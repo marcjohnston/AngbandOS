@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AngbandOS.Core;
 
-internal sealed class ReadOnlyAttributeSet : IGameSerialize
+internal sealed class ReadOnlyAttributeSet : ISaveGameState
 {
     private Game Game { get; }
     public readonly ReadOnlyAttributeValue[] Value;
@@ -30,7 +30,7 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         );
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, 

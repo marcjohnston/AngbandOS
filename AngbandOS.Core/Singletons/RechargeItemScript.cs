@@ -37,10 +37,12 @@ internal sealed class RechargeItemScript : UsedResultUniversalScript, IGetKey, I
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         Turns = Game.ParseNumericExpression(TurnsExpression);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     private string TurnsExpression { get; }
     private Expression Turns { get; set; }

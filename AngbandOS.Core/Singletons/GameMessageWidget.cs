@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class GameMessageWidget : Widget, IGetKey, IToJson, IGameSerialize
+internal sealed class GameMessageWidget : Widget, IGetKey, IToJson, ISaveGameState
 {
     public GameMessageWidget(Game game, GameMessageWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -20,12 +20,14 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson, IGameSeriali
 
     public string Key { get; }
     public string GetKey => Key;
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ChangeTrackers = new IChangeTracker[] { Game.SingletonRepository.Get<IChangeTracker>(nameof(GameMessageProperty)) };
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.

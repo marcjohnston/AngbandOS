@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class DateWidget : Widget, IGetKey, IToJson, IGameSerialize
+internal sealed class DateWidget : Widget, IGetKey, IToJson, ISaveGameState
 {
     public DateWidget(Game game, DateWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -20,7 +20,7 @@ internal sealed class DateWidget : Widget, IGetKey, IToJson, IGameSerialize
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
     public string DateValueName { get; }
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     public IDateAndTimeValue DateValue { get; private set; }
 
     /// <summary>
@@ -31,12 +31,14 @@ internal sealed class DateWidget : Widget, IGetKey, IToJson, IGameSerialize
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         DateValue = Game.SingletonRepository.Get<IDateAndTimeValue>(DateValueName);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.

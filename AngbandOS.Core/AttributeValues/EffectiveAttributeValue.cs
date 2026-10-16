@@ -16,10 +16,10 @@ internal abstract class EffectiveAttributeValue : AttributeValue
     #endregion
 
     protected Game Game { get; }
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Attribute), saveGameState.CreateDerivedGameStateBag(Attribute, false)) // Attributes must already exist, they cannot be constructed.
+            (nameof(Attribute), saveGameState.CreateSystemObjectGameStateBag(Attribute)) // Attributes must already exist, they cannot be constructed.
         );
     }
     public EffectiveAttributeValue(Game game, Attribute attribute)

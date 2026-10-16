@@ -6,13 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class NeuralBlastTalentScript : UniversalScript, IGetKey
+internal class NeuralBlastTalentScript : UniversalScript
 {
     private NeuralBlastTalentScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionWithAim(out int dir))

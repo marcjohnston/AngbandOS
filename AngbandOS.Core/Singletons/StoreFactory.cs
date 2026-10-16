@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson, IGameSerialize
+internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public StoreFactory(Game game, StoreFactoryGameConfiguration gameConfiguration)
@@ -58,7 +58,7 @@ internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson, IGameSeriali
         StoreAnalyzesPurchases = gameConfiguration.StoreAnalyzesPurchases;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
 
@@ -118,7 +118,7 @@ internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson, IGameSeriali
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         // Bind the advertised commands.
         AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : Game.SingletonRepository.Get<StoreCommand>(AdvertisedStoreCommand1Name);
@@ -152,6 +152,8 @@ internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson, IGameSeriali
         }
         StoreStockManifests = storeStockManifestList.ToArray();
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.

@@ -41,9 +41,9 @@ internal class BitwiseOrEffectiveAttributeValue : EffectiveAttributeValue
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
             (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, bool>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateGameStateBag(_modifier)))
         );
     }

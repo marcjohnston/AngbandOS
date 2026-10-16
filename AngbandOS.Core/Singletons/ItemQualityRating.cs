@@ -6,14 +6,14 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class ItemQualityRating : IGetKey, IGameSerialize
+internal abstract class ItemQualityRating : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected ItemQualityRating(Game game)
     {
         Game = game;
     }
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public abstract string Description { get; }
 
@@ -26,8 +26,7 @@ internal abstract class ItemQualityRating : IGetKey, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
-    {
-    }
-
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 }

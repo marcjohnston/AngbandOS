@@ -6,10 +6,20 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
+/// <summary>
+/// 
+/// </summary>
+/// <remarks>
+/// </remarks>
 internal partial class SaveGameState
 {
+    /// <summary>
+    /// Represents a dictionary that tracks the ID for a serialized object by the object.  Serialized objects are assigned an integer ID when they are serialized.
+    /// Future references to the object use the ID in the serialized data stream. 
+    /// </summary>
     private Dictionary<object, int> ObjectToIdDictionary = new Dictionary<object, int>();
-    private Dictionary<int, bool> ObjectReferenceCountDictionary = new Dictionary<int, bool>();
+
+    private Dictionary<int, bool> ObjectReferenceCountDictionary = new Dictionary<int, bool>(); // TODO: Do we still need this.
 
     /// <summary>
     /// Returns the object ID for a reference to an existing object, if the object already exists.  If a reference is issued, the reference count for the object is also incremented. 
@@ -116,20 +126,35 @@ internal partial class SaveGameState
     }
 
     private static bool IsCompatible(Type actualType, Type derivedType) => actualType.IsAssignableFrom(derivedType) || (actualType.BaseType != null && IsCompatible(actualType.BaseType, derivedType));
-    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, bool allowConstruction)
+
+    /// <summary>
+    /// Serializes a game object.  Use this overload when the object is a configured object like mutations, or scripts.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="allowConstruction"></param>
+    /// <returns></returns>
+    public GameStateBag CreateSystemObjectGameStateBag(IGetKey? value)
     {
-        return PrivateCreateDerivedGameStateBag(value, allowConstruction);
+        // Check if the object is null, we return a null object.
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new SystemObjectGameStateBag(value.GetKey);
     }
-    public GameStateBag CreateDerivedGameStateBag(IGameSerialize[]? values, bool allowConstruction)
+
+    public GameStateBag CreateSystemObjectsGameStateBag(IGetKey[]? values)
     {
         if (values is null)
         {
             return new NullValueGameStateBag();
         }
-        GameStateBag[] gameStateBags = values.Select(_value => PrivateCreateDerivedGameStateBag(_value, allowConstruction)).ToArray();
+        GameStateBag[] gameStateBags = values.Select(_value => CreateSystemObjectGameStateBag(_value)).ToArray();
         return new ListGameStateBag(gameStateBags);
     }
-    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, params Type[] derivedTypes)
+
+    public GameStateBag CreateDerivedGameStateBag(ISaveGameState? value, params Type[] derivedTypes)
     {
         return PrivateCreateDerivedGameStateBag(value, true, derivedTypes);
     }
@@ -143,7 +168,7 @@ internal partial class SaveGameState
     /// <param name="allowConstruction">Specify true to require the object to have already been serialized and require the output to be either null or a <see cref="ReferenceGameStateBag"/>.</param>
     /// <param name="derivedTypes">Provide all of the compatible (derived types).  If none or only one is provided, a null derived code will be generated; otherwise, the derived code will be equal to the position (base-0) of the type specified.</param>
     /// <returns></returns>
-    private GameStateBag PrivateCreateDerivedGameStateBag(IGameSerialize? value, bool allowConstruction, params Type[] derivedTypes)
+    private GameStateBag PrivateCreateDerivedGameStateBag(ISaveGameState? value, bool allowConstruction, params Type[] derivedTypes)
     {
         // Check if the object is null, we return a null object.
         if (value is null)
@@ -159,14 +184,15 @@ internal partial class SaveGameState
 
         if (!allowConstruction)
         {
-            throw new Exception("Derived type expected.  Cannot serialize reference not previously serialized because construction during deserialization disallowed.");
+            return new SystemObjectGameStateBag(value.GetType().Name);  
+            //throw new Exception("Derived type expected.  Cannot serialize reference not previously serialized because construction during deserialization disallowed.");
         }
 
         // We need to register this object to the dictionary before we serialize the object to prevent recursion.
         int objectId = RegisterObject(value);
 
         // We need to make the call to the object to perform serialization because this object explicitly has serialization implemented.
-        DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)value.Serialize(this);
+        DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)value.SaveGame(this);
 
         // Now we need to support polymorphism.  We need to determine which type of object based on the types provided in the parameter list.  We only store the index of the 
         // conforming type as it is present on the parameter list.
@@ -176,7 +202,7 @@ internal partial class SaveGameState
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
-    public GameStateBag CreateDerivedGameStateBag(IEnumerable<IGameSerialize?>? value, params Type[] derivedTypes)
+    public GameStateBag CreateDerivedGameStateBag(IEnumerable<ISaveGameState?>? value, params Type[] derivedTypes)
     {
         if (value is null)
         {
@@ -184,14 +210,14 @@ internal partial class SaveGameState
         }
 
         var gameStateBags = new List<GameStateBag>();
-        foreach (IGameSerialize? item in value)
+        foreach (ISaveGameState? item in value)
         {
             gameStateBags.Add(CreateDerivedGameStateBag(item, derivedTypes));
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }
 
-    public GameStateBag CreateDerivedGameStateBag(IGameSerialize[][]? value, params Type[] derivedTypes)
+    public GameStateBag CreateDerivedGameStateBag(ISaveGameState[][]? value, params Type[] derivedTypes)
     {
         if (value is null)
         {
@@ -199,7 +225,7 @@ internal partial class SaveGameState
         }
 
         var gameStateBags = new List<GameStateBag>();
-        foreach (IGameSerialize[] item in value)
+        foreach (ISaveGameState[] item in value)
         {
             gameStateBags.Add(CreateDerivedGameStateBag(item, derivedTypes));
         }
@@ -498,7 +524,7 @@ internal partial class SaveGameState
             return new NullValueGameStateBag();
         }
 
-        if (value is IGameSerialize gameSerializable)
+        if (value is ISaveGameState gameSerializable)
         {
             if (TryGetReferenceId(gameSerializable, out int existingId))
             {
@@ -507,24 +533,24 @@ internal partial class SaveGameState
 
             // We need to register this object to the dictionary before we serialize the object to prevent recursion.
             int objectId = RegisterObject(value);
-            DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.Serialize(this);
+            DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.SaveGame(this);
             return new ObjectGameStateBag(objectId, gameSerializable.GetType().Name, gameStateBag);
         }
 
-        if (value is IGameSerialize[][] arrayOfArrayOfIGameSerialize)
+        if (value is ISaveGameState[][] arrayOfArrayOfIGameSerialize)
         {
             var gameStateBags = new List<GameStateBag>();
-            foreach (IGameSerialize[] item in arrayOfArrayOfIGameSerialize)
+            foreach (ISaveGameState[] item in arrayOfArrayOfIGameSerialize)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }
             return new ListGameStateBag(gameStateBags.ToArray());
         }
 
-        if (value is IEnumerable<IGameSerialize> enumerableOfIGameSerialize)
+        if (value is IEnumerable<ISaveGameState> enumerableOfIGameSerialize)
         {
             var gameStateBags = new List<GameStateBag>();
-            foreach (IGameSerialize item in enumerableOfIGameSerialize)
+            foreach (ISaveGameState item in enumerableOfIGameSerialize)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }

@@ -21,10 +21,12 @@ internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey, IToJson
 
     public override string LearnedDetails { get; }
     public override bool UsesItem { get; }
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         Ability = Game.SingletonRepository.Get<Ability>(AbilityBindingKey);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     protected Ability Ability { get; private set; }
     protected virtual string AbilityBindingKey { get; }

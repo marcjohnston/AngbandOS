@@ -13,7 +13,9 @@ internal class DisarmScript : GameCommandUniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Executes the disarm script and returns true, if the disarm fails due to chance; false, otherwise.

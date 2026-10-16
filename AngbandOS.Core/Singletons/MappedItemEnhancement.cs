@@ -2,7 +2,7 @@
 
 namespace AngbandOS.Core.MappedSpellScripts;
 
-internal sealed class MappedItemEnhancement : IGetKey, IToJson, IGameSerialize
+internal sealed class MappedItemEnhancement : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public MappedItemEnhancement(Game game, MappedItemEnhancementGameConfiguration gameConfiguration)
@@ -14,14 +14,16 @@ internal sealed class MappedItemEnhancement : IGetKey, IToJson, IGameSerialize
         ItemEnhancementBindingKeys = gameConfiguration.ItemEnhancementBindingKeys;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ItemEnhancements = Game.SingletonRepository.GetNullable<IItemEnhancement>(ItemEnhancementBindingKeys);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
     public string ToJson()
     {
         MappedItemEnhancementGameConfiguration gameConfiguration = new()

@@ -18,10 +18,12 @@ internal class ProbingDetectionAndFullIdScript : UsedResultUniversalScript, IGet
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         RechargeItemScript = Game.SingletonRepository.Get<RechargeItemScript>(nameof(RechargeItem2xRechargeItemScript));
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     private RechargeItemScript RechargeItemScript { get; set; }
     public override UsedResultEnum ExecuteUsedScript()

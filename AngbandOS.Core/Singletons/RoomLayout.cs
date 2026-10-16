@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class RoomLayout : IGetKey, IGameSerialize
+internal abstract class RoomLayout : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected RoomLayout(Game game)
@@ -14,12 +14,14 @@ internal abstract class RoomLayout : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the number of grid blocks to the left of the zero-dimension center that the room occupies.

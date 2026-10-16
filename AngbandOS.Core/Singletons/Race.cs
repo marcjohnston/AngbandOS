@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class Race : IGetKey, IGameSerialize
+internal abstract class Race : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected Race(Game game)
@@ -56,7 +56,7 @@ internal abstract class Race : IGetKey, IGameSerialize
         RefreshAndSquashAttributeSet();
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
@@ -69,21 +69,21 @@ internal abstract class Race : IGetKey, IGameSerialize
     public string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetBindingKey);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         ChanceOfSanityBlastImmunityExpression = Game.ParseNumericExpression(ChanceOfSanityBlastImmunityExpressionText);
         ExperienceLevelAndEnhancementTuples = ExperienceLevelAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
-
-        if (restoreGameState is not null)
-        {
-            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
-            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
-                _restoreGameState => _restoreGameState.GetInt(),
-                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
-        }
     }
+    public void RestoreGame(RestoreGameState restoreGameState) 
+    { 
+        AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+        MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
+            _restoreGameState => _restoreGameState.GetInt(),
+            _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
+    }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Represents a set of generated attributes.

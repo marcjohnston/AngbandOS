@@ -1,13 +1,7 @@
 namespace AngbandOS.Core.Scripts;
-internal class AlcoholRandomMutationScript : UniversalScript, IGetKey
+internal class AlcoholRandomMutationScript : UniversalScript
 {
     private AlcoholRandomMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-
-    public void Bind(RestoreGameState? restoreGameState) { }
-
     public override void ExecuteScript()
     {
         if (base.Game.DieRoll(6400) != 321)

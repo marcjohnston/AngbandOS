@@ -8,14 +8,14 @@ using System.Collections;
 
 namespace AngbandOS.Core;
 
-internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, IGameSerialize // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
+internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, ISaveGameState // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
     protected Game Game { get; }
     protected WieldSlot(Game game)
     {
         Game = game;
     }
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the maximum number of items that the inventory slot can hold.  Returns 1, by default.  All inventory slots return 1, except for the pack that returns 26 (a-z).
@@ -249,5 +249,7 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, I
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 }

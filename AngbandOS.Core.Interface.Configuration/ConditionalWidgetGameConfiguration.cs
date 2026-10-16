@@ -1,49 +1,63 @@
-﻿namespace AngbandOS.Core.Interface.Configuration;
+﻿using AngbandOS.Core.Interface.Configuration.Annotations;
 
+namespace AngbandOS.Core.Interface.Configuration;
+
+[ConfigurationEntityAttribute(
+    Title = "Conditional Widget",
+    EntityNoun = "Conditional Widget")]
 public class ConditionalWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
+    [ConfigurationMetadataAttribute(
+        Title = "Conditional Key",
+        Summary = "The key identifying the conditional that determines which widgets are enabled.",
+        DataType = "string")]
     public virtual string ConditionalKey { get; set; }
 
-    /// <summary>
-    /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 
-    /// property is used to bind the <see cref="TrueWidgets"/> property during the bind phase.  Returns null, by default.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "True Widget Names",
+        Summary = "The names of the widgets to invalidate when the conditional evaluates to true.",
+        DataType = "string[]?")]
     public virtual string[]? TrueWidgetNames { get; set; } = null;
 
-    /// <summary>
-    /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns false; or null, if no widget should be invalidated.  This 
-    /// property is used to bind the <see cref="FalseWidgets"/> property during the bind phase.  Returns null, by default.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "False Widget Names",
+        Summary = "The names of the widgets to invalidate when the conditional evaluates to false.",
+        DataType = "string[]?")]
     public virtual string[]? FalseWidgetNames { get; set; } = null;
 
-    /// <summary>
-    /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "Color",
+        Summary = "The color used to draw the widget text.",
+        DataType = "ColorEnum")]
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
-    /// <summary>
-    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "X",
+        Summary = "The x-coordinate on the form where the widget is drawn.",
+        DataType = "int")]
     public virtual int X { get; set; }
 
-    /// <summary>
-    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "Y",
+        Summary = "The y-coordinate on the form where the widget is drawn.",
+        DataType = "int")]
     public virtual int Y { get; set; }
 
-    /// <summary>
-    /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "Width",
+        Summary = "The width of the widget.",
+        DataType = "int")]
     public virtual int Width { get; set; }
 
-    /// <summary>
-    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
-    /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "Justification Name",
+        Summary = "The name of the justification used to position the widget text within its width.",
+        DataType = "string")]
     public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
-    /// <summary>
-    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
-    /// </summary>
+    [ConfigurationMetadataAttribute(
+        Title = "Change Tracker Names",
+        Summary = "The names of the properties that participate in change tracking.",
+        DataType = "string[]?")]
     public virtual string[]? ChangeTrackerNames { get; set; } = null;
 }

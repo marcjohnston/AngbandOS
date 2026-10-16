@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a widget that renders a dungeon map.  This widget supports the ability to "poke" a character directly into the map grid.
 /// </summary>
-internal sealed class MapWidget : Widget, IGetKey, IToJson, IGameSerialize
+internal sealed class MapWidget : Widget, IGetKey, IToJson, ISaveGameState
 {
     public MapWidget(Game game, MapWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -19,7 +19,7 @@ internal sealed class MapWidget : Widget, IGetKey, IToJson, IGameSerialize
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
@@ -30,10 +30,12 @@ internal sealed class MapWidget : Widget, IGetKey, IToJson, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class God : IGetKey, IToJson, IGameSerialize
+internal sealed class God : IGetKey, IToJson, ISaveGameState
 {
     #region State Data
     public int Favor;
@@ -24,7 +24,7 @@ internal sealed class God : IGetKey, IToJson, IGameSerialize
         FavorDescription = gameConfiguration.FavorDescription;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Favor), saveGameState.CreateGameStateBag(Favor)),
@@ -56,15 +56,14 @@ internal sealed class God : IGetKey, IToJson, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
-    {
-        if (restoreGameState is not null)
-        {
-            Favor = restoreGameState.GetByKey(nameof(Favor)).GetInt();
-            IsPatron = restoreGameState.GetByKey(nameof(IsPatron)).GetBool();
-            RestingFavor = restoreGameState.GetByKey(nameof(RestingFavor)).GetInt();   
-        }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) 
+    { 
+        Favor = restoreGameState.GetByKey(nameof(Favor)).GetInt();
+        IsPatron = restoreGameState.GetByKey(nameof(IsPatron)).GetBool();
+        RestingFavor = restoreGameState.GetByKey(nameof(RestingFavor)).GetInt();   
     }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

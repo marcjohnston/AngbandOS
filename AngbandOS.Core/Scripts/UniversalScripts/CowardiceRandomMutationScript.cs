@@ -1,12 +1,7 @@
 namespace AngbandOS.Core.Scripts;
-internal class CowardiceRandomMutationScript : UniversalScript, IGetKey
+internal class CowardiceRandomMutationScript : UniversalScript
 {
     private CowardiceRandomMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-
-    public void Bind(RestoreGameState? restoreGameState) { }
 
     public override void ExecuteScript()
     {

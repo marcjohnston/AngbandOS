@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
+internal sealed class Projectile : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
 
@@ -23,7 +23,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
         ImpactProjectileGraphicBindingKey = gameConfiguration.ImpactProjectileGraphicBindingKey;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -47,7 +47,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         MonsterEffect = Game.SingletonRepository.Get<MonsterEffect>(MonsterEffectBindingKey);
         ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);
@@ -57,6 +57,8 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
         EffectAnimation = Game.SingletonRepository.GetNullable<Animation>(EffectAnimationBindingKey);
         BoltProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(BoltProjectileGraphicBindingKey);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the graphics to be used while the projectile is in motion; or null, if there is no graphic.  Returns null, by default.

@@ -107,9 +107,9 @@ internal sealed class SummonMonsterSpell : MonsterSpell
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public override void Bind(RestoreGameState? restoreGameState)
+    public override void Bind()
     {
-        base.Bind(restoreGameState);
+        base.Bind();
         MonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(MonsterSelectorBindingKey);
         FriendlyMonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(FriendlyMonsterSelectorBindingKey);
         MaximumSummonCountExpression = Game.ParseNumericExpression(MaximumSummonCountExpressionText);

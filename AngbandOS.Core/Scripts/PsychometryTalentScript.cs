@@ -6,13 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class PsychometryTalentScript : UniversalScript, IGetKey
+internal class PsychometryTalentScript : UniversalScript
 {
     private PsychometryTalentScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         if (Game.ExperienceLevel.IntValue < 40)

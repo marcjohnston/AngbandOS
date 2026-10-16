@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class UsedResultUniversalScript : IScript, ICastSpellScript, IActivateItemScript, IAimWandScript, IZapRodScript, IReadScrollOrUseStaffScript, IEatOrQuaffScript, IStoreCommandScript, IGameCommandScript, IGameSerialize
+internal abstract class UsedResultUniversalScript : IScript, ICastSpellScript, IActivateItemScript, IAimWandScript, IZapRodScript, IReadScrollOrUseStaffScript, IEatOrQuaffScript, IStoreCommandScript, IGameCommandScript, ISaveGameState
 {
     protected Game Game { get; }
 
@@ -14,7 +14,7 @@ internal abstract class UsedResultUniversalScript : IScript, ICastSpellScript, I
     {
         Game = game;
     }
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public string LearnedDetails => throw new NotImplementedException();
 

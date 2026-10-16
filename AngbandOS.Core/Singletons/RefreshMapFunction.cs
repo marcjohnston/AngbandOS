@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Functions;
 /// Represents a function that determines when the map needs to be updated.  Widgets that reference the map will use this function and the <see cref="IMapChangeTracking"/> interface
 /// to repaint the map as needed.
 /// </summary>
-internal class RefreshMapFunction : IChangeTracker, IGetKey, IGameSerialize
+internal class RefreshMapFunction : IChangeTracker, IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     private RefreshMapFunction(Game game) 
     {
         Game = game;
     }
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     public virtual string[]? DependencyNames => new string[]
     {
         nameof(RefreshMapProperty), // Manual map refresh
@@ -38,8 +38,10 @@ internal class RefreshMapFunction : IChangeTracker, IGetKey, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 }

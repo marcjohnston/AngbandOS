@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Gender : IGetKey, IToJson, IGameSerialize
+internal sealed class Gender : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public Gender(Game game, GenderGameConfiguration gameConfiguration)
@@ -21,7 +21,7 @@ internal sealed class Gender : IGetKey, IToJson, IGameSerialize
 
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -46,7 +46,9 @@ internal sealed class Gender : IGetKey, IToJson, IGameSerialize
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string Title { get; }
     public string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered

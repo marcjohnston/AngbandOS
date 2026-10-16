@@ -6,19 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class AnnihilationScript : UniversalScript, IGetKey
+internal class AnnihilationScript : UniversalScript
 {
     private AnnihilationScript(Game game) : base(game) { }
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
-    /// </summary>
-    /// <returns></returns>
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Destroys every monster, taking a hit for each one but adding mana for each too.

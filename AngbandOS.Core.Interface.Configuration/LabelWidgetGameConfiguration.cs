@@ -1,40 +1,49 @@
-﻿namespace AngbandOS.Core.Interface.Configuration;
+﻿using AngbandOS.Core.Interface.Configuration.Annotations;
 
+namespace AngbandOS.Core.Interface.Configuration;
+
+[ConfigurationEntity(Title = "Label Widget", EntityNoun = "label widget")]
 public class LabelWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    /// <summary>
-    /// Returns the text to be rendered for the widget.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Text",
+        Summary = "Specifies the text to be rendered for the widget.",
+        DataType = "string")]
     public virtual string Text { get; set; }
 
-    /// <summary>
-    /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Color",
+        Summary = "Specifies the color used to draw the widget text. Defaults to white.",
+        DataType = "ColorEnum")]
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
-    /// <summary>
-    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "X",
+        Summary = "Specifies the x-coordinate on the form where the widget will be drawn.",
+        DataType = "int")]
     public virtual int X { get; set; }
 
-    /// <summary>
-    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Y",
+        Summary = "Specifies the y-coordinate on the form where the widget will be drawn.",
+        DataType = "int")]
     public virtual int Y { get; set; }
 
-    /// <summary>
-    /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Width",
+        Summary = "Specifies the width of the widget. When null, the width defaults to the length of the text.",
+        DataType = "int?")]
     public virtual int? Width { get; set; } = null;
 
-    /// <summary>
-    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
-    /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Justification Name",
+        Summary = "Specifies the name of the justification used to justify the text within the widget width. Defaults to LeftJustification.",
+        DataType = "string")]
     public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
-    /// <summary>
-    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Change Tracker Names",
+        Summary = "Specifies the names of the properties that participate in change tracking.",
+        DataType = "string[]?")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }

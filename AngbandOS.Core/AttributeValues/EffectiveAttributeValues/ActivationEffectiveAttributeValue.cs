@@ -65,9 +65,9 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
         _attributeModifiers.Add(("", value));
     }
 
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
             (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, Activation?>(_attributeModifiers.ToArray(), 
                 _key => saveGameState.CreateGameStateBag(_key), 
                 _modifier => saveGameState.CreateDerivedGameStateBag(_modifier, typeof(Activation))))

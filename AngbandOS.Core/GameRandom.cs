@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class GameRandom : IGameSerialize
+internal class GameRandom : ISaveGameState
 {
     private const int _randnorNum = 256;
     private const int _randnorStd = 64;
@@ -34,7 +34,7 @@ internal class GameRandom : IGameSerialize
     };
 
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(CurrentSeed), saveGameState.CreateGameStateBag(CurrentSeed))

@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 /// to the <see cref="ItemMatches"/> list.  This binding of predefined <see cref="ItemMatch"/> objects allows the matching of items at run-time to be as fast as possible; no unnecessary comparisions
 /// are performed.  These <see cref="ItemFilter"/> objects are designed to support configurability.
 /// </summary>
-internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson, IGameSerialize
+internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public ItemFilter(Game game, ItemFilterGameConfiguration gameConfiguration)
@@ -46,7 +46,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson, IGameSerialize
         IsCursed = gameConfiguration.IsCursed;
         HeavyCurse = gameConfiguration.HeavyCurse;
     }
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     private ItemMatch[] ItemMatches { get; set; }
     private string? AttributeFilterBindingKey { get; }
@@ -132,7 +132,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson, IGameSerialize
         return new ItemMatch[] { };
     }
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         AnyMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AnyMatchingItemClassNames);
         AllNonMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AllNonMatchingItemClassNames);
@@ -165,6 +165,8 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson, IGameSerialize
         itemMatchList.AddRange(AddBooleanMatch(HeavyCurse, new HeavyCurseBooleanGetItemProperty(Game)));
         ItemMatches = itemMatchList.ToArray();
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public bool Matches(Item item)
     {

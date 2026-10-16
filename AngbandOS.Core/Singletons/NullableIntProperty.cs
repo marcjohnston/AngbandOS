@@ -39,9 +39,9 @@ internal abstract class NullableIntProperty : Property, INullIntValue
     protected virtual void OnBeforeSet() { }
     protected virtual void OnAfterSet() { }
 
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
             (nameof(_value), saveGameState.CreateGameStateBag(_value))
         );
     }

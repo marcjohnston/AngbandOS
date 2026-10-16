@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class ItemEffect : IGetKey, IGameSerialize
+internal abstract class ItemEffect : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
 
@@ -14,10 +14,10 @@ internal abstract class ItemEffect : IGetKey, IGameSerialize
 
     public string GetKey => Key;
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
-    public void Bind(RestoreGameState? restoreGameState)
-    {
-    }
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
     protected ItemEffect(Game game)
     {
         Game = game;

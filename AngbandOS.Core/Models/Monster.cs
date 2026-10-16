@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class Monster : IItemContainer, IGameSerialize
+internal class Monster : IItemContainer, ISaveGameState
 {
     #region State Data
     public int ConfusionLevel;
@@ -110,7 +110,7 @@ internal class Monster : IItemContainer, IGameSerialize
 
     #endregion
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             ("bools1", saveGameState.CreateGameStateBag(_isVisible, _isPet, SmCloned, SmImmAcid, SmImmCold, SmImmElec, SmImmFire, SmImmFree)),

@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents an action that occurs when the player bumps into a feature.
 /// </summary>
-internal abstract class AlterAction : IGetKey, IGameSerialize
+internal abstract class AlterAction : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected AlterAction(Game game)
@@ -19,12 +19,14 @@ internal abstract class AlterAction : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public abstract bool Execute(int x, int y);
 
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 }

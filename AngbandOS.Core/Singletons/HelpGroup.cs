@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class HelpGroup : IGetKey, IToJson, IGameSerialize
+internal sealed class HelpGroup : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public HelpGroup(Game game, HelpGroupGameConfiguration gameConfiguration)
@@ -17,11 +17,13 @@ internal sealed class HelpGroup : IGetKey, IToJson, IGameSerialize
         Title = gameConfiguration.Title;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

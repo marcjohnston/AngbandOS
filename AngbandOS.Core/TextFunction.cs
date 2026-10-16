@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue, IGameSerialize
+internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue, ISaveGameState
 {
     protected Game Game { get; }
     protected TextFunction(Game game)
@@ -15,7 +15,7 @@ internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue, IGam
         Game = game;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     public abstract string[]? NullableStringsValue { get; }
     /// <summary>
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.
@@ -32,10 +32,12 @@ internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue, IGam
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public virtual string[]? DependencyNames => null;
 }

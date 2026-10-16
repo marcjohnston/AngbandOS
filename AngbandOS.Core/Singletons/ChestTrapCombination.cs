@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class ChestTrapCombination : IGetKey, IToJson, IGameSerialize
+internal sealed class ChestTrapCombination : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public ChestTrapCombination(Game game, ChestTrapCombinationGameConfiguration gameConfiguration)
@@ -16,7 +16,7 @@ internal sealed class ChestTrapCombination : IGetKey, IToJson, IGameSerialize
         ChestTrapBindingKeys = gameConfiguration.ChestTrapBindingKeys;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -35,10 +35,12 @@ internal sealed class ChestTrapCombination : IGetKey, IToJson, IGameSerialize
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ChestTraps = Game.SingletonRepository.Get<ChestTrap>(ChestTrapBindingKeys);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public ChestTrap[] ChestTraps { get; private set; }
     public string[] ChestTrapBindingKeys { get; }

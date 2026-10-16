@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
+internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, ISaveGameState
 {
     public ExperienceLearnedKnowledge(Game game, ExperienceLearnedKnowledgeGameConfiguration gameConfiguration) : base(game)
     {
@@ -34,7 +34,7 @@ internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IT
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         if (ExperienceLearnedKnowledgeBindingTuples.Length < 1)
         {
@@ -49,6 +49,8 @@ internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IT
         }
         ExperienceLearnedKnowledgeTuples = ExperienceLearnedKnowledgeTupleList.ToArray();
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
     public string ToJson()
     {
         ExperienceLearnedKnowledgeGameConfiguration gameConfiguration = new()
@@ -58,5 +60,5 @@ internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IT
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 }

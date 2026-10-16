@@ -6,19 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class DropScript : UniversalScript, IGetKey
+internal class DropScript : UniversalScript
 {
     private DropScript(Game game) : base(game) { }
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
-    /// </summary>
-    /// <returns></returns>
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the drop script and disposes of the successful result.

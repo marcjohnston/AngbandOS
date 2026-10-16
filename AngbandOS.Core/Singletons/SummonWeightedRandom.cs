@@ -5,7 +5,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript, IToJson, IGameSerialize
+internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript, IToJson, ISaveGameState
 {
     public SummonWeightedRandom(Game game, SummonWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
@@ -14,7 +14,7 @@ internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetK
         LearnedDetails = LearnedDetails;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
  
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.
@@ -25,13 +25,15 @@ internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetK
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         foreach ((string name, int weight) in NameAndWeightBindings)
         {
             Add(weight, Game.SingletonRepository.Get<SummonScript>(name));
         }
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

@@ -10,9 +10,9 @@ internal class MonsterTarget : Target
 {
     private Game Game { get; }
     private readonly Monster _monster;
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
             (nameof(_monster), saveGameState.CreateGameStateBag(_monster))
         );
     }

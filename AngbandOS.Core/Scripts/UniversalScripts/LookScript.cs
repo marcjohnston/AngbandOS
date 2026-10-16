@@ -6,19 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class LookScript : UniversalScript, IGetKey
+internal class LookScript : UniversalScript
 {
     private LookScript(Game game) : base(game) { }
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
-    /// </summary>
-    /// <returns></returns>
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the look script.

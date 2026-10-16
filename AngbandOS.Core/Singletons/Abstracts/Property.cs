@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Properties;
 /// <remarks>
 /// This object has dual restore options.
 /// </remarks>
-internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
+internal abstract class Property : IGetKey, IChangeTracker, ISaveGameState
 {
     protected Game Game { get; }
     protected Property(Game game)
@@ -24,7 +24,7 @@ internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
         IsChanged = restoreGameState.GetByKey(nameof(IsChanged)).GetBool();
     }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(IsChanged), saveGameState.CreateGameStateBag(IsChanged))
@@ -61,11 +61,10 @@ internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
         throw new Exception($"ToString override missing for {GetType().Name}.");
     }
 
-    public virtual void Bind(RestoreGameState? restoreGameState)
-    {
-        if (restoreGameState is not null)
-        {
-            IsChanged = restoreGameState.GetByKey(nameof(IsChanged)).GetBool();
-        }
+    public virtual void Bind() { }
+    public virtual void RestoreGame(RestoreGameState restoreGameState) 
+    { 
+        IsChanged = restoreGameState.GetByKey(nameof(IsChanged)).GetBool();
     }
+    public virtual void InitializationComplete() { }
 }

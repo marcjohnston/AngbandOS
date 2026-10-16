@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core;
 
-internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson, IGameSerialize
+internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public ProjectileScript(Game game, ProjectileScriptGameConfiguration gameConfiguration)
@@ -33,14 +33,16 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson, IGa
         CustomLearnedDetails = gameConfiguration.CustomLearnedDetails;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);
         DamageRoll = Game.ParseNumericExpression(DamageRollExpression);
         RadiusRoll = Game.ParseNumericExpression(RadiusRollExpression);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.  Returns an empty string by default.

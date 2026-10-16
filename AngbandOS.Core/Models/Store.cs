@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class Store : IGameSerialize
+internal class Store : ISaveGameState
 {
     private int _x;
     private int _y;
@@ -14,7 +14,7 @@ internal class Store : IGameSerialize
     protected Game Game { get; }
     public readonly StoreFactory StoreFactory;
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(StoreFactory), saveGameState.CreateDerivedGameStateBag(StoreFactory, typeof(StoreFactory))),

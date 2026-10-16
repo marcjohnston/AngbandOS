@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class MonsterEffect : IGetKey, IGameSerialize
+internal abstract class MonsterEffect : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
 
@@ -14,12 +14,14 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         UnfriendPetMonsterFilter = Game.SingletonRepository.GetNullable<MonsterFilter>(UnfriendPetMonsterFilterBindingKey);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     protected MonsterEffect(Game game)
     {
         Game = game;

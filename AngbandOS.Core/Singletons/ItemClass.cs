@@ -3,7 +3,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a class of items factories that are similar.  These classes define a distinct class name and stomp setting.
 /// </summary>
-internal sealed class ItemClass : IGetKey, IToJson, IGameSerialize
+internal sealed class ItemClass : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public ItemClass(Game game, ItemClassGameConfiguration gameConfiguration)
@@ -16,7 +16,7 @@ internal sealed class ItemClass : IGetKey, IToJson, IGameSerialize
         ItemFlavorBindingKeys = gameConfiguration.ItemFlavorBindingKeys;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the capitalized name of a singular item that the class represents.  This name can be used in a format like 'Your {0}'
@@ -61,9 +61,11 @@ internal sealed class ItemClass : IGetKey, IToJson, IGameSerialize
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ItemFlavors = Game.SingletonRepository.GetNullable<ItemFlavor>(ItemFlavorBindingKeys);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 }
 

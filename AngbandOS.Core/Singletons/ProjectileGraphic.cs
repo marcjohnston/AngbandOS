@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class ProjectileGraphic : IGetKey, IToJson, IGameSerialize
+internal sealed class ProjectileGraphic : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public ProjectileGraphic(Game game, ProjectileGraphicGameConfiguration gameConfiguration)
@@ -17,7 +17,7 @@ internal sealed class ProjectileGraphic : IGetKey, IToJson, IGameSerialize
         Color = gameConfiguration.Color;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -36,7 +36,9 @@ internal sealed class ProjectileGraphic : IGetKey, IToJson, IGameSerialize
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the character to be used for the projectile.

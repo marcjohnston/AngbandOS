@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal abstract class Script : IGetKey, IGameSerialize
+internal abstract class Script : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected Script(Game game)
@@ -14,10 +14,12 @@ internal abstract class Script : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 }

@@ -7,7 +7,7 @@
 using System.Text;
 namespace AngbandOS.Core;
 
-internal class MonsterKnowledge : IGameSerialize
+internal class MonsterKnowledge : ISaveGameState
 {
     #region State Data
     public readonly byte[] RBlows;
@@ -29,7 +29,7 @@ internal class MonsterKnowledge : IGameSerialize
     private readonly MonsterRace _monsterRace;
     #endregion
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_monsterRace), saveGameState.CreateDerivedGameStateBag(_monsterRace, typeof(MonsterRace))),

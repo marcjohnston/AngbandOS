@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class PlayerEffectUniversalScript : IPlayerEffectScript, IGetKey, IGameSerialize
+internal abstract class PlayerEffectUniversalScript : IPlayerEffectScript, IGetKey, ISaveGameState
 {
     protected Game Game { get; }
 
@@ -14,13 +14,15 @@ internal abstract class PlayerEffectUniversalScript : IPlayerEffectScript, IGetK
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     protected PlayerEffectUniversalScript(Game game) // This object is a singleton
     {
         Game = game;
     }
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     public virtual int MaximumDamageAllowed => 1600;
     public virtual string? BlindPreMessage => null;
 

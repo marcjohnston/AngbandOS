@@ -6,13 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class PsychicDrainTalentScript : UniversalScript, IGetKey
+internal class PsychicDrainTalentScript : UniversalScript
 {
     private PsychicDrainTalentScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionWithAim(out int dir))
