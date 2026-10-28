@@ -7080,6 +7080,17 @@ internal class Game : ISaveGameState
         return true;
     }
 
+    public static T[]? Concat<T>(T[]? array1, params T[]? array2)
+    {
+        if (array1 is null)
+            return array2;
+
+        if (array2 is null)
+            return array1;
+
+        return array1.Concat(array2).ToArray();
+    }
+
     public int PolymorphMonsterRace(MonsterRace rPtr)
     {
         int index = rPtr.Index;

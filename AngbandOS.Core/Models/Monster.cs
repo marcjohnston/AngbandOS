@@ -1683,7 +1683,7 @@ internal class Monster : IItemContainer, ISaveGameState
         bool seenByPlayer = !playerIsBlind && IsVisible;
         if (seenByPlayer)
         {
-            Race.Knowledge.RSpells = Race.Knowledge.RSpells.Concat(new MonsterSpell[] { thrownSpell }).ToArray();
+            Race.Knowledge.RSpells = Game.Concat(Race.Knowledge.RSpells, thrownSpell);
             if (thrownSpell.IsInnate)
             {
                 Race.Knowledge.RCastInate++;

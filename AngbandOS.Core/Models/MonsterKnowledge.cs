@@ -19,7 +19,7 @@ internal class MonsterKnowledge : ISaveGameState
     public bool Guardian;
     public bool OnlyGuardian;
     public MonsterCharacteristics Characteristics = new MonsterCharacteristics();
-    public MonsterSpell[] RSpells = new MonsterSpell[] { };
+    public MonsterSpell[]? RSpells;
     public int RIgnore;
     public int RPkills;
     public bool RProbed;
@@ -72,7 +72,7 @@ internal class MonsterKnowledge : ISaveGameState
         Guardian = restoreGameState.GetByKey(nameof(Guardian)).GetBool();
         OnlyGuardian = restoreGameState.GetByKey(nameof(OnlyGuardian)).GetBool();
         Characteristics = restoreGameState.GetByKey(nameof(Characteristics)).GetDerivedReference<MonsterCharacteristics>((_restoreGameState => new MonsterCharacteristics(Game, _restoreGameState)));
-        RSpells = restoreGameState.GetByKey(nameof(RSpells)).GetDerivedReferences<MonsterSpell>();
+        RSpells = restoreGameState.GetByKey(nameof(RSpells)).GetDerivedReferencesOrDefault<MonsterSpell>();
         RIgnore = restoreGameState.GetByKey(nameof(RIgnore)).GetInt();
         RPkills = restoreGameState.GetByKey(nameof(RPkills)).GetInt();
         RProbed = restoreGameState.GetByKey(nameof(RProbed)).GetBool();
@@ -124,13 +124,13 @@ internal class MonsterKnowledge : ISaveGameState
             knowledge.RCastInate = Constants.MaxUchar;
             knowledge.RCastSpell = Constants.MaxUchar;
             knowledge.Characteristics = new MonsterCharacteristics(_monsterRace);
-            knowledge.RSpells = _monsterRace.Spells ?? new MonsterSpell[] { };
+            knowledge.RSpells = _monsterRace.Spells;
         }
         string pronoun = Game.Gender.Pronoun.Trim();
         string capitalizedPronoun = $"{pronoun[0].ToString().ToUpper()}{pronoun[1..]}";
         string possessiveAdjective = Game.Gender.PossessiveAdjective;
         MonsterCharacteristics characteristics = new MonsterCharacteristics(_monsterRace, knowledge.Characteristics);
-        MonsterSpell[] combinedSpells = _monsterRace.Spells.Concat(knowledge.RSpells).ToArray();
+        MonsterSpell[]? combinedSpells = Game.Concat<MonsterSpell>(_monsterRace.Spells, knowledge.RSpells);
         if (_monsterRace.Unique)
         {
             characteristics.Unique = true;
@@ -427,17 +427,19 @@ internal class MonsterKnowledge : ISaveGameState
         // %CGP %may. $CGP is magical, casting spells %intelligently %which
 
         Dictionary<string, List<string>> monsterSpellKnowledgeDictionary = new Dictionary<string, List<string>>();
-        foreach (MonsterSpell monsterSpell in combinedSpells)
+        if (combinedSpells is not null)
         {
-            string actionVerb = monsterSpell.KnowledgeAction.CollapsableActionVerb.Trim();
-            if (!monsterSpellKnowledgeDictionary.TryGetValue(actionVerb, out List<string>? nouns))
+            foreach (MonsterSpell monsterSpell in combinedSpells)
             {
-                nouns = new List<string>();
-                monsterSpellKnowledgeDictionary.Add(actionVerb, nouns);
+                string actionVerb = monsterSpell.KnowledgeAction.CollapsableActionVerb.Trim();
+                if (!monsterSpellKnowledgeDictionary.TryGetValue(actionVerb, out List<string>? nouns))
+                {
+                    nouns = new List<string>();
+                    monsterSpellKnowledgeDictionary.Add(actionVerb, nouns);
+                }
+                nouns.Add(monsterSpell.KnowledgeAction.UniqueDescription);
             }
-            nouns.Add(monsterSpell.KnowledgeAction.UniqueDescription);
         }
-
         int n;
         string maySentence = "";
         if (monsterSpellKnowledgeDictionary.TryGetValue("may", out List<string>? mayItemList))
