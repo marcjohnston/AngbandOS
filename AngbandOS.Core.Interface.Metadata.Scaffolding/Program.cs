@@ -380,6 +380,35 @@ static void WriteProperty(
         $"{indentation}    CategoryTitle = " +
         $"\"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
 
+    if (metadataType == nameof(EnumPropertyMetadata) &&
+        propertyType.IsEnum)
+    {
+        writer.WriteLine(
+            $"{indentation}    Options = new EnumOptionMetadata[]");
+
+        writer.WriteLine(
+            $"{indentation}    {{");
+
+        foreach (string enumName in Enum.GetNames(propertyType))
+        {
+            long enumValue =
+                Convert.ToInt64(
+                    Enum.Parse(
+                        propertyType,
+                        enumName));
+
+            writer.WriteLine(
+                $"{indentation}        new EnumOptionMetadata(" +
+                $"\"{Escape(enumName)}\", {enumValue}),");
+        }
+
+        writer.WriteLine(
+            $"{indentation}    }},");
+    }
+
+    //writer.WriteLine(
+    //    $"{indentation}    }},{{");
+
     writer.WriteLine($"{indentation}}},");
 }
 
@@ -420,6 +449,7 @@ static string GetMetadataType(
         "string" when IsArray(dataType) => nameof(StringsPropertyMetadata),
         "string" => nameof(StringPropertyMetadata),
         "ColorEnum" => nameof(ColorPropertyMetadata),
+        _ when propertyType.IsEnum => nameof(EnumPropertyMetadata),
         _ => throw new InvalidOperationException(
             $"The data type '{dataType}' is not supported in " +
             $"file '{property.DeclaringType?.Name}.cs' for property '{property.Name}'.")

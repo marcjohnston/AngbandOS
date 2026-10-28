@@ -1,4 +1,17 @@
 /**
+ * Represents one selectable value of an enumeration.
+ */
+export class EnumOption {
+  public name: string;
+  public value: number;
+
+  constructor(name: string, value: number) {
+    this.name = name;
+    this.value = value;
+  }
+}
+
+/**
  * Represents a validated PropertyMetadata object.
  */
 export class PropertyMetadata {
@@ -15,12 +28,12 @@ export class PropertyMetadata {
   public entityNounTitle: string | null;
   public entityNoun: string | null;
   public foreignCollectionName: string | null;
+  public enumOptions: EnumOption[] | null;
 
   /**
    * Returns the title of property.
    */
   public get renderTitle(): string {
-    // If the title is null, we render the property name.
     return this.title ?? this.propertyName;
   }
 
@@ -36,7 +49,8 @@ export class PropertyMetadata {
               entityNamePropertyName: string | null,
               entityNounTitle: string | null,
               entityNoun: string | null,
-              foreignCollectionName: string | null) {
+              foreignCollectionName: string | null,
+              enumOptions: EnumOption[] | null = null) {
     this.type = type;
     this.title = title;
     this.propertyName = propertyName;
@@ -50,6 +64,7 @@ export class PropertyMetadata {
     this.entityNounTitle = entityNounTitle;
     this.entityNoun = entityNoun;
     this.foreignCollectionName = foreignCollectionName;
+    this.enumOptions = enumOptions;
   }
 }
 

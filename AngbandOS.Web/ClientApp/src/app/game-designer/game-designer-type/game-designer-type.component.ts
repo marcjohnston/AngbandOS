@@ -13,6 +13,7 @@ import { GameDesignerTypeStringComponent } from './game-designer-type-string/gam
 import { MatIconModule } from '@angular/material/icon';
 import { NgFor, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { GameDesignerTypeEnumComponent } from './game-designer-type-enum/game-designer-type-enum.component';
 
 @Component({
   selector: 'app-game-designer-type',
@@ -31,7 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
     GameDesignerTypeForeignKeyComponent,
     GameDesignerTypeTupleArrayComponent,
     GameDesignerTypeStringArrayComponent,
-    GameDesignerTypeStringComponent
+    GameDesignerTypeStringComponent,
+    GameDesignerTypeEnumComponent
   ]
 })
 export class GameDesignerTypeComponent implements OnInit {
@@ -57,7 +59,8 @@ export class GameDesignerTypeComponent implements OnInit {
       activePropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName,
       activePropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle,
       activePropertyMetadataAndConfiguration.propertyMetadata.entityNoun,
-      activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
+      activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName,
+      activePropertyMetadataAndConfiguration.propertyMetadata.enumOptions);
     return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]);
   }
 

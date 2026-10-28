@@ -39,4 +39,8 @@
   <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'character'">
     <app-game-designer-type-character [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-character>
   </div>
+  <!-- Enum -->
+  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'enum'">
+    <app-game-designer-type-enum [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-enum>
+  </div>
 </ng-container>

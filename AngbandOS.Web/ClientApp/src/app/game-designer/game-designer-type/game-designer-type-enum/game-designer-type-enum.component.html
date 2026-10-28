@@ -1,0 +1,19 @@
+<div id="container" *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+  <div id="select-div">
+    <select [ngModel]="getValue()"
+            (ngModelChange)="setValue($event)">
+      <option *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable"
+              value="">
+      </option>
+      <option *ngFor="let enumOption of options"
+              [value]="enumOption.value">
+        {{enumOption.name}}
+      </option>
+    </select>
+    <span id="modified-span"
+          *ngIf="unmodifiedValue !== getValue()">
+      <mat-icon class="game-designer-undo-icon"
+                (click)="undo()">undo</mat-icon>
+    </span>
+  </div>
+</div>
