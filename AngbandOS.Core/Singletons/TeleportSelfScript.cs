@@ -6,16 +6,14 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal sealed class TeleportSelfScript : UniversalScript, IToJson
+internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
 {
     public TeleportSelfScript(Game game, TeleportSelfScriptGameConfiguration gameConfiguration) : base(game)
     {
-        _key = gameConfiguration.GetKey;
+        Key = gameConfiguration.GetKey;
         DistanceExpression = gameConfiguration.DistanceExpression;
     }
 
-    private string _key;
-    public override string Key => _key;
     public override string LearnedDetails => $"range {Distance.Minimize(Game.GetExpressionProviders()).Text}";
 
     public override bool IdentifiesItem => true;
@@ -34,9 +32,11 @@ internal sealed class TeleportSelfScript : UniversalScript, IToJson
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public override void Bind()
+    public string Key { get; }
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState)
     {
-        base.Bind();
         Distance = Game.ParseNumericExpression(DistanceExpression);
     }
 

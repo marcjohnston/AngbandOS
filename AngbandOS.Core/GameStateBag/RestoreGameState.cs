@@ -312,7 +312,7 @@ internal class RestoreGameState
     }
 
     #region Derived New Object Serialization
-    public T? GetDerivedReferenceOrDefault<T>(params Func<RestoreGameState, T>[] constructors) where T : class
+    public T? GetDerivedReferenceOrDefault<T>(params Func<RestoreGameState, T>[] constructors)
     {
         if (GameStateBag is NullValueGameStateBag)
         {
@@ -331,7 +331,7 @@ internal class RestoreGameState
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
     /// <exception cref="InvalidOperationException"></exception>
-    public T GetDerivedReference<T>(params Func<RestoreGameState, T>[] constructors) where T : class
+    public T GetDerivedReference<T>(params Func<RestoreGameState, T>[] constructors)
     {
         // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
         if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
@@ -388,16 +388,10 @@ internal class RestoreGameState
             TrackObject(objectId, t);
             return t;
         }
-
-        if (GameStateBag is SystemObjectGameStateBag systemObjectGameStateBag)
-        {
-            // This is a system object game state bag.  The system object must already exist.
-            return Game.SingletonRepository.Get<T>(systemObjectGameStateBag.ObjectName);
-        }
         throw new InvalidOperationException($"{GameStateBag.GetType().Name} is not of type {nameof(DerivedObjectGameStateBag)}, {nameof(ObjectGameStateBag)} or {nameof(ReferenceGameStateBag)}.");
     }
 
-    public T[] GetDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors) where T : class
+    public T[] GetDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
     {
         List<T> list = new List<T>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
@@ -409,7 +403,7 @@ internal class RestoreGameState
         return list.ToArray();
     }
 
-    public T[]? GetDerivedReferencesOrDefault<T>(params Func<RestoreGameState, T>[] constructors) where T : class
+    public T[]? GetDerivedReferencesOrDefault<T>(params Func<RestoreGameState, T>[] constructors)
     {
         if (GameStateBag is NullValueGameStateBag)
         {
@@ -419,7 +413,7 @@ internal class RestoreGameState
         return GetDerivedReferences(constructors);
     }
 
-    public T[][] GetArrayOfDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors) where T : class
+    public T[][] GetArrayOfDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
     {
         List<T[]> listOfReferences = new List<T[]>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
@@ -435,7 +429,7 @@ internal class RestoreGameState
         return listOfReferences.ToArray();
     }
 
-    public T?[] GetNullableDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors) where T : class
+    public T?[] GetNullableDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
     {
         List<T?> list = new List<T?>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)

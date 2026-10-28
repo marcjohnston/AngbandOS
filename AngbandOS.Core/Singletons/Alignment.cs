@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class Alignment : IGetKey, ISaveGameState
+internal abstract class Alignment : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected Alignment(Game game)
@@ -18,8 +18,6 @@ internal abstract class Alignment : IGetKey, ISaveGameState
 
     public abstract string[] Align(string[] lines, int mininumHeight);
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

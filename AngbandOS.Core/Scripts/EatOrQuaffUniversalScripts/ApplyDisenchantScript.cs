@@ -12,9 +12,7 @@ internal class ApplyDisenchantScript : EatOrQuaffUniversalScript, IGetKey
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the script and returns a success result.

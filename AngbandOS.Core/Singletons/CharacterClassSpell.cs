@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class CharacterClassSpell : IGetKey, IToJson, ISaveGameState
+internal sealed class CharacterClassSpell : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public CharacterClassSpell(Game game, CharacterClassSpellGameConfiguration gameConfiguration)
@@ -21,7 +21,7 @@ internal sealed class CharacterClassSpell : IGetKey, IToJson, ISaveGameState
         FirstCastExperience = gameConfiguration.FirstCastExperience;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -56,7 +56,5 @@ internal sealed class CharacterClassSpell : IGetKey, IToJson, ISaveGameState
     /// </summary>
     public string GetKey => Key;
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 }

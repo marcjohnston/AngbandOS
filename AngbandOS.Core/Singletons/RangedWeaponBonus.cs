@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class RangedWeaponBonus : IGetKey, IToJson, ISaveGameState
+internal class RangedWeaponBonus : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public RangedWeaponBonus(Game game, RangedWeaponBonusGameConfiguration gameConfiguration)
@@ -18,7 +18,7 @@ internal class RangedWeaponBonus : IGetKey, IToJson, ISaveGameState
         ExperienceLevel = gameConfiguration.ExperienceLevel;
         BonusMissileAttacksPerRound = gameConfiguration.BonusMissileAttacksPerRound;
     }
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string? CharacterClassBindingKey { get; private set; } = null;
     public string? ItemClassBindingKey { get; private set; } = null;
     public int? ExperienceLevel { get; private set; } = null;
@@ -26,9 +26,7 @@ internal class RangedWeaponBonus : IGetKey, IToJson, ISaveGameState
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
     public string ToJson()
     {
         RangedWeaponBonusGameConfiguration classSpellDefinition = new()

@@ -6,16 +6,14 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class AlterScript : GameCommandUniversalScript, IGetKey, ISaveGameState
+internal class AlterScript : GameCommandUniversalScript, IGetKey, IGameSerialize
 {
     private AlterScript(Game game) : base(game) { }
 
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.

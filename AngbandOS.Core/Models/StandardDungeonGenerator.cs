@@ -48,7 +48,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     public StandardDungeonGenerator(Game game) : base(game) { }
     public StandardDungeonGenerator(Game game, RestoreGameState restoreGameState) : this(game) { }
 
-    public override GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public override GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     private bool NewPlayerSpot(GameRandom random)
     {

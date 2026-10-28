@@ -142,9 +142,9 @@ internal sealed class CauseWoundsMonsterSpell : MonsterSpell
     protected override string[]? SmartLearnSpellResistantDetectionKeys { get; }
     public override bool WakesSleepingMonsters { get; }
 
-    public override void Bind()
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        base.Bind();
+        base.Bind(restoreGameState);
         DamageRoll = Game.ParseNumericExpression(DamageRollExpression);
         TimedBleedingExpression = Game.ParseNumericExpression(TimedBleedingExpressionText);
     }

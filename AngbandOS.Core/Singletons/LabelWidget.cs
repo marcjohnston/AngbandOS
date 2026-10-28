@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents a widget that renders a single line of text at the coordinates specified by <see cref="X"/> and <see cref="Y"/>.  Text is automatically justified using the <see cref="Justification"/>
 /// property within the space provided by the <see cref="Width"/> property.  The text is drawn in the color specified by the <see cref="Color"/> property.
 /// </summary>
-internal sealed class LabelWidget : Widget, IGetKey, IToJson, ISaveGameState
+internal sealed class LabelWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     public LabelWidget(Game game, LabelWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -24,7 +24,7 @@ internal sealed class LabelWidget : Widget, IGetKey, IToJson, ISaveGameState
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
@@ -35,13 +35,11 @@ internal sealed class LabelWidget : Widget, IGetKey, IToJson, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

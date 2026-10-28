@@ -9,14 +9,14 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a singleton for a weighted random of nullable <see cref="ItemEnhancement"/> objects.  This weighted random supports null to allow a non-selection.
 /// </summary>
-internal sealed class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey, IToJson, IItemEnhancement, ISaveGameState
+internal sealed class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey, IToJson, IItemEnhancement, IGameSerialize
 {
     public ItemEnhancementWeightedRandom(Game game, ItemEnhancementWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
         Key = gameConfiguration.GetKey;
         NameAndWeightBindings = gameConfiguration.NameAndWeightBindings;
     }
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.
@@ -33,15 +33,13 @@ internal sealed class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhance
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         foreach ((string? name, int weight) in NameAndWeightBindings)
         {
             Add(weight, name == null ? null : Game.SingletonRepository.Get<ItemEnhancement>(name)); // TODO: This smells because of the nullability
         }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

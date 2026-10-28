@@ -10,16 +10,19 @@ internal abstract class IntProperty : Property, IIntValue
 {
     protected IntProperty(Game game) : base(game) { }
 
-    public override void RestoreGame(RestoreGameState restoreGameState)
+    public override void Bind(RestoreGameState restoreGameState)
     {
-        base.RestoreGame(restoreGameState);
-        _value = restoreGameState.GetByKey(nameof(_value)).GetInt();
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetByKey(nameof(_value)).GetInt();
+        }
     }
 
     private int _value;
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_value), new IntValueGameStateBag(_value))
         );
     }

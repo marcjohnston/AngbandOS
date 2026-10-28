@@ -10,15 +10,18 @@ internal abstract class StringProperty : Property, IStringValue
 {
     protected StringProperty(Game game) : base(game) { }
 
-    public override void RestoreGame(RestoreGameState restoreGameState)
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        base.RestoreGame(restoreGameState);
-        _value = restoreGameState.GetByKey(nameof(_value)).GetString();
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetByKey(nameof(_value)).GetString();
+        }
     }
     private string _value;
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_value), new StringValueGameStateBag(_value))
         );
     }

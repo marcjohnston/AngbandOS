@@ -13,9 +13,7 @@ internal class OpenScript : GameCommandUniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the open script and returns true, if the open fails due to chance; false, otherwise.

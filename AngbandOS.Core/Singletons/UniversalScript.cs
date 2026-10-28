@@ -6,23 +6,15 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript, IGameCommandScript, IStoreCommandScript, IGetKey
+internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript, IGameCommandScript, IStoreCommandScript, IGameSerialize
 {
     protected Game Game { get; }
     protected UniversalScript(Game game)
     {
-
         Game = game;
     }
-    public virtual string Key => GetType().Name;
 
-    public string GetKey => Key;
-
-    public virtual void Bind() { }
-    public virtual void RestoreGame(RestoreGameState restoreGameState) { }
-    public virtual void InitializationComplete() { }
-
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual bool RequiresRerendering { get; } = false;
 

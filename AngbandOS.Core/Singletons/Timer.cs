@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents an action that occurs over a period of time.
 /// </summary>
-internal abstract class Timer : IGetKey, IIntValue, IChangeTracker, ISaveGameState
+internal abstract class Timer : IGetKey, IIntValue, IChangeTracker, IGameSerialize
 {
     protected Game Game { get; }
     public Timer(Game game)
@@ -17,7 +17,7 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker, ISaveGameSta
         Game = game;
     }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_value), new IntValueGameStateBag(_value))
@@ -45,12 +45,13 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker, ISaveGameSta
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        _value = restoreGameState.GetByKey(nameof(_value)).GetInt();
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetByKey(nameof(_value)).GetInt();
+        }
     }
-    public void InitializationComplete() { }
 
     private int _value;
 

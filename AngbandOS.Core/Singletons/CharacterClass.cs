@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class CharacterClass : IGetKey, ISaveGameState
+internal abstract class CharacterClass : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected CharacterClass(Game game)
@@ -19,7 +19,7 @@ internal abstract class CharacterClass : IGetKey, ISaveGameState
     /// </summary>
     protected virtual (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => null;
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
@@ -436,7 +436,7 @@ internal abstract class CharacterClass : IGetKey, ISaveGameState
         RefreshAndSquashAttributeSet();
     }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
@@ -457,16 +457,16 @@ internal abstract class CharacterClass : IGetKey, ISaveGameState
         {
             ArtifactBiasWeightedRandom = new WeightedRandom<ArtifactBias?>(Game, ArtifactBiasAndWeightBindingKeys.Select(_artifactBiasAndWeight => (Game.SingletonRepository.GetNullable<ArtifactBias>(_artifactBiasAndWeight.ArtifactBiasBindingKey), _artifactBiasAndWeight.Weight)));
         }
+
+        if (restoreGameState is not null)
+        {
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+            ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
+                _restoreGameState => _restoreGameState.GetInt(),
+                _restoreGameState => _restoreGameState.GetBoolOrDefault(),
+                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
-        ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
-            _restoreGameState => _restoreGameState.GetInt(),
-            _restoreGameState => _restoreGameState.GetBoolOrDefault(),
-            _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
-    }
-    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.

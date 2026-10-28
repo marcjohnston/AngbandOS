@@ -10,15 +10,15 @@ namespace AngbandOS.Core;
 /// Represents an instance of an item.  This item object is universally capable of being any type of object in the game but it also has a
 /// single parent (or factory) that controls what type of object the item is.
 /// </summary>
-internal sealed class Item : IComparable<Item>, ISaveGameState
+internal sealed class Item : IComparable<Item>, IGameSerialize
 {
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(IdentSense), saveGameState.CreateGameStateBag(IdentSense, IdentFixed, IdentEmpty, IdentityIsKnown, IdentityIsStoreBought, IdentMental, WasNoticed, ContainerIsOpen)),
 
             (nameof(FixedArtifact), saveGameState.CreateDerivedGameStateBag(FixedArtifact, typeof(FixedArtifact))),
-            (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag((ISaveGameState)EffectiveAttributeSet, typeof(EffectiveAttributeSet))), // We have to apply the cast for ambiguity. 
+            (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag((IGameSerialize)EffectiveAttributeSet, typeof(EffectiveAttributeSet))), // We have to apply the cast for ambiguity. 
             (nameof(_factory), saveGameState.CreateDerivedGameStateBag(_factory, typeof(ItemFactory))),
             (nameof(NutritionalValue), saveGameState.CreateGameStateBag(NutritionalValue)),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),

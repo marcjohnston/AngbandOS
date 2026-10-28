@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.RaceGenders;
 
-internal sealed class RaceGender : IGetKey, IToJson, ISaveGameState
+internal sealed class RaceGender : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public RaceGender(Game game, RaceGenderGameConfiguration gameConfiguration)
@@ -18,7 +18,7 @@ internal sealed class RaceGender : IGetKey, IToJson, ISaveGameState
         PhysicalAttributesWeightedRandomBindings = gameConfiguration.PhysicalAttributesWeightedRandomBindings;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -38,15 +38,13 @@ internal sealed class RaceGender : IGetKey, IToJson, ISaveGameState
     public string Key { get; }
     public string GetKey => $"{RaceBindingKey}-{GenderBindingKey}";
     public static string GetCompositeKey(Race race, Gender gender) => GameConfiguration.GetCompositeKey(race.GetKey, gender.GetKey);
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);
         Gender = Game.SingletonRepository.Get<Gender>(GenderBindingKey);
         (PhysicalAttributeSet PhysicalAttributeSet, int Weight)[] physicalAttributesWeightedRandoms = PhysicalAttributesWeightedRandomBindings.Select(_physicalAttributesWeightedRandomBinding => (Game.SingletonRepository.Get<PhysicalAttributeSet>(_physicalAttributesWeightedRandomBinding.PhysicalAttributesBindingKey), _physicalAttributesWeightedRandomBinding.Weight)).ToArray();
         PhysicalAttributesWeightedRandom = new WeightedRandom<PhysicalAttributeSet>(Game, physicalAttributesWeightedRandoms);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public Race Race { get; private set; }
     public Gender Gender { get; private set; }

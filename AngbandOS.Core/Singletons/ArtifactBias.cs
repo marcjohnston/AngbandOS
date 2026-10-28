@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents the bias used when applying special abilities to an artifact.
 /// </summary>
-internal abstract class ArtifactBias : IGetKey, ISaveGameState
+internal abstract class ArtifactBias : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     public string GetKey => Key;
@@ -20,11 +20,11 @@ internal abstract class ArtifactBias : IGetKey, ISaveGameState
     }
 
     public abstract string AffinityName { get; }
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual string Key => GetType().Name;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? BindTestsAndItemEnhancements((string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? tuples)
         {
@@ -47,8 +47,6 @@ internal abstract class ArtifactBias : IGetKey, ISaveGameState
         RandomResistances = BindTestsAndItemEnhancements(RandomResistanceTuples);
         RandomSlayings = BindTestsAndItemEnhancements(RandomSlayingTuples);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the chance that the object will have immunity resistance.  The chance relates to a 1-in-chance value.

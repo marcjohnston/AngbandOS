@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace AngbandOS.Core;
 
-internal sealed class Town : IGetKey, IToJson, ISaveGameState
+internal sealed class Town : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Town(Game game, TownGameConfiguration gameConfiguration)
@@ -23,7 +23,7 @@ internal sealed class Town : IGetKey, IToJson, ISaveGameState
         AllowStartupTown = gameConfiguration.AllowStartupTown;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Seed), saveGameState.CreateGameStateBag(Seed)),
@@ -93,7 +93,7 @@ internal sealed class Town : IGetKey, IToJson, ISaveGameState
     /// </summary>
     public bool CanBeEscortedHere => true;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         List<StoreFactory> storeFactoryList = new List<StoreFactory>();
         foreach (string storeName in StoreFactoryNames)
@@ -103,16 +103,16 @@ internal sealed class Town : IGetKey, IToJson, ISaveGameState
         StoreFactories = storeFactoryList.ToArray();
 
         Dungeon = Game.SingletonRepository.Get<Dungeon>(DungeonName);
+
+        if (restoreGameState is not null)
+        {
+            Seed = restoreGameState.GetByKey(nameof(Seed)).GetInt();
+            Visited = restoreGameState.GetByKey(nameof(Visited)).GetBool();
+            X = restoreGameState.GetByKey(nameof(X)).GetInt();
+            Y = restoreGameState.GetByKey(nameof(Y)).GetInt();
+            Stores = restoreGameState.GetByKey(nameof(Stores)).GetDerivedReferences<Store>((RestoreGameState restoreGameState) => new Store(Game, restoreGameState));
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        Seed = restoreGameState.GetByKey(nameof(Seed)).GetInt();
-        Visited = restoreGameState.GetByKey(nameof(Visited)).GetBool();
-        X = restoreGameState.GetByKey(nameof(X)).GetInt();
-        Y = restoreGameState.GetByKey(nameof(Y)).GetInt();
-        Stores = restoreGameState.GetByKey(nameof(Stores)).GetDerivedReferences<Store>((RestoreGameState restoreGameState) => new Store(Game, restoreGameState));
-    }
-    public void InitializationComplete() { }
 
     public void Initialize()
     {

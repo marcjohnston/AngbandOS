@@ -6,9 +6,14 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class JournalScript : UniversalScript
+internal class JournalScript : UniversalScript, IGetKey
 {
     private JournalScript(Game game) : base(game) { }
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public override bool RequiresRerendering => true;
 

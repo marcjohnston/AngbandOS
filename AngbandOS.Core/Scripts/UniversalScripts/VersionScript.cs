@@ -8,9 +8,19 @@ using System.Reflection;
 
 namespace AngbandOS.Core.Scripts;
 
-internal class VersionScript : UniversalScript
+internal class VersionScript : UniversalScript, IGetKey
 {
     private VersionScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the version script.

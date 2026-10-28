@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Vault : IGetKey, IToJson, ISaveGameState
+internal sealed class Vault : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Vault(Game game, VaultGameConfiguration gameConfiguration)
@@ -22,13 +22,11 @@ internal sealed class Vault : IGetKey, IToJson, ISaveGameState
         Width = gameConfiguration.Width;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public ColorEnum Color { get; } = ColorEnum.White;
     public string Name { get; }

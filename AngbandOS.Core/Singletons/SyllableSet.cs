@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace AngbandOS.Core;
 
-internal sealed class SyllableSet : IGetKey, IToJson, ISaveGameState
+internal sealed class SyllableSet : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public SyllableSet(Game game, SyllableSetGameConfiguration gameConfiguration)
@@ -20,7 +20,7 @@ internal sealed class SyllableSet : IGetKey, IToJson, ISaveGameState
         EndingSyllables = gameConfiguration.EndingSyllables;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string[] BeginningSyllables { get; }
     public string[] MiddleSyllables { get; }
     public string[] EndingSyllables { get; }
@@ -28,9 +28,7 @@ internal sealed class SyllableSet : IGetKey, IToJson, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public string ToJson()
     {

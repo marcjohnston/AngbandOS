@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Attack : IGetKey, IToJson, ISaveGameState
+internal sealed class Attack : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Attack(Game game, AttackGameConfiguration gameConfiguration)
@@ -23,7 +23,7 @@ internal sealed class Attack : IGetKey, IToJson, ISaveGameState
         RendersMissMessage = gameConfiguration.RendersMissMessage;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
 
@@ -49,9 +49,7 @@ internal sealed class Attack : IGetKey, IToJson, ISaveGameState
     }
 
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.

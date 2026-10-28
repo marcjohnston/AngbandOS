@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// An ability score
 /// </summary>
-internal abstract class Ability : IGetKey, ISaveGameState
+internal abstract class Ability : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected Ability(Game game)
@@ -17,20 +17,20 @@ internal abstract class Ability : IGetKey, ISaveGameState
         Game = game;
     }
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    {            
-        Adjusted = restoreGameState.GetByKey(nameof(Adjusted)).GetInt();
-        AdjustedMax = restoreGameState.GetByKey(nameof(AdjustedMax)).GetInt();
-        Bonus = restoreGameState.GetByKey(nameof(Bonus)).GetInt();
-        Innate = restoreGameState.GetByKey(nameof(Innate)).GetInt();
-        InnateMax = restoreGameState.GetByKey(nameof(InnateMax)).GetInt();
-        TableIndex = restoreGameState.GetByKey(nameof(TableIndex)).GetInt();
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        if (restoreGameState is not null)
+        {
+            Adjusted = restoreGameState.GetByKey(nameof(Adjusted)).GetInt();
+            AdjustedMax = restoreGameState.GetByKey(nameof(AdjustedMax)).GetInt();
+            Bonus = restoreGameState.GetByKey(nameof(Bonus)).GetInt();
+            Innate = restoreGameState.GetByKey(nameof(Innate)).GetInt();
+            InnateMax = restoreGameState.GetByKey(nameof(InnateMax)).GetInt();
+            TableIndex = restoreGameState.GetByKey(nameof(TableIndex)).GetInt();
+        }
     }
 
-    public void InitializationComplete() { }
-
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Adjusted), saveGameState.CreateGameStateBag(Adjusted)),

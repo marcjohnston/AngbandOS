@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a widget that renders a specific text value and color based on an integer value.
 /// </summary>
-internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, ISaveGameState
+internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     #region State Data
     private bool _sortValidated = false;
@@ -32,7 +32,7 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, ISaveGameState
         _color = DefaultColor;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_sortValidated), saveGameState.CreateGameStateBag(_sortValidated)),
@@ -69,7 +69,7 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, ISaveGameState
     public string IntValueName { get; }
     public IIntValue IntValue { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
@@ -78,14 +78,14 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, ISaveGameState
 
         // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
         ValidateRangeSorting();
+
+        if (restoreGameState is not null)
+        {
+            _sortValidated = restoreGameState.GetByKey(nameof(_sortValidated)).GetBool();
+            _value = restoreGameState.GetByKey(nameof(_value)).GetString();
+            _color = restoreGameState.GetByKey(nameof(_color)).GetEnum<ColorEnum>();
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        _sortValidated = restoreGameState.GetByKey(nameof(_sortValidated)).GetBool();
-        _value = restoreGameState.GetByKey(nameof(_value)).GetString();
-        _color = restoreGameState.GetByKey(nameof(_color)).GetEnum<ColorEnum>();
-    }
-    public void InitializationComplete() { }
 
     private void ValidateRangeSorting()
     {

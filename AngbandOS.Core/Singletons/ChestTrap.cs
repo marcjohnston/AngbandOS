@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents a trap on a chest.  Can be layered with multiple traps.  The base class implements the layering.  Derived classes only
 /// need concern themselves with their own implementation and not sub-traps.
 /// </summary>
-internal class ChestTrap : IGetKey, IToJson, ISaveGameState
+internal class ChestTrap : IGetKey, IToJson, IGameSerialize
 {
     protected Game Game { get; }
     public ChestTrap(Game game, ChestTrapGameConfiguration gameConfiguration)
@@ -21,7 +21,7 @@ internal class ChestTrap : IGetKey, IToJson, ISaveGameState
         ActivationGridTileScriptBindingKey = gameConfiguration.ActivationGridTileScriptBindingKey;
     }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -40,12 +40,10 @@ internal class ChestTrap : IGetKey, IToJson, ISaveGameState
     public virtual string Key { get; set; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ActivationGridTileScript = Game.SingletonRepository.Get<GridTileScript>(ActivationGridTileScriptBindingKey);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     private string ActivationGridTileScriptBindingKey { get; }
     public GridTileScript ActivationGridTileScript { get; private set; }

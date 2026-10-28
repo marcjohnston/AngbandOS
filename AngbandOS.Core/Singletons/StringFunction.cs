@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue, ISaveGameState
+internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue, IGameSerialize
 {
     protected Game Game { get; }
     protected StringFunction(Game game)
@@ -31,13 +31,11 @@ internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue, 
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public virtual string[]? DependencyNames => null;
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

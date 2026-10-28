@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class SpellResistantDetection : IGetKey, ISaveGameState
+internal abstract class SpellResistantDetection : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected SpellResistantDetection(Game game) // This object is a singleton
@@ -16,11 +16,9 @@ internal abstract class SpellResistantDetection : IGetKey, ISaveGameState
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract void Learn(Monster monster);
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }
 

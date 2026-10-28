@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// A dead player character, holding just the bare bones needed for the high score table and
 /// game preview, or to create a new character based on the previous one.
 /// </summary>
-internal class ExPlayer : ISaveGameState
+internal class ExPlayer : IGameSerialize
 {
     #region State Data
     /// <summary>
@@ -59,7 +59,7 @@ internal class ExPlayer : ISaveGameState
     public readonly Realm? SecondaryRealm;
     #endregion
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Gender), saveGameState.CreateDerivedGameStateBag(Gender, typeof(Gender))),

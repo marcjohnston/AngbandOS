@@ -14,10 +14,10 @@ internal class ScriptsListReadOnlyAttributeValue : ListReadOnlyAttributeValue<Un
     {
     }
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Value), saveGameState.CreateSystemObjectsGameStateBag(Value))
+            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, false))
         );
     }
 }

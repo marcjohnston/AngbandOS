@@ -6,10 +6,19 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class AggravateMonstersScript : UniversalScript
+internal class AggravateMonstersScript : UniversalScript, IGetKey
 {
     private AggravateMonstersScript(Game game) : base(game) { }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
     public override bool IdentifiesItem => true;
     public override bool UsesItem => true;
     public override void ExecuteScript()

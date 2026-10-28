@@ -63,9 +63,9 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
         }
         _attributeModifiers.RemoveAll((item) => item.Key == key);
     }
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, string?>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateGameStateBag(_modifier)))
         );
     }

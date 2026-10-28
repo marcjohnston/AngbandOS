@@ -6,9 +6,14 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class TelekineticWaveTalentScript : UniversalScript
+internal class TelekineticWaveTalentScript : UniversalScript, IGetKey
 {
     private TelekineticWaveTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+
     public override void ExecuteScript()
     {
         Game.MsgPrint("A wave of pure physical force radiates out from your body!");

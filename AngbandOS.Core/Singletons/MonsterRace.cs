@@ -6,9 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, IUniqueSequentialIndex, ISaveGameState
+internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, IUniqueSequentialIndex, IGameSerialize
 {
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(CurNum), saveGameState.CreateGameStateBag(CurNum)),
@@ -510,7 +510,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
         int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
@@ -542,16 +542,16 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
 
         GoldItemFactory = Game.SingletonRepository.Get<ItemFactory>(GoldItemFactoryBindingKey);
         Knowledge = new MonsterKnowledge(Game, this);
+
+        if (restoreGameState is not null)
+        {
+            CurNum = restoreGameState.GetByKey(nameof(CurNum)).GetInt();
+            Guardian = restoreGameState.GetByKey(nameof(Guardian)).GetBool();
+            OnlyGuardian = restoreGameState.GetByKey(nameof(OnlyGuardian)).GetBool();
+            MaxNum = restoreGameState.GetByKey(nameof(MaxNum)).GetInt();
+            Knowledge = restoreGameState.GetByKey(nameof(Knowledge)).GetDerivedReference<MonsterKnowledge>((RestoreGameState restoreGameState) => new MonsterKnowledge(Game, restoreGameState));
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        CurNum = restoreGameState.GetByKey(nameof(CurNum)).GetInt();
-        Guardian = restoreGameState.GetByKey(nameof(Guardian)).GetBool();
-        OnlyGuardian = restoreGameState.GetByKey(nameof(OnlyGuardian)).GetBool();
-        MaxNum = restoreGameState.GetByKey(nameof(MaxNum)).GetInt();
-        Knowledge = restoreGameState.GetByKey(nameof(Knowledge)).GetDerivedReference<MonsterKnowledge>((RestoreGameState restoreGameState) => new MonsterKnowledge(Game, restoreGameState));
-    }
-    public void InitializationComplete() { }
 
     public MonsterSpell[]? Spells { get; private set; }
     public bool CanBreatheChaos => Spells?.Any(_spell => typeof(ChaosBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;

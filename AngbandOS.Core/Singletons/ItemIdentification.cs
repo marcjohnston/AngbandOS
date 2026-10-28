@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class ItemIdentification : IGetKey, IToJson, ISaveGameState
+internal class ItemIdentification : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public ItemIdentification(Game game, ItemIdentificationGameConfiguration gameConfiguration)
@@ -17,7 +17,7 @@ internal class ItemIdentification : IGetKey, IToJson, ISaveGameState
         InterpolationExpressionAttributeNames = gameConfiguration.InterpolationExpressionAttributeNames;
         EffectDescription = gameConfiguration.EffectDescription;
     }
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -41,13 +41,11 @@ internal class ItemIdentification : IGetKey, IToJson, ISaveGameState
     private string AttributeFilterBindingKey { get; }
     public AttributeFilter AttributeFilter { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         AttributeFilter = Game.SingletonRepository.Get<AttributeFilter>(AttributeFilterBindingKey);
         InterpolationExpressionAttributes = Game.SingletonRepository.GetNullable<Attribute>(InterpolationExpressionAttributeNames);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
     private string[]? InterpolationExpressionAttributeNames { get; }
     public Attribute[]? InterpolationExpressionAttributes { get; private set; }
     public string[] EffectDescription { get; }

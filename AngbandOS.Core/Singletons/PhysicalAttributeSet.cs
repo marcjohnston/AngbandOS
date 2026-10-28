@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PhysicalAttributeSets;
 
-internal sealed class PhysicalAttributeSet : IGetKey, IToJson, ISaveGameState
+internal sealed class PhysicalAttributeSet : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public PhysicalAttributeSet(Game game, PhysicalAttributeSetGameConfiguration gameConfiguration)
@@ -19,7 +19,7 @@ internal sealed class PhysicalAttributeSet : IGetKey, IToJson, ISaveGameState
         WeightRange = gameConfiguration.WeightRange;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -41,9 +41,7 @@ internal sealed class PhysicalAttributeSet : IGetKey, IToJson, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public int BaseHeight { get; }
     public int HeightRange { get; }

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class StoreCommand : IGetKey, IToJson, ISaveGameState
+internal sealed class StoreCommand : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public StoreCommand(Game game, StoreCommandGameConfiguration gameConfiguration)
@@ -19,7 +19,7 @@ internal sealed class StoreCommand : IGetKey, IToJson, ISaveGameState
         ExecuteScriptName = gameConfiguration.ExecuteScriptName;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
 
@@ -37,7 +37,7 @@ internal sealed class StoreCommand : IGetKey, IToJson, ISaveGameState
     public string Description { get; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         // Get the script from the singleton repository.
         ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IStoreCommandScript>(ExecuteScriptName);
@@ -56,8 +56,6 @@ internal sealed class StoreCommand : IGetKey, IToJson, ISaveGameState
             ValidStoreFactories = storeFactoryList.ToArray();
         }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public bool IsEnabled(StoreFactory storeFactory)
     {

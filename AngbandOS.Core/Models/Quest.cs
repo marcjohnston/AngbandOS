@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class Quest : ISaveGameState
+internal class Quest : IGameSerialize
 {
     #region State Data
     public bool Discovered;
@@ -21,7 +21,7 @@ internal class Quest : ISaveGameState
     public int ToKill;
     #endregion
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Discovered), saveGameState.CreateGameStateBag(Discovered)),

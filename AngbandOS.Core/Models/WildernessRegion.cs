@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class WildernessRegion : ISaveGameState
+internal class WildernessRegion : IGameSerialize
 {
     /// <summary>
     /// Returns the dungeon that is located in this region; or null, if there is none.
@@ -29,7 +29,7 @@ internal class WildernessRegion : ISaveGameState
         Seed = restoreGameState.GetByKey(nameof(Seed)).GetInt();
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Dungeon), saveGameState.CreateDerivedGameStateBag(Dungeon, typeof(Dungeon))),

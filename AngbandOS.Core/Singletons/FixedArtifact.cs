@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class FixedArtifact : IGetKey, IToJson, ISaveGameState
+internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
 {
     protected Game Game { get; }
     protected FixedArtifact(Game game)
@@ -14,22 +14,21 @@ internal abstract class FixedArtifact : IGetKey, IToJson, ISaveGameState
         Game = game;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(CurNum), new IntValueGameStateBag(CurNum))
         );
     }
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
+
+        if (restoreGameState is not null)
+        {
+            CurNum = restoreGameState.GetByKey(nameof(CurNum)).GetInt();
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState)
-    {
-        CurNum = restoreGameState.GetByKey(nameof(CurNum)).GetInt();
-    }
-    
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

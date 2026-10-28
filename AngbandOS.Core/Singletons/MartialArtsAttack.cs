@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class MartialArtsAttack : IGetKey, IToJson, ISaveGameState
+internal sealed class MartialArtsAttack : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
 
@@ -22,7 +22,7 @@ internal sealed class MartialArtsAttack : IGetKey, IToJson, ISaveGameState
         MinLevel = gameConfiguration.MinLevel;
         IsDefault = gameConfiguration.IsDefault;
     }
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -47,12 +47,10 @@ internal sealed class MartialArtsAttack : IGetKey, IToJson, ISaveGameState
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         MartialArtsAttackEffect = Game.SingletonRepository.Get<MartialArtsEffect>(MartialArtsEffectBindingKey);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public int Chance { get; }
     public int Dd { get; }

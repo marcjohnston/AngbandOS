@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.MonsterSelectors;
 
-internal abstract class MonsterSelector : IMonsterSelector, IGetKey, ISaveGameState
+internal abstract class MonsterSelector : IMonsterSelector, IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected MonsterSelector(Game game) // This object is a singleton
@@ -16,11 +16,9 @@ internal abstract class MonsterSelector : IMonsterSelector, IGetKey, ISaveGameSt
 
     public string GetKey => GetType().Name;
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace);
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

@@ -64,9 +64,9 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
         }
         _attributeModifiers.RemoveAll((item) => item.Key == key);
     }
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
            (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, ArtifactBias?>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateDerivedGameStateBag(_modifier, typeof(ArtifactBias))))
         );
     }

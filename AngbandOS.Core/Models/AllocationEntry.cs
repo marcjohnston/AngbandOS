@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// An allocation entry for selecting monsters and items
 /// </summary>
-internal class AllocationEntry : ISaveGameState
+internal class AllocationEntry : IGameSerialize
 {
     /// <summary>
     /// The base probability of the entry being chosen
@@ -36,7 +36,7 @@ internal class AllocationEntry : ISaveGameState
     /// </summary>
     public int Level;
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(BaseProbability), saveGameState.CreateGameStateBag(BaseProbability)),

@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue, ISaveGameState
+internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue, IGameSerialize
 {
     protected Game Game { get; }
     protected IntFunction(Game game)
@@ -18,7 +18,7 @@ internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue, ISaveG
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.
     /// </summary>
     public bool IsChanged => Dependencies == null ? true : Dependencies.Any(_dependency => _dependency.IsChanged);
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Does nothing, because functions are not sinks for tracking.
@@ -30,12 +30,10 @@ internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue, ISaveG
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public virtual string[]? DependencyNames => null;
 

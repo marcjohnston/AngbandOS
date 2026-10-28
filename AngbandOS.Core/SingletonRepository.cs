@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a repository for all game singletons.
 /// </summary>
-internal sealed class SingletonRepository : ISaveGameState
+internal sealed class SingletonRepository : IGameSerialize
 {
     #region Constructors
     public SingletonRepository(Game game)
@@ -20,7 +20,7 @@ internal sealed class SingletonRepository : ISaveGameState
     #endregion
 
     #region Publics
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         // The singleton repository is going to use a dictionary for all of the singletons.  The IGetKey will provide the unique key.
         var result = new Dictionary<string, GameStateBag>();
@@ -157,11 +157,11 @@ internal sealed class SingletonRepository : ISaveGameState
         return singleton;
     }
 
-    //public int GetIndex<T>(T singleton) where T : class
-    //{
-    //    string typeName = typeof(T).Name;
-    //    return _allGenericRepositoriesDictionary[typeName].GetIndex(singleton);
-    //}
+    public int GetIndex<T>(T singleton) where T : class
+    {
+        string typeName = typeof(T).Name;
+        return _allGenericRepositoriesDictionary[typeName].GetIndex(singleton);
+    }
 
     /// <summary>
     /// Returns an array of singletons from the repository specified by the <typeparamref name="T"/> type that are references by the unique key
@@ -429,27 +429,19 @@ internal sealed class SingletonRepository : ISaveGameState
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
         {
-            // Allow the singleton to bind now.
-            singleton.Bind();
-        }
-        #endregion
-
-        #region Restore Game Phase
-        // If we are not restoring, this phase is skipped.
-        if (restoreGameState is not null)
-        {
-            // Bind all of the singletons now.
-            foreach (IGetKey singleton in _allSingletonsList)
+            // Retrieve the restore game state, if we are restoring; otherwise, we will have null as the restore game state--which is still passed to the singleton Bind method.
+            RestoreGameState? singletonRestoreGameState = null;
+            if (restoreGameState is not null)
             {
-                // Retrieve the restore game state, if we are restoring; otherwise, we will have null as the restore game state--which is still passed to the singleton Bind method.
-                RestoreGameState singletonRestoreGameState = restoreGameState.GetByKey(singleton.GetKey);
+                singletonRestoreGameState = restoreGameState.GetByKey(singleton.GetKey);
                 if (singletonRestoreGameState.GameStateBag is ReferenceGameStateBag referenceGameStateBag)
                 {
                     singletonRestoreGameState = restoreGameState.New(restoreGameState.GetObjectGameStateBag(referenceGameStateBag.ObjectId));
                 }
-
-                singleton.RestoreGame(singletonRestoreGameState);
             }
+
+            // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
+            singleton.Bind(singletonRestoreGameState);
         }
         #endregion
 
@@ -465,18 +457,6 @@ internal sealed class SingletonRepository : ISaveGameState
         ValidateInnateTotalsLookupTable();
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
-        #endregion
-    }
-
-    public void FireInitializationComplete()
-    {
-        #region Initialization Complete Phase
-        // Bind all of the singletons now.
-        foreach (IGetKey singleton in _allSingletonsList)
-        {
-            // Allow the singleton to bind now.
-            singleton.InitializationComplete();
-        }
         #endregion
     }
 
@@ -663,10 +643,11 @@ internal sealed class SingletonRepository : ISaveGameState
                 }
 
                 // If the singleton hasn't been registered, register it now.  The singleton may belong to many repositories.
-                if (!genericRepository.Dictionary.TryGetValue(key, out object? existing))
+                if (genericRepository.Dictionary.TryGetValue(key, out object? existing))
                 {
-                    genericRepository.Add(key, singleton);
+                    throw new Exception($"The singleton key {key} has already been registered in the {typeName} repository and is conflicting with {existing.GetType().Name}.");
                 }
+                genericRepository.Add(key, singleton);
             }
         }
     }

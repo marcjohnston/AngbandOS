@@ -1,6 +1,6 @@
 ﻿namespace AngbandOS.Core;
 
-internal sealed class Symbol : IGetKey, IToJson, ISaveGameState
+internal sealed class Symbol : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Symbol(Game game, SymbolGameConfiguration gameConfiguration) 
@@ -11,7 +11,7 @@ internal sealed class Symbol : IGetKey, IToJson, ISaveGameState
         QueryCharacter = gameConfiguration.QueryCharacter;
         Name = gameConfiguration.Name;
     }
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public char Character { get; }
 
@@ -26,9 +26,7 @@ internal sealed class Symbol : IGetKey, IToJson, ISaveGameState
     public string Name { get; }
 
     public string Key { get; }
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public string GetKey => Key;
 

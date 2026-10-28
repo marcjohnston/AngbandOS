@@ -19,9 +19,9 @@ internal class HandsWieldSlot : EquipmentWieldSlot
     public override bool IsArmor => true;
     public override int SortOrder => 12;
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(RestrictingGloves), saveGameState.CreateGameStateBag(RestrictingGloves))
         );
     }

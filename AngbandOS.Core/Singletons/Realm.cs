@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Realm : IGetKey, IToJson, ISaveGameState
+internal sealed class Realm : IGetKey, IToJson, IGameSerialize
 {
     #region Constructor
     public Realm(Game game, RealmGameConfiguration gameConfiguration)
@@ -21,7 +21,7 @@ internal sealed class Realm : IGetKey, IToJson, ISaveGameState
     }
     #endregion
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_firstSpellLevel), saveGameState.CreateGameStateBag(_firstSpellLevel))
@@ -50,15 +50,15 @@ internal sealed class Realm : IGetKey, IToJson, ISaveGameState
     }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         SpellBooks = Game.SingletonRepository.Get<ItemFactory>(SpellBookNames);
+
+        if (restoreGameState is not null)
+        {
+            _firstSpellLevel = restoreGameState.GetByKey(nameof(_firstSpellLevel)).GetNullableInt();
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        _firstSpellLevel = restoreGameState.GetByKey(nameof(_firstSpellLevel)).GetNullableInt();
-    }
-    public void InitializationComplete() { }
 
     /// <summary>
     /// Initialize the spells for the character that the player has chosen.  This process occurs during the confirmation birth stage.  Only the

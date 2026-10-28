@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class DungeonGuardian : IGetKey, IToJson, ISaveGameState
+internal sealed class DungeonGuardian : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public DungeonGuardian(Game game, DungeonGuardianGameConfiguration gameConfiguration)
@@ -17,7 +17,7 @@ internal sealed class DungeonGuardian : IGetKey, IToJson, ISaveGameState
         LevelFound = gameConfiguration.LevelFound;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
 
@@ -35,12 +35,10 @@ internal sealed class DungeonGuardian : IGetKey, IToJson, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         MonsterRace = Game.SingletonRepository.Get<MonsterRace>(MonsterRaceName);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, ISaveGameState
+internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public string DamageExpressionText { get; }
     public Expression DamageExpression { get; private set; }
@@ -20,12 +20,10 @@ internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJso
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         DamageExpression = Game.ParseNumericExpression(DamageExpressionText);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
     public string ToJson()
     {
         DamageLearnedKnowledgeGameConfiguration gameConfiguration = new()
@@ -36,5 +34,5 @@ internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJso
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

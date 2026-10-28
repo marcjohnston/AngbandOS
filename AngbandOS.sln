@@ -26,8 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		Documents\Generate SQL Database.pptx = Documents\Generate SQL Database.pptx
 		Documents\Object Property Design and Binding.pptx = Documents\Object Property Design and Binding.pptx
 		Documents\Persistence Provider Setup.pptx = Documents\Persistence Provider Setup.pptx
-		Documents\Serialization and Deserialization with the Game State Bag.pptx = Documents\Serialization and Deserialization with the Game State Bag.pptx
 		Documents\Singletons Design.pptx = Documents\Singletons Design.pptx
+		Documents\Serialization and Deserialization with the Game State Bag.pptx = Documents\Serialization and Deserialization with the Game State Bag.pptx
 		Documents\Web Front-End Test Cases.pptx = Documents\Web Front-End Test Cases.pptx
 	EndProjectSection
 EndProject
@@ -60,8 +60,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AngbandOS.Web.ControllerTes
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AngbandOS.PersistentStorage.Sql.Schema", "AngbandOS.PersistentStorage.Sql.Schema\AngbandOS.PersistentStorage.Sql.Schema.sqlproj", "{87DE6DBF-ABA2-4919-A7DA-F67FBCBD998E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Core.Interface.Configuration.Annotations", "AngbandOS.Core.Interface.Configuration.Annotations\AngbandOS.Core.Interface.Configuration.Annotations.csproj", "{CC8195EE-C97A-432E-AEA3-6387DCC10677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -571,30 +569,6 @@ Global
 		{87DE6DBF-ABA2-4919-A7DA-F67FBCBD998E}.Release|x86.ActiveCfg = Release|Any CPU
 		{87DE6DBF-ABA2-4919-A7DA-F67FBCBD998E}.Release|x86.Build.0 = Release|Any CPU
 		{87DE6DBF-ABA2-4919-A7DA-F67FBCBD998E}.Release|x86.Deploy.0 = Release|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug (Separate Folders)|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug (Separate Folders)|Any CPU.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug (Separate Folders)|arm64.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug (Separate Folders)|arm64.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug (Separate Folders)|x86.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug (Separate Folders)|x86.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug|arm64.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug|x86.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug1|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug1|Any CPU.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug1|arm64.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug1|arm64.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug1|x86.ActiveCfg = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Debug1|x86.Build.0 = Debug|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Release|arm64.ActiveCfg = Release|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Release|arm64.Build.0 = Release|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Release|x86.ActiveCfg = Release|Any CPU
-		{CC8195EE-C97A-432E-AEA3-6387DCC10677}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

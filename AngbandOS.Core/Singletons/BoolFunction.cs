@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue, ISaveGameState
+internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue, IGameSerialize
 {
     protected Game Game { get; }
     protected BoolFunction(Game game) 
@@ -15,7 +15,7 @@ internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue, ISav
         Game = game;
     }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the boolean result of the function.  This method provides the implementation for the IConditional interface.
@@ -37,12 +37,10 @@ internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue, ISav
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public virtual string[]? DependencyNames => null;
 }

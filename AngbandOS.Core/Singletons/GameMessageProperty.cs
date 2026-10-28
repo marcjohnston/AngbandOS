@@ -30,18 +30,21 @@ internal class GameMessageProperty : Property
             SetChangedFlag();
         }
     }
-    public override void RestoreGame(RestoreGameState restoreGameState) 
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        base.RestoreGame(restoreGameState);
-        foreach (string? message in restoreGameState.GetByKey(nameof(MessageQueue)).GetNullableStrings())
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
         {
-            MessageQueue.Enqueue(message);
+            foreach (string? message in restoreGameState.GetByKey(nameof(MessageQueue)).GetNullableStrings())
+            {
+                MessageQueue.Enqueue(message);
+            }
         }
     }
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(MessageQueue), saveGameState.CreateGameStateBag(MessageQueue.ToArray()))
         );
     }

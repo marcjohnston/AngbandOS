@@ -16,15 +16,18 @@ internal class UpdateManaFlaggedAction : FlaggedAction
     private bool OldRestrictingArmor;
 
     private UpdateManaFlaggedAction(Game game) : base(game) { }
-    public override void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        base.RestoreGame(restoreGameState);
-        OldRestrictingArmor = restoreGameState.GetByKey(nameof(OldRestrictingArmor)).GetBool();
+    public override void Bind(RestoreGameState? restoreGameState)
+    {
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            OldRestrictingArmor = restoreGameState.GetByKey(nameof(OldRestrictingArmor)).GetBool();
+        }
     }
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState), 
+        return new DictionaryGameStateBag(base.Serialize(saveGameState), 
             (nameof(OldRestrictingArmor), saveGameState.CreateGameStateBag(OldRestrictingArmor))
         );
     }

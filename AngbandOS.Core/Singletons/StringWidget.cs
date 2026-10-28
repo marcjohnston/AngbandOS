@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class StringWidget : Widget, IGetKey, IToJson, ISaveGameState
+internal sealed class StringWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     public StringWidget(Game game, StringWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -20,7 +20,7 @@ internal sealed class StringWidget : Widget, IGetKey, IToJson, ISaveGameState
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
@@ -34,14 +34,12 @@ internal sealed class StringWidget : Widget, IGetKey, IToJson, ISaveGameState
     public string StringValueName { get; }
     public IStringValue StringValue { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         StringValue = Game.SingletonRepository.Get<IStringValue>(StringValueName);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
 
     /// <summary>

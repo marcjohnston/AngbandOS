@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Tile : IGetKey, IToJson, ISaveGameState
+internal sealed class Tile : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Tile(Game game, TileGameConfiguration gameConfiguration)
@@ -76,7 +76,7 @@ internal sealed class Tile : IGetKey, IToJson, ISaveGameState
         YellowInTorchlight = gameConfiguration.YellowInTorchlight;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -152,7 +152,7 @@ internal sealed class Tile : IGetKey, IToJson, ISaveGameState
         return JsonSerializer.Serialize(tileDefinition, Game.GetJsonSerializerOptions());
     }
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         AlterAction = AlterActionName == null ? null : Game.SingletonRepository.Get<AlterAction>(AlterActionName);
         HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : Game.SingletonRepository.Get<Tile>(HiddenTreasureForTileName);
@@ -162,8 +162,6 @@ internal sealed class Tile : IGetKey, IToJson, ISaveGameState
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
         VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : Game.SingletonRepository.Get<Tile>(VisibleTreasureForTileName);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
     public override string ToString()
     {
         return GetKey;

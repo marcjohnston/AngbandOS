@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class AttributeFilter : IGetKey, IToJson, ISaveGameState
+internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public AttributeFilter(Game game, AttributeFilterGameConfiguration gameConfiguration)
@@ -20,7 +20,7 @@ internal class AttributeFilter : IGetKey, IToJson, ISaveGameState
         SumAttributeFilterBindings = gameConfiguration.SummationAttributeFilterBindings;
     }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public bool? ActivationAttributeNonNull { get; }
     public bool? ArtifactBiasAttributeNonNull { get; }
     private (string AttributeKey, bool Value)[]? OrAttributeFiltersBindings { get; }
@@ -44,7 +44,7 @@ internal class AttributeFilter : IGetKey, IToJson, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         List<(BitwiseOrAttribute, bool)> orAttributeList = new List<(BitwiseOrAttribute, bool)>();
         if (OrAttributeFiltersBindings is not null)
@@ -68,8 +68,6 @@ internal class AttributeFilter : IGetKey, IToJson, ISaveGameState
         }
         SumAttributeFilters = sumAttributeList.ToArray();
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public bool Test(EffectiveAttributeSet effectiveAttributeSet)
     {

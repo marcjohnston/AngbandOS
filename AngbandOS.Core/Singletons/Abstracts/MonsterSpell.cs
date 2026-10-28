@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class MonsterSpell : IGetKey, IToJson, ISaveGameState
+internal abstract class MonsterSpell : IGetKey, IToJson, IGameSerialize
 {
     protected Game Game { get; }
     protected MonsterSpell(Game game) 
@@ -18,17 +18,15 @@ internal abstract class MonsterSpell : IGetKey, IToJson, ISaveGameState
 
     public abstract (string CollapsableActionVerb, string UniqueDescription) KnowledgeAction { get; }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public virtual void Bind(RestoreGameState? restoreGameState)
     {
         SmartLearn = Game.SingletonRepository.GetNullable<SpellResistantDetection>(SmartLearnSpellResistantDetectionKeys);
     }
-    public virtual void RestoreGame(RestoreGameState restoreGameState) { }
-    public virtual void InitializationComplete() { }
 
     /// <summary>
     /// Returns true, if the spell is an innate ability.  Returns false, by default.  Spells that return true represent spells in the Flags4 flag-set.

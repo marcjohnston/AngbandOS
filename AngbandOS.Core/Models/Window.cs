@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a window (or screen) that is rendered to the UI.  This window will consist of the width and height.  A layout needs to conform to the window.
 /// </summary>
-internal class Window : ISaveGameState
+internal class Window : IGameSerialize
 {
     #region State Data
     /// <summary>
@@ -51,7 +51,7 @@ internal class Window : ISaveGameState
     private bool TotalErase;
     #endregion
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(ActiveScreen), saveGameState.CreateDerivedGameStateBag(ActiveScreen, typeof(ScreenBuffer))),

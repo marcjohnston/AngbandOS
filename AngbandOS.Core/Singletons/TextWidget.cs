@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
+internal sealed class TextWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     public TextWidget(Game game, TextWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -22,7 +22,7 @@ internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
@@ -33,15 +33,13 @@ internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
         NullableStringsValue = Game.SingletonRepository.Get<ITextValue>(NullableStringsValueName);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.

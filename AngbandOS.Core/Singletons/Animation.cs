@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents an animation that occurs when a projectile is launched.
 /// </summary>
-internal sealed class Animation : IGetKey, IToJson, ISaveGameState
+internal sealed class Animation : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Animation(Game game, AnimationGameConfiguration gameConfiguration) 
@@ -23,7 +23,7 @@ internal sealed class Animation : IGetKey, IToJson, ISaveGameState
         Sequence = gameConfiguration.Sequence;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -47,9 +47,7 @@ internal sealed class Animation : IGetKey, IToJson, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public char Character { get; }
     public ColorEnum Color { get; }

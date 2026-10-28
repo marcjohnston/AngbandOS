@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Talent : IGetKey, ISaveGameState, IToJson
+internal sealed class Talent : IGetKey, IGameSerialize, IToJson
 {
     protected Game Game { get; }
     private IScript UseScript { get; set; }
@@ -24,15 +24,13 @@ internal sealed class Talent : IGetKey, ISaveGameState, IToJson
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         UseScript = Game.SingletonRepository.Get<IScript>(UseScriptBindingKey);
         LearnedKnowledge = Game.SingletonRepository.GetNullable<LearnedKnowledge>(LearnedKnowledgeBindingKey);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string Name { get; }
 
     public int Level { get; }

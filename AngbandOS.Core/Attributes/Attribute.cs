@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class Attribute : IGetKey, IUniqueSequentialIndex, ISaveGameState
+internal abstract class Attribute : IGetKey, IUniqueSequentialIndex, IGameSerialize
 {
     protected Attribute(Game game) // This object is a singleton
     {
@@ -25,15 +25,9 @@ internal abstract class Attribute : IGetKey, IUniqueSequentialIndex, ISaveGameSt
 
     public abstract EffectiveAttributeValue CreateEffectiveAttributeValue();
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
-    public void RestoreGame(RestoreGameState restoreGameState)
-    {
-        Index = restoreGameState.GetByKey(nameof(Index)).GetInt();
-    }
-    public void InitializationComplete() { }
-
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Index), new IntValueGameStateBag(Index))

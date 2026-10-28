@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Spell : IGetKey, IToJson, ISaveGameState
+internal sealed class Spell : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
 
@@ -21,7 +21,7 @@ internal sealed class Spell : IGetKey, IToJson, ISaveGameState
     private ItemFactory? _spellBookItemFactory = null;
     public ItemFactory? SpellBookItemFactory => _spellBookItemFactory;
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Forgotten), saveGameState.CreateGameStateBag(Forgotten, Learned, Tried)),
@@ -58,15 +58,16 @@ internal sealed class Spell : IGetKey, IToJson, ISaveGameState
     public string GetKey => Key;
 
 
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        (Forgotten, Learned, Tried) = restoreGameState.GetByKey(nameof(Forgotten)).Get3Bools();
-        _spellIndex = restoreGameState.GetByKey(nameof(_spellIndex)).GetInt();
-        _spellBookItemFactory = restoreGameState.GetByKey(nameof(_spellBookItemFactory)).GetDerivedReferenceOrDefault<ItemFactory>();
-        _characterClassSpell = restoreGameState.GetByKey(nameof(_characterClassSpell)).GetDerivedReferenceOrDefault<CharacterClassSpell>();
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        if (restoreGameState is not null)
+        {
+            (Forgotten, Learned, Tried) = restoreGameState.GetByKey(nameof(Forgotten)).Get3Bools();
+            _spellIndex = restoreGameState.GetByKey(nameof(_spellIndex)).GetInt();
+            _spellBookItemFactory = restoreGameState.GetByKey(nameof(_spellBookItemFactory)).GetDerivedReferenceOrDefault<ItemFactory>();
+            _characterClassSpell = restoreGameState.GetByKey(nameof(_characterClassSpell)).GetDerivedReferenceOrDefault<CharacterClassSpell>();
+        }
     }
-    public void InitializationComplete() { }
 
     #region State Data
     /// <summary>

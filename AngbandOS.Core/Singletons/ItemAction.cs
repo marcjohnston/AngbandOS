@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class ItemAction : IGetKey, ISaveGameState
+internal abstract class ItemAction : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected ItemAction(Game game)
@@ -18,14 +18,12 @@ internal abstract class ItemAction : IGetKey, ISaveGameState
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ItemFilters = Game.SingletonRepository.Get<ItemFilter>(ItemFilterNames);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     protected abstract string[] ItemFilterNames { get; }
 

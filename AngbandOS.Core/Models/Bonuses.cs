@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class Bonuses : ISaveGameState
+internal class Bonuses : IGameSerialize
 {
     #region State Data
     public int AttackBonus { get; init; } = 0;
@@ -18,7 +18,7 @@ internal class Bonuses : ISaveGameState
     public bool HasHeavyWeapon { get; init; } = false;
     #endregion
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttackBonus), saveGameState.CreateGameStateBag(AttackBonus)),

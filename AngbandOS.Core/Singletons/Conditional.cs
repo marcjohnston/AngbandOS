@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson, ISaveGameState
+internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Conditional(Game game, ConditionalGameConfiguration gameConfiguration) 
@@ -17,7 +17,7 @@ internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson
         EnabledNames = gameConfiguration.EnabledNames;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.
@@ -43,7 +43,7 @@ internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
         List<(IBoolValue, bool, int)> conditionalList = new();
@@ -54,8 +54,6 @@ internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson
         }
         Enabled = conditionalList.ToArray();
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string[]? DependencyNames => null;
 

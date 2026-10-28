@@ -13,9 +13,9 @@ internal class LocationTarget : Target
 
     public override string SelectionMessage => "Location Targeted.";
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_location), saveGameState.CreateGameStateBag(_location))
         );
     }

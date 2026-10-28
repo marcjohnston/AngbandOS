@@ -16,9 +16,7 @@ internal class BashScript : GameCommandUniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Allows the player to select a direction and bashes the object found in that direction.  Returns true, if the action fails due to chance.

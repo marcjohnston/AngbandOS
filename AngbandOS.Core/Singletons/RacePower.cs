@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class RacePower : IGetKey, IScript, IToJson, ISaveGameState
+internal sealed class RacePower : IGetKey, IScript, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public RacePower(Game game, RacePowerGameConfiguration gameConfiguration)
@@ -17,7 +17,7 @@ internal sealed class RacePower : IGetKey, IScript, IToJson, ISaveGameState
         RaceBindingKey = gameConfiguration.RaceBindingKey;
         CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
     }
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public static string GetCompositeKey(Race race, CharacterClass? characterClass) => GameConfiguration.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacePowerGameConfiguration));
     public IScript Script { get; private set; }
     private string ScriptBindingKey { get; }
@@ -29,14 +29,12 @@ internal sealed class RacePower : IGetKey, IScript, IToJson, ISaveGameState
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Script = Game.SingletonRepository.Get<IScript>(ScriptBindingKey);
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);
         CharacterClass = Game.SingletonRepository.GetNullable<CharacterClass>(CharacterClassBindingKey);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

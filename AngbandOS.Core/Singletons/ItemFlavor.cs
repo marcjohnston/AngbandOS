@@ -46,12 +46,10 @@ internal sealed class ItemFlavor : Flavor, IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the name of the symbol to be used for rendering.  This property is used to bind the Symbol property during the bind phase.

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class TimeWidget : Widget, IGetKey, IToJson, ISaveGameState
+internal sealed class TimeWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     public TimeWidget(Game game, TimeWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -20,7 +20,7 @@ internal sealed class TimeWidget : Widget, IGetKey, IToJson, ISaveGameState
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string DateAndTimeValueName { get; }
 
     public string Key { get; }
@@ -70,14 +70,12 @@ internal sealed class TimeWidget : Widget, IGetKey, IToJson, ISaveGameState
     /// </summary>
     public string JustificationName { get; } = nameof(LeftJustification);
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         DateAndTimeValue = Game.SingletonRepository.Get<IDateAndTimeValue>(DateAndTimeValueName);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

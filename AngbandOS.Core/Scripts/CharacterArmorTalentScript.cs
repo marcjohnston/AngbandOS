@@ -6,9 +6,13 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class CharacterArmorTalentScript : UniversalScript
+internal class CharacterArmorTalentScript : UniversalScript, IGetKey
 {
     private CharacterArmorTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         Game.StoneskinTimer.AddTimer(Game.ExperienceLevel.IntValue);

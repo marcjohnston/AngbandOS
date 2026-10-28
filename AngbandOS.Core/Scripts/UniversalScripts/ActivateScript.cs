@@ -9,9 +9,19 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Activate the special feature of an item.
 /// </summary>
-internal class ActivateScript : UniversalScript
+internal class ActivateScript : UniversalScript, IGetKey
 {
     private ActivateScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the activate script and disposes of the successful result.

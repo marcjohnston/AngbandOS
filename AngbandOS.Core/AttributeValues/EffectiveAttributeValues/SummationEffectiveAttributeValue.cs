@@ -22,9 +22,9 @@ internal class SummationEffectiveAttributeValue : EffectiveAttributeValue
             _restoreGameState => _restoreGameState.GetInt());
         _attributeModifiers.AddRange(modifiers);
     }
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, int>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateGameStateBag(_modifier)))
         );
     }

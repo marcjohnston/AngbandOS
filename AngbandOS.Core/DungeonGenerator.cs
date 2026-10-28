@@ -6,13 +6,13 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class DungeonGenerator : ISaveGameState
+internal abstract class DungeonGenerator : IGameSerialize
 {
     protected Game Game { get; }
 
     public abstract void GenerateNewLevel();
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public DungeonGenerator(Game game)
     {
         Game = game;

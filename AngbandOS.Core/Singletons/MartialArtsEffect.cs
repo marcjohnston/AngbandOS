@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class MartialArtsEffect : IGetKey, ISaveGameState
+internal abstract class MartialArtsEffect : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected MartialArtsEffect(Game game) // This object is a singleton)
@@ -15,7 +15,7 @@ internal abstract class MartialArtsEffect : IGetKey, ISaveGameState
     }
     public Expression StunLevel { get; private set; }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns an expression for the amount of stun to deliver to the monster with a successful martial arts attack.  Returns 0, by default.
@@ -24,12 +24,10 @@ internal abstract class MartialArtsEffect : IGetKey, ISaveGameState
 
     public string GetKey => GetType().Name;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         StunLevel = Game.ParseNumericExpression(StunLevelExpression);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the total damage from the martial arts effect and the reistance divisor.

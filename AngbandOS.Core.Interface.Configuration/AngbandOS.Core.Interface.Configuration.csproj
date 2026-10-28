@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration.Annotations\AngbandOS.Core.Interface.Configuration.Annotations.csproj" />
     <ProjectReference Include="..\AngbandOS.Core.StringLibrary\AngbandOS.Core.StringLibrary.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>

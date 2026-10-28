@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class MonsterCharacteristics : IMonsterCharacteristics, ISaveGameState
+internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
 {
     public MonsterCharacteristics()
     {
@@ -261,7 +261,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, ISaveGameState
         Undead = copyFrom.Undead;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttrClear), saveGameState.CreateGameStateBag(AttrClear)),

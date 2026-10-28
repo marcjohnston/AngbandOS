@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Check if racial power works based on the minimum level, cost, ability and difficulty.  If the racial power works, it runs an associated script.
 /// </summary>
-internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson, ISaveGameState
+internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public RacialPowerTest(Game game, RacialPowerTestGameConfiguration gameConfiguration)
@@ -22,18 +22,16 @@ internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson, ISaveGameS
         Difficulty = gameConfiguration.Difficulty;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         UseAbility = Game.SingletonRepository.Get<Ability>(UseAbilityBindingKey);
         Cost = Game.ParseNumericExpression(CostExpression);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

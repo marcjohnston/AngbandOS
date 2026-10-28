@@ -1,26 +1,20 @@
 ﻿
-using AngbandOS.Core.Interface.Configuration.Annotations;
-
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Mapped Item Enhancement", EntityNoun = "mapped item enhancement")]
 public class MappedItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
-        Title = "Fixed Artifact Binding Keys",
-        Summary = "Specifies the fixed artifacts for the map entry. When null, applies to all fixed artifacts.",
-        DataType = "string[]?")]
+    /// <summary>
+    /// Returns the fixed artifacts for the map entry; or null, for all fixed artifacts.
+    /// </summary>
     public virtual string[]? FixedArtifactBindingKeys { get; set; }
 
-    [ConfigurationMetadata(
-        Title = "Character Class Binding Keys",
-        Summary = "Specifies the character classes for the map entry. When null, applies to all character classes.",
-        DataType = "string[]?")]
+    /// <summary>
+    /// Returns the character classes for the map entry; or null, for all character classes.
+    /// </summary>
     public virtual string[]? CharacterClassBindingKeys { get; set; }
 
-    [ConfigurationMetadata(
-        Title = "Item Enhancement Binding Keys",
-        Summary = "Specifies the item enhancements to be used for the fixed artifact. When null, no item enhancements are applied.",
-        DataType = "string[]?")]
+    /// <summary>
+    /// Returns the item enhancements to be used for the fixed artifact; or null, if there are no item enhancements.
+    /// </summary>
     public virtual string[]? ItemEnhancementBindingKeys { get; set; }
 }

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class RealmCharacterClass : IGetKey, IToJson, ISaveGameState
+internal sealed class RealmCharacterClass : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public RealmCharacterClass(Game game, RealmCharacterClassGameConfiguration gameConfiguration)
@@ -19,7 +19,7 @@ internal sealed class RealmCharacterClass : IGetKey, IToJson, ISaveGameState
         DeityBindingKey = gameConfiguration.DeityBindingKey;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -39,14 +39,12 @@ internal sealed class RealmCharacterClass : IGetKey, IToJson, ISaveGameState
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         CharacterClass = Game.SingletonRepository.Get<CharacterClass>(CharacterClassBindingKey);
         Realm = Game.SingletonRepository.Get<Realm>(RealmBindingKey);
         Deity = Game.SingletonRepository.GetNullable<God>(DeityBindingKey);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public static string GetCompositeKey(Realm realm, CharacterClass characterClass) => GameConfiguration.GetCompositeKey(realm.GetKey, characterClass.GetKey);
     public God? Deity { get; private set; }

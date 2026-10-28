@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a script that evaluates an <see cref="IBoolValue"/> and runs a script depending on the result.
 /// </summary>
-internal class ConditionalScript : IGetKey, IScript, IToJson, ISaveGameState
+internal class ConditionalScript : IGetKey, IScript, IToJson, IGameSerialize
 {
     protected Game Game { get; }
     public ConditionalScript(Game game, ConditionalScriptGameConfiguration gameConfiguration)
@@ -20,7 +20,7 @@ internal class ConditionalScript : IGetKey, IScript, IToJson, ISaveGameState
         TrueScriptBindingKeys = gameConfiguration.TrueScriptBindingKeys;
         FalseScriptBindingKeys = gameConfiguration.FalseScriptBindingKeys;
     }
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public Conditional Conditional { get; private set; }
     private string ConditionalKey { get; }
 
@@ -48,14 +48,12 @@ internal class ConditionalScript : IGetKey, IScript, IToJson, ISaveGameState
     /// </summary>
     protected IScript[]? FalseScripts { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Conditional = Game.SingletonRepository.Get<Conditional>(ConditionalKey);
         TrueScripts = Game.SingletonRepository.GetNullable<IScript>(TrueScriptBindingKeys);
         FalseScripts = Game.SingletonRepository.GetNullable<IScript>(FalseScriptBindingKeys);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

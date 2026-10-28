@@ -22,7 +22,7 @@ internal class NullableStringReadOnlyAttributeValue : ReadOnlyAttributeValue
     {
     }
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Value), saveGameState.CreateGameStateBag(Value))

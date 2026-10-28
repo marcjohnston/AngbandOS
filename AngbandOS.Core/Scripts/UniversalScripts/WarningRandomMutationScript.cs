@@ -1,7 +1,12 @@
 namespace AngbandOS.Core.Scripts;
-internal class WarningRandomMutationScript : UniversalScript
+internal class WarningRandomMutationScript : UniversalScript, IGetKey
 {
     private WarningRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public override void ExecuteScript()
     {

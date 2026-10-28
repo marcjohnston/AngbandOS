@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents a set of non-deterministic item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
-internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISaveGameState
+internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGameSerialize
 {
     #region Constructors
     public ItemEnhancement(Game game, ItemEnhancementGameConfiguration gameConfiguration)
@@ -28,7 +28,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISav
         FriendlyName = gameConfiguration.FriendlyName;
     }
     #endregion
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     #region API
     private Game Game { get; }
@@ -92,7 +92,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISav
         }
         return ApplicableItemFactories.Contains(itemFactory);
     }
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         // We are using a dictionary because we do not want to support duplicate attributes.
         Dictionary<Attribute, Expression> sumAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
@@ -126,8 +126,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISav
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
         ApplicableItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(ApplicableItemFactoryBindingKeys);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class ActiveMutationScript : IGetKey, ISaveGameState, IScript
+internal abstract class ActiveMutationScript : IGetKey, IGameSerialize, IScript
 {
     protected Game Game { get; }
     protected ActiveMutationScript(Game game)
@@ -15,16 +15,14 @@ internal abstract class ActiveMutationScript : IGetKey, ISaveGameState, IScript
     }
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         DamageExpression = Game.ParseNullableNumericExpression(DamageExpressionText);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
     public abstract string Name { get; }
     protected virtual string? DamageExpressionText => null;
     public Expression? DamageExpression { get; private set; }
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public abstract void ExecuteScript();
 }

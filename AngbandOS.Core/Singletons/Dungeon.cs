@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// A dungeon that the player can explore
 /// </summary>
-internal sealed class Dungeon : IGetKey, IToJson, ISaveGameState
+internal sealed class Dungeon : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
 
@@ -30,7 +30,7 @@ internal sealed class Dungeon : IGetKey, IToJson, ISaveGameState
         Shortname = gameConfiguration.Shortname;
         Tower = gameConfiguration.Tower;
     }
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(RecallLevel), saveGameState.CreateGameStateBag(RecallLevel)),
@@ -45,7 +45,7 @@ internal sealed class Dungeon : IGetKey, IToJson, ISaveGameState
 
     #region Api Methods
     public string GetKey => Key;
-    public void Bind() 
+    public void Bind(RestoreGameState? restoreGameState) 
     {
         if (BiasMonsterFilterName != null)
         {
@@ -61,18 +61,18 @@ internal sealed class Dungeon : IGetKey, IToJson, ISaveGameState
             }
         }
         DungeonGuardians = dungeonGuardianList.ToArray();
+
+        if (restoreGameState is not null)
+        {
+            RecallLevel = restoreGameState.GetByKey(nameof(RecallLevel)).GetInt();
+            KnownDepth = restoreGameState.GetByKey(nameof(KnownDepth)).GetBool();
+            KnownOffset = restoreGameState.GetByKey(nameof(KnownOffset)).GetBool();
+            Offset = restoreGameState.GetByKey(nameof(Offset)).GetInt();
+            Visited = restoreGameState.GetByKey(nameof(Visited)).GetBool();
+            X = restoreGameState.GetByKey(nameof(X)).GetInt();
+            Y = restoreGameState.GetByKey(nameof(Y)).GetInt();
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        RecallLevel = restoreGameState.GetByKey(nameof(RecallLevel)).GetInt();
-        KnownDepth = restoreGameState.GetByKey(nameof(KnownDepth)).GetBool();
-        KnownOffset = restoreGameState.GetByKey(nameof(KnownOffset)).GetBool();
-        Offset = restoreGameState.GetByKey(nameof(Offset)).GetInt();
-        Visited = restoreGameState.GetByKey(nameof(Visited)).GetBool();
-        X = restoreGameState.GetByKey(nameof(X)).GetInt();
-        Y = restoreGameState.GetByKey(nameof(Y)).GetInt();
-    }
-    public void InitializationComplete() { }
 
     public int ActiveQuestCount()
     {

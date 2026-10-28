@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class BirthStage : IGetKey, ISaveGameState
+internal abstract class BirthStage : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     public string GetKey => Key;
@@ -15,16 +15,12 @@ internal abstract class BirthStage : IGetKey, ISaveGameState
         Game = game;
     }
 
-    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
 
     public virtual string Key => GetType().Name;
 
-    public virtual void Bind() { }
-
-    public virtual void RestoreGame(RestoreGameState restoreGameState) { }
-
-    public virtual void InitializationComplete() { }
+    public virtual void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Renders the birth stage and returns the next birth stage to render or null when either the birth stage is complete or the Game.Shutdown is true.

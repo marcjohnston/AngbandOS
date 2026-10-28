@@ -12,10 +12,13 @@ namespace AngbandOS.Core.Properties;
 internal abstract class BoolProperty : Property, IBoolValue
 {
     protected BoolProperty(Game game) : base(game) { }
-    public override void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        base.RestoreGame(restoreGameState);
-        _value = restoreGameState.GetByKey(nameof(_value)).GetBool();
+    public override void Bind(RestoreGameState restoreGameState)
+    {
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetByKey(nameof(_value)).GetBool();
+        }
     }
 
     private bool _value;
@@ -54,9 +57,9 @@ internal abstract class BoolProperty : Property, IBoolValue
         return _value.ToString();
     }
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_value), saveGameState.CreateGameStateBag(_value))
         );
     }

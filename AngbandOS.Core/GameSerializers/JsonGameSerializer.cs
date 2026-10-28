@@ -15,13 +15,13 @@ internal class JsonGameSerializer : IGameSerializer
             WriteIndented = false
         };
 
-        options.Converters.Add(new CustomJsonConverter());
+        options.Converters.Add(new GameStateBagConverter());
         return JsonSerializer.SerializeToUtf8Bytes(saveGameData, options);
     }
     public SaveGameData Deserialize(byte[] serializedSaveGameData)
     {
         var options = new JsonSerializerOptions();
-        options.Converters.Add(new CustomJsonConverter());
+        options.Converters.Add(new GameStateBagConverter());
         SaveGameData? saveGameData = JsonSerializer.Deserialize<SaveGameData>(serializedSaveGameData, options);
         if (saveGameData is null)
         {

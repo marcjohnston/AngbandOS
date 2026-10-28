@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Patron : IGetKey, IToJson, ISaveGameState
+internal sealed class Patron : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Patron(Game game, PatronGameConfiguration gameConfiguration)
@@ -19,7 +19,7 @@ internal sealed class Patron : IGetKey, IToJson, ISaveGameState
         ShortName = gameConfiguration.ShortName;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(RewardReceived), saveGameState.CreateGameStateBag(RewardReceived))
@@ -46,16 +46,16 @@ internal sealed class Patron : IGetKey, IToJson, ISaveGameState
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         PreferredAbility = Game.SingletonRepository.GetNullable<Ability>(PreferredAbilityBindingKey);
         Rewards = Game.SingletonRepository.Get<Reward>(RewardBindingKeys);
+
+        if (restoreGameState is not null)
+        {
+            RewardReceived = restoreGameState.GetByKey(nameof(RewardReceived)).GetBool();
+        }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) 
-    { 
-        RewardReceived = restoreGameState.GetByKey(nameof(RewardReceived)).GetBool();
-    }
-    public void InitializationComplete() { }
 
     public string LongName { get; }
     public bool RewardReceived;

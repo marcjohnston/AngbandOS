@@ -12,17 +12,20 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private int _flowN;
     private int _flowTail;
     private UpdateScentFlaggedAction(Game game) : base(game) { }
-    public override void RestoreGame(RestoreGameState restoreGameState) 
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        base.RestoreGame(restoreGameState);
-        _flowHead = restoreGameState.GetByKey(nameof(_flowHead)).GetInt();
-        _flowN = restoreGameState.GetByKey(nameof(_flowN)).GetInt();
-        _flowTail = restoreGameState.GetByKey(nameof(_flowTail)).GetInt();
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            _flowHead = restoreGameState.GetByKey(nameof(_flowHead)).GetInt();
+            _flowN = restoreGameState.GetByKey(nameof(_flowN)).GetInt();
+            _flowTail = restoreGameState.GetByKey(nameof(_flowTail)).GetInt();
+        }
     }
 
-    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.SaveGame(saveGameState), 
+        return new DictionaryGameStateBag(base.Serialize(saveGameState), 
             (nameof(_flowHead), new IntValueGameStateBag(_flowHead)), 
             (nameof(_flowN), new IntValueGameStateBag(_flowN)), 
             (nameof(_flowTail), new IntValueGameStateBag(_flowTail))

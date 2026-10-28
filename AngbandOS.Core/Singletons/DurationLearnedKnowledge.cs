@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, ISaveGameState
+internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public string DurationExpressionText { get; }
     public Expression DurationExpression { get; private set; }
@@ -20,12 +20,10 @@ internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJ
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         DurationExpression = Game.ParseNumericExpression(DurationExpressionText);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
     public string ToJson()
     {
         DurationLearnedKnowledgeGameConfiguration gameConfiguration = new()
@@ -35,5 +33,5 @@ internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJ
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

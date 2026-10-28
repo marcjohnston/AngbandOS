@@ -1,6 +1,6 @@
 namespace AngbandOS.Core.MappedSpellScripts;
 
-internal sealed class MappedSpellScript : IGetKey, IToJson, ISaveGameState
+internal sealed class MappedSpellScript : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public MappedSpellScript(Game game, MappedSpellScriptGameConfiguration gameConfiguration)
@@ -16,12 +16,12 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, ISaveGameState
         MaximumExperienceLevel = gameConfiguration.MaximumExperienceLevel;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Spell = Game.SingletonRepository.GetNullable<Spell>(SpellBindingKey);
         Realm = Game.SingletonRepository.GetNullable<Realm>(RealmBindingKey);
@@ -29,8 +29,6 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, ISaveGameState
         CastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastSpellScriptBindingKeys);
         Rank = (Spell is null ? 0 : 1) + (Realm is null ? 0 : 1) + (CharacterClass is null ? 0 : 1) + (MinimumExperienceLevel.HasValue ? 1 : 0) + (MaximumExperienceLevel.HasValue ? 1 : 0);
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
     public string ToJson()
     {
         MappedSpellScriptGameConfiguration definition = new MappedSpellScriptGameConfiguration()

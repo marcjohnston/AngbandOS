@@ -6,9 +6,19 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class MutantPowerScript : UniversalScript
+internal class MutantPowerScript : UniversalScript, IGetKey
 {
     private MutantPowerScript(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
+    /// </summary>
+    /// <returns></returns>
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     private List<Mutation> ActivatableMutations()
     {

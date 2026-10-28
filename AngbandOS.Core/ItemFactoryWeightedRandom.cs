@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson, ISaveGameState
+internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson, IGameSerialize
 {
     public ItemFactoryWeightedRandom(Game game, ItemFactoryWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
@@ -14,7 +14,7 @@ internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, I
         NameAndWeightBindings = gameConfiguration.NameAndWeightBindings;
     }
 
-    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.
@@ -25,15 +25,13 @@ internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, I
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         foreach ((string name, int weight) in NameAndWeightBindings)
         {
             Add(weight, Game.SingletonRepository.Get<ItemFactory>(name));
         }
     }
-    public void RestoreGame(RestoreGameState restoreGameState) { }
-    public void InitializationComplete() { }
 
     public string ToJson()
     {
