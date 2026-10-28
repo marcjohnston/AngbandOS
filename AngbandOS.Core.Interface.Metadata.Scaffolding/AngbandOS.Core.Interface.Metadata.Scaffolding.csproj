@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration.Annotations\AngbandOS.Core.Interface.Configuration.Annotations.csproj" />
     <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration\AngbandOS.Core.Interface.Configuration.csproj" />
+    <ProjectReference Include="..\AngbandOS.Core.Interface.Metadata\AngbandOS.Core.Interface.Metadata.csproj" />
   </ItemGroup>
 
 </Project>
