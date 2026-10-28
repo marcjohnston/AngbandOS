@@ -2,7 +2,7 @@
   "profiles": {
     "AngbandOS.Core.Interface.Metadata.Scaffolding": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Core.Interface.Configuration\\GameConfiguration.cs\" \"D:\\OneDrive\\Programming\\AngbandOS\\AngbandOS.Core.Interface.Metadata\\Scaffolded\""
+      "commandLineArgs": "\"D:\\Programming\\AngbandOS\\AngbandOS.Core.Interface.Metadata\\Scaffolded\""
     }
   }
 }
