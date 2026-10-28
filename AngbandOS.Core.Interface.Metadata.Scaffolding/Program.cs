@@ -58,6 +58,14 @@ Dictionary<Type, ConfigurationEntityAttribute> entities =
             x => x.Type,
             x => x.Entity!);
 
+HashSet<Type> enumTypes =
+    reachableTypes
+        .SelectMany(type => GetConfigurationProperties(type))
+        .Select(property => GetEnumType(property.PropertyType))
+        .Where(enumType => enumType != null)
+        .Select(enumType => enumType!)
+        .ToHashSet();
+
 if (Directory.Exists(outputFolder))
 {
     try
@@ -81,7 +89,8 @@ foreach (Type configurationType in reachableTypes
     WriteMetadataClass(
         outputFolder,
         configurationType,
-        entities);
+        entities,
+        enumTypes);
 }
 
 Console.WriteLine(
@@ -223,7 +232,8 @@ static Type? GetReferencedConfigurationType(Type propertyType)
 static void WriteMetadataClass(
     string outputFolder,
     Type configurationType,
-    IReadOnlyDictionary<Type, ConfigurationEntityAttribute> entities)
+    IReadOnlyDictionary<Type, ConfigurationEntityAttribute> entities,
+    IReadOnlyCollection<Type> enumTypes)
 {
     string metadataClassName =
         GetMetadataClassName(configurationType);
@@ -241,6 +251,14 @@ static void WriteMetadataClass(
     writer.WriteLine();
     writer.WriteLine($"public static class {metadataClassName}");
     writer.WriteLine("{");
+
+    if (configurationType == typeof(GameConfiguration))
+    {
+        WriteEnumMetadata(
+            writer,
+            enumTypes);
+    }
+
     writer.WriteLine("    public static PropertyMetadata[] Metadata");
     writer.WriteLine("    {");
     writer.WriteLine("        get");
@@ -380,36 +398,61 @@ static void WriteProperty(
         $"{indentation}    CategoryTitle = " +
         $"\"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
 
-    if (metadataType == nameof(EnumPropertyMetadata) &&
-        propertyType.IsEnum)
+    if (metadataType == nameof(EnumPropertyMetadata))
+    {
+        Type enumType =
+            GetEnumType(property.PropertyType)
+            ?? throw new InvalidOperationException(
+                $"Unable to determine the enum type for property '{property.Name}'.");
+
+        writer.WriteLine(
+            $"{indentation}    EnumName = " +
+            $"\"{Escape(enumType.Name)}\",");
+    }
+
+    writer.WriteLine($"{indentation}}},");
+}
+
+static void WriteEnumMetadata(
+    StreamWriter writer,
+    IReadOnlyCollection<Type> enumTypes)
+{
+    writer.WriteLine("    public static EnumMetadata[] Enums");
+    writer.WriteLine("    {");
+    writer.WriteLine("        get");
+    writer.WriteLine("        {");
+    writer.WriteLine("            return new EnumMetadata[]");
+    writer.WriteLine("            {");
+
+    foreach (Type enumType in enumTypes
+        .OrderBy(x => x.Name, StringComparer.Ordinal))
     {
         writer.WriteLine(
-            $"{indentation}    Options = new EnumOptionMetadata[]");
+            $"                new EnumMetadata(" +
+            $"\"{Escape(enumType.Name)}\", " +
+            "new EnumOptionMetadata[]");
+        writer.WriteLine("                {");
 
-        writer.WriteLine(
-            $"{indentation}    {{");
-
-        foreach (string enumName in Enum.GetNames(propertyType))
+        foreach (string enumName in Enum.GetNames(enumType))
         {
             long enumValue =
                 Convert.ToInt64(
                     Enum.Parse(
-                        propertyType,
+                        enumType,
                         enumName));
 
             writer.WriteLine(
-                $"{indentation}        new EnumOptionMetadata(" +
+                $"                    new EnumOptionMetadata(" +
                 $"\"{Escape(enumName)}\", {enumValue}),");
         }
 
-        writer.WriteLine(
-            $"{indentation}    }},");
+        writer.WriteLine("                }),");
     }
 
-    //writer.WriteLine(
-    //    $"{indentation}    }},{{");
-
-    writer.WriteLine($"{indentation}}},");
+    writer.WriteLine("            };");
+    writer.WriteLine("        }");
+    writer.WriteLine("    }");
+    writer.WriteLine();
 }
 
 static string GetMetadataType(
@@ -549,3 +592,13 @@ static string Escape(string value)
         .Replace("\n", "\\n", StringComparison.Ordinal);
 }
 
+static Type? GetEnumType(Type propertyType)
+{
+    Type unwrappedType =
+        Nullable.GetUnderlyingType(propertyType)
+        ?? propertyType;
+
+    return unwrappedType.IsEnum
+        ? unwrappedType
+        : null;
+}

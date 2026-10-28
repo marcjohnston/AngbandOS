@@ -11,5 +11,8 @@ public sealed class EnumPropertyMetadata : PropertyMetadata
     {
     }
 
-    public EnumOptionMetadata[] Options { get; set; } = new EnumOptionMetadata[] { };
+    /// <summary>
+    /// Gets or sets the name of the shared enumeration metadata.
+    /// </summary>
+    public string EnumName { get; set; } = string.Empty;
 }

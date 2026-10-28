@@ -32,11 +32,7 @@ public static class ProjectileScriptWeightedRandomMetadata
                     IsNullable = false,
                     Title = "Learned Details Mode",
                     CategoryTitle = "",
-                    Options = new EnumOptionMetadata[]
-                    {
-                        new EnumOptionMetadata("Default", 0),
-                        new EnumOptionMetadata("InheritFromFirstDefined", 1),
-                    },
+                    EnumName = "LearnedDetailsWeightedRandomEnum",
                 },
             };
         }

@@ -6,6 +6,64 @@ namespace AngbandOS.Core.Interface.Metadata;
 
 public static class GameConfigurationMetadata
 {
+    public static EnumMetadata[] Enums
+    {
+        get
+        {
+            return new EnumMetadata[]
+            {
+                new EnumMetadata("ColorEnum", new EnumOptionMetadata[]
+                {
+                    new EnumOptionMetadata("Background", 0),
+                    new EnumOptionMetadata("Black", 1),
+                    new EnumOptionMetadata("Grey", 2),
+                    new EnumOptionMetadata("BrightGrey", 3),
+                    new EnumOptionMetadata("Silver", 4),
+                    new EnumOptionMetadata("Beige", 5),
+                    new EnumOptionMetadata("BrightBeige", 6),
+                    new EnumOptionMetadata("White", 7),
+                    new EnumOptionMetadata("BrightWhite", 8),
+                    new EnumOptionMetadata("Red", 9),
+                    new EnumOptionMetadata("BrightRed", 10),
+                    new EnumOptionMetadata("Copper", 11),
+                    new EnumOptionMetadata("Orange", 12),
+                    new EnumOptionMetadata("BrightOrange", 13),
+                    new EnumOptionMetadata("Brown", 14),
+                    new EnumOptionMetadata("BrightBrown", 15),
+                    new EnumOptionMetadata("Gold", 16),
+                    new EnumOptionMetadata("Yellow", 17),
+                    new EnumOptionMetadata("BrightYellow", 18),
+                    new EnumOptionMetadata("Chartreuse", 19),
+                    new EnumOptionMetadata("BrightChartreuse", 20),
+                    new EnumOptionMetadata("Green", 21),
+                    new EnumOptionMetadata("BrightGreen", 22),
+                    new EnumOptionMetadata("Turquoise", 23),
+                    new EnumOptionMetadata("BrightTurquoise", 24),
+                    new EnumOptionMetadata("Blue", 25),
+                    new EnumOptionMetadata("BrightBlue", 26),
+                    new EnumOptionMetadata("Diamond", 27),
+                    new EnumOptionMetadata("Purple", 28),
+                    new EnumOptionMetadata("BrightPurple", 29),
+                    new EnumOptionMetadata("Pink", 30),
+                    new EnumOptionMetadata("BrightPink", 31),
+                }),
+                new EnumMetadata("LearnedDetailsWeightedRandomEnum", new EnumOptionMetadata[]
+                {
+                    new EnumOptionMetadata("Default", 0),
+                    new EnumOptionMetadata("InheritFromFirstDefined", 1),
+                }),
+                new EnumMetadata("NonDirectionalProjectileModeEnum", new EnumOptionMetadata[]
+                {
+                    new EnumOptionMetadata("Default", 0),
+                    new EnumOptionMetadata("PlayerSpecified", 0),
+                    new EnumOptionMetadata("AllDirections", 1),
+                    new EnumOptionMetadata("AllMonstersInLos", 2),
+                    new EnumOptionMetadata("AtPlayerLocation", 3),
+                }),
+            };
+        }
+    }
+
     public static PropertyMetadata[] Metadata
     {
         get

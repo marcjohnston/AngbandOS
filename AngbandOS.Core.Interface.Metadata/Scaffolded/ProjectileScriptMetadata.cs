@@ -130,14 +130,7 @@ public static class ProjectileScriptMetadata
                     IsNullable = false,
                     Title = "Non-Directional Projectile Mode",
                     CategoryTitle = "",
-                    Options = new EnumOptionMetadata[]
-                    {
-                        new EnumOptionMetadata("Default", 0),
-                        new EnumOptionMetadata("PlayerSpecified", 0),
-                        new EnumOptionMetadata("AllDirections", 1),
-                        new EnumOptionMetadata("AllMonstersInLos", 2),
-                        new EnumOptionMetadata("AtPlayerLocation", 3),
-                    },
+                    EnumName = "NonDirectionalProjectileModeEnum",
                 },
             };
         }
