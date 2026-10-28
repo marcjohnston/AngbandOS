@@ -190,7 +190,10 @@ static IEnumerable<PropertyInfo> GetConfigurationProperties(
             BindingFlags.Instance |
             BindingFlags.Public |
             BindingFlags.DeclaredOnly)
-        .Where(x => x.GetIndexParameters().Length == 0)
+        .Where(x =>
+            x.GetIndexParameters().Length == 0 &&
+            x.GetMethod?.IsPublic == true &&
+            x.SetMethod?.IsPublic == true)
         .OrderBy(x => x.MetadataToken);
 }
 
