@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class ConditionalWidget : Widget, IGetKey, IToJson, IGameSerialize
+internal sealed class ConditionalWidget : Widget, IGetKey, IToJson, ISaveGameState
 {
     public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -16,7 +16,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson, IGameSeriali
         FalseWidgetNames = gameConfiguration.FalseWidgetNames;
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
@@ -27,13 +27,15 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson, IGameSeriali
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Conditional = Game.SingletonRepository.Get<Conditional>(ConditionalKey);
         TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
         FalseWidgets = Game.SingletonRepository.GetNullable<Widget>(FalseWidgetNames);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

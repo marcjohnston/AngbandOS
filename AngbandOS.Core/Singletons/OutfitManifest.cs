@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class OutfitManifest : IGetKey, IToJson, IGameSerialize
+internal class OutfitManifest : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public OutfitManifest(Game game, OutfitManifestGameConfiguration gameConfiguration)
@@ -19,7 +19,7 @@ internal class OutfitManifest : IGetKey, IToJson, IGameSerialize
         ItemFactoryAndEnhancementsBindings = gameConfiguration.ItemFactoryAndEnhancementsBindings;
     }
     public static string GetCompositeKey(CharacterClass characterClass, Race race, Realm realm) => GameConfiguration.GetCompositeKey(characterClass.GetKey, race.GetKey, realm.GetKey);
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public (string[] MatchValues, bool IsEqual)? CharacterClassBindingKey { get; private set; }
     public (string[] MatchValues, bool IsEqual)? RaceBindingKey { get; private set; }
@@ -29,7 +29,7 @@ internal class OutfitManifest : IGetKey, IToJson, IGameSerialize
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         // Validate.
         if (CharacterClassBindingKey.HasValue && CharacterClassBindingKey.Value.MatchValues.Contains(""))
@@ -57,6 +57,8 @@ internal class OutfitManifest : IGetKey, IToJson, IGameSerialize
         }
         ItemFactoryAndEnhancements = itemFactoriesAndEnhancementsList.ToArray();
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson, IGameSerialize
+internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public SummonScript(Game game, SummonScriptGameConfiguration gameConfiguration)
@@ -24,7 +24,7 @@ internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson, IGameSe
         Used = gameConfiguration.Used;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.  Returns an empty string by default.
@@ -51,12 +51,14 @@ internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson, IGameSe
     public string GetKey => Key;
     public MonsterRaceFilter MonsterFilter { get; private set; }
     public Expression LevelRoll { get; private set; }
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         MonsterFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(MonsterFilterBindingKey);
         LevelRoll = Game.ParseNumericExpression(LevelRollExpression);
         Group = Game.ParseBooleanExpression(GroupBooleanExpression);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {

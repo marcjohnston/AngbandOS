@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a view (or layout) of widgets used to render the UI.  Views consist of widgets and must conform to the window.
 /// </summary>
-internal sealed class View : IGetKey, IToJson, IGameSerialize
+internal sealed class View : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
 
@@ -20,7 +20,7 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
     /// </summary>
     private Widget[]? PokeWidgets { get; set; } = null;
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     #region Constructors
     public View(Game game, ViewGameConfiguration gameConfiguration)
     {
@@ -45,11 +45,13 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
     }
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         Widgets = Game.SingletonRepository.Get<Widget>(WidgetNames);
         PokeWidgets = Widgets.Where(widget => widget.CanPoke).ToArray();
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

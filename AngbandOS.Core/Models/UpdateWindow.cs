@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a window into the screen that has been modified.  This window limits how much of the double buffer screen needs to be checked.
 /// </summary>
-internal class UpdateWindow : IGameSerialize
+internal class UpdateWindow : ISaveGameState
 {
     #region State Data
     public int Y1;
@@ -20,7 +20,7 @@ internal class UpdateWindow : IGameSerialize
     private int Height { get; }
     #endregion
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Y1), saveGameState.CreateGameStateBag(Y1)),

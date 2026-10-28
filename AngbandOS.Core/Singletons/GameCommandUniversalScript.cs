@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript, ICastSpellScript, IStoreCommandScript, IGameSerialize
+internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript, ICastSpellScript, IStoreCommandScript, ISaveGameState
 {
     protected Game Game { get; }
     protected GameCommandUniversalScript(Game game)
@@ -14,7 +14,7 @@ internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript
         Game = game;
     }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.

@@ -6,12 +6,10 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class PolymorphSelfScript : UniversalScript, IGetKey
+internal class PolymorphSelfScript : UniversalScript
 {
     private PolymorphSelfScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+
     /// <summary>
     /// Executes the polymorph-self script.
     /// </summary>

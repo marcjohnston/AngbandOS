@@ -6,13 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class MindWaveTalentScript : UniversalScript, IGetKey
+internal class MindWaveTalentScript : UniversalScript
 {
     private MindWaveTalentScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         Game.MsgPrint("Mind-warping forces emanate from your brain!");

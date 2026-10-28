@@ -11,18 +11,15 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
     private int OldLightLevel;
     private UpdateTorchRadiusFlaggedAction(Game game) : base(game) { }
 
-    public override void Bind(RestoreGameState? restoreGameState)
+    public override void RestoreGame(RestoreGameState restoreGameState) 
     {
-        base.Bind(restoreGameState);
-        if (restoreGameState is not null)
-        {
-            OldLightLevel = restoreGameState.GetByKey(nameof(OldLightLevel)).GetInt();
-        }
+        base.RestoreGame(restoreGameState);
+        OldLightLevel = restoreGameState.GetByKey(nameof(OldLightLevel)).GetInt();
     }
 
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState), 
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState), 
             (nameof(OldLightLevel), new IntValueGameStateBag(OldLightLevel))
         );
     }

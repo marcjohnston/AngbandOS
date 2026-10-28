@@ -25,12 +25,12 @@ internal class ScriptsListEffectiveAttributeValue : ListEffectiveAttributeValue<
     }
     public override ReadOnlyAttributeValue ToReadOnly() => new ScriptsListReadOnlyAttributeValue(Get());
 
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState), // Serialize the base classes
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState), // Serialize the base classes
             (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, UniversalScript[]>(_attributeModifiers.ToArray(), // Here is the List, which may be empty but not nullable
                 _key => saveGameState.CreateGameStateBag(_key), // Serialize the string key
-                _modifiers => saveGameState.CreateDerivedGameStateBag(_modifiers, false))) // Serialize the UniversalScript
+                _modifiers => saveGameState.CreateSystemObjectsGameStateBag(_modifiers))) // Serialize the UniversalScript
         );
     }
 

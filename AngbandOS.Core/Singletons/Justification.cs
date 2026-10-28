@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Justifications;
 
-internal abstract class Justification : IGetKey, IGameSerialize
+internal abstract class Justification : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected Justification(Game game) // This object is a singleton
@@ -18,6 +18,8 @@ internal abstract class Justification : IGetKey, IGameSerialize
 
     public string GetKey => GetType().Name;
 
-    public void Bind(RestoreGameState? restoreGameState) { }
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 }

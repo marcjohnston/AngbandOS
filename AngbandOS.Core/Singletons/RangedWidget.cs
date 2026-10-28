@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
+internal sealed class RangedWidget : Widget, IGetKey, IToJson, ISaveGameState
 {
     #region State Data
     private string _text;
@@ -29,7 +29,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         _color = DefaultColor;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_text), saveGameState.CreateGameStateBag(_text)),
@@ -41,7 +41,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
@@ -52,13 +52,13 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         {
             throw new Exception($"The ranges specified for the {GetType().Name} are not sorted in descending order by startValue.");
         }
-
-        if (restoreGameState is not null)
-        {
-            _text = restoreGameState.GetByKey(nameof(_text)).GetString();
-            _color = restoreGameState.GetByKey(nameof(_color)).GetEnum<ColorEnum>();
-        }
     }
+    public void RestoreGame(RestoreGameState restoreGameState) 
+    { 
+        _text = restoreGameState.GetByKey(nameof(_text)).GetString();
+        _color = restoreGameState.GetByKey(nameof(_color)).GetEnum<ColorEnum>();
+    }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

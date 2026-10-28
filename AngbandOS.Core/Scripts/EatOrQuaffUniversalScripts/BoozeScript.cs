@@ -12,7 +12,9 @@ internal class BoozeScript : EatOrQuaffUniversalScript, IGetKey
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Executes the script and returns true because the action is always noticed.

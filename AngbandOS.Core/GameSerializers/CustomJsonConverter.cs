@@ -8,11 +8,28 @@ using System.Text.Json.Serialization;
 
 namespace AngbandOS.Core;
 
-internal class GameStateBagConverter : JsonConverter<GameStateBag>
+/// <summary>
+/// JSON converter for <see cref="GameStateBag"/> polymorphic serialization.
+/// </summary>
+/// <remarks>
+/// This converter encodes the concrete <see cref="GameStateBag"/> type in the JSON payload using
+/// the <c>$type</c> property and stores the actual payload in the <c>Value</c> property (or other
+/// properties for complex types such as objects or references). The converter supports all
+/// concrete <see cref="GameStateBag"/> implementations used by the game state serializer.
+/// </remarks>
+internal class CustomJsonConverter : JsonConverter<GameStateBag>
 {
     const string TypePropertyName = "$type";
     const string ValuePropertyName = "Value";
 
+    /// <summary>
+    /// Reads a <see cref="GameStateBag"/> instance from JSON.
+    /// </summary>
+    /// <param name="reader">The <see cref="Utf8JsonReader"/> positioned at the start of the value to read.</param>
+    /// <param name="typeToConvert">The target type to convert to (always <see cref="GameStateBag"/>).</param>
+    /// <param name="options">Serializer options that may affect nested deserialization.</param>
+    /// <returns>The deserialized <see cref="GameStateBag"/> concrete instance.</returns>
+    /// <exception cref="Exception">Thrown when the encoded <c>$type</c> is unknown.</exception>
     public override GameStateBag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         using JsonDocument doc = JsonDocument.ParseValue(ref reader);
@@ -40,6 +57,13 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
         };
     }
 
+    /// <summary>
+    /// Writes the provided <see cref="GameStateBag"/> instance to JSON.
+    /// </summary>
+    /// <param name="writer">The <see cref="Utf8JsonWriter"/> to which JSON will be written.</param>
+    /// <param name="value">The <see cref="GameStateBag"/> instance to serialize.</param>
+    /// <param name="options">Serializer options that may affect nested serialization.</param>
+    /// <exception cref="Exception">Thrown when <paramref name="value"/> is of an unknown <see cref="GameStateBag"/> subtype.</exception>
     public override void Write(Utf8JsonWriter writer, GameStateBag value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();

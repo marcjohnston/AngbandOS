@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a buffer of screen data.  This buffer is used for the screen contents and the double buffer to emit to the console.
 /// </summary>
-internal class ScreenBuffer : IGameSerialize
+internal class ScreenBuffer : ISaveGameState
 {
     #region State Data
     /// <summary>
@@ -38,7 +38,7 @@ internal class ScreenBuffer : IGameSerialize
     public bool CursorVisible = false;
     #endregion
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Va), saveGameState.CreateGameStateBag(Va)),

@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// A single grid tile in either the dungeon, town, or wilderness.  Grid tiles are also containers for items; as they can have one or more items on the tile.
 /// </summary>
-internal class GridTile : IItemContainer, IGameSerialize
+internal class GridTile : IItemContainer, ISaveGameState
 {
     private Game Game { get; }
     private TrapsDetectedProperty _trapsDetectedProperty { get; }
@@ -34,7 +34,7 @@ internal class GridTile : IItemContainer, IGameSerialize
         _backgroundFeature = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
         _featureType = _backgroundFeature;
     }
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             ("bools", saveGameState.CreateGameStateBag(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag)),

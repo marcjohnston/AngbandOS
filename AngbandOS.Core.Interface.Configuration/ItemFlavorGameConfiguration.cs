@@ -1,17 +1,33 @@
-﻿// AngbandOS: 2022 Marc Johnston
-//
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
-// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
-// and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.Interface.Configuration;
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface.Configuration;
+using AngbandOS.Core.Interface.Configuration.Annotations;
 
-/// <entity-name-property-name>Name</entity-name-property-name>
+[ConfigurationEntityAttribute(
+    Title = "Item Flavor",
+    EntityNoun = "Item Flavor")]
 public class ItemFlavorGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    /// <foreign-collection-name>Symbols</foreign-collection-name>
+    [ConfigurationMetadataAttribute(
+        Title = "Symbol Name",
+        Summary = "The name of the symbol used to represent the item flavor.",
+        DataType = "string")]
     public virtual string SymbolName { get; set; }
+
+    [ConfigurationMetadataAttribute(
+        Title = "Color",
+        Summary = "The color used to display the item flavor.",
+        DataType = "ColorEnum")]
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
+
+    [ConfigurationMetadataAttribute(
+        Title = "Name",
+        Summary = "The name of the item flavor.",
+        DataType = "string")]
     public virtual string Name { get; set; }
+
+    [ConfigurationMetadataAttribute(
+        Title = "Can Be Assigned",
+        Summary = "Determines whether this item flavor can be assigned to an item.",
+        DataType = "bool")]
     public virtual bool CanBeAssigned { get; set; }
 }

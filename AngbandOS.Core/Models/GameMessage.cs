@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class GameMessage : IGameMessage, IGameSerialize
+internal class GameMessage : IGameMessage, ISaveGameState
 {
     public int Count { get; set; }
     public string Text { get; }
@@ -21,7 +21,7 @@ internal class GameMessage : IGameMessage, IGameSerialize
         Count = restoreGameState.GetByKey(nameof(Count)).GetInt();
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Text), saveGameState.CreateGameStateBag(Text)),

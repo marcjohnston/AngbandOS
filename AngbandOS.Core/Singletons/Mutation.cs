@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class Mutation : IGetKey, IGameSerialize
+internal abstract class Mutation : IGetKey
 {
     protected Game Game { get; }
     protected Mutation(Game game)
@@ -14,17 +14,20 @@ internal abstract class Mutation : IGetKey, IGameSerialize
         Game = game;
     }
     public abstract string Title { get; }
-    public string Key => GetType().Name;
+    public virtual string Key => GetType().Name;
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
-    {
-        return new DictionaryGameStateBag(
-            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
-            (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
-                _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
-                _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
-        )));
-    }
+    public string GetKey => Key;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
+
+    //public GameStateBag? Serialize(SaveGameState saveGameState)
+    //{
+    //    return new DictionaryGameStateBag(
+    //        (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
+    //        (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
+    //            _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
+    //            _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
+    //    )));
+    //}
 
     /// <summary>
     /// Returns the attribute set that is merged with the players attribute set when this mutation is gained.  This allows the mutation attributes to remain constant for each call of the update bonuses.
@@ -89,10 +92,8 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     /// </remarks>
     public (int, ReadOnlyAttributeSet)[]? MinimumExperienceLevelAndEnhancementAttributeSets { get; private set; } = null;
 
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
-    {
-        
+    public void Bind()
+    {        
         MutationAttackType = Game.SingletonRepository.Get<MutationAttackType>(MutationAttackTypeBindingKey);
 
         MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(_minimumExperienceLevelAndEnhancementBindingTuples => (_minimumExperienceLevelAndEnhancementBindingTuples.Item1, Game.SingletonRepository.GetNullable<ItemEnhancement>(_minimumExperienceLevelAndEnhancementBindingTuples.Item2))).ToArray();
@@ -106,13 +107,18 @@ internal abstract class Mutation : IGetKey, IGameSerialize
             Activation = (activationScript, ActivationBinding.Value.MinLevel, costExpression, ability, ActivationBinding.Value.Difficulty);
         }
 
-        if (restoreGameState is not null)
-        {
-            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReferenceOrDefault<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
-            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
-                _restoreGameState => _restoreGameState.GetInt(),
-                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
-        }
+        //if (restoreGameState is not null)
+        //{
+        //    AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReferenceOrDefault<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+        //    MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
+        //        _restoreGameState => _restoreGameState.GetInt(),
+        //        _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
+        //}
+    }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() 
+    {
+        RegenerateAttributeSets();
     }
     private (ActiveMutationScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
     protected virtual (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding { get; } = null;

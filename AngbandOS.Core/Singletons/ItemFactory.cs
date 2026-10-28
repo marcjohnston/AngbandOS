@@ -10,11 +10,11 @@ namespace AngbandOS.Core;
 /// Represents different variations (ItemType) of item categories (ItemCategory).  E.g. different types of food that belong to the food category.  Several of the
 /// properties are modifiable.
 /// </summary>
-internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
+internal sealed class ItemFactory : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             ("bools", saveGameState.CreateGameStateBag(Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried)),
@@ -383,7 +383,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         ProcessWorld(item);
     }
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         #region Binding
         ItemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
@@ -503,22 +503,20 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         _alternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax ?? _flavorSuppressedDescriptionSyntax;
         #endregion
 
-        #region Game Restore
-        if (restoreGameState is null)
-        {
-            AssignedSymbol = Symbol;
-        }
-        else
-        {
-            (Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried) = restoreGameState.GetByKey("bools").Get6Bools();
-            AssignedSymbol = restoreGameState.GetByKey(nameof(AssignedSymbol)).GetDerivedReference<Symbol>();
-            AssignedColor = restoreGameState.GetByKey(nameof(AssignedColor)).GetEnum<ColorEnum>();
-            Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetDerivedReferenceOrDefault<Flavor>((RestoreGameState restoreGameState) => new IllegibleItemFlavor(Game, restoreGameState));
-            BookIndex = restoreGameState.GetByKey(nameof(BookIndex)).GetInt();
-            Realm = restoreGameState.GetByKey(nameof(Realm)).GetDerivedReferenceOrDefault<Realm>();
-            Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
-        }
-        #endregion
+        AssignedSymbol = Symbol;
+    }
+    public void RestoreGame(RestoreGameState restoreGameState) 
+    { 
+        (Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried) = restoreGameState.GetByKey("bools").Get6Bools();
+        AssignedSymbol = restoreGameState.GetByKey(nameof(AssignedSymbol)).GetDerivedReference<Symbol>();
+        AssignedColor = restoreGameState.GetByKey(nameof(AssignedColor)).GetEnum<ColorEnum>();
+        Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetDerivedReferenceOrDefault<Flavor>((RestoreGameState restoreGameState) => new IllegibleItemFlavor(Game, restoreGameState));
+        BookIndex = restoreGameState.GetByKey(nameof(BookIndex)).GetInt();
+        Realm = restoreGameState.GetByKey(nameof(Realm)).GetDerivedReferenceOrDefault<Realm>();
+        Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
+    }
+    public void InitializationComplete() 
+    { 
     }
 
     /// <summary>

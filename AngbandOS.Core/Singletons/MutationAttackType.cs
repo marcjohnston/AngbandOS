@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core;
 
-internal abstract class MutationAttackType : IGetKey, IGameSerialize
+internal abstract class MutationAttackType : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected MutationAttackType(Game game)
@@ -17,15 +17,13 @@ internal abstract class MutationAttackType : IGetKey, IGameSerialize
     public abstract string Title { get; }
     public string Key => GetType().Name;
     public string GetKey => Key;
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return null;
     }
 
-    public void Bind(RestoreGameState? restoreGameState)
-    {
-        
-    }
-
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
     public abstract void ApplyToMonster(Monster monster, int damage, out bool fear, out bool monsterDies);
 }

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class GameCommand : IGetKey, IToJson, IGameSerialize
+internal sealed class GameCommand : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public GameCommand(Game game, GameCommandGameConfiguration gameConfiguration)
@@ -20,13 +20,15 @@ internal sealed class GameCommand : IGetKey, IToJson, IGameSerialize
     }
 
     public string Key { get; }
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IGameCommandScript>(ExecuteScriptName);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public char KeyChar { get; }
 

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson, IGameSerialize
+internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public WizardCommand(Game game, WizardCommandGameConfiguration gameConfiguration)
@@ -20,7 +20,7 @@ internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson, IGameSeria
         HelpGroupName = gameConfiguration.HelpGroupName;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -42,11 +42,13 @@ internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson, IGameSeria
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) 
+    public void Bind() 
     {
         ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IScript>(ExecuteScriptName);
         HelpGroup = HelpGroupName == null ? null : Game.SingletonRepository.Get<HelpGroup>(HelpGroupName);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public char KeyChar { get; }
 

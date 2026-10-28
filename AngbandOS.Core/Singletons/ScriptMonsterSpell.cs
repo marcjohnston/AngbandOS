@@ -164,9 +164,9 @@ internal sealed class ScriptMonsterSpell : MonsterSpell
     /// </summary>
     public IScriptMonsterMonster? ExecuteOnMonsterScript { get; private set; }
 
-    public override void Bind(RestoreGameState? restoreGameState)
+    public override void Bind()
     {
-        base.Bind(restoreGameState);
+        base.Bind();
         ExecuteOnPlayerScript = Game.SingletonRepository.GetNullable<IScriptMonster>(ExecuteOnPlayerScriptBindingKey);
         ExecuteOnMonsterScript = Game.SingletonRepository.GetNullable<IScriptMonsterMonster>(ExecuteOnMonsterScriptBindingKey);
     }

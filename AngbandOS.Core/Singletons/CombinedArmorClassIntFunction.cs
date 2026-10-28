@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValue, IGameSerialize
+internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValue, ISaveGameState
 {
     private Game Game { get; }
     private int? OldValue = null;
@@ -20,20 +20,19 @@ internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValu
 
     public int IntValue => Game.BaseArmorClass + Game.KnownBonusArmorClass;
 
-    public void Bind(RestoreGameState? restoreGameState)
-    {
-        if (restoreGameState is not null)
-        {
-            OldValue = restoreGameState.GetByKey(nameof(OldValue)).GetNullableInt();
-        }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) 
+    { 
+        OldValue = restoreGameState.GetByKey(nameof(OldValue)).GetNullableInt();
     }
+    public void InitializationComplete() { }
 
     public void ClearChangedFlag()
     {
         OldValue = IntValue;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(OldValue), saveGameState.CreateGameStateBag(OldValue))

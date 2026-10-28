@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.  Fixed artifacts are now using this Activation.
 /// </summary>
-internal sealed class Activation : IGetKey, IToJson, IGameSerialize
+internal sealed class Activation : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public Activation(Game game, ActivationGameConfiguration gameConfiguration)
@@ -23,7 +23,7 @@ internal sealed class Activation : IGetKey, IToJson, IGameSerialize
         ActivationCancellableScriptItemBindingKey = gameConfiguration.ActivationCancellableScriptItemBindingKey;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the unique name for this activation.  This name should be capitalized appropriately.
@@ -95,11 +95,13 @@ internal sealed class Activation : IGetKey, IToJson, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         RechargeTimeRoll = Game.ParseNumericExpression(RechargeTimeRollExpression);
         ActivationCancellableScript = Game.SingletonRepository.Get<IActivateItemScript>(ActivationCancellableScriptItemBindingKey);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     /// <summary>
     /// Returns a Roll expression that determines the amount of time the activation needs to recharge.  This property is used to bind the <see cref="RechargeTimeRoll ">/> property during the bind phase.

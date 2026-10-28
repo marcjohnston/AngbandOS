@@ -165,9 +165,9 @@ internal sealed class ProjectileMonsterSpell : MonsterSpell
     protected override string[]? SmartLearnSpellResistantDetectionKeys { get; }
     public override bool WakesSleepingMonsters { get; }
 
-    public override void Bind(RestoreGameState? restoreGameState)
+    public override void Bind()
     {
-        base.Bind(restoreGameState);
+        base.Bind();
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileKey);
         DamageRoll = Game.ParseNumericExpression(DamageRollExpression);
         RadiusExpression = Game.ParseNumericExpression(RadiusExpressionText);

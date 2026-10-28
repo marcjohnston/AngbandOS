@@ -6,13 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class MajorDisplacementTalentScript : UniversalScript, IGetKey
+internal class MajorDisplacementTalentScript : UniversalScript
 {
     private MajorDisplacementTalentScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         Game.RunScript(nameof(TeleportSelf5xTeleportSelfScript));

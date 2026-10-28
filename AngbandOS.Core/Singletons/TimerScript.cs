@@ -28,12 +28,14 @@ internal sealed class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         Value = Game.ParseNullableNumericExpression(ValueExpression);
         Timer = Game.SingletonRepository.Get<Timer>(TimerBindingKey);
         EnabledBoolPosFunction = Game.SingletonRepository.GetNullable<Conditional>(EnabledBoolPosFunctionBindingKey);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
     protected string? ValueExpression { get; }
     protected string TimerBindingKey { get; }
 

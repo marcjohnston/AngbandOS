@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class MonsterFilter : IGetKey, IGameSerialize
+internal abstract class MonsterFilter : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     public MonsterFilter(Game game)
@@ -14,14 +14,16 @@ internal abstract class MonsterFilter : IGetKey, IGameSerialize
         Game = game;
     }
     public virtual string Key => GetType().Name;
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         FrequencyProbabilityExpression = Game.ParseNullableProbabilityExpression(FrequencyProbabilityExpressionText);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
 
     /// <summary>

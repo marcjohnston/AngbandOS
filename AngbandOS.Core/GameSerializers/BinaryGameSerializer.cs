@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Diagnostics;
 using System.IO.Compression;
 
 namespace AngbandOS.Core;
@@ -35,6 +34,7 @@ internal class BinaryGameSerializer : IGameSerializer
         NonDerivedObjectWithoutState = 19,
         ReferenceToObject = 20,
         StringValue = 21,
+        SystemObject = 23,
         TimeSpanValue = 22
     }
 
@@ -183,6 +183,10 @@ internal class BinaryGameSerializer : IGameSerializer
             case StringValueGameStateBag stringValueGameStateBag:
                 result.Add((byte)TypeEnum.StringValue);
                 AddString(stringValueGameStateBag.Value);
+                break;
+            case SystemObjectGameStateBag systemObjectGameStateBag:
+                result.Add((byte)TypeEnum.SystemObject);
+                AddTypeName(systemObjectGameStateBag.ObjectName);
                 break;
             case TimeSpanValueGameStateBag timeSpanValueGameStateBag:
                 result.Add((byte)TypeEnum.TimeSpanValue);
@@ -356,6 +360,12 @@ internal class BinaryGameSerializer : IGameSerializer
                 string stringValue = System.Text.Encoding.UTF8.GetString(data, index, stringLength);
                 index += stringLength;
                 return new StringValueGameStateBag(stringValue);
+            case (byte)TypeEnum.SystemObject:
+                int systemObjectTypeNameLength = BitConverter.ToInt32(data, index);
+                index += 4;
+                string systemObjectTypeName = System.Text.Encoding.UTF8.GetString(data, index, systemObjectTypeNameLength);
+                index += systemObjectTypeNameLength;
+                return new SystemObjectGameStateBag(systemObjectTypeName);
             case (byte)TypeEnum.TimeSpanValue:
                 long timeSpanTicks = BitConverter.ToInt64(data, index);
                 index += 8;

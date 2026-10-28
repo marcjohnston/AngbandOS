@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class IntWidget : Widget, IGetKey, IToJson, IGameSerialize
+internal sealed class IntWidget : Widget, IGetKey, IToJson, ISaveGameState
 {
     public IntWidget(Game game, IntWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -20,7 +20,7 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson, IGameSerialize
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
     public string Key { get; }
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
 
@@ -64,12 +64,15 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson, IGameSerialize
     /// </summary>
     public string[]? ChangeTrackerNames { get; } = null;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind() 
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
+
     public string ToJson()
     {
         IntWidgetGameConfiguration intWidgetGameConfiguration = new IntWidgetGameConfiguration()

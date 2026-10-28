@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class Shopkeeper : IGetKey, IToJson, IGameSerialize
+internal sealed class Shopkeeper : IGetKey, IToJson, ISaveGameState
 {
     private Game Game { get; }
     public Shopkeeper(Game game, ShopkeeperGameConfiguration gameConfiguration)
@@ -19,7 +19,7 @@ internal sealed class Shopkeeper : IGetKey, IToJson, IGameSerialize
         RaceName = gameConfiguration.RaceName;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public int MaxCost { get; }
 
@@ -44,10 +44,12 @@ internal sealed class Shopkeeper : IGetKey, IToJson, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         OwnerRace = Game.SingletonRepository.GetNullable<Race>(RaceName);
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

@@ -6,19 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class ExamineScript : UniversalScript, IGetKey
+internal class ExamineScript : UniversalScript
 {
     private ExamineScript(Game game) : base(game) { }
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
-    /// </summary>
-    /// <returns></returns>
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the examine script.

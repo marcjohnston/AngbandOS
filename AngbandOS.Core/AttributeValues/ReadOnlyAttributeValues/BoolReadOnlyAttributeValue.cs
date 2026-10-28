@@ -17,7 +17,7 @@ internal class BoolReadOnlyAttributeValue : ReadOnlyAttributeValue
     {
     }
 
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Value), saveGameState.CreateGameStateBag(Value))

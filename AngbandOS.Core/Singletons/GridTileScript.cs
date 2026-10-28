@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class GridTileScript : IGetKey, IGameSerialize
+internal abstract class GridTileScript : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
 
@@ -14,7 +14,9 @@ internal abstract class GridTileScript : IGetKey, IGameSerialize
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     protected GridTileScript(Game game) // This object is a singleton
     {
@@ -22,5 +24,5 @@ internal abstract class GridTileScript : IGetKey, IGameSerialize
     }
 
     public abstract (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y);
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 }

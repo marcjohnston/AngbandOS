@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class Reward : IGetKey, IGameSerialize
+internal abstract class Reward : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected Reward(Game game)
@@ -14,12 +14,14 @@ internal abstract class Reward : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind() { }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public abstract void GetReward(Patron patron);
 }

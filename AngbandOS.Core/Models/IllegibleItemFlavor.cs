@@ -11,7 +11,7 @@ internal class IllegibleItemFlavor : Flavor
     public override Symbol Symbol { get; protected set; }
     public override ColorEnum Color { get; }
     public override string Name { get; }
-    public override GameStateBag? Serialize(SaveGameState saveGameState)
+    public override GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Symbol), saveGameState.CreateDerivedGameStateBag(Symbol, typeof(Symbol))),

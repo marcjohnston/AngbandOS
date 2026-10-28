@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson, IGameSerialize
+internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson, ISaveGameState
 {
     public ProjectileScriptWeightedRandom(Game game, ProjectileScriptWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
@@ -21,19 +21,21 @@ internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>
     /// </summary>
     protected (string name, int weight)[] NameAndWeightBindings { get; }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public virtual string Key { get; }
 
     public string GetKey => Key;
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         foreach ((string name, int weight) in NameAndWeightBindings)
         {
             Add(weight, Game.SingletonRepository.Get<ProjectileScript>(name));
         }
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {

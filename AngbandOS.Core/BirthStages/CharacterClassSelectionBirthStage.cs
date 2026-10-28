@@ -10,9 +10,9 @@ internal class CharacterClassSelectionBirthStage : BirthStage
 {
     private int currentSelection = 14;
 
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
             (nameof(currentSelection), saveGameState.CreateGameStateBag(currentSelection))
         );
     }
@@ -57,13 +57,15 @@ internal class CharacterClassSelectionBirthStage : BirthStage
         return null;
     }
 
-    public override void Bind(RestoreGameState? restoreGameState)
+    public override void Bind()
     {
-        base.Bind(restoreGameState);
-        if (restoreGameState is not null)
-        {
-            currentSelection = restoreGameState.GetByKey(nameof(currentSelection)).GetInt();
-        }
+        base.Bind();
+    }
+
+    public override void RestoreGame(RestoreGameState restoreGameState)
+    {
+        base.RestoreGame(restoreGameState);
+        currentSelection = restoreGameState.GetByKey(nameof(currentSelection)).GetInt();
     }
 
     /// <summary>

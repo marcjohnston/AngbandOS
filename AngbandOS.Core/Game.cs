@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class Game : IGameSerialize
+internal class Game : ISaveGameState
 {
     #region WIP State Data
     public int SkillMelee;
@@ -206,7 +206,7 @@ internal class Game : IGameSerialize
     #endregion
 
     #region Game Serialization
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
@@ -736,6 +736,9 @@ internal class Game : IGameSerialize
         #endregion
 
         View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
+
+        SingletonRepository.FireInitializationComplete();
+
         RenderView(consoleView);
     }
     #endregion
@@ -1198,11 +1201,18 @@ internal class Game : IGameSerialize
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
     }
+
+    /// <summary>
+    /// Generates a read-only attribute set that represents the total of all mutations possessed by the player.  This is used to calculate the total effective attribute set for the player 
+    /// and is a separate method to allow the rendering of the mutation attribute set on the render character screen.
+    /// </summary>
+    /// <returns></returns>
     public ReadOnlyAttributeSet GetMutationsAttributeSet()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(this);
         foreach (Mutation mutation in MutationsPossessed)
         {
+            // Refresh the attribute set for the mutation to ensure that it is up to date.
             mutation.RefreshAndSquashAttributeSet();
 
             // Check to see if there are passive attributes to be merged.

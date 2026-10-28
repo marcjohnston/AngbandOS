@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
 /// </summary>
-internal sealed class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>, IGetKey, IToJson, IGameSerialize
+internal sealed class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>, IGetKey, IToJson, ISaveGameState
 {
     public ArtifactBiasWeightedRandom(Game game, ArtifactBiasWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
@@ -17,20 +17,22 @@ internal sealed class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>
         ArtifactBiasBindingKeyAndWeightTuples = gameConfiguration.ArtifactBiasBindingKeyAndWeightTuples;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
 
     public string Key { get; }
     public string GetKey => Key;
 
     private (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples { get; }
 
-    public void Bind(RestoreGameState? restoreGameState)
+    public void Bind()
     {
         foreach ((string? artifactBiasBindingKey, int weight) in ArtifactBiasBindingKeyAndWeightTuples)
         {
             Add(weight, Game.SingletonRepository.GetNullable<ArtifactBias>(artifactBiasBindingKey));
         }
     }
+    public void RestoreGame(RestoreGameState restoreGameState) { }
+    public void InitializationComplete() { }
 
     public string ToJson()
     {

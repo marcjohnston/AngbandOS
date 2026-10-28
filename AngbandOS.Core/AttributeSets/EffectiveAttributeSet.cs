@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AngbandOS.Core;
 
-internal class EffectiveAttributeSet : IGameSerialize
+internal class EffectiveAttributeSet : ISaveGameState
 {
     #region State Data
     private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
@@ -54,7 +54,7 @@ internal class EffectiveAttributeSet : IGameSerialize
     }
     #endregion
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, 

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-internal abstract class FlaggedAction : IGetKey, IGameSerialize
+internal abstract class FlaggedAction : IGetKey, ISaveGameState
 {
     protected Game Game { get; }
     protected FlaggedAction(Game game) // This object is a singleton
@@ -14,7 +14,7 @@ internal abstract class FlaggedAction : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? SaveGame(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_flag), saveGameState.CreateGameStateBag(_flag))
@@ -25,13 +25,12 @@ internal abstract class FlaggedAction : IGetKey, IGameSerialize
 
     public string GetKey => Key;
 
-    public virtual void Bind(RestoreGameState? restoreGameState)
-    {
-        if (restoreGameState is not null)
-        {
-            _flag = restoreGameState.GetByKey(nameof(_flag)).GetBool();
-        }
-    } 
+    public virtual void Bind() { }
+    public virtual void RestoreGame(RestoreGameState restoreGameState) 
+    { 
+        _flag = restoreGameState.GetByKey(nameof(_flag)).GetBool();
+    }
+    public virtual void InitializationComplete() { }
 
     private bool _flag;
 

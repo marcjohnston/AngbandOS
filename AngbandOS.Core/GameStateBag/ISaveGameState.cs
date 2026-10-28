@@ -6,13 +6,12 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal interface IGameSerialize
+internal interface ISaveGameState
 {
     /// <summary>
     /// Returns a GameStateBag with the data necessary to restore the game state of the object.  Returns null if there is no data to save.
     /// </summary>
     /// <param name="saveGameState"></param>
     /// <returns></returns>
-    GameStateBag? Serialize(SaveGameState saveGameState);
+    GameStateBag? SaveGame(SaveGameState saveGameState);
 }
-

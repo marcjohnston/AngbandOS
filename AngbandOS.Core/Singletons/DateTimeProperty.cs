@@ -14,19 +14,16 @@ internal abstract class DateTimeProperty : Property, IDateAndTimeValue
         _value = restoreGameState.GetByKey(nameof(_value)).GetDateTime();
     }
 
-    public override void Bind(RestoreGameState? restoreGameState)
+    public override void RestoreGame(RestoreGameState restoreGameState)
     {
-        base.Bind(restoreGameState);
-        if (restoreGameState != null)
-        {
-            _value = restoreGameState.GetByKey(nameof(_value)).GetDateTime();
-        }
+        base.RestoreGame(restoreGameState);
+        _value = restoreGameState.GetByKey(nameof(_value)).GetDateTime();
     }
     
     private DateTime _value;
-    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? SaveGame(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+        return new DictionaryGameStateBag(base.SaveGame(saveGameState),
             (nameof(_value), new DateTimeValueGameStateBag(_value))
         );
     }
