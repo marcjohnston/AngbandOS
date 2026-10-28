@@ -1,15 +1,21 @@
-﻿
+﻿using AngbandOS.Core.Interface.Configuration.Annotations;
+
 namespace AngbandOS.Core.Interface.Configuration;
 
+[ConfigurationEntity(
+    Title = "Projectile Graphic",
+    EntityNoun = "projectile graphic")]
 public class ProjectileGraphicGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    /// <summary>
-    /// Returns the character to be used for the projectile.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Character",
+        Summary = "Specifies the character used to render the projectile.",
+        DataType = "char")]
     public virtual char Character { get; set; }
 
-    /// <summary>
-    /// Returns the color to be used for the projectile.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Color",
+        Summary = "Specifies the color used to render the projectile.",
+        DataType = "ColorEnum")]
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 }

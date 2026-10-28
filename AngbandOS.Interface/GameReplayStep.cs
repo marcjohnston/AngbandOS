@@ -2,9 +2,9 @@
 
 public class GameReplayStep
 {
-    public DateTime DateTime { get; }
-    public char Keystroke { get; }
-    public int Seed { get; }
+    public DateTime DateTime { get; } // 8-bytes
+    public char Keystroke { get; } // 2-bytes
+    public int Seed { get; } // 4-bytes
 
     public GameReplayStep(DateTime dateTime, char keystroke, int seed)
     {

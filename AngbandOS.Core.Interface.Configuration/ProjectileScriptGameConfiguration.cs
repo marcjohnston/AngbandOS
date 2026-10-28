@@ -1,91 +1,111 @@
-﻿namespace AngbandOS.Core.Interface.Configuration;
+﻿using AngbandOS.Core.Interface.Configuration.Annotations;
 
+namespace AngbandOS.Core.Interface.Configuration;
+
+[ConfigurationEntity(
+    Title = "Projectile Script",
+    EntityNoun = "projectile script")]
 public class ProjectileScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    /// <summary>
-    /// Returns details to reveal to the player when learned; or null to return a default duration "dam {Damage}".
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Custom Learned Details",
+        Summary = "Returns the details revealed to the player when the projectile is learned. When null, the default details are used.",
+        DataType = "string?")]
     public virtual string? CustomLearnedDetails { get; set; } = null;
 
-    /// <summary>
-    /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Projectile Binding Key",
+        Summary = "Specifies the binding key for the projectile.",
+        DataType = "string")]
     public virtual string ProjectileBindingKey { get; set; }
 
-    /// <summary>
-    /// Returns a roll expression for the amount of damage the projectile produces.  This property is used to bind the <see cref="DamageRoll"/> property during the bind phase.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Damage Roll Expression",
+        Summary = "Specifies the roll expression for the amount of damage produced by the projectile.",
+        DataType = "string")]
     public virtual string DamageRollExpression { get; set; }
 
-    /// <summary>
-    /// Returns a roll expression for the radius of damage the projectile produces.  A radius of 0 represents a bolt.  A radius greater than zero represents a ball and a radius less than zero represents breathe.
-    /// Returns zero by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Radius Roll Expression",
+        Summary = "Specifies the roll expression for the projectile's damage radius. A radius of zero represents a bolt, a positive radius represents a ball, and a negative radius represents a breath attack.",
+        DataType = "string")]
     public virtual string RadiusRollExpression { get; set; } = "0";
 
-    /// <summary>
-    /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Stop",
+        Summary = "Determines whether the projectile stops when it hits an obstacle.",
+        DataType = "bool")]
     public virtual bool Stop { get; set; } = false;
 
-    /// <summary>
-    /// Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Kill",
+        Summary = "Determines whether the projectile can affect monsters or other entities in its path.",
+        DataType = "bool")]
     public virtual bool Kill { get; set; } = false;
 
-    /// <summary>
-    /// Allows the projectile or spell to skip directly to the target location, ignoring any intermediate grids or obstacles.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Jump",
+        Summary = "Determines whether the projectile moves directly to its target while ignoring intermediate grids or obstacles.",
+        DataType = "bool")]
     public virtual bool Jump { get; set; } = false;
 
-    /// <summary>
-    /// Causes the effect to travel in a line, potentially hitting multiple targets along a straight path. Useful in corridors or for reaching enemies aligned with the caster.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Beam",
+        Summary = "Determines whether the projectile travels in a line and can affect multiple targets along its path.",
+        DataType = "bool")]
     public virtual bool Beam { get; set; } = false;
 
-    /// <summary>
-    /// Allows the effect to interact with each grid (tile or cell) it moves through, which can alter terrain or affect grid-based elements like traps.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Grid",
+        Summary = "Determines whether the projectile interacts with each grid through which it travels.",
+        DataType = "bool")]
     public virtual bool Grid { get; set; } = false;
 
-    /// <summary>
-    /// Enables the effect to interact with items it encounters, possibly damaging or destroying them if applicable.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Item",
+        Summary = "Determines whether the projectile interacts with items it encounters.",
+        DataType = "bool")]
     public virtual bool Item { get; set; } = false;
 
-    /// <summary>
-    /// Lets the effect pass through targets or objects without stopping, continuing on to hit entities or objects further along its trajectory.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Thru",
+        Summary = "Determines whether the projectile passes through targets or objects without stopping.",
+        DataType = "bool")]
     public virtual bool Thru { get; set; } = false;
 
-    /// <summary>
-    /// Makes the projectile or spell hidden from the player’s view, often used when visual representation is unnecessary.  Returns false, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Hide",
+        Summary = "Determines whether the projectile is hidden from the player's view.",
+        DataType = "bool")]
     public virtual bool Hide { get; set; } = false;
 
-    /// <summary>
-    /// Returns true, if the projectile is automatically identified; false, if the projectile is not identifiable; or null, if the projectile is identified, if and
-    /// only if, the projectile hits and affects a monster, item or grid tile.  Returns true, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Identified",
+        Summary = "Determines whether the projectile is automatically identified. Null indicates conditional identification when the projectile affects a target.",
+        DataType = "bool?")]
     public virtual bool? Identified { get; set; } = true;
 
-    /// <summary>
-    /// Returns a message to be rendered before the projectile is projected or null, for no message.  Returns null, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Pre-Message",
+        Summary = "Specifies the message rendered before the projectile is projected. When null, no message is rendered.",
+        DataType = "string?")]
     public virtual string? PreMessage { get; set; } = null;
 
-    /// <summary>
-    /// Returns a message to be rendered after the projectile is projected or null, for no message.  Returns null, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Post-Message",
+        Summary = "Specifies the message rendered after the projectile is projected. When null, no message is rendered.",
+        DataType = "string?")]
     public virtual string? PostMessage { get; set; } = null;
 
-    /// <summary>
-    /// Returns whether or not this projectile turns a pet into an unfriendly monster, when using the <see cref="ExecuteUnfriendlyScript"/> method.  Returns true, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Smashing On Pets Turns Unfriendly",
+        Summary = "Determines whether smashing a pet with the projectile turns the pet into an unfriendly monster.",
+        DataType = "bool")]
     public virtual bool SmashingOnPetsTurnsUnfriendly { get; set; } = true;
 
-    /// <summary>
-    /// Returns the mode that the projectile will use when it is launched using a script interface that does not accept a directional parameter.  Returns <see cref="NonDirectionalProjectileModeEnum.Default"/> by default, which is for the player to specify a direction.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Non-Directional Projectile Mode",
+        Summary = "Specifies the mode used when the projectile is launched without a directional parameter.",
+        DataType = "NonDirectionalProjectileModeEnum")]
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode { get; set; } = NonDirectionalProjectileModeEnum.Default;
 }

@@ -124,7 +124,7 @@ internal class MonsterKnowledge : ISaveGameState
             knowledge.RCastInate = Constants.MaxUchar;
             knowledge.RCastSpell = Constants.MaxUchar;
             knowledge.Characteristics = new MonsterCharacteristics(_monsterRace);
-            knowledge.RSpells = _monsterRace.Spells;
+            knowledge.RSpells = _monsterRace.Spells ?? new MonsterSpell[] { };
         }
         string pronoun = Game.Gender.Pronoun.Trim();
         string capitalizedPronoun = $"{pronoun[0].ToString().ToUpper()}{pronoun[1..]}";

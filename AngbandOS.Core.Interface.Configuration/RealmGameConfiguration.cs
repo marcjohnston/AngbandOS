@@ -4,25 +4,42 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration.Annotations;
+
 namespace AngbandOS.Core.Interface.Configuration;
 
+[ConfigurationEntity(
+    Title = "Realm",
+    EntityNoun = "realm")]
 public class RealmGameConfiguration : NonCompositeSingletonGameConfiguration
 {
+    [ConfigurationMetadata(
+        Title = "Spell Book Names",
+        Summary = "Specifies the spell book names associated with the realm.",
+        DataType = "string[]")]
     public virtual string[] SpellBookNames { get; set; }
 
+    [ConfigurationMetadata(
+        Title = "Info",
+        Summary = "Specifies the informational text associated with the realm.",
+        DataType = "string[]")]
     public virtual string[] Info { get; set; }
 
+    [ConfigurationMetadata(
+        Title = "Name",
+        Summary = "Specifies the name of the realm.",
+        DataType = "string")]
     public virtual string Name { get; set; }
 
-    /// <summary>
-    /// Returns true, if a player subscribing to the realm gains resistance to hellfire projectiles.  The resistance offers a 50% reduction in damage.  Returns false, by default.  The Death realm, returns true.
-    /// </summary>
-    /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
+    [ConfigurationMetadata(
+        Title = "Resistant To Holy And Hell Projectiles",
+        Summary = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.",
+        DataType = "bool")]
     public virtual bool ResistantToHolyAndHellProjectiles { get; set; } = false;
 
-    /// <summary>
-    /// Returns true, if a player subscribing to the realm gains is more susceptible to hellfire projectiles.  The susceptibility costs an additional 50% increase in damage.  Returns false, by default.  The Life realm, returns true.
-    /// </summary>
-    /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
+    [ConfigurationMetadata(
+        Title = "Susceptible To Holy And Hell Projectiles",
+        Summary = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.",
+        DataType = "bool")]
     public virtual bool SusceptibleToHolyAndHellProjectiles { get; set; } = false;
 }

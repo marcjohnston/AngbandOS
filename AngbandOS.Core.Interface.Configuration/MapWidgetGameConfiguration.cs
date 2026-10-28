@@ -1,19 +1,27 @@
-﻿namespace AngbandOS.Core.Interface.Configuration;
+﻿using AngbandOS.Core.Interface.Configuration.Annotations;
 
+namespace AngbandOS.Core.Interface.Configuration;
+
+[ConfigurationEntity(
+    Title = "Map Widget",
+    EntityNoun = "map widget")]
 public class MapWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    /// <summary>
-    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "X",
+        Summary = "Specifies the horizontal coordinate where the widget is drawn.",
+        DataType = "int")]
     public virtual int X { get; set; }
 
-    /// <summary>
-    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Y",
+        Summary = "Specifies the vertical coordinate where the widget is drawn.",
+        DataType = "int")]
     public virtual int Y { get; set; }
 
-    /// <summary>
-    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Change Tracker Names",
+        Summary = "Specifies the property names that participate in change tracking.",
+        DataType = "string[]?")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }

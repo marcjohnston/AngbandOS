@@ -1,50 +1,73 @@
-﻿namespace AngbandOS.Core.Interface.Configuration;
+﻿using AngbandOS.Core.Interface.Configuration.Annotations;
 
+namespace AngbandOS.Core.Interface.Configuration;
+
+[ConfigurationEntity(
+    Title = "Ranged Widget",
+    EntityNoun = "ranged widget")]
 public class RangedWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    /// <summary>
-    /// Returns an array of tuples that specify the text and color to render for a range of values.  The <paramref name="startValue"/> element specifies the smallest (or start) value of the range.  Ranges must be sorted in
-    /// descending order (from the largest value to the smallest).  This sorting is validated once upon first usage.  If the value is larger than the first range, the first range will match.  If the value is smaller than the last range specified, the
-    /// <see cref="DefaultText"/> and <see cref="DefaultColor"/> will be used.  Duplicate <paramref name="startValue"/> element cannot be used and will fail the sort validation.
-    /// </summary>
+    [ConfigurationTupleItem(
+        "startValue",
+        Title = "Start Value")]
+    [ConfigurationTupleItem(
+        "textToRender",
+        Title = "Text To Render")]
+    [ConfigurationTupleItem(
+        "color",
+        Title = "Color")]
+    [ConfigurationMetadata(
+        Title = "Ranges",
+        Summary = "Specifies the value ranges, display text, and colors used to render the widget.",
+        DataType = "(int startValue, string textToRender, ColorEnum color)[]")]
     public virtual (int startValue, string textToRender, ColorEnum color)[] Ranges { get; set; }
 
+    [ConfigurationMetadata(
+        Title = "Integer Value Name",
+        Summary = "Specifies the name of the integer value displayed by the widget.",
+        DataType = "string")]
     public virtual string IntValueName { get; set; }
 
-    /// <summary>
-    /// Returns the text to be rendered, when none of the ranges apply.  Returns an empty string, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Default Text",
+        Summary = "Specifies the text rendered when none of the ranges apply.",
+        DataType = "string")]
     public virtual string DefaultText { get; set; } = "";
 
-    /// <summary>
-    /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.  Returns the color white, by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Default Color",
+        Summary = "Specifies the color used when none of the ranges apply.",
+        DataType = "ColorEnum")]
     public virtual ColorEnum DefaultColor { get; set; } = ColorEnum.White;
 
-    /// <summary>
-    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "X",
+        Summary = "Specifies the horizontal coordinate where the widget is drawn.",
+        DataType = "int")]
     public virtual int X { get; set; }
 
-    /// <summary>
-    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Y",
+        Summary = "Specifies the vertical coordinate where the widget is drawn.",
+        DataType = "int")]
     public virtual int Y { get; set; }
 
-    /// <summary>
-    /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Width",
+        Summary = "Specifies the width of the widget. When null, the width is based on the text length.",
+        DataType = "int?")]
     public virtual int? Width { get; set; } = null;
 
-    /// <summary>
-    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
-    /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Justification Name",
+        Summary = "Specifies the name of the justification used to lay out the widget text.",
+        DataType = "string")]
     public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
-    /// <summary>
-    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
-    /// </summary>
+    [ConfigurationMetadata(
+        Title = "Change Tracker Names",
+        Summary = "Specifies the property names that participate in change tracking.",
+        DataType = "string[]?")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }
 
