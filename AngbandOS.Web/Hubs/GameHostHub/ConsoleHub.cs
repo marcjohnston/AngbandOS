@@ -49,7 +49,7 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
         /// <returns></returns>
-        public async Task PlayNewGame(GameConfiguration gameConfiguration)
+        public async Task PlayNewGame(string gameConfigurationName)
         {
             // We need to ensure the user is authenticated.
             string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
@@ -57,7 +57,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                ViewPort = await GameService.PlayNewGameAsync(Context, user.Id, new GameConfiguration(), user.UserName);
+                ViewPort = await GameService.PlayNewGameAsync(Context, user.Id, gameConfigurationName, user.UserName);
             }
         }
 

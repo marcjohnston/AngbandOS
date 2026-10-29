@@ -309,61 +309,12 @@ export class PlayComponent implements OnInit, OnDestroy {
     }
   }
 
-  private LoadConfiguration(): GameConfiguration {
-    const gameConfiguration: GameConfiguration = {
-      maxMessageLogLength: 1,
-      startupTownName: null,
-      towns: null,
-      shopkeepers: null,
-      gameCommands: null,
-      storeCommands: null,
-      helpGroups: null,
-      monsterRaces: null,
-      symbols: null,
-      vaults: null,
-      dungeonGuardians: null,
-      dungeons: null,
-      storeFactories: null,
-      projectileGraphics: null,
-      amuletReadableFlavor: null,
-      mushroomReadableFlavors: null,
-      potionReadableFlavors: null,
-      ringReadableFlavors: null,
-      rodReadableFlavors: null,
-      scrollReadableFlavors: null,
-      staffReadableFlavors: null,
-      wandReadableFlavors: null,
-      classSpells: null,
-      wizardCommands: null,
-      tiles: null,
-      animations: null,
-      spells: null,
-      plurals: null,
-      attacks: null,
-      gods: null,
-      elvishTexts: null,
-      findQuests: null,
-      funnyComments: null,
-      funnyDescriptions: null,
-      horrificDescriptions: null,
-      insultPlayerAttacks: null,
-      moanPlayerAttacks: null,
-      unreadableFlavorSyllables: null,
-      shopkeeperAcceptedComments: null,
-      shopkeeperBargainComments: null,
-      shopkeeperGoodComments: null,
-      shopkeeperLessThanGuessComments: null,
-      shopkeeperWorthlessComments: null,
-      singingPlayerAttacks: null,
-      worshipPlayerAttacks: null
-    }
-    return gameConfiguration;
-  }
-
+  
   private play() {
     if (this.gameHubConnection) {
       this.connectionId = this.gameHubConnection.connectionId;
 
+      // Setup the hub connection events.
       this.gameHubConnection.on("Clear", () => {
         this._zone.run(() => {
           this._htmlConsole?.clear();
@@ -449,10 +400,8 @@ export class PlayComponent implements OnInit, OnDestroy {
           });
         });
       } else if (this.gameGuidStringOrRecoveryIdNumber === null) {
-        // This is a new game request.  We must send a game configuration.
-        const gameConfiguration: GameConfiguration = this.LoadConfiguration();
-
-        this.gameHubConnection.send("PlayNewGame", gameConfiguration).then(() => {
+        // This is a new game request.  We will send a default game configuration name.
+        this.gameHubConnection.send("PlayNewGame", "").then(() => {
         }, (reason: any) => {
           this._snackBar.open(`PlayNewGame rejected ${reason}.`, undefined, {
             duration: 2000,
@@ -537,6 +486,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           this._accessToken = _currentUser.jwt;
         }
 
+        // Check to see if the game hub is still connected.  If it is, then stop it and re-create it.  This is necessary, because the access token may have changed.
         if (this.gameHubConnection !== undefined) {
           this.gameHubConnection.stop();
         }

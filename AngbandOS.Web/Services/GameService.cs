@@ -128,7 +128,7 @@ namespace AngbandOS.Web.Services
         /// <param name="userId">Provide user id of the connected user.</param>
         /// <param name="gameConfiguration">Provide game configuration to play.</param>
         /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
-        public async Task<GameHost?> PlayNewGameAsync(HubCallerContext context, string userId, GameConfiguration gameConfiguration, string username)
+        public async Task<GameHost?> PlayNewGameAsync(HubCallerContext context, string userId, string gameConfigurationName, string username)
         {
             string connectionId = context.ConnectionId;
 
@@ -148,10 +148,9 @@ namespace AngbandOS.Web.Services
             // necessary.
             await gameHub.GameStarted(guid);
 
-            // TODO: Override the configuration because we are not bringing it in from the client yet.
             SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString);
             //gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(username, ""); // Load the configuration from SQL
-            gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
+            GameConfiguration gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
 
             // Create a signal-r console object to manage the in-progress game.  This is a background worker object that runs the game and receives messages from the game to send to the client.
             GameHost gameHost = new GameHost(context, gameHub, gameConfiguration, userId, username, gameUpdateMonitor, WebPersistentStorage);
