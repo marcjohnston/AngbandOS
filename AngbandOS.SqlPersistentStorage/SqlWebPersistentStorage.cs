@@ -308,9 +308,13 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         {
             IQueryable<Message> messagesQuery = context.Messages;
             if (userId == null)
+            {
                 messagesQuery = messagesQuery.Where(_message => _message.ToUserId == null);
+            }
             else
+            {
                 messagesQuery = messagesQuery.Where(_message => _message.ToUserId == null || _message.ToUserId == userId);
+            }
             if (types != null)
             {
                 int[] intTypes = types.Select(_type => (int)_type).ToArray();
