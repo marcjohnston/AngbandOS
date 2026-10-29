@@ -361,18 +361,13 @@ static void WriteProperty(
             $"{indentation}    EntityNounTitle = " +
             $"\"{Escape(entity.Title ?? string.Empty)}\",");
 
-        string nullableStringLiteral =
-            GetNullableStringLiteral(
-                GetPropertyName(elementType, "Key"));
-
         writer.WriteLine(
             $"{indentation}    EntityKeyPropertyName = " +
-            $"{nullableStringLiteral},");
+            $"\"Key\",");
 
         writer.WriteLine(
             $"{indentation}    EntityNamePropertyName = " +
-            $"{GetNullableStringLiteral(
-                GetEntityNameProperty(elementType))},");
+            $"\"Key\",");
     }
 
     writer.WriteLine(
@@ -559,29 +554,6 @@ static string RemoveNullableAndArraySuffixes(string dataType)
     return result;
 }
 
-static string? GetEntityNameProperty(Type entityType)
-{
-    return GetPropertyName(entityType, "Name")
-        ?? GetPropertyName(entityType, "Key");
-}
-
-static string? GetPropertyName(Type type, string propertyName)
-{
-    return type.GetProperty(
-        propertyName,
-        BindingFlags.Instance |
-        BindingFlags.Public |
-        BindingFlags.FlattenHierarchy) != null
-        ? propertyName
-        : null;
-}
-
-static string GetNullableStringLiteral(string? value)
-{
-    return value == null
-        ? "null"
-        : $"\"{Escape(value)}\"";
-}
 
 static string Escape(string value)
 {

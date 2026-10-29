@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
@@ -69,7 +69,8 @@ export class GameDesignerComponent implements OnInit {
   constructor(
     private _httpClient: HttpClient,
     private _ngZone: NgZone,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _changeDetectorRef: ChangeDetectorRef
   ) { }
 
   validateJsonPropertyMetadata(parentName: string, jsonPropertyMetadata: JsonPropertyMetadata): PropertyMetadata | undefined {
@@ -218,6 +219,11 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.foreignCollectionName);
   }
 
+  /**
+   * Checks for the asychronous arrival of both the metadata and the configuration data.  When both have been received, it parses the metadata JSON object to ensure the metadata
+   * is valid and builds the tree view with the metadata and the configuration details for every node.  
+   * @returns
+   */
   initialize() {
     // Wait until the metadata and the configuration have been loaded before we can build the tree nodes.
     if (this.jsonGameMetadata !== undefined && this.configuration !== undefined) {
@@ -335,7 +341,10 @@ export class GameDesignerComponent implements OnInit {
       const gameSettingsTreeNode = new TreeNode("Game Settings", null, gameSettingsPropertyAndMetadataAndConfigurations);
 
       // Assign the list to comply with the Angular change detection assignment.
-      this.rootTreeNodes = [gameSettingsTreeNode, ...rootTreeNodes]; 
+      this.rootTreeNodes = [gameSettingsTreeNode, ...rootTreeNodes];
+
+      // Angular apparently isn't detecting the change for rootTreeNodes.  Manually schedule it now.
+      this._changeDetectorRef.detectChanges();
     }
   }
 
