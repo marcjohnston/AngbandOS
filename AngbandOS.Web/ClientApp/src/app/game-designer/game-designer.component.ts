@@ -31,10 +31,18 @@ import { JsonEnumMetadata } from './JsonEnumMetadata';
 })
 
 export class GameDesignerComponent implements OnInit {
+  /**
+   * A map of collection property names to the list of key values for each entity in the collection.  This is used to populate the select options for foreign key references.
+   */
   public collectionMap = new Map<string, SelectOption[]>();
 
   /**
-   * The unverified metadata that has been received from the game controller.
+   * A map of enum names to the list of select options for each enum value.  This is used to populate the select options for enum properties.
+   */
+  public enumMap = new Map<string, SelectOption[]>();
+
+  /**
+   * The unverified metadata that has been received from the game controller.  Once the metadata has been verified, it will be discarded and the tree nodes will be built.
    */
   private jsonGameMetadata: JsonGameMetadata | undefined = undefined;
 
@@ -216,12 +224,52 @@ export class GameDesignerComponent implements OnInit {
       const rootTreeNodes: TreeNode[] = [];
       const gameSettingsPropertyAndMetadataAndConfigurations: PropertyMetadataAndConfiguration[] = []; // We will need to build the game settings tree node manually.
 
-      // Validate that the metadata property is not undefined.
+      // Validate that the metadata enums property is not undefined.
+      if (this.jsonGameMetadata.enums === undefined) {
+        this._snackBar.open(`The 'enums' game metadata is undefined.`, "", {
+          duration: 5000
+        });
+        return;
+      }
+
+      // Validate that the metadata properties property is not undefined.
       if (this.jsonGameMetadata.properties === undefined) {
         this._snackBar.open(`The 'properties' game metadata is undefined.`, "", {
           duration: 5000
         });
         return;
+      }
+
+      // Store enum options by enum name.
+      for (const jsonEnumMetadata of this.jsonGameMetadata.enums) {
+        if (jsonEnumMetadata.name === undefined) {
+          this._snackBar.open(`Metadata enum name is invalid after json deserialization.`, "", {
+            duration: 5000
+          });
+          return;
+        }
+
+        if (jsonEnumMetadata.options === undefined) {
+          this._snackBar.open(`Metadata enum ${jsonEnumMetadata.name} options are invalid after json deserialization.`, "", {
+            duration: 5000
+          });
+          return;
+        }
+
+        const selectOptions: SelectOption[] = [];
+
+        for (const jsonEnumOption of jsonEnumMetadata.options) {
+          if (jsonEnumOption.name === undefined || jsonEnumOption.value === undefined) {
+            this._snackBar.open(`Metadata enum ${jsonEnumMetadata.name} contains an invalid option after json deserialization.`, "", {
+              duration: 5000
+            });
+            return;
+          }
+
+          selectOptions.push(new SelectOption(jsonEnumOption.name, jsonEnumOption.value.toString()));
+        }
+
+        this.enumMap.set(jsonEnumMetadata.name, selectOptions);
       }
 
       for (var jsonPropertyMetadata of this.jsonGameMetadata.properties) {
