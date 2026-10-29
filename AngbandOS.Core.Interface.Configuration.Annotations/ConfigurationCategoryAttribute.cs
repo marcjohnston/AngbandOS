@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration.Annotations;
 
 /// <summary>
-/// Places a configuration property into a named UI category.
+/// Represents a metadata attribute to places a configuration property into a named UI category.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 public sealed class ConfigurationCategoryAttribute : Attribute

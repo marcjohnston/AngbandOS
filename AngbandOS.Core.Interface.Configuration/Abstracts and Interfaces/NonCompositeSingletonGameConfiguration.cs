@@ -10,6 +10,7 @@ public abstract class NonCompositeSingletonGameConfiguration : IGetKeyGameConfig
     /// This key uses the non-composite singleton key pattern.
     /// </remarks>
     public virtual string? Key { get; set; } = null;
+
     /// <summary>
     /// Returns the unique key for this singleton.
     /// </summary>

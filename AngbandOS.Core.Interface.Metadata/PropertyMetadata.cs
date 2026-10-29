@@ -34,7 +34,7 @@ public abstract class PropertyMetadata
     public string CategoryTitle { get; set; } = "";
 
     /// <summary>
-    /// Returns true, if the property value must be provided by the user.  Returns false, by default.
+    /// Returns false, if the property value must be provided by the user.  Returns false, by default.
     /// </summary>
     public bool IsNullable { get; set; } = false;
 
