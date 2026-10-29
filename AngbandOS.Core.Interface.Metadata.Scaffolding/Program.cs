@@ -295,8 +295,8 @@ static void WriteProperty(
     IReadOnlyDictionary<Type, ConfigurationEntityAttribute> entities,
     int indentLevel)
 {
-    ForeignCollectionAttribute? foreignCollection =
-        property.GetCustomAttribute<ForeignCollectionAttribute>(
+    ConfigurationForeignKeyAttribute? foreignCollection =
+        property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(
             inherit: true);
 
     string dataType =
@@ -363,11 +363,11 @@ static void WriteProperty(
 
         writer.WriteLine(
             $"{indentation}    EntityKeyPropertyName = " +
-            $"\"Key\",");
+            $"\"GetKey\",");
 
         writer.WriteLine(
             $"{indentation}    EntityNamePropertyName = " +
-            $"\"Key\",");
+            $"\"GetKey\",");
     }
 
     writer.WriteLine(
@@ -455,7 +455,7 @@ static string GetMetadataType(
     Type propertyType,
     Type? elementType,
     PropertyInfo property,
-    ForeignCollectionAttribute? foreignCollection,
+    ConfigurationForeignKeyAttribute? foreignCollection,
     IReadOnlyDictionary<Type, ConfigurationEntityAttribute> entities)
 {
     if (IsTuple(dataType))

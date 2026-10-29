@@ -1,13 +1,12 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration.Annotations;
 
 /// <summary>
-/// Identifies a property as referencing a foreign configuration
-/// collection.
+/// Identifies a property as being a foreign key that referenced an entity collection.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public sealed class ForeignCollectionAttribute : Attribute
+public sealed class ConfigurationForeignKeyAttribute : Attribute
 {
-    public ForeignCollectionAttribute(string collectionName)
+    public ConfigurationForeignKeyAttribute(string collectionName)
     {
         if (string.IsNullOrWhiteSpace(collectionName))
         {
