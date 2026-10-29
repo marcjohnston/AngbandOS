@@ -1,7 +1,6 @@
 /**
  * Represents a deserialized PropertyMetadata object that hasn't been validated.
  */
-
 export class JsonPropertyMetadata {
   public type: string | undefined = undefined;
   public propertyName: string | undefined = undefined;

@@ -135,9 +135,10 @@ namespace AngbandOS.Web.Controllers
             string connectionString = Configuration["ConnectionString"];
 
             // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(connectionString);
+//            SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(connectionString);
 
-            GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
+//            GameConfiguration gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(null, "");
+            GameConfiguration gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
 
             // We do not want the clients to have the properties automatically camel-cased.  They won't be aligned with the Metadata.  We also have to ensure tuple-fields get serialized.
             var jsonOptions = new JsonSerializerOptions
@@ -175,10 +176,11 @@ namespace AngbandOS.Web.Controllers
         [Route("configurations/metadata")]
         [Produces("application/json")]
         [AllowAnonymous]
-        public ActionResult<PropertyMetadata[]> GetGameConfigurationMetadata()
+        public ActionResult<(PropertyMetadata[], EnumMetadata[])> GetGameConfigurationMetadata()
         {
             PropertyMetadata[] metadata = GameConfigurationMetadata.Metadata;
-            return Ok(metadata);
+            EnumMetadata[] enums = GameConfigurationMetadata.Enums;
+            return Ok(new GameMetadata(metadata, enums));
         }
         //#endregion
     }

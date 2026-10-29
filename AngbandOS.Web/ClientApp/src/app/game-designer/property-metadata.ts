@@ -1,15 +1,4 @@
-/**
- * Represents one selectable value of an enumeration.
- */
-export class EnumOption {
-  public name: string;
-  public value: number;
-
-  constructor(name: string, value: number) {
-    this.name = name;
-    this.value = value;
-  }
-}
+import { EnumOption } from "./EnumOption";
 
 /**
  * Represents a validated PropertyMetadata object.

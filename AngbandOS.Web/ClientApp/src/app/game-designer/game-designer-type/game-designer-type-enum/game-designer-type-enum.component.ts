@@ -3,7 +3,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
-import { EnumOption } from '../../property-metadata';
+import { EnumOption } from "../../EnumOption";
 
 @Component({
   selector: 'app-game-designer-type-enum',

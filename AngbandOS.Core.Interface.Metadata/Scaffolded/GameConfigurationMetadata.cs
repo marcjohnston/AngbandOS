@@ -236,7 +236,7 @@ public static class GameConfigurationMetadata
                     Description = "Collection of outfit manifest configurations.",
                     IsNullable = true,
                     Title = "Outfit Manifests",
-                    CategoryTitle = "",
+                    CategoryTitle = "",                    
                 },
                 new CollectionPropertyMetadata("Symbols")
                 {
