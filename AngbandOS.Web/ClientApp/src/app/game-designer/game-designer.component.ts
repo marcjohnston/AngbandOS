@@ -277,6 +277,9 @@ export class GameDesignerComponent implements OnInit {
         }
       }
 
+      // We can throw away the jsonGameMetadata now that we have built the tree nodes and the collection map.
+      this.jsonGameMetadata = undefined;
+
       // Sort the root tree nodes by title.
       rootTreeNodes.sort((treeNodeA, treeNodeB) => treeNodeA.title.localeCompare(treeNodeB.title));
 
