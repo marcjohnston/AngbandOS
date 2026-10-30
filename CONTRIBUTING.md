@@ -57,6 +57,7 @@ Follow these rules exactly when adding or updating annotations. The metadata is 
 - A tuple property receives one `ConfigurationTupleItemAttribute` for each element of the tuple, immediately above the property, followed by the `ConfigurationMetadataAttribute`.
 - The `ConfigurationTupleItemAttribute` constructor requires the tuple element name (use `Item1`, `Item2` etc. for unnamed elements).
 - Tuple-item foreign keys must specify `ForeignCollectionName` and `Inline` when applicable.
+- `ConfigurationTupleItemAttribute.Inline` must be declared as `bool`, not `bool?`; nullable value types are invalid attribute parameter types.
 - Example for named tuple elements:
   ```csharp
   [ConfigurationTupleItemAttribute(
@@ -98,6 +99,7 @@ Follow these rules exactly when adding or updating annotations. The metadata is 
 - Apply the same default to tuple-item foreign keys: use `Inline = false` unless the tuple item references `ItemEnhancements`, in which case use `Inline = true`.
 - Always specify `Inline` explicitly; do not rely on the attribute's default value.
 - The metadata scaffolding program must copy `CollectionName` to `ForeignCollectionName` and `Inline` to the generated metadata.
+- For tuple properties, the scaffolder must emit `Types` on `TuplePropertyMetadata` and populate each tuple-item metadata entry with its `ForeignCollectionName` and `Inline` values when specified.
 - A foreign-key property whose `DataType` is an array of strings, such as `string[]?`, must generate `ForeignKeysPropertyMetadata`.
 - Any other foreign-key property type, including a non-array string property, must generate `ForeignKeyPropertyMetadata`.
 - The scaffolding decision must be based on the property type and exact `DataType`; arrays of types other than `string` must not be treated as foreign-key arrays.
@@ -116,6 +118,7 @@ Follow these rules exactly when adding or updating annotations. The metadata is 
 - When asked to annotate a class, return the COMPLETE class source file content (copy/pasteable). Do not use `...` placeholders.
 - Verify the final class against the checklist (attributes present, DataType exact, tuple items present, XML removed, defaults preserved, no omitted properties or methods).
 - After changing configuration annotations or scaffolding behavior, regenerate the scaffolded metadata and verify the generated foreign-key metadata type, collection name, and `Inline` value.
+- For tuple properties, verify that the generated `TuplePropertyMetadata` includes `Types`, `ForeignCollectionName`, and `Inline` where applicable.
 
 ### 11. Example rules and enforcement
 
