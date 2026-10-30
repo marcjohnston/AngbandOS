@@ -316,8 +316,15 @@ export class GameDesignerComponent implements OnInit {
             const collectionTreeNode = new TreeNode(propertyMetadata.title!, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
 
-            // Add the keys to the Map of collections by the property name.
-            this.collectionMap.set(propertyMetadata.propertyName, selectOptions);
+            // Add the keys to the shared foreign collection map without replacing
+            // options contributed by earlier configuration collections.
+            const collectionName = propertyMetadata.foreignCollectionName ?? propertyMetadata.propertyName;
+            const existingSelectOptions = this.collectionMap.get(collectionName) ?? [];
+
+            this.collectionMap.set(collectionName, [
+              ...existingSelectOptions,
+              ...selectOptions
+            ]);
             break;
           case "strings":
               const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
