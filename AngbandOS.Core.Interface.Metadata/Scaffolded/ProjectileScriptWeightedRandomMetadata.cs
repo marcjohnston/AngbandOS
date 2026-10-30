@@ -18,6 +18,21 @@ public static class ProjectileScriptWeightedRandomMetadata
                     IsNullable = false,
                     Title = "Name and Weight Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("Item1")
+                        {
+                            IsNullable = false,
+                            Title = "Item 1",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Item2")
+                        {
+                            IsNullable = false,
+                            Title = "Item 2",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new StringPropertyMetadata("LearnedDetails")
                 {

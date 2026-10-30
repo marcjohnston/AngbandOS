@@ -12,15 +12,19 @@ public static class RaceGenderMetadata
         {
             return new PropertyMetadata[]
             {
-                new StringPropertyMetadata("RaceBindingKey")
+                new ForeignKeyPropertyMetadata("RaceBindingKey")
                 {
+                    ForeignCollectionName = "Races",
+                    Inline = false,
                     Description = "Specifies the binding key for the race.",
                     IsNullable = false,
                     Title = "Race Binding Key",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("GenderBindingKey")
+                new ForeignKeyPropertyMetadata("GenderBindingKey")
                 {
+                    ForeignCollectionName = "Genders",
+                    Inline = false,
                     Description = "Specifies the binding key for the gender.",
                     IsNullable = false,
                     Title = "Gender Binding Key",
@@ -32,6 +36,22 @@ public static class RaceGenderMetadata
                     IsNullable = false,
                     Title = "Physical Attributes Weighted Random Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new ForeignKeyPropertyMetadata("PhysicalAttributesBindingKey")
+                        {
+                            ForeignCollectionName = "PhysicalAttributeSets",
+                            IsNullable = false,
+                            Title = "Physical Attributes Binding Key",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Weight")
+                        {
+                            IsNullable = false,
+                            Title = "Weight",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

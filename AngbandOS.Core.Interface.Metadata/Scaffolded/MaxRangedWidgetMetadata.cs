@@ -18,6 +18,27 @@ public static class MaxRangedWidgetMetadata
                     IsNullable = false,
                     Title = "Ranges",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new IntegerPropertyMetadata("percentage")
+                        {
+                            IsNullable = false,
+                            Title = "Percentage",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("text")
+                        {
+                            IsNullable = true,
+                            Title = "Text",
+                            CategoryTitle = "",
+                        },
+                        new EnumPropertyMetadata("color")
+                        {
+                            IsNullable = false,
+                            Title = "Color",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new ColorPropertyMetadata("DefaultColor")
                 {

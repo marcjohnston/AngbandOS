@@ -36,6 +36,7 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
         Title = "Symbol Name",
         Summary = "Specifies the binding key for the symbol used to render the monster.",
         DataType = "string")]
+    [ConfigurationForeignKey("Symbols", Inline = false)]
     public virtual string SymbolName { get; set; }
 
     [ConfigurationMetadata(
@@ -56,8 +57,15 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
         DataType = "int")]
     public virtual int ArmorClass { get; set; }
 
-    [ConfigurationTupleItem("MethodName", Title = "Method Name")]
-    [ConfigurationTupleItem("EffectName", Title = "Effect Name")]
+    [ConfigurationTupleItem(
+        "MethodName",
+        Title = "Method Name",
+        ForeignCollectionName = "Attacks", 
+        Inline = false)]
+    [ConfigurationTupleItem(
+        "EffectName",
+        Title = "Effect Name",
+        ForeignCollectionName = "AttackEffects")]
     [ConfigurationTupleItem("Dice", Title = "Dice")]
     [ConfigurationTupleItem("Sides", Title = "Sides")]
     [ConfigurationMetadata(
@@ -210,7 +218,11 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
     [ConfigurationMetadata(Title = "Giant", Summary = "Determines whether the monster is a giant.", DataType = "bool")]
     public virtual bool Giant { get; set; } = false;
 
-    [ConfigurationMetadata(Title = "Gold Item Factory Binding Key", Summary = "Specifies the binding key of the item factory used to create gold dropped by the monster.", DataType = "string")]
+    [ConfigurationMetadata(
+        Title = "Gold Item Factory Binding Key",
+        Summary = "Specifies the binding key of the item factory used to create gold dropped by the monster.",
+        DataType = "string")]
+    [ConfigurationForeignKey("ItemFactories", Inline = false)]
     public virtual string GoldItemFactoryBindingKey { get; set; }
 
     [ConfigurationMetadata(Title = "Good", Summary = "Determines whether the monster is good.", DataType = "bool")]

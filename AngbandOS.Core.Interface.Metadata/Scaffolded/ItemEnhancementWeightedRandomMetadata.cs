@@ -18,6 +18,21 @@ public static class ItemEnhancementWeightedRandomMetadata
                     IsNullable = false,
                     Title = "Name and Weight Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("ItemEnhancementName")
+                        {
+                            IsNullable = true,
+                            Title = "Item Enhancement Name",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Weight")
+                        {
+                            IsNullable = false,
+                            Title = "Weight",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

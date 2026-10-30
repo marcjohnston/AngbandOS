@@ -18,6 +18,21 @@ public static class OutfitManifestMetadata
                     IsNullable = true,
                     Title = "Character Class Binding Key",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("MatchValues")
+                        {
+                            IsNullable = false,
+                            Title = "Match Values",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("IsEqual")
+                        {
+                            IsNullable = false,
+                            Title = "Is Equal",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("RaceBindingKey")
                 {
@@ -25,6 +40,21 @@ public static class OutfitManifestMetadata
                     IsNullable = true,
                     Title = "Race Binding Key",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("MatchValues")
+                        {
+                            IsNullable = false,
+                            Title = "Match Values",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("IsEqual")
+                        {
+                            IsNullable = false,
+                            Title = "Is Equal",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("RealmBindingKey")
                 {
@@ -32,6 +62,21 @@ public static class OutfitManifestMetadata
                     IsNullable = true,
                     Title = "Realm Binding Key",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("MatchValues")
+                        {
+                            IsNullable = false,
+                            Title = "Match Values",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("IsEqual")
+                        {
+                            IsNullable = false,
+                            Title = "Is Equal",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("ItemFactoryAndEnhancementsBindings")
                 {
@@ -39,6 +84,39 @@ public static class OutfitManifestMetadata
                     IsNullable = false,
                     Title = "Item Factory and Enhancements Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("ItemFactoryBindingKey")
+                        {
+                            IsNullable = false,
+                            Title = "Item Factory Binding Key",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("ItemEnhancementBindingKey")
+                        {
+                            IsNullable = true,
+                            Title = "Item Enhancement Binding Key",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("StackCountExpression")
+                        {
+                            IsNullable = false,
+                            Title = "Stack Count Expression",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("MakeKnown")
+                        {
+                            IsNullable = false,
+                            Title = "Make Known",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("WieldOne")
+                        {
+                            IsNullable = false,
+                            Title = "Wield One",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

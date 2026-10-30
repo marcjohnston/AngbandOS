@@ -18,6 +18,27 @@ public static class ConditionalMetadata
                     IsNullable = false,
                     Title = "Enabled Names",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("conditionalName")
+                        {
+                            IsNullable = false,
+                            Title = "Conditional Name",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("valueConditionalMustBe")
+                        {
+                            IsNullable = false,
+                            Title = "Value Conditional Must Be",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("productOfSumsTerm")
+                        {
+                            IsNullable = false,
+                            Title = "Product Of Sums Term",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

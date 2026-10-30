@@ -18,6 +18,21 @@ public static class ProjectileMonsterSpellMetadata
                     IsNullable = false,
                     Title = "Knowledge Action",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("Item1")
+                        {
+                            IsNullable = false,
+                            Title = "Item 1",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("Item2")
+                        {
+                            IsNullable = false,
+                            Title = "Item 2",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new BooleanPropertyMetadata("IsInnate")
                 {

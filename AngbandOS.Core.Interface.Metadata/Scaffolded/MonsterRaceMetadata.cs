@@ -35,8 +35,10 @@ public static class MonsterRaceMetadata
                     Title = "Multiline Name",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("SymbolName")
+                new ForeignKeyPropertyMetadata("SymbolName")
                 {
+                    ForeignCollectionName = "Symbols",
+                    Inline = false,
                     Description = "Specifies the binding key for the symbol used to render the monster.",
                     IsNullable = false,
                     Title = "Symbol Name",
@@ -69,6 +71,35 @@ public static class MonsterRaceMetadata
                     IsNullable = true,
                     Title = "Attack Definitions",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new ForeignKeyPropertyMetadata("MethodName")
+                        {
+                            ForeignCollectionName = "Attacks",
+                            IsNullable = false,
+                            Title = "Method Name",
+                            CategoryTitle = "",
+                        },
+                        new ForeignKeyPropertyMetadata("EffectName")
+                        {
+                            ForeignCollectionName = "AttackEffects",
+                            IsNullable = true,
+                            Title = "Effect Name",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Dice")
+                        {
+                            IsNullable = false,
+                            Title = "Dice",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Sides")
+                        {
+                            IsNullable = false,
+                            Title = "Sides",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new BooleanPropertyMetadata("AttrAny")
                 {
@@ -301,8 +332,10 @@ public static class MonsterRaceMetadata
                     Title = "Giant",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("GoldItemFactoryBindingKey")
+                new ForeignKeyPropertyMetadata("GoldItemFactoryBindingKey")
                 {
+                    ForeignCollectionName = "ItemFactories",
+                    Inline = false,
                     Description = "Specifies the binding key of the item factory used to create gold dropped by the monster.",
                     IsNullable = false,
                     Title = "Gold Item Factory Binding Key",

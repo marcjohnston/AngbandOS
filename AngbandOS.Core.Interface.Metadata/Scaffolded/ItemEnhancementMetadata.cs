@@ -18,6 +18,21 @@ public static class ItemEnhancementMetadata
                     IsNullable = true,
                     Title = "Summation Attribute and Expression Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("AttributeName")
+                        {
+                            IsNullable = false,
+                            Title = "Attribute Name",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("Expression")
+                        {
+                            IsNullable = false,
+                            Title = "Expression",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("BitwiseOrAttributeAndExpressionBindings")
                 {
@@ -25,6 +40,21 @@ public static class ItemEnhancementMetadata
                     IsNullable = true,
                     Title = "Bitwise OR Attribute and Expression Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("AttributeName")
+                        {
+                            IsNullable = false,
+                            Title = "Attribute Name",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("BooleanExpression")
+                        {
+                            IsNullable = false,
+                            Title = "Boolean Expression",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("ScriptsAttributeAndScriptBindings")
                 {
@@ -32,6 +62,21 @@ public static class ItemEnhancementMetadata
                     IsNullable = true,
                     Title = "Scripts Attribute and Script Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("AttributeName")
+                        {
+                            IsNullable = false,
+                            Title = "Attribute Name",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("ScriptNames")
+                        {
+                            IsNullable = false,
+                            Title = "Script Names",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new StringsPropertyMetadata("ApplicableItemFactoryBindingKeys")
                 {

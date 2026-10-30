@@ -95,6 +95,21 @@ public static class StoreFactoryMetadata
                     IsNullable = true,
                     Title = "Store Stock Manifest Definitions",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("ItemFactoryName")
+                        {
+                            IsNullable = false,
+                            Title = "Item Factory Name",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Weight")
+                        {
+                            IsNullable = false,
+                            Title = "Weight",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new BooleanPropertyMetadata("ShufflesOwnersAndPricing")
                 {

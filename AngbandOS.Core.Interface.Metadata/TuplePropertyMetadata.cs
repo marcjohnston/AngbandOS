@@ -11,4 +11,17 @@ public class TuplePropertyMetadata : PropertyMetadata
         get => PropertyMetadatas;
         set => PropertyMetadatas = value;
     }
+
+    public new string? ForeignCollectionName
+    {
+        get => base.ForeignCollectionName;
+        set => base.ForeignCollectionName = value;
+    }
+
+    public new bool? Inline
+    {
+        get => base.Inline;
+        set => base.Inline = value;
+    }
+
 }

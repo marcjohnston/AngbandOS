@@ -18,6 +18,21 @@ public static class ArtifactBiasWeightedRandomMetadata
                     IsNullable = false,
                     Title = "Artifact Bias",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("ArtifactBiasBindingKey")
+                        {
+                            IsNullable = true,
+                            Title = "Artifact Bias Binding Key",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Weight")
+                        {
+                            IsNullable = false,
+                            Title = "Weight",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

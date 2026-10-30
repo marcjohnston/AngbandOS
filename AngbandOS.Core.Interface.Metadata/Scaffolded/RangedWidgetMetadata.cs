@@ -18,6 +18,27 @@ public static class RangedWidgetMetadata
                     IsNullable = false,
                     Title = "Ranges",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new IntegerPropertyMetadata("startValue")
+                        {
+                            IsNullable = false,
+                            Title = "Start Value",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("textToRender")
+                        {
+                            IsNullable = false,
+                            Title = "Text To Render",
+                            CategoryTitle = "",
+                        },
+                        new EnumPropertyMetadata("color")
+                        {
+                            IsNullable = false,
+                            Title = "Color",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new StringPropertyMetadata("IntValueName")
                 {

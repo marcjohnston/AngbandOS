@@ -18,6 +18,21 @@ public static class AttributeFilterMetadata
                     IsNullable = true,
                     Title = "Bitwise Or Attribute Filter Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("AttributeKey")
+                        {
+                            IsNullable = false,
+                            Title = "Attribute Key",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("DesiredValue")
+                        {
+                            IsNullable = false,
+                            Title = "Desired Value",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("BoolAttributeFilterBindings")
                 {
@@ -25,6 +40,21 @@ public static class AttributeFilterMetadata
                     IsNullable = true,
                     Title = "Boolean Attribute Filter Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("AttributeKey")
+                        {
+                            IsNullable = false,
+                            Title = "Attribute Key",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("DesiredValue")
+                        {
+                            IsNullable = false,
+                            Title = "Desired Value",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("SummationAttributeFilterBindings")
                 {
@@ -32,6 +62,27 @@ public static class AttributeFilterMetadata
                     IsNullable = true,
                     Title = "Summation Attribute Filter Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("AttributeKey")
+                        {
+                            IsNullable = false,
+                            Title = "Attribute Key",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("StartingValue")
+                        {
+                            IsNullable = true,
+                            Title = "Starting Value",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("EndingValue")
+                        {
+                            IsNullable = true,
+                            Title = "Ending Value",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new BooleanPropertyMetadata("ActivationAttributeNonNull")
                 {

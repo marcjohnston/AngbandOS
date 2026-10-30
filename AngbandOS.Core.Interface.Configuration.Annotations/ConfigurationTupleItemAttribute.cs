@@ -11,9 +11,7 @@ public sealed class ConfigurationTupleItemAttribute : Attribute
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentException(
-                "A tuple item name must be specified.",
-                nameof(name));
+            throw new ArgumentException("A tuple item name must be specified.", nameof(name));
         }
 
         Name = name;
@@ -38,4 +36,6 @@ public sealed class ConfigurationTupleItemAttribute : Attribute
     /// Name of the foreign collection referenced by this tuple item.
     /// </summary>
     public string? ForeignCollectionName { get; set; }
+
+    public bool Inline { get; set; }
 }

@@ -123,6 +123,33 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Use Binding Tuple",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("UseScriptBindingKey")
+                        {
+                            IsNullable = false,
+                            Title = "Use Script Binding Key",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("InitialChargesRollExpression")
+                        {
+                            IsNullable = false,
+                            Title = "Initial Charges Roll Expression",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("PerChargeValue")
+                        {
+                            IsNullable = false,
+                            Title = "Per Charge Value",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("ManaEquivalent")
+                        {
+                            IsNullable = false,
+                            Title = "Mana Equivalent",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new TuplePropertyMetadata("QuaffBindingTuple")
                 {
@@ -130,6 +157,27 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Quaff Binding Tuple",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("QuaffScriptName")
+                        {
+                            IsNullable = false,
+                            Title = "Quaff Script Name",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("SmashScriptName")
+                        {
+                            IsNullable = true,
+                            Title = "Smash Script Name",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("ManaEquivalent")
+                        {
+                            IsNullable = false,
+                            Title = "Mana Equivalent",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new StringsPropertyMetadata("AmmunitionItemFactoryBindingKeys")
                 {
@@ -179,6 +227,33 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Aiming Binding Tuple",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("ActivationScriptName")
+                        {
+                            IsNullable = false,
+                            Title = "Activation Script Name",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("InitialChargesCountRollExpression")
+                        {
+                            IsNullable = false,
+                            Title = "Initial Charges Count Roll Expression",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("PerChargeValue")
+                        {
+                            IsNullable = false,
+                            Title = "Per Charge Value",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("ManaValue")
+                        {
+                            IsNullable = false,
+                            Title = "Mana Value",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new BooleanPropertyMetadata("InitialBrokenStomp")
                 {
@@ -270,6 +345,21 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Mass Produce Binding Tuples",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new IntegerPropertyMetadata("count")
+                        {
+                            IsNullable = false,
+                            Title = "Count",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("rollExpression")
+                        {
+                            IsNullable = false,
+                            Title = "Roll Expression",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new StringPropertyMetadata("BreaksDuringEnchantmentProbabilityExpression")
                 {
@@ -284,6 +374,27 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Enchantment Binding Tuples",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new IntegerPropertyMetadata("Powers")
+                        {
+                            IsNullable = true,
+                            Title = "Powers",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("StoreStock")
+                        {
+                            IsNullable = true,
+                            Title = "Store Stock",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("ScriptNames")
+                        {
+                            IsNullable = false,
+                            Title = "Script Names",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new StringPropertyMetadata("EatMagicScriptBindingKey")
                 {
@@ -424,6 +535,33 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Zap Binding Tuple",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("ScriptName")
+                        {
+                            IsNullable = false,
+                            Title = "Script Name",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("TurnsToRecharge")
+                        {
+                            IsNullable = false,
+                            Title = "Turns to Recharge",
+                            CategoryTitle = "",
+                        },
+                        new BooleanPropertyMetadata("RequiresAiming")
+                        {
+                            IsNullable = false,
+                            Title = "Requires Aiming",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("ManaEquivalent")
+                        {
+                            IsNullable = false,
+                            Title = "Mana Equivalent",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new StringPropertyMetadata("ItemClassBindingKey")
                 {
@@ -473,6 +611,21 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Depths Found and Chances",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new IntegerPropertyMetadata("level")
+                        {
+                            IsNullable = false,
+                            Title = "Level",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("chance")
+                        {
+                            IsNullable = false,
+                            Title = "Chance",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new IntegerPropertyMetadata("DiceSides")
                 {
@@ -683,6 +836,21 @@ public static class ItemFactoryMetadata
                     IsNullable = true,
                     Title = "Read Binding Tuple",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("ScriptName")
+                        {
+                            IsNullable = false,
+                            Title = "Script Name",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("ManaValue")
+                        {
+                            IsNullable = false,
+                            Title = "Mana Value",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

@@ -56,6 +56,7 @@ Follow these rules exactly when adding or updating annotations. The metadata is 
 
 - A tuple property receives one `ConfigurationTupleItemAttribute` for each element of the tuple, immediately above the property, followed by the `ConfigurationMetadataAttribute`.
 - The `ConfigurationTupleItemAttribute` constructor requires the tuple element name (use `Item1`, `Item2` etc. for unnamed elements).
+- Tuple-item foreign keys must specify `ForeignCollectionName` and `Inline` when applicable.
 - Example for named tuple elements:
   ```csharp
   [ConfigurationTupleItemAttribute(
@@ -92,7 +93,10 @@ Follow these rules exactly when adding or updating annotations. The metadata is 
 
 - Add `ConfigurationForeignKeyAttribute` to a configurable property that references an entity collection.
 - Set the constructor argument to the referenced collection name.
-- Set `Inline` to indicate whether the referenced foreign object's properties should be rendered inline.
+- Set `Inline = false` by default when annotating a foreign key.
+- The only exception is a foreign key referencing the `ItemEnhancements` collection; set `Inline = true` for that collection.
+- Apply the same default to tuple-item foreign keys: use `Inline = false` unless the tuple item references `ItemEnhancements`, in which case use `Inline = true`.
+- Always specify `Inline` explicitly; do not rely on the attribute's default value.
 - The metadata scaffolding program must copy `CollectionName` to `ForeignCollectionName` and `Inline` to the generated metadata.
 - A foreign-key property whose `DataType` is an array of strings, such as `string[]?`, must generate `ForeignKeysPropertyMetadata`.
 - Any other foreign-key property type, including a non-array string property, must generate `ForeignKeyPropertyMetadata`.

@@ -18,6 +18,21 @@ public static class ItemFactoryWeightedRandomMetadata
                     IsNullable = false,
                     Title = "Name and Weight Bindings",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("Name")
+                        {
+                            IsNullable = false,
+                            Title = "Name",
+                            CategoryTitle = "",
+                        },
+                        new IntegerPropertyMetadata("Weight")
+                        {
+                            IsNullable = false,
+                            Title = "Weight",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

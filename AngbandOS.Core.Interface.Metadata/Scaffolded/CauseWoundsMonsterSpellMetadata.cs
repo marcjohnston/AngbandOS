@@ -18,6 +18,21 @@ public static class CauseWoundsMonsterSpellMetadata
                     IsNullable = false,
                     Title = "Knowledge Action",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new StringPropertyMetadata("CollapsableActionVerb")
+                        {
+                            IsNullable = false,
+                            Title = "Collapsable Action Verb",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("UniqueDescription")
+                        {
+                            IsNullable = false,
+                            Title = "Unique Description",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
                 new BooleanPropertyMetadata("IsInnate")
                 {

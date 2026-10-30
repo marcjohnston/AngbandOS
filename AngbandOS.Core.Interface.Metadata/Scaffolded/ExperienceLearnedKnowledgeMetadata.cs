@@ -18,6 +18,21 @@ public static class ExperienceLearnedKnowledgeMetadata
                     IsNullable = false,
                     Title = "Experience Learned Knowledge Binding Tuples",
                     CategoryTitle = "",
+                    Types = new PropertyMetadata[]
+                    {
+                        new IntegerPropertyMetadata("MaxExperienceLevel")
+                        {
+                            IsNullable = true,
+                            Title = "Max Experience Level",
+                            CategoryTitle = "",
+                        },
+                        new StringPropertyMetadata("LearnedKnowledgeBindingKey")
+                        {
+                            IsNullable = false,
+                            Title = "Learned Knowledge Binding Key",
+                            CategoryTitle = "",
+                        },
+                    },
                 },
             };
         }

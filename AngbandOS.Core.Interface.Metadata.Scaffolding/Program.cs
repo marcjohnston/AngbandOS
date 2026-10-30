@@ -409,6 +409,15 @@ static void WriteProperty(
             $"\"{Escape(enumType.Name)}\",");
     }
 
+    if (metadataType == nameof(TuplePropertyMetadata))
+    {
+        WriteTupleTypes(
+            writer,
+            property,
+            dataType,
+            indentation);
+    }
+
     writer.WriteLine($"{indentation}}},");
 }
 
@@ -588,4 +597,213 @@ static bool IsStringArray(
         elementType == typeof(string) &&
         RemoveNullableAndArraySuffixes(dataType)
             .Equals("string", StringComparison.Ordinal);
+}
+
+static void WriteTupleTypes(
+    StreamWriter writer,
+    PropertyInfo property,
+    string dataType,
+    string indentation)
+{
+    Type tupleType =
+        Nullable.GetUnderlyingType(property.PropertyType)
+        ?? property.PropertyType;
+
+    while (tupleType.IsArray)
+    {
+        tupleType =
+            tupleType.GetElementType()
+            ?? throw new InvalidOperationException(
+                $"Unable to determine the tuple element type for property '{property.Name}'.");
+    }
+
+    if (!tupleType.IsGenericType)
+    {
+        throw new InvalidOperationException(
+            $"Unable to determine tuple element types for property '{property.Name}'.");
+    }
+
+    Type[] tupleElementTypes =
+        tupleType.GetGenericArguments();
+
+    string[] tupleElementDataTypes =
+        GetTupleElementDataTypes(dataType);
+
+    ConfigurationTupleItemAttribute[] tupleItems =
+        property
+            .GetCustomAttributes<ConfigurationTupleItemAttribute>(
+                inherit: true)
+            .ToArray();
+
+    if (tupleItems.Length != tupleElementTypes.Length ||
+        tupleItems.Length != tupleElementDataTypes.Length)
+    {
+        throw new InvalidOperationException(
+            $"Property '{property.DeclaringType?.FullName}.{property.Name}' " +
+            "must have one ConfigurationTupleItemAttribute for each tuple element.");
+    }
+
+    writer.WriteLine(
+        $"{indentation}    Types = new PropertyMetadata[]");
+
+    writer.WriteLine(
+        $"{indentation}    {{");
+
+    for (int index = 0; index < tupleItems.Length; index++)
+    {
+        ConfigurationTupleItemAttribute tupleItem =
+            tupleItems[index];
+
+        string tupleItemDataType =
+            tupleElementDataTypes[index];
+
+        Type tupleItemType =
+            tupleElementTypes[index];
+
+        string metadataType =
+            GetTupleItemMetadataType(
+                tupleItemDataType,
+                tupleItemType,
+                tupleItem.ForeignCollectionName != null);
+
+        writer.WriteLine(
+            $"{indentation}        new {metadataType}(" +
+            $"\"{Escape(tupleItem.Name)}\")");
+
+        writer.WriteLine(
+            $"{indentation}        {{");
+
+        if (tupleItem.ForeignCollectionName != null)
+        {
+            writer.WriteLine(
+                $"{indentation}            ForeignCollectionName = " +
+                $"\"{Escape(tupleItem.ForeignCollectionName)}\",");
+
+            if (tupleItem.Inline)
+            {
+                writer.WriteLine(
+                    $"{indentation}            Inline = " +
+                    $"{tupleItem.Inline.ToString().ToLowerInvariant()},");
+            }
+        }
+
+        if (tupleItem.Summary != null)
+        {
+            writer.WriteLine(
+                $"{indentation}            Description = " +
+                $"\"{Escape(tupleItem.Summary)}\",");
+        }
+
+        writer.WriteLine(
+            $"{indentation}            IsNullable = " +
+            $"{IsNullable(tupleItemDataType).ToString().ToLowerInvariant()},");
+
+        if (tupleItem.Title != null)
+        {
+            writer.WriteLine(
+                $"{indentation}            Title = " +
+                $"\"{Escape(tupleItem.Title)}\",");
+        }
+
+        writer.WriteLine(
+            $"{indentation}            CategoryTitle = \"\",");
+
+        writer.WriteLine(
+            $"{indentation}        }},");    }
+
+    writer.WriteLine(
+        $"{indentation}    }},");    }
+
+static string GetTupleItemMetadataType(
+    string dataType,
+    Type propertyType,
+    bool isForeignKey)
+{
+    if (isForeignKey)
+    {
+        return nameof(ForeignKeyPropertyMetadata);
+    }
+
+    string normalizedType =
+        RemoveNullableAndArraySuffixes(dataType);
+
+    return normalizedType switch
+    {
+        "bool" => nameof(BooleanPropertyMetadata),
+        "char" => nameof(CharacterPropertyMetadata),
+        "int" => nameof(IntegerPropertyMetadata),
+        "string" => nameof(StringPropertyMetadata),
+        _ when propertyType.IsEnum => nameof(EnumPropertyMetadata),
+        _ => throw new InvalidOperationException(
+            $"The tuple data type '{dataType}' is not supported.")
+    };
+}
+
+static string[] GetTupleElementDataTypes(string dataType)
+{
+    string tupleDataType =
+        RemoveNullableAndArraySuffixes(dataType).Trim();
+
+    if (!tupleDataType.StartsWith("(") ||
+        !tupleDataType.EndsWith(")"))
+    {
+        throw new InvalidOperationException(
+            $"The data type '{dataType}' is not a tuple type.");
+    }
+
+    tupleDataType =
+        tupleDataType[1..^1];
+
+    List<string> elementDataTypes = new();
+    int nestingDepth = 0;
+    int elementStart = 0;
+
+    for (int index = 0; index < tupleDataType.Length; index++)
+    {
+        char character = tupleDataType[index];
+
+        if (character is '<' or '(' or '[')
+        {
+            nestingDepth++;
+        }
+        else if (character is '>' or ')' or ']')
+        {
+            nestingDepth--;
+        }
+        else if (character == ',' && nestingDepth == 0)
+        {
+            elementDataTypes.Add(
+                tupleDataType[elementStart..index].Trim());
+
+            elementStart = index + 1;
+        }
+    }
+
+    elementDataTypes.Add(
+        tupleDataType[elementStart..].Trim());
+
+    return elementDataTypes
+        .Select(RemoveTupleElementName)
+        .ToArray();
+}
+
+static string RemoveTupleElementName(string elementDataType)
+{
+    int separatorIndex =
+        elementDataType.LastIndexOf(' ');
+
+    if (separatorIndex < 0)
+    {
+        return elementDataType;
+    }
+
+    string possibleName =
+        elementDataType[(separatorIndex + 1)..];
+
+    return possibleName.All(
+        character =>
+            char.IsLetterOrDigit(character) ||
+            character == '_')
+        ? elementDataType[..separatorIndex].TrimEnd()
+        : elementDataType;
 }
