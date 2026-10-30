@@ -5,6 +5,10 @@
 /// set modifier to prevent the property values from being set by anything but the derived classes.  This arrangement allows the Games controller to return an array of PropertyMetadata without
 /// needing polymorphic serialization.
 /// </summary>
+/// <remarks>
+/// This class is an abstract class and the set accessors are all protected with the expectation that each derived class uses the "new" modifier on the
+/// properties to expose the set accessors as public.  This arrangement allows the Games controller to return an array of PropertyMetadata without needing polymorphic serialization.
+/// </remarks>
 public abstract class PropertyMetadata
 {
     public PropertyMetadata(string type, string propertyName)
@@ -79,4 +83,9 @@ public abstract class PropertyMetadata
     /// Returns the name of the collection for foreign-key properties.  Returns null, for non-foreign-key properties.
     /// </summary>
     public string? ForeignCollectionName { get; protected set; } = null;
+
+    /// <summary>
+    /// Returns true, if the foreign-key property should be rendered inline rather than requiring selection of an existing foreign object.  Returns null, for non-foreign-key properties.
+    /// </summary>
+    public bool? Inline { get; protected set; } = null;
 }

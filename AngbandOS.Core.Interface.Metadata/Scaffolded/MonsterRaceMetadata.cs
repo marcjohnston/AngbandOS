@@ -19,8 +19,10 @@ public static class MonsterRaceMetadata
                     Title = "Can Teleport Self",
                     CategoryTitle = "",
                 },
-                new StringsPropertyMetadata("SpellNames")
+                new ForeignKeysPropertyMetadata("SpellNames")
                 {
+                    ForeignCollectionName = "Spells",
+                    Inline = false,
                     Description = "Specifies the monster spell binding keys available to the monster race.",
                     IsNullable = true,
                     Title = "Spell Names",

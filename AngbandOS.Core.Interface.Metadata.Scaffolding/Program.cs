@@ -338,6 +338,10 @@ static void WriteProperty(
         writer.WriteLine(
             $"{indentation}    ForeignCollectionName = " +
             $"\"{Escape(foreignCollection.CollectionName)}\",");
+
+        writer.WriteLine(
+            $"{indentation}    Inline = " +
+            $"{foreignCollection.Inline.ToString().ToLowerInvariant()},");
     }
 
     if (metadataType == nameof(CollectionPropertyMetadata) &&
@@ -465,9 +469,9 @@ static string GetMetadataType(
 
     if (foreignCollection != null)
     {
-        return elementType == null
-            ? nameof(ForeignKeyPropertyMetadata)
-            : nameof(ForeignKeysPropertyMetadata);
+        return IsStringArray(dataType, propertyType, elementType)
+            ? nameof(ForeignKeysPropertyMetadata)
+            : nameof(ForeignKeyPropertyMetadata);
     }
 
     if (elementType != null &&
@@ -573,4 +577,15 @@ static Type? GetEnumType(Type propertyType)
     return unwrappedType.IsEnum
         ? unwrappedType
         : null;
+}
+
+static bool IsStringArray(
+    string dataType,
+    Type propertyType,
+    Type? elementType)
+{
+    return propertyType.IsArray &&
+        elementType == typeof(string) &&
+        RemoveNullableAndArraySuffixes(dataType)
+            .Equals("string", StringComparison.Ordinal);
 }

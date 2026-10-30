@@ -24,9 +24,7 @@ public sealed class ConfigurationForeignKeyAttribute : Attribute
     public string CollectionName { get; }
 
     /// <summary>
-    /// Indicates that the foreign object's properties should be
-    /// rendered inline rather than requiring selection of an
-    /// existing foreign object.
+    /// Indicates that the foreign object's properties should be rendered inline rather than requiring selection of an existing foreign object.
     /// </summary>
     public bool Inline { get; set; }
 }

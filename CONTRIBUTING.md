@@ -88,12 +88,32 @@ Follow these rules exactly when adding or updating annotations. The metadata is 
 - `GameConfiguration` may contain collections, tables and implementation code. Annotate only the actual configuration properties (collections and global values). Do not annotate methods or implementation details.
 - DataType for collections should use the `...GameConfiguration[]?` syntax exactly as declared.
 
-### 9. Output and verification
+### 9. Configuration foreign keys
+
+- Add `ConfigurationForeignKeyAttribute` to a configurable property that references an entity collection.
+- Set the constructor argument to the referenced collection name.
+- Set `Inline` to indicate whether the referenced foreign object's properties should be rendered inline.
+- The metadata scaffolding program must copy `CollectionName` to `ForeignCollectionName` and `Inline` to the generated metadata.
+- A foreign-key property whose `DataType` is an array of strings, such as `string[]?`, must generate `ForeignKeysPropertyMetadata`.
+- Any other foreign-key property type, including a non-array string property, must generate `ForeignKeyPropertyMetadata`.
+- The scaffolding decision must be based on the property type and exact `DataType`; arrays of types other than `string` must not be treated as foreign-key arrays.
+- Example:
+  ```csharp
+  [ConfigurationMetadata(
+      Title = "Spell Names",
+      Summary = "Specifies the spell binding keys available to the monster race.",
+      DataType = "string[]?")]
+  [ConfigurationForeignKey("Spells", Inline = false)]
+  public virtual string[]? SpellNames { get; set; }
+  ```
+
+### 10. Output and verification
 
 - When asked to annotate a class, return the COMPLETE class source file content (copy/pasteable). Do not use `...` placeholders.
 - Verify the final class against the checklist (attributes present, DataType exact, tuple items present, XML removed, defaults preserved, no omitted properties or methods).
+- After changing configuration annotations or scaffolding behavior, regenerate the scaffolded metadata and verify the generated foreign-key metadata type, collection name, and `Inline` value.
 
-### 10. Example rules and enforcement
+### 11. Example rules and enforcement
 
 - Preserve nullable reference-type distinctions (e.g. `string` vs `string?`).
 - Preserve tuple element names and nullable tuple element types.

@@ -155,4 +155,8 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+  
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="&quot;D:\Programming\AngbandOS\AngbandOS.Core.Interface.Metadata.Scaffolding\bin\debug\net8.0\scaffold-metadata&quot; &quot;D:\Programming\AngbandOS\AngbandOS.Core.Interface.Metadata\Scaffolded&quot;" />
+  </Target>
 </Project>
