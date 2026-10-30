@@ -114,23 +114,16 @@ public class FileSystemGameConfigurationPersistentStorage
             Gods = LoadEntities<GodGameConfiguration>("Gods"),
             HelpGroups = LoadEntities<HelpGroupGameConfiguration>("HelpGroups"),
             MonsterRaces = LoadEntities<MonsterRaceGameConfiguration>("MonsterRaces"),
-            MushroomReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("MushroomReadableFlavors"),
             Plurals = LoadEntities<PluralGameConfiguration>("Plurals"),
-            PotionReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("PotionReadableFlavors"),
             ProjectileGraphics = LoadEntities<ProjectileGraphicGameConfiguration>("ProjectileGraphics"),
-            RingReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("RingReadableFlavors"),
-            RodReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("RodReadableFlavors"),
-            ScrollReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("ScrollReadableFlavors"),
             Shopkeepers = LoadEntities<ShopkeeperGameConfiguration>("Shopkeepers"),
             Spells = LoadEntities<SpellGameConfiguration>("Spells"),
-            StaffReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("StaffReadableFlavors"),
             StoreCommands = LoadEntities<StoreCommandGameConfiguration>("StoreCommands"),
             StoreFactories = LoadEntities<StoreFactoryGameConfiguration>("StoreFactories"),
             Symbols = LoadEntities<SymbolGameConfiguration>("Symbols"),
             //Tiles = RetrieveEntities<TileConfiguration>(persistentStorage, "Tiles"), // TODO: This is not working with generic
             Towns = LoadEntities<TownGameConfiguration>("Towns"),
             Vaults = LoadEntities<VaultGameConfiguration>("Vaults"),
-            WandReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("WandReadableFlavors"),
             WizardCommands = LoadEntities<WizardCommandGameConfiguration>("WizardCommands"),
         };
     }

@@ -174,55 +174,6 @@ namespace AngbandOS.PersistentStorage
 
             Core.Interface.Configuration.GameConfiguration gameConfiguration = JsonSerializer.Deserialize<Core.Interface.Configuration.GameConfiguration>(userGameConfiguration.JsonData);
             return gameConfiguration;
-            //return new Core.Interface.Configuration.GameConfiguration()
-            //{
-            //    StartupTownName = userGameConfiguration.,
-            //    GoldFactoriesBindingKeys = ,
-            //    AmuletReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("AmuletReadableFlavors"),
-            //    Animations = LoadEntities<AnimationGameConfiguration>("Animations"),
-            //    Attacks = LoadEntities<AttackGameConfiguration>("Attacks"),
-            //    ClassSpells = LoadEntities<ClassSpellGameConfiguration>("ClassSpells"),
-            //    DungeonGuardians = LoadEntities<DungeonGuardianGameConfiguration>("DungeonGuardians"),
-            //    Dungeons = LoadEntities<DungeonGameConfiguration>("Dungeons"),
-            //    GameCommands = LoadEntities<GameCommandGameConfiguration>("GameCommands"),
-            //    Gods = LoadEntities<GodGameConfiguration>("Gods"),
-            //    HelpGroups = LoadEntities<HelpGroupGameConfiguration>("HelpGroups"),
-            //    MonsterRaces = LoadEntities<MonsterRaceGameConfiguration>("MonsterRaces"),
-            //    MushroomReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("MushroomReadableFlavors"),
-            //    Plurals = LoadEntities<PluralGameConfiguration>("Plurals"),
-            //    PotionReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("PotionReadableFlavors"),
-            //    ProjectileGraphics = LoadEntities<ProjectileGraphicGameConfiguration>("ProjectileGraphics"),
-            //    RingReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("RingReadableFlavors"),
-            //    RodReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("RodReadableFlavors"),
-            //    ScrollReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("ScrollReadableFlavors"),
-            //    Shopkeepers = LoadEntities<ShopkeeperGameConfiguration>("Shopkeepers"),
-            //    Spells = LoadEntities<SpellGameConfiguration>("Spells"),
-            //    StaffReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("StaffReadableFlavors"),
-            //    StoreCommands = LoadEntities<StoreCommandGameConfiguration>("StoreCommands"),
-            //    StoreFactories = LoadEntities<StoreFactoryGameConfiguration>("StoreFactories"),
-            //    Symbols = LoadEntities<SymbolGameConfiguration>("Symbols"),
-            //    Tiles = LoadEntities<TileGameConfiguration>("Tiles"), // TODO: This is not working with generic
-            //    Towns = LoadEntities<TownGameConfiguration>("Towns"),
-            //    Vaults = LoadEntities<VaultGameConfiguration>("Vaults"),
-            //    WandReadableFlavors = LoadEntities<ItemFlavorGameConfiguration>("WandReadableFlavors"),
-            //    WizardCommands = LoadEntities<WizardCommandGameConfiguration>("WizardCommands"),
-
-            //    ElvishTexts = LoadEntity("ElvishTexts"),
-            //    FindQuests = LoadEntity("FindQuests"),
-            //    FunnyComments = LoadEntity("FunnyComments"),
-            //    FunnyDescriptions = LoadEntity("FunnyDescriptions"),
-            //    HorrificDescriptions = LoadEntity("HorrificDescriptions"),
-            //    InsultPlayerAttacks = LoadEntity("InsultPlayerAttacks"),
-            //    MoanPlayerAttacks = LoadEntity("MoanPlayerAttacks"),
-            //    UnreadableFlavorSyllables = LoadEntity("UnreadableFlavorSyllables"),
-            //    ShopkeeperAcceptedComments = LoadEntity("ShopkeeperAcceptedComments"),
-            //    ShopkeeperBargainComments = LoadEntity("ShopkeeperBargainComments"),
-            //    ShopkeeperGoodComments = LoadEntity("ShopkeeperGoodComments"),
-            //    ShopkeeperLessThanGuessComments = LoadEntity("ShopkeeperLessThanGuessComments"),
-            //    ShopkeeperWorthlessComments = LoadEntity("ShopkeeperWorthlessComments"),
-            //    SingingPlayerAttacks = LoadEntity("SingingPlayerAttacks"),
-            //    WorshipPlayerAttacks = LoadEntity("WorshipPlayerAttacks")
-            //};
         }
     }
 }

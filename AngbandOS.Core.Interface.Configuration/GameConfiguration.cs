@@ -140,13 +140,6 @@ public class GameConfiguration
         gameConfiguration.StoreFactories = LoadFromAssembly<StoreFactoryGameConfiguration>(assembly);
         gameConfiguration.ProjectileGraphics = LoadFromAssembly<ProjectileGraphicGameConfiguration>(assembly);
         gameConfiguration.ItemFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
-        gameConfiguration.MushroomReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
-        gameConfiguration.PotionReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
-        gameConfiguration.RingReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
-        gameConfiguration.RodReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
-        gameConfiguration.ScrollReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
-        gameConfiguration.StaffReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
-        gameConfiguration.WandReadableFlavors = LoadFromAssembly<ItemFlavorGameConfiguration>(assembly);
         gameConfiguration.ClassSpells = LoadFromAssembly<CharacterClassSpellGameConfiguration>(assembly);
         gameConfiguration.WizardCommands = LoadFromAssembly<WizardCommandGameConfiguration>(assembly);
         gameConfiguration.Tiles = LoadFromAssembly<TileGameConfiguration>(assembly);
@@ -402,48 +395,6 @@ public class GameConfiguration
         Summary = "Collection of item flavor configurations.",
         DataType = "ItemFlavorGameConfiguration[]?")]
     public virtual ItemFlavorGameConfiguration[]? ItemFlavors { get; set; } = null;
-
-    [ConfigurationMetadataAttribute(
-        Title = "Mushroom Readable Flavors",
-        Summary = "Collection of mushroom-readable item flavor configurations.",
-        DataType = "ItemFlavorGameConfiguration[]?")]
-    public virtual ItemFlavorGameConfiguration[]? MushroomReadableFlavors { get; set; } = null;
-
-    [ConfigurationMetadataAttribute(
-        Title = "Potion Readable Flavors",
-        Summary = "Collection of potion-readable item flavor configurations.",
-        DataType = "ItemFlavorGameConfiguration[]?")]
-    public virtual ItemFlavorGameConfiguration[]? PotionReadableFlavors { get; set; } = null;
-
-    [ConfigurationMetadataAttribute(
-        Title = "Ring Readable Flavors",
-        Summary = "Collection of ring-readable item flavor configurations.",
-        DataType = "ItemFlavorGameConfiguration[]?")]
-    public virtual ItemFlavorGameConfiguration[]? RingReadableFlavors { get; set; } = null;
-
-    [ConfigurationMetadataAttribute(
-        Title = "Rod Readable Flavors",
-        Summary = "Collection of rod-readable item flavor configurations.",
-        DataType = "ItemFlavorGameConfiguration[]?")]
-    public virtual ItemFlavorGameConfiguration[]? RodReadableFlavors { get; set; } = null;
-
-    [ConfigurationMetadataAttribute(
-        Title = "Scroll Readable Flavors",
-        Summary = "Collection of scroll-readable item flavor configurations.",
-        DataType = "ItemFlavorGameConfiguration[]?")]
-    public virtual ItemFlavorGameConfiguration[]? ScrollReadableFlavors { get; set; } = null;
-
-    [ConfigurationMetadataAttribute(
-        Title = "Staff Readable Flavors",
-        Summary = "Collection of staff-readable item flavor configurations.",
-        DataType = "ItemFlavorGameConfiguration[]?")]
-    public virtual ItemFlavorGameConfiguration[]? StaffReadableFlavors { get; set; } = null;
-
-    [ConfigurationMetadataAttribute(
-        Title = "Wand Readable Flavors",
-        Summary = "Collection of wand-readable item flavor configurations.",
-        DataType = "ItemFlavorGameConfiguration[]?")]
-    public virtual ItemFlavorGameConfiguration[]? WandReadableFlavors { get; set; } = null;
 
     [ConfigurationMetadataAttribute(
         Title = "Class Spells",

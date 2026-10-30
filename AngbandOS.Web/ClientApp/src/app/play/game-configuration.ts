@@ -13,14 +13,6 @@ export class GameConfiguration {
     public dungeons: DungeonGameConfiguration[] | null = null;
     public storeFactories: StoreFactoryGameConfiguration[] | null = null;
     public projectileGraphics: ProjectileGraphicGameConfiguration[] | null = null;
-    public amuletReadableFlavor: ReadableFlavorGameConfiguration[] | null = null;
-    public mushroomReadableFlavors: ReadableFlavorGameConfiguration[] | null = null;
-    public potionReadableFlavors: ReadableFlavorGameConfiguration[] | null = null;
-    public ringReadableFlavors: ReadableFlavorGameConfiguration[] | null = null;
-    public rodReadableFlavors: ReadableFlavorGameConfiguration[] | null = null;
-    public scrollReadableFlavors: ReadableFlavorGameConfiguration[] | null = null;
-    public staffReadableFlavors: ReadableFlavorGameConfiguration[] | null = null;
-    public wandReadableFlavors: ReadableFlavorGameConfiguration[] | null = null;
     public classSpells: ClassSpellGameConfiguration[] | null = null;
     public wizardCommands: WizardCommandGameConfiguration[] | null = null;
     public tiles: TileGameConfiguration[] | null = null;
