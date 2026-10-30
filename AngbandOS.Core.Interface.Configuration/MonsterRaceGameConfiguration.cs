@@ -65,7 +65,8 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
     [ConfigurationTupleItem(
         "EffectName",
         Title = "Effect Name",
-        ForeignCollectionName = "AttackEffects")]
+        ForeignCollectionName = "AttackEffects",
+        Inline = false)]
     [ConfigurationTupleItem("Dice", Title = "Dice")]
     [ConfigurationTupleItem("Sides", Title = "Sides")]
     [ConfigurationMetadata(
