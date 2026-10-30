@@ -20,6 +20,6 @@ internal class AnimalRangerMonsterRaceFilter : MonsterRaceFilter
                 !rPtr.Demon &&
                 !rPtr.Cthuloid &&
                 !rPtr.Unique &&
-                rPtr.Spells.Length == 0;
+                rPtr.MonsterSpells.Length == 0;
     }
 }

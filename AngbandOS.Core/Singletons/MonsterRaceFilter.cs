@@ -54,7 +54,7 @@ internal abstract class MonsterRaceFilter : IMonsterSelector, IGetKey, ISaveGame
         {
             return false;
         }
-        if (AnyMonsterSpell is not null && !rPtr.Spells.Any(_monsterSpell => AnyMonsterSpell.Contains(_monsterSpell)))
+        if (AnyMonsterSpell is not null && !rPtr.MonsterSpells.Any(_monsterSpell => AnyMonsterSpell.Contains(_monsterSpell)))
         {
             return false;
         }

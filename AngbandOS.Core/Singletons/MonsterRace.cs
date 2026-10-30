@@ -25,7 +25,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
 
     public int Index { get; set; } = -1; // Preset for overwrite detection.
 
-    private string[]? SpellNames { get; } = null;
+    private string[]? MonsterSpellBindingKeys { get; } = null;
 
     /// <summary>
     /// Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the
@@ -406,7 +406,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         // 102 Properties
         CanTeleportSelf = gameConfiguration.CanTeleportSelf;
         Key = gameConfiguration.GetKey;
-        SpellNames = gameConfiguration.SpellNames;
+        MonsterSpellBindingKeys = gameConfiguration.MonsterSpellBindingKeys;
         SymbolName = gameConfiguration.SymbolName;
         MultilineName = gameConfiguration.MultilineName;
         Color = gameConfiguration.Color;
@@ -518,7 +518,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound; // TODO: Something isn't right here.  
 
         // Bind the monster spell names.
-        Spells = Game.SingletonRepository.GetNullable<MonsterSpell>(SpellNames);
+        MonsterSpells = Game.SingletonRepository.GetNullable<MonsterSpell>(MonsterSpellBindingKeys);
 
         // Bind the symbol.
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
@@ -553,16 +553,16 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     }
     public void InitializationComplete() { }
 
-    public MonsterSpell[]? Spells { get; private set; }
-    public bool CanBreatheChaos => Spells?.Any(_spell => typeof(ChaosBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheConfusion => Spells?.Any(_spell => typeof(ConfusionBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheDark => Spells?.Any(_spell => typeof(DarkBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheSound => Spells?.Any(_spell => typeof(SoundBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheForce => Spells?.Any(_spell => typeof(ForceBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheShards => Spells?.Any(_spell => typeof(ShardsBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheGravity => Spells?.Any(_spell => typeof(GravityBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheInertia => Spells?.Any(_spell => typeof(InertiaBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
-    public bool CanBreatheTime => Spells?.Any(_spell => typeof(TimeBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public MonsterSpell[]? MonsterSpells { get; private set; }
+    public bool CanBreatheChaos => MonsterSpells?.Any(_spell => typeof(ChaosBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheConfusion => MonsterSpells?.Any(_spell => typeof(ConfusionBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheDark => MonsterSpells?.Any(_spell => typeof(DarkBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheSound => MonsterSpells?.Any(_spell => typeof(SoundBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheForce => MonsterSpells?.Any(_spell => typeof(ForceBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheShards => MonsterSpells?.Any(_spell => typeof(ShardsBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheGravity => MonsterSpells?.Any(_spell => typeof(GravityBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheInertia => MonsterSpells?.Any(_spell => typeof(InertiaBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
+    public bool CanBreatheTime => MonsterSpells?.Any(_spell => typeof(TimeBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType())) == true;
     public bool CanTeleportSelf { get; }
 
     /// <summary>
@@ -633,7 +633,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             // 102 Properties
             Key = Key,
             CanTeleportSelf = CanTeleportSelf,
-            SpellNames = SpellNames,
+            MonsterSpellBindingKeys = MonsterSpellBindingKeys,
             SymbolName = SymbolName,
             Color = Color,
             Animal = Animal,

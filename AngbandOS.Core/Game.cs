@@ -7156,7 +7156,7 @@ internal class Game : ISaveGameState
             knowledge.RCastInate = Constants.MaxUchar;
             knowledge.RCastSpell = Constants.MaxUchar;
             knowledge.Characteristics = new MonsterCharacteristics(rPtr);
-            knowledge.RSpells = rPtr.Spells;
+            knowledge.RSpells = rPtr.MonsterSpells;
         }
 
         bool probe = false;

@@ -23,8 +23,8 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
         Title = "Spell Names",
         Summary = "Specifies the monster spell binding keys available to the monster race.",
         DataType = "string[]?")]
-    [ConfigurationForeignKey("Spells", Inline = false)]
-    public virtual string[]? SpellNames { get; set; } = null;
+    [ConfigurationForeignKey("MonsterSpells", Inline = false)]
+    public virtual string[]? MonsterSpellBindingKeys { get; set; } = null;
 
     [ConfigurationMetadata(
         Title = "Multiline Name",

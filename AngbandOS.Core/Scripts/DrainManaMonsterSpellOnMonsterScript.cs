@@ -24,7 +24,7 @@ internal class DrainManaMonsterSpellOnMonsterScript : Script, IScriptMonsterMons
         int r1 = (base.Game.DieRoll(rlev) / 2) + 1;
         if (monster.Health < monster.MaxHealth)
         {
-            if (targetRace.Spells.Length == 0)
+            if (targetRace.MonsterSpells.Length == 0)
             {
                 if (seeBoth)
                 {

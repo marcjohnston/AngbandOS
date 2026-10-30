@@ -1553,7 +1553,7 @@ internal class Monster : IItemContainer, ISaveGameState
 
         // Gather together the abilities we have
         int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
-        List<MonsterSpell> spells = Race.Spells.ToList();
+        List<MonsterSpell> spells = Race.MonsterSpells.ToList();
 
         // If we're not allowed innate abilities, then things on Flags4 can't be used
         if (noInnate)
@@ -1728,7 +1728,7 @@ internal class Monster : IItemContainer, ISaveGameState
             return false;
         }
 
-        List<MonsterSpell> monsterSpells = Race.Spells.ToList();
+        List<MonsterSpell> monsterSpells = Race.MonsterSpells.ToList();
 
         // Look through the monster list to find a potential target
         foreach (Monster mPtr in Game.MonsterList)
@@ -1792,7 +1792,7 @@ internal class Monster : IItemContainer, ISaveGameState
             }
 
             // Against other monsters we pick spells randomly
-            MonsterSpell? thrownSpell = new WeightedRandom<MonsterSpell>(Game, Race.Spells).ChooseOrDefault();
+            MonsterSpell? thrownSpell = new WeightedRandom<MonsterSpell>(Game, Race.MonsterSpells).ChooseOrDefault();
             if (thrownSpell == null)
             {
                 return false; // We were unable to cast a spell.

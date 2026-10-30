@@ -124,13 +124,13 @@ internal class MonsterKnowledge : ISaveGameState
             knowledge.RCastInate = Constants.MaxUchar;
             knowledge.RCastSpell = Constants.MaxUchar;
             knowledge.Characteristics = new MonsterCharacteristics(_monsterRace);
-            knowledge.RSpells = _monsterRace.Spells;
+            knowledge.RSpells = _monsterRace.MonsterSpells;
         }
         string pronoun = Game.Gender.Pronoun.Trim();
         string capitalizedPronoun = $"{pronoun[0].ToString().ToUpper()}{pronoun[1..]}";
         string possessiveAdjective = Game.Gender.PossessiveAdjective;
         MonsterCharacteristics characteristics = new MonsterCharacteristics(_monsterRace, knowledge.Characteristics);
-        MonsterSpell[]? combinedSpells = Game.Concat<MonsterSpell>(_monsterRace.Spells, knowledge.RSpells);
+        MonsterSpell[]? combinedSpells = Game.Concat<MonsterSpell>(_monsterRace.MonsterSpells, knowledge.RSpells);
         if (_monsterRace.Unique)
         {
             characteristics.Unique = true;

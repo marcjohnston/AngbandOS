@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class NyarlathotepMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
-    public override string[]? SpellNames => new string[] {
+    public override string[]? MonsterSpellBindingKeys => new string[] {
         nameof(ChaosBallProjectileMonsterSpell),
         nameof(BlindnessScriptMonsterSpell),
         nameof(BrainSmashScriptMonsterSpell),
