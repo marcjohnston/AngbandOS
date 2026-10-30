@@ -8,7 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Help Group", EntityNoun = "help group")]
 public class HelpGroupGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(Title = "Sort Index", Summary = "The order in which the help group is displayed.", DataType = "int")]

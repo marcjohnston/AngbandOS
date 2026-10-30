@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Duration Learned Knowledge",
-    EntityNoun = "Duration Learned Knowledge")]
 public class DurationLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

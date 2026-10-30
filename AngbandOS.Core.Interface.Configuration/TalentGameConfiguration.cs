@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Talent",
-    EntityNoun = "talent")]
 public class TalentGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

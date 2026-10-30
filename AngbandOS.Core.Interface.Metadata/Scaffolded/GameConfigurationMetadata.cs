@@ -157,8 +157,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Towns")
                 {
                     PropertyMetadatas = TownMetadata.Metadata,
-                    EntityNoun = "town",
-                    EntityNounTitle = "Town",
+                    ForeignCollectionName = "Towns",
+                    EntityNoun = "Town",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Null to load towns from the assembly; otherwise a collection of towns to load into the SingletonRepository.",
@@ -169,8 +169,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Shopkeepers")
                 {
                     PropertyMetadatas = ShopkeeperMetadata.Metadata,
-                    EntityNoun = "shopkeeper",
-                    EntityNounTitle = "Shopkeeper",
+                    ForeignCollectionName = "Shopkeepers",
+                    EntityNoun = "Shopkeeper",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of shopkeeper configurations.",
@@ -181,8 +181,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("GameCommands")
                 {
                     PropertyMetadatas = GameCommandMetadata.Metadata,
+                    ForeignCollectionName = "GameCommands",
                     EntityNoun = "Game Command",
-                    EntityNounTitle = "Game Command",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of game command configurations.",
@@ -193,8 +193,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StoreCommands")
                 {
                     PropertyMetadatas = StoreCommandMetadata.Metadata,
-                    EntityNoun = "store command",
-                    EntityNounTitle = "Store Command",
+                    ForeignCollectionName = "StoreCommands",
+                    EntityNoun = "Store Command",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of store command configurations.",
@@ -205,8 +205,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("HelpGroups")
                 {
                     PropertyMetadatas = HelpGroupMetadata.Metadata,
-                    EntityNoun = "help group",
-                    EntityNounTitle = "Help Group",
+                    ForeignCollectionName = "HelpGroups",
+                    EntityNoun = "Help Group",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of help group configurations.",
@@ -217,8 +217,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MonsterRaces")
                 {
                     PropertyMetadatas = MonsterRaceMetadata.Metadata,
-                    EntityNoun = "monster race",
-                    EntityNounTitle = "Monster Race",
+                    ForeignCollectionName = "MonsterRaces",
+                    EntityNoun = "Monster Race",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of monster race configurations.",
@@ -229,8 +229,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("OutfitManifests")
                 {
                     PropertyMetadatas = OutfitManifestMetadata.Metadata,
-                    EntityNoun = "outfit manifest",
-                    EntityNounTitle = "Outfit Manifest",
+                    ForeignCollectionName = "OutfitManifests",
+                    EntityNoun = "Outfit Manifest",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of outfit manifest configurations.",
@@ -241,8 +241,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Symbols")
                 {
                     PropertyMetadatas = SymbolMetadata.Metadata,
-                    EntityNoun = "symbol",
-                    EntityNounTitle = "Symbol",
+                    ForeignCollectionName = "Symbols",
+                    EntityNoun = "Symbol",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of symbol configurations.",
@@ -253,8 +253,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Vaults")
                 {
                     PropertyMetadatas = VaultMetadata.Metadata,
-                    EntityNoun = "vault",
-                    EntityNounTitle = "Vault",
+                    ForeignCollectionName = "Vaults",
+                    EntityNoun = "Vault",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of vault configurations.",
@@ -265,8 +265,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("DungeonGuardians")
                 {
                     PropertyMetadatas = DungeonGuardianMetadata.Metadata,
+                    ForeignCollectionName = "DungeonGuardians",
                     EntityNoun = "Dungeon Guardian",
-                    EntityNounTitle = "Dungeon Guardian",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of dungeon guardian configurations.",
@@ -277,8 +277,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("DamageLearnedKnowledges")
                 {
                     PropertyMetadatas = DamageLearnedKnowledgeMetadata.Metadata,
+                    ForeignCollectionName = "DamageLearnedKnowledges",
                     EntityNoun = "Damage Learned Knowledge",
-                    EntityNounTitle = "Damage Learned Knowledge",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of damage learned-knowledge configurations.",
@@ -289,8 +289,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("DurationLearnedKnowledges")
                 {
                     PropertyMetadatas = DurationLearnedKnowledgeMetadata.Metadata,
+                    ForeignCollectionName = "DurationLearnedKnowledges",
                     EntityNoun = "Duration Learned Knowledge",
-                    EntityNounTitle = "Duration Learned Knowledge",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of duration learned-knowledge configurations.",
@@ -301,8 +301,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RangeLearnedKnowledges")
                 {
                     PropertyMetadatas = RangeLearnedKnowledgeMetadata.Metadata,
-                    EntityNoun = "range learned knowledge",
-                    EntityNounTitle = "Range Learned Knowledge",
+                    ForeignCollectionName = "RangeLearnedKnowledges",
+                    EntityNoun = "Range Learned Knowledge",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of range learned-knowledge configurations.",
@@ -313,8 +313,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ExperienceLearnedKnowledges")
                 {
                     PropertyMetadatas = ExperienceLearnedKnowledgeMetadata.Metadata,
+                    ForeignCollectionName = "ExperienceLearnedKnowledges",
                     EntityNoun = "Experience Learned Knowledge",
-                    EntityNounTitle = "Experience Learned Knowledge",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of experience learned-knowledge configurations.",
@@ -325,8 +325,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Dungeons")
                 {
                     PropertyMetadatas = DungeonMetadata.Metadata,
+                    ForeignCollectionName = "Dungeons",
                     EntityNoun = "Dungeon",
-                    EntityNounTitle = "Dungeon",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of dungeon configurations.",
@@ -337,8 +337,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StoreFactories")
                 {
                     PropertyMetadatas = StoreFactoryMetadata.Metadata,
-                    EntityNoun = "store factory",
-                    EntityNounTitle = "Store Factory",
+                    ForeignCollectionName = "StoreFactories",
+                    EntityNoun = "Store Factory",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Factories used to create stores within towns.",
@@ -349,8 +349,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ProjectileGraphics")
                 {
                     PropertyMetadatas = ProjectileGraphicMetadata.Metadata,
-                    EntityNoun = "projectile graphic",
-                    EntityNounTitle = "Projectile Graphic",
+                    ForeignCollectionName = "ProjectileGraphics",
+                    EntityNoun = "Projectile Graphic",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of projectile graphic configurations.",
@@ -361,8 +361,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemFlavors")
                 {
                     PropertyMetadatas = ItemFlavorMetadata.Metadata,
+                    ForeignCollectionName = "ItemFlavors",
                     EntityNoun = "Item Flavor",
-                    EntityNounTitle = "Item Flavor",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item flavor configurations.",
@@ -373,8 +373,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ClassSpells")
                 {
                     PropertyMetadatas = CharacterClassSpellMetadata.Metadata,
+                    ForeignCollectionName = "ClassSpells",
                     EntityNoun = "Character Class Spell",
-                    EntityNounTitle = "Character Class Spell",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of character class spell configurations.",
@@ -385,8 +385,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("WizardCommands")
                 {
                     PropertyMetadatas = WizardCommandMetadata.Metadata,
-                    EntityNoun = "wizard command",
-                    EntityNounTitle = "Wizard Command",
+                    ForeignCollectionName = "WizardCommands",
+                    EntityNoun = "Wizard Command",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of wizard command configurations.",
@@ -397,8 +397,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Tiles")
                 {
                     PropertyMetadatas = TileMetadata.Metadata,
-                    EntityNoun = "tile",
-                    EntityNounTitle = "Tile",
+                    ForeignCollectionName = "Tiles",
+                    EntityNoun = "Tile",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of tile configurations.",
@@ -409,8 +409,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Animations")
                 {
                     PropertyMetadatas = AnimationMetadata.Metadata,
+                    ForeignCollectionName = "Animations",
                     EntityNoun = "Animation",
-                    EntityNounTitle = "Animation",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of animation configurations.",
@@ -421,8 +421,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Spells")
                 {
                     PropertyMetadatas = SpellMetadata.Metadata,
-                    EntityNoun = "spell",
-                    EntityNounTitle = "Spell",
+                    ForeignCollectionName = "Spells",
+                    EntityNoun = "Spell",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of spell configurations.",
@@ -433,8 +433,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Plurals")
                 {
                     PropertyMetadatas = PluralMetadata.Metadata,
-                    EntityNoun = "plural",
-                    EntityNounTitle = "Plural",
+                    ForeignCollectionName = "Plurals",
+                    EntityNoun = "Plural",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of pluralization configurations.",
@@ -445,8 +445,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Attacks")
                 {
                     PropertyMetadatas = AttackMetadata.Metadata,
+                    ForeignCollectionName = "Attacks",
                     EntityNoun = "Attack",
-                    EntityNounTitle = "Attack",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of attack configurations.",
@@ -457,8 +457,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("AttributeFilters")
                 {
                     PropertyMetadatas = AttributeFilterMetadata.Metadata,
+                    ForeignCollectionName = "AttributeFilters",
                     EntityNoun = "Attribute Filter",
-                    EntityNounTitle = "Attribute Filter",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of attribute filter configurations.",
@@ -469,8 +469,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("OrAttributes")
                 {
                     PropertyMetadatas = BitwiseOrAttributeMetadata.Metadata,
-                    EntityNoun = "Bitwise Or Attribute",
-                    EntityNounTitle = "Bitwise Or Attribute",
+                    ForeignCollectionName = "OrAttributes",
+                    EntityNoun = "Bitwise-Or Attribute",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of bitwise-or attribute configurations.",
@@ -481,8 +481,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("SumAttributes")
                 {
                     PropertyMetadatas = SummationAttributeMetadata.Metadata,
-                    EntityNoun = "summation attribute",
-                    EntityNounTitle = "Summation Attribute",
+                    ForeignCollectionName = "SumAttributes",
+                    EntityNoun = "Summation Attribute",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of summation attribute configurations.",
@@ -493,8 +493,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ScriptsAttributes")
                 {
                     PropertyMetadatas = ScriptsAttributeMetadata.Metadata,
-                    EntityNoun = "scripts attribute",
-                    EntityNounTitle = "Scripts Attribute",
+                    ForeignCollectionName = "ScriptsAttributes",
+                    EntityNoun = "Scripts Attribute",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of scripts attribute configurations.",
@@ -505,8 +505,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ColorEnumAttributes")
                 {
                     PropertyMetadatas = ColorEnumAttributeMetadata.Metadata,
+                    ForeignCollectionName = "ColorEnumAttributes",
                     EntityNoun = "Color Enum Attribute",
-                    EntityNounTitle = "Color Enum Attribute",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of color-enum attribute configurations.",
@@ -517,8 +517,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ActivationAttributes")
                 {
                     PropertyMetadatas = ActivationNullableReferenceAttributeMetadata.Metadata,
-                    EntityNoun = "Activation Nullable Reference Attribute",
-                    EntityNounTitle = "Activation Nullable Reference Attribute",
+                    ForeignCollectionName = "ActivationAttributes",
+                    EntityNoun = "Activation Attribute",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of activation attribute configurations.",
@@ -529,8 +529,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ArtifactBiasAttributes")
                 {
                     PropertyMetadatas = ArtifactBiasNullableReferenceAttributeMetadata.Metadata,
-                    EntityNoun = "Artifact Bias Nullable Reference Attribute",
-                    EntityNounTitle = "Artifact Bias Nullable Reference Attribute",
+                    ForeignCollectionName = "ArtifactBiasAttributes",
+                    EntityNoun = "Artifact Bias Attribute",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of artifact-bias attribute configurations.",
@@ -541,8 +541,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StringAttributes")
                 {
                     PropertyMetadatas = StringNullableReferenceAttributeMetadata.Metadata,
-                    EntityNoun = "String Nullable Reference Attribute",
-                    EntityNounTitle = "String Nullable Reference Attribute",
+                    ForeignCollectionName = "StringAttributes",
+                    EntityNoun = "String Attribute",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of string attribute configurations.",
@@ -553,8 +553,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Gods")
                 {
                     PropertyMetadatas = GodMetadata.Metadata,
-                    EntityNoun = "god",
-                    EntityNounTitle = "God",
+                    ForeignCollectionName = "Gods",
+                    EntityNoun = "God",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of god configurations.",
@@ -565,8 +565,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("SyllableSets")
                 {
                     PropertyMetadatas = SyllableSetMetadata.Metadata,
-                    EntityNoun = "syllable set",
-                    EntityNounTitle = "Syllable Set",
+                    ForeignCollectionName = "SyllableSets",
+                    EntityNoun = "Syllable Set",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of syllable set configurations.",
@@ -577,8 +577,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Projectiles")
                 {
                     PropertyMetadatas = ProjectileMetadata.Metadata,
-                    EntityNoun = "projectile",
-                    EntityNounTitle = "Projectile",
+                    ForeignCollectionName = "Projectiles",
+                    EntityNoun = "Projectile",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of projectile configurations.",
@@ -589,8 +589,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ProjectileScripts")
                 {
                     PropertyMetadatas = ProjectileScriptMetadata.Metadata,
-                    EntityNoun = "projectile script",
-                    EntityNounTitle = "Projectile Script",
+                    ForeignCollectionName = "ProjectileScripts",
+                    EntityNoun = "Projectile Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of projectile script configurations.",
@@ -601,8 +601,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ProjectileMonsterSpells")
                 {
                     PropertyMetadatas = ProjectileMonsterSpellMetadata.Metadata,
-                    EntityNoun = "projectile monster spell",
-                    EntityNounTitle = "Projectile Monster Spell",
+                    ForeignCollectionName = "MonsterSpells",
+                    EntityNoun = "Projectile Monster Spell",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of projectile monster spell configurations.",
@@ -613,8 +613,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("CauseWoundsMonsterSpells")
                 {
                     PropertyMetadatas = CauseWoundsMonsterSpellMetadata.Metadata,
+                    ForeignCollectionName = "MonsterSpells",
                     EntityNoun = "Cause Wounds Monster Spell",
-                    EntityNounTitle = "Cause Wounds Monster Spell",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of cause-wounds monster spell configurations.",
@@ -625,8 +625,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ScriptMonsterSpells")
                 {
                     PropertyMetadatas = ScriptMonsterSpellMetadata.Metadata,
-                    EntityNoun = "script monster spell",
-                    EntityNounTitle = "Script Monster Spell",
+                    ForeignCollectionName = "MonsterSpells",
+                    EntityNoun = "Script Monster Spell",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of script monster spell configurations.",
@@ -637,8 +637,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("SummonMonsterSpells")
                 {
                     PropertyMetadatas = SummonMonsterSpellMetadata.Metadata,
-                    EntityNoun = "summon monster spell",
-                    EntityNounTitle = "Summon Monster Spell",
+                    ForeignCollectionName = "MonsterSpells",
+                    EntityNoun = "Summon Monster Spell",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of summon monster spell configurations.",
@@ -698,8 +698,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ArtifactBiasWeightedRandoms")
                 {
                     PropertyMetadatas = ArtifactBiasWeightedRandomMetadata.Metadata,
+                    ForeignCollectionName = "ArtifactBiasWeightedRandoms",
                     EntityNoun = "Artifact Bias Weighted Random",
-                    EntityNounTitle = "Artifact Bias Weighted Random",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of artifact-bias weighted-random configurations.",
@@ -710,8 +710,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemClasses")
                 {
                     PropertyMetadatas = ItemClassMetadata.Metadata,
-                    EntityNoun = "item class",
-                    EntityNounTitle = "Item Class",
+                    ForeignCollectionName = "ItemClasses",
+                    EntityNoun = "Item Class",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item class configurations.",
@@ -722,8 +722,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemEnhancements")
                 {
                     PropertyMetadatas = ItemEnhancementMetadata.Metadata,
-                    EntityNoun = "item enhancement",
-                    EntityNounTitle = "Item Enhancement",
+                    ForeignCollectionName = "ItemEnhancements",
+                    EntityNoun = "Item Enhancement",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item enhancement configurations.",
@@ -734,8 +734,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemEnhancementWeightedRandoms")
                 {
                     PropertyMetadatas = ItemEnhancementWeightedRandomMetadata.Metadata,
-                    EntityNoun = "item enhancement weighted random",
-                    EntityNounTitle = "Item Enhancement Weighted Random",
+                    ForeignCollectionName = "ItemEnhancementWeightedRandoms",
+                    EntityNoun = "Item Enhancement Weighted Random",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item-enhancement weighted-random configurations.",
@@ -746,8 +746,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemIdentifications")
                 {
                     PropertyMetadatas = ItemIdentificationMetadata.Metadata,
-                    EntityNoun = "item identification",
-                    EntityNounTitle = "Item Identification",
+                    ForeignCollectionName = "ItemIdentifications",
+                    EntityNoun = "Item Identification",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item identification configurations.",
@@ -758,8 +758,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemFactories")
                 {
                     PropertyMetadatas = ItemFactoryMetadata.Metadata,
-                    EntityNoun = "item factory",
-                    EntityNounTitle = "Item Factory",
+                    ForeignCollectionName = "ItemFactories",
+                    EntityNoun = "Item Factory",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item factory configurations.",
@@ -770,8 +770,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ProjectileWeightedRandomScripts")
                 {
                     PropertyMetadatas = ProjectileScriptWeightedRandomMetadata.Metadata,
-                    EntityNoun = "projectile script weighted random",
-                    EntityNounTitle = "Projectile Script Weighted Random",
+                    ForeignCollectionName = "ProjectileWeightedRandomScripts",
+                    EntityNoun = "Projectile Script Weighted Random",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of projectile-weighted-random script configurations.",
@@ -782,8 +782,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ConditionalWidgets")
                 {
                     PropertyMetadatas = ConditionalWidgetMetadata.Metadata,
+                    ForeignCollectionName = "ConditionalWidgets",
                     EntityNoun = "Conditional Widget",
-                    EntityNounTitle = "Conditional Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of conditional widget configurations.",
@@ -794,8 +794,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("DateWidgets")
                 {
                     PropertyMetadatas = DateWidgetMetadata.Metadata,
+                    ForeignCollectionName = "DateWidgets",
                     EntityNoun = "Date Widget",
-                    EntityNounTitle = "Date Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of date widget configurations.",
@@ -806,8 +806,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("IntWidgets")
                 {
                     PropertyMetadatas = IntWidgetMetadata.Metadata,
-                    EntityNoun = "integer widget",
-                    EntityNounTitle = "Integer Widget",
+                    ForeignCollectionName = "IntWidgets",
+                    EntityNoun = "Int Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of int widget configurations.",
@@ -818,8 +818,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MapWidgets")
                 {
                     PropertyMetadatas = MapWidgetMetadata.Metadata,
-                    EntityNoun = "map widget",
-                    EntityNounTitle = "Map Widget",
+                    ForeignCollectionName = "MapWidgets",
+                    EntityNoun = "Map Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of map widget configurations.",
@@ -830,8 +830,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MaxRangedWidgets")
                 {
                     PropertyMetadatas = MaxRangedWidgetMetadata.Metadata,
-                    EntityNoun = "maximum ranged widget",
-                    EntityNounTitle = "Maximum Ranged Widget",
+                    ForeignCollectionName = "MaxRangedWidgets",
+                    EntityNoun = "Max Ranged Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of max-ranged widget configurations.",
@@ -842,8 +842,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RangedWidgets")
                 {
                     PropertyMetadatas = RangedWidgetMetadata.Metadata,
-                    EntityNoun = "ranged widget",
-                    EntityNounTitle = "Ranged Widget",
+                    ForeignCollectionName = "RangedWidgets",
+                    EntityNoun = "Ranged Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of ranged widget configurations.",
@@ -854,8 +854,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RangedWeaponBonuses")
                 {
                     PropertyMetadatas = RangedWeaponBonusMetadata.Metadata,
-                    EntityNoun = "ranged weapon bonus",
-                    EntityNounTitle = "Ranged Weapon Bonus",
+                    ForeignCollectionName = "RangedWeaponBonuses",
+                    EntityNoun = "Ranged Weapon Bonus",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of ranged weapon bonus configurations.",
@@ -866,8 +866,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StringWidgets")
                 {
                     PropertyMetadatas = StringWidgetMetadata.Metadata,
-                    EntityNoun = "string widget",
-                    EntityNounTitle = "String Widget",
+                    ForeignCollectionName = "StringWidgets",
+                    EntityNoun = "String Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of string widget configurations.",
@@ -878,8 +878,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("GameMessageWidgets")
                 {
                     PropertyMetadatas = GameMessageWidgetMetadata.Metadata,
-                    EntityNoun = "GameMessageWidget",
-                    EntityNounTitle = "Game Message Widget",
+                    ForeignCollectionName = "GameMessageWidgets",
+                    EntityNoun = "Game Message Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of game-message widget configurations.",
@@ -890,8 +890,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("LabelWidgets")
                 {
                     PropertyMetadatas = LabelWidgetMetadata.Metadata,
-                    EntityNoun = "label widget",
-                    EntityNounTitle = "Label Widget",
+                    ForeignCollectionName = "LabelWidgets",
+                    EntityNoun = "Label Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of label widget configurations.",
@@ -902,8 +902,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("TimeWidgets")
                 {
                     PropertyMetadatas = TimeWidgetMetadata.Metadata,
-                    EntityNoun = "time widget",
-                    EntityNounTitle = "Time Widget",
+                    ForeignCollectionName = "TimeWidgets",
+                    EntityNoun = "Time Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of time widget configurations.",
@@ -914,8 +914,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("NullableStringsTextAreaWidgets")
                 {
                     PropertyMetadatas = TextWidgetMetadata.Metadata,
-                    EntityNoun = "text widget",
-                    EntityNounTitle = "Text Widget",
+                    ForeignCollectionName = "NullableStringsTextAreaWidgets",
+                    EntityNoun = "Text Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of text widget configurations used for nullable string text areas.",
@@ -926,8 +926,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RaceGenders")
                 {
                     PropertyMetadatas = RaceGenderMetadata.Metadata,
-                    EntityNoun = "race gender",
-                    EntityNounTitle = "Race Gender",
+                    ForeignCollectionName = "RaceGenders",
+                    EntityNoun = "Race Gender",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of race-gender configurations.",
@@ -938,8 +938,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Genders")
                 {
                     PropertyMetadatas = GenderMetadata.Metadata,
+                    ForeignCollectionName = "Genders",
                     EntityNoun = "Gender",
-                    EntityNounTitle = "Gender",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of gender configurations.",
@@ -950,8 +950,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("PhysicalAttributeSets")
                 {
                     PropertyMetadatas = PhysicalAttributeSetMetadata.Metadata,
-                    EntityNoun = "physical attribute set",
-                    EntityNounTitle = "Physical Attribute Set",
+                    ForeignCollectionName = "PhysicalAttributeSets",
+                    EntityNoun = "Physical Attribute Set",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of physical attribute set configurations.",
@@ -962,8 +962,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Realms")
                 {
                     PropertyMetadatas = RealmMetadata.Metadata,
-                    EntityNoun = "realm",
-                    EntityNounTitle = "Realm",
+                    ForeignCollectionName = "Realms",
+                    EntityNoun = "Realm",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of realm configurations.",
@@ -974,8 +974,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RealmCharacterClasses")
                 {
                     PropertyMetadatas = RealmCharacterClassMetadata.Metadata,
-                    EntityNoun = "realm character class",
-                    EntityNounTitle = "Realm Character Class",
+                    ForeignCollectionName = "RealmCharacterClasses",
+                    EntityNoun = "Realm Character Class",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of realm character class configurations.",
@@ -986,8 +986,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Views")
                 {
                     PropertyMetadatas = ViewMetadata.Metadata,
-                    EntityNoun = "view",
-                    EntityNounTitle = "View",
+                    ForeignCollectionName = "Views",
+                    EntityNoun = "View",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of view configurations.",
@@ -998,8 +998,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("SummonScripts")
                 {
                     PropertyMetadatas = SummonScriptMetadata.Metadata,
+                    ForeignCollectionName = "SummonScripts",
                     EntityNoun = "Summon Script",
-                    EntityNounTitle = "Summon Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of summon script configurations.",
@@ -1010,8 +1010,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MappedSpellScripts")
                 {
                     PropertyMetadatas = MappedSpellScriptMetadata.Metadata,
-                    EntityNoun = "MappedSpellScript",
-                    EntityNounTitle = "Mapped Spell Script",
+                    ForeignCollectionName = "MappedSpellScripts",
+                    EntityNoun = "Mapped Spell Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of mapped-spell script configurations.",
@@ -1022,8 +1022,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("SummonWeightedRandoms")
                 {
                     PropertyMetadatas = SummonWeightedRandomMetadata.Metadata,
-                    EntityNoun = "summon weighted random",
-                    EntityNounTitle = "Summon Weighted Random",
+                    ForeignCollectionName = "SummonWeightedRandoms",
+                    EntityNoun = "Summon Weighted Random",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of summon-weighted-random configurations.",
@@ -1034,8 +1034,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemFactoryWeightedRandoms")
                 {
                     PropertyMetadatas = ItemFactoryWeightedRandomMetadata.Metadata,
-                    EntityNoun = "item factory weighted random",
-                    EntityNounTitle = "Item Factory Weighted Random",
+                    ForeignCollectionName = "ItemFactoryWeightedRandoms",
+                    EntityNoun = "Item Factory Weighted Random",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item-factory weighted-random configurations.",
@@ -1046,8 +1046,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("TimerScripts")
                 {
                     PropertyMetadatas = TimerScriptMetadata.Metadata,
-                    EntityNoun = "timer script",
-                    EntityNounTitle = "Timer Script",
+                    ForeignCollectionName = "TimerScripts",
+                    EntityNoun = "Timer Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of timer script configurations.",
@@ -1058,8 +1058,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RenderMessageScripts")
                 {
                     PropertyMetadatas = RenderMessageScriptMetadata.Metadata,
-                    EntityNoun = "render message script",
-                    EntityNounTitle = "Render Message Script",
+                    ForeignCollectionName = "RenderMessageScripts",
+                    EntityNoun = "Render Message Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of render-message script configurations.",
@@ -1070,8 +1070,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MartialArtsAttacks")
                 {
                     PropertyMetadatas = MartialArtsAttackMetadata.Metadata,
-                    EntityNoun = "martial arts attack",
-                    EntityNounTitle = "Martial Arts Attack",
+                    ForeignCollectionName = "MartialArtsAttacks",
+                    EntityNoun = "Martial Arts Attack",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of martial-arts attack configurations.",
@@ -1082,8 +1082,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("AbilityScoreScripts")
                 {
                     PropertyMetadatas = AbilityScoreScriptMetadata.Metadata,
+                    ForeignCollectionName = "AbilityScoreScripts",
                     EntityNoun = "Ability Score Script",
-                    EntityNounTitle = "Ability Score Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of ability-score script configurations.",
@@ -1094,8 +1094,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ChestTrapCombinations")
                 {
                     PropertyMetadatas = ChestTrapCombinationMetadata.Metadata,
+                    ForeignCollectionName = "ChestTrapCombinations",
                     EntityNoun = "Chest Trap Combination",
-                    EntityNounTitle = "Chest Trap Combination",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of chest-trap combination configurations.",
@@ -1106,8 +1106,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Patrons")
                 {
                     PropertyMetadatas = PatronMetadata.Metadata,
-                    EntityNoun = "patron",
-                    EntityNounTitle = "Patron",
+                    ForeignCollectionName = "Patrons",
+                    EntityNoun = "Patron",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of patron configurations.",
@@ -1118,8 +1118,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RacialPowerTests")
                 {
                     PropertyMetadatas = RacialPowerTestMetadata.Metadata,
-                    EntityNoun = "racial power test",
-                    EntityNounTitle = "Racial Power Test",
+                    ForeignCollectionName = "RacialPowerTests",
+                    EntityNoun = "Racial Power Test",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of racial-power test configurations.",
@@ -1130,8 +1130,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RaceAbilities")
                 {
                     PropertyMetadatas = RaceAbilityMetadata.Metadata,
-                    EntityNoun = "race ability",
-                    EntityNounTitle = "Race Ability",
+                    ForeignCollectionName = "RaceAbilities",
+                    EntityNoun = "Race Ability",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of race-ability configurations.",
@@ -1142,8 +1142,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RacialPowers")
                 {
                     PropertyMetadatas = RacePowerMetadata.Metadata,
-                    EntityNoun = "race power",
-                    EntityNounTitle = "Race Power",
+                    ForeignCollectionName = "RacialPowers",
+                    EntityNoun = "Racial Power",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of racial-power configurations.",
@@ -1154,8 +1154,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ConditionalScripts")
                 {
                     PropertyMetadatas = ConditionalScriptMetadata.Metadata,
+                    ForeignCollectionName = "ConditionalScripts",
                     EntityNoun = "Conditional Script",
-                    EntityNounTitle = "Conditional Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of conditional script configurations.",
@@ -1166,8 +1166,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("CharacterClassAbilities")
                 {
                     PropertyMetadatas = CharacterClassAbilityMetadata.Metadata,
+                    ForeignCollectionName = "CharacterClassAbilities",
                     EntityNoun = "Character Class Ability",
-                    EntityNounTitle = "Character Class Ability",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of character-class ability configurations.",
@@ -1178,8 +1178,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("CharacterClassAndRaceInnateTotals")
                 {
                     PropertyMetadatas = InnateTotalsMetadata.Metadata,
-                    EntityNoun = "innate totals",
-                    EntityNounTitle = "Innate Totals",
+                    ForeignCollectionName = "CharacterClassAndRaceInnateTotals",
+                    EntityNoun = "Character Class And Race Innate Total",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of innate-total configurations for character classes and races.",
@@ -1190,8 +1190,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Activations")
                 {
                     PropertyMetadatas = ActivationMetadata.Metadata,
+                    ForeignCollectionName = "Activations",
                     EntityNoun = "Activation",
-                    EntityNounTitle = "Activation",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of activation configurations.",
@@ -1202,8 +1202,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ItemFilters")
                 {
                     PropertyMetadatas = ItemFilterMetadata.Metadata,
-                    EntityNoun = "item filter",
-                    EntityNounTitle = "Item Filter",
+                    ForeignCollectionName = "ItemFilters",
+                    EntityNoun = "Item Filter",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of item filter configurations.",
@@ -1214,8 +1214,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ProductOfSumsBoolFunctions")
                 {
                     PropertyMetadatas = ConditionalMetadata.Metadata,
+                    ForeignCollectionName = "ProductOfSumsBoolFunctions",
                     EntityNoun = "Conditional",
-                    EntityNounTitle = "Conditional",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of conditional (product-of-sums) boolean function configurations.",
@@ -1226,8 +1226,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RechargeItemScripts")
                 {
                     PropertyMetadatas = RechargeItemScriptMetadata.Metadata,
-                    EntityNoun = "recharge item script",
-                    EntityNounTitle = "Recharge Item Script",
+                    ForeignCollectionName = "RechargeItemScripts",
+                    EntityNoun = "Recharge Item Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of recharge-item script configurations.",
@@ -1238,8 +1238,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("Talents")
                 {
                     PropertyMetadatas = TalentMetadata.Metadata,
-                    EntityNoun = "talent",
-                    EntityNounTitle = "Talent",
+                    ForeignCollectionName = "Talents",
+                    EntityNoun = "Talent",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of talent configurations.",
@@ -1250,8 +1250,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("TeleportSelfScripts")
                 {
                     PropertyMetadatas = TeleportSelfScriptMetadata.Metadata,
-                    EntityNoun = "teleport self script",
-                    EntityNounTitle = "Teleport Self Script",
+                    ForeignCollectionName = "TeleportSelfScripts",
+                    EntityNoun = "Teleport Self Script",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of teleport-self script configurations.",
@@ -1262,8 +1262,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MappedItemEnhancements")
                 {
                     PropertyMetadatas = MappedItemEnhancementMetadata.Metadata,
-                    EntityNoun = "mapped item enhancement",
-                    EntityNounTitle = "Mapped Item Enhancement",
+                    ForeignCollectionName = "MappedItemEnhancements",
+                    EntityNoun = "Mapped Item Enhancement",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of mapped-item enhancement configurations.",
@@ -1274,8 +1274,8 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ChestTraps")
                 {
                     PropertyMetadatas = ChestTrapMetadata.Metadata,
+                    ForeignCollectionName = "ChestTraps",
                     EntityNoun = "Chest Trap",
-                    EntityNounTitle = "Chest Trap",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
                     Description = "Collection of chest-trap configurations.",

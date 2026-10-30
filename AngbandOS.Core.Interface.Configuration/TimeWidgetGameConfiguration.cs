@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Time Widget",
-    EntityNoun = "time widget")]
 public class TimeWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

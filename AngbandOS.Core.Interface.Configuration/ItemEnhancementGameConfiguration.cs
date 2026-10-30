@@ -12,7 +12,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// Represents a set of item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
-[ConfigurationEntity(Title = "Item Enhancement", EntityNoun = "item enhancement")]
 public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

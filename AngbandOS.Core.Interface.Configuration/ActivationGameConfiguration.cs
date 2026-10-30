@@ -9,9 +9,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Activation",
-    EntityNoun = "Activation")]
 public class ActivationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

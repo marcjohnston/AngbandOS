@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Monster Race",
-    EntityNoun = "monster race")]
 public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

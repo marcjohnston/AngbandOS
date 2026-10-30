@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Ranged Weapon Bonus",
-    EntityNoun = "ranged weapon bonus")]
 public class RangedWeaponBonusGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, ItemClassBindingKey, ExperienceLevel == null ? null : ExperienceLevel.Value.ToString() }; // CONFIRMED

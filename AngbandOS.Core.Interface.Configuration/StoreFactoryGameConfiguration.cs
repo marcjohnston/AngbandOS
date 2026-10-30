@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Store Factory",
-    EntityNoun = "store factory")]
 public class StoreFactoryGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(Title = "Is Empty Lot", Summary = "Determines whether the store is an empty lot.", DataType = "bool")]

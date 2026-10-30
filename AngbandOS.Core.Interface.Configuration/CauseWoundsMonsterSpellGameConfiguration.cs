@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Cause Wounds Monster Spell",
-    EntityNoun = "Cause Wounds Monster Spell")]
 public class CauseWoundsMonsterSpellGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

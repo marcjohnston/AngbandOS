@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Map Widget",
-    EntityNoun = "map widget")]
 public class MapWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

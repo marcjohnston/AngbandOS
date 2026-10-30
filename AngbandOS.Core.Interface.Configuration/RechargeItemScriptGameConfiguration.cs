@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Recharge Item Script",
-    EntityNoun = "recharge item script")]
 public class RechargeItemScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

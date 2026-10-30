@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Chest Trap Combination",
-    EntityNoun = "Chest Trap Combination")]
 public class ChestTrapCombinationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

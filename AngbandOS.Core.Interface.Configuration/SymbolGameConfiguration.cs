@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Symbol",
-    EntityNoun = "symbol")]
 public class SymbolGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

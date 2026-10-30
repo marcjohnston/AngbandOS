@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Maximum Ranged Widget",
-    EntityNoun = "maximum ranged widget")]
 public class MaxRangedWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationTupleItem(

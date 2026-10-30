@@ -3,7 +3,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Item Factory Weighted Random", EntityNoun = "item factory weighted random")]
 public class ItemFactoryWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Attribute Filter",
-    EntityNoun = "Attribute Filter")]
 public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Vault",
-    EntityNoun = "vault")]
 public class VaultGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

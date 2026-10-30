@@ -2,7 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Item Class", EntityNoun = "item class")]
 public class ItemClassGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     /// <summary>

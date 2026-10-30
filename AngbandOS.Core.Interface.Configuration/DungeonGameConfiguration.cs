@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Dungeon",
-    EntityNoun = "Dungeon")]
 public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     /// <summary>

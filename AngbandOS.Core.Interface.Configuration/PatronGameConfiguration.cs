@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Patron",
-    EntityNoun = "patron")]
 public class PatronGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

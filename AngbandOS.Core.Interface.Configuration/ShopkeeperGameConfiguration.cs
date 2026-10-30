@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Shopkeeper",
-    EntityNoun = "shopkeeper")]
 public class ShopkeeperGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

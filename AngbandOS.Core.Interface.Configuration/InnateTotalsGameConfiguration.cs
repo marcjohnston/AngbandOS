@@ -2,7 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Innate Totals", EntityNoun = "innate totals")]
 public class InnateTotalsGameConfiguration : CompositeSingletonGameConfiguration
 {
     public override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, RaceBindingKey };

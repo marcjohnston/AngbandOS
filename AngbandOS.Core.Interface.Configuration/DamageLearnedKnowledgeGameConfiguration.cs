@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Damage Learned Knowledge",
-    EntityNoun = "Damage Learned Knowledge")]
 public class DamageLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

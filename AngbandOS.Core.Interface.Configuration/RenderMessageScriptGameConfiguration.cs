@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Render Message Script",
-    EntityNoun = "render message script")]
 public class RenderMessageScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

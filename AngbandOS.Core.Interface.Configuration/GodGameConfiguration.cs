@@ -2,7 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "God", EntityNoun = "god")]
 public class GodGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(Title = "Long Name", Summary = "The full name of the god.", DataType = "string")]

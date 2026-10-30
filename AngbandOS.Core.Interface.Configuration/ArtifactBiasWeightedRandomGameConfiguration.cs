@@ -5,9 +5,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// <summary>
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
 /// </summary>
-[ConfigurationEntityAttribute(
-    Title = "Artifact Bias Weighted Random",
-    EntityNoun = "Artifact Bias Weighted Random")]
 public class ArtifactBiasWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

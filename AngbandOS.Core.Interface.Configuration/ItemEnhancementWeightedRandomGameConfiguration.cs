@@ -5,7 +5,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// <summary>
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
 /// </summary>
-[ConfigurationEntity(Title = "Item Enhancement Weighted Random", EntityNoun = "item enhancement weighted random")]
 public class ItemEnhancementWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Projectile Graphic",
-    EntityNoun = "projectile graphic")]
 public class ProjectileGraphicGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

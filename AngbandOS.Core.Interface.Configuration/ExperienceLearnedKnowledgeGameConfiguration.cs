@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntityAttribute(
-    Title = "Experience Learned Knowledge",
-    EntityNoun = "Experience Learned Knowledge")]
 public class ExperienceLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

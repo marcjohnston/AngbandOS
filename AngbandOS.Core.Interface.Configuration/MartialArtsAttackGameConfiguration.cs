@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Martial Arts Attack",
-    EntityNoun = "martial arts attack")]
 public class MartialArtsAttackGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

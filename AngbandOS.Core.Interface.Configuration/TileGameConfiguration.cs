@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Tile",
-    EntityNoun = "tile")]
 public class TileGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(Title = "Is Earthquake Resistant", Summary = "Determines whether the tile is resistant to earthquakes.", DataType = "bool")]

@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Syllable Set",
-    EntityNoun = "syllable set")]
 public class SyllableSetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

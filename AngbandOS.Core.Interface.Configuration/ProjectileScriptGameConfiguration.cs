@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Projectile Script",
-    EntityNoun = "projectile script")]
 public class ProjectileScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

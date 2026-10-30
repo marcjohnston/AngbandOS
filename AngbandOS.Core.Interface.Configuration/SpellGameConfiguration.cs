@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Spell",
-    EntityNoun = "spell")]
 public class SpellGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

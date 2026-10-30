@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Summon Weighted Random",
-    EntityNoun = "summon weighted random")]
 public class SummonWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationTupleItem(

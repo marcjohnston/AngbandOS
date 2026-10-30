@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Range Learned Knowledge",
-    EntityNoun = "range learned knowledge")]
 public class RangeLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

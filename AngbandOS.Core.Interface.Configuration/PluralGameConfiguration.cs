@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Plural",
-    EntityNoun = "plural")]
 public class PluralGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

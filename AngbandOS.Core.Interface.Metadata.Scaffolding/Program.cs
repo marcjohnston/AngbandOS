@@ -45,19 +45,6 @@ if (errors.Count > 0)
     return 1;
 }
 
-Dictionary<Type, ConfigurationEntityAttribute> entities =
-    reachableTypes
-        .Select(
-            type =>
-                (
-                    Type: type,
-                    Entity: type.GetCustomAttribute<ConfigurationEntityAttribute>(
-                        inherit: true)))
-        .Where(x => x.Entity != null)
-        .ToDictionary(
-            x => x.Type,
-            x => x.Entity!);
-
 HashSet<Type> enumTypes =
     reachableTypes
         .SelectMany(type => GetConfigurationProperties(type))
@@ -89,7 +76,6 @@ foreach (Type configurationType in reachableTypes
     WriteMetadataClass(
         outputFolder,
         configurationType,
-        entities,
         enumTypes);
 }
 
@@ -107,9 +93,7 @@ static bool IsConfigurationType(Type type)
             typeof(NonCompositeSingletonGameConfiguration)
                 .IsAssignableFrom(type) ||
             typeof(IGetKeyGameConfiguration)
-                .IsAssignableFrom(type) ||
-            type.GetCustomAttribute<ConfigurationEntityAttribute>(
-                inherit: true) != null);
+                .IsAssignableFrom(type));
 }
 
 static void VisitConfigurationType(
@@ -133,13 +117,6 @@ static void VisitConfigurationType(
     }
 
     reachableTypes.Add(configurationType);
-
-    if (configurationType.GetCustomAttribute<ConfigurationEntityAttribute>(
-            inherit: true) == null)
-    {
-        errors.Add(
-            $"Configuration type '{configurationType.FullName}' is missing ConfigurationEntityAttribute.");
-    }
 
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
@@ -232,7 +209,6 @@ static Type? GetReferencedConfigurationType(Type propertyType)
 static void WriteMetadataClass(
     string outputFolder,
     Type configurationType,
-    IReadOnlyDictionary<Type, ConfigurationEntityAttribute> entities,
     IReadOnlyCollection<Type> enumTypes)
 {
     string metadataClassName =
@@ -278,7 +254,6 @@ static void WriteMetadataClass(
             writer,
             property,
             metadata,
-            entities,
             4);
     }
 
@@ -292,9 +267,12 @@ static void WriteProperty(
     StreamWriter writer,
     PropertyInfo property,
     ConfigurationMetadataAttribute metadata,
-    IReadOnlyDictionary<Type, ConfigurationEntityAttribute> entities,
     int indentLevel)
 {
+    ConfigurationCollectionAttribute? collection =
+        property.GetCustomAttribute<ConfigurationCollectionAttribute>(
+            inherit: true);
+
     ConfigurationForeignKeyAttribute? foreignCollection =
         property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(
             inherit: true);
@@ -326,7 +304,7 @@ static void WriteProperty(
             elementType,
             property,
             foreignCollection,
-            entities);
+            collection);
 
     writer.WriteLine(
         $"{indentation}new {metadataType}(\"{Escape(property.Name)}\")");
@@ -345,25 +323,25 @@ static void WriteProperty(
     }
 
     if (metadataType == nameof(CollectionPropertyMetadata) &&
-        elementType != null &&
-        entities.TryGetValue(
-            elementType,
-            out ConfigurationEntityAttribute? entity))
+        collection != null)
     {
         string childMetadataClassName =
-            GetMetadataClassName(elementType);
+            GetMetadataClassName(
+                elementType
+                ?? throw new InvalidOperationException(
+                    $"Unable to determine the element type for collection property '{property.Name}'."));
 
         writer.WriteLine(
             $"{indentation}    PropertyMetadatas = " +
             $"{childMetadataClassName}.Metadata,");
 
         writer.WriteLine(
-            $"{indentation}    EntityNoun = " +
-            $"\"{Escape(entity.EntityNoun ?? string.Empty)}\",");
+            $"{indentation}    ForeignCollectionName = " +
+            $"\"{Escape(collection.CollectionName)}\",");
 
         writer.WriteLine(
-            $"{indentation}    EntityNounTitle = " +
-            $"\"{Escape(entity.Title ?? string.Empty)}\",");
+            $"{indentation}    EntityNoun = " +
+            $"\"{Escape(collection.EntityNoun ?? string.Empty)}\",");
 
         writer.WriteLine(
             $"{indentation}    EntityKeyPropertyName = " +
@@ -469,7 +447,7 @@ static string GetMetadataType(
     Type? elementType,
     PropertyInfo property,
     ConfigurationForeignKeyAttribute? foreignCollection,
-    IReadOnlyDictionary<Type, ConfigurationEntityAttribute> entities)
+    ConfigurationCollectionAttribute? collection)
 {
     if (IsTuple(dataType))
     {
@@ -483,8 +461,7 @@ static string GetMetadataType(
             : nameof(ForeignKeyPropertyMetadata);
     }
 
-    if (elementType != null &&
-        entities.ContainsKey(elementType))
+    if (collection != null)
     {
         return nameof(CollectionPropertyMetadata);
     }

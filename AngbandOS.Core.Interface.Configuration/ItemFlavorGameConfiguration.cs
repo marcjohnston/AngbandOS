@@ -2,9 +2,6 @@
 using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.Core.Interface.Configuration.Annotations;
 
-[ConfigurationEntityAttribute(
-    Title = "Item Flavor",
-    EntityNoun = "Item Flavor")]
 public class ItemFlavorGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadataAttribute(

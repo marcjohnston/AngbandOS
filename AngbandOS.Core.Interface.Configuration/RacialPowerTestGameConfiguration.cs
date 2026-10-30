@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Racial Power Test",
-    EntityNoun = "racial power test")]
 public class RacialPowerTestGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

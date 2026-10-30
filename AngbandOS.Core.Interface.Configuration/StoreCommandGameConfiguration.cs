@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Store Command",
-    EntityNoun = "store command")]
 public class StoreCommandGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

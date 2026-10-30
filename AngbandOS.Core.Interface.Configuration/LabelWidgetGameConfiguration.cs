@@ -2,7 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Label Widget", EntityNoun = "label widget")]
 public class LabelWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

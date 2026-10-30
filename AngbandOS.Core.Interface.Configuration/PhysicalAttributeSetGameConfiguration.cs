@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Physical Attribute Set",
-    EntityNoun = "physical attribute set")]
 public class PhysicalAttributeSetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

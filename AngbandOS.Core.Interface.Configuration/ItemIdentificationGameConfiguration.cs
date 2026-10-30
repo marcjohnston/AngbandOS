@@ -8,7 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Item Identification", EntityNoun = "item identification")]
 public class ItemIdentificationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

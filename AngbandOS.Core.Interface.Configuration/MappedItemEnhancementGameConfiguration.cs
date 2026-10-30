@@ -3,7 +3,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Mapped Item Enhancement", EntityNoun = "mapped item enhancement")]
 public class MappedItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

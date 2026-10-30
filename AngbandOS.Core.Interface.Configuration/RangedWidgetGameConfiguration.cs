@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Ranged Widget",
-    EntityNoun = "ranged widget")]
 public class RangedWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationTupleItem(

@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Realm",
-    EntityNoun = "realm")]
 public class RealmGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

@@ -7,6 +7,12 @@ public class CollectionPropertyMetadata : PropertyMetadata
 {
     public CollectionPropertyMetadata(string propertyName) : base("collection", propertyName) { }
 
+    public new string? ForeignCollectionName
+    {
+        get => base.ForeignCollectionName;
+        set => base.ForeignCollectionName = value;
+    }
+
     /// <summary>
     /// Represents the metadata for the properties of the entities in the collection.
     /// </summary>

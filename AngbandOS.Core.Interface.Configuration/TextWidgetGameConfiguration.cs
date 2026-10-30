@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Text Widget",
-    EntityNoun = "text widget")]
 public class TextWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

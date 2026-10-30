@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Projectile Script Weighted Random",
-    EntityNoun = "projectile script weighted random")]
 public class ProjectileScriptWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationTupleItem(

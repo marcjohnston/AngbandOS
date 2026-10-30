@@ -8,7 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Item Factory", EntityNoun = "item factory")]
 public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

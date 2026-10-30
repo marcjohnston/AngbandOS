@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Timer Script",
-    EntityNoun = "timer script")]
 public class TimerScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

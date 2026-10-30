@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// Provides binding and layout settings for widgets that display an integer value.
 /// Properties are virtual to permit overriding in derived configurations or for test doubles.
 /// </remarks>
-[ConfigurationEntity(Title = "Integer Widget", EntityNoun = "integer widget")]
 public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     /// <summary>

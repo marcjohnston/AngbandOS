@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "View",
-    EntityNoun = "view")]
 public class ViewGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

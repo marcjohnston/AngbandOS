@@ -8,9 +8,6 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Wizard Command",
-    EntityNoun = "wizard command")]
 public class WizardCommandGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(

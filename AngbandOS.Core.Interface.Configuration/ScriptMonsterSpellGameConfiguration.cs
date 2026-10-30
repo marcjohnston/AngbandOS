@@ -2,9 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(
-    Title = "Script Monster Spell",
-    EntityNoun = "script monster spell")]
 public class ScriptMonsterSpellGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationTupleItem(

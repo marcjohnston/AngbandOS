@@ -2,7 +2,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[ConfigurationEntity(Title = "Item Filter", EntityNoun = "item filter")]
 public class ItemFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationMetadata(
