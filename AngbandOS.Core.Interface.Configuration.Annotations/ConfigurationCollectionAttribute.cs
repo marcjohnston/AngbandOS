@@ -26,5 +26,11 @@ public sealed class ConfigurationCollectionAttribute : Attribute
     /// </summary>
     public string? EntityNoun { get; set; }
 
+    /// <summary>
+    /// Returns the name of the collection for the items.  Multiple properties may contribute to the same collection (e.g. CauseWoundsMonsterSpells, ProjectileMonsterSpells, ScriptMonsterSpells and SummonMonsterSpells
+    /// all contribute to the MonsterSpells collection).
+    /// </summary>
     public string CollectionName { get; }
+
+    public string? EntityNamePropertyName { get; set; }
 }

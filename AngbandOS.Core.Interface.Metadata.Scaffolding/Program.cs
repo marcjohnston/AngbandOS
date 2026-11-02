@@ -349,7 +349,7 @@ static void WriteProperty(
 
         writer.WriteLine(
             $"{indentation}    EntityNamePropertyName = " +
-            $"\"GetKey\",");
+            $"\"{Escape(collection.EntityNamePropertyName ?? "GetKey")}\",");
     }
 
     writer.WriteLine(

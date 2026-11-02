@@ -47,7 +47,7 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
   public createTupleChild(tupleTypePropertyMetadata: PropertyMetadata, tupleIndex: number, tupleValues: any): PropertyMetadataAndConfiguration {
     const derivedTuplePropertyMetadata = new PropertyMetadata(
       tupleTypePropertyMetadata.type,
-      `Item${tupleIndex + 1}`, // This is how the serialization is naming the tuple fields
+      tupleTypePropertyMetadata.propertyName,
       tupleTypePropertyMetadata.title,
       tupleTypePropertyMetadata.categoryTitle,
       tupleTypePropertyMetadata.isNullable,

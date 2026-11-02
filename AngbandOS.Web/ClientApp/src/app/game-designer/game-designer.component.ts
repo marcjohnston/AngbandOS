@@ -246,7 +246,7 @@ export class GameDesignerComponent implements OnInit {
         return;
       }
 
-      // Store enum options by enum name.
+      // Store enum options by enum name in the enumMap.
       for (const jsonEnumMetadata of this.jsonGameMetadata.enums) {
         if (jsonEnumMetadata.name === undefined) {
           this._snackBar.open(`Metadata enum name is invalid after json deserialization.`, "", {
@@ -262,8 +262,8 @@ export class GameDesignerComponent implements OnInit {
           return;
         }
 
+        // Build the select options.
         const selectOptions: SelectOption[] = [];
-
         for (const jsonEnumOption of jsonEnumMetadata.options) {
           if (jsonEnumOption.name === undefined || jsonEnumOption.value === undefined) {
             this._snackBar.open(`Metadata enum ${jsonEnumMetadata.name} contains an invalid option after json deserialization.`, "", {
@@ -275,9 +275,19 @@ export class GameDesignerComponent implements OnInit {
           selectOptions.push(new SelectOption(jsonEnumOption.name, jsonEnumOption.value.toString()));
         }
 
+        // Ensure we did not send a duplicate.
+        if (this.enumMap.has(jsonEnumMetadata.name)) {
+          this._snackBar.open(`Metadata enum ${jsonEnumMetadata.name} is duplicate.`, "", {
+            duration: 5000
+          });
+          return;
+        }
+
+        // Preserve the enum map.
         this.enumMap.set(jsonEnumMetadata.name, selectOptions);
       }
 
+      // Now build the tree structure.
       for (var jsonPropertyMetadata of this.jsonGameMetadata.properties) {
         // We need to validate the json metadata before we can provide it to a tree node.
         const propertyMetadata = this.validateJsonPropertyMetadata("GameConfiguration", jsonPropertyMetadata);
@@ -287,15 +297,24 @@ export class GameDesignerComponent implements OnInit {
 
         switch (propertyMetadata.type) {
           case "collection":
+            // Get all of the entities for this collection from the current configuration. They will become child tree nodes.
             const entityTable: any[] | null = this.configuration[propertyMetadata.propertyName];
+
+            // Ensure the configuration matched the metadata.
             if (entityTable === null) {
               this._snackBar.open(`The ${propertyMetadata.propertyName} collection does not exist in the configuration.`, "", {
                 duration: 5000
               });
               return;
             }
+
+            // Build the child tree nodes that will be attached to this parent node.
             const childTreeNodes: TreeNode[] = [];
+
+            // While we build the child nodes, each item in this "physical" collection becomes a select option in the foreign key collection.
             const selectOptions: SelectOption[] = [];
+
+            // Enumerate the entities in this "physical" collection.
             for (var entity of entityTable) {
               // Get the key value for the entity.
               const keyValue = entity[propertyMetadata.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
@@ -319,8 +338,9 @@ export class GameDesignerComponent implements OnInit {
             // Add the keys to the shared foreign collection map without replacing
             // options contributed by earlier configuration collections.
             const collectionName = propertyMetadata.foreignCollectionName ?? propertyMetadata.propertyName;
-            const existingSelectOptions = this.collectionMap.get(collectionName) ?? [];
 
+            // Now add the select options to the foreign key collection.  Do not overwrite the existing items.
+            const existingSelectOptions = this.collectionMap.get(collectionName) ?? [];
             this.collectionMap.set(collectionName, [
               ...existingSelectOptions,
               ...selectOptions

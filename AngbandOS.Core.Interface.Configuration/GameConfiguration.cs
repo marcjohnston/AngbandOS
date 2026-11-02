@@ -1008,7 +1008,8 @@ public class GameConfiguration
         DataType = "PatronGameConfiguration[]?")]
     [ConfigurationCollection(
         "Patrons",
-        EntityNoun = "Patron")]
+        EntityNoun = "Patron",
+        EntityNamePropertyName = "LongName")]
     public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
 
     [ConfigurationMetadata(

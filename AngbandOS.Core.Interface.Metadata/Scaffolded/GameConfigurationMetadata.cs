@@ -1109,7 +1109,7 @@ public static class GameConfigurationMetadata
                     ForeignCollectionName = "Patrons",
                     EntityNoun = "Patron",
                     EntityKeyPropertyName = "GetKey",
-                    EntityNamePropertyName = "GetKey",
+                    EntityNamePropertyName = "ShortName",
                     Description = "Collection of patron configurations.",
                     IsNullable = true,
                     Title = "Patrons",
