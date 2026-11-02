@@ -249,6 +249,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             // Retrieve orphaned game recoveries.
             Web.Interface.GameRecovery[] recoveryGames = await context.GameRecoveries
                 .Where(_gameRecovery => !savedGameGuids.Contains(_gameRecovery.GameGuid.ToString()) && _gameRecovery.UserId == userId)
+                .OrderByDescending(_gameRecovery => _gameRecovery.LastPlayed) 
                 .Select(_gameReplay => new Web.Interface.GameRecovery()
                     {
                         Id = _gameReplay.Id,
