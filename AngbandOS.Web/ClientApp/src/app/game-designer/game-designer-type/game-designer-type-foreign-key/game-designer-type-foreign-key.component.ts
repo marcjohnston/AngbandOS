@@ -4,6 +4,7 @@ import { SelectOption } from '../../select-option';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-game-designer-type-foreign-key',
@@ -24,10 +25,33 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
   public unmodifiedValue: string | null | undefined = undefined;
   public errorMessage: string = "";
 
-  constructor() { }
+  constructor(
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.unmodifiedValue = this.getValue();
+
+    const foreignCollectionName =
+      this.activePropertyMetadataAndConfiguration?.propertyMetadata.foreignCollectionName;
+
+    if (foreignCollectionName === null || foreignCollectionName === undefined) {
+      this._snackBar.open(
+        'The foreign-key metadata does not specify a foreign collection name.',
+        '',
+        { duration: 5000 }
+      );
+      return;
+    }
+
+    if (this.collectionMap === undefined || !this.collectionMap.has(foreignCollectionName)) {
+      this._snackBar.open(
+        `The foreign collection '${foreignCollectionName}' could not be found on the '${this.activePropertyMetadataAndConfiguration?.propertyMetadata.propertyName}' property.`,
+        '',
+        { duration: 5000 }
+      );
+      return;
+    }
   }
 
   public undo() {
