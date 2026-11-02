@@ -12,8 +12,10 @@ public static class ViewMetadata
         {
             return new PropertyMetadata[]
             {
-                new StringsPropertyMetadata("WidgetNames")
+                new ForeignKeysPropertyMetadata("WidgetNames")
                 {
+                    ForeignCollectionName = "Widgets",
+                    Inline = false,
                     Description = "Specifies the names of the widgets displayed in the view.",
                     IsNullable = false,
                     Title = "Widget Names",

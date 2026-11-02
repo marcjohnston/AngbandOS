@@ -8,5 +8,8 @@ public class ViewGameConfiguration : NonCompositeSingletonGameConfiguration
         Title = "Widget Names",
         Summary = "Specifies the names of the widgets displayed in the view.",
         DataType = "string[]")]
+    [ConfigurationForeignKey(
+        "Widgets", 
+        Inline = false)]
     public virtual string[] WidgetNames { get; set; }
 }

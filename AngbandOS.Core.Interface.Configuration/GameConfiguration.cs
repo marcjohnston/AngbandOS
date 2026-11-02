@@ -764,7 +764,7 @@ public class GameConfiguration
         Summary = "Collection of conditional widget configurations.",
         DataType = "ConditionalWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "ConditionalWidgets",
+        "Widgets",
         EntityNoun = "Conditional Widget")]
     public virtual ConditionalWidgetGameConfiguration[]? ConditionalWidgets { get; set; } = null;
 
@@ -773,7 +773,7 @@ public class GameConfiguration
         Summary = "Collection of date widget configurations.",
         DataType = "DateWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "DateWidgets",
+        "Widgets",
         EntityNoun = "Date Widget")]
     public virtual DateWidgetGameConfiguration[]? DateWidgets { get; set; } = null;
 
@@ -782,7 +782,7 @@ public class GameConfiguration
         Summary = "Collection of int widget configurations.",
         DataType = "IntWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "IntWidgets",
+        "Widgets",
         EntityNoun = "Int Widget")]
     public virtual IntWidgetGameConfiguration[]? IntWidgets { get; set; } = null;
 
@@ -791,7 +791,7 @@ public class GameConfiguration
         Summary = "Collection of map widget configurations.",
         DataType = "MapWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "MapWidgets",
+        "Widgets",
         EntityNoun = "Map Widget")]
     public virtual MapWidgetGameConfiguration[]? MapWidgets { get; set; } = null;
 
@@ -800,7 +800,7 @@ public class GameConfiguration
         Summary = "Collection of max-ranged widget configurations.",
         DataType = "MaxRangedWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "MaxRangedWidgets",
+        "Widgets",
         EntityNoun = "Max Ranged Widget")]
     public virtual MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets { get; set; } = null;
 
@@ -809,7 +809,7 @@ public class GameConfiguration
         Summary = "Collection of ranged widget configurations.",
         DataType = "RangedWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "RangedWidgets",
+        "Widgets",
         EntityNoun = "Ranged Widget")]
     public virtual RangedWidgetGameConfiguration[]? RangedWidgets { get; set; } = null;
 
@@ -827,7 +827,7 @@ public class GameConfiguration
         Summary = "Collection of string widget configurations.",
         DataType = "StringWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "StringWidgets",
+        "Widgets",
         EntityNoun = "String Widget")]
     public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
 
@@ -836,7 +836,7 @@ public class GameConfiguration
         Summary = "Collection of game-message widget configurations.",
         DataType = "GameMessageWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "GameMessageWidgets",
+        "Widgets",
         EntityNoun = "Game Message Widget")]
     public virtual GameMessageWidgetGameConfiguration[]? GameMessageWidgets { get; set; } = null;
 
@@ -845,7 +845,7 @@ public class GameConfiguration
         Summary = "Collection of label widget configurations.",
         DataType = "LabelWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "LabelWidgets",
+        "Widgets",
         EntityNoun = "Label Widget")]
     public virtual LabelWidgetGameConfiguration[]? LabelWidgets { get; set; } = null;
 
@@ -854,7 +854,7 @@ public class GameConfiguration
         Summary = "Collection of time widget configurations.",
         DataType = "TimeWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "TimeWidgets",
+        "Widgets",
         EntityNoun = "Time Widget")]
     public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
 
@@ -863,7 +863,7 @@ public class GameConfiguration
         Summary = "Collection of text widget configurations used for nullable string text areas.",
         DataType = "TextWidgetGameConfiguration[]?")]
     [ConfigurationCollection(
-        "NullableStringsTextAreaWidgets",
+        "Widgets",
         EntityNoun = "Text Widget")]
     public virtual TextWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
 

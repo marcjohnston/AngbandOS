@@ -782,7 +782,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("ConditionalWidgets")
                 {
                     PropertyMetadatas = ConditionalWidgetMetadata.Metadata,
-                    ForeignCollectionName = "ConditionalWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Conditional Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -794,7 +794,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("DateWidgets")
                 {
                     PropertyMetadatas = DateWidgetMetadata.Metadata,
-                    ForeignCollectionName = "DateWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Date Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -806,7 +806,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("IntWidgets")
                 {
                     PropertyMetadatas = IntWidgetMetadata.Metadata,
-                    ForeignCollectionName = "IntWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Int Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -818,7 +818,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MapWidgets")
                 {
                     PropertyMetadatas = MapWidgetMetadata.Metadata,
-                    ForeignCollectionName = "MapWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Map Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -830,7 +830,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("MaxRangedWidgets")
                 {
                     PropertyMetadatas = MaxRangedWidgetMetadata.Metadata,
-                    ForeignCollectionName = "MaxRangedWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Max Ranged Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -842,7 +842,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("RangedWidgets")
                 {
                     PropertyMetadatas = RangedWidgetMetadata.Metadata,
-                    ForeignCollectionName = "RangedWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Ranged Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -866,7 +866,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("StringWidgets")
                 {
                     PropertyMetadatas = StringWidgetMetadata.Metadata,
-                    ForeignCollectionName = "StringWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "String Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -878,7 +878,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("GameMessageWidgets")
                 {
                     PropertyMetadatas = GameMessageWidgetMetadata.Metadata,
-                    ForeignCollectionName = "GameMessageWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Game Message Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -890,7 +890,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("LabelWidgets")
                 {
                     PropertyMetadatas = LabelWidgetMetadata.Metadata,
-                    ForeignCollectionName = "LabelWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Label Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -902,7 +902,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("TimeWidgets")
                 {
                     PropertyMetadatas = TimeWidgetMetadata.Metadata,
-                    ForeignCollectionName = "TimeWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Time Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -914,7 +914,7 @@ public static class GameConfigurationMetadata
                 new CollectionPropertyMetadata("NullableStringsTextAreaWidgets")
                 {
                     PropertyMetadatas = TextWidgetMetadata.Metadata,
-                    ForeignCollectionName = "NullableStringsTextAreaWidgets",
+                    ForeignCollectionName = "Widgets",
                     EntityNoun = "Text Widget",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
@@ -1109,7 +1109,7 @@ public static class GameConfigurationMetadata
                     ForeignCollectionName = "Patrons",
                     EntityNoun = "Patron",
                     EntityKeyPropertyName = "GetKey",
-                    EntityNamePropertyName = "ShortName",
+                    EntityNamePropertyName = "LongName",
                     Description = "Collection of patron configurations.",
                     IsNullable = true,
                     Title = "Patrons",
