@@ -14,50 +14,51 @@ public static class StringWidgetMetadata
             {
                 new StringPropertyMetadata("StringValueName")
                 {
-                    Description = "Select the value for this widget to render?",
+                    Description = "Specifies the name of the string value displayed by the widget.",
                     IsNullable = false,
-                    Title = "Value to Render",
+                    Title = "String Value Name",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
-                    Description = "What foreground color should be used to render the text?",
+                    Description = "Specifies the color used to draw the widget text.",
                     IsNullable = false,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("X")
                 {
-                    Description = "What is the x-coordinate where this widget should be placed on the view?",
+                    Description = "Specifies the horizontal coordinate where the widget is drawn.",
                     IsNullable = false,
                     Title = "X",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Y")
                 {
-                    Description = "What is the x-coordinate where this widget should be placed on the view?",
+                    Description = "Specifies the vertical coordinate where the widget is drawn.",
                     IsNullable = false,
                     Title = "Y",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
-                    Description = "What is the width for this widget? Use auto-size to make the widget the same width as the text being rendered.",                    IsNullable = true,
+                    Description = "Specifies the width of the widget. When null, the width is based on the text length.",
+                    IsNullable = true,
                     Title = "Width",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("JustificationName")
                 {
-                    Description = "How should the text be justified within the specified width?  If the width is auto-size, then this justification is ignored.",
+                    Description = "Specifies the name of the justification used to lay out the widget text.",
                     IsNullable = false,
-                    Title = "Justification",
+                    Title = "Justification Name",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ChangeTrackerNames")
                 {
                     Description = "Specifies the property names that participate in change tracking.",
                     IsNullable = true,
-                    Title = "Change Trackers",
+                    Title = "Change Tracker Names",
                     CategoryTitle = "",
                 },
             };
