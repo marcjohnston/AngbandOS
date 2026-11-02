@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text.Json;
-
 namespace AngbandOS.Web.Controllers
 {
     [Route("apiv1")]
@@ -59,6 +58,7 @@ namespace AngbandOS.Web.Controllers
             if (user == null)
                 return Unauthorized();
             AvailableGames availableGames = await PersistentStorage.ListGamesAsync(user.Id);
+            availableGames.SavedGames = availableGames.SavedGames.OrderByDescending(s => s.IsAlive).ThenByDescending(s => s.SavedDateTime).ToArray();
             return Ok(availableGames);
         }
 
