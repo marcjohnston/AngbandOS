@@ -15,20 +15,20 @@ public static class ItemEnhancementMetadata
                 new TuplePropertyMetadata("SummationAttributeAndExpressionBindings")
                 {
                     Description = "The attribute names and expressions used to calculate summation-based item enhancements.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Summation Attribute and Expression Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("AttributeName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Attribute Name",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("Expression")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Expression",
                             CategoryTitle = "",
                         },
@@ -37,20 +37,20 @@ public static class ItemEnhancementMetadata
                 new TuplePropertyMetadata("BitwiseOrAttributeAndExpressionBindings")
                 {
                     Description = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Bitwise OR Attribute and Expression Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("AttributeName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Attribute Name",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("BooleanExpression")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Boolean Expression",
                             CategoryTitle = "",
                         },
@@ -59,20 +59,20 @@ public static class ItemEnhancementMetadata
                 new TuplePropertyMetadata("ScriptsAttributeAndScriptBindings")
                 {
                     Description = "The attribute names and script names used to apply scripts as item enhancements.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Scripts Attribute and Script Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("AttributeName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Attribute Name",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("ScriptNames")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Script Names",
                             CategoryTitle = "",
                         },
@@ -81,35 +81,35 @@ public static class ItemEnhancementMetadata
                 new StringsPropertyMetadata("ApplicableItemFactoryBindingKeys")
                 {
                     Description = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Applicable Item Factory Binding Keys",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AdditionalItemEnhancementWeightedRandomBindingKey")
                 {
                     Description = "The binding key of the weighted random configuration used to select an additional item enhancement.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Additional Item Enhancement Weighted Random Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("FriendlyName")
                 {
                     Description = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Friendly Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ActivationName")
                 {
                     Description = "The name of the activation applied to the item, or null when the item cannot be activated.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Activation Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ArtifactBiasWeightedRandomBindingKey")
                 {
                     Description = "The binding key of the weighted random configuration used to select an artifact bias.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Artifact Bias Weighted Random Binding Key",
                     CategoryTitle = "",
                 },

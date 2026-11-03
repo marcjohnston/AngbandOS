@@ -357,8 +357,8 @@ static void WriteProperty(
         $"\"{Escape(metadata.Summary ?? string.Empty)}\",");
 
     writer.WriteLine(
-        $"{indentation}    IsNullable = " +
-        $"{IsNullable(dataType).ToString().ToLowerInvariant()},");
+        $"{indentation}    LabelIfNullable = " +
+        $"{(DataTypeIsNullable(dataType) ? $"\"{Escape(metadata.LabelIfNullable ?? "Default")}\"" : "null")},");
 
     if (metadata.Title != null)
     {
@@ -509,11 +509,9 @@ static bool IsArray(string dataType)
     return dataType.Contains("[]", StringComparison.Ordinal);
 }
 
-static bool IsNullable(string dataType)
+static bool DataTypeIsNullable(string dataType)
 {
-    return dataType.TrimEnd().EndsWith(
-        "?",
-        StringComparison.Ordinal);
+    return dataType.TrimEnd().EndsWith("?", StringComparison.Ordinal);
 }
 
 static string RemoveNullableAndArraySuffixes(string dataType)
@@ -672,8 +670,8 @@ static void WriteTupleTypes(
         }
 
         writer.WriteLine(
-            $"{indentation}            IsNullable = " +
-            $"{IsNullable(tupleItemDataType).ToString().ToLowerInvariant()},");
+            $"{indentation}            LabelIfNullable = " +
+            $"{(DataTypeIsNullable(tupleItemDataType) ? "\"Null\"" : "null")},");
 
         if (tupleItem.Title != null)
         {

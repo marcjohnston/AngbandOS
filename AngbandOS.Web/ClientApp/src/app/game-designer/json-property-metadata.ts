@@ -6,7 +6,6 @@ export class JsonPropertyMetadata {
   public propertyName: string | undefined = undefined;
   public title: string | null | undefined = undefined;
   public categoryTitle: string | undefined = undefined;
-  public isNullable: boolean | undefined = undefined;
   public description: string | null | undefined = undefined;
   public defaultValue: string[] | null | undefined = undefined;
   public propertyMetadatas: JsonPropertyMetadata[] | null | undefined = undefined;
@@ -15,4 +14,5 @@ export class JsonPropertyMetadata {
   public entityNounTitle: string | null | undefined = undefined;
   public entityNoun: string | null | undefined = undefined;
   public foreignCollectionName: string | null | undefined = undefined;
+  public labelIfNullable: string | null | undefined = undefined;
 }

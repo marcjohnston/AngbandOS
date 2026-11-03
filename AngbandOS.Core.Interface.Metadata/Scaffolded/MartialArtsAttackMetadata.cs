@@ -15,49 +15,49 @@ public static class MartialArtsAttackMetadata
                 new IntegerPropertyMetadata("Chance")
                 {
                     Description = "Specifies the chance of performing the martial arts attack.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Chance",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Dd")
                 {
                     Description = "Specifies the number of damage dice used by the attack.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Damage Dice",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Desc")
                 {
                     Description = "Specifies the description of the martial arts attack.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Description",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Ds")
                 {
                     Description = "Specifies the number of sides on each damage die.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Damage Sides",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MartialArtsEffectBindingKey")
                 {
                     Description = "Specifies the binding key of the effect applied by the martial arts attack.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Martial Arts Effect Binding Key",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MinLevel")
                 {
                     Description = "Specifies the minimum level at which the martial arts attack is available.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Minimum Level",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsDefault")
                 {
                     Description = "Determines whether the martial arts attack is the default attack.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Default",
                     CategoryTitle = "",
                 },

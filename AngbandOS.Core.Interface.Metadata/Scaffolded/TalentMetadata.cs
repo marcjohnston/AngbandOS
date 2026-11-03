@@ -15,42 +15,42 @@ public static class TalentMetadata
                 new StringPropertyMetadata("Name")
                 {
                     Description = "Specifies the name of the talent.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Level")
                 {
                     Description = "Specifies the level required to use the talent.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Level",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ManaCost")
                 {
                     Description = "Specifies the mana cost of using the talent.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Mana Cost",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BaseFailure")
                 {
                     Description = "Specifies the base failure chance of using the talent.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Base Failure",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("UseScriptBindingKey")
                 {
                     Description = "Specifies the binding key of the script used by the talent.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Use Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("LearnedKnowledgeBindingKey")
                 {
                     Description = "Specifies the optional binding key of the knowledge learned from the talent.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Learned Knowledge Binding Key",
                     CategoryTitle = "",
                 },

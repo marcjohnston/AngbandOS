@@ -15,21 +15,21 @@ public static class InnateTotalsMetadata
                 new StringPropertyMetadata("CharacterClassBindingKey")
                 {
                     Description = "The binding key of the character class associated with these innate totals.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Character Class Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RaceBindingKey")
                 {
                     Description = "The binding key of the race associated with these innate totals.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Race Binding Key",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MaxInnates")
                 {
                     Description = "The maximum number of innate abilities available for each innate ability category.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Maximum Innates",
                     CategoryTitle = "",
                 },

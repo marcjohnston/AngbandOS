@@ -17,7 +17,7 @@ public static class RaceGenderMetadata
                     ForeignCollectionName = "Races",
                     Inline = false,
                     Description = "Specifies the binding key for the race.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Race Binding Key",
                     CategoryTitle = "",
                 },
@@ -26,14 +26,14 @@ public static class RaceGenderMetadata
                     ForeignCollectionName = "Genders",
                     Inline = false,
                     Description = "Specifies the binding key for the gender.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Gender Binding Key",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("PhysicalAttributesWeightedRandomBindings")
                 {
                     Description = "Specifies the weighted random bindings for the race gender's physical attribute sets.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Physical Attributes Weighted Random Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
@@ -41,13 +41,13 @@ public static class RaceGenderMetadata
                         new ForeignKeyPropertyMetadata("PhysicalAttributesBindingKey")
                         {
                             ForeignCollectionName = "PhysicalAttributeSets",
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Physical Attributes Binding Key",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Weight")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Weight",
                             CategoryTitle = "",
                         },

@@ -15,14 +15,14 @@ public static class ChestTrapMetadata
                 new StringPropertyMetadata("ActivationGridTileScriptBindingKey")
                 {
                     Description = "The binding key identifying the grid tile script activated by the chest trap.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Activation Grid Tile Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Description")
                 {
                     Description = "The description of the chest trap.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Description",
                     CategoryTitle = "",
                 },

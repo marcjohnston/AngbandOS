@@ -15,7 +15,7 @@ public static class DurationLearnedKnowledgeMetadata
                 new StringPropertyMetadata("DurationExpressionText")
                 {
                     Description = "The expression that defines the duration value learned from this knowledge.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Duration Expression Text",
                     CategoryTitle = "",
                 },

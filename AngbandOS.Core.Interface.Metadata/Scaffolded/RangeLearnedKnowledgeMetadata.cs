@@ -15,7 +15,7 @@ public static class RangeLearnedKnowledgeMetadata
                 new StringPropertyMetadata("RangeExpressionText")
                 {
                     Description = "The expression that defines the range value learned from this knowledge.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Range Expression Text",
                     CategoryTitle = "",
                 },

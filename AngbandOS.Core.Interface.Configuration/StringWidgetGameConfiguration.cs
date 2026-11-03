@@ -31,6 +31,7 @@ public class StringWidgetGameConfiguration : NonCompositeSingletonGameConfigurat
     [ConfigurationMetadata(
         Title = "Width",
         Summary = "Specifies the width of the widget. When null, the width is based on the text length.",
+        LabelIfNullable = "Auto-size",
         DataType = "int?")]
     public virtual int? Width { get; set; } = null;
 

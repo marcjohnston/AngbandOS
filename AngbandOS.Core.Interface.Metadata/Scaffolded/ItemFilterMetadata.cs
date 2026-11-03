@@ -15,154 +15,154 @@ public static class ItemFilterMetadata
                 new StringPropertyMetadata("AttributeFilterBindingKey")
                 {
                     Description = "Specifies the binding key for the attribute filter to apply.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Attribute Filter Binding Key",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("AnyMatchingItemClassNames")
                 {
                     Description = "Specifies item class names where an item matches if it belongs to any of the specified classes.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Any Matching Item Class Names",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("AllNonMatchingItemClassNames")
                 {
                     Description = "Specifies item class names that an item must not belong to for the filter to match.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "All Non-Matching Item Class Names",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("AnyMatchingItemFactoryNames")
                 {
                     Description = "Specifies item factory names where an item matches if it was created by any of the specified factories.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Any Matching Item Factory Names",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("AllNonMatchingItemFactoryNames")
                 {
                     Description = "Specifies item factory names that an item must not have been created by for the filter to match.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "All Non-Matching Item Factory Names",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeActivated")
                 {
                     Description = "Specifies whether the item must be capable of being activated.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Activated",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeAimed")
                 {
                     Description = "Specifies whether the item must be capable of being aimed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Aimed",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeFired")
                 {
                     Description = "Specifies whether the item must be capable of being fired.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Fired",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeQuaffed")
                 {
                     Description = "Specifies whether the item must be capable of being quaffed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Quaffed",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeRead")
                 {
                     Description = "Specifies whether the item must be capable of being read.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Read",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeRecharged")
                 {
                     Description = "Specifies whether the item must be capable of being recharged.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Recharged",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeUsed")
                 {
                     Description = "Specifies whether the item must be capable of being used.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Used",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeZapped")
                 {
                     Description = "Specifies whether the item must be capable of being zapped.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Be Zapped",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanProjectArrows")
                 {
                     Description = "Specifies whether the item must be capable of projecting arrows.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Can Project Arrows",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsKnown")
                 {
                     Description = "Specifies whether the item must be known.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Is Known",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsOfValue")
                 {
                     Description = "Specifies whether the item must be considered valuable.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Is Of Value",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsTooHeavyToWield")
                 {
                     Description = "Specifies whether the item must be too heavy for the player to wield.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Is Too Heavy To Wield",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsUsableSpellBook")
                 {
                     Description = "Specifies whether the item must be a usable spell book.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Is Usable Spell Book",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ArtifactBiasCanSlay")
                 {
                     Description = "Specifies whether the item's artifact bias must be capable of slaying a target.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Artifact Bias Can Slay",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ArtifactBias")
                 {
                     Description = "Specifies whether the item must have an artifact bias.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Artifact Bias",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsCursed")
                 {
                     Description = "Specifies whether the item must be cursed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Is Cursed",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HeavyCurse")
                 {
                     Description = "Specifies whether the item must have a heavy curse.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Heavy Curse",
                     CategoryTitle = "",
                 },

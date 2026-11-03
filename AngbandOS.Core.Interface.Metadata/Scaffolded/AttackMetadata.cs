@@ -15,56 +15,56 @@ public static class AttackMetadata
                 new StringPropertyMetadata("MonsterAction")
                 {
                     Description = "The action message displayed when the attack targets another monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Monster Action",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("PlayerActionMessages")
                 {
                     Description = "The action messages displayed when the attack targets the player.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Player Action Messages",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("KnowledgeAction")
                 {
                     Description = "The action message displayed when a description of the attack is rendered in the player's knowledge.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Knowledge Action",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackTouchesTarget")
                 {
                     Description = "Determines whether the attack requires touching the target.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attack Touches Target",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackAwakensTarget")
                 {
                     Description = "Determines whether the attack awakens the target.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attack Awakens Target",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackStunsTarget")
                 {
                     Description = "Determines whether the attack stuns the target.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attack Stuns Target",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttackCutsTarget")
                 {
                     Description = "Determines whether the attack cuts the target.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attack Cuts Target",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RendersMissMessage")
                 {
                     Description = "Determines whether a message is rendered when the attack touches the target but misses.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Renders Miss Message",
                     CategoryTitle = "",
                 },

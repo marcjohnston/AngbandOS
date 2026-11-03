@@ -15,20 +15,20 @@ public static class ProjectileScriptWeightedRandomMetadata
                 new TuplePropertyMetadata("NameAndWeightBindings")
                 {
                     Description = "Specifies the projectile script names and their associated weights used for weighted random selection.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name and Weight Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("Item1")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Item 1",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Item2")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Item 2",
                             CategoryTitle = "",
                         },
@@ -37,14 +37,14 @@ public static class ProjectileScriptWeightedRandomMetadata
                 new StringPropertyMetadata("LearnedDetails")
                 {
                     Description = "Specifies the details revealed when the projectile script is learned.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Learned Details",
                     CategoryTitle = "",
                 },
                 new EnumPropertyMetadata("LearnedDetailsMode")
                 {
                     Description = "Specifies how the learned details are determined.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Learned Details Mode",
                     CategoryTitle = "",
                     EnumName = "LearnedDetailsWeightedRandomEnum",

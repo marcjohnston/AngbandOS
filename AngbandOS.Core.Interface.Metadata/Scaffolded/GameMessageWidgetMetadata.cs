@@ -15,35 +15,35 @@ public static class GameMessageWidgetMetadata
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "The color used to draw the widget's text.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("X")
                 {
                     Description = "X-coordinate (horizontal) of the widget's top-left corner on the Form.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "X",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Y")
                 {
                     Description = "Y-coordinate (vertical) of the widget's top-left corner on the Form.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Y",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
                     Description = "Width of the widget; when null, the widget should extend to the remaining width of the screen.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Width",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MorePrompt")
                 {
                     Description = "Text used for the \"more\" prompt when message output is paused.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "More Prompt",
                     CategoryTitle = "",
                 },

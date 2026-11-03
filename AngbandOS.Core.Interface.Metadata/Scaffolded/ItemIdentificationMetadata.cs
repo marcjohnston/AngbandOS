@@ -15,21 +15,21 @@ public static class ItemIdentificationMetadata
                 new StringPropertyMetadata("AttributeFilterBindingKey")
                 {
                     Description = "Specifies the binding key for the attribute filter used to identify the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attribute Filter Binding Key",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("InterpolationExpressionAttributeNames")
                 {
                     Description = "Specifies the attribute names whose values are available for interpolation in the effect description.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Interpolation Expression Attribute Names",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("EffectDescription")
                 {
                     Description = "Specifies the description of the effect produced when the item is identified.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Effect Description",
                     CategoryTitle = "",
                 },

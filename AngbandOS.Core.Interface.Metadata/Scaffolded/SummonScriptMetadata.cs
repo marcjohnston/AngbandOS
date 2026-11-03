@@ -15,63 +15,63 @@ public static class SummonScriptMetadata
                 new BooleanPropertyMetadata("Pet")
                 {
                     Description = "Returns true, to summon a friendly monster (a.k.a pet); false, otherwise. Returns false, by default.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Pet",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("GroupBooleanExpression")
                 {
                     Description = "Returns a boolean expression that is computed to determine whether the summoning of the monster will produce a group of like-monsters. Returns true, by default.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Group Boolean Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MonsterFilterBindingKey")
                 {
                     Description = "The binding key of the monster filter used to select monsters for summoning.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Monster Filter Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("LevelRollExpression")
                 {
                     Description = "The expression used to determine the level of summoned monsters.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Level Roll Expression",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("PreMessages")
                 {
                     Description = "The messages displayed before summoning is attempted.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Pre-Messages",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("SuccessMessages")
                 {
                     Description = "The messages displayed when summoning succeeds.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Success Messages",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("FailureMessages")
                 {
                     Description = "The messages displayed when summoning fails.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Failure Messages",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("LearnedDetails")
                 {
                     Description = "The details displayed for the learned summoning script.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Learned Details",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Used")
                 {
                     Description = "Determines whether the summoning script is used.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Used",
                     CategoryTitle = "",
                 },

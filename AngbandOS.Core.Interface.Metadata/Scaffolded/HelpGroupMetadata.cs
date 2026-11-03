@@ -15,14 +15,14 @@ public static class HelpGroupMetadata
                 new IntegerPropertyMetadata("SortIndex")
                 {
                     Description = "The order in which the help group is displayed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Sort Index",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Title")
                 {
                     Description = "The title of the help group.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Title",
                     CategoryTitle = "",
                 },

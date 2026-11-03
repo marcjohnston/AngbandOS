@@ -15,49 +15,49 @@ public static class VaultMetadata
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "Specifies the display color of the vault.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "Specifies the name of the vault.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Category")
                 {
                     Description = "Specifies the category of the vault.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Category",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Height")
                 {
                     Description = "Specifies the height of the vault.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Height",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Rating")
                 {
                     Description = "Specifies the difficulty rating of the vault.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Rating",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Text")
                 {
                     Description = "Specifies the layout text of the vault.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Text",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
                     Description = "Specifies the width of the vault.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Width",
                     CategoryTitle = "",
                 },

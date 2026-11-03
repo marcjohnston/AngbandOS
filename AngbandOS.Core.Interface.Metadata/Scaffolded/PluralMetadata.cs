@@ -15,7 +15,7 @@ public static class PluralMetadata
                 new StringPropertyMetadata("PluralForm")
                 {
                     Description = "Specifies the pluralized form of the key.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Plural Form",
                     CategoryTitle = "",
                 },

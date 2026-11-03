@@ -2,8 +2,8 @@
   <div id="select-div">
     <select #select [ngModel]="getValue()" (change)="setValue()">
       <ng-container *ngIf="collectionMap !== undefined">
-        <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable">
-          <option value=""></option>
+        <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null">
+          <option value="">{{activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}</option>
         </ng-container>
         <ng-container *ngFor="let selectOption of collectionMap.get(this.activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName!)">
           <option value="{{selectOption.value}}">{{selectOption.text}}</option>

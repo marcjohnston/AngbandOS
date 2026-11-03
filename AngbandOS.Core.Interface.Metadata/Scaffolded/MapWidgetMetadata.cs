@@ -15,21 +15,21 @@ public static class MapWidgetMetadata
                 new IntegerPropertyMetadata("X")
                 {
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "X",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Y")
                 {
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Y",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ChangeTrackerNames")
                 {
                     Description = "Specifies the property names that participate in change tracking.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Change Tracker Names",
                     CategoryTitle = "",
                 },

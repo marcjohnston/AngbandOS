@@ -15,137 +15,137 @@ public static class ItemFactoryMetadata
                 new StringPropertyMetadata("ItemEnhancementBindingKey")
                 {
                     Description = "The binding key of the item enhancement applied to items created by this factory.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Item Enhancement Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PreassignedItemFlavorBindingKey")
                 {
                     Description = "The binding key of the item flavor assigned to items created by this factory, or null to allow the item class to assign a random flavor.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Preassigned Item Flavor Binding Key",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("NegativeBonusDamageRepresentsBroken")
                 {
                     Description = "Determines whether a negative bonus damage value represents a broken item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Negative Bonus Damage Represents Broken",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("NegativeBonusArmorClassRepresentsBroken")
                 {
                     Description = "Determines whether a negative bonus armor class value represents a broken item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Negative Bonus Armor Class Represents Broken",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("NegativeBonusHitRepresentsBroken")
                 {
                     Description = "Determines whether a negative bonus hit value represents a broken item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Negative Bonus Hit Represents Broken",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "The color used to render items of this type.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey")
                 {
                     Description = "The binding key of the weighted random configuration used to select slaying item enhancements for random artifacts.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Slaying Random Artifact Item Enhancement Weighted Random Binding Key",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("RandomArtifactBonusArmorCeiling")
                 {
                     Description = "The maximum bonus armor value allowed when creating a random artifact, or null when no bonus should be added.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Random Artifact Bonus Armor Ceiling",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("RandomArtifactBonusHitCeiling")
                 {
                     Description = "The maximum bonus hit value allowed when creating a random artifact, or null when no bonus should be added.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Random Artifact Bonus Hit Ceiling",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("RandomArtifactBonusDamageCeiling")
                 {
                     Description = "The maximum bonus damage value allowed when creating a random artifact, or null when no bonus should be added.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Random Artifact Bonus Damage Ceiling",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RefillScriptBindingKey")
                 {
                     Description = "The binding key of the script used to refill the item, or null when the item cannot be refilled.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Refill Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SymbolBindingKey")
                 {
                     Description = "The binding key of the symbol used to render the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Symbol Binding Key",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeWeaponOfLaw")
                 {
                     Description = "Determines whether the item can be a weapon of law.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Weapon of Law",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeWeaponOfSharpness")
                 {
                     Description = "Determines whether the item can be a weapon of sharpness.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Weapon of Sharpness",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CapableOfVorpalSlaying")
                 {
                     Description = "Determines whether the item is capable of vorpal slaying.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Capable of Vorpal Slaying",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("UseBindingTuple")
                 {
                     Description = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Use Binding Tuple",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("UseScriptBindingKey")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Use Script Binding Key",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("InitialChargesRollExpression")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Initial Charges Roll Expression",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("PerChargeValue")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Per Charge Value",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("ManaEquivalent")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Mana Equivalent",
                             CategoryTitle = "",
                         },
@@ -154,26 +154,26 @@ public static class ItemFactoryMetadata
                 new TuplePropertyMetadata("QuaffBindingTuple")
                 {
                     Description = "The quaff script name, optional smash script name, and mana equivalent used when the item is quaffed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Quaff Binding Tuple",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("QuaffScriptName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Quaff Script Name",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("SmashScriptName")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Smash Script Name",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("ManaEquivalent")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Mana Equivalent",
                             CategoryTitle = "",
                         },
@@ -182,74 +182,74 @@ public static class ItemFactoryMetadata
                 new StringsPropertyMetadata("AmmunitionItemFactoryBindingKeys")
                 {
                     Description = "The binding keys of the item factories used as ammunition for this item, or null when the item is not a ranged weapon.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Ammunition Item Factory Binding Keys",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanSpikeDoorClosed")
                 {
                     Description = "Determines whether the item can be used to spike a door closed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Spike Door Closed",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanProjectArrows")
                 {
                     Description = "Determines whether the item is a bow that can project arrows.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Project Arrows",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("EnchantmentMaximumCount")
                 {
                     Description = "The maximum number of items that can be enchanted at one time.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Enchantment Maximum Count",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsMagical")
                 {
                     Description = "Determines whether the item is magical and is noticed by the detect magical scroll.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Magical",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ValuePerTurnOfLight")
                 {
                     Description = "The value of each turn of light for light sources.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Value Per Turn of Light",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("AimingBindingTuple")
                 {
                     Description = "The activation script name, initial charges roll expression, per-charge value, and mana value for an item that can be aimed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Aiming Binding Tuple",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("ActivationScriptName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Activation Script Name",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("InitialChargesCountRollExpression")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Initial Charges Count Roll Expression",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("PerChargeValue")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Per Charge Value",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("ManaValue")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Mana Value",
                             CategoryTitle = "",
                         },
@@ -258,104 +258,104 @@ public static class ItemFactoryMetadata
                 new BooleanPropertyMetadata("InitialBrokenStomp")
                 {
                     Description = "Determines whether broken items of this factory initially default to being stomped.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Broken Stomp",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("InitialAverageStomp")
                 {
                     Description = "Determines whether average-quality items of this factory initially default to being stomped.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Average Stomp",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("InitialGoodStomp")
                 {
                     Description = "Determines whether good-quality items of this factory initially default to being stomped.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Good Stomp",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("InitialExcellentStomp")
                 {
                     Description = "Determines whether excellent-quality items of this factory initially default to being stomped.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Excellent Stomp",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RechargeScriptBindingKey")
                 {
                     Description = "The binding key of the script used to recharge the item.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Recharge Script Binding Key",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsIgnoredByMonsters")
                 {
                     Description = "Determines whether the item is ignored by monsters.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Ignored by Monsters",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsContainer")
                 {
                     Description = "Determines whether the item is a container.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Container",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsRangedWeapon")
                 {
                     Description = "Determines whether the item is a ranged weapon.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Ranged Weapon",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("DisableStomp")
                 {
                     Description = "Determines whether stomping is disabled for the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Disable Stomp",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("EnhancementFixedArtifactFactoriesBindingKeys")
                 {
                     Description = "The binding keys of fixed artifact factories used to provide enhancements for this item factory.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Enhancement Fixed Artifact Factories Binding Keys",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MissileDamageMultiplier")
                 {
                     Description = "The damage multiplier applied when the missile weapon is used.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Missile Damage Multiplier",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MaxPhlogiston")
                 {
                     Description = "The maximum amount of fuel that can be used for phlogiston, or null when the light source cannot create phlogiston.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Maximum Phlogiston",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("MassProduceBindingTuples")
                 {
                     Description = "The count and roll expression used to determine additional items produced for items sold in a store based on their cost.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Mass Produce Binding Tuples",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new IntegerPropertyMetadata("count")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Count",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("rollExpression")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Roll Expression",
                             CategoryTitle = "",
                         },
@@ -364,33 +364,33 @@ public static class ItemFactoryMetadata
                 new StringPropertyMetadata("BreaksDuringEnchantmentProbabilityExpression")
                 {
                     Description = "The probability expression that determines the chance the item breaks during enchantment.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Breaks During Enchantment Probability Expression",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("EnchantmentBindingTuples")
                 {
                     Description = "The power levels, store-stock condition, and script names used to determine which enchantment scripts apply.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Enchantment Binding Tuples",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new IntegerPropertyMetadata("Powers")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Powers",
                             CategoryTitle = "",
                         },
                         new BooleanPropertyMetadata("StoreStock")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Store Stock",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("ScriptNames")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Script Names",
                             CategoryTitle = "",
                         },
@@ -399,165 +399,165 @@ public static class ItemFactoryMetadata
                 new StringPropertyMetadata("EatMagicScriptBindingKey")
                 {
                     Description = "The binding key of the script run when the energy of a rechargeable item is consumed, or null when the item has no consumable charges.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Eat Magic Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("GridProcessWorldScriptBindingKey")
                 {
                     Description = "The binding key of the script used to process the item on the grid during world processing.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Grid Process World Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MonsterProcessWorldScriptBindingKey")
                 {
                     Description = "The binding key of the script used to process the item during monster world processing.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Monster Process World Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("EquipmentProcessWorldScriptBindingKey")
                 {
                     Description = "The binding key of the script used to process the item during equipment world processing.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Equipment Process World Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PackProcessWorldScriptBindingKey")
                 {
                     Description = "The binding key of the script used to process the item during pack world processing.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Pack Process World Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("BreakageChanceProbabilityExpression")
                 {
                     Description = "The probability expression representing the chance that an item thrown or fired will break.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Breakage Chance Probability Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MakeObjectCountExpression")
                 {
                     Description = "The expression used to determine the number of items created by MakeObject.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Make Object Count Expression",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("GetsDamageMultiplier")
                 {
                     Description = "Determines whether the item multiplies damage against a specific monster race.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Gets Damage Multiplier",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IdentityCanBeSensed")
                 {
                     Description = "Determines whether the item can be sensed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Identity Can Be Sensed",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsArmor")
                 {
                     Description = "Determines whether the item is armor.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Armor",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWeapon")
                 {
                     Description = "Determines whether the item is a weapon.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Weapon",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("NumberOfItemsContained")
                 {
                     Description = "The number of items contained in the chest, or zero when the item is not a container.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Number of Items Contained",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "The name of the item within its factory class, uniquely identifying it from other items in the same factory class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("DescriptionSyntax")
                 {
                     Description = "The syntax used to construct the item's description, including article and pluralization markers.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Description Syntax",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AlternateDescriptionSyntax")
                 {
                     Description = "The alternate description syntax used for items with character-class-specific names, or null to use the standard description syntax.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Alternate Description Syntax",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("FlavorSuppressedDescriptionSyntax")
                 {
                     Description = "The description syntax used when the item's flavor is suppressed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Flavor Suppressed Description Syntax",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AlternateFlavorSuppressedDescriptionSyntax")
                 {
                     Description = "The alternate description syntax used when the item's flavor is suppressed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Alternate Flavor Suppressed Description Syntax",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("FlavorUnknownDescriptionSyntax")
                 {
                     Description = "The description syntax used when the item's flavor is unknown.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Flavor Unknown Description Syntax",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AlternateFlavorUnknownDescriptionSyntax")
                 {
                     Description = "The alternate description syntax used when the item's flavor is unknown.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Alternate Flavor Unknown Description Syntax",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("ZapBindingTuple")
                 {
                     Description = "The script name, recharge time, aiming requirement, and mana equivalent for an item that can be zapped.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Zap Binding Tuple",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("ScriptName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Script Name",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("TurnsToRecharge")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Turns to Recharge",
                             CategoryTitle = "",
                         },
                         new BooleanPropertyMetadata("RequiresAiming")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Requires Aiming",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("ManaEquivalent")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Mana Equivalent",
                             CategoryTitle = "",
                         },
@@ -566,62 +566,62 @@ public static class ItemFactoryMetadata
                 new StringPropertyMetadata("ItemClassBindingKey")
                 {
                     Description = "The binding key of the item class for this item factory.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Item Class Binding Key",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("PackSort")
                 {
                     Description = "The sort order index used to arrange items in a pack. Lower values appear first.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Pack Sort",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("WieldSlotBindingKeys")
                 {
                     Description = "The binding keys of the inventory slots where the item can be wielded, in preference order.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Wield Slot Binding Keys",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AskDestroyAll")
                 {
                     Description = "Determines whether the destroy script asks the player whether known items from this factory should be destroyed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Ask Destroy All",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HasQualityRatings")
                 {
                     Description = "Determines whether items from this factory have different quality ratings.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Has Quality Ratings",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ArmorClass")
                 {
                     Description = "The base armor class rating for items created by the factory.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Armor Class",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("DepthsFoundAndChances")
                 {
                     Description = "The dungeon levels and corresponding one-in chances at which the item can be found naturally, or null when it is not found naturally.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Depths Found and Chances",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new IntegerPropertyMetadata("level")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Level",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("chance")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Chance",
                             CategoryTitle = "",
                         },
@@ -630,223 +630,223 @@ public static class ItemFactoryMetadata
                 new IntegerPropertyMetadata("DiceSides")
                 {
                     Description = "The number of sides on the item's damage die.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Dice Sides",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("LevelNormallyFound")
                 {
                     Description = "The dungeon level at which the item is normally found.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Level Normally Found",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("InitialBonusAttacks")
                 {
                     Description = "The initial number of bonus attacks assigned to the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Bonus Attacks",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("InitialBonusInfravision")
                 {
                     Description = "The initial amount of bonus infravision assigned to the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Bonus Infravision",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("InitialBonusSpeed")
                 {
                     Description = "The initial amount of bonus speed assigned to the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Bonus Speed",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("InitialBonusSearchExpression")
                 {
                     Description = "The expression used to determine the initial bonus search value assigned to the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Bonus Search Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("InitialBonusStealthExpression")
                 {
                     Description = "The expression used to determine the initial bonus stealth value assigned to the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Bonus Stealth Expression",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("InitialBonusTunnel")
                 {
                     Description = "The initial amount of bonus tunneling assigned to the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Bonus Tunnel",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("InitialTurnsOfLight")
                 {
                     Description = "The initial number of turns of light assigned to the item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Turns of Light",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("InitialNutritionalValue")
                 {
                     Description = "The initial nutritional value assigned to items created by this factory.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Nutritional Value",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("InitialGoldPiecesRollExpression")
                 {
                     Description = "The roll expression used to determine the initial number of gold pieces given to the player when the item is picked up.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Initial Gold Pieces Roll Expression",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ExperienceGainDivisorForDestroying")
                 {
                     Description = "The divisor used to calculate experience gained when an applicable character class destroys the book.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Experience Gain Divisor for Destroying",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("SpellBindingKeys")
                 {
                     Description = "The binding keys of the spells belonging to this book, in order, or null when the item is not a book.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Spell Binding Keys",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsGood")
                 {
                     Description = "Determines whether this factory generates good items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Good",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsSmall")
                 {
                     Description = "Determines whether the chest is small.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Small",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BaseValue")
                 {
                     Description = "The base value of a non-flavor-aware item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Base Value",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HatesElectricity")
                 {
                     Description = "Determines whether the item is susceptible to electricity.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hates Electricity",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HatesFire")
                 {
                     Description = "Determines whether the item is susceptible to fire.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hates Fire",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HatesAcid")
                 {
                     Description = "Determines whether the item is susceptible to acid.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hates Acid",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HatesCold")
                 {
                     Description = "Determines whether the item is susceptible to cold.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hates Cold",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanProvideSheathOfElectricity")
                 {
                     Description = "Determines whether the item can provide a sheath of electricity.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Provide Sheath of Electricity",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanProvideSheathOfFire")
                 {
                     Description = "Determines whether the item can provide a sheath of fire.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Provide Sheath of Fire",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("RandartActivationChance")
                 {
                     Description = "The one-in chance that a random artifact receives an activation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Random Artifact Activation Chance",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ProvidesSunlight")
                 {
                     Description = "Determines whether the item provides sunlight that burns certain races.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Provides Sunlight",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanApplyArtifactBiasResistance")
                 {
                     Description = "Determines whether items from this factory can receive random resistance bonuses from biased artifacts.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Apply Artifact Bias Resistance",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeEatenByMonsters")
                 {
                     Description = "Determines whether an item from this factory can be eaten by a monster with the eat food attack effect.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Eaten by Monsters",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("EatScriptBindingKey")
                 {
                     Description = "The binding key of the script run when an item from this factory is eaten, or null when items cannot be eaten.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Eat Script Binding Key",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("VanishesWhenEatenBySkeletons")
                 {
                     Description = "Determines whether the item vanishes when eaten by skeletons.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Vanishes When Eaten by Skeletons",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsConsumedWhenEaten")
                 {
                     Description = "Determines whether the food item is completely consumed and removed when eaten.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Consumed When Eaten",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("ReadBindingTuple")
                 {
                     Description = "The script name and mana value used when the item is read.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Read Binding Tuple",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("ScriptName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Script Name",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("ManaValue")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Mana Value",
                             CategoryTitle = "",
                         },

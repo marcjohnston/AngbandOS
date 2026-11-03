@@ -15,35 +15,35 @@ public static class RealmMetadata
                 new StringsPropertyMetadata("SpellBookNames")
                 {
                     Description = "Specifies the spell book names associated with the realm.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Spell Book Names",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("Info")
                 {
                     Description = "Specifies the informational text associated with the realm.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Info",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "Specifies the name of the realm.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistantToHolyAndHellProjectiles")
                 {
                     Description = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Resistant To Holy And Hell Projectiles",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("SusceptibleToHolyAndHellProjectiles")
                 {
                     Description = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Susceptible To Holy And Hell Projectiles",
                     CategoryTitle = "",
                 },

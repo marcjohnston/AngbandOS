@@ -15,119 +15,119 @@ public static class ProjectileScriptMetadata
                 new StringPropertyMetadata("CustomLearnedDetails")
                 {
                     Description = "Returns the details revealed to the player when the projectile is learned. When null, the default details are used.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Custom Learned Details",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ProjectileBindingKey")
                 {
                     Description = "Specifies the binding key for the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Projectile Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("DamageRollExpression")
                 {
                     Description = "Specifies the roll expression for the amount of damage produced by the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Damage Roll Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RadiusRollExpression")
                 {
                     Description = "Specifies the roll expression for the projectile's damage radius. A radius of zero represents a bolt, a positive radius represents a ball, and a negative radius represents a breath attack.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Radius Roll Expression",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Stop")
                 {
                     Description = "Determines whether the projectile stops when it hits an obstacle.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Stop",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Kill")
                 {
                     Description = "Determines whether the projectile can affect monsters or other entities in its path.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Kill",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Jump")
                 {
                     Description = "Determines whether the projectile moves directly to its target while ignoring intermediate grids or obstacles.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Jump",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Beam")
                 {
                     Description = "Determines whether the projectile travels in a line and can affect multiple targets along its path.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Beam",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Grid")
                 {
                     Description = "Determines whether the projectile interacts with each grid through which it travels.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Grid",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Item")
                 {
                     Description = "Determines whether the projectile interacts with items it encounters.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Item",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Thru")
                 {
                     Description = "Determines whether the projectile passes through targets or objects without stopping.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Thru",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Hide")
                 {
                     Description = "Determines whether the projectile is hidden from the player's view.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hide",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Identified")
                 {
                     Description = "Determines whether the projectile is automatically identified. Null indicates conditional identification when the projectile affects a target.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Identified",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PreMessage")
                 {
                     Description = "Specifies the message rendered before the projectile is projected. When null, no message is rendered.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Pre-Message",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PostMessage")
                 {
                     Description = "Specifies the message rendered after the projectile is projected. When null, no message is rendered.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Post-Message",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("SmashingOnPetsTurnsUnfriendly")
                 {
                     Description = "Determines whether smashing a pet with the projectile turns the pet into an unfriendly monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Smashing On Pets Turns Unfriendly",
                     CategoryTitle = "",
                 },
                 new EnumPropertyMetadata("NonDirectionalProjectileMode")
                 {
                     Description = "Specifies the mode used when the projectile is launched without a directional parameter.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Non-Directional Projectile Mode",
                     CategoryTitle = "",
                     EnumName = "NonDirectionalProjectileModeEnum",

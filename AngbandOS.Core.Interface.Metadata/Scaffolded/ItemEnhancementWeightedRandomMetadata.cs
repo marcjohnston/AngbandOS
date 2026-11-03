@@ -15,20 +15,20 @@ public static class ItemEnhancementWeightedRandomMetadata
                 new TuplePropertyMetadata("NameAndWeightBindings")
                 {
                     Description = "The names of item enhancements and their corresponding weights used for weighted random selection.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name and Weight Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("ItemEnhancementName")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Item Enhancement Name",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Weight")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Weight",
                             CategoryTitle = "",
                         },

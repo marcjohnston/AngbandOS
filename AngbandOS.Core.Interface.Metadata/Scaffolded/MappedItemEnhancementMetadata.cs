@@ -15,21 +15,21 @@ public static class MappedItemEnhancementMetadata
                 new StringsPropertyMetadata("FixedArtifactBindingKeys")
                 {
                     Description = "Specifies the fixed artifacts for the map entry. When null, applies to all fixed artifacts.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Fixed Artifact Binding Keys",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("CharacterClassBindingKeys")
                 {
                     Description = "Specifies the character classes for the map entry. When null, applies to all character classes.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Character Class Binding Keys",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ItemEnhancementBindingKeys")
                 {
                     Description = "Specifies the item enhancements to be used for the fixed artifact. When null, no item enhancements are applied.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Item Enhancement Binding Keys",
                     CategoryTitle = "",
                 },

@@ -15,49 +15,49 @@ public static class DateWidgetMetadata
                 new StringPropertyMetadata("DateValueName")
                 {
                     Description = "The name of the date value displayed by the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Date Value Name",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "The color used to draw the widget text.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("X")
                 {
                     Description = "The x-coordinate on the form where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "X",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Y")
                 {
                     Description = "The y-coordinate on the form where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Y",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
                     Description = "The width of the widget, or null to use the default width.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Width",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("JustificationName")
                 {
                     Description = "The name of the justification used to position the widget text within its width.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Justification Name",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ChangeTrackerNames")
                 {
                     Description = "The names of the properties that participate in change tracking.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Change Tracker Names",
                     CategoryTitle = "",
                 },

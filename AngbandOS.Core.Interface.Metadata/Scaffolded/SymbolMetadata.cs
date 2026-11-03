@@ -15,21 +15,21 @@ public static class SymbolMetadata
                 new CharacterPropertyMetadata("Character")
                 {
                     Description = "Specifies the character used to render the symbol.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character",
                     CategoryTitle = "",
                 },
                 new CharacterPropertyMetadata("QueryCharacter")
                 {
                     Description = "Specifies the optional character used when querying the symbol.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Query Character",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "Specifies the name of the symbol.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },

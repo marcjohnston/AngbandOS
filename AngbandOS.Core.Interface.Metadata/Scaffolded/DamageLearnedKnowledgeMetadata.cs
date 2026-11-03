@@ -15,7 +15,7 @@ public static class DamageLearnedKnowledgeMetadata
                 new StringPropertyMetadata("DamageExpressionText")
                 {
                     Description = "The expression that defines the damage value learned from this knowledge.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Damage Expression Text",
                     CategoryTitle = "",
                 },

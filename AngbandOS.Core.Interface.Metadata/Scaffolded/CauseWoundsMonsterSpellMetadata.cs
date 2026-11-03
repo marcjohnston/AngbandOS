@@ -15,20 +15,20 @@ public static class CauseWoundsMonsterSpellMetadata
                 new TuplePropertyMetadata("KnowledgeAction")
                 {
                     Description = "The action information displayed when the spell is described in the player's knowledge.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Knowledge Action",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("CollapsableActionVerb")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Collapsable Action Verb",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("UniqueDescription")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Unique Description",
                             CategoryTitle = "",
                         },
@@ -37,287 +37,287 @@ public static class CauseWoundsMonsterSpellMetadata
                 new BooleanPropertyMetadata("IsInnate")
                 {
                     Description = "Determines whether the spell is an innate ability.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Innate",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsIntelligent")
                 {
                     Description = "Determines whether the spell is an intelligent spell.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Intelligent",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesAcid")
                 {
                     Description = "Determines whether the spell uses acid against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Acid",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesLightning")
                 {
                     Description = "Determines whether the spell uses lightning against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Lightning",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesFire")
                 {
                     Description = "Determines whether the spell uses fire against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Fire",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesCold")
                 {
                     Description = "Determines whether the spell uses cold against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Cold",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesPoison")
                 {
                     Description = "Determines whether the spell uses poison against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Poison",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesRadiation")
                 {
                     Description = "Determines whether the spell uses radiation against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Radiation",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesNether")
                 {
                     Description = "Determines whether the spell uses nether against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Nether",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesLight")
                 {
                     Description = "Determines whether the spell uses light against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Light",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesDarkness")
                 {
                     Description = "Determines whether the spell uses darkness against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Darkness",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesFear")
                 {
                     Description = "Determines whether the spell uses fear against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Fear",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesConfusion")
                 {
                     Description = "Determines whether the spell uses confusion against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Confusion",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesBreathe")
                 {
                     Description = "Determines whether the spell uses a breathe attack against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Breathe",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesChaos")
                 {
                     Description = "Determines whether the spell uses chaos against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Chaos",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesDisenchantment")
                 {
                     Description = "Determines whether the spell uses disenchantment against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Disenchantment",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesBlindness")
                 {
                     Description = "Determines whether the spell uses blindness against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Blindness",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesNexus")
                 {
                     Description = "Determines whether the spell uses nexus against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Nexus",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesSound")
                 {
                     Description = "Determines whether the spell uses sound against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Sound",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesShards")
                 {
                     Description = "Determines whether the spell uses shards against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Shards",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeReflected")
                 {
                     Description = "Determines whether the spell can be reflected back from its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Reflected",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RestrictsFreeAction")
                 {
                     Description = "Determines whether the spell restricts free action against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Restricts Free Action",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("DrainsMana")
                 {
                     Description = "Determines whether the spell drains mana from its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drains Mana",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("SummonsHelp")
                 {
                     Description = "Determines whether the spell summons help against its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Summons Help",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ProvidesEscape")
                 {
                     Description = "Determines whether the spell provides escape from its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Provides Escape",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Heals")
                 {
                     Description = "Determines whether the spell heals.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Heals",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsAttack")
                 {
                     Description = "Determines whether the spell can attack its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Attack",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsTactical")
                 {
                     Description = "Determines whether the spell is tactical.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Tactical",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Hastens")
                 {
                     Description = "Determines whether the spell hastens itself.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hastens",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Annoys")
                 {
                     Description = "Determines whether the spell annoys its foe.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Annoys",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("VsPlayerBlindMessage")
                 {
                     Description = "The message rendered when the spell targets the player while the player is blind.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Vs Player Blind Message",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("VsPlayerActionMessage")
                 {
                     Description = "The message rendered when the spell targets a visible player who is not blind.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Vs Player Action Message",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("VsPlayerActionMessageOnInvisibleMonster")
                 {
                     Description = "The message rendered when the spell targets the player while the monster is not visible.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Vs Player Action Message On Invisible Monster",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("VsMonsterUnseenMessage")
                 {
                     Description = "The message rendered when the spell targets another monster while the player is blind.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Vs Monster Unseen Message",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("VsMonsterSeenMessage")
                 {
                     Description = "The message rendered when a monster attacks another monster and the player can see the interaction.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Vs Monster Seen Message",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("SmartLearnSpellResistantDetectionKeys")
                 {
                     Description = "The spell resistant detection keys learned when the player experiences or sees the spell.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Smart Learn Spell Resistant Detection Keys",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("WakesSleepingMonsters")
                 {
                     Description = "Determines whether attacking a sleeping monster wakes it.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Wakes Sleeping Monsters",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("DamageRollExpression")
                 {
                     Description = "The roll expression used to determine the amount of damage inflicted by the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Damage Roll Expression",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("CurseEquipmentChance")
                 {
                     Description = "The chance that an item of equipment worn by the player will be cursed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Curse Equipment Chance",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("HeavyCurseEquipmentChance")
                 {
                     Description = "The chance that an item of equipment worn by the player will be heavily cursed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Heavy Curse Equipment Chance",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("TimedBleedingExpressionText")
                 {
                     Description = "The expression determining the additional amount of time the player will bleed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Timed Bleeding Expression Text",
                     CategoryTitle = "",
                 },

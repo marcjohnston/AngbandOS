@@ -15,7 +15,7 @@ public static class MonsterRaceMetadata
                 new BooleanPropertyMetadata("CanTeleportSelf")
                 {
                     Description = "Determines whether the monster can teleport itself.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Teleport Self",
                     CategoryTitle = "",
                 },
@@ -24,14 +24,14 @@ public static class MonsterRaceMetadata
                     ForeignCollectionName = "MonsterSpells",
                     Inline = false,
                     Description = "Specifies the monster spell binding keys available to the monster race.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Spell Names",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MultilineName")
                 {
                     Description = "Specifies the multiline name displayed to the player. When null, the friendly name is used.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Multiline Name",
                     CategoryTitle = "",
                 },
@@ -40,35 +40,35 @@ public static class MonsterRaceMetadata
                     ForeignCollectionName = "Symbols",
                     Inline = false,
                     Description = "Specifies the binding key for the symbol used to render the monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Symbol Name",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "Specifies the color used to display the monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Animal")
                 {
                     Description = "Determines whether the monster is an animal.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Animal",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ArmorClass")
                 {
                     Description = "Specifies the monster's armor class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Armor Class",
                     CategoryTitle = "",
                 },
                 new TuplePropertyMetadata("AttackDefinitions")
                 {
                     Description = "Specifies the attack definitions for the monster. When null, the monster cannot attack.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Attack Definitions",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
@@ -76,26 +76,26 @@ public static class MonsterRaceMetadata
                         new ForeignKeyPropertyMetadata("MethodName")
                         {
                             ForeignCollectionName = "Attacks",
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Method Name",
                             CategoryTitle = "",
                         },
                         new ForeignKeyPropertyMetadata("EffectName")
                         {
                             ForeignCollectionName = "AttackEffects",
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Effect Name",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Dice")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Dice",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Sides")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Sides",
                             CategoryTitle = "",
                         },
@@ -104,231 +104,231 @@ public static class MonsterRaceMetadata
                 new BooleanPropertyMetadata("AttrAny")
                 {
                     Description = "Determines whether the monster can use any color when its color changes.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attribute Any",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttrClear")
                 {
                     Description = "Determines whether the monster is transparent.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attribute Clear",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AttrMulti")
                 {
                     Description = "Determines whether the monster changes color.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Attribute Multi",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("BashDoor")
                 {
                     Description = "Determines whether the monster can break open doors.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Bash Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CharClear")
                 {
                     Description = "Determines whether the monster is never seen, even with see invisible.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character Clear",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CharMulti")
                 {
                     Description = "Determines whether the monster changes shape randomly.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character Multi",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ColdBlood")
                 {
                     Description = "Determines whether the monster is cold-blooded.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Cold Blood",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Cthuloid")
                 {
                     Description = "Determines whether the monster is cthuloid.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Cthuloid",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Demon")
                 {
                     Description = "Determines whether the monster is a demon.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Demon",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Description")
                 {
                     Description = "Specifies the descriptive text for the monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Description",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Dragon")
                 {
                     Description = "Determines whether the monster is a dragon.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Dragon",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_1D2")
                 {
                     Description = "Determines whether the monster drops one to two items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop 1D2",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_2D2")
                 {
                     Description = "Determines whether the monster drops two to four items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop 2D2",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_3D2")
                 {
                     Description = "Determines whether the monster drops three to six items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop 3D2",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop_4D2")
                 {
                     Description = "Determines whether the monster drops four to eight items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop 4D2",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop60")
                 {
                     Description = "Determines whether the monster drops an item 60 percent of the time.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop 60",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Drop90")
                 {
                     Description = "Determines whether the monster drops an item 90 percent of the time.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop 90",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("DropGood")
                 {
                     Description = "Determines whether the monster drops good items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop Good",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("DropGreat")
                 {
                     Description = "Determines whether the monster drops great items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Drop Great",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("EldritchHorror")
                 {
                     Description = "Determines whether the monster is an eldritch horror.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Eldritch Horror",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("EmptyMind")
                 {
                     Description = "Determines whether the monster has an empty mind.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Empty Mind",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Escorted")
                 {
                     Description = "Determines whether the monster comes with minions of the same character.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Escorted",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("EscortsGroup")
                 {
                     Description = "Determines whether the monster's minions come in groups.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Escorts Group",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Evil")
                 {
                     Description = "Determines whether the monster is evil.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Evil",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Female")
                 {
                     Description = "Determines whether the monster uses feminine pronouns.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Female",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("FireAura")
                 {
                     Description = "Determines whether the monster has an aura of fire.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Fire Aura",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ForceMaxHp")
                 {
                     Description = "Determines whether the monster has maximum hit points.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Force Maximum Hit Points",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ForceSleep")
                 {
                     Description = "Determines whether the monster always starts asleep.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Force Sleep",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("FreqInate")
                 {
                     Description = "Specifies the one-in-X frequency with which the monster uses innate abilities.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Innate Frequency",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("FreqSpell")
                 {
                     Description = "Specifies the one-in-X frequency with which the monster uses spells.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Spell Frequency",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("FriendlyName")
                 {
                     Description = "Specifies the name displayed to the player.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Friendly Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Friends")
                 {
                     Description = "Determines whether the monster comes with friends of the same race.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Friends",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Giant")
                 {
                     Description = "Determines whether the monster is a giant.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Giant",
                     CategoryTitle = "",
                 },
@@ -337,427 +337,427 @@ public static class MonsterRaceMetadata
                     ForeignCollectionName = "ItemFactories",
                     Inline = false,
                     Description = "Specifies the binding key of the item factory used to create gold dropped by the monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Gold Item Factory Binding Key",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Good")
                 {
                     Description = "Determines whether the monster is good.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Good",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("GreatOldOne")
                 {
                     Description = "Determines whether the monster is a Great Old One.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Great Old One",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HasLegs")
                 {
                     Description = "Determines whether the monster has legs.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Has Legs",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Hdice")
                 {
                     Description = "Specifies the number of hit dice the monster has.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hit Dice",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Hside")
                 {
                     Description = "Specifies the number of sides on the monster's hit dice.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hit Dice Sides",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByCold")
                 {
                     Description = "Determines whether the monster is hurt by cold.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hurt By Cold",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByFire")
                 {
                     Description = "Determines whether the monster is hurt by fire.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hurt By Fire",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByLight")
                 {
                     Description = "Determines whether the monster is hurt by light.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hurt By Light",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HurtByRock")
                 {
                     Description = "Determines whether the monster is hurt by rock.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Hurt By Rock",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneAcid")
                 {
                     Description = "Determines whether the monster is immune to acid.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Acid",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneCold")
                 {
                     Description = "Determines whether the monster is immune to cold.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Cold",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneConfusion")
                 {
                     Description = "Determines whether the monster is immune to confusion.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Confusion",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneFear")
                 {
                     Description = "Determines whether the monster is immune to fear.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Fear",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneFire")
                 {
                     Description = "Determines whether the monster is immune to fire.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Fire",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneLightning")
                 {
                     Description = "Determines whether the monster is immune to lightning.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Lightning",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmunePoison")
                 {
                     Description = "Determines whether the monster is immune to poison.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Poison",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneSleep")
                 {
                     Description = "Determines whether the monster is immune to sleep.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Sleep",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ImmuneStun")
                 {
                     Description = "Determines whether the monster is immune to stunning.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Immune Stun",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Invisible")
                 {
                     Description = "Determines whether the monster is invisible.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Invisible",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("KillBody")
                 {
                     Description = "Determines whether the monster can kill bodies.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Kill Body",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("KillItem")
                 {
                     Description = "Determines whether the monster can destroy items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Kill Item",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("KillWall")
                 {
                     Description = "Determines whether the monster can destroy walls.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Kill Wall",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("LevelFound")
                 {
                     Description = "Specifies the level on which the monster is normally found.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Level Found",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("LightningAura")
                 {
                     Description = "Determines whether the monster has an aura of electricity.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Lightning Aura",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Male")
                 {
                     Description = "Determines whether the monster is male.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Male",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Mexp")
                 {
                     Description = "Specifies the experience value for killing the monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Experience",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("MoveBody")
                 {
                     Description = "Determines whether the monster can move bodies.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Move Body",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Multiply")
                 {
                     Description = "Determines whether the monster can multiply.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Multiply",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("NeverAttack")
                 {
                     Description = "Determines whether the monster never attacks.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Never Attack",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("NeverMove")
                 {
                     Description = "Determines whether the monster never moves.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Never Move",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Nonliving")
                 {
                     Description = "Determines whether the monster is nonliving.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Nonliving",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("NoticeRange")
                 {
                     Description = "Specifies the distance at which the monster notices the player.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Notice Range",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("OnlyDropGold")
                 {
                     Description = "Determines whether the monster drops only gold.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Only Drop Gold",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("OnlyDropItem")
                 {
                     Description = "Determines whether the monster drops only items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Only Drop Item",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("OpenDoor")
                 {
                     Description = "Determines whether the monster can open doors.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Open Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Orc")
                 {
                     Description = "Determines whether the monster is an orc.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Orc",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("PassWall")
                 {
                     Description = "Determines whether the monster can pass through walls.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Pass Wall",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BallAndBreatheProjectileBonusRadius")
                 {
                     Description = "Specifies the bonus radius applied to ball and breath projectiles used by the monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Ball And Breathe Projectile Bonus Radius",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RandomMove25")
                 {
                     Description = "Determines whether the monster randomly moves 25 percent of the time.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Random Move 25",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RandomMove50")
                 {
                     Description = "Determines whether the monster randomly moves 50 percent of the time.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Random Move 50",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Rarity")
                 {
                     Description = "Specifies the rarity with which the monster is found.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Rarity",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Reflecting")
                 {
                     Description = "Determines whether the monster reflects attacks.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Reflecting",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Reaver")
                 {
                     Description = "Determines whether the monster is a reaver.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Reaver",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Regenerate")
                 {
                     Description = "Determines whether the monster regenerates.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Regenerate",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistDisenchant")
                 {
                     Description = "Determines whether the monster resists disenchantment.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Resist Disenchant",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistNether")
                 {
                     Description = "Determines whether the monster resists nether.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Resist Nether",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistNexus")
                 {
                     Description = "Determines whether the monster resists nexus.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Resist Nexus",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistPlasma")
                 {
                     Description = "Determines whether the monster resists plasma.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Resist Plasma",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistTeleport")
                 {
                     Description = "Determines whether the monster resists teleportation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Resist Teleport",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ResistWater")
                 {
                     Description = "Determines whether the monster resists water.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Resist Water",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Shapechanger")
                 {
                     Description = "Determines whether the monster is a shapechanger.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Shapechanger",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Sleep")
                 {
                     Description = "Specifies how deeply the monster sleeps.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Sleep",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Smart")
                 {
                     Description = "Determines whether the monster prioritizes disabling, summoning, or escape spells when badly injured.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Smart",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Speed")
                 {
                     Description = "Specifies how fast the monster moves. A value of 110 represents normal speed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Speed",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Stupid")
                 {
                     Description = "Determines whether the monster is stupid.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Stupid",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("TakeItem")
                 {
                     Description = "Determines whether the monster can take items.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Take Item",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Troll")
                 {
                     Description = "Determines whether the monster is a troll.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Troll",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Undead")
                 {
                     Description = "Determines whether the monster is undead.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Undead",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Unique")
                 {
                     Description = "Determines whether the monster is unique.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Unique",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("WeirdMind")
                 {
                     Description = "Determines whether the monster has a weird mind.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Weird Mind",
                     CategoryTitle = "",
                 },

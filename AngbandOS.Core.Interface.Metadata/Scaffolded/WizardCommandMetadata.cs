@@ -15,35 +15,35 @@ public static class WizardCommandMetadata
                 new CharacterPropertyMetadata("KeyChar")
                 {
                     Description = "Specifies the character used to invoke the wizard command.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Key Character",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsEnabled")
                 {
                     Description = "Determines whether the wizard command is enabled.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Enabled",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("HelpGroupName")
                 {
                     Description = "Specifies the name of the help group containing the wizard command. When null, the command is not associated with a help group.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Help Group Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("HelpDescription")
                 {
                     Description = "Specifies the description displayed for the wizard command.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Help Description",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
                     Description = "Specifies the name of the script executed by the wizard command. When null, no script is executed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Execute Script Name",
                     CategoryTitle = "",
                 },

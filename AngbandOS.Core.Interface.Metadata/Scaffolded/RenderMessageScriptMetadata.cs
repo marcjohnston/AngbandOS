@@ -15,21 +15,21 @@ public static class RenderMessageScriptMetadata
                 new StringPropertyMetadata("Message")
                 {
                     Description = "Specifies the message rendered by the script.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Message",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesItem")
                 {
                     Description = "Determines whether the script uses an item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Item",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IdentifiesItem")
                 {
                     Description = "Determines whether the script identifies an item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Identifies Item",
                     CategoryTitle = "",
                 },

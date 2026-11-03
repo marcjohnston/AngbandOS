@@ -15,28 +15,28 @@ public static class RechargeItemScriptMetadata
                 new StringPropertyMetadata("TurnsExpression")
                 {
                     Description = "Specifies the expression used to determine the number of turns required to recharge an item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Turns Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SelectItemMessage")
                 {
                     Description = "Specifies the message displayed when selecting an item to recharge.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Select Item Message",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("NonRechargeableItemMessage")
                 {
                     Description = "Specifies the message displayed when the selected item cannot be recharged.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Non-Rechargeable Item Message",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("NothingRechargeableMessage")
                 {
                     Description = "Specifies the message displayed when no rechargeable items are available.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Nothing Rechargeable Message",
                     CategoryTitle = "",
                 },

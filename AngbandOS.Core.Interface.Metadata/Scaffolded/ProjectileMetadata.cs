@@ -15,49 +15,49 @@ public static class ProjectileMetadata
                 new StringPropertyMetadata("FloorEffectBindingKey")
                 {
                     Description = "Specifies the binding key for the floor effect script used by the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Floor Effect Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ItemEffectBindingKey")
                 {
                     Description = "Specifies the binding key for the item effect script used by the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Item Effect Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PlayerEffectBindingKey")
                 {
                     Description = "Specifies the binding key for the player effect script used by the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Player Effect Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MonsterEffectBindingKey")
                 {
                     Description = "Specifies the binding key for the monster effect script used by the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Monster Effect Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("BoltProjectileGraphicBindingKey")
                 {
                     Description = "Specifies the optional binding key for the projectile graphic used by a bolt.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Bolt Projectile Graphic Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("EffectAnimationBindingKey")
                 {
                     Description = "Specifies the optional binding key for the animation used by the projectile effect.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Effect Animation Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ImpactProjectileGraphicBindingKey")
                 {
                     Description = "Specifies the optional binding key for the projectile graphic used on impact.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Impact Projectile Graphic Binding Key",
                     CategoryTitle = "",
                 },

@@ -8,7 +8,6 @@ export class PropertyMetadata {
   public propertyName: string;
   public title: string | null;
   public categoryTitle: string;
-  public isNullable: boolean;
   public description: string | null;
   public defaultValue: string[] | null;
   public propertyMetadatas: PropertyMetadata[] | null;
@@ -18,6 +17,7 @@ export class PropertyMetadata {
   public entityNoun: string | null;
   public foreignCollectionName: string | null;
   public enumOptions: EnumOption[] | null;
+  public labelIfNullable: string | null;
 
   /**
    * Returns the title of property.
@@ -30,7 +30,7 @@ export class PropertyMetadata {
               propertyName: string,
               title: string | null,
               categoryTitle: string,
-              isNullable: boolean,
+              labelIfNullable: string | null,
               description: string | null,
               defaultValue: string[] | null,
               propertyMetadatas: PropertyMetadata[] | null,
@@ -44,7 +44,7 @@ export class PropertyMetadata {
     this.title = title;
     this.propertyName = propertyName;
     this.categoryTitle = categoryTitle;
-    this.isNullable = isNullable;
+    this.labelIfNullable = labelIfNullable;
     this.description = description;
     this.defaultValue = defaultValue;
     this.propertyMetadatas = propertyMetadatas;

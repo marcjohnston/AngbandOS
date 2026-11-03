@@ -15,63 +15,63 @@ public static class TextWidgetMetadata
                 new StringPropertyMetadata("NullableStringsValueName")
                 {
                     Description = "Specifies the name of the nullable strings value displayed by the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Nullable Strings Value Name",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "Specifies the color used to draw the widget text.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("X")
                 {
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "X",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Y")
                 {
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Y",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
                     Description = "Specifies the width of the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Width",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Height")
                 {
                     Description = "Specifies the height of the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Height",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("JustificationName")
                 {
                     Description = "Specifies the name of the justification used to lay out the widget text.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Justification Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AlignmentName")
                 {
                     Description = "Specifies the name of the alignment used to align the widget text.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Alignment Name",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ChangeTrackerNames")
                 {
                     Description = "Specifies the property names that participate in change tracking.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Change Tracker Names",
                     CategoryTitle = "",
                 },

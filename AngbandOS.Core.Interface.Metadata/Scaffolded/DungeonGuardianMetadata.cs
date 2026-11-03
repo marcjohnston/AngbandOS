@@ -15,14 +15,14 @@ public static class DungeonGuardianMetadata
                 new StringPropertyMetadata("MonsterRaceName")
                 {
                     Description = "The name of the monster race for the quest monster.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Monster Race Name",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("LevelFound")
                 {
                     Description = "The dungeon level where the fixed quest is encountered.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Level Found",
                     CategoryTitle = "",
                 },

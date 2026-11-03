@@ -15,21 +15,21 @@ public static class SyllableSetMetadata
                 new StringsPropertyMetadata("BeginningSyllables")
                 {
                     Description = "Specifies the syllables that can begin generated names.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Beginning Syllables",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("MiddleSyllables")
                 {
                     Description = "Specifies the syllables that can appear in the middle of generated names.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Middle Syllables",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("EndingSyllables")
                 {
                     Description = "Specifies the syllables that can end generated names.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Ending Syllables",
                     CategoryTitle = "",
                 },

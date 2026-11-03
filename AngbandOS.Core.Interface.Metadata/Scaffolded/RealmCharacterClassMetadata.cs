@@ -15,28 +15,28 @@ public static class RealmCharacterClassMetadata
                 new StringPropertyMetadata("CharacterClassBindingKey")
                 {
                     Description = "Specifies the binding key for the character class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character Class Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RealmBindingKey")
                 {
                     Description = "Specifies the binding key for the realm.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Realm Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CharacterClassTitle")
                 {
                     Description = "Specifies the optional title displayed for the character class.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Character Class Title",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("DeityBindingKey")
                 {
                     Description = "Specifies the optional binding key for the deity.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Deity Binding Key",
                     CategoryTitle = "",
                 },

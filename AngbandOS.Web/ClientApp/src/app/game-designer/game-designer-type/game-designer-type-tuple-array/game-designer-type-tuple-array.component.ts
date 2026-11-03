@@ -50,7 +50,7 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
       tupleTypePropertyMetadata.propertyName,
       tupleTypePropertyMetadata.title,
       tupleTypePropertyMetadata.categoryTitle,
-      tupleTypePropertyMetadata.isNullable,
+      tupleTypePropertyMetadata.labelIfNullable,
       tupleTypePropertyMetadata.description,
       tupleTypePropertyMetadata.defaultValue,
       tupleTypePropertyMetadata.propertyMetadatas,

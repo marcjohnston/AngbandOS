@@ -15,7 +15,7 @@ public static class ChestTrapCombinationMetadata
                 new StringsPropertyMetadata("ChestTrapBindingKeys")
                 {
                     Description = "The binding keys identifying the chest traps included in this combination.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Chest Trap Binding Keys",
                     CategoryTitle = "",
                 },

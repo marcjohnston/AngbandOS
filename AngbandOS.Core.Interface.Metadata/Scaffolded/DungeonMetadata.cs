@@ -15,56 +15,56 @@ public static class DungeonMetadata
                 new IntegerPropertyMetadata("BaseOffset")
                 {
                     Description = "The base offset, or difficulty, of the dungeon.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Base Offset",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("BiasMonsterFilterName")
                 {
                     Description = "The name of the monster filter used to bias monster generation, or null if the dungeon has no monster bias.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Bias Monster Filter Name",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("DungeonGuardianNames")
                 {
                     Description = "The names of the dungeon guardians associated with the dungeon.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Dungeon Guardian Names",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MapSymbol")
                 {
                     Description = "The symbol used to represent the dungeon on the wilderness map.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Map Symbol",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MaxLevel")
                 {
                     Description = "The maximum number of levels in the dungeon.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Max Level",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "The full name of the dungeon.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Shortname")
                 {
                     Description = "The shortened name of the dungeon used for display purposes.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Shortname",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Tower")
                 {
                     Description = "Determines whether the dungeon is a tower.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Tower",
                     CategoryTitle = "",
                 },

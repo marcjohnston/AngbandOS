@@ -15,28 +15,28 @@ public static class ItemClassMetadata
                 new StringPropertyMetadata("Name")
                 {
                     Description = "The capitalized singular name of the item represented by this item class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AllowStomp")
                 {
                     Description = "Determines whether items of this class allow the player to stomp them.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Allow Stomp",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("NumberOfFlavorsToGenerate")
                 {
                     Description = "The number of flavors to generate for items of this item class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Number of Flavors to Generate",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ItemFlavorBindingKeys")
                 {
                     Description = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Item Flavor Binding Keys",
                     CategoryTitle = "",
                 },

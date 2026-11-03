@@ -15,20 +15,20 @@ public static class SummonWeightedRandomMetadata
                 new TuplePropertyMetadata("NameAndWeightBindings")
                 {
                     Description = "Specifies the summon names and their associated weights used for weighted random selection.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name and Weight Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("Item1")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Item 1",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Item2")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Item 2",
                             CategoryTitle = "",
                         },
@@ -37,7 +37,7 @@ public static class SummonWeightedRandomMetadata
                 new StringPropertyMetadata("LearnedDetails")
                 {
                     Description = "Specifies the information revealed when the summon is learned.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Learned Details",
                     CategoryTitle = "",
                 },

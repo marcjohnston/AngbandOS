@@ -15,28 +15,28 @@ public static class GameCommandMetadata
                 new CharacterPropertyMetadata("KeyChar")
                 {
                     Description = "The character used to invoke the game command.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Key Character",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Repeat")
                 {
                     Description = "The number of times the command is repeated, or null when no repeat count is specified.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Repeat",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsEnabled")
                 {
                     Description = "Determines whether the game command is enabled.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Enabled",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
                     Description = "The name of the script executed by the game command.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Execute Script Name",
                     CategoryTitle = "",
                 },

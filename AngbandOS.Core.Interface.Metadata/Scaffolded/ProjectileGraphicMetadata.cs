@@ -15,14 +15,14 @@ public static class ProjectileGraphicMetadata
                 new CharacterPropertyMetadata("Character")
                 {
                     Description = "Specifies the character used to render the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "Specifies the color used to render the projectile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },

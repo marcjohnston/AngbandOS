@@ -27,4 +27,10 @@ public sealed class ConfigurationMetadataAttribute : Attribute
     ///     "(string MethodName, string? EffectName, int Dice, int Sides)[]?"
     /// </summary>
     public string? DataType { get; set; }
+    
+    /// <summary>
+    /// Label to display if the property is nullable.  Returns null, by default.  
+    /// When null, nullable boolean properties will scaffold to the default value of "Default".
+    /// </summary>
+    public string? LabelIfNullable { get; set; } = null;
 }

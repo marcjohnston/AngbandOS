@@ -15,49 +15,49 @@ public static class LabelWidgetMetadata
                 new StringPropertyMetadata("Text")
                 {
                     Description = "Specifies the text to be rendered for the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Text",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "Specifies the color used to draw the widget text. Defaults to white.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("X")
                 {
                     Description = "Specifies the x-coordinate on the form where the widget will be drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "X",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Y")
                 {
                     Description = "Specifies the y-coordinate on the form where the widget will be drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Y",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
                     Description = "Specifies the width of the widget. When null, the width defaults to the length of the text.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Width",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("JustificationName")
                 {
                     Description = "Specifies the name of the justification used to justify the text within the widget width. Defaults to LeftJustification.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Justification Name",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ChangeTrackerNames")
                 {
                     Description = "Specifies the names of the properties that participate in change tracking.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Change Tracker Names",
                     CategoryTitle = "",
                 },

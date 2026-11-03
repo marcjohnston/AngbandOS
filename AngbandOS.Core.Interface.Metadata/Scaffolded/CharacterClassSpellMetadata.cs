@@ -15,42 +15,42 @@ public static class CharacterClassSpellMetadata
                 new StringPropertyMetadata("SpellName")
                 {
                     Description = "The name of the spell associated with the character class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Spell Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CharacterClassName")
                 {
                     Description = "The name of the character class associated with the spell.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character Class Name",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Level")
                 {
                     Description = "The character class level at which the spell becomes available.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Level",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ManaCost")
                 {
                     Description = "The amount of mana required to cast the spell.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Mana Cost",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BaseFailure")
                 {
                     Description = "The base chance that casting the spell will fail.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Base Failure",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("FirstCastExperience")
                 {
                     Description = "The experience gained the first time the spell is cast.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "First Cast Experience",
                     CategoryTitle = "",
                 },

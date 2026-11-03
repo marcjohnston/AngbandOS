@@ -15,14 +15,14 @@ public static class SpellMetadata
                 new StringPropertyMetadata("Name")
                 {
                     Description = "Returns the name of the spell, as rendered to the save game.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("LearnedDetails")
                 {
                     Description = "Returns details about the spell, blank if there are no details, or null if the details should be retrieved from the associated scripts configured when the spell succeeds.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Learned Details",
                     CategoryTitle = "",
                 },

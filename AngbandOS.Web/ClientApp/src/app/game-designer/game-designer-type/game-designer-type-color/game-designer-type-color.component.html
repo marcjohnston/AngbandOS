@@ -2,11 +2,13 @@
   <div id="select-div">
     <select #select [ngModel]="getValue()" (change)="setValue()">
       <ng-container *ngIf="colorOptions !== undefined">
-        <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable">
-          <option value=""></option>
+        <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null">
+          <option value="">{{activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}</option>
         </ng-container>
         <ng-container *ngFor="let selectOption of colorOptions">
-          <option value="{{selectOption.value}}">{{selectOption.text}}</option>
+          <option value="{{selectOption.value
+            }}">{{selectOption.text}}
+          </option>
         </ng-container>
       </ng-container>
     </select>

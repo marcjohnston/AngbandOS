@@ -15,20 +15,20 @@ public static class AttributeFilterMetadata
                 new TuplePropertyMetadata("BitwiseOrAttributeFilterBindings")
                 {
                     Description = "The attribute bindings used to filter for attributes where any specified bitwise value matches.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Bitwise Or Attribute Filter Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("AttributeKey")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Attribute Key",
                             CategoryTitle = "",
                         },
                         new BooleanPropertyMetadata("DesiredValue")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Desired Value",
                             CategoryTitle = "",
                         },
@@ -37,20 +37,20 @@ public static class AttributeFilterMetadata
                 new TuplePropertyMetadata("BoolAttributeFilterBindings")
                 {
                     Description = "The attribute bindings used to filter boolean attributes by their desired values.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Boolean Attribute Filter Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("AttributeKey")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Attribute Key",
                             CategoryTitle = "",
                         },
                         new BooleanPropertyMetadata("DesiredValue")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Desired Value",
                             CategoryTitle = "",
                         },
@@ -59,26 +59,26 @@ public static class AttributeFilterMetadata
                 new TuplePropertyMetadata("SummationAttributeFilterBindings")
                 {
                     Description = "The attribute bindings used to filter summed numeric attributes within a specified range.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Summation Attribute Filter Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("AttributeKey")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Attribute Key",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("StartingValue")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Starting Value",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("EndingValue")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Ending Value",
                             CategoryTitle = "",
                         },
@@ -87,14 +87,14 @@ public static class AttributeFilterMetadata
                 new BooleanPropertyMetadata("ActivationAttributeNonNull")
                 {
                     Description = "Determines whether the activation attribute must be non-null.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Activation Attribute Non-Null",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("ArtifactBiasAttributeNonNull")
                 {
                     Description = "Determines whether the artifact bias attribute must be non-null.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Artifact Bias Attribute Non-Null",
                     CategoryTitle = "",
                 },

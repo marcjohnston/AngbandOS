@@ -15,56 +15,56 @@ public static class TownMetadata
                 new CharacterPropertyMetadata("Char")
                 {
                     Description = "Specifies the character used to represent the town.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("HousePrice")
                 {
                     Description = "Specifies the price of a house in the town.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "House Price",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "Specifies the name of the town.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("StoreFactoryNames")
                 {
                     Description = "Specifies the store factory names available in the town.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Store Factory Names",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeEscortedHere")
                 {
                     Description = "Determines whether the player can be escorted to the town.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Escorted Here",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AllowStartupTown")
                 {
                     Description = "Determines whether the town can be used as the startup town.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Allow Startup Town",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("DungeonName")
                 {
                     Description = "Specifies the name of the dungeon associated with the town.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Dungeon Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UnusedStoreLotsAreGraveyards")
                 {
                     Description = "Determines whether unused store lots are treated as graveyards.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Unused Store Lots Are Graveyards",
                     CategoryTitle = "",
                 },

@@ -38,9 +38,9 @@ public abstract class PropertyMetadata
     public string CategoryTitle { get; set; } = "";
 
     /// <summary>
-    /// Returns false, if the property value must be provided by the user.  Returns false, by default.
+    /// Returns the label to display when the property value is null, or null when the property is not nullable.
     /// </summary>
-    public bool IsNullable { get; set; } = false;
+    public string? LabelIfNullable { get; set; } = null;
 
     /// <summary>
     /// Returns a description of the property that can be presented to the user that provides the maximum amount of details on how the property is to be used.  Returns a blank description, by default.

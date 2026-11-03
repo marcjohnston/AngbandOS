@@ -15,26 +15,26 @@ public static class MaxRangedWidgetMetadata
                 new TuplePropertyMetadata("Ranges")
                 {
                     Description = "Specifies the percentage ranges, display text, and colors used to render the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Ranges",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new IntegerPropertyMetadata("percentage")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Percentage",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("text")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Text",
                             CategoryTitle = "",
                         },
                         new EnumPropertyMetadata("color")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Color",
                             CategoryTitle = "",
                         },
@@ -43,56 +43,56 @@ public static class MaxRangedWidgetMetadata
                 new ColorPropertyMetadata("DefaultColor")
                 {
                     Description = "Specifies the color used when none of the ranges apply.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Default Color",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MaxIntValueName")
                 {
                     Description = "Specifies the name of the maximum integer value displayed by the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Maximum Integer Value Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("IntValueName")
                 {
                     Description = "Specifies the name of the integer value displayed by the widget.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Integer Value Name",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("X")
                 {
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "X",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Y")
                 {
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Y",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Width")
                 {
                     Description = "Specifies the width of the widget. When null, the width is based on the text length.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Width",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("JustificationName")
                 {
                     Description = "Specifies the name of the justification used to lay out the widget text.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Justification Name",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ChangeTrackerNames")
                 {
                     Description = "Specifies the property names that participate in change tracking.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Change Tracker Names",
                     CategoryTitle = "",
                 },

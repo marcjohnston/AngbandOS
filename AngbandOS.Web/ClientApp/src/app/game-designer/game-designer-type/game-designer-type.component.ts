@@ -51,7 +51,7 @@ export class GameDesignerTypeComponent implements OnInit {
       valueIndex, // This is how the serialization is naming the tuple fields
       activePropertyMetadataAndConfiguration.propertyMetadata.title,
       activePropertyMetadataAndConfiguration.propertyMetadata.categoryTitle,
-      activePropertyMetadataAndConfiguration.propertyMetadata.isNullable,
+      activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable,
       activePropertyMetadataAndConfiguration.propertyMetadata.description,
       activePropertyMetadataAndConfiguration.propertyMetadata.defaultValue,
       activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas,

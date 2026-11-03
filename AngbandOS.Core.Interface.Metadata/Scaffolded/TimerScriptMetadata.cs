@@ -15,49 +15,49 @@ public static class TimerScriptMetadata
                 new BooleanPropertyMetadata("Used")
                 {
                     Description = "Determines whether items are considered used by the timer.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Used",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ValueExpression")
                 {
                     Description = "Specifies the expression used to modify the timer. Positive values add time, negative values subtract time, and null resets the timer to zero.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Value Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("TimerBindingKey")
                 {
                     Description = "Specifies the binding key of the timer modified by the script.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Timer Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CustomLearnedDetails")
                 {
                     Description = "Specifies custom details revealed when the timer script is learned.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Custom Learned Details",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Quiet")
                 {
                     Description = "Determines whether the timer script executes without displaying messages.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Quiet",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PreMessage")
                 {
                     Description = "Specifies the message displayed before the timer script executes.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Pre-Message",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("EnabledBoolPosFunctionBindingKey")
                 {
                     Description = "Specifies the optional binding key for the function that determines whether the timer script is enabled.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Enabled Boolean Positive Function Binding Key",
                     CategoryTitle = "",
                 },

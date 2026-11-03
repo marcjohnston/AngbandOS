@@ -15,28 +15,28 @@ public static class AbilityScoreScriptMetadata
                 new StringPropertyMetadata("LearnedDetails")
                 {
                     Description = "Details describing what is learned when this ability score script is used.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Learned Details",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UsesItem")
                 {
                     Description = "Determines whether using this ability score script requires an item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Uses Item",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AbilityBindingKey")
                 {
                     Description = "The binding key that identifies the ability associated with this script.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Ability Binding Key",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("TrueToIncreaseFalseToDecrease")
                 {
                     Description = "Determines whether the script increases the ability score when true or decreases it when false.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "True To Increase False To Decrease",
                     CategoryTitle = "",
                 },

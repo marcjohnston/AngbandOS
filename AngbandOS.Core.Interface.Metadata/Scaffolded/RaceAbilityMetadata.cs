@@ -15,21 +15,21 @@ public static class RaceAbilityMetadata
                 new IntegerPropertyMetadata("Bonus")
                 {
                     Description = "Specifies the bonus applied to the race ability.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Bonus",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RaceBindingKey")
                 {
                     Description = "Specifies the binding key of the associated race.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Race Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AbilityBindingKey")
                 {
                     Description = "Specifies the binding key of the associated ability.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Ability Binding Key",
                     CategoryTitle = "",
                 },

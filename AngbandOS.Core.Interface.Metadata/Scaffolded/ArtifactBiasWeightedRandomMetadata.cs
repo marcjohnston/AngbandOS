@@ -15,20 +15,20 @@ public static class ArtifactBiasWeightedRandomMetadata
                 new TuplePropertyMetadata("ArtifactBiasBindingKeyAndWeightTuples")
                 {
                     Description = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Artifact Bias",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("ArtifactBiasBindingKey")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Artifact Bias Binding Key",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Weight")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Weight",
                             CategoryTitle = "",
                         },

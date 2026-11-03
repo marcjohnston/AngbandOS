@@ -15,28 +15,28 @@ public static class StoreCommandMetadata
                 new CharacterPropertyMetadata("KeyChar")
                 {
                     Description = "Specifies the character used to invoke the store command.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Key Character",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Description")
                 {
                     Description = "Specifies the description of the store command.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Description",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("ValidStoreFactoryNames")
                 {
                     Description = "Specifies the store factory names for which the command is valid.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Valid Store Factory Names",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ExecuteScriptName")
                 {
                     Description = "Specifies the name of the script executed by the store command.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Execute Script Name",
                     CategoryTitle = "",
                 },

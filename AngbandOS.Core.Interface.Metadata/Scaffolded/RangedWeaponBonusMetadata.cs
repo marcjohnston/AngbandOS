@@ -15,28 +15,28 @@ public static class RangedWeaponBonusMetadata
                 new StringPropertyMetadata("ItemClassBindingKey")
                 {
                     Description = "Specifies the optional binding key of the item class affected by the ranged weapon bonus.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Item Class Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CharacterClassBindingKey")
                 {
                     Description = "Specifies the optional binding key of the character class affected by the ranged weapon bonus.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Character Class Binding Key",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("ExperienceLevel")
                 {
                     Description = "Specifies the optional experience level at which the ranged weapon bonus applies.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Experience Level",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BonusMissileAttacksPerRound")
                 {
                     Description = "Specifies the bonus number of missile attacks performed per round.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Bonus Missile Attacks Per Round",
                     CategoryTitle = "",
                 },

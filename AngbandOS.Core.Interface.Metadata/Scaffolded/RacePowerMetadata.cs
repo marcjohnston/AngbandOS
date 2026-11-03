@@ -15,21 +15,21 @@ public static class RacePowerMetadata
                 new StringPropertyMetadata("ScriptBindingKey")
                 {
                     Description = "Specifies the binding key of the script executed by the racial power.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Script Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RaceBindingKey")
                 {
                     Description = "Specifies the binding key of the associated race.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Race Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CharacterClassBindingKey")
                 {
                     Description = "Specifies the optional binding key of the associated character class.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Character Class Binding Key",
                     CategoryTitle = "",
                 },

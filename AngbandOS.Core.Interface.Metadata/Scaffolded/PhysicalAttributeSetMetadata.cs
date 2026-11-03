@@ -15,28 +15,28 @@ public static class PhysicalAttributeSetMetadata
                 new IntegerPropertyMetadata("BaseHeight")
                 {
                     Description = "Specifies the base height for the physical attribute set.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Base Height",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("HeightRange")
                 {
                     Description = "Specifies the height variation range for the physical attribute set.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Height Range",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("BaseWeight")
                 {
                     Description = "Specifies the base weight for the physical attribute set.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Base Weight",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("WeightRange")
                 {
                     Description = "Specifies the weight variation range for the physical attribute set.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Weight Range",
                     CategoryTitle = "",
                 },

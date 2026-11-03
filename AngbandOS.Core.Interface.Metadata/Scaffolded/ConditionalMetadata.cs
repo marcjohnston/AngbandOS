@@ -15,26 +15,26 @@ public static class ConditionalMetadata
                 new TuplePropertyMetadata("EnabledNames")
                 {
                     Description = "The conditional names and required values used to determine whether configuration conditions are enabled.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Enabled Names",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("conditionalName")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Conditional Name",
                             CategoryTitle = "",
                         },
                         new BooleanPropertyMetadata("valueConditionalMustBe")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Value Conditional Must Be",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("productOfSumsTerm")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Product Of Sums Term",
                             CategoryTitle = "",
                         },

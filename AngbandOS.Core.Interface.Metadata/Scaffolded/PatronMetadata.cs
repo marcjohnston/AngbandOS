@@ -15,28 +15,28 @@ public static class PatronMetadata
                 new StringPropertyMetadata("LongName")
                 {
                     Description = "Specifies the long name of the patron.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Long Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PreferredAbilityBindingKey")
                 {
                     Description = "Specifies the optional binding key of the patron's preferred ability.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Preferred Ability Binding Key",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("RewardBindingKeys")
                 {
                     Description = "Specifies the binding keys of the rewards granted by the patron.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Reward Binding Keys",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ShortName")
                 {
                     Description = "Specifies the short name of the patron.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Short Name",
                     CategoryTitle = "",
                 },

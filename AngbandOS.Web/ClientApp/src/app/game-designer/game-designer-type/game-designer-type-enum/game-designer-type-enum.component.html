@@ -2,8 +2,8 @@
   <div id="select-div">
     <select [ngModel]="getValue()"
             (ngModelChange)="setValue($event)">
-      <option *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable"
-              value="">
+      <option *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null"
+              value="{{activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}">
       </option>
       <option *ngFor="let enumOption of options"
               [value]="enumOption.value">

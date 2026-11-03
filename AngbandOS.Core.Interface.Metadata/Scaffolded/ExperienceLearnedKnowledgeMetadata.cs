@@ -15,20 +15,20 @@ public static class ExperienceLearnedKnowledgeMetadata
                 new TuplePropertyMetadata("ExperienceLearnedKnowledgeBindingTuples")
                 {
                     Description = "The experience levels and learned knowledge binding keys used to determine which knowledge is learned.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Experience Learned Knowledge Binding Tuples",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new IntegerPropertyMetadata("MaxExperienceLevel")
                         {
-                            IsNullable = true,
+                            LabelIfNullable = "Null",
                             Title = "Max Experience Level",
                             CategoryTitle = "",
                         },
                         new StringPropertyMetadata("LearnedKnowledgeBindingKey")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Learned Knowledge Binding Key",
                             CategoryTitle = "",
                         },

@@ -15,35 +15,35 @@ public static class GenderMetadata
                 new StringPropertyMetadata("Title")
                 {
                     Description = "Display title for the gender (e.g., \"Male\", \"Female\").",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Title",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Winner")
                 {
                     Description = "Short title used when this gender is presented as the winner type.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Winner",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeRandomlySelected")
                 {
                     Description = "Whether this gender may be chosen by the random-selection logic.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Randomly Selected",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Pronoun")
                 {
                     Description = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Pronoun",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PossessiveAdjective")
                 {
                     Description = "Possessive adjective to use when rendering messages (default: \"its\").",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Possessive Adjective",
                     CategoryTitle = "",
                 },

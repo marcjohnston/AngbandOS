@@ -15,21 +15,21 @@ public static class CharacterClassAbilityMetadata
                 new IntegerPropertyMetadata("Bonus")
                 {
                     Description = "The bonus applied to the ability for this character class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Bonus",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CharacterClassBindingKey")
                 {
                     Description = "The binding key identifying the character class.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character Class Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AbilityBindingKey")
                 {
                     Description = "The binding key identifying the ability.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Ability Binding Key",
                     CategoryTitle = "",
                 },

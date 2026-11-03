@@ -15,28 +15,28 @@ public static class RacialPowerTestMetadata
                 new IntegerPropertyMetadata("MinLevel")
                 {
                     Description = "Specifies the minimum level required to use the racial power.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Minimum Level",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CostExpression")
                 {
                     Description = "Specifies the expression used to determine the cost of the racial power.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Cost Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("UseAbilityBindingKey")
                 {
                     Description = "Specifies the binding key of the ability used by the racial power.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Use Ability Binding Key",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Difficulty")
                 {
                     Description = "Specifies the difficulty of the racial power test.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Difficulty",
                     CategoryTitle = "",
                 },

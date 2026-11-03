@@ -99,8 +99,8 @@ export class GameDesignerComponent implements OnInit {
       });
       return undefined;
     }
-    if (jsonPropertyMetadata.isNullable === undefined) {
-      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid isNullable value after json deserialization.`, "", {
+    if (jsonPropertyMetadata.labelIfNullable === undefined) {
+      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid labelIfNullable value after json deserialization.`, "", {
         duration: 5000
       });
       return undefined;
@@ -208,7 +208,7 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.propertyName,
       jsonPropertyMetadata.title,
       jsonPropertyMetadata.categoryTitle,
-      jsonPropertyMetadata.isNullable,
+      jsonPropertyMetadata.labelIfNullable,
       jsonPropertyMetadata.description,
       jsonPropertyMetadata.defaultValue,
       collectionPropertyMetadataList,

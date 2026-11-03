@@ -40,7 +40,7 @@ export class GameDesignerTypeIntegerComponent implements OnInit {
     const INT32_MAX: number = 2147483647;  // 2^31 - 1
     const INT32_MIN: number = -2147483648; // -2^31
     if (this.input.nativeElement.value == "") {
-      if (!this.activePropertyMetadataAndConfiguration?.propertyMetadata.isNullable) {
+      if (!this.activePropertyMetadataAndConfiguration?.propertyMetadata.labelIfNullable !== null) {
         this.errorMessage = "Value is required.";
         return NaN;
       } else {

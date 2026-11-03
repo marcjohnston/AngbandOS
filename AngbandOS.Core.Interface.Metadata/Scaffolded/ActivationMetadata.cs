@@ -15,35 +15,35 @@ public static class ActivationMetadata
                 new StringPropertyMetadata("Name")
                 {
                     Description = "The name of the activation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("PreActivationMessage")
                 {
                     Description = "The message displayed before the activation occurs.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Pre-Activation Message",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("Value")
                 {
                     Description = "The value associated with the activation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Value",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RechargeTimeRollExpression")
                 {
                     Description = "The roll expression used to determine how long it takes for the activation to recharge.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Recharge Time Roll Expression",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ActivationCancellableScriptItemBindingKey")
                 {
                     Description = "The binding key of the script item that can cancel the activation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Activation Cancellable Script Item Binding Key",
                     CategoryTitle = "",
                 },

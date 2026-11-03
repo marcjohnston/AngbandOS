@@ -1,7 +1,7 @@
 <ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
   <select #select [ngModel]="getValue()" (change)="setValue()">
-    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.isNullable">
-      <option value="">Default</option>
+    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null">
+      <option value="">activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable</option>
     </ng-container>
     <option value="true">True</option>
     <option value="false">False</option>

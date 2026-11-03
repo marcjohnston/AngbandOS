@@ -15,20 +15,20 @@ public static class ItemFactoryWeightedRandomMetadata
                 new TuplePropertyMetadata("NameAndWeightBindings")
                 {
                     Description = "The item factory binding keys and their corresponding weights used for weighted random selection.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name and Weight Bindings",
                     CategoryTitle = "",
                     Types = new PropertyMetadata[]
                     {
                         new StringPropertyMetadata("Name")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Name",
                             CategoryTitle = "",
                         },
                         new IntegerPropertyMetadata("Weight")
                         {
-                            IsNullable = false,
+                            LabelIfNullable = null,
                             Title = "Weight",
                             CategoryTitle = "",
                         },

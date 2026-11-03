@@ -15,35 +15,35 @@ public static class AnimationMetadata
                 new CharacterPropertyMetadata("Character")
                 {
                     Description = "The character displayed by the animation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Character",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "The primary color used by the animation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "The name of the animation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("AlternateColor")
                 {
                     Description = "The alternate color used by the animation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Alternate Color",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Sequence")
                 {
                     Description = "The sequence of characters or frames that make up the animation.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Sequence",
                     CategoryTitle = "",
                 },

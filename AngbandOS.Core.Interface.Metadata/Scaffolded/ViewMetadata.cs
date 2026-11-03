@@ -17,7 +17,7 @@ public static class ViewMetadata
                     ForeignCollectionName = "Widgets",
                     Inline = false,
                     Description = "Specifies the names of the widgets displayed in the view.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Widget Names",
                     CategoryTitle = "",
                 },

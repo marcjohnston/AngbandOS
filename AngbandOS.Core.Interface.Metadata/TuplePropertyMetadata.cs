@@ -23,5 +23,4 @@ public class TuplePropertyMetadata : PropertyMetadata
         get => base.Inline;
         set => base.Inline = value;
     }
-
 }

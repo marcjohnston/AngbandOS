@@ -15,28 +15,28 @@ public static class ItemFlavorMetadata
                 new StringPropertyMetadata("SymbolName")
                 {
                     Description = "The name of the symbol used to represent the item flavor.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Symbol Name",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "The color used to display the item flavor.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "The name of the item flavor.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeAssigned")
                 {
                     Description = "Determines whether this item flavor can be assigned to an item.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Assigned",
                     CategoryTitle = "",
                 },

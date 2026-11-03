@@ -15,28 +15,28 @@ public static class ShopkeeperMetadata
                 new IntegerPropertyMetadata("MaxCost")
                 {
                     Description = "Specifies the maximum cost of items handled by the shopkeeper.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Maximum Cost",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MinInflate")
                 {
                     Description = "Specifies the minimum inflation applied by the shopkeeper.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Minimum Inflate",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Name")
                 {
                     Description = "Specifies the name of the shopkeeper.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("RaceName")
                 {
                     Description = "Specifies the race name of the shopkeeper. When null, no race is specified.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Race Name",
                     CategoryTitle = "",
                 },

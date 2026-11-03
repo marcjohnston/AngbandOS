@@ -15,49 +15,49 @@ public static class MappedSpellScriptMetadata
                 new StringPropertyMetadata("RealmBindingKey")
                 {
                     Description = "Returns the binding key of the realm associated with this mapped spell script.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Realm Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("CharacterClassBindingKey")
                 {
                     Description = "Returns the binding key of the character class associated with this mapped spell script.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Character Class Binding Key",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SpellBindingKey")
                 {
                     Description = "Returns the binding key of the spell associated with this mapped spell script.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Spell Binding Key",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("Success")
                 {
                     Description = "Indicates whether the mapped spell script represents a successful spell cast.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Success",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("CastSpellScriptBindingKeys")
                 {
                     Description = "Returns the binding keys of the cast spell scripts to run when the spell is cast, or null if the spell does nothing when cast.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Cast Spell Script Binding Keys",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MinimumExperienceLevel")
                 {
                     Description = "Returns the minimum experience level required for this mapped spell script, or null if there is no minimum.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Minimum Experience Level",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MaximumExperienceLevel")
                 {
                     Description = "Returns the maximum experience level allowed for this mapped spell script, or null if there is no maximum.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Maximum Experience Level",
                     CategoryTitle = "",
                 },

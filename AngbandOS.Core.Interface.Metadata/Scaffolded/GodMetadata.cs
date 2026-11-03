@@ -15,21 +15,21 @@ public static class GodMetadata
                 new StringPropertyMetadata("LongName")
                 {
                     Description = "The full name of the god.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Long Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("ShortName")
                 {
                     Description = "The abbreviated name of the god.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Short Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("FavorDescription")
                 {
                     Description = "A description of the favor granted by the god.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Favor Description",
                     CategoryTitle = "",
                 },

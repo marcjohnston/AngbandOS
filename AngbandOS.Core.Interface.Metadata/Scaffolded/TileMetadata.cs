@@ -15,427 +15,427 @@ public static class TileMetadata
                 new BooleanPropertyMetadata("IsEarthquakeResistant")
                 {
                     Description = "Determines whether the tile is resistant to earthquakes.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Earthquake Resistant",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsPathBase")
                 {
                     Description = "Determines whether the tile is a path base tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Path Base",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("CanBeClosed")
                 {
                     Description = "Determines whether the tile can be closed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Can Be Closed",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsInvisibleTrap")
                 {
                     Description = "Determines whether the tile is an invisible trap.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Invisible Trap",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("OnJammedTileName")
                 {
                     Description = "Specifies the tile name used when this tile is jammed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "On Jammed Tile Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("VisibleTreasureForTileName")
                 {
                     Description = "Specifies the visible treasure tile name associated with this tile.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Visible Treasure For Tile Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsYellowSignSigil")
                 {
                     Description = "Determines whether the tile is a Yellow Sign sigil.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Yellow Sign Sigil",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("StepOnScriptName")
                 {
                     Description = "Specifies the name of the script executed when the tile is stepped on.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Step On Script Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("SymbolName")
                 {
                     Description = "Specifies the name of the symbol used to render the tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Symbol Name",
                     CategoryTitle = "",
                 },
                 new ColorPropertyMetadata("Color")
                 {
                     Description = "Specifies the color used to render the tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Color",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWildPath")
                 {
                     Description = "Determines whether the tile is a wild path.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Wild Path",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsPath")
                 {
                     Description = "Determines whether the tile is a path tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Path",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsTreasure")
                 {
                     Description = "Determines whether the tile is a treasure tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Treasure",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("BlocksScent")
                 {
                     Description = "Determines whether the tile blocks the scent trail. When null, the value is derived from whether the tile blocks line of sight.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Blocks Scent",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("HiddenTreasureForTileName")
                 {
                     Description = "Specifies the visible tile name associated with this hidden treasure tile. When null, the tile is not hidden treasure.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Hidden Treasure For Tile Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsVisibleTreasure")
                 {
                     Description = "Determines whether the tile is a visible treasure tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Visible Treasure",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsBorder")
                 {
                     Description = "Determines whether the tile is a border tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Border",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsMagma")
                 {
                     Description = "Determines whether the tile is magma.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Magma",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWallOuter")
                 {
                     Description = "Determines whether the tile is an outer wall.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Wall Outer",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWallPermanentOuter")
                 {
                     Description = "Determines whether the tile is a permanent outer wall.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Wall Permanent Outer",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWallPermanentSolid")
                 {
                     Description = "Determines whether the tile is a permanent solid wall.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Wall Permanent Solid",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWallSolid")
                 {
                     Description = "Determines whether the tile is a solid wall.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Wall Solid",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("AlterActionName")
                 {
                     Description = "Specifies the name of the action performed on the tile.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Alter Action Name",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MimicTileName")
                 {
                     Description = "Specifies the name of the tile this tile appears to be when viewed.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "Mimic Tile Name",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("BlocksLos")
                 {
                     Description = "Determines whether the tile blocks line of sight.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Blocks Line Of Sight",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("Description")
                 {
                     Description = "Specifies the text description of the tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Description",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("DimsOutsideLOS")
                 {
                     Description = "Determines whether the tile dims outside line of sight.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Dims Outside Line Of Sight",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsBasicWall")
                 {
                     Description = "Determines whether the tile is a basic, non-permanent dungeon wall.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Basic Wall",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsVisibleDoor")
                 {
                     Description = "Determines whether the tile is a visible door.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Visible Door",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("LockLevel")
                 {
                     Description = "Specifies the lock level of the tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Lock Level",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsInteresting")
                 {
                     Description = "Determines whether the tile is interesting and should be noticed when the player looks around.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Interesting",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsOpenFloor")
                 {
                     Description = "Determines whether the tile is open floor that is safe to drop items on.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Open Floor",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsPassable")
                 {
                     Description = "Determines whether the tile is passable.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Passable",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsPermanent")
                 {
                     Description = "Determines whether the tile is permanent.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Permanent",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsShop")
                 {
                     Description = "Determines whether the tile is a shop entrance.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Shop",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsTrap")
                 {
                     Description = "Determines whether the tile is a known trap.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Trap",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWall")
                 {
                     Description = "Determines whether the tile is a wall, excluding secret doors.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Wall",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsWater")
                 {
                     Description = "Determines whether the tile is water.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Water",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsRock")
                 {
                     Description = "Determines whether the tile is rock.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Rock",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsDownStaircase")
                 {
                     Description = "Determines whether the tile is a down staircase.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Down Staircase",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsUpStaircase")
                 {
                     Description = "Determines whether the tile is an up staircase.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Up Staircase",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsGrass")
                 {
                     Description = "Determines whether the tile is grass.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Grass",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("HasWater")
                 {
                     Description = "Determines whether the tile has water.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Has Water",
                     CategoryTitle = "",
                 },
                 new IntegerPropertyMetadata("MapPriority")
                 {
                     Description = "Specifies the priority of the tile on the map.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Map Priority",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("RunPast")
                 {
                     Description = "Determines whether the player runs past the tile rather than stopping at it.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Run Past",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("YellowInTorchlight")
                 {
                     Description = "Determines whether the tile appears yellow in torchlight.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Yellow In Torchlight",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsRevealedWithDetectStairsScript")
                 {
                     Description = "Determines whether the tile is revealed by the detect stairs script.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Revealed With Detect Stairs Script",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("AllowMonsterToOccupy")
                 {
                     Description = "Determines whether a monster can occupy the tile.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Allow Monster To Occupy",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsSecretDoor")
                 {
                     Description = "Determines whether the tile is a secret door.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Secret Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsClosedDoor")
                 {
                     Description = "Determines whether the tile is a closed door.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Closed Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsJammedClosedDoor")
                 {
                     Description = "Determines whether the tile is a door that is jammed closed.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Jammed Closed Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsTrapDoor")
                 {
                     Description = "Determines whether the tile is a trap door.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Trap Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsRubble")
                 {
                     Description = "Determines whether the tile is rubble.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Rubble",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsBrokenDoor")
                 {
                     Description = "Determines whether the tile is a broken door.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Broken Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsBush")
                 {
                     Description = "Determines whether the tile is a bush.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Bush",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsPillar")
                 {
                     Description = "Determines whether the tile is a pillar.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Pillar",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsElderSignSigil")
                 {
                     Description = "Determines whether the tile is an Elder Sign sigil.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Elder Sign Sigil",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsOpenDoor")
                 {
                     Description = "Determines whether the tile is an open door.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Open Door",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsVein")
                 {
                     Description = "Determines whether the tile is a vein.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Vein",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsUnidentifiedTrap")
                 {
                     Description = "Determines whether the tile is an unidentified trap.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Unidentified Trap",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("IsTree")
                 {
                     Description = "Determines whether the tile is a tree.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Is Tree",
                     CategoryTitle = "",
                 },

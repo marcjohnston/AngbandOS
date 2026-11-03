@@ -15,21 +15,21 @@ public static class ConditionalScriptMetadata
                 new StringPropertyMetadata("ConditionalKey")
                 {
                     Description = "The key identifying the conditional evaluated by the script.",
-                    IsNullable = false,
+                    LabelIfNullable = null,
                     Title = "Conditional Key",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("TrueScriptBindingKeys")
                 {
                     Description = "The binding keys of the scripts executed when the conditional evaluates to true.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "True Script Binding Keys",
                     CategoryTitle = "",
                 },
                 new StringsPropertyMetadata("FalseScriptBindingKeys")
                 {
                     Description = "The binding keys of the scripts executed when the conditional evaluates to false.",
-                    IsNullable = true,
+                    LabelIfNullable = "Default",
                     Title = "False Script Binding Keys",
                     CategoryTitle = "",
                 },
