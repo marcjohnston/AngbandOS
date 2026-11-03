@@ -208,7 +208,6 @@ public class GameConfiguration
         gameConfiguration.SumAttributes = LoadFromAssembly<SummationAttributeGameConfiguration>(assembly);
         gameConfiguration.ScriptsAttributes = LoadFromAssembly<ScriptsAttributeGameConfiguration>(assembly);
         gameConfiguration.ColorEnumAttributes = LoadFromAssembly<ColorEnumAttributeGameConfiguration>(assembly);
-        gameConfiguration.ActivationAttributes = LoadFromAssembly<ActivationNullableReferenceAttributeGameConfiguration>(assembly);
         gameConfiguration.ArtifactBiasAttributes = LoadFromAssembly<ArtifactBiasNullableReferenceAttributeGameConfiguration>(assembly);
         gameConfiguration.StringAttributes = LoadFromAssembly<StringNullableReferenceAttributeGameConfiguration>(assembly);
     }
@@ -554,15 +553,6 @@ public class GameConfiguration
         "ColorEnumAttributes",
         EntityNoun = "Color Enum Attribute")]
     public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
-
-    [ConfigurationMetadata(
-        Title = "Activation Attributes",
-        Summary = "Collection of activation attribute configurations.",
-        DataType = "ActivationNullableReferenceAttributeGameConfiguration[]?")]
-    [ConfigurationCollection(
-        "ActivationAttributes",
-        EntityNoun = "Activation Attribute")]
-    public virtual ActivationNullableReferenceAttributeGameConfiguration[]? ActivationAttributes { get; set; } = null;
 
     [ConfigurationMetadata(
         Title = "Artifact Bias Attributes",
