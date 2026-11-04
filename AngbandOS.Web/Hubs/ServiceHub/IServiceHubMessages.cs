@@ -15,7 +15,7 @@
         /// Outgoing message to a web client that the chat history has changed.  This signature must be identical to the same method on the IChatHub.
         /// </summary>
         /// <returns></returns>
-        Task ChatRefreshed(ChatMessage[] history);
+        Task ChatRefreshed(ChatMessage[] history, bool hasMoreMessages);
 
         Task ChatUpdated(ChatMessage message);
 

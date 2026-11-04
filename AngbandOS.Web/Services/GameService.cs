@@ -462,13 +462,22 @@ namespace AngbandOS.Web.Services
         /// </summary>
         /// <param name="endingId"></param>
         /// <returns></returns>
-        public async Task<ChatMessage[]> GetChatMessagesAsync(string connectionId, int? endingId)
+        public async Task<(ChatMessage[] chatMessages, bool hasMoreMessages)> GetChatMessagesAsync(string connectionId, int? oldestDownloadedMessageId)
         {
             // Determine if the current user is an administrator.
-            ChatRecipients.TryGetValue(connectionId, out ChatRecipient? chatRecipient);
+            if (!ChatRecipients.TryGetValue(connectionId, out ChatRecipient? chatRecipient))
+            {
+                return (Array.Empty<ChatMessage>(), false);
+            }
 
             // Retrieve the messages from the database.
-            MessageDetails[] messages = await chatRecipient.GetMessagesAsync(WebPersistentStorage, endingId);
+            MessageDetails[] messages = await chatRecipient.GetMessagesAsync(WebPersistentStorage, oldestDownloadedMessageId, 51);
+            bool hasMoreMessages = messages.Length > 50;
+            if (hasMoreMessages)
+            {
+                int oldestId = messages.Min(_message => _message.Id);
+                messages = messages.Where(_message => _message.Id != oldestId).ToArray();
+            }
 
             // Convert the messages into chat format that they can be sent to the client.
             List<ChatMessage> chatMessages = new List<ChatMessage>();
@@ -476,7 +485,7 @@ namespace AngbandOS.Web.Services
             {
                 chatMessages.Add(await GetChatMessageAsync(message));
             }
-            return chatMessages.ToArray();
+            return (chatMessages.ToArray(), hasMoreMessages);
         }
 
         private async Task<ChatMessage> GetChatMessageAsync(MessageDetails message)

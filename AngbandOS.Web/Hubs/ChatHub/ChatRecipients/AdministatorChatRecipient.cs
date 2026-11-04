@@ -22,9 +22,9 @@ namespace AngbandOS.Web.Hubs
             await ChatHub.ChatUpdated(chatMessage);
         }
 
-        public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? endingId)
+        public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? oldestDownloadedMessageId, int maximumMessages)
         {
-            return await webPersistentStorage.GetMessagesAsync(UserId, endingId, null, IncludeDeletedMessages);
+            return await webPersistentStorage.GetMessagesAsync(UserId, oldestDownloadedMessageId, maximumMessages, null, IncludeDeletedMessages);
         }
     }
 }

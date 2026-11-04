@@ -9,6 +9,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ChangeDetectorRef } from '@angular/core';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-chat',
@@ -20,7 +21,8 @@ import { ChangeDetectorRef } from '@angular/core';
     NgFor,
     NgIf,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ]
 })
 export class ChatComponent implements OnInit, OnDestroy {
@@ -28,6 +30,14 @@ export class ChatComponent implements OnInit, OnDestroy {
   public isAuthenticated: boolean = false;
   public isAdministrator = false;
   public connectionId: string | null = null;
+  public hasMoreMessages: boolean = false;
+
+  /** Returns true, while a request for older messages is outstanding.  Prevents duplicate requests from repeated clicks. */
+  public isLoadingMoreMessages: boolean = false;
+
+  /** Returns the oldest message ID sent with the outstanding RefreshChat request, or null when the request is for the most recent page.  Determines whether the reply replaces or prepends the history. */
+  private _requestedOldestDownloadedMessageId: number | null = null;
+
   @ViewChild('scrollDiv', { static: true }) private scrollDivRef: ElementRef | undefined;
   private _initSubscriptions = new Subscription();
   private _chatConnection: HubConnection | undefined; // Initialized only as needed due to two different authentication channels.
@@ -85,6 +95,61 @@ export class ChatComponent implements OnInit, OnDestroy {
     scrollDiv.scrollTop = scrollDiv.scrollHeight;
   }
 
+  /** Returns the connection that is currently active; the chat hub for authenticated users or the service hub for anonymous users. */
+  private get activeConnection(): HubConnection | undefined {
+    return this._chatConnection ?? this._serviceConnection;
+  }
+
+  /** Returns the ID of the oldest message in the history; or null, if there is no history.  All messages with this ID and higher have been downloaded. */
+  private get oldestDownloadedMessageId(): number | null {
+    if (this.history === undefined || this.history.length === 0) {
+      return null;
+    }
+    return Math.min(...this.history.map(_message => _message.id!));
+  }
+
+  /** Requests a page of chat messages from the server.  Null requests the most recent page; otherwise, the page of messages older than the ID. */
+  private refreshChat(connection: HubConnection, oldestDownloadedMessageId: number | null) {
+    this._requestedOldestDownloadedMessageId = oldestDownloadedMessageId;
+    connection.send("RefreshChat", oldestDownloadedMessageId);
+  }
+
+  /** Requests the next page of older messages.  Invoked by the "Get More Messages" button. */
+  public getMoreMessages() {
+    const connection = this.activeConnection;
+    const oldestDownloadedMessageId = this.oldestDownloadedMessageId;
+    if (connection === undefined || oldestDownloadedMessageId === null || !this.hasMoreMessages || this.isLoadingMoreMessages) {
+      return;
+    }
+    this.isLoadingMoreMessages = true;
+    this.refreshChat(connection, oldestDownloadedMessageId);
+  }
+
+  /** Handles a page of chat messages from the server.  The initial page replaces the history; pages of older messages are inserted at the top. */
+  private chatRefreshed(history: ChatMessage[], hasMoreMessages: boolean | undefined) {
+    this.hasMoreMessages = hasMoreMessages === true;
+    this.isLoadingMoreMessages = false;
+    if (this._requestedOldestDownloadedMessageId === null || this.history === undefined) {
+      this.updateHistory(history);
+    } else {
+      this.prependHistory(history);
+    }
+  }
+
+  /** Inserts older messages at the top of the history and keeps the messages the user was looking at in the same place on the screen. */
+  private prependHistory(olderMessages: ChatMessage[]) {
+    const scrollDiv: HTMLDivElement = this.scrollDivRef?.nativeElement as HTMLDivElement;
+    const previousScrollHeight = scrollDiv.scrollHeight;
+    const previousScrollTop = scrollDiv.scrollTop;
+
+    this.history = olderMessages.concat(this.history ?? []);
+    this._changeDetectorRef.detectChanges();
+
+    // The new messages pushed the existing ones down; scroll by the same amount so the view does not jump.
+    scrollDiv.scrollTop = previousScrollTop + (scrollDiv.scrollHeight - previousScrollHeight);
+  }
+
+
   private updateHistory(history: ChatMessage[]) {
     this.history = history;
     this._changeDetectorRef.detectChanges();
@@ -104,8 +169,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     this._serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
 
     // Register handlers before start.
-    this._serviceConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
-      this.updateHistory(_history);
+    this._serviceConnection.on("ChatRefreshed", (_history: ChatMessage[], _hasMoreMessages: boolean | undefined) => {
+      this.chatRefreshed(_history, _hasMoreMessages);
     });
     this._serviceConnection.on("ChatUpdated", (_message: ChatMessage) => {
       this.appendHistory(_message);
@@ -114,7 +179,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this._serviceConnection.start().then(() => {
       this.connectionId = `Service: ${this._serviceConnection?.connectionId!}`;
       if (this._serviceConnection !== undefined) {
-        this._serviceConnection.send("RefreshChat", null);
+        this.refreshChat(this._serviceConnection, null);
       }
     }, (reason: any) => {
       this.showMessage(`Cannot connect to service '${reason}'`);
@@ -129,8 +194,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     }).build();
 
     // Register handlers before start.
-    this._chatConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
-      this.updateHistory(_history);
+    this._chatConnection.on("ChatRefreshed", (_history: ChatMessage[], _hasMoreMessages: boolean | undefined) => {
+      this.chatRefreshed(_history, _hasMoreMessages);
     });
     this._chatConnection.on("ChatUpdated", (_message: ChatMessage) => {
       this.appendHistory(_message);
@@ -143,7 +208,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this._chatConnection.start().then(() => {
       this.connectionId = `Chat: ${this._chatConnection?.connectionId!}`;
       if (this._chatConnection !== undefined) {
-        this._chatConnection.send("RefreshChat", null);
+        this.refreshChat(this._chatConnection, null);
       }
     }, (reason: any) => {
       this.showMessage(`Cannot connect to chat '${reason}'`);
@@ -208,6 +273,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     return Promise.all(chatAndServiceHubs).then(() => {
       this._serviceConnection = undefined;
       this._chatConnection = undefined;
+
+      this.hasMoreMessages = false;
+      this.isLoadingMoreMessages = false;
+      this._requestedOldestDownloadedMessageId = null;
     });
   }
 

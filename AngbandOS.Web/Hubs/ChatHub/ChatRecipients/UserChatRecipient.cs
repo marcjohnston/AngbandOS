@@ -23,12 +23,12 @@ namespace AngbandOS.Web.Hubs
                 await ChatHub.ChatUpdated(chatMessage);
         }
 
-        public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? endingId)
+        public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? oldestDownloadedMessageId, int maximumMessages)
         {
             MessageTypeEnum[] messageTypes = new MessageTypeEnum[] { MessageTypeEnum.UserMessage, MessageTypeEnum.CharacterDied };
 
             // Deleted messages are not available to normal users.
-            return await webPersistentStorage.GetMessagesAsync(UserId, endingId, messageTypes, false);
+            return await webPersistentStorage.GetMessagesAsync(UserId, oldestDownloadedMessageId, maximumMessages, messageTypes, false);
         }
     }
 }
