@@ -426,7 +426,7 @@ export class PlayComponent implements OnInit, OnDestroy {
         // Play the game.
         this.play();
       }, (reason: any) => {
-        this.showSnackBar(`Connection to game server failed ${reason}.`);
+        this.showSnackBar("Game not available. Please try again later.");
         // Turn off the game in progress so that the CanDeactivate route guard isn't triggered.
         this.gameInProgress = false;
 
