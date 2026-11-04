@@ -28,12 +28,7 @@ HashSet<Type> reachableTypes = new();
 HashSet<Type> activeTypes = new();
 HashSet<Type> completedTypes = new();
 
-VisitConfigurationType(
-    typeof(GameConfiguration),
-    reachableTypes,
-    activeTypes,
-    completedTypes,
-    errors);
+VisitConfigurationType(typeof(GameConfiguration), reachableTypes, activeTypes, completedTypes, errors);
 
 if (errors.Count > 0)
 {
@@ -120,47 +115,34 @@ static void VisitConfigurationType(
 
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
-        Type? referencedType =
-            GetReferencedConfigurationType(property.PropertyType);
+        Type? referencedType = GetReferencedConfigurationType(property.PropertyType);
 
         if (referencedType != null)
         {
-            VisitConfigurationType(
-                referencedType,
-                reachableTypes,
-                activeTypes,
-                completedTypes,
-                errors);
+            VisitConfigurationType(referencedType, reachableTypes, activeTypes, completedTypes, errors);
         }
 
-        ConfigurationMetadataAttribute? metadata =
-            property.GetCustomAttribute<ConfigurationMetadataAttribute>(
-                inherit: false);
+        ConfigurationMetadataAttribute? metadata = property.GetCustomAttribute<ConfigurationMetadataAttribute>(inherit: false);
 
         if (metadata == null)
         {
-            errors.Add(
-                $"Property '{configurationType.FullName}.{property.Name}' is not annotated with ConfigurationMetadataAttribute.");
-
+            errors.Add($"Property '{configurationType.FullName}.{property.Name}' is not annotated with ConfigurationMetadataAttribute.");
             continue;
         }
 
         if (string.IsNullOrWhiteSpace(metadata.Title))
         {
-            errors.Add(
-                $"Property '{configurationType.FullName}.{property.Name}' has no metadata Title.");
+            errors.Add($"Property '{configurationType.FullName}.{property.Name}' has no metadata Title.");
         }
 
         if (string.IsNullOrWhiteSpace(metadata.Summary))
         {
-            errors.Add(
-                $"Property '{configurationType.FullName}.{property.Name}' has no metadata Summary.");
+            errors.Add($"Property '{configurationType.FullName}.{property.Name}' has no metadata Summary.");
         }
 
         if (string.IsNullOrWhiteSpace(metadata.DataType))
         {
-            errors.Add(
-                $"Property '{configurationType.FullName}.{property.Name}' has no metadata DataType.");
+            errors.Add($"Property '{configurationType.FullName}.{property.Name}' has no metadata DataType.");
         }
     }
 
