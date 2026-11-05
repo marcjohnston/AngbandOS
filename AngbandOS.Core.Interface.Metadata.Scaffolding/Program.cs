@@ -266,7 +266,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
 
             if (tupleItems.Length != tupleElementDataTypes.Length)
             {
-                Console.Error.WriteLine($"Property '{property.DeclaringType?.FullName}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
+                Console.Error.WriteLine($"Property '{configurationType.Name}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
                 Environment.Exit(1);
             }
 
