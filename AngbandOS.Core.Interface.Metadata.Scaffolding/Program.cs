@@ -107,10 +107,9 @@ static void TraverseGameConfigurationType(Type configurationType, ISet<Type> rea
     }
 }
 
-static IEnumerable<PropertyInfo> GetConfigurationProperties(
-    Type configurationType)
+static IEnumerable<PropertyInfo> GetConfigurationProperties(Type gameConfigurationType)
 {
-    return configurationType
+    return gameConfigurationType
         .GetProperties(
             BindingFlags.Instance |
             BindingFlags.Public |
@@ -180,8 +179,12 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
 
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
-        ConfigurationPropertyAttribute metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>(inherit: false)
-            ?? throw new InvalidOperationException($"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
+        ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>(inherit: false);
+        if (metadata is null)
+        {
+            Console.Error.WriteLine($"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
+            Environment.Exit(1);
+        }
 
         WriteProperty(writer, property, metadata, 4);
     }
