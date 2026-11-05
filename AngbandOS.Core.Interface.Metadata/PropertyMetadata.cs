@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Interface.Metadata;
 
 /// <summary>
 /// Represents a class that contains metadata description for class.  The properties of this class use public modifiers on the properties to enable standard Json serialization and a protected 

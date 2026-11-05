@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Interface.Metadata;
 
 /// <summary>
 /// Represents a property that is a collection of entities.

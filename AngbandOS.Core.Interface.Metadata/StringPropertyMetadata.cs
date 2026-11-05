@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Interface.Metadata;
 
 /// <summary>
 /// Represents a derived <see cref="PropertyMetadata"/> class for the description of a string property.

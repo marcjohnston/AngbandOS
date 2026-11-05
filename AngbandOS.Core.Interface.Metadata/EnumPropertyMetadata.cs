@@ -1,4 +1,4 @@
-namespace AngbandOS.Core.Interface;
+namespace AngbandOS.Core.Interface.Metadata;
 
 /// <summary>
 /// Represents metadata for an enumeration-valued configuration property.

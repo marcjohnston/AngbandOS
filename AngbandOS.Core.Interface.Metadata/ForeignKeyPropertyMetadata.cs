@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Core.Interface;
+﻿namespace AngbandOS.Core.Interface.Metadata;
 
 /// <summary>
 /// Represents a property that is a foreign key reference to another entity collection.  This metadata is used to identify the property as a foreign key and to provide information about the referenced collection.

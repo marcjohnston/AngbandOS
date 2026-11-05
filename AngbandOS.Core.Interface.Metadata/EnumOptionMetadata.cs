@@ -1,4 +1,4 @@
-namespace AngbandOS.Core.Interface;
+namespace AngbandOS.Core.Interface.Metadata;
 
 /// <summary>
 /// Describes one selectable value of an enumeration.
