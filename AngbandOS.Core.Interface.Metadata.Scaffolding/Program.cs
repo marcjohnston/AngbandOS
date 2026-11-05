@@ -82,7 +82,7 @@ static void TraverseGameConfigurationType(Type configurationType, ISet<Type> rea
             TraverseGameConfigurationType(referencedType, reachableTypes, errors);
         }
 
-        ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>(inherit: false);
+        ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
 
         if (metadata == null)
         {
@@ -179,7 +179,7 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
 
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
-        ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>(inherit: false);
+        ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
         if (metadata is null)
         {
             Console.Error.WriteLine($"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
@@ -197,8 +197,8 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
 
 static void WriteProperty(StreamWriter writer, string propertyName, PropertyInfo property, ConfigurationPropertyAttribute metadata, int indentLevel)
 {
-    ConfigurationCollectionAttribute? collection = property.GetCustomAttribute<ConfigurationCollectionAttribute>(inherit: true);
-    ConfigurationForeignKeyAttribute? foreignCollection = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(inherit: true);
+    ConfigurationCollectionAttribute? collection = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
+    ConfigurationForeignKeyAttribute? foreignCollection = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
 
     // We need to retrieve the data type property from the annotation.  These data types allow this scaffolder to determine the correct underlying data type due to limitations with reflection and nullablility.
     string? annotatedDataType = metadata.DataType?.Trim();
@@ -247,7 +247,7 @@ static void WriteProperty(StreamWriter writer, string propertyName, PropertyInfo
         writer.WriteLine($"{indentation}    Title = \"{Escape(metadata.Title)}\",");
     }
 
-    ConfigurationCategoryAttribute? propertyCategory = property.GetCustomAttribute<ConfigurationCategoryAttribute>(inherit: true);
+    ConfigurationCategoryAttribute? propertyCategory = property.GetCustomAttribute<ConfigurationCategoryAttribute>();
 
     writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
 
@@ -442,7 +442,7 @@ static void WriteTupleTypes(StreamWriter writer, string propertyName, PropertyIn
 
     string[] tupleElementDataTypes = GetTupleElementDataTypes(dataType);
 
-    ConfigurationTupleItemAttribute[] tupleItems = property.GetCustomAttributes<ConfigurationTupleItemAttribute>(inherit: true).ToArray();
+    ConfigurationTupleItemAttribute[] tupleItems = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
 
     if (tupleItems.Length != tupleElementTypes.Length || tupleItems.Length != tupleElementDataTypes.Length)
     {
