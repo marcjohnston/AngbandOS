@@ -200,21 +200,20 @@ static void WriteProperty(StreamWriter writer, PropertyInfo property, Configurat
     ConfigurationCollectionAttribute? collection = property.GetCustomAttribute<ConfigurationCollectionAttribute>(inherit: true);
     ConfigurationForeignKeyAttribute? foreignCollection = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(inherit: true);
 
-    string dataType = metadata.DataType?.Trim()
-        ?? throw new InvalidOperationException($"The property '{property.DeclaringType?.FullName}.{property.Name}' has no DataType.");
+    string? dataType = metadata.DataType?.Trim();
+    if (dataType is null)
+    {
+        Console.Error.WriteLine($"The property '{property.DeclaringType?.FullName}.{property.Name}' has no DataType.");
+        Environment.Exit(1);
+    }
 
     string indentation = new(' ', indentLevel * 4);
-
     Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-
     bool isArray = propertyType.IsArray;
-
     Type? elementType = isArray ? propertyType.GetElementType() : null;
-
     string metadataType = GetMetadataType(dataType, propertyType, elementType, property, foreignCollection, collection);
 
     writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(property.Name)}\")");
-
     writer.WriteLine($"{indentation}{{");
 
     if (foreignCollection != null)
@@ -225,8 +224,12 @@ static void WriteProperty(StreamWriter writer, PropertyInfo property, Configurat
 
     if (metadataType == nameof(CollectionPropertyMetadata) && collection != null)
     {
-        string childMetadataClassName = GetMetadataClassName(elementType
-                ?? throw new InvalidOperationException($"Unable to determine the element type for collection property '{property.Name}'."));
+        if (elementType is null)
+        {
+            Console.Error.WriteLine($"Unable to determine the element type for collection property '{property.Name}'.");
+            Environment.Exit(1);
+        }
+        string childMetadataClassName = GetMetadataClassName(elementType);
 
         writer.WriteLine($"{indentation}    PropertyMetadatas = {childMetadataClassName}.Metadata,");
         writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(collection.CollectionName)}\",");
