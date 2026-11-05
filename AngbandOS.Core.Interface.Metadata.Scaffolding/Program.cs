@@ -396,8 +396,7 @@ static Type GetAnnotatedType(string annotatedDataType)
         }
     }
 
-    Console.Error.WriteLine($"Unable to resolve annotated DataType '{annotatedDataType}'.");
-    Environment.Exit(1);
+    throw new Exception($"Unable to resolve annotated DataType '{annotatedDataType}'.");
 }
 
 static void WriteEnumMetadata(StreamWriter writer, IReadOnlyCollection<Type> enumTypes)
@@ -528,17 +527,12 @@ static string RemoveNullableAndArraySuffixes(string dataType)
 
 static string Escape(string value)
 {
-    return value
-        .Replace("\\", "\\\\", StringComparison.Ordinal)
-        .Replace("\"", "\\\"", StringComparison.Ordinal)
-        .Replace("\r", "\\r", StringComparison.Ordinal)
-        .Replace("\n", "\\n", StringComparison.Ordinal);
+    return value.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\r", "\\r").Replace("\n", "\\n");
 }
 
 static Type? GetEnumType(Type propertyType)
 {
     Type unwrappedType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-
     return unwrappedType.IsEnum ? unwrappedType : null;
 }
 
