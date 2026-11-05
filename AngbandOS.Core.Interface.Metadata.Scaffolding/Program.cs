@@ -178,13 +178,16 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
     writer.WriteLine($"            {{");
 
     string indentation = new(' ', 4 * 4);
+
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
         // We use the property name from reflection but that is it.
         string propertyName = property.Name;
 
-        // Retrieve the ConfigurationPropertyAttribute metadata for the property.  This attribute is required for all properties in a configuration class.
-        ConfigurationPropertyAttribute? configurationPropertyAttribute = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
+        // Retrieve the ConfigurationPropertyAttribute metadata for the property.
+        ConfigurationPropertyAttribute? configurationPropertyAttribute =
+            property.GetCustomAttribute<ConfigurationPropertyAttribute>();
+
         if (configurationPropertyAttribute is null)
         {
             Console.Error.WriteLine($"Property '{configurationType.FullName}.{propertyName}' is missing ConfigurationMetadataAttribute.");
@@ -192,21 +195,26 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
         }
 
         // There are additional annotations we need to check.
-        ConfigurationCollectionAttribute? configurationCollectionAttribute = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
-        ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
+        ConfigurationCollectionAttribute? configurationCollectionAttribute =
+            property.GetCustomAttribute<ConfigurationCollectionAttribute>();
 
-        // We need to retrieve the data type property from the annotation.  These data types allow this scaffolder to determine the correct underlying data type due to limitations with reflection and nullablility.
+        ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute =
+            property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
+
+        // Retrieve the annotated data type.
         string? annotatedDataType = configurationPropertyAttribute.DataType?.Trim();
+
         if (annotatedDataType is null)
         {
             Console.Error.WriteLine($"The property '{configurationType.Name}.{propertyName}' has no DataType.");
             Environment.Exit(1);
         }
 
-        Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-        bool isArray = propertyType.IsArray;
-        Type? elementType = isArray ? propertyType.GetElementType() : null;
-        string metadataType = GetMetadataType(annotatedDataType, propertyName, configurationForeignCollectionAttribute, configurationCollectionAttribute);
+        string metadataType = GetMetadataType(
+            annotatedDataType,
+            propertyName,
+            configurationForeignCollectionAttribute,
+            configurationCollectionAttribute);
 
         writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(propertyName)}\")");
         writer.WriteLine($"{indentation}{{");
@@ -219,11 +227,17 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
 
         if (metadataType == nameof(CollectionPropertyMetadata) && configurationCollectionAttribute != null)
         {
-            if (elementType is null)
+            string elementDataType = annotatedDataType.Trim().TrimEnd('?');
+
+            if (!elementDataType.EndsWith("[]", StringComparison.Ordinal))
             {
-                Console.Error.WriteLine($"Unable to determine the element type for collection property '{propertyName}'.");
+                Console.Error.WriteLine($"DataType '{annotatedDataType}' is not an array.");
                 Environment.Exit(1);
             }
+
+            elementDataType = elementDataType[..^2].Trim();
+            Type elementType = GetAnnotatedType(elementDataType);
+
             string childMetadataClassName = GetMetadataClassName(elementType);
 
             writer.WriteLine($"{indentation}    PropertyMetadatas = {childMetadataClassName}.Metadata,");
@@ -241,58 +255,48 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
             writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
         }
 
-        ConfigurationCategoryAttribute? propertyCategory = property.GetCustomAttribute<ConfigurationCategoryAttribute>();
+        ConfigurationCategoryAttribute? propertyCategory =
+            property.GetCustomAttribute<ConfigurationCategoryAttribute>();
 
         writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
 
         if (metadataType == nameof(EnumPropertyMetadata))
         {
-            Type enumType = GetEnumType(property.PropertyType)
-                ?? throw new InvalidOperationException($"Unable to determine the enum type for property '{propertyName}'.");
+            Type enumType = GetAnnotatedType(annotatedDataType);
 
             writer.WriteLine($"{indentation}    EnumName = \"{Escape(enumType.Name)}\",");
         }
 
         if (metadataType == nameof(TuplePropertyMetadata))
         {
-            Type? tupleType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-
-            while (tupleType.IsArray)
-            {
-                tupleType = tupleType.GetElementType();
-                if (tupleType is null)
-                {
-                    Console.Error.WriteLine($"Unable to determine the tuple element type for property '{propertyName}'.");
-                    Environment.Exit(1);
-                }
-            }
-
-            if (!tupleType.IsGenericType)
-            {
-                Console.Error.WriteLine($"Unable to determine tuple element types for property '{propertyName}'.");
-                Environment.Exit(1);
-            }
-
-            Type[] tupleElementTypes = tupleType.GetGenericArguments();
             string[] tupleElementDataTypes = GetTupleElementDataTypes(annotatedDataType);
-            ConfigurationTupleItemAttribute[] tupleItems = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
 
-            if (tupleItems.Length != tupleElementTypes.Length || tupleItems.Length != tupleElementDataTypes.Length)
+            ConfigurationTupleItemAttribute[] tupleItems =
+                property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
+
+            if (tupleItems.Length != tupleElementDataTypes.Length)
             {
-                Console.Error.WriteLine($"Property '{property.DeclaringType?.FullName}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
+                Console.Error.WriteLine(
+                    $"Property '{property.DeclaringType?.FullName}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
+
                 Environment.Exit(1);
             }
 
             writer.WriteLine($"{indentation}    Types = new PropertyMetadata[]");
-
             writer.WriteLine($"{indentation}    {{");
 
             for (int index = 0; index < tupleItems.Length; index++)
             {
                 ConfigurationTupleItemAttribute tupleItem = tupleItems[index];
                 string tupleItemDataType = tupleElementDataTypes[index];
-                Type tupleItemType = tupleElementTypes[index];
-                string tupleMetadataType = GetTupleItemMetadataType(tupleItemDataType, tupleItemType, tupleItem.ForeignCollectionName != null);
+
+                Type tupleItemType = GetAnnotatedType(tupleItemDataType);
+
+                string tupleMetadataType = GetTupleItemMetadataType(
+                    tupleItemDataType,
+                    tupleItemType,
+                    tupleItem.ForeignCollectionName != null);
+
                 writer.WriteLine($"{indentation}        new {tupleMetadataType}(\"{Escape(tupleItem.Name)}\")");
                 writer.WriteLine($"{indentation}        {{");
 
@@ -332,6 +336,80 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
     writer.WriteLine($"        }}");
     writer.WriteLine($"    }}");
     writer.WriteLine($"}}");
+}
+
+static Type GetAnnotatedType(string annotatedDataType)
+{
+    string typeName = annotatedDataType.Trim();
+
+    // Remove nullable and array annotations.
+    while (true)
+    {
+        if (typeName.EndsWith("?", StringComparison.Ordinal))
+        {
+            typeName = typeName[..^1].Trim();
+        }
+        else if (typeName.EndsWith("[]", StringComparison.Ordinal))
+        {
+            typeName = typeName[..^2].Trim();
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    Type? type = typeName switch
+    {
+        "bool" => typeof(bool),
+        "byte" => typeof(byte),
+        "sbyte" => typeof(sbyte),
+        "short" => typeof(short),
+        "ushort" => typeof(ushort),
+        "int" => typeof(int),
+        "uint" => typeof(uint),
+        "long" => typeof(long),
+        "ulong" => typeof(ulong),
+        "float" => typeof(float),
+        "double" => typeof(double),
+        "decimal" => typeof(decimal),
+        "char" => typeof(char),
+        "string" => typeof(string),
+        "object" => typeof(object),
+        _ => null
+    };
+
+    if (type is not null)
+    {
+        return type;
+    }
+
+    type = Type.GetType(typeName, false, true);
+
+    if (type is not null)
+    {
+        return type;
+    }
+
+    foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+    {
+        type = assembly.GetType(typeName, false, true);
+
+        if (type is not null)
+        {
+            return type;
+        }
+
+        type = assembly.GetTypes().FirstOrDefault(t => string.Equals(t.Name, typeName, StringComparison.Ordinal));
+
+        if (type is not null)
+        {
+            return type;
+        }
+    }
+
+    throw new InvalidOperationException(
+        $"Unable to resolve annotated DataType '{annotatedDataType}'.");
 }
 
 static void WriteEnumMetadata(StreamWriter writer, IReadOnlyCollection<Type> enumTypes)
