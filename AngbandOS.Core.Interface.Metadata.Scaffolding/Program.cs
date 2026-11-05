@@ -206,7 +206,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
         Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
         bool isArray = propertyType.IsArray;
         Type? elementType = isArray ? propertyType.GetElementType() : null;
-        string metadataType = GetMetadataType(annotatedDataType, property, configurationForeignCollectionAttribute, configurationCollectionAttribute);
+        string metadataType = GetMetadataType(annotatedDataType, propertyName, configurationForeignCollectionAttribute, configurationCollectionAttribute);
 
         writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(propertyName)}\")");
         writer.WriteLine($"{indentation}{{");
@@ -334,9 +334,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
     writer.WriteLine($"}}");
 }
 
-static void WriteEnumMetadata(
-    StreamWriter writer,
-    IReadOnlyCollection<Type> enumTypes)
+static void WriteEnumMetadata(StreamWriter writer, IReadOnlyCollection<Type> enumTypes)
 {
     writer.WriteLine("    public static EnumMetadata[] Enums");
     writer.WriteLine("    {");
@@ -376,7 +374,7 @@ static void WriteEnumMetadata(
     writer.WriteLine();
 }
 
-static string GetMetadataType(string dataType, PropertyInfo property, ConfigurationForeignKeyAttribute? foreignCollection, ConfigurationCollectionAttribute? collection)
+static string GetMetadataType(string dataType, string propertyName, ConfigurationForeignKeyAttribute? foreignCollection, ConfigurationCollectionAttribute? collection)
 {
     if (IsTuple(dataType))
     {
@@ -405,8 +403,7 @@ static string GetMetadataType(string dataType, PropertyInfo property, Configurat
         "ColorEnum" => nameof(ColorPropertyMetadata),
         _ when normalizedType.EndsWith("Enum", StringComparison.Ordinal) => nameof(EnumPropertyMetadata),
         _ => throw new InvalidOperationException(
-            $"The data type '{dataType}' is not supported in " +
-            $"file '{property.DeclaringType?.Name}.cs' for property '{property.Name}'.")
+            $"The data type '{dataType}' is not supported for property '{propertyName}'.")
     };
 }
 
