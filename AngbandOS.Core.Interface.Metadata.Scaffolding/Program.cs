@@ -5,9 +5,7 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 if (args.Length != 1)
 {
-    Console.Error.WriteLine(
-        "syntax: scaffold-metadata {output_folder}");
-
+    Console.Error.WriteLine("syntax: scaffold-metadata {output_folder}");
     return 1;
 }
 
@@ -15,20 +13,13 @@ string outputFolder = Path.GetFullPath(args[0]);
 
 if (File.Exists(outputFolder))
 {
-    Console.Error.WriteLine(
-        $"The output path '{outputFolder}' is a file. " +
-        "The output path must be either nonexistent or an existing directory.");
-
+    Console.Error.WriteLine($"The output path '{outputFolder}' is a file. The output path must be either nonexistent or an existing directory.");
     return 1;
 }
 
 List<string> errors = new();
-
 HashSet<Type> reachableTypes = new();
-HashSet<Type> activeTypes = new();
-HashSet<Type> completedTypes = new();
-
-VisitConfigurationType(typeof(GameConfiguration), reachableTypes, activeTypes, completedTypes, errors);
+TraverseGameConfigurationType(typeof(GameConfiguration), reachableTypes, errors);
 
 if (errors.Count > 0)
 {
@@ -56,58 +47,26 @@ if (Directory.Exists(outputFolder))
     }
     catch (Exception exception)
     {
-        Console.Error.WriteLine(
-            $"Unable to delete existing output directory '{outputFolder}': {exception.Message}");
-
+        Console.Error.WriteLine($"Unable to delete existing output directory '{outputFolder}': {exception.Message}");
         return 1;
     }
 }
 
 Directory.CreateDirectory(outputFolder);
 
-foreach (Type configurationType in reachableTypes
-    .OrderBy(x => x.Name, StringComparer.Ordinal))
+foreach (Type configurationType in reachableTypes.OrderBy(x => x.Name, StringComparer.Ordinal))
 {
-    WriteMetadataClass(
-        outputFolder,
-        configurationType,
-        enumTypes);
+    WriteMetadataClass(outputFolder, configurationType, enumTypes);
 }
 
-Console.WriteLine(
-    $"Generated {reachableTypes.Count} metadata classes in '{outputFolder}'.");
-
+Console.WriteLine($"Generated {reachableTypes.Count} metadata classes in '{outputFolder}'.");
 return 0;
 
-static bool IsConfigurationType(Type type)
+static void TraverseGameConfigurationType(Type configurationType, ISet<Type> reachableTypes, ICollection<string> errors)
 {
-    return type.IsClass &&
-        !type.IsAbstract &&
-        (
-            type == typeof(GameConfiguration) ||
-            typeof(NonCompositeSingletonGameConfiguration)
-                .IsAssignableFrom(type) ||
-            typeof(IGetKeyGameConfiguration)
-                .IsAssignableFrom(type));
-}
-
-static void VisitConfigurationType(
-    Type configurationType,
-    ISet<Type> reachableTypes,
-    ISet<Type> activeTypes,
-    ISet<Type> completedTypes,
-    ICollection<string> errors)
-{
-    if (completedTypes.Contains(configurationType))
+    if (!reachableTypes.Add(configurationType))
     {
-        return;
-    }
-
-    if (!activeTypes.Add(configurationType))
-    {
-        errors.Add(
-            $"Configuration type '{configurationType.FullName}' contains a recursive property relationship.");
-
+        errors.Add($"Configuration type '{configurationType.FullName}' contains a recursive property relationship.");
         return;
     }
 
@@ -115,18 +74,18 @@ static void VisitConfigurationType(
 
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
-        Type? referencedType = GetReferencedConfigurationType(property.PropertyType);
+        Type? referencedType = GetNonNullableAndNonArrayBaseType(property.PropertyType);
 
         if (referencedType != null)
         {
-            VisitConfigurationType(referencedType, reachableTypes, activeTypes, completedTypes, errors);
+            TraverseGameConfigurationType(referencedType, reachableTypes, errors);
         }
 
         ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>(inherit: false);
 
         if (metadata == null)
         {
-            errors.Add($"Property '{configurationType.FullName}.{property.Name}' is not annotated with ConfigurationMetadataAttribute.");
+            errors.Add($"Property '{configurationType.FullName}.{property.Name}' is not annotated with {nameof(ConfigurationPropertyAttribute)}.");
             continue;
         }
 
@@ -145,9 +104,6 @@ static void VisitConfigurationType(
             errors.Add($"Property '{configurationType.FullName}.{property.Name}' has no metadata DataType.");
         }
     }
-
-    activeTypes.Remove(configurationType);
-    completedTypes.Add(configurationType);
 }
 
 static IEnumerable<PropertyInfo> GetConfigurationProperties(
@@ -165,27 +121,28 @@ static IEnumerable<PropertyInfo> GetConfigurationProperties(
         .OrderBy(x => x.MetadataToken);
 }
 
-static Type? GetReferencedConfigurationType(Type propertyType)
+static Type? GetNonNullableAndNonArrayBaseType(Type propertyType)
 {
-    Type unwrappedType =
-        Nullable.GetUnderlyingType(propertyType)
-        ?? propertyType;
+    // Remove the outside nullable wrapper if the property type is nullable.
+    Type? unwrappedType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
 
+    // We need to unwrap nested arrays of arrays.
     while (unwrappedType.IsArray)
     {
-        unwrappedType =
-            unwrappedType.GetElementType()
-            ?? throw new InvalidOperationException(
-                $"Unable to determine the element type for '{propertyType}'.");
+        // Remove the array wrapper to get the base element type.
+        unwrappedType = unwrappedType.GetElementType();
+        if (unwrappedType is null)
+        {
+            Console.Error.WriteLine($"Unable to determine the element type for '{propertyType}'.");
+            Environment.Exit(1);
+        }
 
-        unwrappedType =
-            Nullable.GetUnderlyingType(unwrappedType)
-            ?? unwrappedType;
+        // Remove the nullable wrapper if the element type is nullable.
+        unwrappedType = Nullable.GetUnderlyingType(unwrappedType) ?? unwrappedType;
     }
 
-    return IsConfigurationType(unwrappedType)
-        ? unwrappedType
-        : null;
+    // Check to see if the unwrapped type implements IGetKeyGameConfiguration, if so return it, otherwise return null.
+    return typeof(IGetKeyGameConfiguration).IsAssignableFrom(unwrappedType) ? unwrappedType : null;
 }
 
 static void WriteMetadataClass(string outputFolder, Type configurationType, IReadOnlyCollection<Type> enumTypes)
@@ -197,11 +154,13 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
     string outputPath = Path.Combine(outputFolder, $"{metadataClassName}.cs");
     using StreamWriter writer = new(outputPath, false);
 
+    // Determine the namespace for the output generation.
+    var propertyMetadataNamespace = typeof(PropertyMetadata).Namespace;
+
     writer.WriteLine("// <auto-generated>");
     writer.WriteLine("// This code was generated by scaffold-metadata.");
     writer.WriteLine("// Changes to this file may cause incorrect behavior and will be lost if the code is regenerated.");
     writer.WriteLine("// </auto-generated>");
-    var propertyMetadataNamespace = typeof(PropertyMetadata).Namespace;
     writer.WriteLine($"namespace {propertyMetadataNamespace};");
     writer.WriteLine($"public static class {metadataClassName}");
     writer.WriteLine("{");
