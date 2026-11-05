@@ -185,8 +185,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
         string propertyName = property.Name;
 
         // Retrieve the ConfigurationPropertyAttribute metadata for the property.
-        ConfigurationPropertyAttribute? configurationPropertyAttribute =
-            property.GetCustomAttribute<ConfigurationPropertyAttribute>();
+        ConfigurationPropertyAttribute? configurationPropertyAttribute = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
 
         if (configurationPropertyAttribute is null)
         {
@@ -195,11 +194,9 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
         }
 
         // There are additional annotations we need to check.
-        ConfigurationCollectionAttribute? configurationCollectionAttribute =
-            property.GetCustomAttribute<ConfigurationCollectionAttribute>();
+        ConfigurationCollectionAttribute? configurationCollectionAttribute = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
 
-        ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute =
-            property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
+        ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
 
         // Retrieve the annotated data type.
         string? annotatedDataType = configurationPropertyAttribute.DataType?.Trim();
@@ -210,12 +207,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
             Environment.Exit(1);
         }
 
-        string metadataType = GetMetadataType(
-            annotatedDataType,
-            propertyName,
-            configurationForeignCollectionAttribute,
-            configurationCollectionAttribute);
-
+        string metadataType = GetMetadataType(annotatedDataType, propertyName, configurationForeignCollectionAttribute, configurationCollectionAttribute);
         writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(propertyName)}\")");
         writer.WriteLine($"{indentation}{{");
 
@@ -255,15 +247,13 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
             writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
         }
 
-        ConfigurationCategoryAttribute? propertyCategory =
-            property.GetCustomAttribute<ConfigurationCategoryAttribute>();
+        ConfigurationCategoryAttribute? propertyCategory = property.GetCustomAttribute<ConfigurationCategoryAttribute>();
 
         writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
 
         if (metadataType == nameof(EnumPropertyMetadata))
         {
             Type enumType = GetAnnotatedType(annotatedDataType);
-
             writer.WriteLine($"{indentation}    EnumName = \"{Escape(enumType.Name)}\",");
         }
 
@@ -276,9 +266,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
 
             if (tupleItems.Length != tupleElementDataTypes.Length)
             {
-                Console.Error.WriteLine(
-                    $"Property '{property.DeclaringType?.FullName}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
-
+                Console.Error.WriteLine($"Property '{property.DeclaringType?.FullName}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
                 Environment.Exit(1);
             }
 
@@ -408,8 +396,8 @@ static Type GetAnnotatedType(string annotatedDataType)
         }
     }
 
-    throw new InvalidOperationException(
-        $"Unable to resolve annotated DataType '{annotatedDataType}'.");
+    Console.Error.WriteLine($"Unable to resolve annotated DataType '{annotatedDataType}'.");
+    Environment.Exit(1);
 }
 
 static void WriteEnumMetadata(StreamWriter writer, IReadOnlyCollection<Type> enumTypes)
@@ -586,7 +574,8 @@ static string[] GetTupleElementDataTypes(string dataType)
 
     if (!tupleDataType.StartsWith("(") || !tupleDataType.EndsWith(")"))
     {
-        throw new InvalidOperationException($"The data type '{dataType}' is not a tuple type.");
+        Console.Error.WriteLine($"The data type '{dataType}' is not a tuple type.");
+        Environment.Exit(1);
     }
 
     tupleDataType = tupleDataType[1..^1];
