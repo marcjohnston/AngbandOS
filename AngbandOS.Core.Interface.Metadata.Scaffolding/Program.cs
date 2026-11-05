@@ -5,7 +5,8 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 if (args.Length != 1)
 {
-    Console.Error.WriteLine("syntax: scaffold-metadata {output_folder}");
+    string currentExecutableName = Path.GetFileNameWithoutExtension(Environment.ProcessPath) ?? "scaffold-metadata";
+    Console.Error.WriteLine($"syntax: {currentExecutableName} {{output_folder}}");
     return 1;
 }
 
