@@ -435,36 +435,36 @@ static void WriteEnumMetadata(StreamWriter writer, IReadOnlyCollection<Type> enu
     writer.WriteLine();
 }
 
-static string GetMetadataType(string dataType, string propertyName, ConfigurationForeignKeyAttribute? foreignCollection, ConfigurationCollectionAttribute? collection)
+static string GetMetadataType(string annotatedDataType, string propertyName, ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute, ConfigurationCollectionAttribute? configurationCollectionAttribute)
 {
-    if (IsTuple(dataType))
+    if (IsTuple(annotatedDataType))
     {
         return nameof(TuplePropertyMetadata);
     }
 
-    if (foreignCollection != null)
+    if (configurationForeignCollectionAttribute != null)
     {
-        return IsStringArray(dataType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
+        return IsStringArray(annotatedDataType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
     }
 
-    if (collection != null)
+    if (configurationCollectionAttribute != null)
     {
         return nameof(CollectionPropertyMetadata);
     }
 
-    string normalizedType = RemoveNullableAndArraySuffixes(dataType);
+    string normalizedType = RemoveNullableAndArraySuffixes(annotatedDataType);
 
     return normalizedType switch
     {
         "bool" => nameof(BooleanPropertyMetadata),
         "char" => nameof(CharacterPropertyMetadata),
         "int" => nameof(IntegerPropertyMetadata),
-        "string" when IsArray(dataType) => nameof(StringsPropertyMetadata),
+        "string" when IsArray(annotatedDataType) => nameof(StringsPropertyMetadata),
         "string" => nameof(StringPropertyMetadata),
         "ColorEnum" => nameof(ColorPropertyMetadata),
         _ when normalizedType.EndsWith("Enum", StringComparison.Ordinal) => nameof(EnumPropertyMetadata),
         _ => throw new InvalidOperationException(
-            $"The data type '{dataType}' is not supported for property '{propertyName}'.")
+            $"The data type '{annotatedDataType}' is not supported for property '{propertyName}'.")
     };
 }
 
