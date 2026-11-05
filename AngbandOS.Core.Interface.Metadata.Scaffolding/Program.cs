@@ -205,7 +205,35 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
             Environment.Exit(1);
         }
 
-        string metadataType = GetMetadataType(annotatedDataType, propertyName, configurationForeignCollectionAttribute, configurationCollectionAttribute);
+        string metadataType;
+        if (IsTuple(annotatedDataType))
+        {
+            metadataType = nameof(TuplePropertyMetadata);
+        }
+        else if (configurationForeignCollectionAttribute != null)
+        {
+            metadataType = IsStringArray(annotatedDataType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
+        }
+        else if (configurationCollectionAttribute != null)
+        {
+            metadataType = nameof(CollectionPropertyMetadata);
+        }
+        else
+        {
+            string normalizedType = RemoveNullableAndArraySuffixes(annotatedDataType);
+            metadataType = normalizedType switch
+            {
+                "bool" => nameof(BooleanPropertyMetadata),
+                "char" => nameof(CharacterPropertyMetadata),
+                "int" => nameof(IntegerPropertyMetadata),
+                "string" when IsArray(annotatedDataType) => nameof(StringsPropertyMetadata),
+                "string" => nameof(StringPropertyMetadata),
+                "ColorEnum" => nameof(ColorPropertyMetadata),
+                _ when normalizedType.EndsWith("Enum", StringComparison.Ordinal) => nameof(EnumPropertyMetadata),
+                _ => throw new InvalidOperationException(
+                    $"The data type '{annotatedDataType}' is not supported for property '{propertyName}'.")
+            };
+        }
         writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(propertyName)}\")");
         writer.WriteLine($"{indentation}{{");
 
@@ -433,39 +461,6 @@ static void WriteEnumMetadata(StreamWriter writer, IReadOnlyCollection<Type> enu
     writer.WriteLine("        }");
     writer.WriteLine("    }");
     writer.WriteLine();
-}
-
-static string GetMetadataType(string annotatedDataType, string propertyName, ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute, ConfigurationCollectionAttribute? configurationCollectionAttribute)
-{
-    if (IsTuple(annotatedDataType))
-    {
-        return nameof(TuplePropertyMetadata);
-    }
-
-    if (configurationForeignCollectionAttribute != null)
-    {
-        return IsStringArray(annotatedDataType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
-    }
-
-    if (configurationCollectionAttribute != null)
-    {
-        return nameof(CollectionPropertyMetadata);
-    }
-
-    string normalizedType = RemoveNullableAndArraySuffixes(annotatedDataType);
-
-    return normalizedType switch
-    {
-        "bool" => nameof(BooleanPropertyMetadata),
-        "char" => nameof(CharacterPropertyMetadata),
-        "int" => nameof(IntegerPropertyMetadata),
-        "string" when IsArray(annotatedDataType) => nameof(StringsPropertyMetadata),
-        "string" => nameof(StringPropertyMetadata),
-        "ColorEnum" => nameof(ColorPropertyMetadata),
-        _ when normalizedType.EndsWith("Enum", StringComparison.Ordinal) => nameof(EnumPropertyMetadata),
-        _ => throw new InvalidOperationException(
-            $"The data type '{annotatedDataType}' is not supported for property '{propertyName}'.")
-    };
 }
 
 static string GetMetadataClassName(Type configurationType)
