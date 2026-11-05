@@ -195,12 +195,10 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
 
         // There are additional annotations we need to check.
         ConfigurationCollectionAttribute? configurationCollectionAttribute = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
-
         ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
 
         // Retrieve the annotated data type.
         string? annotatedDataType = configurationPropertyAttribute.DataType?.Trim();
-
         if (annotatedDataType is null)
         {
             Console.Error.WriteLine($"The property '{configurationType.Name}.{propertyName}' has no DataType.");
@@ -260,9 +258,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
         if (metadataType == nameof(TuplePropertyMetadata))
         {
             string[] tupleElementDataTypes = GetTupleElementDataTypes(annotatedDataType);
-
-            ConfigurationTupleItemAttribute[] tupleItems =
-                property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
+            ConfigurationTupleItemAttribute[] tupleItems = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
 
             if (tupleItems.Length != tupleElementDataTypes.Length)
             {
