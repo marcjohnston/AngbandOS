@@ -182,6 +182,7 @@ These standards define the project-wide C# style. The primary goal is readable, 
 - Use expression-bodied members only when the expression is short and remains immediately readable.
 - Break long argument lists and chained calls at semantic boundaries.
 - Use named arguments when they clarify a non-obvious argument, especially for Boolean or configuration values.
+- Do not use the `+` operator for string concatenation. Use string interpolation instead.
 - Avoid unnecessary string interpolation for strings that contain no interpolation.
 
 ## Comments and documentation

@@ -187,7 +187,7 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
         ConfigurationPropertyAttribute? configurationPropertyAttribute = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
         if (configurationPropertyAttribute is null)
         {
-            Console.Error.WriteLine($"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
+            Console.Error.WriteLine($"Property '{configurationType.FullName}.{propertyName}' is missing ConfigurationMetadataAttribute.");
             Environment.Exit(1);
         }
 
