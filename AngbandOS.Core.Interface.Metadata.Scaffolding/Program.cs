@@ -180,18 +180,23 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
     string indentation = new(' ', 4 * 4);
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
-        ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
-        if (metadata is null)
+        // We use the property name from reflection but that is it.
+        string propertyName = property.Name;
+
+        // Retrieve the ConfigurationPropertyAttribute metadata for the property.  This attribute is required for all properties in a configuration class.
+        ConfigurationPropertyAttribute? configurationPropertyAttribute = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
+        if (configurationPropertyAttribute is null)
         {
             Console.Error.WriteLine($"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
             Environment.Exit(1);
         }
-        string propertyName = property.Name;
-        ConfigurationCollectionAttribute? collection = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
-        ConfigurationForeignKeyAttribute? foreignCollection = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
+
+        // There are additional annotations we need to check.
+        ConfigurationCollectionAttribute? configurationCollectionAttribute = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
+        ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
 
         // We need to retrieve the data type property from the annotation.  These data types allow this scaffolder to determine the correct underlying data type due to limitations with reflection and nullablility.
-        string? annotatedDataType = metadata.DataType?.Trim();
+        string? annotatedDataType = configurationPropertyAttribute.DataType?.Trim();
         if (annotatedDataType is null)
         {
             Console.Error.WriteLine($"The property '{property.DeclaringType?.FullName}.{propertyName}' has no DataType.");
@@ -201,18 +206,18 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
         Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
         bool isArray = propertyType.IsArray;
         Type? elementType = isArray ? propertyType.GetElementType() : null;
-        string metadataType = GetMetadataType(annotatedDataType, property, foreignCollection, collection);
+        string metadataType = GetMetadataType(annotatedDataType, property, configurationForeignCollectionAttribute, configurationCollectionAttribute);
 
         writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(propertyName)}\")");
         writer.WriteLine($"{indentation}{{");
 
-        if (foreignCollection is not null)
+        if (configurationForeignCollectionAttribute is not null)
         {
-            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(foreignCollection.CollectionName)}\",");
-            writer.WriteLine($"{indentation}    Inline = {foreignCollection.Inline.ToString().ToLowerInvariant()},");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
+            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
         }
 
-        if (metadataType == nameof(CollectionPropertyMetadata) && collection != null)
+        if (metadataType == nameof(CollectionPropertyMetadata) && configurationCollectionAttribute != null)
         {
             if (elementType is null)
             {
@@ -222,18 +227,18 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
             string childMetadataClassName = GetMetadataClassName(elementType);
 
             writer.WriteLine($"{indentation}    PropertyMetadatas = {childMetadataClassName}.Metadata,");
-            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(collection.CollectionName)}\",");
-            writer.WriteLine($"{indentation}    EntityNoun = \"{Escape(collection.EntityNoun ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationCollectionAttribute.CollectionName)}\",");
+            writer.WriteLine($"{indentation}    EntityNoun = \"{Escape(configurationCollectionAttribute.EntityNoun ?? string.Empty)}\",");
             writer.WriteLine($"{indentation}    EntityKeyPropertyName = \"GetKey\",");
-            writer.WriteLine($"{indentation}    EntityNamePropertyName = \"{Escape(collection.EntityNamePropertyName ?? "GetKey")}\",");
+            writer.WriteLine($"{indentation}    EntityNamePropertyName = \"{Escape(configurationCollectionAttribute.EntityNamePropertyName ?? "GetKey")}\",");
         }
 
-        writer.WriteLine($"{indentation}    Description = \"{Escape(metadata.Summary ?? string.Empty)}\",");
-        writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(metadata.LabelIfNullable ?? "Default")}\"" : "null")},");
+        writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+        writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
 
-        if (metadata.Title is not null)
+        if (configurationPropertyAttribute.Title is not null)
         {
-            writer.WriteLine($"{indentation}    Title = \"{Escape(metadata.Title)}\",");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
         }
 
         ConfigurationCategoryAttribute? propertyCategory = property.GetCustomAttribute<ConfigurationCategoryAttribute>();
