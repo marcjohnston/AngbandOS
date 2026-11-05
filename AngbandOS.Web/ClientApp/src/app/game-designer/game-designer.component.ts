@@ -308,6 +308,13 @@ export class GameDesignerComponent implements OnInit {
               return;
             }
 
+            if (!(Symbol.iterator in Object(entityTable))) {
+              this._snackBar.open(`The ${propertyMetadata.propertyName} collection does not exist in the configuration.`, "", {
+                duration: 5000
+              });
+              return;
+            }
+
             // Build the child tree nodes that will be attached to this parent node.
             const childTreeNodes: TreeNode[] = [];
 
