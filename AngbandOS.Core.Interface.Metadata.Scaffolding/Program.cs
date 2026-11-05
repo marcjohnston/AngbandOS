@@ -372,8 +372,7 @@ static bool DataTypeIsNullable(string dataType)
 
 static string RemoveNullableAndArraySuffixes(string dataType)
 {
-    string result =
-        dataType.Trim();
+    string result = dataType.Trim();
 
     bool changed;
 
