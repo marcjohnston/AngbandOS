@@ -10,43 +10,43 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class VaultGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Color",
         Summary = "Specifies the display color of the vault.",
         DataType = "ColorEnum")]
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Name",
         Summary = "Specifies the name of the vault.",
         DataType = "string")]
     public virtual string Name { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Category",
         Summary = "Specifies the category of the vault.",
         DataType = "int")]
     public virtual int Category { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Height",
         Summary = "Specifies the height of the vault.",
         DataType = "int")]
     public virtual int Height { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Rating",
         Summary = "Specifies the difficulty rating of the vault.",
         DataType = "int")]
     public virtual int Rating { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Text",
         Summary = "Specifies the layout text of the vault.",
         DataType = "string")]
     public virtual string Text { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Width",
         Summary = "Specifies the width of the vault.",
         DataType = "int")]

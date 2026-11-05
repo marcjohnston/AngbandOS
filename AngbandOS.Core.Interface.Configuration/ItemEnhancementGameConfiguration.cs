@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// </summary>
 public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Summation Attribute and Expression Bindings",
         Summary = "The attribute names and expressions used to calculate summation-based item enhancements.",
         DataType = "(string AttributeName, string Expression)[]?")]
@@ -22,7 +22,7 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     [ConfigurationTupleItem("Expression", Title = "Expression")]
     public virtual (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Bitwise OR Attribute and Expression Bindings",
         Summary = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.",
         DataType = "(string AttributeName, string BooleanExpression)[]?")]
@@ -30,7 +30,7 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     [ConfigurationTupleItem("BooleanExpression", Title = "Boolean Expression")]
     public virtual (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Scripts Attribute and Script Bindings",
         Summary = "The attribute names and script names used to apply scripts as item enhancements.",
         DataType = "(string AttributeName, string[] ScriptNames)[]?")]
@@ -42,13 +42,13 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Applicable Item Factory Binding Keys",
         Summary = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.",
         DataType = "string[]?")]
     public virtual string[]? ApplicableItemFactoryBindingKeys { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Additional Item Enhancement Weighted Random Binding Key",
         Summary = "The binding key of the weighted random configuration used to select an additional item enhancement.",
         DataType = "string?")]
@@ -57,7 +57,7 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
     /// </summary>
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Friendly Name",
         Summary = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.",
         DataType = "string?")]
@@ -68,13 +68,13 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Activation Name",
         Summary = "The name of the activation applied to the item, or null when the item cannot be activated.",
         DataType = "string?")]
     public virtual string? ActivationName { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Artifact Bias Weighted Random Binding Key",
         Summary = "The binding key of the weighted random configuration used to select an artifact bias.",
         DataType = "string?")]

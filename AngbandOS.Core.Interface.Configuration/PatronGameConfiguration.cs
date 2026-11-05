@@ -4,25 +4,25 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class PatronGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Long Name",
         Summary = "Specifies the long name of the patron.",
         DataType = "string")]
     public virtual string LongName { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Preferred Ability Binding Key",
         Summary = "Specifies the optional binding key of the patron's preferred ability.",
         DataType = "string?")]
     public virtual string? PreferredAbilityBindingKey { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Reward Binding Keys",
         Summary = "Specifies the binding keys of the rewards granted by the patron.",
         DataType = "string[]")]
     public virtual string[] RewardBindingKeys { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Short Name",
         Summary = "Specifies the short name of the patron.",
         DataType = "string")]

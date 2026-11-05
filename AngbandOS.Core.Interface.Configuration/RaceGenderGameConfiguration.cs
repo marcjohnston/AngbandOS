@@ -6,14 +6,14 @@ public class RaceGenderGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { RaceBindingKey, GenderBindingKey }; // CONFIRMED
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Race Binding Key",
         Summary = "Specifies the binding key for the race.",
         DataType = "string")]
     [ConfigurationForeignKey("Races", Inline = false)]
     public virtual string RaceBindingKey { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Gender Binding Key",
         Summary = "Specifies the binding key for the gender.",
         DataType = "string")]
@@ -28,7 +28,7 @@ public class RaceGenderGameConfiguration : CompositeSingletonGameConfiguration
     [ConfigurationTupleItem(
         "Weight",
         Title = "Weight")]
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Physical Attributes Weighted Random Bindings",
         Summary = "Specifies the weighted random bindings for the race gender's physical attribute sets.",
         DataType = "(string PhysicalAttributesBindingKey, int Weight)[]")]

@@ -10,31 +10,31 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class RealmGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Spell Book Names",
         Summary = "Specifies the spell book names associated with the realm.",
         DataType = "string[]")]
     public virtual string[] SpellBookNames { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Info",
         Summary = "Specifies the informational text associated with the realm.",
         DataType = "string[]")]
     public virtual string[] Info { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Name",
         Summary = "Specifies the name of the realm.",
         DataType = "string")]
     public virtual string Name { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Resistant To Holy And Hell Projectiles",
         Summary = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.",
         DataType = "bool")]
     public virtual bool ResistantToHolyAndHellProjectiles { get; set; } = false;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Susceptible To Holy And Hell Projectiles",
         Summary = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.",
         DataType = "bool")]

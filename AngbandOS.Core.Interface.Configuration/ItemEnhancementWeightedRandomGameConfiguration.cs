@@ -7,7 +7,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// </summary>
 public class ItemEnhancementWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Name and Weight Bindings",
         Summary = "The names of item enhancements and their corresponding weights used for weighted random selection.",
         DataType = "(string?, int)[]")]

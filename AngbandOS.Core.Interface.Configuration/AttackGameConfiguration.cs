@@ -13,7 +13,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Monster Action",
         Summary = "The action message displayed when the attack targets another monster.",
         DataType = "string")]
@@ -24,7 +24,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Player Action Messages",
         Summary = "The action messages displayed when the attack targets the player.",
         DataType = "string[]?")]
@@ -34,7 +34,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing
     /// their knowledge.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Knowledge Action",
         Summary = "The action message displayed when a description of the attack is rendered in the player's knowledge.",
         DataType = "string")]
@@ -44,7 +44,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// Returns true, if the attack requires touching the target; false otherwise.  Returns true, by default.  The beg, drool, gaze, insult, moan, show, spit, 
     /// spore, wail and worship attacks do not require touching the target.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Attack Touches Target",
         Summary = "Determines whether the attack requires touching the target.",
         DataType = "bool")]
@@ -54,7 +54,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// Returns true, if the attack awakes the target; false otherwise.  Returns false, by default,  The beg, insult, moan and show attacks
     /// return true.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Attack Awakens Target",
         Summary = "Determines whether the attack awakens the target.",
         DataType = "bool")]
@@ -63,7 +63,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// <summary>
     /// Returns true, if the attack stuns the target; false otherwise.  Returns false, by default.  The hit, punch, kick, butt and crush attacks return true.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Attack Stuns Target",
         Summary = "Determines whether the attack stuns the target.",
         DataType = "bool")]
@@ -72,7 +72,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// <summary>
     /// Returns true, if the attack cuts the target; false otherwise.  Returns false, by default.  The hit, claw and bite attacks all return true.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Attack Cuts Target",
         Summary = "Determines whether the attack cuts the target.",
         DataType = "bool")]
@@ -82,7 +82,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// Returns true, if the attack should render a message, if the attack touches the target and missed; false no message should be rendered.  Returns true, by default.  
     /// Only the crawl attack, requires touching the target and does not render a miss message.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Renders Miss Message",
         Summary = "Determines whether a message is rendered when the attack touches the target but misses.",
         DataType = "bool")]

@@ -6,19 +6,19 @@ public class RaceAbilityGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { RaceBindingKey, AbilityBindingKey }; // CONFIRMED
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Bonus",
         Summary = "Specifies the bonus applied to the race ability.",
         DataType = "int")]
     public virtual int Bonus { get; set; } = 0;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Race Binding Key",
         Summary = "Specifies the binding key of the associated race.",
         DataType = "string")]
     public virtual string RaceBindingKey { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Ability Binding Key",
         Summary = "Specifies the binding key of the associated ability.",
         DataType = "string")]

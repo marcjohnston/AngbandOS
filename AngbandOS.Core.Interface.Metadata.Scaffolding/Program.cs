@@ -122,7 +122,7 @@ static void VisitConfigurationType(
             VisitConfigurationType(referencedType, reachableTypes, activeTypes, completedTypes, errors);
         }
 
-        ConfigurationMetadataAttribute? metadata = property.GetCustomAttribute<ConfigurationMetadataAttribute>(inherit: false);
+        ConfigurationPropertyAttribute? metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>(inherit: false);
 
         if (metadata == null)
         {
@@ -190,8 +190,10 @@ static Type? GetReferencedConfigurationType(Type propertyType)
 
 static void WriteMetadataClass(string outputFolder, Type configurationType, IReadOnlyCollection<Type> enumTypes)
 {
+    // Determine the name of the file to be created.
     string metadataClassName = GetMetadataClassName(configurationType);
 
+    // Add the path to it.
     string outputPath = Path.Combine(outputFolder, $"{metadataClassName}.cs");
 
     using StreamWriter writer = new(outputPath, false);
@@ -219,7 +221,7 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
 
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
-        ConfigurationMetadataAttribute metadata = property.GetCustomAttribute<ConfigurationMetadataAttribute>(inherit: false)
+        ConfigurationPropertyAttribute metadata = property.GetCustomAttribute<ConfigurationPropertyAttribute>(inherit: false)
             ?? throw new InvalidOperationException($"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
 
         WriteProperty(writer, property, metadata, 4);
@@ -231,7 +233,7 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
     writer.WriteLine("}");
 }
 
-static void WriteProperty(StreamWriter writer, PropertyInfo property, ConfigurationMetadataAttribute metadata, int indentLevel)
+static void WriteProperty(StreamWriter writer, PropertyInfo property, ConfigurationPropertyAttribute metadata, int indentLevel)
 {
     ConfigurationCollectionAttribute? collection = property.GetCustomAttribute<ConfigurationCollectionAttribute>(inherit: true);
     ConfigurationForeignKeyAttribute? foreignCollection = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(inherit: true);
@@ -382,10 +384,7 @@ static string GetMetadataClassName(Type configurationType)
         return "GameConfigurationMetadata";
     }
 
-    return configurationType.Name.Replace(
-        "GameConfiguration",
-        "Metadata",
-        StringComparison.Ordinal);
+    return configurationType.Name.Replace("GameConfiguration", "Metadata", StringComparison.Ordinal);
 }
 
 static bool IsTuple(string dataType)

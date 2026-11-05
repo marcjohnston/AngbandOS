@@ -10,25 +10,25 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ShopkeeperGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Maximum Cost",
         Summary = "Specifies the maximum cost of items handled by the shopkeeper.",
         DataType = "int")]
     public virtual int MaxCost { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Minimum Inflate",
         Summary = "Specifies the minimum inflation applied by the shopkeeper.",
         DataType = "int")]
     public virtual int MinInflate { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Name",
         Summary = "Specifies the name of the shopkeeper.",
         DataType = "string")]
     public virtual string Name { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Race Name",
         Summary = "Specifies the race name of the shopkeeper. When null, no race is specified.",
         DataType = "string?")]

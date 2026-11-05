@@ -7,19 +7,19 @@ public class CharacterClassAbilityGameConfiguration : CompositeSingletonGameConf
 {
     public sealed override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, AbilityBindingKey }; // CONFIRMED
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Bonus",
         Summary = "The bonus applied to the ability for this character class.",
         DataType = "int")]
     public virtual int Bonus { get; set; } = 0;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Character Class Binding Key",
         Summary = "The binding key identifying the character class.",
         DataType = "string")]
     public virtual string CharacterClassBindingKey { get; set; }
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Ability Binding Key",
         Summary = "The binding key identifying the ability.",
         DataType = "string")]

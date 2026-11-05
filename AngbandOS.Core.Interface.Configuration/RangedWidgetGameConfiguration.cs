@@ -13,55 +13,55 @@ public class RangedWidgetGameConfiguration : NonCompositeSingletonGameConfigurat
     [ConfigurationTupleItem(
         "color",
         Title = "Color")]
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Ranges",
         Summary = "Specifies the value ranges, display text, and colors used to render the widget.",
         DataType = "(int startValue, string textToRender, ColorEnum color)[]")]
     public virtual (int startValue, string textToRender, ColorEnum color)[] Ranges { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Integer Value Name",
         Summary = "Specifies the name of the integer value displayed by the widget.",
         DataType = "string")]
     public virtual string IntValueName { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Default Text",
         Summary = "Specifies the text rendered when none of the ranges apply.",
         DataType = "string")]
     public virtual string DefaultText { get; set; } = "";
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Default Color",
         Summary = "Specifies the color used when none of the ranges apply.",
         DataType = "ColorEnum")]
     public virtual ColorEnum DefaultColor { get; set; } = ColorEnum.White;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "X",
         Summary = "Specifies the horizontal coordinate where the widget is drawn.",
         DataType = "int")]
     public virtual int X { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Y",
         Summary = "Specifies the vertical coordinate where the widget is drawn.",
         DataType = "int")]
     public virtual int Y { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Width",
         Summary = "Specifies the width of the widget. When null, the width is based on the text length.",
         DataType = "int?")]
     public virtual int? Width { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Justification Name",
         Summary = "Specifies the name of the justification used to lay out the widget text.",
         DataType = "string")]
     public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Change Tracker Names",
         Summary = "Specifies the property names that participate in change tracking.",
         DataType = "string[]?")]

@@ -6,19 +6,19 @@ public class RacePowerGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { RaceBindingKey, CharacterClassBindingKey, nameof(RacePowerGameConfiguration) }; // CONFIRMED, TODO: WHY FIXED 3RD KEY?
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Script Binding Key",
         Summary = "Specifies the binding key of the script executed by the racial power.",
         DataType = "string")]
     public virtual string ScriptBindingKey { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Race Binding Key",
         Summary = "Specifies the binding key of the associated race.",
         DataType = "string")]
     public virtual string RaceBindingKey { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Character Class Binding Key",
         Summary = "Specifies the optional binding key of the associated character class.",
         DataType = "string?")]

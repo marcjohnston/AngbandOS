@@ -13,7 +13,7 @@ public class DungeonGuardianGameConfiguration : NonCompositeSingletonGameConfigu
     /// <summary>
     /// Returns the name of the race for the first quest monster.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Monster Race Name",
         Summary = "The name of the monster race for the quest monster.",
         DataType = "string")]
@@ -22,7 +22,7 @@ public class DungeonGuardianGameConfiguration : NonCompositeSingletonGameConfigu
     /// <summary>
     /// The level for the fixed quest.
     /// </summary>
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Level Found",
         Summary = "The dungeon level where the fixed quest is encountered.",
         DataType = "int")]

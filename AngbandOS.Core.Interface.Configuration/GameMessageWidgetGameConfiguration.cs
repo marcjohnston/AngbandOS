@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Color",
         Summary = "The color used to draw the widget's text.",
         DataType = "ColorEnum")]
@@ -21,7 +21,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
     /// </remarks>
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "X",
         Summary = "X-coordinate (horizontal) of the widget's top-left corner on the Form.",
         DataType = "int")]
@@ -32,7 +32,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
     /// </remarks>
     public virtual int X { get; set; }
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Y",
         Summary = "Y-coordinate (vertical) of the widget's top-left corner on the Form.",
         DataType = "int")]
@@ -43,7 +43,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
     /// </remarks>
     public virtual int Y { get; set; }
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Width",
         Summary = "Width of the widget; when null, the widget should extend to the remaining width of the screen.",
         DataType = "int?")]
@@ -54,7 +54,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
     /// </remarks>
     public virtual int? Width { get; set; } = null;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "More Prompt",
         Summary = "Text used for the \"more\" prompt when message output is paused.",
         DataType = "string")]

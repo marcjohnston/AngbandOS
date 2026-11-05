@@ -4,7 +4,7 @@
 /// Provides metadata describing a configuration property.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public sealed class ConfigurationMetadataAttribute : Attribute
+public sealed class ConfigurationPropertyAttribute : Attribute
 {
     /// <summary>
     /// Human-readable title rendered by the UI.

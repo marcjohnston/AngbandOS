@@ -10,13 +10,13 @@ public class SummonWeightedRandomGameConfiguration : NonCompositeSingletonGameCo
     [ConfigurationTupleItem(
         "Item2",
         Title = "Item 2")]
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Name and Weight Bindings",
         Summary = "Specifies the summon names and their associated weights used for weighted random selection.",
         DataType = "(string, int)[]")]
     public virtual (string, int)[] NameAndWeightBindings { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Learned Details",
         Summary = "Specifies the information revealed when the summon is learned.",
         DataType = "string")]

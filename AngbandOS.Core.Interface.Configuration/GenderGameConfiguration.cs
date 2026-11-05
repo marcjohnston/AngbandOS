@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Title",
         Summary = "Display title for the gender (e.g., \"Male\", \"Female\").",
         DataType = "string")]
     public virtual string Title { get; set; }
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Winner",
         Summary = "Short title used when this gender is presented as the winner type.",
         DataType = "string")]
@@ -25,13 +25,13 @@ public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     public virtual string Winner { get; set; } // TODO ... this winner title to describe the type of winner is not rendered
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Can Be Randomly Selected",
         Summary = "Whether this gender may be chosen by the random-selection logic.",
         DataType = "bool")]
     public virtual bool CanBeRandomlySelected { get; set; } = true;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Pronoun",
         Summary = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").",
         DataType = "string")]
@@ -40,7 +40,7 @@ public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     public virtual string Pronoun { get; set; } = "it";
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Possessive Adjective",
         Summary = "Possessive adjective to use when rendering messages (default: \"its\").",
         DataType = "string")]

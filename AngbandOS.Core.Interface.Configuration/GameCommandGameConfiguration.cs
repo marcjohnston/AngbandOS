@@ -5,25 +5,25 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class GameCommandGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Key Character",
         Summary = "The character used to invoke the game command.",
         DataType = "char")]
     public virtual char KeyChar { get; set; }
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Repeat",
         Summary = "The number of times the command is repeated, or null when no repeat count is specified.",
         DataType = "int?")]
     public virtual int? Repeat { get; set; } = 0;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Is Enabled",
         Summary = "Determines whether the game command is enabled.",
         DataType = "bool")]
     public virtual bool IsEnabled { get; set; } = true;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Execute Script Name",
         Summary = "The name of the script executed by the game command.",
         DataType = "string?")]

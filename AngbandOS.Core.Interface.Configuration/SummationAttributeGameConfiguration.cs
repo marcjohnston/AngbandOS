@@ -1,6 +1,4 @@
-﻿using AngbandOS.Core.Interface.Configuration.Annotations;
-
-namespace AngbandOS.Core.Interface.Configuration;
+﻿namespace AngbandOS.Core.Interface.Configuration;
 
 public class SummationAttributeGameConfiguration : NonCompositeSingletonGameConfiguration
 {

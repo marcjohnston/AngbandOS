@@ -4,43 +4,43 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class TimeWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Date And Time Value Name",
         Summary = "Specifies the name of the date and time value displayed by the widget.",
         DataType = "string")]
     public virtual string DateAndTimeValueName { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Color",
         Summary = "Specifies the color used to draw the widget text.",
         DataType = "ColorEnum")]
     public virtual ColorEnum Color { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "X",
         Summary = "Specifies the horizontal coordinate where the widget is drawn.",
         DataType = "int")]
     public virtual int X { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Y",
         Summary = "Specifies the vertical coordinate where the widget is drawn.",
         DataType = "int")]
     public virtual int Y { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Width",
         Summary = "Specifies the width of the widget. When null, the width is based on the text length.",
         DataType = "int?")]
     public virtual int? Width { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Justification Name",
         Summary = "Specifies the name of the justification used to lay out the widget text.",
         DataType = "string")]
     public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Change Tracker Names",
         Summary = "Specifies the property names that participate in change tracking.",
         DataType = "string[]?")]

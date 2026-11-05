@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ConditionalGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Enabled Names",
         Summary = "The conditional names and required values used to determine whether configuration conditions are enabled.",
         DataType = "(string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[]")]

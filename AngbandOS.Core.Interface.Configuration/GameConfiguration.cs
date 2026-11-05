@@ -212,79 +212,79 @@ public class GameConfiguration
         gameConfiguration.StringAttributes = LoadFromAssembly<StringNullableReferenceAttributeGameConfiguration>(assembly);
     }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Game Tick Event Binding Keys",
         Summary = "Binding keys for events that occur on each game tick.",
         DataType = "string[]?")]
     public virtual string[]? GameTickEventBindingKeys { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Max Monster Count",
         Summary = "Maximum number of monsters allowed.",
         DataType = "int")]
     public virtual int MaxMonsterCount { get; set; } = 512;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Compact Monster Cut In",
         Summary = "Number of monsters at which compacting begins.",
         DataType = "int")]
     public virtual int CompactMonsterCutIn { get; set; } = 32;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Compact Monster Cut Out Target",
         Summary = "Target number of monsters to reduce to when compacting.",
         DataType = "int")]
     public virtual int CompactMonsterCutOutTarget { get; set; } = 64;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Max Message Log Length",
         Summary = "Number of log items that the message history may store. Null indicates no limit.",
         DataType = "int?")]
     public virtual int? MaxMessageLogLength { get; set; } = 2048;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Follow Distance",
         Summary = "Distance at which followers remain from the player.",
         DataType = "int")]
     public virtual int FollowDistance { get; set; } = 4;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Decay Rate",
         Summary = "Rate at which certain game elements decay.",
         DataType = "int")]
     public virtual int DecayRate { get; set; } = 10;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Patron Resting Favour",
         Summary = "Favour amount awarded when resting with a patron.",
         DataType = "int")]
     public virtual int PatronRestingFavour { get; set; } = 30;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Dungeon View Binding Key",
         Summary = "Binding key for the dungeon view.",
         DataType = "string?")]
     public virtual string? DungeonViewBindingKey { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Startup Town Name",
         Summary = "Name of the town where the player will start, or null to choose a random startup town from available towns.",
         DataType = "string?")]
     public virtual string? StartupTownName { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Gold Factories Binding Keys",
         Summary = "Binding keys for gold factories.",
         DataType = "string[]?")]
     public virtual string[]? GoldFactoriesBindingKeys { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Gold Item Is Great Probability Expression",
         Summary = "Probability expression that determines whether a gold-containing item is considered 'great'.",
         DataType = "string")]
     public virtual string? GoldItemIsGreatProbabilityExpression { get; set; } = "0.05"; // 1 in 20 or 5%
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Towns",
         Summary = "Null to load towns from the assembly; otherwise a collection of towns to load into the SingletonRepository.",
         DataType = "TownGameConfiguration[]?")]
@@ -293,7 +293,7 @@ public class GameConfiguration
         EntityNoun = "Town")]
     public virtual TownGameConfiguration[]? Towns { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Shopkeepers",
         Summary = "Collection of shopkeeper configurations.",
         DataType = "ShopkeeperGameConfiguration[]?")]
@@ -302,7 +302,7 @@ public class GameConfiguration
         EntityNoun = "Shopkeeper")]
     public virtual ShopkeeperGameConfiguration[]? Shopkeepers { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Game Commands",
         Summary = "Collection of game command configurations.",
         DataType = "GameCommandGameConfiguration[]?")]
@@ -311,7 +311,7 @@ public class GameConfiguration
         EntityNoun = "Game Command")]
     public virtual GameCommandGameConfiguration[]? GameCommands { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Store Commands",
         Summary = "Collection of store command configurations.",
         DataType = "StoreCommandGameConfiguration[]?")]
@@ -320,7 +320,7 @@ public class GameConfiguration
         EntityNoun = "Store Command")]
     public virtual StoreCommandGameConfiguration[]? StoreCommands { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Help Groups",
         Summary = "Collection of help group configurations.",
         DataType = "HelpGroupGameConfiguration[]?")]
@@ -329,7 +329,7 @@ public class GameConfiguration
         EntityNoun = "Help Group")]
     public virtual HelpGroupGameConfiguration[]? HelpGroups { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Monster Races",
         Summary = "Collection of monster race configurations.",
         DataType = "MonsterRaceGameConfiguration[]?")]
@@ -338,7 +338,7 @@ public class GameConfiguration
         EntityNoun = "Monster Race")]
     public virtual MonsterRaceGameConfiguration[]? MonsterRaces { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Outfit Manifests",
         Summary = "Collection of outfit manifest configurations.",
         DataType = "OutfitManifestGameConfiguration[]?")]
@@ -347,7 +347,7 @@ public class GameConfiguration
         EntityNoun = "Outfit Manifest")]
     public virtual OutfitManifestGameConfiguration[]? OutfitManifests { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Symbols",
         Summary = "Collection of symbol configurations.",
         DataType = "SymbolGameConfiguration[]?")]
@@ -356,7 +356,7 @@ public class GameConfiguration
         EntityNoun = "Symbol")]
     public virtual SymbolGameConfiguration[]? Symbols { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Vaults",
         Summary = "Collection of vault configurations.",
         DataType = "VaultGameConfiguration[]?")]
@@ -365,7 +365,7 @@ public class GameConfiguration
         EntityNoun = "Vault")]
     public virtual VaultGameConfiguration[]? Vaults { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Dungeon Guardians",
         Summary = "Collection of dungeon guardian configurations.",
         DataType = "DungeonGuardianGameConfiguration[]?")]
@@ -374,7 +374,7 @@ public class GameConfiguration
         EntityNoun = "Dungeon Guardian")]
     public virtual DungeonGuardianGameConfiguration[]? DungeonGuardians { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Damage Learned Knowledges",
         Summary = "Collection of damage learned-knowledge configurations.",
         DataType = "DamageLearnedKnowledgeGameConfiguration[]?")]
@@ -383,7 +383,7 @@ public class GameConfiguration
         EntityNoun = "Damage Learned Knowledge")]
     public virtual DamageLearnedKnowledgeGameConfiguration[]? DamageLearnedKnowledges { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Duration Learned Knowledges",
         Summary = "Collection of duration learned-knowledge configurations.",
         DataType = "DurationLearnedKnowledgeGameConfiguration[]?")]
@@ -392,7 +392,7 @@ public class GameConfiguration
         EntityNoun = "Duration Learned Knowledge")]
     public virtual DurationLearnedKnowledgeGameConfiguration[]? DurationLearnedKnowledges { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Range Learned Knowledges",
         Summary = "Collection of range learned-knowledge configurations.",
         DataType = "RangeLearnedKnowledgeGameConfiguration[]?")]
@@ -401,7 +401,7 @@ public class GameConfiguration
         EntityNoun = "Range Learned Knowledge")]
     public virtual RangeLearnedKnowledgeGameConfiguration[]? RangeLearnedKnowledges { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Experience Learned Knowledges",
         Summary = "Collection of experience learned-knowledge configurations.",
         DataType = "ExperienceLearnedKnowledgeGameConfiguration[]?")]
@@ -410,7 +410,7 @@ public class GameConfiguration
         EntityNoun = "Experience Learned Knowledge")]
     public virtual ExperienceLearnedKnowledgeGameConfiguration[]? ExperienceLearnedKnowledges { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Dungeons",
         Summary = "Collection of dungeon configurations.",
         DataType = "DungeonGameConfiguration[]?")]
@@ -419,7 +419,7 @@ public class GameConfiguration
         EntityNoun = "Dungeon")]
     public virtual DungeonGameConfiguration[]? Dungeons { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Store Factories",
         Summary = "Factories used to create stores within towns.",
         DataType = "StoreFactoryGameConfiguration[]?")]
@@ -428,7 +428,7 @@ public class GameConfiguration
         EntityNoun = "Store Factory")]
     public virtual StoreFactoryGameConfiguration[]? StoreFactories { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Projectile Graphics",
         Summary = "Collection of projectile graphic configurations.",
         DataType = "ProjectileGraphicGameConfiguration[]?")]
@@ -437,7 +437,7 @@ public class GameConfiguration
         EntityNoun = "Projectile Graphic")]
     public virtual ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Flavors",
         Summary = "Collection of item flavor configurations.",
         DataType = "ItemFlavorGameConfiguration[]?")]
@@ -446,7 +446,7 @@ public class GameConfiguration
         EntityNoun = "Item Flavor")]
     public virtual ItemFlavorGameConfiguration[]? ItemFlavors { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Class Spells",
         Summary = "Collection of character class spell configurations.",
         DataType = "CharacterClassSpellGameConfiguration[]?")]
@@ -455,7 +455,7 @@ public class GameConfiguration
         EntityNoun = "Character Class Spell")]
     public virtual CharacterClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Wizard Commands",
         Summary = "Collection of wizard command configurations.",
         DataType = "WizardCommandGameConfiguration[]?")]
@@ -464,7 +464,7 @@ public class GameConfiguration
         EntityNoun = "Wizard Command")]
     public virtual WizardCommandGameConfiguration[]? WizardCommands { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Tiles",
         Summary = "Collection of tile configurations.",
         DataType = "TileGameConfiguration[]?")]
@@ -473,7 +473,7 @@ public class GameConfiguration
         EntityNoun = "Tile")]
     public virtual TileGameConfiguration[]? Tiles { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Animations",
         Summary = "Collection of animation configurations.",
         DataType = "AnimationGameConfiguration[]?")]
@@ -482,7 +482,7 @@ public class GameConfiguration
         EntityNoun = "Animation")]
     public virtual AnimationGameConfiguration[]? Animations { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Spells",
         Summary = "Collection of spell configurations.",
         DataType = "SpellGameConfiguration[]?")]
@@ -491,7 +491,7 @@ public class GameConfiguration
         EntityNoun = "Spell")]
     public virtual SpellGameConfiguration[]? Spells { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Plurals",
         Summary = "Collection of pluralization configurations.",
         DataType = "PluralGameConfiguration[]?")]
@@ -500,7 +500,7 @@ public class GameConfiguration
         EntityNoun = "Plural")]
     public virtual PluralGameConfiguration[]? Plurals { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Attacks",
         Summary = "Collection of attack configurations.",
         DataType = "AttackGameConfiguration[]?")]
@@ -509,7 +509,7 @@ public class GameConfiguration
         EntityNoun = "Attack")]
     public virtual AttackGameConfiguration[]? Attacks { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Attribute Filters",
         Summary = "Collection of attribute filter configurations.",
         DataType = "AttributeFilterGameConfiguration[]?")]
@@ -518,7 +518,7 @@ public class GameConfiguration
         EntityNoun = "Attribute Filter")]
     public virtual AttributeFilterGameConfiguration[]? AttributeFilters { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Or Attributes",
         Summary = "Collection of bitwise-or attribute configurations.",
         DataType = "BitwiseOrAttributeGameConfiguration[]?")]
@@ -527,7 +527,7 @@ public class GameConfiguration
         EntityNoun = "Bitwise-Or Attribute")]
     public virtual BitwiseOrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Sum Attributes",
         Summary = "Collection of summation attribute configurations.",
         DataType = "SummationAttributeGameConfiguration[]?")]
@@ -536,7 +536,7 @@ public class GameConfiguration
         EntityNoun = "Summation Attribute")]
     public virtual SummationAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Scripts Attributes",
         Summary = "Collection of scripts attribute configurations.",
         DataType = "ScriptsAttributeGameConfiguration[]?")]
@@ -545,7 +545,7 @@ public class GameConfiguration
         EntityNoun = "Scripts Attribute")]
     public virtual ScriptsAttributeGameConfiguration[]? ScriptsAttributes { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Color Enum Attributes",
         Summary = "Collection of color-enum attribute configurations.",
         DataType = "ColorEnumAttributeGameConfiguration[]?")]
@@ -554,7 +554,7 @@ public class GameConfiguration
         EntityNoun = "Color Enum Attribute")]
     public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Artifact Bias Attributes",
         Summary = "Collection of artifact-bias attribute configurations.",
         DataType = "ArtifactBiasNullableReferenceAttributeGameConfiguration[]?")]
@@ -563,7 +563,7 @@ public class GameConfiguration
         EntityNoun = "Artifact Bias Attribute")]
     public virtual ArtifactBiasNullableReferenceAttributeGameConfiguration[]? ArtifactBiasAttributes { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "String Attributes",
         Summary = "Collection of string attribute configurations.",
         DataType = "StringNullableReferenceAttributeGameConfiguration[]?")]
@@ -572,7 +572,7 @@ public class GameConfiguration
         EntityNoun = "String Attribute")]
     public virtual StringNullableReferenceAttributeGameConfiguration[]? StringAttributes { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Gods",
         Summary = "Collection of god configurations.",
         DataType = "GodGameConfiguration[]?")]
@@ -581,7 +581,7 @@ public class GameConfiguration
         EntityNoun = "God")]
     public virtual GodGameConfiguration[]? Gods { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Syllable Sets",
         Summary = "Collection of syllable set configurations.",
         DataType = "SyllableSetGameConfiguration[]?")]
@@ -590,7 +590,7 @@ public class GameConfiguration
         EntityNoun = "Syllable Set")]
     public virtual SyllableSetGameConfiguration[]? SyllableSets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Projectiles",
         Summary = "Collection of projectile configurations.",
         DataType = "ProjectileGameConfiguration[]?")]
@@ -599,7 +599,7 @@ public class GameConfiguration
         EntityNoun = "Projectile")]
     public virtual ProjectileGameConfiguration[]? Projectiles { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Projectile Scripts",
         Summary = "Collection of projectile script configurations.",
         DataType = "ProjectileScriptGameConfiguration[]?")]
@@ -608,7 +608,7 @@ public class GameConfiguration
         EntityNoun = "Projectile Script")]
     public virtual ProjectileScriptGameConfiguration[]? ProjectileScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Projectile Monster Spells",
         Summary = "Collection of projectile monster spell configurations.",
         DataType = "ProjectileMonsterSpellGameConfiguration[]?")]
@@ -617,7 +617,7 @@ public class GameConfiguration
         EntityNoun = "Projectile Monster Spell")]
     public virtual ProjectileMonsterSpellGameConfiguration[]? ProjectileMonsterSpells { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Cause Wounds Monster Spells",
         Summary = "Collection of cause-wounds monster spell configurations.",
         DataType = "CauseWoundsMonsterSpellGameConfiguration[]?")]
@@ -626,7 +626,7 @@ public class GameConfiguration
         EntityNoun = "Cause Wounds Monster Spell")]
     public virtual CauseWoundsMonsterSpellGameConfiguration[]? CauseWoundsMonsterSpells { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Script Monster Spells",
         Summary = "Collection of script monster spell configurations.",
         DataType = "ScriptMonsterSpellGameConfiguration[]?")]
@@ -635,7 +635,7 @@ public class GameConfiguration
         EntityNoun = "Script Monster Spell")]
     public virtual ScriptMonsterSpellGameConfiguration[]? ScriptMonsterSpells { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Summon Monster Spells",
         Summary = "Collection of summon monster spell configurations.",
         DataType = "SummonMonsterSpellGameConfiguration[]?")]
@@ -644,49 +644,49 @@ public class GameConfiguration
         EntityNoun = "Summon Monster Spell")]
     public virtual SummonMonsterSpellGameConfiguration[]? SummonMonsterSpells { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Shopkeeper Accepted Comments",
         Summary = "Accepted shopkeeper comment strings.",
         DataType = "string[]?")]
     public virtual string[]? ShopkeeperAcceptedComments { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Illegible Flavor Syllables",
         Summary = "Syllables used to represent illegible flavors.",
         DataType = "string[]?")]
     public virtual string[]? IllegibleFlavorSyllables { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Find Quests",
         Summary = "Find-quest strings.",
         DataType = "string[]?")]
     public virtual string[]? FindQuests { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Elvish Texts",
         Summary = "Elvish text strings.",
         DataType = "string[]?")]
     public virtual string[]? ElvishTexts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Funny Descriptions",
         Summary = "Funny description strings.",
         DataType = "string[]?")]
     public virtual string[]? FunnyDescriptions { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Funny Comments",
         Summary = "Funny comment strings.",
         DataType = "string[]?")]
     public virtual string[]? FunnyComments { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Horrific Descriptions",
         Summary = "Horrific description strings.",
         DataType = "string[]?")]
     public virtual string[]? HorrificDescriptions { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Artifact Bias Weighted Randoms",
         Summary = "Collection of artifact-bias weighted-random configurations.",
         DataType = "ArtifactBiasWeightedRandomGameConfiguration[]?")]
@@ -695,7 +695,7 @@ public class GameConfiguration
         EntityNoun = "Artifact Bias Weighted Random")]
     public virtual ArtifactBiasWeightedRandomGameConfiguration[]? ArtifactBiasWeightedRandoms { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Classes",
         Summary = "Collection of item class configurations.",
         DataType = "ItemClassGameConfiguration[]?")]
@@ -704,7 +704,7 @@ public class GameConfiguration
         EntityNoun = "Item Class")]
     public virtual ItemClassGameConfiguration[]? ItemClasses { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Enhancements",
         Summary = "Collection of item enhancement configurations.",
         DataType = "ItemEnhancementGameConfiguration[]?")]
@@ -713,7 +713,7 @@ public class GameConfiguration
         EntityNoun = "Item Enhancement")]
     public virtual ItemEnhancementGameConfiguration[]? ItemEnhancements { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Enhancement Weighted Randoms",
         Summary = "Collection of item-enhancement weighted-random configurations.",
         DataType = "ItemEnhancementWeightedRandomGameConfiguration[]?")]
@@ -722,7 +722,7 @@ public class GameConfiguration
         EntityNoun = "Item Enhancement Weighted Random")]
     public virtual ItemEnhancementWeightedRandomGameConfiguration[]? ItemEnhancementWeightedRandoms { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Identifications",
         Summary = "Collection of item identification configurations.",
         DataType = "ItemIdentificationGameConfiguration[]?")]
@@ -731,7 +731,7 @@ public class GameConfiguration
         EntityNoun = "Item Identification")]
     public virtual ItemIdentificationGameConfiguration[]? ItemIdentifications { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Factories",
         Summary = "Collection of item factory configurations.",
         DataType = "ItemFactoryGameConfiguration[]?")]
@@ -740,7 +740,7 @@ public class GameConfiguration
         EntityNoun = "Item Factory")]
     public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Projectile Weighted Random Scripts",
         Summary = "Collection of projectile-weighted-random script configurations.",
         DataType = "ProjectileScriptWeightedRandomGameConfiguration[]?")]
@@ -749,7 +749,7 @@ public class GameConfiguration
         EntityNoun = "Projectile Script Weighted Random")]
     public virtual ProjectileScriptWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Conditional Widgets",
         Summary = "Collection of conditional widget configurations.",
         DataType = "ConditionalWidgetGameConfiguration[]?")]
@@ -758,7 +758,7 @@ public class GameConfiguration
         EntityNoun = "Conditional Widget")]
     public virtual ConditionalWidgetGameConfiguration[]? ConditionalWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Date Widgets",
         Summary = "Collection of date widget configurations.",
         DataType = "DateWidgetGameConfiguration[]?")]
@@ -767,7 +767,7 @@ public class GameConfiguration
         EntityNoun = "Date Widget")]
     public virtual DateWidgetGameConfiguration[]? DateWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Int Widgets",
         Summary = "Collection of int widget configurations.",
         DataType = "IntWidgetGameConfiguration[]?")]
@@ -776,7 +776,7 @@ public class GameConfiguration
         EntityNoun = "Int Widget")]
     public virtual IntWidgetGameConfiguration[]? IntWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Map Widgets",
         Summary = "Collection of map widget configurations.",
         DataType = "MapWidgetGameConfiguration[]?")]
@@ -785,7 +785,7 @@ public class GameConfiguration
         EntityNoun = "Map Widget")]
     public virtual MapWidgetGameConfiguration[]? MapWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Max Ranged Widgets",
         Summary = "Collection of max-ranged widget configurations.",
         DataType = "MaxRangedWidgetGameConfiguration[]?")]
@@ -794,7 +794,7 @@ public class GameConfiguration
         EntityNoun = "Max Ranged Widget")]
     public virtual MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Ranged Widgets",
         Summary = "Collection of ranged widget configurations.",
         DataType = "RangedWidgetGameConfiguration[]?")]
@@ -803,7 +803,7 @@ public class GameConfiguration
         EntityNoun = "Ranged Widget")]
     public virtual RangedWidgetGameConfiguration[]? RangedWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Ranged Weapon Bonuses",
         Summary = "Collection of ranged weapon bonus configurations.",
         DataType = "RangedWeaponBonusGameConfiguration[]?")]
@@ -812,7 +812,7 @@ public class GameConfiguration
         EntityNoun = "Ranged Weapon Bonus")]
     public virtual RangedWeaponBonusGameConfiguration[]? RangedWeaponBonuses { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "String Widgets",
         Summary = "Collection of string widget configurations.",
         DataType = "StringWidgetGameConfiguration[]?")]
@@ -821,7 +821,7 @@ public class GameConfiguration
         EntityNoun = "String Widget")]
     public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Game Message Widgets",
         Summary = "Collection of game-message widget configurations.",
         DataType = "GameMessageWidgetGameConfiguration[]?")]
@@ -830,7 +830,7 @@ public class GameConfiguration
         EntityNoun = "Game Message Widget")]
     public virtual GameMessageWidgetGameConfiguration[]? GameMessageWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Label Widgets",
         Summary = "Collection of label widget configurations.",
         DataType = "LabelWidgetGameConfiguration[]?")]
@@ -839,7 +839,7 @@ public class GameConfiguration
         EntityNoun = "Label Widget")]
     public virtual LabelWidgetGameConfiguration[]? LabelWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Time Widgets",
         Summary = "Collection of time widget configurations.",
         DataType = "TimeWidgetGameConfiguration[]?")]
@@ -848,7 +848,7 @@ public class GameConfiguration
         EntityNoun = "Time Widget")]
     public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Nullable Strings Text Area Widgets",
         Summary = "Collection of text widget configurations used for nullable string text areas.",
         DataType = "TextWidgetGameConfiguration[]?")]
@@ -857,7 +857,7 @@ public class GameConfiguration
         EntityNoun = "Text Widget")]
     public virtual TextWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Race Genders",
         Summary = "Collection of race-gender configurations.",
         DataType = "RaceGenderGameConfiguration[]?")]
@@ -866,7 +866,7 @@ public class GameConfiguration
         EntityNoun = "Race Gender")]
     public virtual RaceGenderGameConfiguration[]? RaceGenders { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Genders",
         Summary = "Collection of gender configurations.",
         DataType = "GenderGameConfiguration[]?")]
@@ -875,7 +875,7 @@ public class GameConfiguration
         EntityNoun = "Gender")]
     public virtual GenderGameConfiguration[]? Genders { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Physical Attribute Sets",
         Summary = "Collection of physical attribute set configurations.",
         DataType = "PhysicalAttributeSetGameConfiguration[]?")]
@@ -884,7 +884,7 @@ public class GameConfiguration
         EntityNoun = "Physical Attribute Set")]
     public virtual PhysicalAttributeSetGameConfiguration[]? PhysicalAttributeSets { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Realms",
         Summary = "Collection of realm configurations.",
         DataType = "RealmGameConfiguration[]?")]
@@ -893,7 +893,7 @@ public class GameConfiguration
         EntityNoun = "Realm")]
     public virtual RealmGameConfiguration[]? Realms { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Realm Character Classes",
         Summary = "Collection of realm character class configurations.",
         DataType = "RealmCharacterClassGameConfiguration[]?")]
@@ -902,7 +902,7 @@ public class GameConfiguration
         EntityNoun = "Realm Character Class")]
     public virtual RealmCharacterClassGameConfiguration[]? RealmCharacterClasses { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Views",
         Summary = "Collection of view configurations.",
         DataType = "ViewGameConfiguration[]?")]
@@ -911,7 +911,7 @@ public class GameConfiguration
         EntityNoun = "View")]
     public virtual ViewGameConfiguration[]? Views { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Summon Scripts",
         Summary = "Collection of summon script configurations.",
         DataType = "SummonScriptGameConfiguration[]?")]
@@ -920,7 +920,7 @@ public class GameConfiguration
         EntityNoun = "Summon Script")]
     public virtual SummonScriptGameConfiguration[]? SummonScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Mapped Spell Scripts",
         Summary = "Collection of mapped-spell script configurations.",
         DataType = "MappedSpellScriptGameConfiguration[]?")]
@@ -929,7 +929,7 @@ public class GameConfiguration
         EntityNoun = "Mapped Spell Script")]
     public virtual MappedSpellScriptGameConfiguration[]? MappedSpellScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Summon Weighted Randoms",
         Summary = "Collection of summon-weighted-random configurations.",
         DataType = "SummonWeightedRandomGameConfiguration[]?")]
@@ -938,7 +938,7 @@ public class GameConfiguration
         EntityNoun = "Summon Weighted Random")]
     public virtual SummonWeightedRandomGameConfiguration[]? SummonWeightedRandoms { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Factory Weighted Randoms",
         Summary = "Collection of item-factory weighted-random configurations.",
         DataType = "ItemFactoryWeightedRandomGameConfiguration[]?")]
@@ -947,7 +947,7 @@ public class GameConfiguration
         EntityNoun = "Item Factory Weighted Random")]
     public virtual ItemFactoryWeightedRandomGameConfiguration[]? ItemFactoryWeightedRandoms { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Timer Scripts",
         Summary = "Collection of timer script configurations.",
         DataType = "TimerScriptGameConfiguration[]?")]
@@ -956,7 +956,7 @@ public class GameConfiguration
         EntityNoun = "Timer Script")]
     public virtual TimerScriptGameConfiguration[]? TimerScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Render Message Scripts",
         Summary = "Collection of render-message script configurations.",
         DataType = "RenderMessageScriptGameConfiguration[]?")]
@@ -965,7 +965,7 @@ public class GameConfiguration
         EntityNoun = "Render Message Script")]
     public virtual RenderMessageScriptGameConfiguration[]? RenderMessageScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Martial Arts Attacks",
         Summary = "Collection of martial-arts attack configurations.",
         DataType = "MartialArtsAttackGameConfiguration[]?")]
@@ -974,7 +974,7 @@ public class GameConfiguration
         EntityNoun = "Martial Arts Attack")]
     public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Ability Score Scripts",
         Summary = "Collection of ability-score script configurations.",
         DataType = "AbilityScoreScriptGameConfiguration[]?")]
@@ -983,7 +983,7 @@ public class GameConfiguration
         EntityNoun = "Ability Score Script")]
     public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Chest Trap Combinations",
         Summary = "Collection of chest-trap combination configurations.",
         DataType = "ChestTrapCombinationGameConfiguration[]?")]
@@ -992,7 +992,7 @@ public class GameConfiguration
         EntityNoun = "Chest Trap Combination")]
     public virtual ChestTrapCombinationGameConfiguration[]? ChestTrapCombinations { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Patrons",
         Summary = "Collection of patron configurations.",
         DataType = "PatronGameConfiguration[]?")]
@@ -1002,7 +1002,7 @@ public class GameConfiguration
         EntityNamePropertyName = "LongName")]
     public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Racial Power Tests",
         Summary = "Collection of racial-power test configurations.",
         DataType = "RacialPowerTestGameConfiguration[]?")]
@@ -1011,7 +1011,7 @@ public class GameConfiguration
         EntityNoun = "Racial Power Test")]
     public virtual RacialPowerTestGameConfiguration[]? RacialPowerTests { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Race Abilities",
         Summary = "Collection of race-ability configurations.",
         DataType = "RaceAbilityGameConfiguration[]?")]
@@ -1020,7 +1020,7 @@ public class GameConfiguration
         EntityNoun = "Race Ability")]
     public virtual RaceAbilityGameConfiguration[]? RaceAbilities { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Racial Powers",
         Summary = "Collection of racial-power configurations.",
         DataType = "RacePowerGameConfiguration[]?")]
@@ -1029,7 +1029,7 @@ public class GameConfiguration
         EntityNoun = "Racial Power")]
     public virtual RacePowerGameConfiguration[]? RacialPowers { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Conditional Scripts",
         Summary = "Collection of conditional script configurations.",
         DataType = "ConditionalScriptGameConfiguration[]?")]
@@ -1038,7 +1038,7 @@ public class GameConfiguration
         EntityNoun = "Conditional Script")]
     public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Character Class Abilities",
         Summary = "Collection of character-class ability configurations.",
         DataType = "CharacterClassAbilityGameConfiguration[]?")]
@@ -1047,7 +1047,7 @@ public class GameConfiguration
         EntityNoun = "Character Class Ability")]
     public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Character Class And Race Innate Totals",
         Summary = "Collection of innate-total configurations for character classes and races.",
         DataType = "InnateTotalsGameConfiguration[]?")]
@@ -1056,7 +1056,7 @@ public class GameConfiguration
         EntityNoun = "Character Class And Race Innate Total")]
     public virtual InnateTotalsGameConfiguration[]? CharacterClassAndRaceInnateTotals { get; set; } = null;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Activations",
         Summary = "Collection of activation configurations.",
         DataType = "ActivationGameConfiguration[]?")]
@@ -1065,7 +1065,7 @@ public class GameConfiguration
         EntityNoun = "Activation")]
     public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Item Filters",
         Summary = "Collection of item filter configurations.",
         DataType = "ItemFilterGameConfiguration[]?")]
@@ -1074,7 +1074,7 @@ public class GameConfiguration
         EntityNoun = "Item Filter")]
     public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Product Of Sums Bool Functions",
         Summary = "Collection of conditional (product-of-sums) boolean function configurations.",
         DataType = "ConditionalGameConfiguration[]?")]
@@ -1083,7 +1083,7 @@ public class GameConfiguration
         EntityNoun = "Conditional")]
     public virtual ConditionalGameConfiguration[]? ProductOfSumsBoolFunctions { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Recharge Item Scripts",
         Summary = "Collection of recharge-item script configurations.",
         DataType = "RechargeItemScriptGameConfiguration[]?")]
@@ -1092,7 +1092,7 @@ public class GameConfiguration
         EntityNoun = "Recharge Item Script")]
     public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Talents",
         Summary = "Collection of talent configurations.",
         DataType = "TalentGameConfiguration[]?")]
@@ -1101,7 +1101,7 @@ public class GameConfiguration
         EntityNoun = "Talent")]
     public virtual TalentGameConfiguration[]? Talents { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Teleport Self Scripts",
         Summary = "Collection of teleport-self script configurations.",
         DataType = "TeleportSelfScriptGameConfiguration[]?")]
@@ -1110,7 +1110,7 @@ public class GameConfiguration
         EntityNoun = "Teleport Self Script")]
     public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Mapped Item Enhancements",
         Summary = "Collection of mapped-item enhancement configurations.",
         DataType = "MappedItemEnhancementGameConfiguration[]?")]
@@ -1119,7 +1119,7 @@ public class GameConfiguration
         EntityNoun = "Mapped Item Enhancement")]
     public virtual MappedItemEnhancementGameConfiguration[]? MappedItemEnhancements { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Chest Traps",
         Summary = "Collection of chest-trap configurations.",
         DataType = "ChestTrapGameConfiguration[]?")]
@@ -1128,7 +1128,7 @@ public class GameConfiguration
         EntityNoun = "Chest Trap")]
     public virtual ChestTrapGameConfiguration[]? ChestTraps { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Required Experience Per Level",
         Summary = "Array of required experience values for each level.",
         DataType = "int[]")]
@@ -1140,7 +1140,7 @@ public class GameConfiguration
         4000000, 4500000, 5000000
     };
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Extract Energy",
         Summary = "Energy extracted per speed class.",
         DataType = "int[]")]
@@ -1168,7 +1168,7 @@ public class GameConfiguration
 	/* Fast 190-199 */  49, 49, 49, 49, 49, 49, 49, 49, 49, 49
     };
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Blows Table",
         Summary = "Table describing number of blows by attack/speed group.",
         DataType = "int[][]")]

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class TeleportSelfScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Distance Expression",
         Summary = "Specifies the expression used to determine the teleportation distance.",
         DataType = "string")]

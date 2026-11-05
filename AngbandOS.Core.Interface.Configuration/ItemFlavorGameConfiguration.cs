@@ -4,25 +4,25 @@ using AngbandOS.Core.Interface.Configuration.Annotations;
 
 public class ItemFlavorGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Symbol Name",
         Summary = "The name of the symbol used to represent the item flavor.",
         DataType = "string")]
     public virtual string SymbolName { get; set; }
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Color",
         Summary = "The color used to display the item flavor.",
         DataType = "ColorEnum")]
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Name",
         Summary = "The name of the item flavor.",
         DataType = "string")]
     public virtual string Name { get; set; }
 
-    [ConfigurationMetadataAttribute(
+    [ConfigurationPropertyAttribute(
         Title = "Can Be Assigned",
         Summary = "Determines whether this item flavor can be assigned to an item.",
         DataType = "bool")]

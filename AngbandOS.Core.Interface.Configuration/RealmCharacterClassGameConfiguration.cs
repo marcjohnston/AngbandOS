@@ -6,25 +6,25 @@ public class RealmCharacterClassGameConfiguration : CompositeSingletonGameConfig
 {
     public sealed override string?[] CompositeKeys => new string?[] { RealmBindingKey, CharacterClassBindingKey }; // CONFIRMED
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Character Class Binding Key",
         Summary = "Specifies the binding key for the character class.",
         DataType = "string")]
     public virtual string CharacterClassBindingKey { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Realm Binding Key",
         Summary = "Specifies the binding key for the realm.",
         DataType = "string")]
     public virtual string RealmBindingKey { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Character Class Title",
         Summary = "Specifies the optional title displayed for the character class.",
         DataType = "string?")]
     public virtual string? CharacterClassTitle { get; set; } = null;
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Deity Binding Key",
         Summary = "Specifies the optional binding key for the deity.",
         DataType = "string?")]

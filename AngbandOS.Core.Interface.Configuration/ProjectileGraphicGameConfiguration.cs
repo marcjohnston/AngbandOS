@@ -4,13 +4,13 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ProjectileGraphicGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Character",
         Summary = "Specifies the character used to render the projectile.",
         DataType = "char")]
     public virtual char Character { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Color",
         Summary = "Specifies the color used to render the projectile.",
         DataType = "ColorEnum")]

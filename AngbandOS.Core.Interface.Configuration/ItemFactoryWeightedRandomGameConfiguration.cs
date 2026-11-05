@@ -5,7 +5,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ItemFactoryWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Name and Weight Bindings",
         Summary = "The item factory binding keys and their corresponding weights used for weighted random selection.",
         DataType = "(string Name, int Weight)[]")]

@@ -4,13 +4,13 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class SpellGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Name",
         Summary = "Returns the name of the spell, as rendered to the save game.",
         DataType = "string")]
     public virtual string Name { get; set; }
 
-    [ConfigurationMetadata(
+    [ConfigurationProperty(
         Title = "Learned Details",
         Summary = "Returns details about the spell, blank if there are no details, or null if the details should be retrieved from the associated scripts configured when the spell succeeds.",
         DataType = "string?")]
