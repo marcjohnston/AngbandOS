@@ -188,16 +188,11 @@ static Type? GetReferencedConfigurationType(Type propertyType)
         : null;
 }
 
-static void WriteMetadataClass(
-    string outputFolder,
-    Type configurationType,
-    IReadOnlyCollection<Type> enumTypes)
+static void WriteMetadataClass(string outputFolder, Type configurationType, IReadOnlyCollection<Type> enumTypes)
 {
-    string metadataClassName =
-        GetMetadataClassName(configurationType);
+    string metadataClassName = GetMetadataClassName(configurationType);
 
-    string outputPath =
-        Path.Combine(outputFolder, $"{metadataClassName}.cs");
+    string outputPath = Path.Combine(outputFolder, $"{metadataClassName}.cs");
 
     using StreamWriter writer = new(outputPath, false);
 
@@ -212,9 +207,7 @@ static void WriteMetadataClass(
 
     if (configurationType == typeof(GameConfiguration))
     {
-        WriteEnumMetadata(
-            writer,
-            enumTypes);
+        WriteEnumMetadata(writer, enumTypes);
     }
 
     writer.WriteLine("    public static PropertyMetadata[] Metadata");
@@ -226,17 +219,10 @@ static void WriteMetadataClass(
 
     foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
     {
-        ConfigurationMetadataAttribute metadata =
-            property.GetCustomAttribute<ConfigurationMetadataAttribute>(
-                inherit: false)
-            ?? throw new InvalidOperationException(
-                $"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
+        ConfigurationMetadataAttribute metadata = property.GetCustomAttribute<ConfigurationMetadataAttribute>(inherit: false)
+            ?? throw new InvalidOperationException($"Property '{configurationType.FullName}.{property.Name}' is missing ConfigurationMetadataAttribute.");
 
-        WriteProperty(
-            writer,
-            property,
-            metadata,
-            4);
+        WriteProperty(writer, property, metadata, 4);
     }
 
     writer.WriteLine("            };");
@@ -245,137 +231,69 @@ static void WriteMetadataClass(
     writer.WriteLine("}");
 }
 
-static void WriteProperty(
-    StreamWriter writer,
-    PropertyInfo property,
-    ConfigurationMetadataAttribute metadata,
-    int indentLevel)
+static void WriteProperty(StreamWriter writer, PropertyInfo property, ConfigurationMetadataAttribute metadata, int indentLevel)
 {
-    ConfigurationCollectionAttribute? collection =
-        property.GetCustomAttribute<ConfigurationCollectionAttribute>(
-            inherit: true);
+    ConfigurationCollectionAttribute? collection = property.GetCustomAttribute<ConfigurationCollectionAttribute>(inherit: true);
+    ConfigurationForeignKeyAttribute? foreignCollection = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(inherit: true);
 
-    ConfigurationForeignKeyAttribute? foreignCollection =
-        property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(
-            inherit: true);
+    string dataType = metadata.DataType?.Trim()
+        ?? throw new InvalidOperationException($"The property '{property.DeclaringType?.FullName}.{property.Name}' has no DataType.");
 
-    string dataType =
-        metadata.DataType?.Trim()
-        ?? throw new InvalidOperationException(
-            $"The property '{property.DeclaringType?.FullName}.{property.Name}' has no DataType.");
+    string indentation = new(' ', indentLevel * 4);
 
-    string indentation =
-        new(' ', indentLevel * 4);
+    Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
 
-    Type propertyType =
-        Nullable.GetUnderlyingType(property.PropertyType)
-        ?? property.PropertyType;
+    bool isArray = propertyType.IsArray;
 
-    bool isArray =
-        propertyType.IsArray;
+    Type? elementType = isArray ? propertyType.GetElementType() : null;
 
-    Type? elementType =
-        isArray
-            ? propertyType.GetElementType()
-            : null;
+    string metadataType = GetMetadataType(dataType, propertyType, elementType, property, foreignCollection, collection);
 
-    string metadataType =
-        GetMetadataType(
-            dataType,
-            propertyType,
-            elementType,
-            property,
-            foreignCollection,
-            collection);
-
-    writer.WriteLine(
-        $"{indentation}new {metadataType}(\"{Escape(property.Name)}\")");
+    writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(property.Name)}\")");
 
     writer.WriteLine($"{indentation}{{");
 
     if (foreignCollection != null)
     {
-        writer.WriteLine(
-            $"{indentation}    ForeignCollectionName = " +
-            $"\"{Escape(foreignCollection.CollectionName)}\",");
-
-        writer.WriteLine(
-            $"{indentation}    Inline = " +
-            $"{foreignCollection.Inline.ToString().ToLowerInvariant()},");
+        writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(foreignCollection.CollectionName)}\",");
+        writer.WriteLine($"{indentation}    Inline = {foreignCollection.Inline.ToString().ToLowerInvariant()},");
     }
 
-    if (metadataType == nameof(CollectionPropertyMetadata) &&
-        collection != null)
+    if (metadataType == nameof(CollectionPropertyMetadata) && collection != null)
     {
-        string childMetadataClassName =
-            GetMetadataClassName(
-                elementType
-                ?? throw new InvalidOperationException(
-                    $"Unable to determine the element type for collection property '{property.Name}'."));
+        string childMetadataClassName = GetMetadataClassName(elementType
+                ?? throw new InvalidOperationException($"Unable to determine the element type for collection property '{property.Name}'."));
 
-        writer.WriteLine(
-            $"{indentation}    PropertyMetadatas = " +
-            $"{childMetadataClassName}.Metadata,");
-
-        writer.WriteLine(
-            $"{indentation}    ForeignCollectionName = " +
-            $"\"{Escape(collection.CollectionName)}\",");
-
-        writer.WriteLine(
-            $"{indentation}    EntityNoun = " +
-            $"\"{Escape(collection.EntityNoun ?? string.Empty)}\",");
-
-        writer.WriteLine(
-            $"{indentation}    EntityKeyPropertyName = " +
-            $"\"GetKey\",");
-
-        writer.WriteLine(
-            $"{indentation}    EntityNamePropertyName = " +
-            $"\"{Escape(collection.EntityNamePropertyName ?? "GetKey")}\",");
+        writer.WriteLine($"{indentation}    PropertyMetadatas = {childMetadataClassName}.Metadata,");
+        writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(collection.CollectionName)}\",");
+        writer.WriteLine($"{indentation}    EntityNoun = \"{Escape(collection.EntityNoun ?? string.Empty)}\",");
+        writer.WriteLine($"{indentation}    EntityKeyPropertyName = \"GetKey\",");
+        writer.WriteLine($"{indentation}    EntityNamePropertyName = \"{Escape(collection.EntityNamePropertyName ?? "GetKey")}\",");
     }
 
-    writer.WriteLine(
-        $"{indentation}    Description = " +
-        $"\"{Escape(metadata.Summary ?? string.Empty)}\",");
-
-    writer.WriteLine(
-        $"{indentation}    LabelIfNullable = " +
-        $"{(DataTypeIsNullable(dataType) ? $"\"{Escape(metadata.LabelIfNullable ?? "Default")}\"" : "null")},");
+    writer.WriteLine($"{indentation}    Description = \"{Escape(metadata.Summary ?? string.Empty)}\",");
+    writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(dataType) ? $"\"{Escape(metadata.LabelIfNullable ?? "Default")}\"" : "null")},");
 
     if (metadata.Title != null)
     {
-        writer.WriteLine(
-            $"{indentation}    Title = " +
-            $"\"{Escape(metadata.Title)}\",");
+        writer.WriteLine($"{indentation}    Title = \"{Escape(metadata.Title)}\",");
     }
 
-    ConfigurationCategoryAttribute? propertyCategory =
-        property.GetCustomAttribute<ConfigurationCategoryAttribute>(
-            inherit: true);
+    ConfigurationCategoryAttribute? propertyCategory = property.GetCustomAttribute<ConfigurationCategoryAttribute>(inherit: true);
 
-    writer.WriteLine(
-        $"{indentation}    CategoryTitle = " +
-        $"\"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
+    writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
 
     if (metadataType == nameof(EnumPropertyMetadata))
     {
-        Type enumType =
-            GetEnumType(property.PropertyType)
-            ?? throw new InvalidOperationException(
-                $"Unable to determine the enum type for property '{property.Name}'.");
+        Type enumType =GetEnumType(property.PropertyType)
+            ?? throw new InvalidOperationException($"Unable to determine the enum type for property '{property.Name}'.");
 
-        writer.WriteLine(
-            $"{indentation}    EnumName = " +
-            $"\"{Escape(enumType.Name)}\",");
+        writer.WriteLine($"{indentation}    EnumName = \"{Escape(enumType.Name)}\",");
     }
 
     if (metadataType == nameof(TuplePropertyMetadata))
     {
-        WriteTupleTypes(
-            writer,
-            property,
-            dataType,
-            indentation);
+        WriteTupleTypes(writer, property, dataType, indentation);
     }
 
     writer.WriteLine($"{indentation}}},");
@@ -423,13 +341,7 @@ static void WriteEnumMetadata(
     writer.WriteLine();
 }
 
-static string GetMetadataType(
-    string dataType,
-    Type propertyType,
-    Type? elementType,
-    PropertyInfo property,
-    ConfigurationForeignKeyAttribute? foreignCollection,
-    ConfigurationCollectionAttribute? collection)
+static string GetMetadataType(string dataType, Type propertyType, Type? elementType, PropertyInfo property, ConfigurationForeignKeyAttribute? foreignCollection, ConfigurationCollectionAttribute? collection)
 {
     if (IsTuple(dataType))
     {
@@ -438,9 +350,7 @@ static string GetMetadataType(
 
     if (foreignCollection != null)
     {
-        return IsStringArray(dataType, propertyType, elementType)
-            ? nameof(ForeignKeysPropertyMetadata)
-            : nameof(ForeignKeyPropertyMetadata);
+        return IsStringArray(dataType, propertyType, elementType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
     }
 
     if (collection != null)
@@ -448,8 +358,7 @@ static string GetMetadataType(
         return nameof(CollectionPropertyMetadata);
     }
 
-    string normalizedType =
-        RemoveNullableAndArraySuffixes(dataType);
+    string normalizedType = RemoveNullableAndArraySuffixes(dataType);
 
     return normalizedType switch
     {
