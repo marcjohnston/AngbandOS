@@ -200,8 +200,9 @@ static void WriteProperty(StreamWriter writer, PropertyInfo property, Configurat
     ConfigurationCollectionAttribute? collection = property.GetCustomAttribute<ConfigurationCollectionAttribute>(inherit: true);
     ConfigurationForeignKeyAttribute? foreignCollection = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>(inherit: true);
 
-    string? dataType = metadata.DataType?.Trim();
-    if (dataType is null)
+    // We need to retrieve the data type property from the annotation.  These data types allow this scaffolder to determine the correct underlying data type due to limitations with reflection and nullablility.
+    string? annotatedDataType = metadata.DataType?.Trim();
+    if (annotatedDataType is null)
     {
         Console.Error.WriteLine($"The property '{property.DeclaringType?.FullName}.{property.Name}' has no DataType.");
         Environment.Exit(1);
@@ -211,12 +212,12 @@ static void WriteProperty(StreamWriter writer, PropertyInfo property, Configurat
     Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
     bool isArray = propertyType.IsArray;
     Type? elementType = isArray ? propertyType.GetElementType() : null;
-    string metadataType = GetMetadataType(dataType, propertyType, elementType, property, foreignCollection, collection);
+    string metadataType = GetMetadataType(annotatedDataType, propertyType, elementType, property, foreignCollection, collection);
 
     writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(property.Name)}\")");
     writer.WriteLine($"{indentation}{{");
 
-    if (foreignCollection != null)
+    if (foreignCollection is not null)
     {
         writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(foreignCollection.CollectionName)}\",");
         writer.WriteLine($"{indentation}    Inline = {foreignCollection.Inline.ToString().ToLowerInvariant()},");
@@ -239,9 +240,9 @@ static void WriteProperty(StreamWriter writer, PropertyInfo property, Configurat
     }
 
     writer.WriteLine($"{indentation}    Description = \"{Escape(metadata.Summary ?? string.Empty)}\",");
-    writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(dataType) ? $"\"{Escape(metadata.LabelIfNullable ?? "Default")}\"" : "null")},");
+    writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(metadata.LabelIfNullable ?? "Default")}\"" : "null")},");
 
-    if (metadata.Title != null)
+    if (metadata.Title is not null)
     {
         writer.WriteLine($"{indentation}    Title = \"{Escape(metadata.Title)}\",");
     }
@@ -260,7 +261,7 @@ static void WriteProperty(StreamWriter writer, PropertyInfo property, Configurat
 
     if (metadataType == nameof(TuplePropertyMetadata))
     {
-        WriteTupleTypes(writer, property, dataType, indentation);
+        WriteTupleTypes(writer, property, annotatedDataType, indentation);
     }
 
     writer.WriteLine($"{indentation}}},");
