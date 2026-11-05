@@ -212,7 +212,7 @@ static void WriteProperty(StreamWriter writer, PropertyInfo property, Configurat
     Type propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
     bool isArray = propertyType.IsArray;
     Type? elementType = isArray ? propertyType.GetElementType() : null;
-    string metadataType = GetMetadataType(annotatedDataType, propertyType, elementType, property, foreignCollection, collection);
+    string metadataType = GetMetadataType(annotatedDataType, property, foreignCollection, collection);
 
     writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(property.Name)}\")");
     writer.WriteLine($"{indentation}{{");
@@ -309,7 +309,7 @@ static void WriteEnumMetadata(
     writer.WriteLine();
 }
 
-static string GetMetadataType(string dataType, Type propertyType, Type? elementType, PropertyInfo property, ConfigurationForeignKeyAttribute? foreignCollection, ConfigurationCollectionAttribute? collection)
+static string GetMetadataType(string dataType, PropertyInfo property, ConfigurationForeignKeyAttribute? foreignCollection, ConfigurationCollectionAttribute? collection)
 {
     if (IsTuple(dataType))
     {
@@ -318,7 +318,7 @@ static string GetMetadataType(string dataType, Type propertyType, Type? elementT
 
     if (foreignCollection != null)
     {
-        return IsStringArray(dataType, propertyType, elementType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
+        return IsStringArray(dataType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
     }
 
     if (collection != null)
@@ -336,7 +336,7 @@ static string GetMetadataType(string dataType, Type propertyType, Type? elementT
         "string" when IsArray(dataType) => nameof(StringsPropertyMetadata),
         "string" => nameof(StringPropertyMetadata),
         "ColorEnum" => nameof(ColorPropertyMetadata),
-        _ when propertyType.IsEnum => nameof(EnumPropertyMetadata),
+        _ when normalizedType.EndsWith("Enum", StringComparison.Ordinal) => nameof(EnumPropertyMetadata),
         _ => throw new InvalidOperationException(
             $"The data type '{dataType}' is not supported in " +
             $"file '{property.DeclaringType?.Name}.cs' for property '{property.Name}'.")
@@ -419,15 +419,9 @@ static Type? GetEnumType(Type propertyType)
         : null;
 }
 
-static bool IsStringArray(
-    string dataType,
-    Type propertyType,
-    Type? elementType)
+static bool IsStringArray(string dataType)
 {
-    return propertyType.IsArray &&
-        elementType == typeof(string) &&
-        RemoveNullableAndArraySuffixes(dataType)
-            .Equals("string", StringComparison.Ordinal);
+    return IsArray(dataType) && RemoveNullableAndArraySuffixes(dataType).Equals("string", StringComparison.Ordinal);
 }
 
 static void WriteTupleTypes(
