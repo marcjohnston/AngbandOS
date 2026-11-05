@@ -199,7 +199,7 @@ static void WriteMetadataClass(string outputFolder, Type configurationType, IRea
         string? annotatedDataType = configurationPropertyAttribute.DataType?.Trim();
         if (annotatedDataType is null)
         {
-            Console.Error.WriteLine($"The property '{property.DeclaringType?.FullName}.{propertyName}' has no DataType.");
+            Console.Error.WriteLine($"The property '{configurationType.Name}.{propertyName}' has no DataType.");
             Environment.Exit(1);
         }
 
