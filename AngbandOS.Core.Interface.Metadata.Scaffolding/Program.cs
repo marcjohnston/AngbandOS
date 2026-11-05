@@ -261,7 +261,74 @@ static void WriteProperty(StreamWriter writer, string propertyName, PropertyInfo
 
     if (metadataType == nameof(TuplePropertyMetadata))
     {
-        WriteTupleTypes(writer, propertyName, property, annotatedDataType, indentation);
+        Type? tupleType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+
+        while (tupleType.IsArray)
+        {
+            tupleType = tupleType.GetElementType();
+            if (tupleType is null)
+            {
+                Console.Error.WriteLine($"Unable to determine the tuple element type for property '{propertyName}'.");
+                Environment.Exit(1);
+            }
+        }
+
+        if (!tupleType.IsGenericType)
+        {
+            Console.Error.WriteLine($"Unable to determine tuple element types for property '{propertyName}'.");
+            Environment.Exit(1);
+        }
+
+        Type[] tupleElementTypes = tupleType.GetGenericArguments();
+        string[] tupleElementDataTypes = GetTupleElementDataTypes(annotatedDataType);
+        ConfigurationTupleItemAttribute[] tupleItems = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
+
+        if (tupleItems.Length != tupleElementTypes.Length || tupleItems.Length != tupleElementDataTypes.Length)
+        {
+            Console.Error.WriteLine($"Property '{property.DeclaringType?.FullName}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
+            Environment.Exit(1);
+        }
+
+        writer.WriteLine($"{indentation}    Types = new PropertyMetadata[]");
+
+        writer.WriteLine($"{indentation}    {{");
+
+        for (int index = 0; index < tupleItems.Length; index++)
+        {
+            ConfigurationTupleItemAttribute tupleItem = tupleItems[index];
+            string tupleItemDataType = tupleElementDataTypes[index];
+            Type tupleItemType = tupleElementTypes[index];
+            string tupleMetadataType = GetTupleItemMetadataType(tupleItemDataType, tupleItemType, tupleItem.ForeignCollectionName != null);
+            writer.WriteLine($"{indentation}        new {tupleMetadataType}(\"{Escape(tupleItem.Name)}\")");
+            writer.WriteLine($"{indentation}        {{");
+
+            if (tupleItem.ForeignCollectionName != null)
+            {
+                writer.WriteLine($"{indentation}            ForeignCollectionName = \"{Escape(tupleItem.ForeignCollectionName)}\",");
+
+                if (tupleItem.Inline)
+                {
+                    writer.WriteLine($"{indentation}            Inline = {tupleItem.Inline.ToString().ToLowerInvariant()},");
+                }
+            }
+
+            if (tupleItem.Summary != null)
+            {
+                writer.WriteLine($"{indentation}            Description = \"{Escape(tupleItem.Summary)}\",");
+            }
+
+            writer.WriteLine($"{indentation}            LabelIfNullable = {(DataTypeIsNullable(tupleItemDataType) ? "\"Null\"" : "null")},");
+
+            if (tupleItem.Title != null)
+            {
+                writer.WriteLine($"{indentation}            Title = \"{Escape(tupleItem.Title)}\",");
+            }
+
+            writer.WriteLine($"{indentation}            CategoryTitle = \"\",");
+            writer.WriteLine($"{indentation}        }},");
+        }
+
+        writer.WriteLine($"{indentation}    }},");
     }
 
     writer.WriteLine($"{indentation}}},");
@@ -421,78 +488,6 @@ static Type? GetEnumType(Type propertyType)
 static bool IsStringArray(string dataType)
 {
     return IsArray(dataType) && RemoveNullableAndArraySuffixes(dataType).Equals("string", StringComparison.Ordinal);
-}
-
-static void WriteTupleTypes(StreamWriter writer, string propertyName, PropertyInfo property, string dataType, string indentation)
-{
-    Type? tupleType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-
-    while (tupleType.IsArray)
-    {
-        tupleType = tupleType.GetElementType();
-        if (tupleType is null)
-        {
-            Console.Error.WriteLine($"Unable to determine the tuple element type for property '{propertyName}'.");
-            Environment.Exit(1);
-        }
-    }
-
-    if (!tupleType.IsGenericType)
-    {
-        Console.Error.WriteLine($"Unable to determine tuple element types for property '{propertyName}'.");
-        Environment.Exit(1);
-    }
-
-    Type[] tupleElementTypes = tupleType.GetGenericArguments();
-    string[] tupleElementDataTypes = GetTupleElementDataTypes(dataType);
-    ConfigurationTupleItemAttribute[] tupleItems = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
-
-    if (tupleItems.Length != tupleElementTypes.Length || tupleItems.Length != tupleElementDataTypes.Length)
-    {
-        Console.Error.WriteLine($"Property '{property.DeclaringType?.FullName}.{propertyName}' must have one ConfigurationTupleItemAttribute for each tuple element.");
-        Environment.Exit(1);
-    }
-
-    writer.WriteLine($"{indentation}    Types = new PropertyMetadata[]");
-
-    writer.WriteLine($"{indentation}    {{");
-
-    for (int index = 0; index < tupleItems.Length; index++)
-    {
-        ConfigurationTupleItemAttribute tupleItem = tupleItems[index];
-        string tupleItemDataType = tupleElementDataTypes[index];
-        Type tupleItemType = tupleElementTypes[index];
-        string metadataType = GetTupleItemMetadataType(tupleItemDataType, tupleItemType, tupleItem.ForeignCollectionName != null);
-        writer.WriteLine($"{indentation}        new {metadataType}(\"{Escape(tupleItem.Name)}\")");
-        writer.WriteLine($"{indentation}        {{");
-
-        if (tupleItem.ForeignCollectionName != null)
-        {
-            writer.WriteLine($"{indentation}            ForeignCollectionName = \"{Escape(tupleItem.ForeignCollectionName)}\",");
-
-            if (tupleItem.Inline)
-            {
-                writer.WriteLine($"{indentation}            Inline = {tupleItem.Inline.ToString().ToLowerInvariant()},");
-            }
-        }
-
-        if (tupleItem.Summary != null)
-        {
-            writer.WriteLine($"{indentation}            Description = \"{Escape(tupleItem.Summary)}\",");
-        }
-
-        writer.WriteLine($"{indentation}            LabelIfNullable = {(DataTypeIsNullable(tupleItemDataType) ? "\"Null\"" : "null")},");
-
-        if (tupleItem.Title != null)
-        {
-            writer.WriteLine($"{indentation}            Title = \"{Escape(tupleItem.Title)}\",");
-        }
-
-        writer.WriteLine($"{indentation}            CategoryTitle = \"\",");
-        writer.WriteLine($"{indentation}        }},");    
-    }
-
-    writer.WriteLine($"{indentation}    }},");    
 }
 
 static string GetTupleItemMetadataType(
