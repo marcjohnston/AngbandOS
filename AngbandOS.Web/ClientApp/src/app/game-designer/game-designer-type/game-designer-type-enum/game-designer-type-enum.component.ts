@@ -26,7 +26,7 @@ export class GameDesignerTypeEnumComponent implements OnInit {
     this.unmodifiedValue = this.getValue();
   }
 
-  public get options(): EnumOption[] {
+  public get enumOptions(): EnumOption[] {
     return this.activePropertyMetadataAndConfiguration?.propertyMetadata.enumOptions ?? [];
   }
 
