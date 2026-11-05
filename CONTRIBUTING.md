@@ -143,8 +143,9 @@ These standards define the project-wide C# style. The primary goal is readable, 
 - Insert a blank line between logical sections of a method and between related groups of declarations.
 - Keep closely related expressions together, but break long expressions at meaningful boundaries.
 - Preserve multiline method chains when they improve scanability. Indent each chained operation consistently.
+- Fluent and LINQ statements should remain on a single line unless their total length exceeds the recommended line length.
 - Do not use aggressive formatter settings that collapse readable multiline code into dense one-line expressions.
-- Keep line lengths reasonable when a line becomes difficult to scan; break at operators, arguments, or fluent-method boundaries.
+- Keep line lengths reasonable when a line becomes difficult to scan; line length is not a hard character limit, but should generally be between 150 and 200 characters when a line must be broken. Break at operators, arguments, or fluent-method boundaries.
 - Use file-scoped namespaces when consistent with the containing project.
 - Use top-level statements for small executable entry points when they make the program easier to follow.
 
@@ -155,6 +156,7 @@ These standards define the project-wide C# style. The primary goal is readable, 
 - Use `camelCase` for parameters and local variables.
 - Use descriptive names. Avoid single-letter names except for genuinely local iteration variables where the meaning is obvious.
 - Use names that communicate the domain concept rather than implementation details.
+- Do not approve acronyms when Visual Studio flags them as not being a word.
 
 ## Types and declarations
 
@@ -174,6 +176,7 @@ These standards define the project-wide C# style. The primary goal is readable, 
 - Keep validation, primary work, and output/error handling in visually distinct sections.
 - Use `switch` expressions when they make a finite mapping clearer; use a statement-based `switch` when multiple operations or side effects are involved.
 - Do not compress nested conditions or important branching into dense expressions.
+- Prefer `if`/`else` over the conditional `? :` operator unless the conditional expression is short enough to be easily readable on a single line.
 
 ## Methods and expressions
 

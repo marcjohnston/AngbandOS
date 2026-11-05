@@ -57,7 +57,7 @@ Directory.CreateDirectory(outputFolder);
 
 foreach (Type configurationType in reachableTypes.OrderBy(x => x.Name, StringComparer.Ordinal))
 {
-    WriteMetadataClass(outputFolder, configurationType, enumTypes);
+    WriteMetadataClassFile(outputFolder, configurationType, enumTypes);
 }
 
 Console.WriteLine($"Generated {reachableTypes.Count} metadata classes in '{outputFolder}'.");
@@ -145,7 +145,7 @@ static Type? GetNonNullableAndNonArrayBaseType(Type propertyType)
     return typeof(IGetKeyGameConfiguration).IsAssignableFrom(unwrappedType) ? unwrappedType : null;
 }
 
-static void WriteMetadataClass(string outputFolder, Type configurationType, IReadOnlyCollection<Type> enumTypes)
+static void WriteMetadataClassFile(string outputFolder, Type configurationType, IReadOnlyCollection<Type> enumTypes)
 {
     // Determine the name of the file to be created.
     string metadataClassName = GetMetadataClassName(configurationType);
@@ -422,9 +422,7 @@ static string GetMetadataClassName(Type configurationType)
 
 static bool IsTuple(string dataType)
 {
-    return RemoveNullableAndArraySuffixes(dataType)
-        .TrimStart()
-        .StartsWith("(");
+    return RemoveNullableAndArraySuffixes(dataType).TrimStart() .StartsWith("(");
 }
 
 static bool IsArray(string dataType)
@@ -476,13 +474,9 @@ static string Escape(string value)
 
 static Type? GetEnumType(Type propertyType)
 {
-    Type unwrappedType =
-        Nullable.GetUnderlyingType(propertyType)
-        ?? propertyType;
+    Type unwrappedType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
 
-    return unwrappedType.IsEnum
-        ? unwrappedType
-        : null;
+    return unwrappedType.IsEnum ? unwrappedType : null;
 }
 
 static bool IsStringArray(string dataType)
@@ -490,18 +484,14 @@ static bool IsStringArray(string dataType)
     return IsArray(dataType) && RemoveNullableAndArraySuffixes(dataType).Equals("string", StringComparison.Ordinal);
 }
 
-static string GetTupleItemMetadataType(
-    string dataType,
-    Type propertyType,
-    bool isForeignKey)
+static string GetTupleItemMetadataType(string dataType, Type propertyType, bool isForeignKey)
 {
     if (isForeignKey)
     {
         return nameof(ForeignKeyPropertyMetadata);
     }
 
-    string normalizedType =
-        RemoveNullableAndArraySuffixes(dataType);
+    string normalizedType = RemoveNullableAndArraySuffixes(dataType);
 
     return normalizedType switch
     {
@@ -517,18 +507,14 @@ static string GetTupleItemMetadataType(
 
 static string[] GetTupleElementDataTypes(string dataType)
 {
-    string tupleDataType =
-        RemoveNullableAndArraySuffixes(dataType).Trim();
+    string tupleDataType = RemoveNullableAndArraySuffixes(dataType).Trim();
 
-    if (!tupleDataType.StartsWith("(") ||
-        !tupleDataType.EndsWith(")"))
+    if (!tupleDataType.StartsWith("(") || !tupleDataType.EndsWith(")"))
     {
-        throw new InvalidOperationException(
-            $"The data type '{dataType}' is not a tuple type.");
+        throw new InvalidOperationException($"The data type '{dataType}' is not a tuple type.");
     }
 
-    tupleDataType =
-        tupleDataType[1..^1];
+    tupleDataType = tupleDataType[1..^1];
 
     List<string> elementDataTypes = new();
     int nestingDepth = 0;
@@ -548,38 +534,33 @@ static string[] GetTupleElementDataTypes(string dataType)
         }
         else if (character == ',' && nestingDepth == 0)
         {
-            elementDataTypes.Add(
-                tupleDataType[elementStart..index].Trim());
-
+            elementDataTypes.Add(tupleDataType[elementStart..index].Trim());
             elementStart = index + 1;
         }
     }
 
-    elementDataTypes.Add(
-        tupleDataType[elementStart..].Trim());
+    elementDataTypes.Add(tupleDataType[elementStart..].Trim());
 
-    return elementDataTypes
-        .Select(RemoveTupleElementName)
-        .ToArray();
+    return elementDataTypes.Select(RemoveTupleElementName).ToArray();
 }
 
 static string RemoveTupleElementName(string elementDataType)
 {
-    int separatorIndex =
-        elementDataType.LastIndexOf(' ');
+    int separatorIndex = elementDataType.LastIndexOf(' ');
 
     if (separatorIndex < 0)
     {
         return elementDataType;
     }
 
-    string possibleName =
-        elementDataType[(separatorIndex + 1)..];
+    string possibleName = elementDataType[(separatorIndex + 1)..];
 
-    return possibleName.All(
-        character =>
-            char.IsLetterOrDigit(character) ||
-            character == '_')
-        ? elementDataType[..separatorIndex].TrimEnd()
-        : elementDataType;
+    if (possibleName.All(character => char.IsLetterOrDigit(character) || character == '_'))
+    {
+        return elementDataType[..separatorIndex].TrimEnd();
+    }
+    else
+    {
+        return elementDataType;
+    }
 }
