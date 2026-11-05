@@ -512,7 +512,6 @@ static string[] GetTupleElementDataTypes(string dataType)
     }
 
     tupleDataType = tupleDataType[1..^1];
-
     List<string> elementDataTypes = new();
     int nestingDepth = 0;
     int elementStart = 0;
