@@ -205,129 +205,17 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
         // There are additional optional annotations we need to check.
         ConfigurationCollectionAttribute? configurationCollectionAttribute = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
         ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
+        ConfigurationCategoryAttribute? configurationCategoryAttribute = property.GetCustomAttribute<ConfigurationCategoryAttribute>();
 
-        string metadataType;
         // Tuples
         if (IsTuple(annotatedDataType))
         {
-            metadataType = nameof(TuplePropertyMetadata);
             writer.WriteLine($"{indentation}new {nameof(TuplePropertyMetadata)}(\"{Escape(propertyName)}\")");
             writer.WriteLine($"{indentation}{{");
-        }
-        // Foreign keys
-        else if (configurationForeignCollectionAttribute is not null && IsStringArray(annotatedDataType))
-        {
-            metadataType = nameof(ForeignKeysPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(ForeignKeysPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
-            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
-        }
-        else if (configurationForeignCollectionAttribute is not null)
-        {
-            metadataType = nameof(ForeignKeyPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(ForeignKeyPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
-            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
-        }
-        else if (configurationCollectionAttribute is not null)
-        {
-            metadataType = nameof(CollectionPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(CollectionPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else if (normalizedType == "bool")
-        {
-            metadataType = nameof(BooleanPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(BooleanPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else if (normalizedType == "char")
-        {
-            metadataType = nameof(CharacterPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(CharacterPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else if (normalizedType == "int")
-        {
-            metadataType = nameof(IntegerPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(IntegerPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else if (normalizedType == "string" && IsArray(annotatedDataType))
-        {
-            metadataType = nameof(StringsPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(StringsPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else if (normalizedType == "string")
-        {
-            metadataType = nameof(StringPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(StringPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else if (normalizedType == "ColorEnum")
-        {
-            metadataType = nameof(ColorPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(ColorPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else if (normalizedType.ToLower().EndsWith("enum"))
-        {
-            metadataType = nameof(EnumPropertyMetadata);
-            writer.WriteLine($"{indentation}new {nameof(EnumPropertyMetadata)}(\"{Escape(propertyName)}\")");
-            writer.WriteLine($"{indentation}{{");
-        }
-        else
-        {
-            Console.Error.WriteLine($"The data type '{annotatedDataType}' is not supported for property '{propertyName}'.");
-            Environment.Exit(1);
-            return; // Unreachable, but required to satisfy the compiler.
-        }
-
-        if (metadataType == nameof(CollectionPropertyMetadata) && configurationCollectionAttribute != null)
-        {
-            string elementDataType = annotatedDataType.Trim().TrimEnd('?');
-
-            if (!elementDataType.EndsWith("[]", StringComparison.Ordinal))
-            {
-                Console.Error.WriteLine($"DataType '{annotatedDataType}' is not an array.");
-                Environment.Exit(1);
-            }
-
-            elementDataType = elementDataType[..^2].Trim();
-            Type elementType = GetAnnotatedType(elementDataType);
-
-            string childMetadataClassName = GetMetadataClassName(elementType);
-
-            writer.WriteLine($"{indentation}    PropertyMetadatas = {childMetadataClassName}.Metadata,");
-            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationCollectionAttribute.CollectionName)}\",");
-            writer.WriteLine($"{indentation}    EntityNoun = \"{Escape(configurationCollectionAttribute.EntityNoun ?? string.Empty)}\",");
-            writer.WriteLine($"{indentation}    EntityKeyPropertyName = \"GetKey\",");
-            writer.WriteLine($"{indentation}    EntityNamePropertyName = \"{Escape(configurationCollectionAttribute.EntityNamePropertyName ?? "GetKey")}\",");
-        }
-
-        writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
-        writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
-
-        if (configurationPropertyAttribute.Title is not null)
-        {
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
             writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
-        }
-
-        ConfigurationCategoryAttribute? propertyCategory = property.GetCustomAttribute<ConfigurationCategoryAttribute>();
-
-        writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(propertyCategory?.Title ?? string.Empty)}\",");
-
-        if (metadataType == nameof(EnumPropertyMetadata))
-        {
-            Type enumType = GetAnnotatedType(annotatedDataType);
-            writer.WriteLine($"{indentation}    EnumName = \"{Escape(enumType.Name)}\",");
-        }
-
-        if (metadataType == nameof(TuplePropertyMetadata))
-        {
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
             string[] tupleElementDataTypes = GetTupleElementDataTypes(annotatedDataType);
             ConfigurationTupleItemAttribute[] tupleItems = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
 
@@ -382,6 +270,127 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
             }
 
             writer.WriteLine($"{indentation}    }},");
+        }
+        // Foreign keys
+        else if (configurationForeignCollectionAttribute is not null && IsStringArray(annotatedDataType))
+        {
+            writer.WriteLine($"{indentation}new {nameof(ForeignKeysPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
+            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (configurationForeignCollectionAttribute is not null)
+        {
+            writer.WriteLine($"{indentation}new {nameof(ForeignKeyPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
+            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (configurationCollectionAttribute is not null)
+        {
+            writer.WriteLine($"{indentation}new {nameof(CollectionPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            string elementDataType = annotatedDataType.Trim().TrimEnd('?');
+
+            if (!elementDataType.EndsWith("[]", StringComparison.Ordinal))
+            {
+                Console.Error.WriteLine($"DataType '{annotatedDataType}' is not an array.");
+                Environment.Exit(1);
+            }
+
+            elementDataType = elementDataType[..^2].Trim();
+            Type elementType = GetAnnotatedType(elementDataType);
+
+            string childMetadataClassName = GetMetadataClassName(elementType);
+
+            writer.WriteLine($"{indentation}    PropertyMetadatas = {childMetadataClassName}.Metadata,");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationCollectionAttribute.CollectionName)}\",");
+            writer.WriteLine($"{indentation}    EntityNoun = \"{Escape(configurationCollectionAttribute.EntityNoun ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    EntityKeyPropertyName = \"GetKey\",");
+            writer.WriteLine($"{indentation}    EntityNamePropertyName = \"{Escape(configurationCollectionAttribute.EntityNamePropertyName ?? "GetKey")}\",");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (normalizedType == "bool")
+        {
+            writer.WriteLine($"{indentation}new {nameof(BooleanPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (normalizedType == "char")
+        {
+            writer.WriteLine($"{indentation}new {nameof(CharacterPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (normalizedType == "int")
+        {
+            writer.WriteLine($"{indentation}new {nameof(IntegerPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (normalizedType == "string" && IsArray(annotatedDataType))
+        {
+            writer.WriteLine($"{indentation}new {nameof(StringsPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (normalizedType == "string")
+        {
+            writer.WriteLine($"{indentation}new {nameof(StringPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (normalizedType == "ColorEnum")
+        {
+            writer.WriteLine($"{indentation}new {nameof(ColorPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+        }
+        else if (normalizedType.ToLower().EndsWith("enum"))
+        {
+            writer.WriteLine($"{indentation}new {nameof(EnumPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    Description = \"{Escape(configurationPropertyAttribute.Summary ?? string.Empty)}\",");
+            writer.WriteLine($"{indentation}    LabelIfNullable = {(DataTypeIsNullable(annotatedDataType) ? $"\"{Escape(configurationPropertyAttribute.LabelIfNullable ?? "Default")}\"" : "null")},");
+            writer.WriteLine($"{indentation}    Title = \"{Escape(configurationPropertyAttribute.Title)}\",");
+            writer.WriteLine($"{indentation}    CategoryTitle = \"{Escape(configurationCategoryAttribute?.Title ?? string.Empty)}\",");
+            Type enumType = GetAnnotatedType(annotatedDataType);
+            writer.WriteLine($"{indentation}    EnumName = \"{Escape(enumType.Name)}\",");
+        }
+        else
+        {
+            Console.Error.WriteLine($"The data type '{annotatedDataType}' is not supported for property '{propertyName}'.");
+            Environment.Exit(1);
+            return; // Unreachable, but required to satisfy the compiler.
         }
 
         writer.WriteLine($"{indentation}}},");
