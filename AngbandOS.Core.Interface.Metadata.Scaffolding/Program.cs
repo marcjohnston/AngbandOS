@@ -193,10 +193,6 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
             Environment.Exit(1);
         }
 
-        // There are additional annotations we need to check.
-        ConfigurationCollectionAttribute? configurationCollectionAttribute = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
-        ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
-
         // Retrieve the annotated data type.
         string? annotatedDataType = configurationPropertyAttribute.DataType?.Trim();
         if (annotatedDataType is null)
@@ -204,43 +200,90 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
             Console.Error.WriteLine($"The property '{configurationType.Name}.{propertyName}' has no DataType.");
             Environment.Exit(1);
         }
+        string normalizedType = RemoveNullableAndArraySuffixes(annotatedDataType);
+
+        // There are additional optional annotations we need to check.
+        ConfigurationCollectionAttribute? configurationCollectionAttribute = property.GetCustomAttribute<ConfigurationCollectionAttribute>();
+        ConfigurationForeignKeyAttribute? configurationForeignCollectionAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
 
         string metadataType;
+        // Tuples
         if (IsTuple(annotatedDataType))
         {
             metadataType = nameof(TuplePropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(TuplePropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
         }
-        else if (configurationForeignCollectionAttribute != null)
+        // Foreign keys
+        else if (configurationForeignCollectionAttribute is not null && IsStringArray(annotatedDataType))
         {
-            metadataType = IsStringArray(annotatedDataType) ? nameof(ForeignKeysPropertyMetadata) : nameof(ForeignKeyPropertyMetadata);
+            metadataType = nameof(ForeignKeysPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(ForeignKeysPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
+            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
         }
-        else if (configurationCollectionAttribute != null)
+        else if (configurationForeignCollectionAttribute is not null)
+        {
+            metadataType = nameof(ForeignKeyPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(ForeignKeyPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
+            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
+        }
+        else if (configurationCollectionAttribute is not null)
         {
             metadataType = nameof(CollectionPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(CollectionPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+        }
+        else if (normalizedType == "bool")
+        {
+            metadataType = nameof(BooleanPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(BooleanPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+        }
+        else if (normalizedType == "char")
+        {
+            metadataType = nameof(CharacterPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(CharacterPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+        }
+        else if (normalizedType == "int")
+        {
+            metadataType = nameof(IntegerPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(IntegerPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+        }
+        else if (normalizedType == "string" && IsArray(annotatedDataType))
+        {
+            metadataType = nameof(StringsPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(StringsPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+        }
+        else if (normalizedType == "string")
+        {
+            metadataType = nameof(StringPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(StringPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+        }
+        else if (normalizedType == "ColorEnum")
+        {
+            metadataType = nameof(ColorPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(ColorPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
+        }
+        else if (normalizedType.ToLower().EndsWith("enum"))
+        {
+            metadataType = nameof(EnumPropertyMetadata);
+            writer.WriteLine($"{indentation}new {nameof(EnumPropertyMetadata)}(\"{Escape(propertyName)}\")");
+            writer.WriteLine($"{indentation}{{");
         }
         else
         {
-            string normalizedType = RemoveNullableAndArraySuffixes(annotatedDataType);
-            metadataType = normalizedType switch
-            {
-                "bool" => nameof(BooleanPropertyMetadata),
-                "char" => nameof(CharacterPropertyMetadata),
-                "int" => nameof(IntegerPropertyMetadata),
-                "string" when IsArray(annotatedDataType) => nameof(StringsPropertyMetadata),
-                "string" => nameof(StringPropertyMetadata),
-                "ColorEnum" => nameof(ColorPropertyMetadata),
-                _ when normalizedType.EndsWith("Enum", StringComparison.Ordinal) => nameof(EnumPropertyMetadata),
-                _ => throw new InvalidOperationException(
-                    $"The data type '{annotatedDataType}' is not supported for property '{propertyName}'.")
-            };
-        }
-        writer.WriteLine($"{indentation}new {metadataType}(\"{Escape(propertyName)}\")");
-        writer.WriteLine($"{indentation}{{");
-
-        if (configurationForeignCollectionAttribute is not null)
-        {
-            writer.WriteLine($"{indentation}    ForeignCollectionName = \"{Escape(configurationForeignCollectionAttribute.CollectionName)}\",");
-            writer.WriteLine($"{indentation}    Inline = {configurationForeignCollectionAttribute.Inline.ToString().ToLowerInvariant()},");
+            Console.Error.WriteLine($"The data type '{annotatedDataType}' is not supported for property '{propertyName}'.");
+            Environment.Exit(1);
+            return; // Unreachable, but required to satisfy the compiler.
         }
 
         if (metadataType == nameof(CollectionPropertyMetadata) && configurationCollectionAttribute != null)
