@@ -458,9 +458,12 @@ namespace AngbandOS.Web.Services
         }
 
         /// <summary>
-        /// Retrieves chat messages from the database for a user.
-        /// </summary>
-        /// <param name="endingId"></param>
+        /// Retrieves chat messages from the database for a user.Up to 50 messages are returned. One extra message is fetched only to tell whether older messages remain, and it is not returned.
+        /// </summary>        
+        /// <param name="connectionId">The SignalR connection ID used to look up the chat recipient.</param>
+        /// <param name="oldestDownloadedMessageId">
+        /// The ID of the oldest message the client already has. Only messages older than this are retrieved.
+        /// Pass <c>null</c> to retrieve the most recent messages.</param>
         /// <returns></returns>
         public async Task<(ChatMessage[] chatMessages, bool hasMoreMessages)> GetChatMessagesAsync(string connectionId, int? oldestDownloadedMessageId)
         {
