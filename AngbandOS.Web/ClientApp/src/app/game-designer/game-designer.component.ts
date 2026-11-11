@@ -14,6 +14,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 import { JsonGameMetadata } from './JsonGameMetadata';
 import { JsonEnumMetadata } from './JsonEnumMetadata';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-game-designer',
@@ -26,7 +27,8 @@ import { JsonEnumMetadata } from './JsonEnumMetadata';
     GameDesignerPropertyComponent,
     FooterComponent,
     JsonPipe,
-    NavMenuComponent
+    NavMenuComponent,
+    MatIconModule
   ]
 })
 
