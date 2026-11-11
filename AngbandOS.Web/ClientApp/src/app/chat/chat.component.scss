@@ -53,16 +53,16 @@
       }
 
       &.get-more-messages {
-        cursor: pointer; // Show the hand cursor so it reads as clickable.
+        cursor: pointer; // Show the hand cursor so user knows it's clickable.
         text-align: center; // Center the label in the card.
         user-select: none; // Do not highlight the label text on repeated clicks.
 
         & mat-card-content {
-          padding-top: 5px; // There is no subtitle above the label, so balance the bottom padding.
+          padding-top: 5px;
         }
 
         &:hover:not(.disabled) {
-          filter: brightness(1.25); // Lighten the card on hover, like a button.
+          filter: brightness(1.25); // Lighten the card on hover
         }
 
         &.disabled {
