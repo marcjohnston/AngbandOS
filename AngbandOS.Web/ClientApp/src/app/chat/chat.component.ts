@@ -161,7 +161,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this._serviceConnection.start().then(() => {
       this.connectionId = `Service: ${this._serviceConnection?.connectionId!}`;
       if (this._serviceConnection !== undefined) {
-        this.refreshChat(this._serviceConnection, null);
+        this._serviceConnection.send("RefreshChat", null);
       }
     }, (reason: any) => {
       this.showMessage(`Cannot connect to service '${reason}'`);
@@ -190,7 +190,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this._chatConnection.start().then(() => {
       this.connectionId = `Chat: ${this._chatConnection?.connectionId!}`;
       if (this._chatConnection !== undefined) {
-        this.refreshChat(this._chatConnection, null);
+        this._chatConnection.send("RefreshChat", null);
       }
     }, (reason: any) => {
       this.showMessage(`Cannot connect to chat '${reason}'`);
