@@ -180,7 +180,7 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types, bool includeDeleted)
+        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? oldestDownloadedMessageId, int maximumMessages, MessageTypeEnum[]? types, bool includeDeleted)
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
@@ -195,9 +195,14 @@ namespace AngbandOS.PersistentStorage
                     int[] intTypes = types.Select(_type => (int)_type).ToArray();
                     messagesQuery = messagesQuery.Where(_message => intTypes.Contains(_message.Type));
                 }
+                if (oldestDownloadedMessageId != null)
+                {
+                    // Only return messages older than the oldest message the client already has
+                    messagesQuery = messagesQuery.Where(_message => _message.Id < oldestDownloadedMessageId.Value);
+                }
                 IQueryable<MessageDetails> messageDetailsQuery = messagesQuery
                     .OrderByDescending(_message => _message.Id) // We will use the clustered index for sorting.
-                    .Take(50) // We are only providing 50 messages.  The user will need to scroll for more.
+                    .Take(maximumMessages) // We are only providing 50 messages.  The user will need to scroll for more.
                     .Select(_message => new MessageDetails // We need to build MessageDetails objects to be returned.
                     {
                         FromId = _message.FromUserId,

@@ -22,12 +22,12 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? endingId)
+        public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? oldestDownloadedMessageId, int maximumMessages)
         {
             MessageTypeEnum[] messageTypes = new MessageTypeEnum[] { MessageTypeEnum.UserMessage, MessageTypeEnum.CharacterDied };
 
             // Deleted messages are available to anonymous users.
-            return await webPersistentStorage.GetMessagesAsync(null, endingId, messageTypes, false);
+            return await webPersistentStorage.GetMessagesAsync(null, oldestDownloadedMessageId, maximumMessages, messageTypes, false);
         }
     }
 }
