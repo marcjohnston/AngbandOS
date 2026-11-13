@@ -7,7 +7,7 @@ form {
   flex-direction: column; // Arrange the form-fields straight down.
 
   & #email-address, & #password {
-    width: 250px; // Set the width of the email address and password fields.
+    width: 450px; // Set the width of the email address and password fields.
   }
 
   & span {
