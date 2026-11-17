@@ -1,6 +1,17 @@
 <div id="container">
   <div #scrollDiv id="history-area" title="{{connectionId}}">
     <div id="history-scroll-area">
+      <mat-card class="get-more-messages"
+                role="button"
+                tabindex="0"
+                [class.disabled]="!hasMoreMessages || isLoadingMoreMessages"
+                [attr.aria-disabled]="!hasMoreMessages || isLoadingMoreMessages"
+                (click)="getMoreMessages()"
+                (keydown.enter)="getMoreMessages()">
+        <mat-card-content>
+          {{ isLoadingMoreMessages ? 'Loading…' : 'Get More Messages' }}
+        </mat-card-content>
+      </mat-card>
       <ng-container *ngFor="let chatMessage of history">
         <mat-card title="{{isAdministrator ? 'ID: ' + chatMessage.id : ''}}">
           <mat-card-subtitle>

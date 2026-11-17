@@ -51,6 +51,25 @@
         height: auto; // Make sure the card can contain all of the content.  Otherwise it renders outside.
         padding-bottom: 5px; // Remove the padding on the bottom.
       }
+
+      &.get-more-messages {
+        cursor: pointer; // Show the hand cursor so user knows it's clickable.
+        text-align: center; // Center the label in the card.
+        user-select: none; // Do not highlight the label text on repeated clicks.
+
+        & mat-card-content {
+          padding-top: 5px;
+        }
+
+        &:hover:not(.disabled) {
+          filter: brightness(1.25); // Lighten the card on hover
+        }
+
+        &.disabled {
+          cursor: default; // No hand cursor when there is nothing to load.
+          opacity: 0.5; // Fade the card when there are no older messages.
+        }
+      }
     }
   }
 

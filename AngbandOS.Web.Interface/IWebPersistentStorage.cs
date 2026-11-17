@@ -68,7 +68,7 @@ namespace AngbandOS.Web.Interface
         /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned; or null for most recent.  Used for scrolling.</param>
         /// <param name="types">List of message types that the user should receive or null for ALL.</param>
         /// <returns></returns>
-        Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types, bool includeDeleted);
+        Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, int maximumMessages, MessageTypeEnum[]? types, bool includeDeleted);
 
         /// <summary>
         /// Flags a single message as deleted by the unique message id from the database and returns true, if the message was found and delete; false, otherwise.

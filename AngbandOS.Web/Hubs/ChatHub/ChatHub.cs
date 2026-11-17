@@ -47,11 +47,10 @@ namespace AngbandOS.Web.Hubs
             string customRoleClaimType = Configuration["CustomRoleClaimType"];
             if (Context.User.HasClaim(customRoleClaimType, "administrator"))
             {
-                await WebPersistentStorage.DeleteMessageAsync(messageId);
-
+                await WebPersistentStorage.DeleteMessageAsync(messageId);                
                 // We need to force a refresh of all chat clients.
-                //GameService.RefreshAllChatClients();
-                //ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
+                //RefreshChat(oldestDownloadedMessageId);
+                //ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, oldestDownloadedMessageId);
                 //IChatHub chatHub = Clients.Client(Context.ConnectionId);
                 //await chatHub.ChatRefreshed(chatMessages.ToArray());
             }
@@ -72,15 +71,16 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        public async Task RefreshChat(int? endingId)
+        public async Task RefreshChat(int? oldestDownloadedMessageId)
         {
-            ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
+            //gets up to 50 messages and returns  hasMoreMessages = true if there are additonal messages on the database
+            (ChatMessage[] chatMessages, bool hasMoreMessages) = await GameService.GetChatMessagesAsync(Context.ConnectionId, oldestDownloadedMessageId);
 
             // Get the hub for the currently connected client.
             IChatHubMessages chatHub = Clients.Client(Context.ConnectionId);
 
             // Send the response.
-            await chatHub.ChatRefreshed(chatMessages.ToArray());
+            await chatHub.ChatRefreshed(chatMessages, hasMoreMessages);
         }
 
 

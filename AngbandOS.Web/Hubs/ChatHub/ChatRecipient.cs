@@ -29,7 +29,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="webPersistentStorage"></param>
         /// <param name="endingId"></param>
         /// <returns></returns>
-        public abstract Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? endingId);
+        public abstract Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? oldestDownloadedMessageId, int maximumMessages);
 
         public ChatRecipient(string username)
         {
