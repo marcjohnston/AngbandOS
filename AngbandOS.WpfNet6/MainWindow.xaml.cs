@@ -212,7 +212,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         string replayFilename = Path.Combine(savePath, "replay.json");
         string jsonSaveFilename = Path.Combine(savePath, "savegame.json");
         PlayModeEnum playMode = File.Exists(jsonSaveFilename) ? PlayModeEnum.ExistingGame : File.Exists(replayFilename) ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
-        ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
+        using ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
         GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
         GameResults gameResults;
         if (playMode == PlayModeEnum.ExistingGame)
@@ -230,6 +230,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         else
         {
             int seed = gameServer.GenerateNewGame(gameConfiguration);
+            replayPersistentStorage.NewGame(seed);
             gameResults = gameServer.PlayGame(this, replayPersistentStorage);
         }
 

@@ -59,7 +59,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
             bool saveFileExists = File.Exists(saveFilename);
             bool replayFileExists = File.Exists(replayFilename);
             PlayModeEnum playMode = saveFileExists ? PlayModeEnum.ExistingGame : replayFileExists ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
-            ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
+            using ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
             GameConfiguration gameConfiguration = new CthangbandGameConfiguration();
             GameResults gameResults;
             if (playMode == PlayModeEnum.ExistingGame)
