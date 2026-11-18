@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11919.86 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.Core", "AngbandOS.Core\AngbandOS.Core.csproj", "{C522F5F4-DB48-4564-83EA-57706DB9FCE5}"
 EndProject
@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		Documents\AngbandOS.xlsx = Documents\AngbandOS.xlsx
 		Documents\Cthangband.xlsx = Documents\Cthangband.xlsx
+		Documents\Game Designer.pptx = Documents\Game Designer.pptx
 		Documents\Generate SQL Database.pptx = Documents\Generate SQL Database.pptx
 		Documents\Object Property Design and Binding.pptx = Documents\Object Property Design and Binding.pptx
 		Documents\Persistence Provider Setup.pptx = Documents\Persistence Provider Setup.pptx
