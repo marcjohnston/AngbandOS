@@ -49,7 +49,8 @@ public class DivisionInfixExpression : InfixExpression
             else if (dividend is IntegerExpression dividendIntegerExpression)
             {
                 // Test if the division produces an integer.
-                (int quotient, int remainder) = Math.DivRem(dividendIntegerExpression.Value, divisorIntegerExpression.Value);
+                int quotient = dividendIntegerExpression.Value / divisorIntegerExpression.Value;
+                int remainder = dividendIntegerExpression.Value % divisorIntegerExpression.Value;
                 if (remainder == 0)
                 {
                     return new IntegerExpression(quotient);
