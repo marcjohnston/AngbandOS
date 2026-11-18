@@ -33,7 +33,7 @@
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(activePropertyMetadataAndConfiguration.configuration)}}</span><br />
       <div class="property-container-div" *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
-        <app-game-designer-collection [activePropertyMetadataAndConfiguration]="createChild(activePropertyMetadataAndConfiguration, childPropertyMetadata)" [collectionMap]="collectionMap"></app-game-designer-collection> <!-- Recursion -->
+        <app-game-designer-property [activePropertyMetadataAndConfiguration]="createChild(activePropertyMetadataAndConfiguration, childPropertyMetadata)" [collectionMap]="collectionMap"></app-game-designer-property> <!-- Recursion -->
       </div>
     </ng-template>
   </div>
