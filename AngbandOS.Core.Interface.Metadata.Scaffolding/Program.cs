@@ -235,10 +235,7 @@ static void WriteMetadataClassFile(string outputFolder, Type configurationType, 
 
                 Type tupleItemType = GetAnnotatedType(tupleItemDataType);
 
-                string tupleMetadataType = GetTupleItemMetadataType(
-                    tupleItemDataType,
-                    tupleItemType,
-                    tupleItem.ForeignCollectionName != null);
+                string tupleMetadataType = GetTupleItemMetadataType(tupleItemDataType, tupleItemType, tupleItem.ForeignCollectionName != null);
 
                 writer.WriteLine($"{indentation}        new {tupleMetadataType}(\"{Escape(tupleItem.Name)}\")");
                 writer.WriteLine($"{indentation}        {{");
