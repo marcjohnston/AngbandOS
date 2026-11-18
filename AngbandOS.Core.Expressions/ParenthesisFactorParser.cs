@@ -1,4 +1,5 @@
-﻿namespace AngbandOS.Core.Expressions;
+﻿using System.Windows.Markup;
+namespace AngbandOS.Core.Expressions;
 
 public class ParenthesisFactorParser : FactorParser
 {
