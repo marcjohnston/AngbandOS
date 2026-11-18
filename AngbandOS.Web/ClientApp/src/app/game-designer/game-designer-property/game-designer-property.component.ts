@@ -32,13 +32,13 @@ export class GameDesignerPropertyComponent implements OnInit {
    * Returns an entity name.  If the entity doesn't have a defined property name, the property key value will be returned.
    */
   public getEntityName(entity: any) {
-    return importedGetEntityName(this.activePropertyMetadataAndConfiguration!.propertyMetadata, entity);
+    return importedGetEntityName(this.activePropertyMetadataAndConfiguration!.activePropertyMetadata, entity);
   }
 
   public addEntity() {
     const newCollectionEntity: any[] = [];
-    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas!.length; index++) {
-      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
+    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas![index];
       newCollectionEntity.push(tuplePropertyMetadata.defaultValue);
     }
     this.activePropertyMetadataAndConfiguration?.activeConfiguration.push(newCollectionEntity);
@@ -54,6 +54,6 @@ export class GameDesignerPropertyComponent implements OnInit {
    * @returns
    */
   public createChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, childPropertyMetadata: PropertyMetadata): PropertyMetadataAndConfiguration {
-    return new PropertyMetadataAndConfiguration(childPropertyMetadata, activePropertyMetadataAndConfiguration.activeConfiguration);
+    return new PropertyMetadataAndConfiguration(childPropertyMetadata, activePropertyMetadataAndConfiguration.activeConfiguration, activePropertyMetadataAndConfiguration.configuration);
   }
 }

@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgFor, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { GameDesignerTypeEnumComponent } from './game-designer-type-enum/game-designer-type-enum.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-game-designer-type',
@@ -38,38 +39,51 @@ import { GameDesignerTypeEnumComponent } from './game-designer-type-enum/game-de
 })
 export class GameDesignerTypeComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
-  @Input() collectionMap: Map<string, SelectOption[]> | undefined = undefined; // Undefined until Angular loads the parameters.
-
-  constructor() { }
+  constructor(
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
   }
 
-  public createArrayChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, valueIndex: any) {
+  /**
+   * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.
+   * @param activePropertyMetadataAndConfiguration - We pass this in from the HTML because we know it is not undefined.
+   * @param valueIndex
+   * @returns
+   */
+  public createArrayChild(valueIndex: any) {
+    if (this.activePropertyMetadataAndConfiguration === undefined) {
+      this._snackBar.open('Property metadata and configuration are not defined');
+      return;
+    }
+
+    const validatedActivePropertyMetadataAndConfiguration = this.activePropertyMetadataAndConfiguration;
     const derivedArrayPropertyMetadata = new PropertyMetadata(
-      activePropertyMetadataAndConfiguration.propertyMetadata.type,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.type,
       valueIndex, // This is how the serialization is naming the tuple fields
-      activePropertyMetadataAndConfiguration.propertyMetadata.title,
-      activePropertyMetadataAndConfiguration.propertyMetadata.categoryTitle,
-      activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable,
-      activePropertyMetadataAndConfiguration.propertyMetadata.description,
-      activePropertyMetadataAndConfiguration.propertyMetadata.defaultValue,
-      activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas,
-      activePropertyMetadataAndConfiguration.propertyMetadata.entityKeyPropertyName,
-      activePropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName,
-      activePropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle,
-      activePropertyMetadataAndConfiguration.propertyMetadata.entityNoun,
-      activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName,
-      activePropertyMetadataAndConfiguration.propertyMetadata.enumOptions);
-    return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]);
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.title,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.categoryTitle,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.labelIfNullable,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.description,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.defaultValue,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.propertyMetadatas,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.entityKeyPropertyName,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.entityNamePropertyName,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.entityNounTitle,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.entityNoun,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.foreignCollectionName,
+      validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.enumOptions);
+    const activePropertyMetadataAndConfiguration = validatedActivePropertyMetadataAndConfiguration.activeConfiguration[validatedActivePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName];
+    return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration, validatedActivePropertyMetadataAndConfiguration.configuration);
   }
 
   public deleteArrayIndex(index: number) {
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].splice(index, 1);
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName].splice(index, 1);
   }
 
   public appendArrayItem() {
     //this.activePropertyMetadataAndConfiguration!.propertyMetadata.def
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].push("");
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName].push("");
   }
 }

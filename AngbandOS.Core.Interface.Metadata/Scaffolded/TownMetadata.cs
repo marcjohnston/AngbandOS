@@ -13,7 +13,7 @@ public static class TownMetadata
             {
                 new CharacterPropertyMetadata("Char")
                 {
-                    Description = "Specifies the character used to represent the town.",
+                    Description = "Specifies the ASCII character used to represent the town.",
                     LabelIfNullable = null,
                     Title = "Character",
                     CategoryTitle = "",
@@ -55,11 +55,13 @@ public static class TownMetadata
                     Title = "Allow Startup Town",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("DungeonName")
+                new ForeignKeyPropertyMetadata("DungeonName")
                 {
+                    ForeignCollectionName = "Dungeons",
+                    Inline = false,
                     Description = "Specifies the name of the dungeon associated with the town.",
                     LabelIfNullable = null,
-                    Title = "Dungeon Name",
+                    Title = "Dungeon",
                     CategoryTitle = "",
                 },
                 new BooleanPropertyMetadata("UnusedStoreLotsAreGraveyards")

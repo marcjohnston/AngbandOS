@@ -12,7 +12,7 @@ public class TownGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty(
         Title = "Character",
-        Summary = "Specifies the character used to represent the town.",
+        Summary = "Specifies the ASCII character used to represent the town.",
         DataType = "char")]
     public virtual char Char { get; set; }
 
@@ -48,9 +48,10 @@ public class TownGameConfiguration : NonCompositeSingletonGameConfiguration
     public virtual bool AllowStartupTown { get; set; } = true;
 
     [ConfigurationProperty(
-        Title = "Dungeon Name",
+        Title = "Dungeon",
         Summary = "Specifies the name of the dungeon associated with the town.",
         DataType = "string")]
+    [ConfigurationForeignKey("Dungeons")]
     public virtual string DungeonName { get; set; }
 
     [ConfigurationProperty(

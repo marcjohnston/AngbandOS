@@ -27,15 +27,15 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
 
   public addTuple() {
     const newTupleValue: any[] = [];
-    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas!.length; index++) {
-      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
+    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas![index];
       newTupleValue.push(tuplePropertyMetadata.defaultValue);
     }
-    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].push(newTupleValue);
+    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName].push(newTupleValue);
   }
 
   public deleteTuple(index: number) {
-    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].splice(index, 1);
+    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName].splice(index, 1);
   }
 
   /**
@@ -59,6 +59,6 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
       null, // EntityTitle - Tuples do not support collections/entities
       null, // EntityName - Tuples do not support collections/entities
       tupleTypePropertyMetadata.foreignCollectionName);
-    return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
+    return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues, this.activePropertyMetadataAndConfiguration?.configuration);
   }
 }

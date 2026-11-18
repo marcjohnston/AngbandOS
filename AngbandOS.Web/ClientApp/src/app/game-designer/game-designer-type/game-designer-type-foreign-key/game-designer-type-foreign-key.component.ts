@@ -5,6 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { getEntityName as importedGetEntityName } from '../../game-designer-library.module';
 
 @Component({
   selector: 'app-game-designer-type-foreign-key',
@@ -20,8 +21,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class GameDesignerTypeForeignKeyComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
-  @Input() collectionMap: Map<string, SelectOption[]> | undefined = undefined; // Undefined until Angular loads the parameters.
   @ViewChild('select') select!: ElementRef;
+
+  public selectOptions: SelectOption[] | null = null; // Undefined until it is built during the ngInit.
   public unmodifiedValue: string | null | undefined = undefined;
   public errorMessage: string = "";
 
@@ -30,10 +32,15 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Validate that the activePropertyMetadataAndConfiguration was passed in.
+    if (this.activePropertyMetadataAndConfiguration === null || this.activePropertyMetadataAndConfiguration === undefined) {
+      // This is a developer error, so throw an exception.
+      throw new Error("The activePropertyMetadataAndConfiguration parameter was not passed into the GameDesignerTypeForeignKeyComponent.");
+    }
+
     this.unmodifiedValue = this.getValue();
 
-    const foreignCollectionName =
-      this.activePropertyMetadataAndConfiguration?.propertyMetadata.foreignCollectionName;
+    const foreignCollectionName = this.activePropertyMetadataAndConfiguration.activePropertyMetadata.foreignCollectionName;
 
     if (foreignCollectionName === null || foreignCollectionName === undefined) {
       this._snackBar.open(
@@ -44,25 +51,38 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
       return;
     }
 
-    if (this.collectionMap === undefined || !this.collectionMap.has(foreignCollectionName)) {
+    const foreignCollection = this.activePropertyMetadataAndConfiguration.configuration[foreignCollectionName];
+    if (foreignCollection === null || foreignCollection === undefined) {
       this._snackBar.open(
-        `The foreign collection '${foreignCollectionName}' could not be found on the '${this.activePropertyMetadataAndConfiguration?.propertyMetadata.propertyName}' property.`,
+        `The foreign collection '${foreignCollectionName}' could not be found on the '${this.activePropertyMetadataAndConfiguration?.activePropertyMetadata.propertyName}' property.`,
         '',
         { duration: 5000 }
       );
       return;
     }
+
+    // Generate the foreign keys for the foreign collection.
+    for (const foreignEntity of foreignCollection) {
+      // Get the key value for the entity.
+      const keyValue = foreignEntity[this.activePropertyMetadataAndConfiguration.activeConfiguration.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
+
+      // Now generate the entity name for the tree node title.
+      const entityName = importedGetEntityName(this.activePropertyMetadataAndConfiguration.activePropertyMetadata, foreignEntity);
+
+      const selectOption = new SelectOption(entityName, keyValue)
+      this.selectOptions?.push(selectOption);
+    }
   }
 
   public undo() {
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = this.unmodifiedValue;
   }
 
   public getValue(): string | null {
-    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
+    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] ?? "";
   }
 
   public setValue() {
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value == "" ? null : this.select.nativeElement.value;
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = this.select.nativeElement.value == "" ? null : this.select.nativeElement.value;
   }
 }

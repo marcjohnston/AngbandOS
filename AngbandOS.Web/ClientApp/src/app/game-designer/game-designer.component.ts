@@ -31,11 +31,6 @@ import { JsonGameMetadata } from './JsonGameMetadata';
 
 export class GameDesignerComponent implements OnInit {
   /**
-   * A map of collection property names to the list of key values for each entity in the collection.  This is used to populate the select options for foreign key references.
-   */
-  public collectionMap = new Map<string, SelectOption[]>();
-
-  /**
    * A map of enum names to the list of select options for each enum value.  This is used to populate the select options for enum properties.
    */
   public enumMap = new Map<string, SelectOption[]>();
@@ -291,6 +286,7 @@ export class GameDesignerComponent implements OnInit {
         // We need to validate the json metadata before we can provide it to a tree node.
         const propertyMetadata = this.validateJsonPropertyMetadata("GameConfiguration", jsonPropertyMetadata);
         if (propertyMetadata === undefined) {
+          throw new Error(`Metadata property ${jsonPropertyMetadata.propertyName} is invalid after json deserialization.`);
           return;
         }
 
@@ -329,7 +325,7 @@ export class GameDesignerComponent implements OnInit {
               const entityName = importedGetEntityName(propertyMetadata, entity);
 
               // Build the child tree node for each entity of the collection.
-              const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
+              const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity, this.configuration);
               childTreeNodes.push(new TreeNode(entityName, null, [childPropertyMetadataAndConfiguration]));
 
               // Add the key value to the collection keys array.  This array will be assigned to the collections Map that is used for foreign key references.
@@ -337,28 +333,17 @@ export class GameDesignerComponent implements OnInit {
             }
 
             // This is the parent node, we are not rendering any children.
-            const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entityTable); // This is the parent node with no children (null).
+            const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entityTable, this.configuration); // This is the parent node with no children (null).
             const collectionTreeNode = new TreeNode(propertyMetadata.title!, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
-
-            // Add the keys to the shared foreign collection map without replacing
-            // options contributed by earlier configuration collections.
-            const collectionName = propertyMetadata.foreignCollectionName ?? propertyMetadata.propertyName;
-
-            // Now add the select options to the foreign key collection.  Do not overwrite the existing items.
-            const existingSelectOptions = this.collectionMap.get(collectionName) ?? [];
-            this.collectionMap.set(collectionName, [
-              ...existingSelectOptions,
-              ...selectOptions
-            ]);
             break;
           case "strings":
-              const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+            const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration, this.configuration);
               const stringArrayTreeNode = new TreeNode(propertyMetadata.renderTitle, null, [stringArrayPropertyMetadataAndConfiguration]);
               rootTreeNodes.push(stringArrayTreeNode);
             break;
           default:
-            const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
+            const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration, this.configuration);
             gameSettingsPropertyAndMetadataAndConfigurations.push(gameSettingPropertyAndMetadataConfiguration);
             break;
         }

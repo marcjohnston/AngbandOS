@@ -33,14 +33,14 @@ export class GameDesignerTypeIntegerComponent implements OnInit {
   }
 
   public getValue(): string | null {
-    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
+    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] ?? "";
   }
 
   public validate(): number | null {
     const INT32_MAX: number = 2147483647;  // 2^31 - 1
     const INT32_MIN: number = -2147483648; // -2^31
     if (this.input.nativeElement.value == "") {
-      if (!this.activePropertyMetadataAndConfiguration?.propertyMetadata.labelIfNullable !== null) {
+      if (!this.activePropertyMetadataAndConfiguration?.activePropertyMetadata.labelIfNullable !== null) {
         this.errorMessage = "Value is required.";
         return NaN;
       } else {
@@ -70,7 +70,7 @@ export class GameDesignerTypeIntegerComponent implements OnInit {
   public setValue() {
     const intValue = this.validate();
     if (intValue === null || !isNaN(intValue)) {
-      this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = intValue;
+      this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = intValue;
       this.input.nativeElement.value = intValue;
     }
   }

@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <!-- Tuple table header -->
-        <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
+        <ng-container *ngFor="let tupleType of activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyMetadatas">
           <td>
             <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
           </td>
@@ -13,9 +13,9 @@
     </thead>
     <tbody>
       <!-- Tuple table rows of configuration values -->
-      <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let index=index">
+      <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName]; let index=index">
         <tr>
-          <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas; let tupleIndex=index">
+          <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyMetadatas; let tupleIndex=index">
             <td>
               <app-game-designer-type [activePropertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)"></app-game-designer-type>
             </td>
@@ -26,10 +26,10 @@
         </tr>
       </ng-container>
     </tbody>
-    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas !== null">
+    <ng-container *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyMetadatas !== null">
       <tfoot>
         <tr>
-          <td [attr.colspan]="activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas.length + 1">
+          <td [attr.colspan]="activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyMetadatas.length + 1">
             <mat-icon class="game-designer-add-icon" title="Add new setting." (click)="addTuple()">add</mat-icon>
           </td>
         </tr>

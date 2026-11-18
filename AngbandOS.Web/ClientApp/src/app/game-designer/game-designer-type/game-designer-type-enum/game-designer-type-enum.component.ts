@@ -27,12 +27,12 @@ export class GameDesignerTypeEnumComponent implements OnInit {
   }
 
   public get enumOptions(): EnumOption[] {
-    return this.activePropertyMetadataAndConfiguration?.propertyMetadata.enumOptions ?? [];
+    return this.activePropertyMetadataAndConfiguration?.activePropertyMetadata.enumOptions ?? [];
   }
 
   public getValue(): number | null {
     const value =
-      this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName];
+      this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName];
 
     return value === null || value === undefined || value === ""
       ? null
@@ -44,7 +44,7 @@ export class GameDesignerTypeEnumComponent implements OnInit {
       return;
     }
 
-    this.activePropertyMetadataAndConfiguration.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] =
+    this.activePropertyMetadataAndConfiguration.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName] =
       value === ""
         ? null
         : Number(value);
@@ -56,6 +56,6 @@ export class GameDesignerTypeEnumComponent implements OnInit {
     }
 
     this.activePropertyMetadataAndConfiguration.activeConfiguration[
-      this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = this.unmodifiedValue;
+      this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName] = this.unmodifiedValue;
   }
 }
