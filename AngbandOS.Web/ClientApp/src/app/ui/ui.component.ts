@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatSlider } from '@angular/material/slider';
 import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +13,6 @@ import { ConsoleConfiguration } from '../modules/html-console/console-configurat
   styleUrls: ['./ui.component.scss'],
   standalone: true,
   imports: [
-    MatSlider,
     FormsModule,
     ColorPickerModule,
     MatSelectModule,
