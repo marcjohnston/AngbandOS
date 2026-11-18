@@ -33,7 +33,7 @@ export class GameDesignerTypeIntegerComponent implements OnInit {
   }
 
   public getValue(): string | null {
-    return this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
+    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
   public validate(): number | null {
@@ -70,7 +70,7 @@ export class GameDesignerTypeIntegerComponent implements OnInit {
   public setValue() {
     const intValue = this.validate();
     if (intValue === null || !isNaN(intValue)) {
-      this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = intValue;
+      this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = intValue;
       this.input.nativeElement.value = intValue;
     }
   }

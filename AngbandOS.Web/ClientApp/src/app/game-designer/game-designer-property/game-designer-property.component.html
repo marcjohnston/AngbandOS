@@ -9,7 +9,7 @@
       </ng-container>
       <table>
         <tbody>
-          <ng-container *ngFor="let entity of activePropertyMetadataAndConfiguration.configuration; let index=index">
+          <ng-container *ngFor="let entity of activePropertyMetadataAndConfiguration.activeConfiguration; let index=index">
             <tr>
               <td>
                 {{getEntityName(entity)}}
@@ -31,7 +31,7 @@
     </ng-container>
     <!-- Single collection entity -->
     <ng-template #showCollectionEntity>
-      <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(activePropertyMetadataAndConfiguration.configuration)}}</span><br />
+      <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(activePropertyMetadataAndConfiguration.activeConfiguration)}}</span><br />
       <div class="property-container-div" *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
         <app-game-designer-property [activePropertyMetadataAndConfiguration]="createChild(activePropertyMetadataAndConfiguration, childPropertyMetadata)" [collectionMap]="collectionMap"></app-game-designer-property> <!-- Recursion -->
       </div>

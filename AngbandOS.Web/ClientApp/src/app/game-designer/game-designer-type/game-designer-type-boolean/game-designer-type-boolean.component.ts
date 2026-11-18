@@ -33,14 +33,14 @@ export class GameDesignerTypeBooleanComponent implements OnInit {
    * @returns "true", "false" or "" for null
    */
   public getValue(): string {
-    return this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
+    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
   public setValue() {
-    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value === "" ? null : this.select.nativeElement.value === "true" ? true : false;
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value === "" ? null : this.select.nativeElement.value === "true" ? true : false;
   }
 
   public undo() {
-    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
   }
 }

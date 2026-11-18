@@ -55,14 +55,14 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
   }
 
   public undo() {
-    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
   }
 
   public getValue(): string | null {
-    return this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
+    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
   public setValue() {
-    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value == "" ? null : this.select.nativeElement.value;
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value == "" ? null : this.select.nativeElement.value;
   }
 }

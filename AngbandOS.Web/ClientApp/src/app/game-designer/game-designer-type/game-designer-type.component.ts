@@ -61,15 +61,15 @@ export class GameDesignerTypeComponent implements OnInit {
       activePropertyMetadataAndConfiguration.propertyMetadata.entityNoun,
       activePropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName,
       activePropertyMetadataAndConfiguration.propertyMetadata.enumOptions);
-    return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]);
+    return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]);
   }
 
   public deleteArrayIndex(index: number) {
-    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].splice(index, 1);
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].splice(index, 1);
   }
 
   public appendArrayItem() {
     //this.activePropertyMetadataAndConfiguration!.propertyMetadata.def
-    this.activePropertyMetadataAndConfiguration!.configuration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].push("");
+    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyName].push("");
   }
 }

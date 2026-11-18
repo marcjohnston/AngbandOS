@@ -1,7 +1,7 @@
 <ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
   <!-- Foreign Key Array -->
   <div class="array-div" *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-keys'">
-    <div class="array-item-div" *ngFor="let value of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let valueIndex = index">
+    <div class="array-item-div" *ngFor="let value of activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let valueIndex = index">
       <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="createArrayChild(activePropertyMetadataAndConfiguration, valueIndex)" [collectionMap]="collectionMap"></app-game-designer-type-foreign-key>
       <mat-icon class="game-designer-delete-icon" (click)="deleteArrayIndex(valueIndex)">delete</mat-icon>
     </div>

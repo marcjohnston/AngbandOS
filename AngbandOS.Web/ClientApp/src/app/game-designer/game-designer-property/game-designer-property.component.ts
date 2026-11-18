@@ -41,11 +41,11 @@ export class GameDesignerPropertyComponent implements OnInit {
       const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
       newCollectionEntity.push(tuplePropertyMetadata.defaultValue);
     }
-    this.activePropertyMetadataAndConfiguration?.configuration.push(newCollectionEntity);
+    this.activePropertyMetadataAndConfiguration?.activeConfiguration.push(newCollectionEntity);
   }
 
   public deleteEntity(index: number) {
-    this.activePropertyMetadataAndConfiguration?.configuration.splice(index, 1);
+    this.activePropertyMetadataAndConfiguration?.activeConfiguration.splice(index, 1);
   }
 
   /**
@@ -54,6 +54,6 @@ export class GameDesignerPropertyComponent implements OnInit {
    * @returns
    */
   public createChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, childPropertyMetadata: PropertyMetadata): PropertyMetadataAndConfiguration {
-    return new PropertyMetadataAndConfiguration(childPropertyMetadata, activePropertyMetadataAndConfiguration.configuration);
+    return new PropertyMetadataAndConfiguration(childPropertyMetadata, activePropertyMetadataAndConfiguration.activeConfiguration);
   }
 }

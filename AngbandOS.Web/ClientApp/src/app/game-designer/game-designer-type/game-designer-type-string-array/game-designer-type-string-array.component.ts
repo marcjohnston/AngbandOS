@@ -22,10 +22,10 @@ export class GameDesignerTypeStringArrayComponent implements OnInit {
   }
 
   public getValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
-    return activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].join('\n');
+    return activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].join('\n');
   }
 
   public setValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
-    activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = event.target.value.split('\n');
+    activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = event.target.value.split('\n');
   }
 }

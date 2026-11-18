@@ -6,14 +6,13 @@ import { PropertyMetadata } from './property-metadata';
 import { TreeNode } from './tree-node';
 import { PropertyMetadataAndConfiguration } from './property-metadata-and-configuration';
 import { JsonPropertyMetadata } from './json-property-metadata';
-import { getEntityName } from './game-designer-library.module';
+import { getEntityName as importedGetEntityName} from './game-designer-library.module';
 import { SelectOption } from './select-option';
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { GameDesignerPropertyComponent } from './game-designer-property/game-designer-property.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 import { JsonGameMetadata } from './JsonGameMetadata';
-import { JsonEnumMetadata } from './JsonEnumMetadata';
 
 @Component({
   selector: 'app-game-designer',
@@ -327,7 +326,7 @@ export class GameDesignerComponent implements OnInit {
               const keyValue = entity[propertyMetadata.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
 
               // Now generate the entity name for the tree node title.
-              const entityName = getEntityName(propertyMetadata, entity);
+              const entityName = importedGetEntityName(propertyMetadata, entity);
 
               // Build the child tree node for each entity of the collection.
               const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);

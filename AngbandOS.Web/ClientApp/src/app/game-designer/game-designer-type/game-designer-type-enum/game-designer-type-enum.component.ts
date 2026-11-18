@@ -32,8 +32,7 @@ export class GameDesignerTypeEnumComponent implements OnInit {
 
   public getValue(): number | null {
     const value =
-      this.activePropertyMetadataAndConfiguration
-        ?.configuration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName];
+      this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName];
 
     return value === null || value === undefined || value === ""
       ? null
@@ -45,8 +44,7 @@ export class GameDesignerTypeEnumComponent implements OnInit {
       return;
     }
 
-    this.activePropertyMetadataAndConfiguration.configuration[
-      this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] =
+    this.activePropertyMetadataAndConfiguration.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] =
       value === ""
         ? null
         : Number(value);
@@ -57,8 +55,7 @@ export class GameDesignerTypeEnumComponent implements OnInit {
       return;
     }
 
-    this.activePropertyMetadataAndConfiguration.configuration[
-      this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] =
-      this.unmodifiedValue;
+    this.activePropertyMetadataAndConfiguration.activeConfiguration[
+      this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName] = this.unmodifiedValue;
   }
 }

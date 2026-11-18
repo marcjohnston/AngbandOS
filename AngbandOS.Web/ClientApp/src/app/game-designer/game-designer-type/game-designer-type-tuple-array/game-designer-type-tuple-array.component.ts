@@ -31,11 +31,11 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
       const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
       newTupleValue.push(tuplePropertyMetadata.defaultValue);
     }
-    this.activePropertyMetadataAndConfiguration?.configuration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].push(newTupleValue);
+    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].push(newTupleValue);
   }
 
   public deleteTuple(index: number) {
-    this.activePropertyMetadataAndConfiguration?.configuration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].splice(index, 1);
+    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.propertyMetadata.propertyName].splice(index, 1);
   }
 
   /**

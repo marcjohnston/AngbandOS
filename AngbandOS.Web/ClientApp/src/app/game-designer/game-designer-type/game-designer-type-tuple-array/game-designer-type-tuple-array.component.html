@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <!-- Tuple table rows of configuration values -->
-      <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let index=index">
+      <ng-container *ngFor="let tupleValues of activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]; let index=index">
         <tr>
           <ng-container *ngFor="let tupleTypePropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas; let tupleIndex=index">
             <td>
