@@ -32,8 +32,10 @@ public static class TownMetadata
                     Title = "Name",
                     CategoryTitle = "",
                 },
-                new StringsPropertyMetadata("StoreFactoryNames")
+                new ForeignKeysPropertyMetadata("StoreFactoryNames")
                 {
+                    ForeignCollectionName = "StoreFactories",
+                    Inline = false,
                     Description = "Specifies the store factory names available in the town.",
                     LabelIfNullable = null,
                     Title = "Store Factory Names",

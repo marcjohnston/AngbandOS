@@ -75,13 +75,13 @@ public static class MonsterRaceMetadata
                         new ForeignKeyPropertyMetadata("MethodName")
                         {
                             ForeignCollectionName = "Attacks",
+                            Inline = true,
                             LabelIfNullable = null,
                             Title = "Method Name",
                             CategoryTitle = "",
                         },
-                        new ForeignKeyPropertyMetadata("EffectName")
+                        new StringPropertyMetadata("EffectName")
                         {
-                            ForeignCollectionName = "AttackEffects",
                             LabelIfNullable = "Null",
                             Title = "Effect Name",
                             CategoryTitle = "",

@@ -37,5 +37,9 @@ public sealed class ConfigurationTupleItemAttribute : Attribute
     /// </summary>
     public string? ForeignCollectionName { get; set; }
 
-    public bool Inline { get; set; }
+    /// <summary>
+    /// Returns true, if the tuple item is a foreign-key and the foreign object should be rendered inline in the UI, rather than as a link to the foreign object.
+    /// Defaults to true for tuples.
+    /// </summary>
+    public bool Inline { get; set; } = true;
 }

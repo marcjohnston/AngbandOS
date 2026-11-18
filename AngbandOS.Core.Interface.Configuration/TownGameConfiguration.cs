@@ -32,6 +32,7 @@ public class TownGameConfiguration : NonCompositeSingletonGameConfiguration
         Title = "Store Factory Names",
         Summary = "Specifies the store factory names available in the town.",
         DataType = "string[]")]
+    [ConfigurationForeignKey("StoreFactories")]
     public virtual string[] StoreFactoryNames { get; set; }
 
     [ConfigurationProperty(

@@ -26,5 +26,5 @@ public sealed class ConfigurationForeignKeyAttribute : Attribute
     /// <summary>
     /// Indicates that the foreign object's properties should be rendered inline rather than requiring selection of an existing foreign object.
     /// </summary>
-    public bool Inline { get; set; }
+    public bool Inline { get; set; } = false;
 }

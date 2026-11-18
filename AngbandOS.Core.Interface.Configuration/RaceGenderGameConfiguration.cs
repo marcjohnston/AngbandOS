@@ -10,7 +10,6 @@ public class RaceGenderGameConfiguration : CompositeSingletonGameConfiguration
         Title = "Race Binding Key",
         Summary = "Specifies the binding key for the race.",
         DataType = "string")]
-    [ConfigurationForeignKey("Races", Inline = false)]
     public virtual string RaceBindingKey { get; set; }
 
     [ConfigurationProperty(

@@ -20,7 +20,7 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
         Title = "Spell Names",
         Summary = "Specifies the monster spell binding keys available to the monster race.",
         DataType = "string[]?")]
-    [ConfigurationForeignKey("MonsterSpells", Inline = false)]
+    [ConfigurationForeignKey("MonsterSpells")]
     public virtual string[]? MonsterSpellBindingKeys { get; set; } = null;
 
     [ConfigurationProperty(
@@ -33,7 +33,7 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
         Title = "Symbol Name",
         Summary = "Specifies the binding key for the symbol used to render the monster.",
         DataType = "string")]
-    [ConfigurationForeignKey("Symbols", Inline = false)]
+    [ConfigurationForeignKey("Symbols")]
     public virtual string SymbolName { get; set; }
 
     [ConfigurationProperty(
@@ -57,13 +57,10 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
     [ConfigurationTupleItem(
         "MethodName",
         Title = "Method Name",
-        ForeignCollectionName = "Attacks", 
-        Inline = false)]
+        ForeignCollectionName = "Attacks")]
     [ConfigurationTupleItem(
         "EffectName",
-        Title = "Effect Name",
-        ForeignCollectionName = "AttackEffects",
-        Inline = false)]
+        Title = "Effect Name")]
     [ConfigurationTupleItem("Dice", Title = "Dice")]
     [ConfigurationTupleItem("Sides", Title = "Sides")]
     [ConfigurationProperty(
@@ -220,7 +217,7 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
         Title = "Gold Item Factory Binding Key",
         Summary = "Specifies the binding key of the item factory used to create gold dropped by the monster.",
         DataType = "string")]
-    [ConfigurationForeignKey("ItemFactories", Inline = false)]
+    [ConfigurationForeignKey("ItemFactories")]
     public virtual string GoldItemFactoryBindingKey { get; set; }
 
     [ConfigurationProperty(Title = "Good", Summary = "Determines whether the monster is good.", DataType = "bool")]

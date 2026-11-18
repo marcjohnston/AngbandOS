@@ -21,6 +21,7 @@ if (File.Exists(outputFolder))
 List<string> errors = new();
 HashSet<Type> reachableTypes = new();
 TraverseGameConfigurationType(typeof(GameConfiguration), reachableTypes, errors);
+ValidateForeignCollectionNames(reachableTypes, errors);
 
 if (errors.Count > 0)
 {
@@ -103,6 +104,38 @@ static void TraverseGameConfigurationType(Type configurationType, ISet<Type> rea
         if (string.IsNullOrWhiteSpace(metadata.DataType))
         {
             errors.Add($"Property '{configurationType.FullName}.{property.Name}' has no metadata DataType.");
+        }
+    }
+}
+
+static void ValidateForeignCollectionNames(IEnumerable<Type> configurationTypes, ICollection<string> errors)
+{
+    HashSet<string> collectionNames = configurationTypes
+        .SelectMany(GetConfigurationProperties)
+        .Select(property => property.GetCustomAttribute<ConfigurationCollectionAttribute>())
+        .Where(attribute => attribute is not null)
+        .Select(attribute => attribute!.CollectionName)
+        .ToHashSet(StringComparer.Ordinal);
+
+    foreach (Type configurationType in configurationTypes)
+    {
+        foreach (PropertyInfo property in GetConfigurationProperties(configurationType))
+        {
+            // Check to see if the property itself is a foreign key, and if so, validate that the foreign collection name is valid.
+            ConfigurationForeignKeyAttribute? foreignKey = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
+
+            if (foreignKey is not null && !collectionNames.Contains(foreignKey.CollectionName))
+            {
+                errors.Add($"Property '{configurationType.FullName}.{property.Name}' references foreign collection '{foreignKey.CollectionName}', but no collection with that name exists.");
+            }
+
+            foreach (ConfigurationTupleItemAttribute tupleItem in property.GetCustomAttributes<ConfigurationTupleItemAttribute>())
+            {
+                if (tupleItem.ForeignCollectionName is not null && !collectionNames.Contains(tupleItem.ForeignCollectionName))
+                {
+                    errors.Add($"Tuple item '{configurationType.FullName}.{property.Name}.{tupleItem.Name}' references foreign collection '{tupleItem.ForeignCollectionName}', but no collection with that name exists.");
+                }
+            }
         }
     }
 }

@@ -11,10 +11,8 @@ public static class RaceGenderMetadata
         {
             return new PropertyMetadata[]
             {
-                new ForeignKeyPropertyMetadata("RaceBindingKey")
+                new StringPropertyMetadata("RaceBindingKey")
                 {
-                    ForeignCollectionName = "Races",
-                    Inline = false,
                     Description = "Specifies the binding key for the race.",
                     LabelIfNullable = null,
                     Title = "Race Binding Key",
