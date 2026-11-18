@@ -8,9 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
 
 @Component({
-  selector: 'app-game-designer-property',
-  templateUrl: './game-designer-property.component.html',
-  styleUrls: ['./game-designer-property.component.scss'],
+  selector: 'app-game-designer-collection',
+  templateUrl: './game-designer-collection.component.html',
+  styleUrls: ['./game-designer-collection.component.scss'],
   standalone: true,
   imports: [
     NgIf,
@@ -19,7 +19,7 @@ import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-t
     GameDesignerTypeComponent
   ]
 })
-export class GameDesignerPropertyComponent implements OnInit {
+export class GameDesignerCollectionComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
   @Input() collectionMap: Map<string, SelectOption[]> | undefined = undefined; // Undefined until Angular loads the parameters.
 
