@@ -5,7 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { getEntityName, getEntityName as importedGetEntityName } from '../../game-designer-library.module';
+import { getEntityName as importedGetEntityName } from '../../game-designer-library.module';
 import { PropertyMetadata } from '../../property-metadata';
 
 @Component({
@@ -28,54 +28,51 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
 
   public selectOptions: SelectOption[] = [];
   public unmodifiedValue: string | null | undefined = undefined;
-  public errorMessage: string = "";
-
-  constructor(
-    private _snackBar: MatSnackBar
-  ) { }
 
   ngOnInit(): void {
     this.unmodifiedValue = this.getValue();
 
     const foreignCollectionName = this.propertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName;
 
-    if (foreignCollectionName === null || foreignCollectionName === undefined) {
-      this._snackBar.open(
-        'The foreign-key metadata does not specify a foreign collection name.',
-        '',
-        { duration: 5000 }
-      );
-      return;
+    // The foreign collection name must be present.
+    if (foreignCollectionName === null) {
+      throw new Error('The foreign-key metadata does not specify a foreign collection name.');
     }
 
-    const foreignCollection: unknown = this.configuration[foreignCollectionName];
-    if (!Array.isArray(foreignCollection)) {
-      this._snackBar.open(
-        `The foreign collection '${foreignCollectionName}' could not be found on the '${this.propertyMetadataAndConfiguration?.propertyMetadata.propertyName}' property.`,
-        '',
-        { duration: 5000 }
-      );
-      return;
+    // Track for an error where no collections exist.
+    let collectionFound = false;
+
+    // A foreign collection can be represented by multiple metadata entries.
+    for (const foreignCollectionPropertyMetadata of this.propertyMetadataMap.values()) {
+      // Check to see if the foreign collection name matches.
+      if (foreignCollectionPropertyMetadata.foreignCollectionName !== foreignCollectionName) {
+        continue;
+      }
+
+      // It does.  Validate the collection.
+      const foreignCollection: unknown = this.configuration[foreignCollectionPropertyMetadata.propertyName];
+      if (!Array.isArray(foreignCollection)) {
+        continue;
+      }
+
+      // Prevent the no collection found error from being thrown.
+      collectionFound = true;
+
+      // Generate the select options for the foreign collection.
+      for (const foreignEntity of foreignCollection) {
+        // Get the key value for the entity.
+        const keyValue = foreignEntity[foreignCollectionPropertyMetadata.entityKeyPropertyName!];
+
+        // Now generate the entity name for the tree node title.
+        const entityName = importedGetEntityName(foreignCollectionPropertyMetadata, foreignEntity);
+
+        const selectOption = new SelectOption(entityName, keyValue)
+        this.selectOptions.push(selectOption);
+      }
     }
 
-    // We need to retrieve the propertyMetadata for the foreign collection.
-    const foreignCollectionPropertyMetadata: PropertyMetadata | undefined = this.propertyMetadataMap.get(foreignCollectionName);
-
-    // Validate it.
-    if (foreignCollectionPropertyMetadata === undefined) {
-      throw new Error(`PropertyMetadataMap does not have item for ${foreignCollectionName}`);
-    }
-
-    // Generate the foreign keys for the foreign collection.
-    for (const foreignEntity of foreignCollection) {
-      // Get the key value for the entity.
-      const keyValue = foreignEntity[foreignCollectionPropertyMetadata.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
-
-      // Now generate the entity name for the tree node title.
-      const entityName = importedGetEntityName(foreignCollectionPropertyMetadata, foreignEntity);
-
-      const selectOption = new SelectOption(entityName, keyValue)
-      this.selectOptions.push(selectOption);
+    if (!collectionFound) {
+      throw new Error(`No collections found for '${foreignCollectionName}'.`);
     }
   }
 
