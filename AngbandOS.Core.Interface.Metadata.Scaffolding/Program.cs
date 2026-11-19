@@ -124,11 +124,18 @@ static void ValidateForeignCollectionNames(IEnumerable<Type> configurationTypes,
             // Check to see if the property itself is a foreign key, and if so, validate that the foreign collection name is valid.
             ConfigurationForeignKeyAttribute? foreignKey = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
 
-            if (foreignKey is not null && !collectionNames.Contains(foreignKey.CollectionName))
+            if (foreignKey is null)
+            {
+                continue;
+            }
+
+            // Verify the foreign collection name is valid.
+            if (!collectionNames.Contains(foreignKey.CollectionName))
             {
                 errors.Add($"Property '{configurationType.FullName}.{property.Name}' references foreign collection '{foreignKey.CollectionName}', but no collection with that name exists.");
             }
 
+            // If the property is a tuple, check all of the tuple items.
             foreach (ConfigurationTupleItemAttribute tupleItem in property.GetCustomAttributes<ConfigurationTupleItemAttribute>())
             {
                 if (tupleItem.ForeignCollectionName is not null && !collectionNames.Contains(tupleItem.ForeignCollectionName))
