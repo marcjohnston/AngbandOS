@@ -17,8 +17,8 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
     public virtual bool CanTeleportSelf { get; set; } = false;
 
     [ConfigurationProperty(
-        Title = "Spell Names",
-        Summary = "Specifies the monster spell binding keys available to the monster race.",
+        Title = "Spells",
+        Summary = "Specifies the spells that are available to monsters of this race.",
         DataType = "string[]?")]
     [ConfigurationForeignKey("MonsterSpells")]
     public virtual string[]? MonsterSpellBindingKeys { get; set; } = null;
