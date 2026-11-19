@@ -15,6 +15,6 @@ public class ExperiencePointsForNextLevelIntWidget : IntWidgetGameConfiguration
     public override int Y => 6;
     public override int? Width => 8;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntValueName => nameof(FunctionsEnum.ExperiencePointsForNextLevelIntFunction);
+    public override string IntValueName => nameof(IntFunctionsEnum.ExperiencePointsForNextLevelIntFunction);
     public override string JustificationName => nameof(JustificationsEnum.RightJustification);
 }

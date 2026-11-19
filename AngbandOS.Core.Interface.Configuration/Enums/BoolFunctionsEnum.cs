@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-public enum FunctionsEnum
+public enum BoolFunctionsEnum
 {
     CanStudyBoolFunction,
     ExperienceLevelAtMaxBoolFunction,
@@ -23,19 +23,5 @@ public enum FunctionsEnum
     TrackedMonsterIsInvisibleBoolFunction,
     TrackedMonsterIsSleepingBoolFunction,
     TrapsDetectedBoolFunction,
-    UsesManaBoolFunction,
-
-    RefreshMapFunction,
-
-    CombinedArmorClassIntFunction,
-    ExperiencePointsForNextLevelIntFunction,
-    TrackedMonsterHealthIntFunction,
-    TrackedMonsterMaxHealthIntFunction,
-    TrapCountIntFunction,
-
-    CharacterSubclassNameStringFunction,
-    DepthStringFunction,
-    RaceTitleStringFunction,
-
-    TrackedMonsterRaceNameTextFunction,
+    UsesManaBoolFunction
 }

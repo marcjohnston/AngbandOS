@@ -17,7 +17,7 @@ public class TrapCountRangedWidget : RangedWidgetGameConfiguration
     public override int? Width => 5;
     public override ColorEnum DefaultColor => ColorEnum.Yellow;
     public override string DefaultText => "DTRAP";
-    public override string IntValueName => nameof(FunctionsEnum.TrapCountIntFunction);
+    public override string IntValueName => nameof(IntFunctionsEnum.TrapCountIntFunction);
     public override (int startValue, string textToRender, ColorEnum color)[] Ranges => new (int, string, ColorEnum)[]
     {
         (4, "DTrap", ColorEnum.Green)

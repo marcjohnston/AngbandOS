@@ -13,5 +13,5 @@ public class StudyConditionalWidget : ConditionalWidgetGameConfiguration
     public override string[]? TrueWidgetNames => new string[] { nameof(StudyLabelWidget) };
 
     public override string[]? FalseWidgetNames => new string[] { nameof(NonStudyLabelWidget) };
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.CanStudyBoolFunction) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(BoolFunctionsEnum.CanStudyBoolFunction) };
 }

@@ -3,6 +3,6 @@ public class TrackedMonsterHealthIsDeadConditional : ConditionalGameConfiguratio
 {
     public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
-        (nameof(FunctionsEnum.TrackedMonsterIsDeadBoolFunction), true, 0)
+        (nameof(BoolFunctionsEnum.TrackedMonsterIsDeadBoolFunction), true, 0)
     };
 }

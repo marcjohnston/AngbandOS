@@ -3,6 +3,6 @@ public class PlayerIsHallucinatingTrackedMonsterHealthConditional : ConditionalG
 {
     public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
-        (nameof(FunctionsEnum.PlayerIsHallucinatingBoolFunction), true, 0)
+        (nameof(BoolFunctionsEnum.PlayerIsHallucinatingBoolFunction), true, 0)
     };
 }

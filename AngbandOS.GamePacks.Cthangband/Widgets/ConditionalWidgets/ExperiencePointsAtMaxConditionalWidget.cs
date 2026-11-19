@@ -16,5 +16,5 @@ public class ExperiencePointsAtMaxConditionalWidget : ConditionalWidgetGameConfi
     public override string ConditionalKey => nameof(ExperiencePointsAtMaxConditional);
     public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsAtMaxLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(ExperiencePointsForNextLevelConditionalWidget) };
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.ExperiencePointsForNextLevelIntFunction) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(IntFunctionsEnum.ExperiencePointsForNextLevelIntFunction) };
 }

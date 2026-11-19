@@ -11,7 +11,7 @@ public class CharacterSubclassNameStringWidget : StringWidgetGameConfiguration
 {
     public override int X => 0;
     public override int Y => 3;
-    public override string StringValueName => nameof(FunctionsEnum.CharacterSubclassNameStringFunction);
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.CharacterSubclassNameStringFunction) };
+    public override string StringValueName => nameof(StringFunctionsEnum.CharacterSubclassNameStringFunction);
+    public override string[]? ChangeTrackerNames => new string[] { nameof(StringFunctionsEnum.CharacterSubclassNameStringFunction) };
 }
 

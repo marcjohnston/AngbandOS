@@ -4,6 +4,6 @@ public class DoesNotHaveBlindnessResistanceConditional : ConditionalGameConfigur
 {
     public override (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames => new (string, bool, int)[] 
     { 
-        (nameof(FunctionsEnum.HasBlindnessResistanceBoolFunction), false, 0) 
+        (nameof(BoolFunctionsEnum.HasBlindnessResistanceBoolFunction), false, 0) 
     };
 }

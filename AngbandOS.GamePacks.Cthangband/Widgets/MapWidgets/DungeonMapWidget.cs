@@ -10,5 +10,5 @@ public class DungeonMapWidget : MapWidgetGameConfiguration
 {
     public override int X => 13;
     public override int Y => 1;
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.RefreshMapFunction) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(MapFunctionsEnum.RefreshMapFunction) };
 }

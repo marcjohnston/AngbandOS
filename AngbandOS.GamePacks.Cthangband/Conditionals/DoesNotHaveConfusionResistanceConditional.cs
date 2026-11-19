@@ -2,5 +2,5 @@
 
 public class DoesNotHaveConfusionResistanceConditional : ConditionalGameConfiguration
 {
-    public override (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames => new (string, bool, int)[] { (nameof(FunctionsEnum.HasConfusionResistanceBoolFunction), false, 0) };
+    public override (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames => new (string, bool, int)[] { (nameof(BoolFunctionsEnum.HasConfusionResistanceBoolFunction), false, 0) };
 }

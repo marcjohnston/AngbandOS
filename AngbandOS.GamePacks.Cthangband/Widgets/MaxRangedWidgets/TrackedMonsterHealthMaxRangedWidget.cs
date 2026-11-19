@@ -13,8 +13,8 @@ public class TrackedMonsterHealthMaxRangedWidget : MaxRangedWidgetGameConfigurat
     public override int Y => 32;
 
     public override ColorEnum DefaultColor => ColorEnum.Red;
-    public override string IntValueName => nameof(FunctionsEnum.TrackedMonsterHealthIntFunction);
-    public override string MaxIntValueName => nameof(FunctionsEnum.TrackedMonsterMaxHealthIntFunction);
+    public override string IntValueName => nameof(IntFunctionsEnum.TrackedMonsterHealthIntFunction);
+    public override string MaxIntValueName => nameof(IntFunctionsEnum.TrackedMonsterMaxHealthIntFunction);
 
     public override (int, string?, ColorEnum)[] Ranges => new (int, string?, ColorEnum)[]
     {

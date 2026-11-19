@@ -11,7 +11,7 @@ public class RaceTitleStringWidget : StringWidgetGameConfiguration
 {
     public override int X => 0;
     public override int Y => 2;
-    public override string StringValueName => nameof(FunctionsEnum.RaceTitleStringFunction);
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.RaceTitleStringFunction) };
+    public override string StringValueName => nameof(StringFunctionsEnum.RaceTitleStringFunction);
+    public override string[]? ChangeTrackerNames => new string[] { nameof(StringFunctionsEnum.RaceTitleStringFunction) };
 }
 

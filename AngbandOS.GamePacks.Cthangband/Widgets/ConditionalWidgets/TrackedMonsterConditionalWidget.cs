@@ -15,5 +15,5 @@ public class TrackedMonsterConditionalWidget : ConditionalWidgetGameConfiguratio
 
     public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterRaceNameTextWidget), nameof(TrackedMonsterHealthIsInvisibleConditionalWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(TrackedMonsterRaceNameTextWidget), nameof(NoTrackedMonsterHealthLabelWidget) };
-    public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.PlayerIsTrackingMonsterBoolFunction) };
+    public override string[]? ChangeTrackerNames => new string[] { nameof(BoolFunctionsEnum.PlayerIsTrackingMonsterBoolFunction) };
 }
