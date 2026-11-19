@@ -150,6 +150,8 @@ namespace AngbandOS.Web.Controllers
             return new JsonResult(gameConfiguration, jsonOptions);
         }
 
+        // We are not supporting configurations by ID yet ... just default
+        
         //[HttpGet]
         //[Route("configuration/{guid}")]
         //[Produces("application/json")]
