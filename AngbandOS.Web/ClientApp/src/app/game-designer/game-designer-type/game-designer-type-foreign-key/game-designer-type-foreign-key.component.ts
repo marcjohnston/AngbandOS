@@ -5,7 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { getEntityName as importedGetEntityName } from '../../game-designer-library.module';
+import { getEntityName, getEntityName as importedGetEntityName } from '../../game-designer-library.module';
 import { PropertyMetadata } from '../../property-metadata';
 
 @Component({
@@ -22,11 +22,11 @@ import { PropertyMetadata } from '../../property-metadata';
 })
 export class GameDesignerTypeForeignKeyComponent implements OnInit {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: any;
+  @Input({ required: true }) public configuration!: Record<string, unknown>;
   @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
   @ViewChild('select') select!: ElementRef;
 
-  public selectOptions: SelectOption[] | null = null; // Undefined until it is built during the ngInit.
+  public selectOptions: SelectOption[] = [];
   public unmodifiedValue: string | null | undefined = undefined;
   public errorMessage: string = "";
 
@@ -48,8 +48,8 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
       return;
     }
 
-    const foreignCollection = this.propertyMetadataAndConfiguration.configuration[foreignCollectionName];
-    if (foreignCollection === null || foreignCollection === undefined) {
+    const foreignCollection: unknown = this.configuration[foreignCollectionName];
+    if (!Array.isArray(foreignCollection)) {
       this._snackBar.open(
         `The foreign collection '${foreignCollectionName}' could not be found on the '${this.propertyMetadataAndConfiguration?.propertyMetadata.propertyName}' property.`,
         '',
@@ -58,16 +58,24 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
       return;
     }
 
+    // We need to retrieve the propertyMetadata for the foreign collection.
+    const foreignCollectionPropertyMetadata: PropertyMetadata | undefined = this.propertyMetadataMap.get(foreignCollectionName);
+
+    // Validate it.
+    if (foreignCollectionPropertyMetadata === undefined) {
+      throw new Error(`PropertyMetadataMap does not have item for ${foreignCollectionName}`);
+    }
+
     // Generate the foreign keys for the foreign collection.
     for (const foreignEntity of foreignCollection) {
       // Get the key value for the entity.
-      const keyValue = foreignEntity[this.propertyMetadataAndConfiguration.configuration.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
+      const keyValue = foreignEntity[foreignCollectionPropertyMetadata.entityKeyPropertyName!]; // collectionKeyPropertyName was already validated.
 
       // Now generate the entity name for the tree node title.
-      const entityName = importedGetEntityName(this.propertyMetadataAndConfiguration.propertyMetadata, foreignEntity);
+      const entityName = importedGetEntityName(foreignCollectionPropertyMetadata, foreignEntity);
 
       const selectOption = new SelectOption(entityName, keyValue)
-      this.selectOptions?.push(selectOption);
+      this.selectOptions.push(selectOption);
     }
   }
 

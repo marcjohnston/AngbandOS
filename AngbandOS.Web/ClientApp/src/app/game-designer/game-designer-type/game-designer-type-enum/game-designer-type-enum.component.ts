@@ -20,7 +20,7 @@ import { PropertyMetadata } from '../../property-metadata';
 })
 export class GameDesignerTypeEnumComponent implements OnInit {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: any;
+  @Input({ required: true }) public configuration!: Record<string, unknown>;
   @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
 
   public unmodifiedValue: number | null = null;

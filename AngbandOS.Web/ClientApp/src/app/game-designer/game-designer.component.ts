@@ -42,7 +42,7 @@ export class GameDesignerComponent implements OnInit {
   /**
    * The game configuration object.
    */
-  public configuration: any | undefined = undefined;
+  public configuration: Record<string, unknown> | undefined = undefined;
 
   /**
    * Returns the unmodified original configuration to detect changes.
@@ -300,10 +300,10 @@ export class GameDesignerComponent implements OnInit {
         switch (propertyMetadata.type) {
           case "collection":
             // Get all of the entities for this collection from the current configuration. They will become child tree nodes.
-            const entityTable: any[] | null = this.configuration[propertyMetadata.propertyName];
+            const entityTable: unknown = this.configuration[propertyMetadata.propertyName];
 
-            // Ensure the configuration matched the metadata.
-            if (entityTable === null) {
+            // Ensure the configuration matched the metadata and it must be an array.
+            if (!Array.isArray(entityTable)) {
               this._snackBar.open(`The ${propertyMetadata.propertyName} collection does not exist in the configuration.`, "", {
                 duration: 5000
               });

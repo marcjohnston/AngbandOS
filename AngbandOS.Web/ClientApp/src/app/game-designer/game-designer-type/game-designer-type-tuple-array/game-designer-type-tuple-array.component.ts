@@ -19,7 +19,7 @@ import { GameDesignerTypeComponent } from '../game-designer-type.component';
 })
 export class GameDesignerTypeTupleArrayComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: any;
+  @Input({ required: true }) public configuration!: Record<string, unknown>;
   @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
 
   public addTuple() {

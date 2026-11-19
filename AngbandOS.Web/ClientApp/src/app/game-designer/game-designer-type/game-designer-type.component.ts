@@ -39,7 +39,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class GameDesignerTypeComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: any;
+  @Input({ required: true }) public configuration!: Record<string, unknown>;
   @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
 
   /**
