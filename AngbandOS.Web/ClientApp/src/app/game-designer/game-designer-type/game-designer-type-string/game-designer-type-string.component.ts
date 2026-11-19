@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PropertyMetadata } from '../../property-metadata';
 
 @Component({
   selector: 'app-game-designer-type-string',
@@ -13,12 +14,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ]
 })
-export class GameDesignerTypeStringComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class GameDesignerTypeStringComponent {
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
 }

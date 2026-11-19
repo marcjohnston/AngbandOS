@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { EnumOption } from "../../EnumOption";
+import { PropertyMetadata } from '../../property-metadata';
 
 @Component({
   selector: 'app-game-designer-type-enum',
@@ -18,7 +19,9 @@ import { EnumOption } from "../../EnumOption";
   ]
 })
 export class GameDesignerTypeEnumComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined;
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
+  @Input({ required: true }) public configuration!: any;
+  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
 
   public unmodifiedValue: number | null = null;
 
@@ -27,35 +30,29 @@ export class GameDesignerTypeEnumComponent implements OnInit {
   }
 
   public get enumOptions(): EnumOption[] {
-    return this.activePropertyMetadataAndConfiguration?.activePropertyMetadata.enumOptions ?? [];
+    return this.propertyMetadataAndConfiguration?.propertyMetadata.enumOptions ?? [];
   }
 
   public getValue(): number | null {
     const value =
-      this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName];
+      this.propertyMetadataAndConfiguration?.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName];
 
-    return value === null || value === undefined || value === ""
-      ? null
-      : Number(value);
+    return value === null || value === undefined || value === "" ? null : Number(value);
   }
 
   public setValue(value: string): void {
-    if (this.activePropertyMetadataAndConfiguration === undefined) {
+    if (this.propertyMetadataAndConfiguration === undefined) {
       return;
     }
 
-    this.activePropertyMetadataAndConfiguration.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName] =
-      value === ""
-        ? null
-        : Number(value);
+    this.propertyMetadataAndConfiguration.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName] = value === "" ? null : Number(value);
   }
 
   public undo(): void {
-    if (this.activePropertyMetadataAndConfiguration === undefined) {
+    if (this.propertyMetadataAndConfiguration === undefined) {
       return;
     }
 
-    this.activePropertyMetadataAndConfiguration.activeConfiguration[
-      this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName] = this.unmodifiedValue;
+    this.propertyMetadataAndConfiguration.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName] = this.unmodifiedValue;
   }
 }

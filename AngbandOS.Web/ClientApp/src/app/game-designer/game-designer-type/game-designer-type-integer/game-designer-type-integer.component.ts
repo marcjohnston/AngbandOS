@@ -3,6 +3,7 @@ import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-co
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { PropertyMetadata } from '../../property-metadata';
 
 @Component({
   selector: 'app-game-designer-type-integer',
@@ -16,12 +17,11 @@ import { MatIconModule } from '@angular/material/icon';
   ]
 })
 export class GameDesignerTypeIntegerComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
   @ViewChild('input') input!: ElementRef;
+
   public unmodifiedValue: string | null | undefined = undefined;
   public errorMessage: string = "";
-
-  constructor() { }
 
   ngOnInit(): void {
     this.unmodifiedValue = this.getValue();
@@ -33,14 +33,14 @@ export class GameDesignerTypeIntegerComponent implements OnInit {
   }
 
   public getValue(): string | null {
-    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] ?? "";
+    return this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
   public validate(): number | null {
     const INT32_MAX: number = 2147483647;  // 2^31 - 1
     const INT32_MIN: number = -2147483648; // -2^31
     if (this.input.nativeElement.value == "") {
-      if (!this.activePropertyMetadataAndConfiguration?.activePropertyMetadata.labelIfNullable !== null) {
+      if (!this.propertyMetadataAndConfiguration?.propertyMetadata.labelIfNullable !== null) {
         this.errorMessage = "Value is required.";
         return NaN;
       } else {
@@ -70,7 +70,7 @@ export class GameDesignerTypeIntegerComponent implements OnInit {
   public setValue() {
     const intValue = this.validate();
     if (intValue === null || !isNaN(intValue)) {
-      this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = intValue;
+      this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] = intValue;
       this.input.nativeElement.value = intValue;
     }
   }

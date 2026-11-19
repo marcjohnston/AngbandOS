@@ -8,7 +8,7 @@ import { PropertyMetadataAndConfiguration } from './property-metadata-and-config
 import { JsonPropertyMetadata } from './json-property-metadata';
 import { getEntityName as importedGetEntityName} from './game-designer-library.module';
 import { SelectOption } from './select-option';
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { GameDesignerPropertyComponent } from './game-designer-property/game-designer-property.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
@@ -24,7 +24,6 @@ import { JsonGameMetadata } from './JsonGameMetadata';
     NgFor,
     GameDesignerPropertyComponent,
     FooterComponent,
-    JsonPipe,
     NavMenuComponent
   ]
 })
@@ -41,7 +40,7 @@ export class GameDesignerComponent implements OnInit {
   private jsonGameMetadata: JsonGameMetadata | undefined = undefined;
 
   /**
-   * The configuration object being worked on.
+   * The game configuration object.
    */
   public configuration: any | undefined = undefined;
 
@@ -57,8 +56,14 @@ export class GameDesignerComponent implements OnInit {
 
   /**
    * The property metadata and the configuration to be rendered on demand when the user clicks a tree node; null, if the user hasn't selected any tree node.
+   * It is an array because the tree node may have multiple propertyMetadataAndConfiguration objects associated with it.
    */
-  public activePropertyMetadataAndConfigurations: PropertyMetadataAndConfiguration[] | null = null;
+  public selectedPropertyMetadataAndConfigurations: PropertyMetadataAndConfiguration[] | null = null;
+
+  /**
+   * Represents the validated property metadata converted from Json mapped by the property name.  This helps with foreign key lookups.
+   */
+  public propertyMetadataMap = new Map<string, PropertyMetadata>();
 
   constructor(
     private _httpClient: HttpClient,
@@ -287,8 +292,10 @@ export class GameDesignerComponent implements OnInit {
         const propertyMetadata = this.validateJsonPropertyMetadata("GameConfiguration", jsonPropertyMetadata);
         if (propertyMetadata === undefined) {
           throw new Error(`Metadata property ${jsonPropertyMetadata.propertyName} is invalid after json deserialization.`);
-          return;
         }
+
+        // Append the validated property metadata to the validated property metadata array.
+        this.propertyMetadataMap.set(propertyMetadata.propertyName, propertyMetadata);
 
         switch (propertyMetadata.type) {
           case "collection":
@@ -325,7 +332,7 @@ export class GameDesignerComponent implements OnInit {
               const entityName = importedGetEntityName(propertyMetadata, entity);
 
               // Build the child tree node for each entity of the collection.
-              const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity, this.configuration);
+              const childPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entity);
               childTreeNodes.push(new TreeNode(entityName, null, [childPropertyMetadataAndConfiguration]));
 
               // Add the key value to the collection keys array.  This array will be assigned to the collections Map that is used for foreign key references.
@@ -333,17 +340,17 @@ export class GameDesignerComponent implements OnInit {
             }
 
             // This is the parent node, we are not rendering any children.
-            const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entityTable, this.configuration); // This is the parent node with no children (null).
+            const collectionPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, entityTable); // This is the parent node with no children (null).
             const collectionTreeNode = new TreeNode(propertyMetadata.title!, childTreeNodes, [collectionPropertyMetadataAndConfiguration]);
             rootTreeNodes.push(collectionTreeNode);
             break;
           case "strings":
-            const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration, this.configuration);
+            const stringArrayPropertyMetadataAndConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
               const stringArrayTreeNode = new TreeNode(propertyMetadata.renderTitle, null, [stringArrayPropertyMetadataAndConfiguration]);
               rootTreeNodes.push(stringArrayTreeNode);
             break;
           default:
-            const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration, this.configuration);
+            const gameSettingPropertyAndMetadataConfiguration = new PropertyMetadataAndConfiguration(propertyMetadata, this.configuration);
             gameSettingsPropertyAndMetadataAndConfigurations.push(gameSettingPropertyAndMetadataConfiguration);
             break;
         }
@@ -372,7 +379,7 @@ export class GameDesignerComponent implements OnInit {
 
   public treeNodeClicked(treeNode: TreeNode) {
     // Activate the tree node property metadata and configuration.
-    this.activePropertyMetadataAndConfigurations = treeNode.propertyMetadataAndConfigurations;
+    this.selectedPropertyMetadataAndConfigurations = treeNode.propertyMetadataAndConfigurations;
   }
 
   ngOnInit(): void {

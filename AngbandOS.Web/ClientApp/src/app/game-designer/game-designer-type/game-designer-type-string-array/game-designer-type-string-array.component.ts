@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PropertyMetadata } from '../../property-metadata';
 
 @Component({
   selector: 'app-game-designer-type-string-array',
@@ -13,19 +14,14 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ]
 })
-export class GameDesignerTypeStringArrayComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
+export class GameDesignerTypeStringArrayComponent {
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public getValue(propertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
+    return propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName].join('\n');
   }
 
-  public getValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration): string {
-    return activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName].join('\n');
-  }
-
-  public setValue(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
-    activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName] = event.target.value.split('\n');
+  public setValue(propertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, event: any) {
+    propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName] = event.target.value.split('\n');
   }
 }

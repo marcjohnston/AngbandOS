@@ -6,6 +6,7 @@ import { convertToTitleCase } from '../../../modules/strings-library/strings-lib
 import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { PropertyMetadata } from '../../property-metadata';
 
 @Component({
   selector: 'app-game-designer-type-color',
@@ -20,8 +21,9 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class GameDesignerTypeColorComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
   @ViewChild('select') select!: ElementRef;
+
   public errorMessage: string = "";
   public unmodifiedValue: ColorEnum | undefined = undefined; // The possible values will be true, false or "" to represent null.
   public colorOptions: SelectOption[] | undefined = undefined;
@@ -47,14 +49,14 @@ export class GameDesignerTypeColorComponent implements OnInit {
    * @returns "true", "false" or "" for null
    */
   public getValue(): ColorEnum {
-    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] ?? "";
+    return this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
   public setValue() {
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = this.select.nativeElement.value === "" ? null : this.select.nativeElement.value;
+    this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value === "" ? null : this.select.nativeElement.value;
   }
 
   public undo() {
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = this.unmodifiedValue;
+    this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
   }
 }

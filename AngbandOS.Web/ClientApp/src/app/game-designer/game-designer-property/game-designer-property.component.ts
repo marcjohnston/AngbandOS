@@ -19,33 +19,29 @@ import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-t
     GameDesignerTypeComponent
   ]
 })
-export class GameDesignerPropertyComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
-  @Input() collectionMap: Map<string, SelectOption[]> | undefined = undefined; // Undefined until Angular loads the parameters.
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class GameDesignerPropertyComponent {
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
+  @Input({ required: true }) public configuration!: any;
+  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
 
   /***
    * Returns an entity name.  If the entity doesn't have a defined property name, the property key value will be returned.
    */
   public getEntityName(entity: any) {
-    return importedGetEntityName(this.activePropertyMetadataAndConfiguration!.activePropertyMetadata, entity);
+    return importedGetEntityName(this.propertyMetadataAndConfiguration.propertyMetadata, entity);
   }
 
   public addEntity() {
     const newCollectionEntity: any[] = [];
-    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas!.length; index++) {
-      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas![index];
+    for (let index = 0; index < this.propertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.propertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
       newCollectionEntity.push(tuplePropertyMetadata.defaultValue);
     }
-    this.activePropertyMetadataAndConfiguration?.activeConfiguration.push(newCollectionEntity);
+    this.propertyMetadataAndConfiguration?.configuration.push(newCollectionEntity);
   }
 
   public deleteEntity(index: number) {
-    this.activePropertyMetadataAndConfiguration?.activeConfiguration.splice(index, 1);
+    this.propertyMetadataAndConfiguration.configuration.splice(index, 1);
   }
 
   /**
@@ -53,7 +49,11 @@ export class GameDesignerPropertyComponent implements OnInit {
    * @param propertyMetadata
    * @returns
    */
-  public createChild(activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration, childPropertyMetadata: PropertyMetadata): PropertyMetadataAndConfiguration {
-    return new PropertyMetadataAndConfiguration(childPropertyMetadata, activePropertyMetadataAndConfiguration.activeConfiguration, activePropertyMetadataAndConfiguration.configuration);
+  public createChild(childPropertyMetadata: PropertyMetadata): PropertyMetadataAndConfiguration {
+    if (this.propertyMetadataAndConfiguration === null || this.propertyMetadataAndConfiguration === undefined) {
+      throw new Error('propertyMetadataAndConfiguration is null or undefined');
+    }
+
+    return new PropertyMetadataAndConfiguration(childPropertyMetadata, this.propertyMetadataAndConfiguration.configuration);
   }
 }

@@ -1,46 +1,46 @@
-<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+<ng-container *ngIf="propertyMetadataAndConfiguration !== undefined">
   <!-- Foreign Key Array -->
-  <div class="array-div" *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'foreign-keys'">
-    <div class="array-item-div" *ngFor="let value of activePropertyMetadataAndConfiguration.activeConfiguration[activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName]; let valueIndex = index">
-      <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="createArrayChild(valueIndex)"></app-game-designer-type-foreign-key>
+  <div class="array-div" *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-keys'">
+    <div class="array-item-div" *ngFor="let value of propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName]; let valueIndex = index">
+      <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="createArrayChild(valueIndex)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-foreign-key>
       <mat-icon class="game-designer-delete-icon" (click)="deleteArrayIndex(valueIndex)">delete</mat-icon>
     </div>
     <mat-icon class="game-designer-add-icon" (click)="appendArrayItem()">add</mat-icon>
   </div>
   <!-- Foreign Key -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'foreign-key'">
-    <app-game-designer-type-foreign-key [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-foreign-key>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
+    <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-foreign-key>
   </div>
   <!-- String Array -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'strings'">
-    <app-game-designer-type-string-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string-array>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'strings'">
+    <app-game-designer-type-string-array [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-string-array>
   </div>
   <!-- String -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'string'">
-    <app-game-designer-type-string [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-string>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'string'">
+    <app-game-designer-type-string [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-string>
   </div>
   <!-- Boolean -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'boolean'">
-    <app-game-designer-type-boolean [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-boolean>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'boolean'">
+    <app-game-designer-type-boolean [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-boolean>
   </div>
   <!-- Color -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'color'">
-    <app-game-designer-type-color [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-color>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'color'">
+    <app-game-designer-type-color [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-color>
   </div>
   <!-- Tuple Array -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'tuple'">
-    <app-game-designer-type-tuple-array [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-tuple-array>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
+    <app-game-designer-type-tuple-array [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-tuple-array>
   </div>
   <!-- Integer -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'integer'">
-    <app-game-designer-type-integer [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-integer>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'integer'">
+    <app-game-designer-type-integer [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-integer>
   </div>
   <!-- Character -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'character'">
-    <app-game-designer-type-character [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-character>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'character'">
+    <app-game-designer-type-character [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-character>
   </div>
   <!-- Enum -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.activePropertyMetadata.type === 'enum'">
-    <app-game-designer-type-enum [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration"></app-game-designer-type-enum>
+  <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'enum'">
+    <app-game-designer-type-enum [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-enum>
   </div>
 </ng-container>

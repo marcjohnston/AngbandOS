@@ -17,25 +17,22 @@ import { GameDesignerTypeComponent } from '../game-designer-type.component';
     forwardRef(() => GameDesignerTypeComponent) /** This is needed to break the circular reference */
   ]
 })
-export class GameDesignerTypeTupleArrayComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class GameDesignerTypeTupleArrayComponent {
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
+  @Input({ required: true }) public configuration!: any;
+  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
 
   public addTuple() {
     const newTupleValue: any[] = [];
-    for (let index = 0; index < this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas!.length; index++) {
-      const tuplePropertyMetadata: PropertyMetadata = this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyMetadatas![index];
+    for (let index = 0; index < this.propertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.propertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
       newTupleValue.push(tuplePropertyMetadata.defaultValue);
     }
-    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName].push(newTupleValue);
+    this.propertyMetadataAndConfiguration?.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName].push(newTupleValue);
   }
 
   public deleteTuple(index: number) {
-    this.activePropertyMetadataAndConfiguration?.activeConfiguration[this.activePropertyMetadataAndConfiguration.activePropertyMetadata.propertyName].splice(index, 1);
+    this.propertyMetadataAndConfiguration?.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName].splice(index, 1);
   }
 
   /**
@@ -59,6 +56,6 @@ export class GameDesignerTypeTupleArrayComponent implements OnInit {
       null, // EntityTitle - Tuples do not support collections/entities
       null, // EntityName - Tuples do not support collections/entities
       tupleTypePropertyMetadata.foreignCollectionName);
-    return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues, this.activePropertyMetadataAndConfiguration?.configuration);
+    return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
   }
 }

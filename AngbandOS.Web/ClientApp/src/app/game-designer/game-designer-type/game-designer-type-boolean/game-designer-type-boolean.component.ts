@@ -18,8 +18,9 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class GameDesignerTypeBooleanComponent implements OnInit {
-  @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
+  @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
   @ViewChild('select') select!: ElementRef;
+
   public unmodifiedValue: string | undefined = undefined; // The possible values will be true, false or "" to represent null.
 
   constructor() { }
@@ -33,14 +34,14 @@ export class GameDesignerTypeBooleanComponent implements OnInit {
    * @returns "true", "false" or "" for null
    */
   public getValue(): string {
-    return this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] ?? "";
+    return this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] ?? "";
   }
 
   public setValue() {
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = this.select.nativeElement.value === "" ? null : this.select.nativeElement.value === "true" ? true : false;
+    this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.select.nativeElement.value === "" ? null : this.select.nativeElement.value === "true" ? true : false;
   }
 
   public undo() {
-    this.activePropertyMetadataAndConfiguration!.activeConfiguration[this.activePropertyMetadataAndConfiguration!.activePropertyMetadata.propertyName] = this.unmodifiedValue;
+    this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName] = this.unmodifiedValue;
   }
 }
