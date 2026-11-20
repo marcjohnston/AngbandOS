@@ -18,10 +18,9 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// The consuming UI layer will resolve this name against the data context to obtain the value
     /// to display. This should match the property name used by the owning model or state object.
     /// </remarks>
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Integer Value Name",
-        Summary = "The name of the integer value property to bind to.",
-        DataType = "string")]
+        Summary = "The name of the integer value property to bind to.")]
     public virtual string IntValueName { get; set; }
 
     /// <summary>
@@ -31,10 +30,9 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// If not explicitly set, the rendering layer may apply a default color (commonly
     /// <see cref="ColorEnum.White"/>). The exact visual result depends on the UI implementation.
     /// </remarks>
-    [ConfigurationProperty(
+    [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "The color used to draw the widget's text.",
-        DataType = "ColorEnum")]
+        Summary = "The color used to draw the widget's text.")]
     public virtual ColorEnum Color { get; set; }
 
     /// <summary>
@@ -44,10 +42,9 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// Coordinate units (pixels vs character cells) are determined by the rendering layer that
     /// consumes this configuration. Use 0 to align with the left edge of the client area.
     /// </remarks>
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "X",
-        Summary = "The horizontal coordinate of the widget's top-left corner.",
-        DataType = "int")]
+        Summary = "The horizontal coordinate of the widget's top-left corner.")]
     public virtual int X { get; set; }
 
     /// <summary>
@@ -57,10 +54,9 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// Coordinate units (pixels vs character cells) are determined by the rendering layer that
     /// consumes this configuration. Use 0 to align with the top edge of the client area.
     /// </remarks>
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Y",
-        Summary = "The vertical coordinate of the widget's top-left corner.",
-        DataType = "int")]
+        Summary = "The vertical coordinate of the widget's top-left corner.")]
     public virtual int Y { get; set; }
 
     /// <summary>
@@ -71,10 +67,9 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// size the widget to the natural length of the rendered text (including sign and any formatting).
     /// The consuming UI should handle wrapping or truncation according to its policy.
     /// </remarks>
-    [ConfigurationProperty(
+    [ConfigurationProperty("int?",
         Title = "Width",
-        Summary = "The width of the widget, or null to size it to the natural length of the rendered text.",
-        DataType = "int?")]
+        Summary = "The width of the widget, or null to size it to the natural length of the rendered text.")]
     public virtual int? Width { get; set; } = null;
 
     /// <summary>
@@ -84,10 +79,9 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// Defaults to <see cref="LeftJustification"/> (via <c>nameof(JustificationsEnum.LeftJustification)</c>).
     /// The UI will resolve this name to a justification object or rule during binding.
     /// </remarks>
-    [ConfigurationProperty(
+    [ConfigurationProperty("JustificationsEnum",
         Title = "Justification",
-        Summary = "The name of the justification strategy used to lay out the text within the widget width.",
-        DataType = "JustificationsEnum")]
+        Summary = "The name of the justification strategy used to lay out the text within the widget width.")]
     public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     /// <summary>
@@ -98,10 +92,9 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// refresh when the underlying value(s) change. Provide one or more property names as needed,
     /// or null when no explicit change tracking is required.
     /// </remarks>
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]?",
         Title = "Change Tracker Names",
-        Summary = "The names of properties that participate in change tracking for this widget.",
-        DataType = "string[]?")]
+        Summary = "The names of properties that participate in change tracking for this widget.")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }
 

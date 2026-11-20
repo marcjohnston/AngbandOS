@@ -10,27 +10,23 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class StoreCommandGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("char",
         Title = "Key Character",
-        Summary = "Specifies the character used to invoke the store command.",
-        DataType = "char")]
+        Summary = "Specifies the character used to invoke the store command.")]
     public virtual char KeyChar { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Description",
-        Summary = "Specifies the description of the store command.",
-        DataType = "string")]
+        Summary = "Specifies the description of the store command.")]
     public virtual string Description { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]?",
         Title = "Valid Store Factory Names",
-        Summary = "Specifies the store factory names for which the command is valid.",
-        DataType = "string[]?")]
+        Summary = "Specifies the store factory names for which the command is valid.")]
     public virtual string[]? ValidStoreFactoryNames { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Execute Script Name",
-        Summary = "Specifies the name of the script executed by the store command.",
-        DataType = "string?")]
+        Summary = "Specifies the name of the script executed by the store command.")]
     public virtual string? ExecuteScriptName { get; set; }
 }

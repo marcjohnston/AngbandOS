@@ -11,33 +11,28 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ActivationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "The name of the activation.",
-        DataType = "string")]
+        Summary = "The name of the activation.")]
     public virtual string Name { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Pre-Activation Message",
-        Summary = "The message displayed before the activation occurs.",
-        DataType = "string?")]
+        Summary = "The message displayed before the activation occurs.")]
     public virtual string? PreActivationMessage { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Value",
-        Summary = "The value associated with the activation.",
-        DataType = "int")]
+        Summary = "The value associated with the activation.")]
     public virtual int Value { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Recharge Time Roll Expression",
-        Summary = "The roll expression used to determine how long it takes for the activation to recharge.",
-        DataType = "string")]
+        Summary = "The roll expression used to determine how long it takes for the activation to recharge.")]
     public virtual string RechargeTimeRollExpression { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Activation Cancellable Script Item Binding Key",
-        Summary = "The binding key of the script item that can cancel the activation.",
-        DataType = "string")]
+        Summary = "The binding key of the script item that can cancel the activation.")]
     public virtual string ActivationCancellableScriptItemBindingKey { get; set; }
 }

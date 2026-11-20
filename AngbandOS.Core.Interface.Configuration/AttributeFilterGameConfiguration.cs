@@ -10,10 +10,9 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string AttributeKey, bool DesiredValue)[]?",
         Title = "Bitwise Or Attribute Filter Bindings",
-        Summary = "The attribute bindings used to filter for attributes where any specified bitwise value matches.",
-        DataType = "(string AttributeKey, bool DesiredValue)[]?")]
+        Summary = "The attribute bindings used to filter for attributes where any specified bitwise value matches.")]
     [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
@@ -22,10 +21,9 @@ public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfigu
         Title = "Desired Value")]
     public virtual (string AttributeKey, bool DesiredValue)[]? BitwiseOrAttributeFilterBindings { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string AttributeKey, bool?[] DesiredValue)[]?",
         Title = "Boolean Attribute Filter Bindings",
-        Summary = "The attribute bindings used to filter boolean attributes by their desired values.",
-        DataType = "(string AttributeKey, bool?[] DesiredValue)[]?")]
+        Summary = "The attribute bindings used to filter boolean attributes by their desired values.")]
     [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
@@ -34,10 +32,9 @@ public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfigu
         Title = "Desired Value")]
     public virtual (string AttributeKey, bool?[] DesiredValue)[]? BoolAttributeFilterBindings { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string AttributeKey, int? StartingValue, int? EndingValue)[]?",
         Title = "Summation Attribute Filter Bindings",
-        Summary = "The attribute bindings used to filter summed numeric attributes within a specified range.",
-        DataType = "(string AttributeKey, int? StartingValue, int? EndingValue)[]?")]
+        Summary = "The attribute bindings used to filter summed numeric attributes within a specified range.")]
     [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
@@ -49,15 +46,13 @@ public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfigu
         Title = "Ending Value")]
     public virtual (string AttributeKey, int? StartingValue, int? EndingValue)[]? SummationAttributeFilterBindings { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool?",
         Title = "Activation Attribute Non-Null",
-        Summary = "Determines whether the activation attribute must be non-null.",
-        DataType = "bool?")]
+        Summary = "Determines whether the activation attribute must be non-null.")]
     public virtual bool? ActivationAttributeNonNull { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool?",
         Title = "Artifact Bias Attribute Non-Null",
-        Summary = "Determines whether the artifact bias attribute must be non-null.",
-        DataType = "bool?")]
+        Summary = "Determines whether the artifact bias attribute must be non-null.")]
     public virtual bool? ArtifactBiasAttributeNonNull { get; set; } = null;
 }

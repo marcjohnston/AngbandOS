@@ -22,9 +22,10 @@ public sealed class ConfigurationCollectionAttribute : Attribute
     }
 
     /// <summary>
-    /// Singular noun used when referring to an individual entity in the collection.  This noun completes a statement of "This is a(n) 'what'."
+    /// Singular noun used when referring to an individual entity in the collection or null, to simply use the collection name.  This noun completes a statement of "This is a(n) 'what'."
+    /// Returns null, by default.
     /// </summary>
-    public string? EntityNoun { get; set; }
+    public string? EntityNoun { get; set; } = null;
 
     /// <summary>
     /// Returns the name of the collection for the items.  Multiple properties may contribute to the same collection (e.g. CauseWoundsMonsterSpells, ProjectileMonsterSpells, ScriptMonsterSpells and SummonMonsterSpells
@@ -32,5 +33,8 @@ public sealed class ConfigurationCollectionAttribute : Attribute
     /// </summary>
     public string CollectionName { get; }
 
-    public string? EntityNamePropertyName { get; set; }
+    /// <summary>
+    /// Returns the name of the property that represents the entity name or null, to use the collection key.  Returns null, by default.
+    /// </summary>
+    public string? EntityNamePropertyName { get; set; } = null;
 }

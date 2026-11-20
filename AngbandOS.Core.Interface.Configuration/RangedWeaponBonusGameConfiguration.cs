@@ -12,27 +12,23 @@ public class RangedWeaponBonusGameConfiguration : CompositeSingletonGameConfigur
 {
     public sealed override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, ItemClassBindingKey, ExperienceLevel == null ? null : ExperienceLevel.Value.ToString() }; // CONFIRMED
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Item Class Binding Key",
-        Summary = "Specifies the optional binding key of the item class affected by the ranged weapon bonus.",
-        DataType = "string?")]
+        Summary = "Specifies the optional binding key of the item class affected by the ranged weapon bonus.")]
     public virtual string? ItemClassBindingKey { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Character Class Binding Key",
-        Summary = "Specifies the optional binding key of the character class affected by the ranged weapon bonus.",
-        DataType = "string?")]
+        Summary = "Specifies the optional binding key of the character class affected by the ranged weapon bonus.")]
     public virtual string? CharacterClassBindingKey { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int?",
         Title = "Experience Level",
-        Summary = "Specifies the optional experience level at which the ranged weapon bonus applies.",
-        DataType = "int?")]
+        Summary = "Specifies the optional experience level at which the ranged weapon bonus applies.")]
     public virtual int? ExperienceLevel { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Bonus Missile Attacks Per Round",
-        Summary = "Specifies the bonus number of missile attacks performed per round.",
-        DataType = "int")]
+        Summary = "Specifies the bonus number of missile attacks performed per round.")]
     public virtual int BonusMissileAttacksPerRound { get; set; } = 0;
 }

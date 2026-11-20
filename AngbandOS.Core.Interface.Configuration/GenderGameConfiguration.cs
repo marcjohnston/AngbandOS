@@ -10,40 +10,35 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Title",
-        Summary = "Display title for the gender (e.g., \"Male\", \"Female\").",
-        DataType = "string")]
+        Summary = "Display title for the gender (e.g., \"Male\", \"Female\").")]
     public virtual string Title { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Winner",
-        Summary = "Short title used when this gender is presented as the winner type.",
-        DataType = "string")]
+        Summary = "Short title used when this gender is presented as the winner type.")]
     /// <remarks>
     /// The comment indicates this may not currently be rendered; keep this value for potential UI usage.
     /// </remarks>
     public virtual string Winner { get; set; } // TODO ... this winner title to describe the type of winner is not rendered
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Can Be Randomly Selected",
-        Summary = "Whether this gender may be chosen by the random-selection logic.",
-        DataType = "bool")]
+        Summary = "Whether this gender may be chosen by the random-selection logic.")]
     public virtual bool CanBeRandomlySelected { get; set; } = true;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Pronoun",
-        Summary = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").",
-        DataType = "string")]
+        Summary = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").")]
     /// <remarks>
     /// Localize or change to "he", "she", etc., as appropriate for the gender entry.
     /// </remarks>
     public virtual string Pronoun { get; set; } = "it";
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Possessive Adjective",
-        Summary = "Possessive adjective to use when rendering messages (default: \"its\").",
-        DataType = "string")]
+        Summary = "Possessive adjective to use when rendering messages (default: \"its\").")]
     /// <remarks>
     /// Examples: "his", "her", "its". Used for natural-language assembly of messages.
     /// </remarks>

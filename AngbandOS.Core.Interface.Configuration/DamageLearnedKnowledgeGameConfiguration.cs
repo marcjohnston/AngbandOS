@@ -4,9 +4,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class DamageLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Damage Expression Text",
-        Summary = "The expression that defines the damage value learned from this knowledge.",
-        DataType = "string")]
+        Summary = "The expression that defines the damage value learned from this knowledge.")]
     public virtual string DamageExpressionText { get; set; }
 }

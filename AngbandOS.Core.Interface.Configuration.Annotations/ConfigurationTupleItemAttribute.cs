@@ -18,24 +18,24 @@ public sealed class ConfigurationTupleItemAttribute : Attribute
     }
 
     /// <summary>
-    /// Name of the tuple item.
+    /// Name of the tuple item.  This name is used to match the tuple item with the corresponding property in the tuple data type.
     /// </summary>
     public string Name { get; }
 
     /// <summary>
-    /// Human-readable title rendered by the UI.
+    /// Human-readable title rendered by the UI or null, to render the name.  Returns null, by default.
     /// </summary>
-    public string? Title { get; set; }
+    public string? Title { get; set; } = null;
 
     /// <summary>
-    /// Human-readable summary describing the tuple item.
+    /// Human-readable summary description describing the tuple item.  Returns null, by default.
     /// </summary>
-    public string? Summary { get; set; }
+    public string? Description { get; set; } = null;
 
     /// <summary>
-    /// Name of the foreign collection referenced by this tuple item.
+    /// Name of the foreign collection referenced by this tuple item, if the tuple item references a foreign collection; null, otherwise.  Returns null, by default.
     /// </summary>
-    public string? ForeignCollectionName { get; set; }
+    public string? ForeignCollectionName { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the tuple item is a foreign-key and the foreign object should be rendered inline in the UI, rather than as a link to the foreign object.

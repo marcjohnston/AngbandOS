@@ -10,53 +10,45 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class TownGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("char",
         Title = "Character",
-        Summary = "Specifies the ASCII character used to represent the town.",
-        DataType = "char")]
+        Summary = "Specifies the ASCII character used to represent the town.")]
     public virtual char Char { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "House Price",
-        Summary = "Specifies the price of a house in the town.",
-        DataType = "int")]
+        Summary = "Specifies the price of a house in the town.")]
     public virtual int HousePrice { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "Specifies the name of the town.",
-        DataType = "string")]
+        Summary = "Specifies the name of the town.")]
     public virtual string Name { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Store Factory Names",
-        Summary = "Specifies the store factory names available in the town.",
-        DataType = "string[]")]
+        Summary = "Specifies the store factory names available in the town.")]
     [ConfigurationForeignKey("StoreFactories")]
     public virtual string[] StoreFactoryNames { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Can Be Escorted Here",
-        Summary = "Determines whether the player can be escorted to the town.",
-        DataType = "bool")]
+        Summary = "Determines whether the player can be escorted to the town.")]
     public virtual bool CanBeEscortedHere { get; set; } = true;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Allow Startup Town",
-        Summary = "Determines whether the town can be used as the startup town.",
-        DataType = "bool")]
+        Summary = "Determines whether the town can be used as the startup town.")]
     public virtual bool AllowStartupTown { get; set; } = true;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Dungeon",
-        Summary = "Specifies the name of the dungeon associated with the town.",
-        DataType = "string")]
+        Summary = "Specifies the name of the dungeon associated with the town.")]
     [ConfigurationForeignKey("Dungeons")]
     public virtual string DungeonName { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Unused Store Lots Are Graveyards",
-        Summary = "Determines whether unused store lots are treated as graveyards.",
-        DataType = "bool")]
+        Summary = "Determines whether unused store lots are treated as graveyards.")]
     public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
 }

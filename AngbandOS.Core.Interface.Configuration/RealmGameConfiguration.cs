@@ -10,33 +10,28 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class RealmGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Spell Book Names",
-        Summary = "Specifies the spell book names associated with the realm.",
-        DataType = "string[]")]
+        Summary = "Specifies the spell book names associated with the realm.")]
     public virtual string[] SpellBookNames { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Info",
-        Summary = "Specifies the informational text associated with the realm.",
-        DataType = "string[]")]
+        Summary = "Specifies the informational text associated with the realm.")]
     public virtual string[] Info { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "Specifies the name of the realm.",
-        DataType = "string")]
+        Summary = "Specifies the name of the realm.")]
     public virtual string Name { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Resistant To Holy And Hell Projectiles",
-        Summary = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.",
-        DataType = "bool")]
+        Summary = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.")]
     public virtual bool ResistantToHolyAndHellProjectiles { get; set; } = false;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Susceptible To Holy And Hell Projectiles",
-        Summary = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.",
-        DataType = "bool")]
+        Summary = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.")]
     public virtual bool SusceptibleToHolyAndHellProjectiles { get; set; } = false;
 }

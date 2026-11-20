@@ -7,31 +7,27 @@ public class ItemClassGameConfiguration : NonCompositeSingletonGameConfiguration
     /// <summary>
     /// Returns the capitalized name of a singular item that the class represents.  This name can be used in a format like 'Your {0}'
     /// </summary>
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "The capitalized singular name of the item represented by this item class.",
-        DataType = "string")]
+        Summary = "The capitalized singular name of the item represented by this item class.")]
     public virtual string Name { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Allow Stomp",
-        Summary = "Determines whether items of this class allow the player to stomp them.",
-        DataType = "bool")]
+        Summary = "Determines whether items of this class allow the player to stomp them.")]
     public virtual bool AllowStomp { get; set; } = true;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Number of Flavors to Generate",
-        Summary = "The number of flavors to generate for items of this item class.",
-        DataType = "int")]
+        Summary = "The number of flavors to generate for items of this item class.")]
     public virtual int NumberOfFlavorsToGenerate { get; set; } = 0;
 
     /// <summary>
     /// Returns the names of all of the flavors to be assigned to items of this item class;or null, if items should use the <see cref="EffectiveAttributeSet"/>.  Null is returned
     /// when an item has a predefined flavor.  Apple juice, water and slime-mold item factories use pre-defined flavors. 
     /// </summary>
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]?",
         Title = "Item Flavor Binding Keys",
-        Summary = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.",
-        DataType = "string[]?")]
+        Summary = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.")]
     public virtual string[]? ItemFlavorBindingKeys { get; set; } = null;
 }

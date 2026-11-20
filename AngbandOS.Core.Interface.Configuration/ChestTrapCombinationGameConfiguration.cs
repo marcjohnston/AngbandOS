@@ -4,9 +4,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ChestTrapCombinationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Chest Trap Binding Keys",
-        Summary = "The binding keys identifying the chest traps included in this combination.",
-        DataType = "string[]")]
+        Summary = "The binding keys identifying the chest traps included in this combination.")]
     public virtual string[] ChestTrapBindingKeys { get; set; }
 }

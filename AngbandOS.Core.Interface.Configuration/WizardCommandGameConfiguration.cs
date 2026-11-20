@@ -10,34 +10,29 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class WizardCommandGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("char",
         Title = "Key Character",
-        Summary = "Specifies the character used to invoke the wizard command.",
-        DataType = "char")]
+        Summary = "Specifies the character used to invoke the wizard command.")]
     public virtual char KeyChar { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Is Enabled",
-        Summary = "Determines whether the wizard command is enabled.",
-        DataType = "bool")]
+        Summary = "Determines whether the wizard command is enabled.")]
     public virtual bool IsEnabled { get; set; } = true;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Help Group Name",
-        Summary = "Specifies the name of the help group containing the wizard command. When null, the command is not associated with a help group.",
-        DataType = "string?")]
+        Summary = "Specifies the name of the help group containing the wizard command. When null, the command is not associated with a help group.")]
     public virtual string? HelpGroupName { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Help Description",
-        Summary = "Specifies the description displayed for the wizard command.",
-        DataType = "string")]
+        Summary = "Specifies the description displayed for the wizard command.")]
     public virtual string HelpDescription { get; set; } = "";
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Execute Script Name",
-        Summary = "Specifies the name of the script executed by the wizard command. When null, no script is executed.",
-        DataType = "string?")]
+        Summary = "Specifies the name of the script executed by the wizard command. When null, no script is executed.")]
     public virtual string? ExecuteScriptName { get; set; } = null;
 }
 

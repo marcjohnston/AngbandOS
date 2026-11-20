@@ -10,9 +10,13 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class HelpGroupGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(Title = "Sort Index", Summary = "The order in which the help group is displayed.", DataType = "int")]
+    [ConfigurationProperty("int",
+        Title = "Sort Index",
+        Summary = "The order in which the help group is displayed.")]
     public virtual int SortIndex { get; set; }
 
-    [ConfigurationProperty(Title = "Title", Summary = "The title of the help group.", DataType = "string")]
+    [ConfigurationProperty("string",
+        Title = "Title",
+        Summary = "The title of the help group.")]
     public virtual string Title { get; set; }
 }

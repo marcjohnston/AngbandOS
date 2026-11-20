@@ -4,10 +4,9 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ExperienceLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("(int? MaxExperienceLevel, string LearnedKnowledgeBindingKey)[]",
         Title = "Experience Learned Knowledge Binding Tuples",
-        Summary = "The experience levels and learned knowledge binding keys used to determine which knowledge is learned.",
-        DataType = "(int? MaxExperienceLevel, string LearnedKnowledgeBindingKey)[]")]
+        Summary = "The experience levels and learned knowledge binding keys used to determine which knowledge is learned.")]
     [ConfigurationTupleItem(
         "MaxExperienceLevel",
         Title = "Max Experience Level")]

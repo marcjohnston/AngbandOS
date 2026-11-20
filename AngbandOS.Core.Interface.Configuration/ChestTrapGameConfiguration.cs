@@ -5,15 +5,13 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ChestTrapGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Activation Grid Tile Script Binding Key",
-        Summary = "The binding key identifying the grid tile script activated by the chest trap.",
-        DataType = "string")]
+        Summary = "The binding key identifying the grid tile script activated by the chest trap.")]
     public virtual string ActivationGridTileScriptBindingKey { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Description",
-        Summary = "The description of the chest trap.",
-        DataType = "string")]
+        Summary = "The description of the chest trap.")]
     public virtual string Description { get; set; }
 }

@@ -6,6 +6,11 @@
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 public sealed class ConfigurationPropertyAttribute : Attribute
 {
+    public ConfigurationPropertyAttribute(string dataType)
+    {
+        DataType = dataType;
+    }
+
     /// <summary>
     /// Human-readable title rendered by the UI.
     /// </summary>
@@ -26,10 +31,10 @@ public sealed class ConfigurationPropertyAttribute : Attribute
     ///     "string?[]?"
     ///     "(string MethodName, string? EffectName, int Dice, int Sides)[]?"
     /// </summary>
-    public string? DataType { get; set; }
+    public string DataType { get; }
     
     /// <summary>
-    /// Label to display if the property is nullable.  Returns null, by default.  
+    /// Label to display if the property is nullable.  Returns null (non-nullable), by default.  
     /// When null, nullable boolean properties will scaffold to the default value of "Default".
     /// </summary>
     public string? LabelIfNullable { get; set; } = null;

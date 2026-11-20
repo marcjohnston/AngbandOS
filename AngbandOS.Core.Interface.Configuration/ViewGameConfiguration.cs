@@ -4,10 +4,9 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ViewGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Widget Names",
-        Summary = "Specifies the names of the widgets displayed in the view.",
-        DataType = "string[]")]
+        Summary = "Specifies the names of the widgets displayed in the view.")]
     [ConfigurationForeignKey(
         "Widgets", 
         Inline = false)]

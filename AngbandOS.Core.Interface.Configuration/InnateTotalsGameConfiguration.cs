@@ -6,12 +6,18 @@ public class InnateTotalsGameConfiguration : CompositeSingletonGameConfiguration
 {
     public override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, RaceBindingKey };
 
-    [ConfigurationProperty(Title = "Character Class Binding Key", Summary = "The binding key of the character class associated with these innate totals.", DataType = "string?")]
+    [ConfigurationProperty("string?",
+        Title = "Character Class Binding Key",
+        Summary = "The binding key of the character class associated with these innate totals.")]
     public virtual string? CharacterClassBindingKey { get; set; } = null;
 
-    [ConfigurationProperty(Title = "Race Binding Key", Summary = "The binding key of the race associated with these innate totals.", DataType = "string?")]
+    [ConfigurationProperty("string?",
+        Title = "Race Binding Key",
+        Summary = "The binding key of the race associated with these innate totals.")]
     public virtual string? RaceBindingKey { get; set; } = null;
 
-    [ConfigurationProperty(Title = "Maximum Innates", Summary = "The maximum number of innate abilities available for each innate ability category.", DataType = "int[]")]
+    [ConfigurationProperty("int[]",
+        Title = "Maximum Innates",
+        Summary = "The maximum number of innate abilities available for each innate ability category.")]
     public virtual int[] MaxInnates { get; set; }
 }

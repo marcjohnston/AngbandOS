@@ -4,33 +4,28 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class AnimationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("char",
         Title = "Character",
-        Summary = "The character displayed by the animation.",
-        DataType = "char")]
+        Summary = "The character displayed by the animation.")]
     public virtual char Character { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "The primary color used by the animation.",
-        DataType = "ColorEnum")]
+        Summary = "The primary color used by the animation.")]
     public virtual ColorEnum Color { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "The name of the animation.",
-        DataType = "string")]
+        Summary = "The name of the animation.")]
     public virtual string Name { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("ColorEnum",
         Title = "Alternate Color",
-        Summary = "The alternate color used by the animation.",
-        DataType = "ColorEnum")]
+        Summary = "The alternate color used by the animation.")]
     public virtual ColorEnum AlternateColor { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Sequence",
-        Summary = "The sequence of characters or frames that make up the animation.",
-        DataType = "string")]
+        Summary = "The sequence of characters or frames that make up the animation.")]
     public virtual string Sequence { get; set; }
 }

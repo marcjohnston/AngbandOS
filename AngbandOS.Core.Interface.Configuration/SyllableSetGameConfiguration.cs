@@ -4,21 +4,18 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class SyllableSetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Beginning Syllables",
-        Summary = "Specifies the syllables that can begin generated names.",
-        DataType = "string[]")]
+        Summary = "Specifies the syllables that can begin generated names.")]
     public virtual string[] BeginningSyllables { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Middle Syllables",
-        Summary = "Specifies the syllables that can appear in the middle of generated names.",
-        DataType = "string[]")]
+        Summary = "Specifies the syllables that can appear in the middle of generated names.")]
     public virtual string[] MiddleSyllables { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]",
         Title = "Ending Syllables",
-        Summary = "Specifies the syllables that can end generated names.",
-        DataType = "string[]")]
+        Summary = "Specifies the syllables that can end generated names.")]
     public virtual string[] EndingSyllables { get; set; }
 }

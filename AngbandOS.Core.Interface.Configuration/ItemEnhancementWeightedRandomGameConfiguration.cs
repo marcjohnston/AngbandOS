@@ -7,10 +7,9 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// </summary>
 public class ItemEnhancementWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string? ItemEnhancementName, int Weight)[]",
         Title = "Name and Weight Bindings",
-        Summary = "The names of item enhancements and their corresponding weights used for weighted random selection.",
-        DataType = "(string? ItemEnhancementName, int Weight)[]")]
+        Summary = "The names of item enhancements and their corresponding weights used for weighted random selection.")]
     [ConfigurationTupleItem("ItemEnhancementName", Title = "Item Enhancement Name")]
     [ConfigurationTupleItem("Weight", Title = "Weight")]
     public virtual (string? ItemEnhancementName, int Weight)[] NameAndWeightBindings { get; set; }

@@ -4,46 +4,39 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class DateWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Date Value Name",
-        Summary = "The name of the date value displayed by the widget.",
-        DataType = "string")]
+        Summary = "The name of the date value displayed by the widget.")]
     public virtual string DateValueName { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "The color used to draw the widget text.",
-        DataType = "ColorEnum")]
+        Summary = "The color used to draw the widget text.")]
     public virtual ColorEnum Color { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "X",
-        Summary = "The x-coordinate on the form where the widget is drawn.",
-        DataType = "int")]
+        Summary = "The x-coordinate on the form where the widget is drawn.")]
     public virtual int X { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Y",
-        Summary = "The y-coordinate on the form where the widget is drawn.",
-        DataType = "int")]
+        Summary = "The y-coordinate on the form where the widget is drawn.")]
     public virtual int Y { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int?",
         Title = "Width",
-        Summary = "The width of the widget, or null to use the default width.",
-        DataType = "int?")]
+        Summary = "The width of the widget, or null to use the default width.")]
     public virtual int? Width { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("JustificationsEnum",
         Title = "Justification",
-        Summary = "The name of the justification used to position the widget text within its width.",
-        DataType = "JustificationsEnum")]
+        Summary = "The name of the justification used to position the widget text within its width.")]
     public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]?",
         Title = "Change Tracker Names",
-        Summary = "The names of the properties that participate in change tracking.",
-        DataType = "string[]?")]
+        Summary = "The names of the properties that participate in change tracking.")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }
 

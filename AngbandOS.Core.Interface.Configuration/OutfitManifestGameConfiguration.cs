@@ -15,10 +15,9 @@ public class OutfitManifestGameConfiguration : IGetKeyGameConfiguration // We ca
     [ConfigurationTupleItem(
         "IsEqual",
         Title = "Is Equal")]
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string[] MatchValues, bool IsEqual)?",
         Title = "Character Class Binding Key",
-        Summary = "Returns null to match all character classes, or specifies the character class values and equality operator used for matching.",
-        DataType = "(string[] MatchValues, bool IsEqual)?")]
+        Summary = "Returns null to match all character classes, or specifies the character class values and equality operator used for matching.")]
     public virtual (string[] MatchValues, bool IsEqual)? CharacterClassBindingKey { get; set; } = null;
 
     [ConfigurationTupleItem(
@@ -27,10 +26,9 @@ public class OutfitManifestGameConfiguration : IGetKeyGameConfiguration // We ca
     [ConfigurationTupleItem(
         "IsEqual",
         Title = "Is Equal")]
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string[] MatchValues, bool IsEqual)?",
         Title = "Race Binding Key",
-        Summary = "Returns null to match all races, or specifies the race values and equality operator used for matching.",
-        DataType = "(string[] MatchValues, bool IsEqual)?")]
+        Summary = "Returns null to match all races, or specifies the race values and equality operator used for matching.")]
     public virtual (string[] MatchValues, bool IsEqual)? RaceBindingKey { get; set; } = null;
 
     [ConfigurationTupleItem(
@@ -39,10 +37,9 @@ public class OutfitManifestGameConfiguration : IGetKeyGameConfiguration // We ca
     [ConfigurationTupleItem(
         "IsEqual",
         Title = "Is Equal")]
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string[] MatchValues, bool IsEqual)?",
         Title = "Realm Binding Key",
-        Summary = "Returns null to match all realms, or specifies the realm values and equality operator used for matching.",
-        DataType = "(string[] MatchValues, bool IsEqual)?")]
+        Summary = "Returns null to match all realms, or specifies the realm values and equality operator used for matching.")]
     public virtual (string[] MatchValues, bool IsEqual)? RealmBindingKey { get; set; } = null;
 
     [ConfigurationTupleItem(
@@ -60,9 +57,8 @@ public class OutfitManifestGameConfiguration : IGetKeyGameConfiguration // We ca
     [ConfigurationTupleItem(
         "WieldOne",
         Title = "Wield One")]
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[]",
         Title = "Item Factory and Enhancements Bindings",
-        Summary = "Specifies the item factories, item enhancements, stack counts, identification state, and wield-one behavior for the outfit manifest.",
-        DataType = "(string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[]")]
+        Summary = "Specifies the item factories, item enhancements, stack counts, identification state, and wield-one behavior for the outfit manifest.")]
     public virtual (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings { get; set; }
 }

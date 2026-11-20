@@ -12,39 +12,33 @@ public class CharacterClassSpellGameConfiguration : CompositeSingletonGameConfig
 {
     public sealed override string?[] CompositeKeys => new string?[] { CharacterClassName, SpellName }; // CONFIRMED
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Spell Name",
-        Summary = "The name of the spell associated with the character class.",
-        DataType = "string")]
+        Summary = "The name of the spell associated with the character class.")]
     public virtual string SpellName { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Character Class Name",
-        Summary = "The name of the character class associated with the spell.",
-        DataType = "string")]
+        Summary = "The name of the character class associated with the spell.")]
     public virtual string CharacterClassName { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Level",
-        Summary = "The character class level at which the spell becomes available.",
-        DataType = "int")]
+        Summary = "The character class level at which the spell becomes available.")]
     public virtual int Level { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Mana Cost",
-        Summary = "The amount of mana required to cast the spell.",
-        DataType = "int")]
+        Summary = "The amount of mana required to cast the spell.")]
     public virtual int ManaCost { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Base Failure",
-        Summary = "The base chance that casting the spell will fail.",
-        DataType = "int")]
+        Summary = "The base chance that casting the spell will fail.")]
     public virtual int BaseFailure { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "First Cast Experience",
-        Summary = "The experience gained the first time the spell is cast.",
-        DataType = "int")]
+        Summary = "The experience gained the first time the spell is cast.")]
     public virtual int FirstCastExperience { get; set; }
 }

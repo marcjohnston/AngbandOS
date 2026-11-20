@@ -4,9 +4,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class PluralGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Plural Form",
-        Summary = "Specifies the pluralized form of the key.",
-        DataType = "string")]
+        Summary = "Specifies the pluralized form of the key.")]
     public virtual string PluralForm { get; set; }
 }

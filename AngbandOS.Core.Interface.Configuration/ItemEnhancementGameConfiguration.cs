@@ -14,26 +14,23 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// </summary>
 public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string AttributeName, string Expression)[]?",
         Title = "Summation Attribute and Expression Bindings",
-        Summary = "The attribute names and expressions used to calculate summation-based item enhancements.",
-        DataType = "(string AttributeName, string Expression)[]?")]
+        Summary = "The attribute names and expressions used to calculate summation-based item enhancements.")]
     [ConfigurationTupleItem("AttributeName", Title = "Attribute Name")]
     [ConfigurationTupleItem("Expression", Title = "Expression")]
     public virtual (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string AttributeName, string BooleanExpression)[]?",
         Title = "Bitwise OR Attribute and Expression Bindings",
-        Summary = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.",
-        DataType = "(string AttributeName, string BooleanExpression)[]?")]
+        Summary = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.")]
     [ConfigurationTupleItem("AttributeName", Title = "Attribute Name")]
     [ConfigurationTupleItem("BooleanExpression", Title = "Boolean Expression")]
     public virtual (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string AttributeName, string[] ScriptNames)[]?",
         Title = "Scripts Attribute and Script Bindings",
-        Summary = "The attribute names and script names used to apply scripts as item enhancements.",
-        DataType = "(string AttributeName, string[] ScriptNames)[]?")]
+        Summary = "The attribute names and script names used to apply scripts as item enhancements.")]
     [ConfigurationTupleItem("AttributeName", Title = "Attribute Name")]
     [ConfigurationTupleItem("ScriptNames", Title = "Script Names")]
     public virtual (string AttributeName, string[] ScriptNames)[]? ScriptsAttributeAndScriptBindings { get; set; } = null;
@@ -42,25 +39,22 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]?",
         Title = "Applicable Item Factory Binding Keys",
-        Summary = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.",
-        DataType = "string[]?")]
+        Summary = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.")]
     public virtual string[]? ApplicableItemFactoryBindingKeys { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Additional Item Enhancement Weighted Random Binding Key",
-        Summary = "The binding key of the weighted random configuration used to select an additional item enhancement.",
-        DataType = "string?")]
+        Summary = "The binding key of the weighted random configuration used to select an additional item enhancement.")]
     public virtual string? AdditionalItemEnhancementWeightedRandomBindingKey { get; set; } = null;
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
     /// </summary>
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Friendly Name",
-        Summary = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.",
-        DataType = "string?")]
+        Summary = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.")]
     public virtual string? FriendlyName { get; set; } = null;
 
     /// <summary>
@@ -68,15 +62,13 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Activation Name",
-        Summary = "The name of the activation applied to the item, or null when the item cannot be activated.",
-        DataType = "string?")]
+        Summary = "The name of the activation applied to the item, or null when the item cannot be activated.")]
     public virtual ActivationsEnum? ActivationEnumValue { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string?",
         Title = "Artifact Bias Weighted Random Binding Key",
-        Summary = "The binding key of the weighted random configuration used to select an artifact bias.",
-        DataType = "string?")]
+        Summary = "The binding key of the weighted random configuration used to select an artifact bias.")]
     public virtual string? ArtifactBiasWeightedRandomBindingKey { get; set; } = null;
 }

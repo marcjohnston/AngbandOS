@@ -10,21 +10,18 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ItemIdentificationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Attribute Filter Binding Key",
-        Summary = "Specifies the binding key for the attribute filter used to identify the item.",
-        DataType = "string")]
+        Summary = "Specifies the binding key for the attribute filter used to identify the item.")]
     public virtual string AttributeFilterBindingKey { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]?",
         Title = "Interpolation Expression Attribute Names",
-        Summary = "Specifies the attribute names whose values are available for interpolation in the effect description.",
-        DataType = "string[]?")]
+        Summary = "Specifies the attribute names whose values are available for interpolation in the effect description.")]
     public virtual string[]? InterpolationExpressionAttributeNames { get; set; } = null;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Effect Description",
-        Summary = "Specifies the description of the effect produced when the item is identified.",
-        DataType = "string")]
+        Summary = "Specifies the description of the effect produced when the item is identified.")]
     public virtual string[] EffectDescription { get; set; }
 }

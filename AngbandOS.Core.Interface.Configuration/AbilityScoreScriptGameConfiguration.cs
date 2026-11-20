@@ -4,27 +4,23 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class AbilityScoreScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Learned Details",
-        Summary = "Details describing what is learned when this ability score script is used.",
-        DataType = "string")]
+        Summary = "Details describing what is learned when this ability score script is used.")]
     public virtual string LearnedDetails { get; set; } = "";
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "Uses Item",
-        Summary = "Determines whether using this ability score script requires an item.",
-        DataType = "bool")]
+        Summary = "Determines whether using this ability score script requires an item.")]
     public virtual bool UsesItem { get; set; } = true;
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("AbilitiesEnum",
         Title = "Ability",
-        Summary = "The binding key that identifies the ability associated with this script.",
-        DataType = "AbilitiesEnum")]
+        Summary = "The binding key that identifies the ability associated with this script.")]
     public virtual AbilitiesEnum AbilityEnumValue { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("bool",
         Title = "True To Increase False To Decrease",
-        Summary = "Determines whether the script increases the ability score when true or decreases it when false.",
-        DataType = "bool")]
+        Summary = "Determines whether the script increases the ability score when true or decreases it when false.")]
     public virtual bool TrueToIncreaseFalseToDecrease { get; set; }
 }

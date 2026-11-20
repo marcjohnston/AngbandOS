@@ -10,21 +10,18 @@ public class ProjectileScriptWeightedRandomGameConfiguration : NonCompositeSingl
     [ConfigurationTupleItem(
         "Weight",
         Title = "Weight")]
-    [ConfigurationProperty(
+    [ConfigurationProperty("(string, int)[]",
         Title = "Name and Weight Bindings",
-        Summary = "Specifies the projectile script names and their associated weights used for weighted random selection.",
-        DataType = "(string, int)[]")]
+        Summary = "Specifies the projectile script names and their associated weights used for weighted random selection.")]
     public virtual (string Name, int Weight)[] NameAndWeightBindings { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Learned Details",
-        Summary = "Specifies the details revealed when the projectile script is learned.",
-        DataType = "string")]
+        Summary = "Specifies the details revealed when the projectile script is learned.")]
     public virtual string LearnedDetails { get; set; } = "";
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("LearnedDetailsWeightedRandomEnum",
         Title = "Learned Details Mode",
-        Summary = "Specifies how the learned details are determined.",
-        DataType = "LearnedDetailsWeightedRandomEnum")]
+        Summary = "Specifies how the learned details are determined.")]
     public virtual LearnedDetailsWeightedRandomEnum LearnedDetailsMode { get; set; } = LearnedDetailsWeightedRandomEnum.Default;
 }

@@ -4,9 +4,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class RangeLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("string",
         Title = "Range Expression Text",
-        Summary = "The expression that defines the range value learned from this knowledge.",
-        DataType = "string")]
+        Summary = "The expression that defines the range value learned from this knowledge.")]
     public virtual string RangeExpressionText { get; set; }
 }

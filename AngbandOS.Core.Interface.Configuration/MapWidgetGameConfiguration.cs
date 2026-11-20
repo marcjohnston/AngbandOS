@@ -4,21 +4,18 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class MapWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "X",
-        Summary = "Specifies the horizontal coordinate where the widget is drawn.",
-        DataType = "int")]
+        Summary = "Specifies the horizontal coordinate where the widget is drawn.")]
     public virtual int X { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("int",
         Title = "Y",
-        Summary = "Specifies the vertical coordinate where the widget is drawn.",
-        DataType = "int")]
+        Summary = "Specifies the vertical coordinate where the widget is drawn.")]
     public virtual int Y { get; set; }
 
-    [ConfigurationProperty(
+    [ConfigurationProperty("string[]?",
         Title = "Change Tracker Names",
-        Summary = "Specifies the property names that participate in change tracking.",
-        DataType = "string[]?")]
+        Summary = "Specifies the property names that participate in change tracking.")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }
