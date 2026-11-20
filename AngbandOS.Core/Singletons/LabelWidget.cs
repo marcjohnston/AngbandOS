@@ -20,7 +20,7 @@ internal sealed class LabelWidget : Widget, IGetKey, IToJson, ISaveGameState
         X = gameConfiguration.X;
         Y = gameConfiguration.Y;
         Width = gameConfiguration.Width;
-        JustificationName = gameConfiguration.JustificationName;
+        JustificationEnumValue = gameConfiguration.JustificationEnumValue;
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
@@ -38,7 +38,7 @@ internal sealed class LabelWidget : Widget, IGetKey, IToJson, ISaveGameState
     public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
+        Justification = Game.SingletonRepository.GetFromEnum<Justification, JustificationsEnum>(JustificationEnumValue);
     }
     public void RestoreGame(RestoreGameState restoreGameState) { }
     public void InitializationComplete() { }
@@ -53,7 +53,7 @@ internal sealed class LabelWidget : Widget, IGetKey, IToJson, ISaveGameState
             X = X,
             Y = Y,
             Width = Width,
-            JustificationName = JustificationName,
+            JustificationEnumValue = JustificationEnumValue,
             ChangeTrackerNames = ChangeTrackerNames,
         };
         return JsonSerializer.Serialize(textWidgetGameConfiguration, Game.GetJsonSerializerOptions());
@@ -94,7 +94,7 @@ internal sealed class LabelWidget : Widget, IGetKey, IToJson, ISaveGameState
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public string JustificationName { get; } = nameof(LeftJustification);
+    public JustificationsEnum JustificationEnumValue { get; }
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.

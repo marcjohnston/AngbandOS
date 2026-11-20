@@ -46,7 +46,7 @@ public static class DateWidgetMetadata
                     Title = "Width",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("JustificationName")
+                new EnumPropertyMetadata("JustificationEnumValue")
                 {
                     Description = "The name of the justification used to position the widget text within its width.",
                     LabelIfNullable = null,

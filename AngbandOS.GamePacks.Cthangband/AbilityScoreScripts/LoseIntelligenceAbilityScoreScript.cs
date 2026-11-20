@@ -2,6 +2,6 @@
 
 public class LoseIntelligenceAbilityScoreScript : AbilityScoreScriptGameConfiguration
 {
-    public override string AbilityBindingKey => nameof(AbilitiesEnum.IntelligenceAbility);
+    public override AbilitiesEnum AbilityEnumValue => AbilitiesEnum.IntelligenceAbility;
     public override bool TrueToIncreaseFalseToDecrease => false;
 }

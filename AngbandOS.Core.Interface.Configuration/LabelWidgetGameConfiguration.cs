@@ -35,10 +35,10 @@ public class LabelWidgetGameConfiguration : NonCompositeSingletonGameConfigurati
     public virtual int? Width { get; set; } = null;
 
     [ConfigurationProperty(
-        Title = "Justification Name",
+        Title = "Justification",
         Summary = "Specifies the name of the justification used to justify the text within the widget width. Defaults to LeftJustification.",
-        DataType = "string")]
-    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
+        DataType = "JustificationsEnum")]
+    public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     [ConfigurationProperty(
         Title = "Change Tracker Names",

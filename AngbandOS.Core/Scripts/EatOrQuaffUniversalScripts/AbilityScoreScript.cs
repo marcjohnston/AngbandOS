@@ -13,7 +13,7 @@ internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey, IToJson
         Key = gameConfiguration.GetKey;
         LearnedDetails = gameConfiguration.LearnedDetails;
         UsesItem = gameConfiguration.UsesItem;
-        AbilityBindingKey = gameConfiguration.AbilityBindingKey;
+        AbilityEnumValue = gameConfiguration.AbilityEnumValue;
         TrueToIncreaseFalseToDecrease = gameConfiguration.TrueToIncreaseFalseToDecrease;
     }
     public virtual string Key { get; }
@@ -23,13 +23,13 @@ internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     public override bool UsesItem { get; }
     public void Bind()
     {
-        Ability = Game.SingletonRepository.Get<Ability>(AbilityBindingKey);
+        Ability = Game.SingletonRepository.GetFromEnum<Ability, AbilitiesEnum>(AbilityEnumValue);
     }
     public void RestoreGame(RestoreGameState restoreGameState) { }
     public void InitializationComplete() { }
 
     protected Ability Ability { get; private set; }
-    protected virtual string AbilityBindingKey { get; }
+    protected virtual AbilitiesEnum AbilityEnumValue { get; }
     protected virtual bool TrueToIncreaseFalseToDecrease { get; }
     public override IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
@@ -50,7 +50,7 @@ internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey, IToJson
             Key = Key,
             LearnedDetails = LearnedDetails,
             UsesItem = UsesItem,
-            AbilityBindingKey = AbilityBindingKey,
+            AbilityEnumValue = AbilityEnumValue,
             TrueToIncreaseFalseToDecrease = TrueToIncreaseFalseToDecrease,
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());

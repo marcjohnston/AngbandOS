@@ -2,6 +2,6 @@
 
 public class GainCharismaAbilityScoreScript : AbilityScoreScriptGameConfiguration
 {
-    public override string AbilityBindingKey => nameof(AbilitiesEnum.CharismaAbility);
+    public override AbilitiesEnum AbilityEnumValue => AbilitiesEnum.CharismaAbility;
     public override bool TrueToIncreaseFalseToDecrease => true;
 }

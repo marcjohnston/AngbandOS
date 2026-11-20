@@ -13,6 +13,6 @@ public class CombinedArmorClassIntWidget : IntWidgetGameConfiguration
     public override int? Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntValueName => nameof(IntFunctionsEnum.CombinedArmorClassIntFunction);
-    public override string JustificationName => nameof(JustificationsEnum.RightJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.RightJustification;
     public override string[]? ChangeTrackerNames => new string[] { nameof(IntFunctionsEnum.CombinedArmorClassIntFunction) };
 }

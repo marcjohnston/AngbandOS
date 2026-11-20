@@ -56,10 +56,10 @@ public class MaxRangedWidgetGameConfiguration : NonCompositeSingletonGameConfigu
     public virtual int? Width { get; set; } = null;
 
     [ConfigurationProperty(
-        Title = "Justification Name",
+        Title = "Justification",
         Summary = "Specifies the name of the justification used to lay out the widget text.",
-        DataType = "string")]
-    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
+        DataType = "JustificationsEnum")]
+    public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     [ConfigurationProperty(
         Title = "Change Tracker Names",

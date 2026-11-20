@@ -47,10 +47,10 @@ public class ConditionalWidgetGameConfiguration : NonCompositeSingletonGameConfi
     public virtual int Width { get; set; }
 
     [ConfigurationPropertyAttribute(
-        Title = "Justification Name",
+        Title = "Justification",
         Summary = "The name of the justification used to position the widget text within its width.",
-        DataType = "string")]
-    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
+        DataType = "JustificationsEnum")]
+    public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     [ConfigurationPropertyAttribute(
         Title = "Change Tracker Names",

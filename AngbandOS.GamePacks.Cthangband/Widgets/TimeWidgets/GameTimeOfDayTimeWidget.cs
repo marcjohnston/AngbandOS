@@ -12,7 +12,7 @@ public class GameTimeOfDayTimeWidget : TimeWidgetGameConfiguration
     public override int Y => 8;
     public override int? Width => 8;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string JustificationName => nameof(JustificationsEnum.RightJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.RightJustification;
     public override string DateAndTimeValueName => nameof(PropertiesEnum.CurrentGameDateTimeProperty);
     public override string[]? ChangeTrackerNames => new string[] { nameof(PropertiesEnum.CurrentGameDateTimeProperty) };
 }

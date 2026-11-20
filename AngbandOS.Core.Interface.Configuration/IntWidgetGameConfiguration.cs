@@ -85,10 +85,10 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// The UI will resolve this name to a justification object or rule during binding.
     /// </remarks>
     [ConfigurationProperty(
-        Title = "Justification Name",
+        Title = "Justification",
         Summary = "The name of the justification strategy used to lay out the text within the widget width.",
-        DataType = "string")]
-    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
+        DataType = "JustificationsEnum")]
+    public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     /// <summary>
     /// Names of properties that participate in change-tracking for this widget.

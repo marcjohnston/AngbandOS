@@ -17,10 +17,10 @@ public class AbilityScoreScriptGameConfiguration : NonCompositeSingletonGameConf
     public virtual bool UsesItem { get; set; } = true;
 
     [ConfigurationPropertyAttribute(
-        Title = "Ability Binding Key",
+        Title = "Ability",
         Summary = "The binding key that identifies the ability associated with this script.",
-        DataType = "string")]
-    public virtual string AbilityBindingKey { get; set; }
+        DataType = "AbilitiesEnum")]
+    public virtual AbilitiesEnum AbilityEnumValue { get; set; }
 
     [ConfigurationPropertyAttribute(
         Title = "True To Increase False To Decrease",

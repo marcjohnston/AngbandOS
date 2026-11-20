@@ -41,16 +41,16 @@ public class TextWidgetGameConfiguration : NonCompositeSingletonGameConfiguratio
     public virtual int Height { get; set; }
 
     [ConfigurationProperty(
-        Title = "Justification Name",
+        Title = "Justification",
         Summary = "Specifies the name of the justification used to lay out the widget text.",
-        DataType = "string")]
-    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
+        DataType = "JustificationsEnum")]
+    public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     [ConfigurationProperty(
         Title = "Alignment Name",
         Summary = "Specifies the name of the alignment used to align the widget text.",
-        DataType = "string")]
-    public virtual string AlignmentName { get; set; }
+        DataType = "AlignmentsEnum")]
+    public virtual AlignmentsEnum AlignmentEnumValue { get; set; }
 
     [ConfigurationProperty(
         Title = "Change Tracker Names",

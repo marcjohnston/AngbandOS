@@ -2,6 +2,6 @@
 
 public class LoseDexterityAbilityScoreScript : AbilityScoreScriptGameConfiguration
 {
-    public override string AbilityBindingKey => nameof(AbilitiesEnum.DexterityAbility);
+    public override AbilitiesEnum AbilityEnumValue => AbilitiesEnum.DexterityAbility;
     public override bool TrueToIncreaseFalseToDecrease => false;
 }

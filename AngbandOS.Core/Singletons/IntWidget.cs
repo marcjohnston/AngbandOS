@@ -16,7 +16,7 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson, ISaveGameState
         X = gameConfiguration.X;
         Y = gameConfiguration.Y;
         Width = gameConfiguration.Width;
-        JustificationName = gameConfiguration.JustificationName;
+        JustificationEnumValue = gameConfiguration.JustificationEnumValue;
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
     public string Key { get; }
@@ -57,7 +57,7 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson, ISaveGameState
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public string JustificationName { get; } = nameof(LeftJustification);
+    public JustificationsEnum JustificationEnumValue { get; }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
@@ -67,7 +67,7 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson, ISaveGameState
     public void Bind() 
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
+        Justification = Game.SingletonRepository.GetFromEnum<Justification, JustificationsEnum>(JustificationEnumValue);
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
     }
     public void RestoreGame(RestoreGameState restoreGameState) { }
@@ -83,7 +83,7 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson, ISaveGameState
             X = X,
             Y = Y,
             Width = Width,
-            JustificationName = JustificationName,
+            JustificationEnumValue = JustificationEnumValue,
             ChangeTrackerNames = ChangeTrackerNames,
         };
         return JsonSerializer.Serialize(intWidgetGameConfiguration, Game.GetJsonSerializerOptions());

@@ -14,7 +14,7 @@ public class HealthPointsMaxRangedWidget : MaxRangedWidgetGameConfiguration
     public override ColorEnum DefaultColor => ColorEnum.BrightRed;
     public override string IntValueName => nameof(PropertiesEnum.HealthPointsIntProperty);
     public override string MaxIntValueName => nameof(PropertiesEnum.MaxHealthPointsIntProperty);
-    public override string JustificationName => nameof(JustificationsEnum.RightJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.RightJustification;
 
     public override (int, string?, ColorEnum)[] Ranges => new (int, string?, ColorEnum)[]
     {

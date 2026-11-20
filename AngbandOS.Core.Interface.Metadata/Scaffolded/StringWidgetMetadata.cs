@@ -46,7 +46,7 @@ public static class StringWidgetMetadata
                     Title = "Width",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("JustificationName")
+                new EnumPropertyMetadata("JustificationEnumValue")
                 {
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     LabelIfNullable = null,

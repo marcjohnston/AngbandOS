@@ -2,6 +2,6 @@
 
 public class GainWisdomAbilityScoreScript : AbilityScoreScriptGameConfiguration
 {
-    public override string AbilityBindingKey => nameof(AbilitiesEnum.WisdomAbility);
+    public override AbilitiesEnum AbilityEnumValue => AbilitiesEnum.WisdomAbility;
     public override bool TrueToIncreaseFalseToDecrease => true;
 }

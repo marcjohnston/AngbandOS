@@ -23,7 +23,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, ISaveGameState
         X = gameConfiguration.X;
         Y = gameConfiguration.Y;
         Width = gameConfiguration.Width;
-        JustificationName = gameConfiguration.JustificationName;
+        JustificationEnumValue = gameConfiguration.JustificationEnumValue;
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
         _text = DefaultText;
         _color = DefaultColor;
@@ -44,7 +44,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, ISaveGameState
     public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
+        Justification = Game.SingletonRepository.GetFromEnum<Justification, JustificationsEnum>(JustificationEnumValue);
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
 
         // Validate the sort order for the Ranges; from smallest startValue to largest.
@@ -90,7 +90,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, ISaveGameState
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public string JustificationName { get; } = nameof(LeftJustification);
+    public JustificationsEnum JustificationEnumValue { get; }
 
     /// <summary>
     /// Returns an array of tuples that specify the text and color to render for a range of values.  The <paramref name="startValue"/> element specifies the smallest (or start) value of the range.  Ranges must be sorted in
@@ -164,7 +164,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, ISaveGameState
             X = X,
             Y = Y,
             Width = Width,
-            JustificationName = JustificationName,
+            JustificationEnumValue = JustificationEnumValue,
             ChangeTrackerNames = ChangeTrackerNames,
         };
         return JsonSerializer.Serialize(rangedWidgetGameConfiguration, Game.GetJsonSerializerOptions());

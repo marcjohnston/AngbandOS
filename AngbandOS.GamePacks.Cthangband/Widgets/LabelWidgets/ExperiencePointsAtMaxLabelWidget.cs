@@ -15,6 +15,6 @@ public class ExperiencePointsAtMaxLabelWidget : LabelWidgetGameConfiguration
     public override int Y => 6;
     public override int? Width => 8;
     public override string Text => "   *****";
-    public override string JustificationName => nameof(JustificationsEnum.RightJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.RightJustification;
     public override ColorEnum Color => ColorEnum.BrightGreen;
 }

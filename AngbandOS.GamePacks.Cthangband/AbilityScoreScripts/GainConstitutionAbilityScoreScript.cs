@@ -2,6 +2,6 @@
 
 public class GainConstitutionAbilityScoreScript : AbilityScoreScriptGameConfiguration
 {
-    public override string AbilityBindingKey => nameof(AbilitiesEnum.ConstitutionAbility);
+    public override AbilitiesEnum AbilityEnumValue => AbilitiesEnum.ConstitutionAbility;
     public override bool TrueToIncreaseFalseToDecrease => true;
 }

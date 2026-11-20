@@ -17,8 +17,8 @@ internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
         Y = gameConfiguration.Y;
         Width = gameConfiguration.Width;
         Height = gameConfiguration.Height;
-        JustificationName = gameConfiguration.JustificationName;
-        AlignmentName = gameConfiguration.AlignmentName;
+        JustificationEnumValue = gameConfiguration.JustificationEnumValue;
+        AlignmentEnumValue = gameConfiguration.AlignmentEnumValue;
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
@@ -36,8 +36,8 @@ internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
     public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
-        Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
+        Justification = Game.SingletonRepository.GetFromEnum<Justification, JustificationsEnum>(JustificationEnumValue);
+        Alignment = Game.SingletonRepository.GetFromEnum<Alignment, AlignmentsEnum>(AlignmentEnumValue);
         NullableStringsValue = Game.SingletonRepository.Get<ITextValue>(NullableStringsValueName);
     }
     public void RestoreGame(RestoreGameState restoreGameState) { }
@@ -75,7 +75,7 @@ internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
     private Justification Justification { get; set; }
 
     /// <summary>
-    /// Returns the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is bound using the <see cref="AlignmentName"/>
+    /// Returns the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is bound using the <see cref="AlignmentEnumValue"/>
     /// property during the bind phase.
     /// </summary>
     private Alignment Alignment { get; set; }
@@ -84,13 +84,13 @@ internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
     /// Returns the name of the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is used to bind the <see cref="Alignment"/>
     /// property during the bind phase.
     /// </summary>
-    public string AlignmentName { get; }
+    public AlignmentsEnum AlignmentEnumValue { get; }
 
     /// <summary>
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public string JustificationName { get; } = nameof(LeftJustification);
+    public JustificationsEnum JustificationEnumValue { get; }
 
     ///// <summary>
     ///// Returns the text to be rendered for the widget.
@@ -143,8 +143,8 @@ internal sealed class TextWidget : Widget, IGetKey, IToJson, ISaveGameState
             Color = Color,
             X = X,
             Y = Y,
-            JustificationName = JustificationName,
-            AlignmentName = AlignmentName,
+            JustificationEnumValue = JustificationEnumValue,
+            AlignmentEnumValue = AlignmentEnumValue,
             ChangeTrackerNames = ChangeTrackerNames,
         };
         return JsonSerializer.Serialize(nullableStringsTextAreaWidgetGameConfiguration, Game.GetJsonSerializerOptions());

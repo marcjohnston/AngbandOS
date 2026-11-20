@@ -20,12 +20,12 @@ public class TrackedMonsterRaceNameTextWidget : TextWidgetGameConfiguration
     /// <summary>
     /// Returns a bottom alignment to vertically align the monster name to the bottom.
     /// </summary>
-    public override string AlignmentName => nameof(AlignmentsEnum.BottomAlignment);
+    public override AlignmentsEnum AlignmentEnumValue => AlignmentsEnum.BottomAlignment;
 
     /// <summary>
     /// Returns a center justication to horizontally justify the monster name in the center.
     /// </summary>
-    public override string JustificationName => nameof(JustificationsEnum.CenterJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.CenterJustification;
 
     /// <summary>
     /// Returns the <see cref="TrackedMonsterRaceNameNullableStringsFunction"/> function to render a multiline version of the monster race name.

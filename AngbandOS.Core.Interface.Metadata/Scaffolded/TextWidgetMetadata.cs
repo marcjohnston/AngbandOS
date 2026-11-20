@@ -53,14 +53,14 @@ public static class TextWidgetMetadata
                     Title = "Height",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("JustificationName")
+                new EnumPropertyMetadata("JustificationEnumValue")
                 {
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     LabelIfNullable = null,
                     Title = "Justification Name",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("AlignmentName")
+                new EnumPropertyMetadata("AlignmentEnumValue")
                 {
                     Description = "Specifies the name of the alignment used to align the widget text.",
                     LabelIfNullable = null,

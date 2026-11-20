@@ -16,5 +16,5 @@ public class ExperienceLevelLostIntWidget : IntWidgetGameConfiguration
     public override int? Width => 6;
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string IntValueName => nameof(PropertiesEnum.ExperienceLevelIntProperty);
-    public override string JustificationName => nameof(JustificationsEnum.RightJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.RightJustification;
 }

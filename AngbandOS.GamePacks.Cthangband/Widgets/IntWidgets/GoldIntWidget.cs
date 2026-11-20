@@ -13,6 +13,6 @@ public class GoldIntWidget : IntWidgetGameConfiguration
     public override int? Width => 9;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntValueName => nameof(PropertiesEnum.GoldIntProperty);
-    public override string JustificationName => nameof(JustificationsEnum.RightJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.RightJustification;
     public override string[]? ChangeTrackerNames => new string[] { nameof(PropertiesEnum.GoldIntProperty) };
 }

@@ -46,7 +46,7 @@ public static class LabelWidgetMetadata
                     Title = "Width",
                     CategoryTitle = "",
                 },
-                new StringPropertyMetadata("JustificationName")
+                new EnumPropertyMetadata("JustificationEnumValue")
                 {
                     Description = "Specifies the name of the justification used to justify the text within the widget width. Defaults to LeftJustification.",
                     LabelIfNullable = null,

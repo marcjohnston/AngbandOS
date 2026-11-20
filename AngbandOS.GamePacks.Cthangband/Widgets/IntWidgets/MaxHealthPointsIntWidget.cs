@@ -13,6 +13,6 @@ public class MaxHealthPointsIntWidget : IntWidgetGameConfiguration
     public override int? Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntValueName => nameof(PropertiesEnum.MaxHealthPointsIntProperty);
-    public override string JustificationName => nameof(JustificationsEnum.RightJustification);
+    public override JustificationsEnum JustificationEnumValue => JustificationsEnum.RightJustification;
     public override string[]? ChangeTrackerNames => new string[] { nameof(PropertiesEnum.MaxHealthPointsIntProperty) };
 }
