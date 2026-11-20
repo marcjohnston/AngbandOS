@@ -12,37 +12,37 @@ public class CharacterClassSpellGameConfiguration : CompositeSingletonGameConfig
 {
     public sealed override string?[] CompositeKeys => new string?[] { CharacterClassName, SpellName }; // CONFIRMED
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Spell Name",
         Summary = "The name of the spell associated with the character class.",
         DataType = "string")]
     public virtual string SpellName { get; set; }
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Character Class Name",
         Summary = "The name of the character class associated with the spell.",
         DataType = "string")]
     public virtual string CharacterClassName { get; set; }
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Level",
         Summary = "The character class level at which the spell becomes available.",
         DataType = "int")]
     public virtual int Level { get; set; }
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Mana Cost",
         Summary = "The amount of mana required to cast the spell.",
         DataType = "int")]
     public virtual int ManaCost { get; set; }
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Base Failure",
         Summary = "The base chance that casting the spell will fail.",
         DataType = "int")]
     public virtual int BaseFailure { get; set; }
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "First Cast Experience",
         Summary = "The experience gained the first time the spell is cast.",
         DataType = "int")]

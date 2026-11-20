@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class DurationLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Duration Expression Text",
         Summary = "The expression that defines the duration value learned from this knowledge.",
         DataType = "string")]

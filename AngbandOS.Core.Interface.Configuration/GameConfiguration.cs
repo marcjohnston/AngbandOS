@@ -974,7 +974,7 @@ public class GameConfiguration
         EntityNoun = "Martial Arts Attack")]
     public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Ability Score Scripts",
         Summary = "Collection of ability-score script configurations.",
         DataType = "AbilityScoreScriptGameConfiguration[]?")]
@@ -1056,7 +1056,7 @@ public class GameConfiguration
         EntityNoun = "Character Class And Race Innate Total")]
     public virtual InnateTotalsGameConfiguration[]? CharacterClassAndRaceInnateTotals { get; set; } = null;
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Activations",
         Summary = "Collection of activation configurations.",
         DataType = "ActivationGameConfiguration[]?")]

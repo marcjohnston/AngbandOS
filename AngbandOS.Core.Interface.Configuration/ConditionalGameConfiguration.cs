@@ -10,17 +10,17 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ConditionalGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Enabled Names",
         Summary = "The conditional names and required values used to determine whether configuration conditions are enabled.",
         DataType = "(string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[]")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "conditionalName",
         Title = "Conditional Name")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "valueConditionalMustBe",
         Title = "Value Conditional Must Be")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "productOfSumsTerm",
         Title = "Product Of Sums Term")]
     public virtual (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; set; }

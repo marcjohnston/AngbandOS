@@ -7,13 +7,13 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// </summary>
 public class ArtifactBiasWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Artifact Bias",
         Summary = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.",
         DataType = "(string?, int)[]")]
-    [ConfigurationTupleItemAttribute("ArtifactBiasBindingKey",
+    [ConfigurationTupleItem("ArtifactBiasBindingKey",
         Title = "Artifact Bias Binding Key")]
-    [ConfigurationTupleItemAttribute("Weight",
+    [ConfigurationTupleItem("Weight",
         Title = "Weight")]
     public virtual (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples { get; set; }
 }

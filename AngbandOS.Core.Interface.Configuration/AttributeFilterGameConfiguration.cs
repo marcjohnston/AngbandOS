@@ -10,52 +10,52 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Bitwise Or Attribute Filter Bindings",
         Summary = "The attribute bindings used to filter for attributes where any specified bitwise value matches.",
         DataType = "(string AttributeKey, bool DesiredValue)[]?")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "DesiredValue",
         Title = "Desired Value")]
     public virtual (string AttributeKey, bool DesiredValue)[]? BitwiseOrAttributeFilterBindings { get; set; } = null;
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Boolean Attribute Filter Bindings",
         Summary = "The attribute bindings used to filter boolean attributes by their desired values.",
         DataType = "(string AttributeKey, bool?[] DesiredValue)[]?")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "DesiredValue",
         Title = "Desired Value")]
     public virtual (string AttributeKey, bool?[] DesiredValue)[]? BoolAttributeFilterBindings { get; set; } = null;
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Summation Attribute Filter Bindings",
         Summary = "The attribute bindings used to filter summed numeric attributes within a specified range.",
         DataType = "(string AttributeKey, int? StartingValue, int? EndingValue)[]?")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "StartingValue",
         Title = "Starting Value")]
-    [ConfigurationTupleItemAttribute(
+    [ConfigurationTupleItem(
         "EndingValue",
         Title = "Ending Value")]
     public virtual (string AttributeKey, int? StartingValue, int? EndingValue)[]? SummationAttributeFilterBindings { get; set; } = null;
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Activation Attribute Non-Null",
         Summary = "Determines whether the activation attribute must be non-null.",
         DataType = "bool?")]
     public virtual bool? ActivationAttributeNonNull { get; set; } = null;
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Artifact Bias Attribute Non-Null",
         Summary = "Determines whether the artifact bias attribute must be non-null.",
         DataType = "bool?")]

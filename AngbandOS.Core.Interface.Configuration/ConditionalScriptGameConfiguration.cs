@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 public class ConditionalScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "Conditional Key",
         Summary = "The key identifying the conditional evaluated by the script.",
         DataType = "string")]
     public virtual string ConditionalKey { get; set; }
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "True Script Binding Keys",
         Summary = "The binding keys of the scripts executed when the conditional evaluates to true.",
         DataType = "string[]?")]
     public virtual string[]? TrueScriptBindingKeys { get; set; } = null;
 
-    [ConfigurationPropertyAttribute(
+    [ConfigurationProperty(
         Title = "False Script Binding Keys",
         Summary = "The binding keys of the scripts executed when the conditional evaluates to false.",
         DataType = "string[]?")]
