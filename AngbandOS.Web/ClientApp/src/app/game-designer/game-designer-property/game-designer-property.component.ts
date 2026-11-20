@@ -7,6 +7,9 @@ import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
 
+/**
+ * Represents a component that renders a single PropertyAndMetadata.
+ */
 @Component({
   selector: 'app-game-designer-property',
   templateUrl: './game-designer-property.component.html',

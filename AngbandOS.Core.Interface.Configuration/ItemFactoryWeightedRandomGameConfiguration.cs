@@ -11,5 +11,5 @@ public class ItemFactoryWeightedRandomGameConfiguration : NonCompositeSingletonG
         DataType = "(string Name, int Weight)[]")]
     [ConfigurationTupleItem("Name", Title = "Name")]
     [ConfigurationTupleItem("Weight", Title = "Weight")]
-    public virtual (string, int)[] NameAndWeightBindings { get; set; }
+    public virtual (string Name, int Weight)[] NameAndWeightBindings { get; set; }
 }

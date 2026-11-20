@@ -5,16 +5,16 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ProjectileMonsterSpellGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationTupleItem(
-        "Item1",
-        Title = "Item 1")]
+        "CollapsableActionVerb",
+        Title = "CollapsableActionVerb")]
     [ConfigurationTupleItem(
-        "Item2",
-        Title = "Item 2")]
+        "UniqueDescription",
+        Title = "UniqueDescription")]
     [ConfigurationProperty(
         Title = "Knowledge Action",
         Summary = "Specifies the knowledge action associated with the projectile monster spell.",
-        DataType = "(string, string)")]
-    public virtual (string, string) KnowledgeAction { get; set; }
+        DataType = "(string CollapsableActionVerb, string UniqueDescription)")]
+    public virtual (string CollapsableActionVerb, string UniqueDescription) KnowledgeAction { get; set; }
 
     [ConfigurationProperty(
         Title = "Is Innate",

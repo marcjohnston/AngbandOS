@@ -8,8 +8,8 @@ public class TuplePropertyMetadata : PropertyMetadata
     public TuplePropertyMetadata(string propertyName) : base("tuple", propertyName) { }
     public PropertyMetadata[]? Types
     {
-        get => PropertyMetadatas;
-        set => PropertyMetadatas = value;
+        get => AssociatedProperties;
+        set => AssociatedProperties = value;
     }
 
     public new string? ForeignCollectionName

@@ -16,10 +16,10 @@ public class CollectionPropertyMetadata : PropertyMetadata
     /// <summary>
     /// Represents the metadata for the properties of the entities in the collection.
     /// </summary>
-    public new PropertyMetadata[]? PropertyMetadatas
+    public new PropertyMetadata[]? AssociatedProperties
     {
-        get => base.PropertyMetadatas;
-        set => base.PropertyMetadatas = value;
+        get => base.AssociatedProperties;
+        set => base.AssociatedProperties = value;
     }
 
     /// <summary>

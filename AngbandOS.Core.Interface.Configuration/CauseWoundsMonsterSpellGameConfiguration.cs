@@ -7,7 +7,7 @@ public class CauseWoundsMonsterSpellGameConfiguration : NonCompositeSingletonGam
     [ConfigurationProperty(
         Title = "Knowledge Action",
         Summary = "The action information displayed when the spell is described in the player's knowledge.",
-        DataType = "(string, string)")]
+        DataType = "(string CollapsableActionVerb, string UniqueDescription)")]
     [ConfigurationTupleItem(
         "CollapsableActionVerb",
         Title = "Collapsable Action Verb")]

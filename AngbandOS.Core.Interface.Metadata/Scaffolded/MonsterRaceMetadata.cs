@@ -22,9 +22,9 @@ public static class MonsterRaceMetadata
                 {
                     ForeignCollectionName = "MonsterSpells",
                     Inline = false,
-                    Description = "Specifies the monster spell binding keys available to the monster race.",
+                    Description = "Specifies the spells that are available to monsters of this race.",
                     LabelIfNullable = "Default",
-                    Title = "Spell Names",
+                    Title = "Spells",
                     CategoryTitle = "",
                 },
                 new StringPropertyMetadata("MultilineName")

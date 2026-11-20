@@ -10,7 +10,7 @@ export class PropertyMetadata {
   public categoryTitle: string;
   public description: string | null;
   public defaultValue: string[] | null;
-  public propertyMetadatas: PropertyMetadata[] | null;
+  public associatedProperties: PropertyMetadata[] | null;
   public entityKeyPropertyName: string | null;
   public entityNamePropertyName: string | null;
   public entityNounTitle: string | null;
@@ -47,7 +47,7 @@ export class PropertyMetadata {
     this.labelIfNullable = labelIfNullable;
     this.description = description;
     this.defaultValue = defaultValue;
-    this.propertyMetadatas = propertyMetadatas;
+    this.associatedProperties = propertyMetadatas;
     this.entityKeyPropertyName = entityKeyPropertyName;
     this.entityNamePropertyName = entityNamePropertyName;
     this.entityNounTitle = entityNounTitle;

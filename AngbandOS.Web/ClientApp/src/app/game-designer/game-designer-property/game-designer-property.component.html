@@ -29,15 +29,15 @@
         </tfoot>
       </table>
     </ng-container>
-    <!-- Single collection entity -->
+    <!-- Render a the properties of a single entity that belongs to a collection -->
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{propertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(propertyMetadataAndConfiguration.configuration)}}</span><br />
-      <div class="property-container-div" *ngFor="let childPropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
+      <div class="property-container-div" *ngFor="let childPropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
         <app-game-designer-property [propertyMetadataAndConfiguration]="createChild(childPropertyMetadata)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-property> <!-- Recursion -->
       </div>
     </ng-template>
   </div>
-  <!-- An array of metadatas and configurations -->
+  <!-- Render a single Game Setting.  The parent component is rendering this in a loop for multiple game settings -->
   <ng-template #nonCollectionProperty>
     <span class="collection-property-metadata-title">{{propertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
     <ng-container *ngIf="propertyMetadataAndConfiguration.propertyMetadata.description !== null && propertyMetadataAndConfiguration.propertyMetadata.description !== ''">

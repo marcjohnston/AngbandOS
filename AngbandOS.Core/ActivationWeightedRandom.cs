@@ -16,7 +16,7 @@ internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, I
     public string GetKey => Key;
 
     public GameStateBag? SaveGame(SaveGameState saveGameState) => null;
-    protected abstract (string, int)[] ActivationNamesAndWeights { get; }
+    protected abstract (string Name, int Weight)[] ActivationNamesAndWeights { get; }
 
     public void Bind()
     {

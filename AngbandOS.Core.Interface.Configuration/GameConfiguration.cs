@@ -1132,7 +1132,7 @@ public class GameConfiguration
         Title = "Required Experience Per Level",
         Summary = "Array of required experience values for each level.",
         DataType = "int[]")]
-    public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
+    public virtual int[] RequiredExperiencePerLevel { get; set; } = new int[] // TODO: Need defaults removed.
     {
         10, 25, 45, 70, 100, 140, 200, 280, 380, 500, 650, 850, 1100, 1400, 1800, 2300, 2900, 3600, 4400, 5400,
         6800, 8400, 10200, 12500, 17500, 25000, 35000, 50000, 75000, 100000, 150000, 200000, 275000, 350000, 450000,
@@ -1144,7 +1144,7 @@ public class GameConfiguration
         Title = "Extract Energy",
         Summary = "Energy extracted per speed class.",
         DataType = "int[]")]
-    public virtual int[] ExtractEnergy => new int[] // TODO: Need defaults removed.
+    public virtual int[] ExtractEnergy { get; set; } = new int[] // TODO: Need defaults removed.
     {
 	/* Slow 0-9 */       1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
 	/* Slow 10-19 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
@@ -1172,7 +1172,7 @@ public class GameConfiguration
         Title = "Blows Table",
         Summary = "Table describing number of blows by attack/speed group.",
         DataType = "int[][]")]
-    public virtual int[][] BlowsTable => new int[][]
+    public virtual int[][] BlowsTable { get; set; } = new int[][]
     {
         new[] {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3},
         new[] {1, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4},

@@ -116,6 +116,12 @@ export class GameDesignerComponent implements OnInit {
       });
       return undefined;
     }
+    if (jsonPropertyMetadata.isArray === undefined) {
+      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid isArray value after json deserialization.`, "", {
+        duration: 5000
+      });
+      return undefined;
+    }
     if (jsonPropertyMetadata.propertyMetadatas === undefined) {
       this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid propertyMetadatas value after json deserialization.`, "", {
         duration: 5000
@@ -210,6 +216,7 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.labelIfNullable,
       jsonPropertyMetadata.description,
       jsonPropertyMetadata.defaultValue,
+      jsonPropertyMetadata.isArray,
       collectionPropertyMetadataList,
       jsonPropertyMetadata.entityKeyPropertyName,
       jsonPropertyMetadata.entityNamePropertyName,

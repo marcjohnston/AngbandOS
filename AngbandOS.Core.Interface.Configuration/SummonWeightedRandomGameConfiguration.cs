@@ -5,16 +5,16 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class SummonWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationTupleItem(
-        "Item1",
-        Title = "Item 1")]
+        "Name",
+        Title = "Name")]
     [ConfigurationTupleItem(
-        "Item2",
-        Title = "Item 2")]
+        "Weight",
+        Title = "Weight")]
     [ConfigurationProperty(
         Title = "Name and Weight Bindings",
         Summary = "Specifies the summon names and their associated weights used for weighted random selection.",
         DataType = "(string, int)[]")]
-    public virtual (string, int)[] NameAndWeightBindings { get; set; }
+    public virtual (string Name, int Weight)[] NameAndWeightBindings { get; set; }
 
     [ConfigurationProperty(
         Title = "Learned Details",
