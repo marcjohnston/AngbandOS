@@ -5,9 +5,7 @@ namespace AngbandOS.Core.Interface.Metadata;
 /// </summary>
 public sealed class EnumMetadata
 {
-    public EnumMetadata(
-        string name,
-        EnumOptionMetadata[] options)
+    public EnumMetadata(string name, EnumOptionMetadata[] options)
     {
         Name = name;
         Options = options;
