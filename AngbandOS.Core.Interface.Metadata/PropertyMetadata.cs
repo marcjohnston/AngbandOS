@@ -66,6 +66,18 @@ public abstract class PropertyMetadata
     /// Returns the label to display when a property is nullable and the value is null, or null when the property is not nullable.
     /// </summary>
     /// <remarks>
+    /// Establishes whether the property is nullable and, if so, provides the label
+    /// to display when the property has a null value.
+    ///
+    /// If the property is not nullable, this value must be null. Providing a value
+    /// for a non-nullable property is an error.
+    ///
+    /// If the property is nullable, the provided value is retained. If no value is
+    /// provided, an empty string is used.
+    ///
+    /// A null value therefore indicates that the property is not nullable, while
+    /// any non-null value indicates that the property is nullable.
+    /// 
     /// This property applies to all types.
     /// </remarks>
     public string? LabelIfNullable { get; set; } = null;
