@@ -14,7 +14,7 @@ public class FlailTotilaFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(ShowModsAttribute), "true"),
         (nameof(SlayEvilAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.ConfuseMonster20Every15DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.ConfuseMonster20Every15DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

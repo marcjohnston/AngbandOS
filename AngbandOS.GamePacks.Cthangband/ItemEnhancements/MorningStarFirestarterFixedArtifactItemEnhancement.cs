@@ -21,6 +21,6 @@ public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(AttacksAttribute), "2"),
         (nameof(ValueAttribute), "35000"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.LargeBallFire72Every100DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.LargeBallFire72Every100DirectionalActivation;
     public override string FriendlyName => "'Firestarter'";
 }

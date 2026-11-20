@@ -21,7 +21,7 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.LargeFrostBall200Every325p1d325DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.LargeFrostBall200Every325p1d325DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

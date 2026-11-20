@@ -21,7 +21,7 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ShowModsAttribute), "true"),
         (nameof(TeleportAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Terror40xEvery3xp10Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Terror40xEvery3xp10Activation;
     public override string FriendlyName => "'Terror Mask'";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

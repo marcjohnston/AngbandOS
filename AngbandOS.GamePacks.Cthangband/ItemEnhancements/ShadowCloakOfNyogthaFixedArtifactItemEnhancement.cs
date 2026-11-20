@@ -24,6 +24,6 @@ public class ShadowCloakOfNyogthaFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(BonusIntelligenceAttribute), "2"),
         (nameof(BonusCharismaAttribute), "2"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.RestoreLifeLevelsEvery450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.RestoreLifeLevelsEvery450DirectionalActivation;
     public override string FriendlyName => "of Nyogtha";
 }

@@ -22,6 +22,6 @@ public class DaggerOfThothFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(MeleeToHitAttribute), "4"),
         (nameof(ToDamageAttribute), "3"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.StinkingCloud12Every1d4p4DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.StinkingCloud12Every1d4p4DirectionalActivation;
     public override string FriendlyName => "of Thoth";
 }

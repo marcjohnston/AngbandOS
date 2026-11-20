@@ -12,7 +12,7 @@ public class DaggerCharityFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(ResElecAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.LightningBolt4d8Every6p1d6DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.LightningBolt4d8Every6p1d6DirectionalActivation;
     public override string FriendlyName => "'Charity'";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

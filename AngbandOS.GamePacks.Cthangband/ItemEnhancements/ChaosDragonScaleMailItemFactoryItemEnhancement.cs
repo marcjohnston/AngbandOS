@@ -13,7 +13,7 @@ public class ChaosDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(ResConfAttribute), "true"),
         (nameof(ResDisenAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfChaos200r2Every1d300p300DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfChaos200r2Every1d300p300DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

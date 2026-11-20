@@ -11,7 +11,7 @@ public class GoldDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGame
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResSoundAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfSound130r2Every1d450p450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfSound130r2Every1d450p450DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

@@ -19,7 +19,7 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
         (nameof(ResPoisAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Heal777CuringAndHeroism25pd25Every300Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Heal777CuringAndHeroism25pd25Every300Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

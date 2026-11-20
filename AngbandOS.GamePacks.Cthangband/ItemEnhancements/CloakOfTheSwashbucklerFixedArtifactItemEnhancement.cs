@@ -22,6 +22,6 @@ public class CloakOfTheSwashbucklerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ValueAttribute), "35000"),
         (nameof(AttacksAttribute), "18"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.RechargeActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.RechargeActivation;
     public override string FriendlyName => "of the Swashbuckler";
 }

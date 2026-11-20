@@ -19,7 +19,7 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(SlayTrollAttribute), "true"),
         (nameof(SustDexAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfFire72r2Every400DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfFire72r2Every400DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

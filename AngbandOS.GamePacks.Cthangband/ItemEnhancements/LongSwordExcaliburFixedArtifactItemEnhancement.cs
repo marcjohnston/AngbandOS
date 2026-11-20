@@ -21,7 +21,7 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(SlayUndeadAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfCold100r2Every300DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfCold100r2Every300DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

@@ -72,7 +72,7 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
         Title = "Activation Name",
         Summary = "The name of the activation applied to the item, or null when the item cannot be activated.",
         DataType = "string?")]
-    public virtual string? ActivationName { get; set; }
+    public virtual ActivationsEnum? ActivationEnumValue { get; set; }
 
     [ConfigurationProperty(
         Title = "Artifact Bias Weighted Random Binding Key",

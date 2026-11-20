@@ -29,6 +29,6 @@ public class ScytheOfGharneFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(BonusCharismaAttribute), "3"),
         (nameof(GlowRadiusAttribute), "3"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.WordOfRecallEvery200DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.WordOfRecallEvery200DirectionalActivation;
     public override string FriendlyName => "of G'harne";
 }

@@ -21,7 +21,7 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(SlayUndeadAttribute), "true"),
         (nameof(SustChaAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.SummonFriendlyReaverEvery500p1d500Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.SummonFriendlyReaverEvery500p1d500Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

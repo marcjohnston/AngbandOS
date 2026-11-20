@@ -24,7 +24,7 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Heal700Every25Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Heal700Every25Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(BonusStrengthAttribute), "3"),

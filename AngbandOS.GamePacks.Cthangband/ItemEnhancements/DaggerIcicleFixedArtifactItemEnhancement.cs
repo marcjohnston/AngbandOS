@@ -28,6 +28,6 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(MeleeToHitAttribute), "6"),
         (nameof(ToDamageAttribute), "9"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfCold48r2Every5p1d5DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfCold48r2Every5p1d5DirectionalActivation;
     public override string FriendlyName => "'Icicle'";
 }

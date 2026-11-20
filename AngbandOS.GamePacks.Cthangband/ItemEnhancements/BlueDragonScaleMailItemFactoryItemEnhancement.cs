@@ -11,7 +11,7 @@ public class BlueDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGame
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResElecAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfLightning100r2Every1d450p450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfLightning100r2Every1d450p450DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

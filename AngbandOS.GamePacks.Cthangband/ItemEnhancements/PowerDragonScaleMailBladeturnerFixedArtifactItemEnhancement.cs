@@ -28,7 +28,7 @@ public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemE
         (nameof(ResSoundAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.PowerDragonEvery400DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.PowerDragonEvery400DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

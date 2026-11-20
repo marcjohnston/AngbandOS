@@ -10,7 +10,7 @@ public class RingOfBastFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Speed75p1d75Every150p1d150Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Speed75p1d75Every150p1d150Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

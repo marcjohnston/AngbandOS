@@ -17,7 +17,7 @@ public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancem
         (nameof(SustDexAttribute), "true"),
         (nameof(SustStrAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.FireBall120r3Every225p1d225DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.FireBall120r3Every225p1d225DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(BonusStrengthAttribute), "1"),

@@ -23,6 +23,6 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(BonusWisdomAttribute), "3"),
         (nameof(TreasureRatingAttribute), "10"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.DrainLife120Every400DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.DrainLife120Every400DirectionalActivation;
     public override string FriendlyName => "of Theoden";
 }

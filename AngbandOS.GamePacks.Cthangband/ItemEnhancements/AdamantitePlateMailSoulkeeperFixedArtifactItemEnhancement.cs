@@ -18,7 +18,7 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
         (nameof(ResNexusAttribute), "true"),
         (nameof(SustConAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Heal1000Every888Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Heal1000Every888Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

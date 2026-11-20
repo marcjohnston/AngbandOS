@@ -12,7 +12,7 @@ public class IronHelmSkullkeeperFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(ResBlindAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.DetectionEvery55p1d55Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.DetectionEvery55p1d55Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

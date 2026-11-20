@@ -21,7 +21,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISav
         SummationAttributeAndExpressionBindings = gameConfiguration.SummationAttributeAndExpressionBindings;
         BitwiseOrAttributeAndExpressionBindings = gameConfiguration.BitwiseOrAttributeAndExpressionBindings;
         ScriptsAttributeAndScriptBindings = gameConfiguration.ScriptsAttributeAndScriptBindings;
-        ActivationName = gameConfiguration.ActivationName;
+        ActivationEnumValue = gameConfiguration.ActivationEnumValue;
         AdditionalItemEnhancementWeightedRandomBindingKey = gameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
         ApplicableItemFactoryBindingKeys = gameConfiguration.ApplicableItemFactoryBindingKeys;
         ArtifactBiasWeightedRandomBindingKey = gameConfiguration.ArtifactBiasWeightedRandomBindingKey;
@@ -120,7 +120,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISav
         }
         OrAttributeAndExpressions = orAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
         ScriptsAttributeAndScripts = ScriptsAttributeAndScriptBindings?.Select(_attributeNameAndScriptNames => (Game.SingletonRepository.Get<ScriptsAttribute>(_attributeNameAndScriptNames.AttributeName), Game.SingletonRepository.Get<UniversalScript>(_attributeNameAndScriptNames.ScriptNames))).ToArray();
-        Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
+        Activation = Game.SingletonRepository.GetFromEnumOrDefault<Activation, ActivationsEnum>(ActivationEnumValue);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
@@ -139,7 +139,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISav
             BitwiseOrAttributeAndExpressionBindings = BitwiseOrAttributeAndExpressionBindings,
             ScriptsAttributeAndScriptBindings = ScriptsAttributeAndScriptBindings,
 
-            ActivationName = ActivationName,
+            ActivationEnumValue = ActivationEnumValue,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
             ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
             ArtifactBiasWeightedRandomBindingKey = ArtifactBiasWeightedRandomBindingKey,
@@ -185,7 +185,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, ISav
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    private string? ActivationName { get; }
+    private ActivationsEnum? ActivationEnumValue { get; }
 
     private string? ArtifactBiasWeightedRandomBindingKey { get; }       
     #endregion

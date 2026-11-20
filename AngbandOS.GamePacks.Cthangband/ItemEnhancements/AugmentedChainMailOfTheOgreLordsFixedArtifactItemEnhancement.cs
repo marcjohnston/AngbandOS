@@ -23,6 +23,6 @@ public class AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement : Item
         (nameof(BonusIntelligenceAttribute), "3"),
         (nameof(BonusWisdomAttribute), "3"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.DestroyDoorsEvery10Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.DestroyDoorsEvery10Activation;
     public override string FriendlyName => "of the Ogre Lords";
 }

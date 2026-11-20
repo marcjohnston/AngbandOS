@@ -16,6 +16,6 @@ public class SetOfGauntletsOfTheDeadFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "12000"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BoltOfAcid5d8Every1d5p5DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BoltOfAcid5d8Every1d5p5DirectionalActivation;
     public override string FriendlyName => "of the Dead";
 }

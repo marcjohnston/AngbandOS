@@ -15,7 +15,7 @@ public class MultiHuedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(ResFireAttribute), "true"),
         (nameof(ResPoisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BreatheLightningFrostAcidPoisonGasOrFire250r2Every1d225p225DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

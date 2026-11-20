@@ -16,6 +16,6 @@ public class SetOfGauntletsWhiteSparkFixedArtifactItemEnhancement : ItemEnhancem
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "11000"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BoltOfElectricity4d8Every1d6p6DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BoltOfElectricity4d8Every1d6p6DirectionalActivation;
     public override string FriendlyName => "'White Spark'";
 }

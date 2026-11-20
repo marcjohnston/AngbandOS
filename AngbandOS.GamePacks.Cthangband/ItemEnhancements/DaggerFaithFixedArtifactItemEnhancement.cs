@@ -20,6 +20,6 @@ public class DaggerFaithFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(MeleeToHitAttribute), "4"),
         (nameof(ToDamageAttribute), "6"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.FireBolt9d8Every8p1d8DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.FireBolt9d8Every8p1d8DirectionalActivation;
     public override string FriendlyName => "'Faith'";
 }

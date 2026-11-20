@@ -11,7 +11,7 @@ public class RedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResFireAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BreatheFire200r2Every1d450p450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BreatheFire200r2Every1d450p450DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

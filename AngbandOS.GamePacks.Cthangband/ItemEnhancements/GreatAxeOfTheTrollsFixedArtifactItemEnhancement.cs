@@ -19,7 +19,7 @@ public class GreatAxeOfTheTrollsFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(SlayOrcAttribute), "true"),
         (nameof(SlayUndeadAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.MassCarnageActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.MassCarnageActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

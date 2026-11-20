@@ -22,7 +22,7 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(FeatherAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.TeleportAwayEvery150DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.TeleportAwayEvery150DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

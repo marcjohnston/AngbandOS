@@ -19,7 +19,7 @@ public class DaggerHopeFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
         (nameof(MeleeToHitAttribute), "4"),
         (nameof(ToDamageAttribute), "6"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.FrostBolt6d8Every7p1d7DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.FrostBolt6d8Every7p1d7DirectionalActivation;
 
     public override string FriendlyName => "'Hope'";
 }

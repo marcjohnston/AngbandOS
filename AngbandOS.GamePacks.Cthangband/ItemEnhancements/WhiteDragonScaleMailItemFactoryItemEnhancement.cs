@@ -11,7 +11,7 @@ public class WhiteDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResColdAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BreathBallOfFrost110r2Every500DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BreathBallOfFrost110r2Every500DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

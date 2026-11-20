@@ -22,7 +22,7 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
         (nameof(SustWisAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.LargeLightningBall250Every425p1d425DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.LargeLightningBall250Every425p1d425DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

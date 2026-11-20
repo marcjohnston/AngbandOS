@@ -11,7 +11,7 @@ public class BronzeDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResConfAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfConfusion120r2Every1d450p450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfConfusion120r2Every1d450p450DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

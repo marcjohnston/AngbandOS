@@ -22,6 +22,6 @@ public class BattleAxeSpleenSlicerFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(BonusStrengthAttribute), "1"),
         (nameof(BonusDexterityAttribute), "1"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Heal4d8AndWoundsEvery3p1d3Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Heal4d8AndWoundsEvery3p1d3Activation;
     public override string FriendlyName => "'Spleen Slicer'";
 }

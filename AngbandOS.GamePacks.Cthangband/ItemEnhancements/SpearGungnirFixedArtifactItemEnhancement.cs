@@ -22,7 +22,7 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(SlayTrollAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfLightning100r3Every500DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfLightning100r3Every500DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

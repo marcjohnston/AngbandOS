@@ -29,6 +29,6 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(GlowRadiusAttribute), "3"),
         (nameof(TreasureRatingAttribute), "20"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Terror40xEvery3xp10Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Terror40xEvery3xp10Activation;
     public override string FriendlyName => "of Power";
 }

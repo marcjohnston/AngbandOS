@@ -10,7 +10,7 @@ public class PairOfHardLeatherBootsOfIthaquaFixedArtifactItemEnhancement : ItemE
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResNexusAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Speed20p1d20Every200Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Speed20p1d20Every200Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

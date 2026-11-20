@@ -23,7 +23,7 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(SlayGiantAttribute), "true"),
         (nameof(SlayUndeadAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.StoneToMudDirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.StoneToMudDirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

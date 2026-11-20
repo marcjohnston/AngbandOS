@@ -12,7 +12,7 @@ public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(ResAcidAttribute), "true"),
         (nameof(ResDarkAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.SleepActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.SleepActivation;
     public override string FriendlyName => "'Darkness'";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

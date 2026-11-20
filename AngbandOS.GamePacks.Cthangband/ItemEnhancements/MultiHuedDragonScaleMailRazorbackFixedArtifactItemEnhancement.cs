@@ -18,7 +18,7 @@ public class MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement : Ite
         (nameof(ResPoisAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.StarBall150Every1000p1d325DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.StarBall150Every1000p1d325DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

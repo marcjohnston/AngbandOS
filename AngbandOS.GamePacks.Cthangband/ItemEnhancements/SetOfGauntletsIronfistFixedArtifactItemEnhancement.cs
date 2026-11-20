@@ -16,6 +16,6 @@ public class SetOfGauntletsIronfistFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "15000"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BoltOfFire9d8Every1d8p8DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BoltOfFire9d8Every1d8p8DirectionalActivation;
     public override string FriendlyName => "'Ironfist'";
 }

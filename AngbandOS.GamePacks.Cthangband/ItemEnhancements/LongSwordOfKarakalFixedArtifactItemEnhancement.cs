@@ -28,7 +28,7 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(SustStrAttribute), "true"),
         (nameof(SustWisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.GetawayEvery35Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.GetawayEvery35Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

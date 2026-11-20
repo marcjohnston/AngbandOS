@@ -16,7 +16,7 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(ResElecAttribute), "true"),
         (nameof(ResFireAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.GenocideEvery500Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.GenocideEvery500Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(BonusArmorClassAttribute), "2"),

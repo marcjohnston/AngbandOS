@@ -12,7 +12,7 @@ public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(ResPoisAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.DrainLife100Every100p1d100DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.DrainLife100Every100p1d100DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

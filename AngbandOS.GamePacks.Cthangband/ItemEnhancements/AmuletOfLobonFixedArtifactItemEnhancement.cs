@@ -11,7 +11,7 @@ public class AmuletOfLobonFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResFireAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.ProtectionFromEvilActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.ProtectionFromEvilActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

@@ -15,7 +15,7 @@ public class AmuletOfAbdulAlhazredFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(ResElecAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.DispelEvil5xEvery300p1d300Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.DispelEvil5xEvery300p1d300Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

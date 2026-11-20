@@ -18,6 +18,6 @@ public class StarEssenceOfXothFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(GlowRadiusAttribute), "1"),
         (nameof(SpeedAttribute), "1"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.MagicMappingAndIlluminationEvery1d50p50DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.MagicMappingAndIlluminationEvery1d50p50DirectionalActivation;
     public override string FriendlyName => "of Xoth";
 }

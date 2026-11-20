@@ -11,7 +11,7 @@ public class BlackDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResAcidAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BallOfAcid130r2Every1d450p450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BallOfAcid130r2Every1d450p450DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

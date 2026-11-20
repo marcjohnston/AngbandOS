@@ -17,6 +17,6 @@ public class CloakShifterFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(ValueAttribute), "11000"),
         (nameof(AttacksAttribute), "15"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Teleport100Every45Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Teleport100Every45Activation;
     public override string FriendlyName => "'Shifter'";
 }

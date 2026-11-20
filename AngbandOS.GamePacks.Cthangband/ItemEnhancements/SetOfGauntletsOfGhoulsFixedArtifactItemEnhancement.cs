@@ -19,6 +19,6 @@ public class SetOfGauntletsOfGhoulsFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ValueAttribute), "33000"),
         (nameof(BonusConstitutionAttribute), "4"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BoltOfFrost6d8Every1d7p7DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BoltOfFrost6d8Every1d7p7DirectionalActivation;
     public override string FriendlyName => "of Ghouls";
 }

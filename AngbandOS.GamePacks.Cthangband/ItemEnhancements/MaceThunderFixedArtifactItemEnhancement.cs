@@ -12,7 +12,7 @@ public class MaceThunderFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(ImElecAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.Speed20p1d20Every250Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Speed20p1d20Every250Activation;
     public override string FriendlyName => "'Thunder'";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

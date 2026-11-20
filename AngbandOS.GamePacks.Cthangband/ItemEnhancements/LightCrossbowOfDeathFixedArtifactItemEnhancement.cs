@@ -12,7 +12,7 @@ public class LightCrossbowOfDeathFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(ShowModsAttribute), "true"),
         (nameof(XtraMightAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BrandBoltsEvery999Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BrandBoltsEvery999Activation;
     public override string FriendlyName => "of Death";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

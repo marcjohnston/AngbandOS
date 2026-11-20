@@ -24,6 +24,6 @@ public class PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement : ItemE
         (nameof(ValueAttribute), "40000"),
         (nameof(AttacksAttribute), "15"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.RemoveFearAndPoisonEvery5Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.RemoveFearAndPoisonEvery5Activation;
     public override string FriendlyName => "of Dancing";
 }

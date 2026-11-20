@@ -33,7 +33,7 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BizarreThingsEvery1d450p450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BizarreThingsEvery1d450p450DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),

@@ -11,7 +11,7 @@ public class GreenDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResPoisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BreathePoisonGas150r2Every1d450p450DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BreathePoisonGas150r2Every1d450p450DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

@@ -20,6 +20,6 @@ public class CloakOfBarzaiFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(ValueAttribute), "10000"),
         (nameof(AttacksAttribute), "15"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.ResistAll20p1d20Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.ResistAll20p1d20Activation;
     public override string FriendlyName => "of Barzai";
 }

@@ -12,7 +12,7 @@ public class WeaponPlanarWeaponItemEnhancement : ItemEnhancementGameConfiguratio
         (nameof(TeleportAttribute), "true"),
     };
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
-    public override string? ActivationName => nameof(ActivationsEnum.Teleport100Every1d50p50Activation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.Teleport100Every1d50p50Activation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "7000"),

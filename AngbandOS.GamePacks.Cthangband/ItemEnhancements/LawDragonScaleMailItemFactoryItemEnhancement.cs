@@ -12,7 +12,7 @@ public class LawDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(ResShardsAttribute), "true"),
         (nameof(ResSoundAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.BreatheSoundOrShards230r2Every1d300p300DirectionalActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.BreatheSoundOrShards230r2Every1d300p300DirectionalActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),

@@ -13,7 +13,7 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
         (nameof(ResConfAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
-    public override string? ActivationName => nameof(ActivationsEnum.TrapezohedronGemstoneActivation);
+    public override ActivationsEnum? ActivationEnumValue => ActivationsEnum.TrapezohedronGemstoneActivation;
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
