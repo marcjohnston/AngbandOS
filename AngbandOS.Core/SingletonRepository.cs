@@ -157,6 +157,21 @@ internal sealed class SingletonRepository : ISaveGameState
         return singleton;
     }
 
+    public T GetFromEnum<T, TEnum>(TEnum enumValue) where T : class where TEnum : Enum
+    {
+        string? enumName = Enum.GetName(typeof(TEnum), enumValue);
+        if (enumName is null)
+        {
+            throw new Exception($"The {typeof(TEnum).Name} enum value {enumValue} does not exist.");
+        }
+        T? singleton = Get<T>(enumName);
+        if (singleton == null)
+        {
+            throw new Exception($"The singleton {typeof(T).Name}.{enumName} does not exist.");
+        }
+        return singleton;
+    }
+
     //public int GetIndex<T>(T singleton) where T : class
     //{
     //    string typeName = typeof(T).Name;
