@@ -44,7 +44,7 @@ public abstract class PropertyMetadata
     /// <remarks>
     /// This property applies to all types.
     /// </remarks>
-    public string PropertyName { get; set; }
+    public string PropertyName { get; }
 
     /// <summary>
     /// Returns the title (or short description) of the property that can be presented to the user or null; in which the <see cref="PropertyName"/> should be rendered.
