@@ -13,10 +13,10 @@
               <td (click)="treeNode.isOpen=!treeNode.isOpen">
                 <ng-container *ngIf="treeNode.children != null">
                   <ng-container *ngIf="!treeNode.isOpen">
-                    +
+                    <mat-icon class="game-designer-add-icon">add</mat-icon>
                   </ng-container>
                   <ng-container *ngIf="treeNode.isOpen">
-                    -
+                    <mat-icon class="game-designer-add-icon">remove</mat-icon>
                   </ng-container>
                 </ng-container>
               </td>

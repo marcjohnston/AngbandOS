@@ -514,18 +514,6 @@ public static class GameConfigurationMetadata
                     Title = "Color Enum Attributes",
                     CategoryTitle = "",
                 },
-                new CollectionPropertyMetadata("ActivationAttributes")
-                {
-                    PropertyMetadatas = ActivationNullableReferenceAttributeMetadata.Metadata,
-                    ForeignCollectionName = "ActivationAttributes",
-                    EntityNoun = "Activation Attribute",
-                    EntityKeyPropertyName = "GetKey",
-                    EntityNamePropertyName = "GetKey",
-                    Description = "Collection of activation attribute configurations.",
-                    LabelIfNullable = "Default",
-                    Title = "Activation Attributes",
-                    CategoryTitle = "",
-                },
                 new CollectionPropertyMetadata("ArtifactBiasAttributes")
                 {
                     PropertyMetadatas = ArtifactBiasNullableReferenceAttributeMetadata.Metadata,
