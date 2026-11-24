@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { getEntityName as importedGetEntityName } from '../../game-designer-library.module';
 import { PropertyMetadata } from '../../property-metadata';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-game-designer-type-foreign-key',
@@ -16,6 +17,7 @@ import { PropertyMetadata } from '../../property-metadata';
   imports: [
     NgFor,
     NgIf,
+    JsonPipe,
     FormsModule,
     MatIconModule
   ]
@@ -25,6 +27,7 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
   @Input({ required: true }) public configuration!: Record<string, unknown>;
   @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
   @ViewChild('select') select!: ElementRef;
+  public showDebug: boolean = false;
 
   public selectOptions: SelectOption[] = [];
   public unmodifiedValue: string | null | undefined = undefined;

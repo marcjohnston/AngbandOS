@@ -1,15 +1,14 @@
 <ng-container *ngIf="propertyMetadataAndConfiguration !== undefined">
-  @if (false)
-  {
+  @if (true) {
     <div (click)="showDebug = !showDebug" style="color: white; background-color: black; width: fit-content">
       {{ showDebug ? '-' : '+' }} Debug
     </div>
     @if (showDebug) {
       <div style="background-color: #1e1e1e; padding: 10px; border: 1px solid #ddd; border-radius:8px; width: fit-content">
-        Game Designer Property - Configuration
-        <pre>{{propertyMetadataAndConfiguration.configuration | json}}</pre>
-        Metadata
+        Game Designer Property - Metadata
         <pre>{{propertyMetadataAndConfiguration.propertyMetadata | json}}</pre>
+        Configuration
+        <pre>{{propertyMetadataAndConfiguration.configuration | json}}</pre>
       </div>
     }
   }
