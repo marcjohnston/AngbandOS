@@ -11,27 +11,27 @@ public static class SummonScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Pet")
                 {
                     Title = "Pet",
                     Description = "Returns true, to summon a friendly monster (a.k.a pet); false, otherwise. Returns false, by default.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "GroupBooleanExpression")
                 {
                     Title = "Group Boolean Expression",
                     Description = "Returns a boolean expression that is computed to determine whether the summoning of the monster will produce a group of like-monsters. Returns true, by default.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "MonsterFilterBindingKey")
                 {
                     Title = "Monster Filter Binding Key",
                     Description = "The binding key of the monster filter used to select monsters for summoning.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "LevelRollExpression")
                 {
                     Title = "Level Roll Expression",
                     Description = "The expression used to determine the level of summoned monsters.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "PreMessages")
                 {
                     Title = "Pre-Messages",
                     Description = "The messages displayed before summoning is attempted.",
@@ -42,7 +42,7 @@ public static class SummonScriptsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "SuccessMessages")
                 {
                     Title = "Success Messages",
                     Description = "The messages displayed when summoning succeeds.",
@@ -53,7 +53,7 @@ public static class SummonScriptsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "FailureMessages")
                 {
                     Title = "Failure Messages",
                     Description = "The messages displayed when summoning fails.",
@@ -64,12 +64,12 @@ public static class SummonScriptsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "LearnedDetails")
                 {
                     Title = "Learned Details",
                     Description = "The details displayed for the learned summoning script.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Used")
                 {
                     Title = "Used",
                     Description = "Determines whether the summoning script is used.",

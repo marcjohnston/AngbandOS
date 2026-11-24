@@ -11,7 +11,7 @@ public static class MaxRangedWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "Ranges")
                 {
                     Title = "Ranges",
                     Description = "Specifies the percentage ranges, display text, and colors used to render the widget.",
@@ -41,44 +41,44 @@ public static class MaxRangedWidgetsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "DefaultColor")
                 {
                     Title = "Default Color",
                     Description = "Specifies the color used when none of the ranges apply.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "MaxIntValueName")
                 {
                     Title = "Maximum Integer Value Name",
                     Description = "Specifies the name of the maximum integer value displayed by the widget.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "IntValueName")
                 {
                     Title = "Integer Value Name",
                     Description = "Specifies the name of the integer value displayed by the widget.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "X")
                 {
                     Title = "X",
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Y")
                 {
                     Title = "Y",
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Width")
                 {
                     Title = "Width",
                     Description = "Specifies the width of the widget. When null, the width is based on the text length.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "JustificationEnumValue")
                 {
                     Title = "Justification",
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ChangeTrackerNames")
                 {
                     Title = "Change Tracker Names",
                     Description = "Specifies the property names that participate in change tracking.",

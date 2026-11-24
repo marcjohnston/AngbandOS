@@ -11,7 +11,7 @@ public static class CauseWoundsMonsterSpellsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "KnowledgeAction")
                 {
                     Title = "Knowledge Action",
                     Description = "The action information displayed when the spell is described in the player's knowledge.",
@@ -29,182 +29,182 @@ public static class CauseWoundsMonsterSpellsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsInnate")
                 {
                     Title = "Is Innate",
                     Description = "Determines whether the spell is an innate ability.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsIntelligent")
                 {
                     Title = "Is Intelligent",
                     Description = "Determines whether the spell is an intelligent spell.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesAcid")
                 {
                     Title = "Uses Acid",
                     Description = "Determines whether the spell uses acid against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesLightning")
                 {
                     Title = "Uses Lightning",
                     Description = "Determines whether the spell uses lightning against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesFire")
                 {
                     Title = "Uses Fire",
                     Description = "Determines whether the spell uses fire against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesCold")
                 {
                     Title = "Uses Cold",
                     Description = "Determines whether the spell uses cold against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesPoison")
                 {
                     Title = "Uses Poison",
                     Description = "Determines whether the spell uses poison against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesRadiation")
                 {
                     Title = "Uses Radiation",
                     Description = "Determines whether the spell uses radiation against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesNether")
                 {
                     Title = "Uses Nether",
                     Description = "Determines whether the spell uses nether against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesLight")
                 {
                     Title = "Uses Light",
                     Description = "Determines whether the spell uses light against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesDarkness")
                 {
                     Title = "Uses Darkness",
                     Description = "Determines whether the spell uses darkness against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesFear")
                 {
                     Title = "Uses Fear",
                     Description = "Determines whether the spell uses fear against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesConfusion")
                 {
                     Title = "Uses Confusion",
                     Description = "Determines whether the spell uses confusion against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesBreathe")
                 {
                     Title = "Uses Breathe",
                     Description = "Determines whether the spell uses a breathe attack against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesChaos")
                 {
                     Title = "Uses Chaos",
                     Description = "Determines whether the spell uses chaos against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesDisenchantment")
                 {
                     Title = "Uses Disenchantment",
                     Description = "Determines whether the spell uses disenchantment against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesBlindness")
                 {
                     Title = "Uses Blindness",
                     Description = "Determines whether the spell uses blindness against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesNexus")
                 {
                     Title = "Uses Nexus",
                     Description = "Determines whether the spell uses nexus against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesSound")
                 {
                     Title = "Uses Sound",
                     Description = "Determines whether the spell uses sound against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesShards")
                 {
                     Title = "Uses Shards",
                     Description = "Determines whether the spell uses shards against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanBeReflected")
                 {
                     Title = "Can Be Reflected",
                     Description = "Determines whether the spell can be reflected back from its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "RestrictsFreeAction")
                 {
                     Title = "Restricts Free Action",
                     Description = "Determines whether the spell restricts free action against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "DrainsMana")
                 {
                     Title = "Drains Mana",
                     Description = "Determines whether the spell drains mana from its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "SummonsHelp")
                 {
                     Title = "Summons Help",
                     Description = "Determines whether the spell summons help against its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ProvidesEscape")
                 {
                     Title = "Provides Escape",
                     Description = "Determines whether the spell provides escape from its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Heals")
                 {
                     Title = "Heals",
                     Description = "Determines whether the spell heals.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsAttack")
                 {
                     Title = "Is Attack",
                     Description = "Determines whether the spell can attack its foe.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsTactical")
                 {
                     Title = "Is Tactical",
                     Description = "Determines whether the spell is tactical.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Hastens")
                 {
                     Title = "Hastens",
                     Description = "Determines whether the spell hastens itself.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Annoys")
                 {
                     Title = "Annoys",
                     Description = "Determines whether the spell annoys its foe.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "VsPlayerBlindMessage")
                 {
                     Title = "Vs Player Blind Message",
                     Description = "The message rendered when the spell targets the player while the player is blind.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "VsPlayerActionMessage")
                 {
                     Title = "Vs Player Action Message",
                     Description = "The message rendered when the spell targets a visible player who is not blind.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "VsPlayerActionMessageOnInvisibleMonster")
                 {
                     Title = "Vs Player Action Message On Invisible Monster",
                     Description = "The message rendered when the spell targets the player while the monster is not visible.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "VsMonsterUnseenMessage")
                 {
                     Title = "Vs Monster Unseen Message",
                     Description = "The message rendered when the spell targets another monster while the player is blind.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "VsMonsterSeenMessage")
                 {
                     Title = "Vs Monster Seen Message",
                     Description = "The message rendered when a monster attacks another monster and the player can see the interaction.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "SmartLearnSpellResistantDetectionKeys")
                 {
                     Title = "Smart Learn Spell Resistant Detection Keys",
                     Description = "The spell resistant detection keys learned when the player experiences or sees the spell.",
@@ -215,27 +215,27 @@ public static class CauseWoundsMonsterSpellsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "WakesSleepingMonsters")
                 {
                     Title = "Wakes Sleeping Monsters",
                     Description = "Determines whether attacking a sleeping monster wakes it.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "DamageRollExpression")
                 {
                     Title = "Damage Roll Expression",
                     Description = "The roll expression used to determine the amount of damage inflicted by the projectile.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "CurseEquipmentChance")
                 {
                     Title = "Curse Equipment Chance",
                     Description = "The chance that an item of equipment worn by the player will be cursed.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "HeavyCurseEquipmentChance")
                 {
                     Title = "Heavy Curse Equipment Chance",
                     Description = "The chance that an item of equipment worn by the player will be heavily cursed.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "TimedBleedingExpressionText")
                 {
                     Title = "Timed Bleeding Expression Text",
                     Description = "The expression determining the additional amount of time the player will bleed.",

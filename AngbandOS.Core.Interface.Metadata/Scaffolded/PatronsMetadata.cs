@@ -11,17 +11,17 @@ public static class PatronsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "LongName")
                 {
                     Title = "Long Name",
                     Description = "Specifies the long name of the patron.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "PreferredAbilityBindingKey")
                 {
                     Title = "Preferred Ability Binding Key",
                     Description = "Specifies the optional binding key of the patron's preferred ability.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "RewardBindingKeys")
                 {
                     Title = "Reward Binding Keys",
                     Description = "Specifies the binding keys of the rewards granted by the patron.",
@@ -32,7 +32,7 @@ public static class PatronsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ShortName")
                 {
                     Title = "Short Name",
                     Description = "Specifies the short name of the patron.",

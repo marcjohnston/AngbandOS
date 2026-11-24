@@ -11,7 +11,7 @@ public static class DamageLearnedKnowledgesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "DamageExpressionText")
                 {
                     Title = "Damage Expression Text",
                     Description = "The expression that defines the damage value learned from this knowledge.",

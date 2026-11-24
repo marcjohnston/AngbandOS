@@ -125,7 +125,7 @@ static void WritePropertyMetadata(StreamWriter writer, PropertyMetadata property
     }
     if (propertyMetadata.EntityNounTitle is not null)
     {
-        writer.WriteLine($"{indentation}    EntityNoun = \"{Escape(propertyMetadata.EntityNounTitle)}\",");
+        writer.WriteLine($"{indentation}    EntityNounTitle = \"{Escape(propertyMetadata.EntityNounTitle)}\",");
     }
     if (propertyMetadata.ForeignCollectionName is not null)
     {
@@ -439,7 +439,7 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
             }
 
             // Generate the property metadata for the collection property.
-            PropertyMetadata propertyMetadata = annotatedDataType.ToPropertyMetadata();
+            PropertyMetadata propertyMetadata = annotatedDataType.ToPropertyMetadata(propertyName);
 
             // Copy the ConfigurationPropertyAttribute properties.
             propertyMetadata.Title = configurationPropertyAttribute.Title;

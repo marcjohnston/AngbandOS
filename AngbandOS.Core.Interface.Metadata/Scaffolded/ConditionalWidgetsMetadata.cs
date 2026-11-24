@@ -11,12 +11,12 @@ public static class ConditionalWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ConditionalKey")
                 {
                     Title = "Conditional Key",
                     Description = "The key identifying the conditional that determines which widgets are enabled.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "TrueWidgetNames")
                 {
                     Title = "True Widget Names",
                     Description = "The names of the widgets to invalidate when the conditional evaluates to true.",
@@ -27,7 +27,7 @@ public static class ConditionalWidgetsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "FalseWidgetNames")
                 {
                     Title = "False Widget Names",
                     Description = "The names of the widgets to invalidate when the conditional evaluates to false.",
@@ -38,34 +38,34 @@ public static class ConditionalWidgetsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "The color used to draw the widget text.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "X")
                 {
                     Title = "X",
                     Description = "The x-coordinate on the form where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Y")
                 {
                     Title = "Y",
                     Description = "The y-coordinate on the form where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Width")
                 {
                     Title = "Width",
                     Description = "The width of the widget.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "JustificationEnumValue")
                 {
                     Title = "Justification",
                     Description = "The name of the justification used to position the widget text within its width.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ChangeTrackerNames")
                 {
                     Title = "Change Tracker Names",
                     Description = "The names of the properties that participate in change tracking.",

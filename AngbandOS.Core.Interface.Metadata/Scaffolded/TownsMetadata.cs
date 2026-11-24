@@ -11,22 +11,22 @@ public static class TownsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "")
+                new PropertyMetadata("character", "Char")
                 {
                     Title = "Character",
                     Description = "Specifies the ASCII character used to represent the town.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "HousePrice")
                 {
                     Title = "House Price",
                     Description = "Specifies the price of a house in the town.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "Specifies the name of the town.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "StoreFactoryNames")
                 {
                     Title = "Store Factory Names",
                     Description = "Specifies the store factory names available in the town.",
@@ -39,24 +39,24 @@ public static class TownsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanBeEscortedHere")
                 {
                     Title = "Can Be Escorted Here",
                     Description = "Determines whether the player can be escorted to the town.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "AllowStartupTown")
                 {
                     Title = "Allow Startup Town",
                     Description = "Determines whether the town can be used as the startup town.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "DungeonName")
                 {
                     Title = "Dungeon",
                     Description = "Specifies the name of the dungeon associated with the town.",
                     ForeignCollectionName = "Dungeons",
                     Inline = false,
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UnusedStoreLotsAreGraveyards")
                 {
                     Title = "Unused Store Lots Are Graveyards",
                     Description = "Determines whether unused store lots are treated as graveyards.",

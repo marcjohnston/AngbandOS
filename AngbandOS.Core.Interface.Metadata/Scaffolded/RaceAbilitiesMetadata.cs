@@ -11,17 +11,17 @@ public static class RaceAbilitiesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Bonus")
                 {
                     Title = "Bonus",
                     Description = "Specifies the bonus applied to the race ability.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RaceBindingKey")
                 {
                     Title = "Race Binding Key",
                     Description = "Specifies the binding key of the associated race.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "AbilityBindingKey")
                 {
                     Title = "Ability Binding Key",
                     Description = "Specifies the binding key of the associated ability.",

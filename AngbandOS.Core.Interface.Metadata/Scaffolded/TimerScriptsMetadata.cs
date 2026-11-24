@@ -11,37 +11,37 @@ public static class TimerScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Used")
                 {
                     Title = "Used",
                     Description = "Determines whether items are considered used by the timer.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ValueExpression")
                 {
                     Title = "Value Expression",
                     Description = "Specifies the expression used to modify the timer. Positive values add time, negative values subtract time, and null resets the timer to zero.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "TimerBindingKey")
                 {
                     Title = "Timer Binding Key",
                     Description = "Specifies the binding key of the timer modified by the script.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "CustomLearnedDetails")
                 {
                     Title = "Custom Learned Details",
                     Description = "Specifies custom details revealed when the timer script is learned.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Quiet")
                 {
                     Title = "Quiet",
                     Description = "Determines whether the timer script executes without displaying messages.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "PreMessage")
                 {
                     Title = "Pre-Message",
                     Description = "Specifies the message displayed before the timer script executes.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "EnabledBoolPosFunctionBindingKey")
                 {
                     Title = "Enabled Boolean Positive Function Binding Key",
                     Description = "Specifies the optional binding key for the function that determines whether the timer script is enabled.",

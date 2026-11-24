@@ -11,27 +11,27 @@ public static class ActivationsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "The name of the activation.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "PreActivationMessage")
                 {
                     Title = "Pre-Activation Message",
                     Description = "The message displayed before the activation occurs.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Value")
                 {
                     Title = "Value",
                     Description = "The value associated with the activation.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RechargeTimeRollExpression")
                 {
                     Title = "Recharge Time Roll Expression",
                     Description = "The roll expression used to determine how long it takes for the activation to recharge.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ActivationCancellableScriptItemBindingKey")
                 {
                     Title = "Activation Cancellable Script Item Binding Key",
                     Description = "The binding key of the script item that can cancel the activation.",

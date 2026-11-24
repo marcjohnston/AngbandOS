@@ -11,7 +11,7 @@ public static class OutfitManifestsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "CharacterClassBindingKey")
                 {
                     Title = "Character Class Binding Key",
                     Description = "Returns null to match all character classes, or specifies the character class values and equality operator used for matching.",
@@ -35,7 +35,7 @@ public static class OutfitManifestsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "RaceBindingKey")
                 {
                     Title = "Race Binding Key",
                     Description = "Returns null to match all races, or specifies the race values and equality operator used for matching.",
@@ -59,7 +59,7 @@ public static class OutfitManifestsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "RealmBindingKey")
                 {
                     Title = "Realm Binding Key",
                     Description = "Returns null to match all realms, or specifies the realm values and equality operator used for matching.",
@@ -83,7 +83,7 @@ public static class OutfitManifestsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ItemFactoryAndEnhancementsBindings")
                 {
                     Title = "Item Factory and Enhancements Bindings",
                     Description = "Specifies the item factories, item enhancements, stack counts, identification state, and wield-one behavior for the outfit manifest.",

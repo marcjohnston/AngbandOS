@@ -11,7 +11,7 @@ public static class TeleportSelfScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "DistanceExpression")
                 {
                     Title = "Distance Expression",
                     Description = "Specifies the expression used to determine the teleportation distance.",

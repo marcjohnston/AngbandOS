@@ -980,7 +980,7 @@ public static class GameConfigurationMetadata
                     ForeignCollectionName = "ChestTraps",
                     AssociatedProperties = ChestTrapsMetadata.Metadata,
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "GameTickEventBindingKeys")
                 {
                     Title = "Game Tick Event Binding Keys",
                     Description = "Binding keys for events that occur on each game tick.",
@@ -991,52 +991,52 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MaxMonsterCount")
                 {
                     Title = "Max Monster Count",
                     Description = "Maximum number of monsters allowed.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "CompactMonsterCutIn")
                 {
                     Title = "Compact Monster Cut In",
                     Description = "Number of monsters at which compacting begins.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "CompactMonsterCutOutTarget")
                 {
                     Title = "Compact Monster Cut Out Target",
                     Description = "Target number of monsters to reduce to when compacting.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MaxMessageLogLength")
                 {
                     Title = "Max Message Log Length",
                     Description = "Number of log items that the message history may store. Null indicates no limit.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "FollowDistance")
                 {
                     Title = "Follow Distance",
                     Description = "Distance at which followers remain from the player.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "DecayRate")
                 {
                     Title = "Decay Rate",
                     Description = "Rate at which certain game elements decay.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "PatronRestingFavour")
                 {
                     Title = "Patron Resting Favour",
                     Description = "Favour amount awarded when resting with a patron.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "DungeonViewBindingKey")
                 {
                     Title = "Dungeon View Binding Key",
                     Description = "Binding key for the dungeon view.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "StartupTownName")
                 {
                     Title = "Startup Town Name",
                     Description = "Name of the town where the player will start, or null to choose a random startup town from available towns.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "GoldFactoriesBindingKeys")
                 {
                     Title = "Gold Factories Binding Keys",
                     Description = "Binding keys for gold factories.",
@@ -1047,12 +1047,12 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "GoldItemIsGreatProbabilityExpression")
                 {
                     Title = "Gold Item Is Great Probability Expression",
                     Description = "Probability expression that determines whether a gold-containing item is considered 'great'.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ShopkeeperAcceptedComments")
                 {
                     Title = "Shopkeeper Accepted Comments",
                     Description = "Accepted shopkeeper comment strings.",
@@ -1063,7 +1063,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "IllegibleFlavorSyllables")
                 {
                     Title = "Illegible Flavor Syllables",
                     Description = "Syllables used to represent illegible flavors.",
@@ -1074,7 +1074,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "FindQuests")
                 {
                     Title = "Find Quests",
                     Description = "Find-quest strings.",
@@ -1085,7 +1085,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ElvishTexts")
                 {
                     Title = "Elvish Texts",
                     Description = "Elvish text strings.",
@@ -1096,7 +1096,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "FunnyDescriptions")
                 {
                     Title = "Funny Descriptions",
                     Description = "Funny description strings.",
@@ -1107,7 +1107,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "FunnyComments")
                 {
                     Title = "Funny Comments",
                     Description = "Funny comment strings.",
@@ -1118,7 +1118,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "HorrificDescriptions")
                 {
                     Title = "Horrific Descriptions",
                     Description = "Horrific description strings.",
@@ -1129,7 +1129,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "RequiredExperiencePerLevel")
                 {
                     Title = "Required Experience Per Level",
                     Description = "Array of required experience values for each level.",
@@ -1140,7 +1140,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ExtractEnergy")
                 {
                     Title = "Extract Energy",
                     Description = "Energy extracted per speed class.",
@@ -1151,7 +1151,7 @@ public static class GameConfigurationMetadata
                         },
                     },
                 },
-                new PropertyMetadata("2d-array", "")
+                new PropertyMetadata("2d-array", "BlowsTable")
                 {
                     Title = "Blows Table",
                     Description = "Table describing number of blows by attack/speed group.",

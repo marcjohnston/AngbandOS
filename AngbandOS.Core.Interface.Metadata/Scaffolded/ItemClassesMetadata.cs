@@ -11,22 +11,22 @@ public static class ItemClassesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "The capitalized singular name of the item represented by this item class.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "AllowStomp")
                 {
                     Title = "Allow Stomp",
                     Description = "Determines whether items of this class allow the player to stomp them.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "NumberOfFlavorsToGenerate")
                 {
                     Title = "Number of Flavors to Generate",
                     Description = "The number of flavors to generate for items of this item class.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ItemFlavorBindingKeys")
                 {
                     Title = "Item Flavor Binding Keys",
                     Description = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.",

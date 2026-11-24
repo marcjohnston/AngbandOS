@@ -11,22 +11,22 @@ public static class ShopkeepersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MaxCost")
                 {
                     Title = "Maximum Cost",
                     Description = "Specifies the maximum cost of items handled by the shopkeeper.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MinInflate")
                 {
                     Title = "Minimum Inflate",
                     Description = "Specifies the minimum inflation applied by the shopkeeper.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "Specifies the name of the shopkeeper.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RaceName")
                 {
                     Title = "Race Name",
                     Description = "Specifies the race name of the shopkeeper. When null, no race is specified.",

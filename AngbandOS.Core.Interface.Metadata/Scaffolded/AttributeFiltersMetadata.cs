@@ -11,7 +11,7 @@ public static class AttributeFiltersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "BitwiseOrAttributeFilterBindings")
                 {
                     Title = "Bitwise Or Attribute Filter Bindings",
                     Description = "The attribute bindings used to filter for attributes where any specified bitwise value matches.",
@@ -35,7 +35,7 @@ public static class AttributeFiltersMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "BoolAttributeFilterBindings")
                 {
                     Title = "Boolean Attribute Filter Bindings",
                     Description = "The attribute bindings used to filter boolean attributes by their desired values.",
@@ -66,7 +66,7 @@ public static class AttributeFiltersMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "SummationAttributeFilterBindings")
                 {
                     Title = "Summation Attribute Filter Bindings",
                     Description = "The attribute bindings used to filter summed numeric attributes within a specified range.",
@@ -95,12 +95,12 @@ public static class AttributeFiltersMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ActivationAttributeNonNull")
                 {
                     Title = "Activation Attribute Non-Null",
                     Description = "Determines whether the activation attribute must be non-null.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ArtifactBiasAttributeNonNull")
                 {
                     Title = "Artifact Bias Attribute Non-Null",
                     Description = "Determines whether the artifact bias attribute must be non-null.",

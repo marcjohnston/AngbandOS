@@ -11,7 +11,7 @@ public static class ItemEnhancementWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "NameAndWeightBindings")
                 {
                     Title = "Name and Weight Bindings",
                     Description = "The names of item enhancements and their corresponding weights used for weighted random selection.",

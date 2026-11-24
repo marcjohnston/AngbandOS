@@ -11,17 +11,17 @@ public static class DungeonsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "BaseOffset")
                 {
                     Title = "Base Offset",
                     Description = "The base offset, or difficulty, of the dungeon.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "BiasMonsterFilterName")
                 {
                     Title = "Bias Monster Filter Name",
                     Description = "The name of the monster filter used to bias monster generation, or null if the dungeon has no monster bias.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "DungeonGuardianNames")
                 {
                     Title = "Dungeon Guardian Names",
                     Description = "The names of the dungeon guardians associated with the dungeon.",
@@ -32,27 +32,27 @@ public static class DungeonsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "MapSymbol")
                 {
                     Title = "Map Symbol",
                     Description = "The symbol used to represent the dungeon on the wilderness map.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MaxLevel")
                 {
                     Title = "Max Level",
                     Description = "The maximum number of levels in the dungeon.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "The full name of the dungeon.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Shortname")
                 {
                     Title = "Shortname",
                     Description = "The shortened name of the dungeon used for display purposes.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Tower")
                 {
                     Title = "Tower",
                     Description = "Determines whether the dungeon is a tower.",

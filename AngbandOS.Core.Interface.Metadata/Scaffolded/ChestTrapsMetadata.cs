@@ -11,12 +11,12 @@ public static class ChestTrapsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ActivationGridTileScriptBindingKey")
                 {
                     Title = "Activation Grid Tile Script Binding Key",
                     Description = "The binding key identifying the grid tile script activated by the chest trap.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Description")
                 {
                     Title = "Description",
                     Description = "The description of the chest trap.",

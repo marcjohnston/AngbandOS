@@ -11,7 +11,7 @@ public static class SummonWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "NameAndWeightBindings")
                 {
                     Title = "Name and Weight Bindings",
                     Description = "Specifies the summon names and their associated weights used for weighted random selection.",
@@ -35,7 +35,7 @@ public static class SummonWeightedRandomsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "LearnedDetails")
                 {
                     Title = "Learned Details",
                     Description = "Specifies the information revealed when the summon is learned.",

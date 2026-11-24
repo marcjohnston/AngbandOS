@@ -11,7 +11,7 @@ public static class ExperienceLearnedKnowledgesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ExperienceLearnedKnowledgeBindingTuples")
                 {
                     Title = "Experience Learned Knowledge Binding Tuples",
                     Description = "The experience levels and learned knowledge binding keys used to determine which knowledge is learned.",

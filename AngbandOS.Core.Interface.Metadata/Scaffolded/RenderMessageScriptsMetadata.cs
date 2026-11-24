@@ -11,17 +11,17 @@ public static class RenderMessageScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Message")
                 {
                     Title = "Message",
                     Description = "Specifies the message rendered by the script.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "UsesItem")
                 {
                     Title = "Uses Item",
                     Description = "Determines whether the script uses an item.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IdentifiesItem")
                 {
                     Title = "Identifies Item",
                     Description = "Determines whether the script identifies an item.",

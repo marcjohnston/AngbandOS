@@ -11,22 +11,22 @@ public static class RacialPowerTestsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MinLevel")
                 {
                     Title = "Minimum Level",
                     Description = "Specifies the minimum level required to use the racial power.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "CostExpression")
                 {
                     Title = "Cost Expression",
                     Description = "Specifies the expression used to determine the cost of the racial power.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "UseAbilityBindingKey")
                 {
                     Title = "Use Ability Binding Key",
                     Description = "Specifies the binding key of the ability used by the racial power.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Difficulty")
                 {
                     Title = "Difficulty",
                     Description = "Specifies the difficulty of the racial power test.",

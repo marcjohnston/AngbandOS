@@ -11,40 +11,40 @@ public static class StringWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "StringValueName")
                 {
                     Title = "String Value Name",
                     Description = "Specifies the name of the string value displayed by the widget.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "Specifies the color used to draw the widget text.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "X")
                 {
                     Title = "X",
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Y")
                 {
                     Title = "Y",
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Width")
                 {
                     Title = "Width",
                     LabelIfNullable = "Auto-size",
                     Description = "Specifies the width of the widget. When null, the width is based on the text length.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "JustificationEnumValue")
                 {
                     Title = "Justification",
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ChangeTrackerNames")
                 {
                     Title = "Change Tracker Names",
                     Description = "Specifies the property names that participate in change tracking.",

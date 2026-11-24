@@ -11,7 +11,7 @@ public static class ArtifactBiasWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ArtifactBiasBindingKeyAndWeightTuples")
                 {
                     Title = "Artifact Bias",
                     Description = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.",

@@ -11,7 +11,7 @@ public static class ChestTrapCombinationsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ChestTrapBindingKeys")
                 {
                     Title = "Chest Trap Binding Keys",
                     Description = "The binding keys identifying the chest traps included in this combination.",

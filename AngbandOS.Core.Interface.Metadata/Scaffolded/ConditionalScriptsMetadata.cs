@@ -11,12 +11,12 @@ public static class ConditionalScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ConditionalKey")
                 {
                     Title = "Conditional Key",
                     Description = "The key identifying the conditional evaluated by the script.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "TrueScriptBindingKeys")
                 {
                     Title = "True Script Binding Keys",
                     Description = "The binding keys of the scripts executed when the conditional evaluates to true.",
@@ -27,7 +27,7 @@ public static class ConditionalScriptsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "FalseScriptBindingKeys")
                 {
                     Title = "False Script Binding Keys",
                     Description = "The binding keys of the scripts executed when the conditional evaluates to false.",

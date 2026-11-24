@@ -6,6 +6,7 @@ import { SelectOption } from '../select-option';
 import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
+import { JsonPipe } from '@angular/common';
 
 /**
  * Represents a component that renders a single PropertyAndMetadata.
@@ -18,6 +19,7 @@ import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-t
   imports: [
     NgIf,
     NgFor,
+    JsonPipe,
     MatIconModule,
     GameDesignerTypeComponent
   ]
@@ -26,6 +28,7 @@ export class GameDesignerPropertyComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
   @Input({ required: true }) public configuration!: Record<string, unknown>;
   @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
+  public showDebug: boolean = false;
 
   /***
    * Returns an entity name.  If the entity doesn't have a defined property name, the property key value will be returned.

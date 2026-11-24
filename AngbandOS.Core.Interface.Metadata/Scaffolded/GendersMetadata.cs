@@ -11,27 +11,27 @@ public static class GendersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Title")
                 {
                     Title = "Title",
                     Description = "Display title for the gender (e.g., \"Male\", \"Female\").",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Winner")
                 {
                     Title = "Winner",
                     Description = "Short title used when this gender is presented as the winner type.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanBeRandomlySelected")
                 {
                     Title = "Can Be Randomly Selected",
                     Description = "Whether this gender may be chosen by the random-selection logic.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Pronoun")
                 {
                     Title = "Pronoun",
                     Description = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "PossessiveAdjective")
                 {
                     Title = "Possessive Adjective",
                     Description = "Possessive adjective to use when rendering messages (default: \"its\").",

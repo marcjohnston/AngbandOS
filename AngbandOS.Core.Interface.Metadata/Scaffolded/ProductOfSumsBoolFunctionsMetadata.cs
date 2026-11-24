@@ -11,7 +11,7 @@ public static class ProductOfSumsBoolFunctionsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "EnabledNames")
                 {
                     Title = "Enabled Names",
                     Description = "The conditional names and required values used to determine whether configuration conditions are enabled.",

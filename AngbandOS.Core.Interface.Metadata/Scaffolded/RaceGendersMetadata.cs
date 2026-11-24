@@ -11,19 +11,19 @@ public static class RaceGendersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RaceBindingKey")
                 {
                     Title = "Race Binding Key",
                     Description = "Specifies the binding key for the race.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "GenderBindingKey")
                 {
                     Title = "Gender Binding Key",
                     Description = "Specifies the binding key for the gender.",
                     ForeignCollectionName = "Genders",
                     Inline = false,
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "PhysicalAttributesWeightedRandomBindings")
                 {
                     Title = "Physical Attributes Weighted Random Bindings",
                     Description = "Specifies the weighted random bindings for the race gender's physical attribute sets.",

@@ -11,17 +11,17 @@ public static class MapWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "X")
                 {
                     Title = "X",
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Y")
                 {
                     Title = "Y",
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ChangeTrackerNames")
                 {
                     Title = "Change Tracker Names",
                     Description = "Specifies the property names that participate in change tracking.",

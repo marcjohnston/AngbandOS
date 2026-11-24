@@ -11,7 +11,7 @@ public static class ViewsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "WidgetNames")
                 {
                     Title = "Widget Names",
                     Description = "Specifies the names of the widgets displayed in the view.",

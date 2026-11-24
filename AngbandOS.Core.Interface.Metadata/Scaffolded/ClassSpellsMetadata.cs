@@ -11,32 +11,32 @@ public static class ClassSpellsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "SpellName")
                 {
                     Title = "Spell Name",
                     Description = "The name of the spell associated with the character class.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "CharacterClassName")
                 {
                     Title = "Character Class Name",
                     Description = "The name of the character class associated with the spell.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Level")
                 {
                     Title = "Level",
                     Description = "The character class level at which the spell becomes available.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "ManaCost")
                 {
                     Title = "Mana Cost",
                     Description = "The amount of mana required to cast the spell.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "BaseFailure")
                 {
                     Title = "Base Failure",
                     Description = "The base chance that casting the spell will fail.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "FirstCastExperience")
                 {
                     Title = "First Cast Experience",
                     Description = "The experience gained the first time the spell is cast.",

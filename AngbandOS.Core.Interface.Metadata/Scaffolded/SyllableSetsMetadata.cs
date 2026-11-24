@@ -11,7 +11,7 @@ public static class SyllableSetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "BeginningSyllables")
                 {
                     Title = "Beginning Syllables",
                     Description = "Specifies the syllables that can begin generated names.",
@@ -22,7 +22,7 @@ public static class SyllableSetsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "MiddleSyllables")
                 {
                     Title = "Middle Syllables",
                     Description = "Specifies the syllables that can appear in the middle of generated names.",
@@ -33,7 +33,7 @@ public static class SyllableSetsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "EndingSyllables")
                 {
                     Title = "Ending Syllables",
                     Description = "Specifies the syllables that can end generated names.",

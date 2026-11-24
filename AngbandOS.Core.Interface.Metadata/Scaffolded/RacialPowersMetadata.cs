@@ -11,17 +11,17 @@ public static class RacialPowersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ScriptBindingKey")
                 {
                     Title = "Script Binding Key",
                     Description = "Specifies the binding key of the script executed by the racial power.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RaceBindingKey")
                 {
                     Title = "Race Binding Key",
                     Description = "Specifies the binding key of the associated race.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "CharacterClassBindingKey")
                 {
                     Title = "Character Class Binding Key",
                     Description = "Specifies the optional binding key of the associated character class.",

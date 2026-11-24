@@ -11,7 +11,7 @@ public static class ItemEnhancementsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "SummationAttributeAndExpressionBindings")
                 {
                     Title = "Summation Attribute and Expression Bindings",
                     Description = "The attribute names and expressions used to calculate summation-based item enhancements.",
@@ -35,7 +35,7 @@ public static class ItemEnhancementsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "BitwiseOrAttributeAndExpressionBindings")
                 {
                     Title = "Bitwise OR Attribute and Expression Bindings",
                     Description = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.",
@@ -59,7 +59,7 @@ public static class ItemEnhancementsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ScriptsAttributeAndScriptBindings")
                 {
                     Title = "Scripts Attribute and Script Bindings",
                     Description = "The attribute names and script names used to apply scripts as item enhancements.",
@@ -89,7 +89,7 @@ public static class ItemEnhancementsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ApplicableItemFactoryBindingKeys")
                 {
                     Title = "Applicable Item Factory Binding Keys",
                     Description = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.",
@@ -100,22 +100,22 @@ public static class ItemEnhancementsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "AdditionalItemEnhancementWeightedRandomBindingKey")
                 {
                     Title = "Additional Item Enhancement Weighted Random Binding Key",
                     Description = "The binding key of the weighted random configuration used to select an additional item enhancement.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "FriendlyName")
                 {
                     Title = "Friendly Name",
                     Description = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ActivationEnumValue")
                 {
                     Title = "Activation Name",
                     Description = "The name of the activation applied to the item, or null when the item cannot be activated.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ArtifactBiasWeightedRandomBindingKey")
                 {
                     Title = "Artifact Bias Weighted Random Binding Key",
                     Description = "The binding key of the weighted random configuration used to select an artifact bias.",

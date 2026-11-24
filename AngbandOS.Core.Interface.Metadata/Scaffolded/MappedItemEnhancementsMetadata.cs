@@ -11,7 +11,7 @@ public static class MappedItemEnhancementsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "FixedArtifactBindingKeys")
                 {
                     Title = "Fixed Artifact Binding Keys",
                     Description = "Specifies the fixed artifacts for the map entry. When null, applies to all fixed artifacts.",
@@ -22,7 +22,7 @@ public static class MappedItemEnhancementsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "CharacterClassBindingKeys")
                 {
                     Title = "Character Class Binding Keys",
                     Description = "Specifies the character classes for the map entry. When null, applies to all character classes.",
@@ -33,7 +33,7 @@ public static class MappedItemEnhancementsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ItemEnhancementBindingKeys")
                 {
                     Title = "Item Enhancement Binding Keys",
                     Description = "Specifies the item enhancements to be used for the fixed artifact. When null, no item enhancements are applied.",

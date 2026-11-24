@@ -11,32 +11,32 @@ public static class TalentsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "Specifies the name of the talent.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Level")
                 {
                     Title = "Level",
                     Description = "Specifies the level required to use the talent.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "ManaCost")
                 {
                     Title = "Mana Cost",
                     Description = "Specifies the mana cost of using the talent.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "BaseFailure")
                 {
                     Title = "Base Failure",
                     Description = "Specifies the base failure chance of using the talent.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "UseScriptBindingKey")
                 {
                     Title = "Use Script Binding Key",
                     Description = "Specifies the binding key of the script used by the talent.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "LearnedKnowledgeBindingKey")
                 {
                     Title = "Learned Knowledge Binding Key",
                     Description = "Specifies the optional binding key of the knowledge learned from the talent.",

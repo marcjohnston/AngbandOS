@@ -11,29 +11,29 @@ public static class AnimationsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "")
+                new PropertyMetadata("character", "Character")
                 {
                     Title = "Character",
                     Description = "The character displayed by the animation.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "The primary color used by the animation.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "The name of the animation.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "AlternateColor")
                 {
                     Title = "Alternate Color",
                     Description = "The alternate color used by the animation.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Sequence")
                 {
                     Title = "Sequence",
                     Description = "The sequence of characters or frames that make up the animation.",

@@ -11,17 +11,17 @@ public static class CharacterClassAndRaceInnateTotalsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "CharacterClassBindingKey")
                 {
                     Title = "Character Class Binding Key",
                     Description = "The binding key of the character class associated with these innate totals.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RaceBindingKey")
                 {
                     Title = "Race Binding Key",
                     Description = "The binding key of the race associated with these innate totals.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "MaxInnates")
                 {
                     Title = "Maximum Innates",
                     Description = "The maximum number of innate abilities available for each innate ability category.",

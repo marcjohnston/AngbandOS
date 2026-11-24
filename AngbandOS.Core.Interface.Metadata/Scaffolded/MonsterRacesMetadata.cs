@@ -11,12 +11,12 @@ public static class MonsterRacesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanTeleportSelf")
                 {
                     Title = "Can Teleport Self",
                     Description = "Determines whether the monster can teleport itself.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "MonsterSpellBindingKeys")
                 {
                     Title = "Spells",
                     Description = "Specifies the spells that are available to monsters of this race.",
@@ -29,35 +29,35 @@ public static class MonsterRacesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "MultilineName")
                 {
                     Title = "Multiline Name",
                     Description = "Specifies the multiline name displayed to the player. When null, the friendly name is used.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "SymbolName")
                 {
                     Title = "Symbol Name",
                     Description = "Specifies the binding key for the symbol used to render the monster.",
                     ForeignCollectionName = "Symbols",
                     Inline = false,
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "Specifies the color used to display the monster.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Animal")
                 {
                     Title = "Animal",
                     Description = "Determines whether the monster is an animal.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "ArmorClass")
                 {
                     Title = "Armor Class",
                     Description = "Specifies the monster's armor class.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "AttackDefinitions")
                 {
                     Title = "Attack Definitions",
                     Description = "Specifies the attack definitions for the monster. When null, the monster cannot attack.",
@@ -92,474 +92,474 @@ public static class MonsterRacesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "AttrAny")
                 {
                     Title = "Attribute Any",
                     Description = "Determines whether the monster can use any color when its color changes.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "AttrClear")
                 {
                     Title = "Attribute Clear",
                     Description = "Determines whether the monster is transparent.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "AttrMulti")
                 {
                     Title = "Attribute Multi",
                     Description = "Determines whether the monster changes color.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "BashDoor")
                 {
                     Title = "Bash Door",
                     Description = "Determines whether the monster can break open doors.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CharClear")
                 {
                     Title = "Character Clear",
                     Description = "Determines whether the monster is never seen, even with see invisible.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CharMulti")
                 {
                     Title = "Character Multi",
                     Description = "Determines whether the monster changes shape randomly.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ColdBlood")
                 {
                     Title = "Cold Blood",
                     Description = "Determines whether the monster is cold-blooded.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Cthuloid")
                 {
                     Title = "Cthuloid",
                     Description = "Determines whether the monster is cthuloid.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Demon")
                 {
                     Title = "Demon",
                     Description = "Determines whether the monster is a demon.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Description")
                 {
                     Title = "Description",
                     Description = "Specifies the descriptive text for the monster.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Dragon")
                 {
                     Title = "Dragon",
                     Description = "Determines whether the monster is a dragon.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Drop_1D2")
                 {
                     Title = "Drop 1D2",
                     Description = "Determines whether the monster drops one to two items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Drop_2D2")
                 {
                     Title = "Drop 2D2",
                     Description = "Determines whether the monster drops two to four items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Drop_3D2")
                 {
                     Title = "Drop 3D2",
                     Description = "Determines whether the monster drops three to six items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Drop_4D2")
                 {
                     Title = "Drop 4D2",
                     Description = "Determines whether the monster drops four to eight items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Drop60")
                 {
                     Title = "Drop 60",
                     Description = "Determines whether the monster drops an item 60 percent of the time.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Drop90")
                 {
                     Title = "Drop 90",
                     Description = "Determines whether the monster drops an item 90 percent of the time.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "DropGood")
                 {
                     Title = "Drop Good",
                     Description = "Determines whether the monster drops good items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "DropGreat")
                 {
                     Title = "Drop Great",
                     Description = "Determines whether the monster drops great items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "EldritchHorror")
                 {
                     Title = "Eldritch Horror",
                     Description = "Determines whether the monster is an eldritch horror.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "EmptyMind")
                 {
                     Title = "Empty Mind",
                     Description = "Determines whether the monster has an empty mind.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Escorted")
                 {
                     Title = "Escorted",
                     Description = "Determines whether the monster comes with minions of the same character.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "EscortsGroup")
                 {
                     Title = "Escorts Group",
                     Description = "Determines whether the monster's minions come in groups.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Evil")
                 {
                     Title = "Evil",
                     Description = "Determines whether the monster is evil.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Female")
                 {
                     Title = "Female",
                     Description = "Determines whether the monster uses feminine pronouns.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "FireAura")
                 {
                     Title = "Fire Aura",
                     Description = "Determines whether the monster has an aura of fire.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ForceMaxHp")
                 {
                     Title = "Force Maximum Hit Points",
                     Description = "Determines whether the monster has maximum hit points.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ForceSleep")
                 {
                     Title = "Force Sleep",
                     Description = "Determines whether the monster always starts asleep.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "FreqInate")
                 {
                     Title = "Innate Frequency",
                     Description = "Specifies the one-in-X frequency with which the monster uses innate abilities.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "FreqSpell")
                 {
                     Title = "Spell Frequency",
                     Description = "Specifies the one-in-X frequency with which the monster uses spells.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "FriendlyName")
                 {
                     Title = "Friendly Name",
                     Description = "Specifies the name displayed to the player.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Friends")
                 {
                     Title = "Friends",
                     Description = "Determines whether the monster comes with friends of the same race.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Giant")
                 {
                     Title = "Giant",
                     Description = "Determines whether the monster is a giant.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "GoldItemFactoryBindingKey")
                 {
                     Title = "Gold Item Factory Binding Key",
                     Description = "Specifies the binding key of the item factory used to create gold dropped by the monster.",
                     ForeignCollectionName = "ItemFactories",
                     Inline = false,
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Good")
                 {
                     Title = "Good",
                     Description = "Determines whether the monster is good.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "GreatOldOne")
                 {
                     Title = "Great Old One",
                     Description = "Determines whether the monster is a Great Old One.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HasLegs")
                 {
                     Title = "Has Legs",
                     Description = "Determines whether the monster has legs.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Hdice")
                 {
                     Title = "Hit Dice",
                     Description = "Specifies the number of hit dice the monster has.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Hside")
                 {
                     Title = "Hit Dice Sides",
                     Description = "Specifies the number of sides on the monster's hit dice.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HurtByCold")
                 {
                     Title = "Hurt By Cold",
                     Description = "Determines whether the monster is hurt by cold.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HurtByFire")
                 {
                     Title = "Hurt By Fire",
                     Description = "Determines whether the monster is hurt by fire.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HurtByLight")
                 {
                     Title = "Hurt By Light",
                     Description = "Determines whether the monster is hurt by light.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HurtByRock")
                 {
                     Title = "Hurt By Rock",
                     Description = "Determines whether the monster is hurt by rock.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneAcid")
                 {
                     Title = "Immune Acid",
                     Description = "Determines whether the monster is immune to acid.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneCold")
                 {
                     Title = "Immune Cold",
                     Description = "Determines whether the monster is immune to cold.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneConfusion")
                 {
                     Title = "Immune Confusion",
                     Description = "Determines whether the monster is immune to confusion.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneFear")
                 {
                     Title = "Immune Fear",
                     Description = "Determines whether the monster is immune to fear.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneFire")
                 {
                     Title = "Immune Fire",
                     Description = "Determines whether the monster is immune to fire.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneLightning")
                 {
                     Title = "Immune Lightning",
                     Description = "Determines whether the monster is immune to lightning.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmunePoison")
                 {
                     Title = "Immune Poison",
                     Description = "Determines whether the monster is immune to poison.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneSleep")
                 {
                     Title = "Immune Sleep",
                     Description = "Determines whether the monster is immune to sleep.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ImmuneStun")
                 {
                     Title = "Immune Stun",
                     Description = "Determines whether the monster is immune to stunning.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Invisible")
                 {
                     Title = "Invisible",
                     Description = "Determines whether the monster is invisible.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "KillBody")
                 {
                     Title = "Kill Body",
                     Description = "Determines whether the monster can kill bodies.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "KillItem")
                 {
                     Title = "Kill Item",
                     Description = "Determines whether the monster can destroy items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "KillWall")
                 {
                     Title = "Kill Wall",
                     Description = "Determines whether the monster can destroy walls.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "LevelFound")
                 {
                     Title = "Level Found",
                     Description = "Specifies the level on which the monster is normally found.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "LightningAura")
                 {
                     Title = "Lightning Aura",
                     Description = "Determines whether the monster has an aura of electricity.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Male")
                 {
                     Title = "Male",
                     Description = "Determines whether the monster is male.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Mexp")
                 {
                     Title = "Experience",
                     Description = "Specifies the experience value for killing the monster.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "MoveBody")
                 {
                     Title = "Move Body",
                     Description = "Determines whether the monster can move bodies.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Multiply")
                 {
                     Title = "Multiply",
                     Description = "Determines whether the monster can multiply.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "NeverAttack")
                 {
                     Title = "Never Attack",
                     Description = "Determines whether the monster never attacks.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "NeverMove")
                 {
                     Title = "Never Move",
                     Description = "Determines whether the monster never moves.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Nonliving")
                 {
                     Title = "Nonliving",
                     Description = "Determines whether the monster is nonliving.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "NoticeRange")
                 {
                     Title = "Notice Range",
                     Description = "Specifies the distance at which the monster notices the player.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "OnlyDropGold")
                 {
                     Title = "Only Drop Gold",
                     Description = "Determines whether the monster drops only gold.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "OnlyDropItem")
                 {
                     Title = "Only Drop Item",
                     Description = "Determines whether the monster drops only items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "OpenDoor")
                 {
                     Title = "Open Door",
                     Description = "Determines whether the monster can open doors.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Orc")
                 {
                     Title = "Orc",
                     Description = "Determines whether the monster is an orc.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "PassWall")
                 {
                     Title = "Pass Wall",
                     Description = "Determines whether the monster can pass through walls.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "BallAndBreatheProjectileBonusRadius")
                 {
                     Title = "Ball And Breathe Projectile Bonus Radius",
                     Description = "Specifies the bonus radius applied to ball and breath projectiles used by the monster.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "RandomMove25")
                 {
                     Title = "Random Move 25",
                     Description = "Determines whether the monster randomly moves 25 percent of the time.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "RandomMove50")
                 {
                     Title = "Random Move 50",
                     Description = "Determines whether the monster randomly moves 50 percent of the time.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Rarity")
                 {
                     Title = "Rarity",
                     Description = "Specifies the rarity with which the monster is found.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Reflecting")
                 {
                     Title = "Reflecting",
                     Description = "Determines whether the monster reflects attacks.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Reaver")
                 {
                     Title = "Reaver",
                     Description = "Determines whether the monster is a reaver.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Regenerate")
                 {
                     Title = "Regenerate",
                     Description = "Determines whether the monster regenerates.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ResistDisenchant")
                 {
                     Title = "Resist Disenchant",
                     Description = "Determines whether the monster resists disenchantment.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ResistNether")
                 {
                     Title = "Resist Nether",
                     Description = "Determines whether the monster resists nether.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ResistNexus")
                 {
                     Title = "Resist Nexus",
                     Description = "Determines whether the monster resists nexus.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ResistPlasma")
                 {
                     Title = "Resist Plasma",
                     Description = "Determines whether the monster resists plasma.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ResistTeleport")
                 {
                     Title = "Resist Teleport",
                     Description = "Determines whether the monster resists teleportation.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ResistWater")
                 {
                     Title = "Resist Water",
                     Description = "Determines whether the monster resists water.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Shapechanger")
                 {
                     Title = "Shapechanger",
                     Description = "Determines whether the monster is a shapechanger.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Sleep")
                 {
                     Title = "Sleep",
                     Description = "Specifies how deeply the monster sleeps.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Smart")
                 {
                     Title = "Smart",
                     Description = "Determines whether the monster prioritizes disabling, summoning, or escape spells when badly injured.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Speed")
                 {
                     Title = "Speed",
                     Description = "Specifies how fast the monster moves. A value of 110 represents normal speed.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Stupid")
                 {
                     Title = "Stupid",
                     Description = "Determines whether the monster is stupid.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "TakeItem")
                 {
                     Title = "Take Item",
                     Description = "Determines whether the monster can take items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Troll")
                 {
                     Title = "Troll",
                     Description = "Determines whether the monster is a troll.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Undead")
                 {
                     Title = "Undead",
                     Description = "Determines whether the monster is undead.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Unique")
                 {
                     Title = "Unique",
                     Description = "Determines whether the monster is unique.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "WeirdMind")
                 {
                     Title = "Weird Mind",
                     Description = "Determines whether the monster has a weird mind.",

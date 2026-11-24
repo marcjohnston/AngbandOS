@@ -11,38 +11,38 @@ public static class VaultsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "Specifies the display color of the vault.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "Specifies the name of the vault.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Category")
                 {
                     Title = "Category",
                     Description = "Specifies the category of the vault.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Height")
                 {
                     Title = "Height",
                     Description = "Specifies the height of the vault.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Rating")
                 {
                     Title = "Rating",
                     Description = "Specifies the difficulty rating of the vault.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Text")
                 {
                     Title = "Text",
                     Description = "Specifies the layout text of the vault.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Width")
                 {
                     Title = "Width",
                     Description = "Specifies the width of the vault.",

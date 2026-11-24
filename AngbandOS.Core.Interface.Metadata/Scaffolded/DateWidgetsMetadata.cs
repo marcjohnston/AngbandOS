@@ -11,39 +11,39 @@ public static class DateWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "DateValueName")
                 {
                     Title = "Date Value Name",
                     Description = "The name of the date value displayed by the widget.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "The color used to draw the widget text.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "X")
                 {
                     Title = "X",
                     Description = "The x-coordinate on the form where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Y")
                 {
                     Title = "Y",
                     Description = "The y-coordinate on the form where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Width")
                 {
                     Title = "Width",
                     Description = "The width of the widget, or null to use the default width.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "JustificationEnumValue")
                 {
                     Title = "Justification",
                     Description = "The name of the justification used to position the widget text within its width.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ChangeTrackerNames")
                 {
                     Title = "Change Tracker Names",
                     Description = "The names of the properties that participate in change tracking.",

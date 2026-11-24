@@ -11,50 +11,50 @@ public static class NullableStringsTextAreaWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "NullableStringsValueName")
                 {
                     Title = "Nullable Strings Value Name",
                     Description = "Specifies the name of the nullable strings value displayed by the widget.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "Specifies the color used to draw the widget text.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "X")
                 {
                     Title = "X",
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Y")
                 {
                     Title = "Y",
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Width")
                 {
                     Title = "Width",
                     Description = "Specifies the width of the widget.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "Height")
                 {
                     Title = "Height",
                     Description = "Specifies the height of the widget.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "JustificationEnumValue")
                 {
                     Title = "Justification",
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "AlignmentEnumValue")
                 {
                     Title = "Alignment Name",
                     Description = "Specifies the name of the alignment used to align the widget text.",
                     ForeignCollectionName = "AlignmentsEnum",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "ChangeTrackerNames")
                 {
                     Title = "Change Tracker Names",
                     Description = "Specifies the property names that participate in change tracking.",

@@ -11,27 +11,27 @@ public static class WizardCommandsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "")
+                new PropertyMetadata("character", "KeyChar")
                 {
                     Title = "Key Character",
                     Description = "Specifies the character used to invoke the wizard command.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsEnabled")
                 {
                     Title = "Is Enabled",
                     Description = "Determines whether the wizard command is enabled.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "HelpGroupName")
                 {
                     Title = "Help Group Name",
                     Description = "Specifies the name of the help group containing the wizard command. When null, the command is not associated with a help group.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "HelpDescription")
                 {
                     Title = "Help Description",
                     Description = "Specifies the description displayed for the wizard command.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ExecuteScriptName")
                 {
                     Title = "Execute Script Name",
                     Description = "Specifies the name of the script executed by the wizard command. When null, no script is executed.",

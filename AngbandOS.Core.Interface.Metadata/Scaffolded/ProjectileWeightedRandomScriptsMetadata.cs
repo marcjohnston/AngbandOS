@@ -11,7 +11,7 @@ public static class ProjectileWeightedRandomScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "NameAndWeightBindings")
                 {
                     Title = "Name and Weight Bindings",
                     Description = "Specifies the projectile script names and their associated weights used for weighted random selection.",
@@ -35,12 +35,12 @@ public static class ProjectileWeightedRandomScriptsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "LearnedDetails")
                 {
                     Title = "Learned Details",
                     Description = "Specifies the details revealed when the projectile script is learned.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "LearnedDetailsMode")
                 {
                     Title = "Learned Details Mode",
                     Description = "Specifies how the learned details are determined.",

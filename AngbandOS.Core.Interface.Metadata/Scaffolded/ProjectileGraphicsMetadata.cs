@@ -11,12 +11,12 @@ public static class ProjectileGraphicsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "")
+                new PropertyMetadata("character", "Character")
                 {
                     Title = "Character",
                     Description = "Specifies the character used to render the projectile.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "Specifies the color used to render the projectile.",

@@ -11,7 +11,7 @@ public static class ItemFactoryWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "NameAndWeightBindings")
                 {
                     Title = "Name and Weight Bindings",
                     Description = "The item factory binding keys and their corresponding weights used for weighted random selection.",

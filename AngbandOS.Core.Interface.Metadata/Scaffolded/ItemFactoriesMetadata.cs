@@ -11,83 +11,83 @@ public static class ItemFactoriesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ItemEnhancementBindingKey")
                 {
                     Title = "Item Enhancement Binding Key",
                     Description = "The binding key of the item enhancement applied to items created by this factory.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "PreassignedItemFlavorBindingKey")
                 {
                     Title = "Preassigned Item Flavor Binding Key",
                     Description = "The binding key of the item flavor assigned to items created by this factory, or null to allow the item class to assign a random flavor.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "NegativeBonusDamageRepresentsBroken")
                 {
                     Title = "Negative Bonus Damage Represents Broken",
                     Description = "Determines whether a negative bonus damage value represents a broken item.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "NegativeBonusArmorClassRepresentsBroken")
                 {
                     Title = "Negative Bonus Armor Class Represents Broken",
                     Description = "Determines whether a negative bonus armor class value represents a broken item.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "NegativeBonusHitRepresentsBroken")
                 {
                     Title = "Negative Bonus Hit Represents Broken",
                     Description = "Determines whether a negative bonus hit value represents a broken item.",
                 },
-                new PropertyMetadata("enum", "")
+                new PropertyMetadata("enum", "Color")
                 {
                     Title = "Color",
                     Description = "The color used to render items of this type.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey")
                 {
                     Title = "Slaying Random Artifact Item Enhancement Weighted Random Binding Key",
                     Description = "The binding key of the weighted random configuration used to select slaying item enhancements for random artifacts.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "RandomArtifactBonusArmorCeiling")
                 {
                     Title = "Random Artifact Bonus Armor Ceiling",
                     Description = "The maximum bonus armor value allowed when creating a random artifact, or null when no bonus should be added.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "RandomArtifactBonusHitCeiling")
                 {
                     Title = "Random Artifact Bonus Hit Ceiling",
                     Description = "The maximum bonus hit value allowed when creating a random artifact, or null when no bonus should be added.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "RandomArtifactBonusDamageCeiling")
                 {
                     Title = "Random Artifact Bonus Damage Ceiling",
                     Description = "The maximum bonus damage value allowed when creating a random artifact, or null when no bonus should be added.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RefillScriptBindingKey")
                 {
                     Title = "Refill Script Binding Key",
                     Description = "The binding key of the script used to refill the item, or null when the item cannot be refilled.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "SymbolBindingKey")
                 {
                     Title = "Symbol Binding Key",
                     Description = "The binding key of the symbol used to render the item.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanBeWeaponOfLaw")
                 {
                     Title = "Can Be Weapon of Law",
                     Description = "Determines whether the item can be a weapon of law.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanBeWeaponOfSharpness")
                 {
                     Title = "Can Be Weapon of Sharpness",
                     Description = "Determines whether the item can be a weapon of sharpness.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CapableOfVorpalSlaying")
                 {
                     Title = "Capable of Vorpal Slaying",
                     Description = "Determines whether the item is capable of vorpal slaying.",
                 },
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "UseBindingTuple")
                 {
                     Title = "Use Binding Tuple",
                     Description = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.",
@@ -115,7 +115,7 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "QuaffBindingTuple")
                 {
                     Title = "Quaff Binding Tuple",
                     Description = "The quaff script name, optional smash script name, and mana equivalent used when the item is quaffed.",
@@ -138,7 +138,7 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "AmmunitionItemFactoryBindingKeys")
                 {
                     Title = "Ammunition Item Factory Binding Keys",
                     Description = "The binding keys of the item factories used as ammunition for this item, or null when the item is not a ranged weapon.",
@@ -149,32 +149,32 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanSpikeDoorClosed")
                 {
                     Title = "Can Spike Door Closed",
                     Description = "Determines whether the item can be used to spike a door closed.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanProjectArrows")
                 {
                     Title = "Can Project Arrows",
                     Description = "Determines whether the item is a bow that can project arrows.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "EnchantmentMaximumCount")
                 {
                     Title = "Enchantment Maximum Count",
                     Description = "The maximum number of items that can be enchanted at one time.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsMagical")
                 {
                     Title = "Is Magical",
                     Description = "Determines whether the item is magical and is noticed by the detect magical scroll.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "ValuePerTurnOfLight")
                 {
                     Title = "Value Per Turn of Light",
                     Description = "The value of each turn of light for light sources.",
                 },
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "AimingBindingTuple")
                 {
                     Title = "Aiming Binding Tuple",
                     Description = "The activation script name, initial charges roll expression, per-charge value, and mana value for an item that can be aimed.",
@@ -202,52 +202,52 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "InitialBrokenStomp")
                 {
                     Title = "Initial Broken Stomp",
                     Description = "Determines whether broken items of this factory initially default to being stomped.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "InitialAverageStomp")
                 {
                     Title = "Initial Average Stomp",
                     Description = "Determines whether average-quality items of this factory initially default to being stomped.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "InitialGoodStomp")
                 {
                     Title = "Initial Good Stomp",
                     Description = "Determines whether good-quality items of this factory initially default to being stomped.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "InitialExcellentStomp")
                 {
                     Title = "Initial Excellent Stomp",
                     Description = "Determines whether excellent-quality items of this factory initially default to being stomped.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RechargeScriptBindingKey")
                 {
                     Title = "Recharge Script Binding Key",
                     Description = "The binding key of the script used to recharge the item.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsIgnoredByMonsters")
                 {
                     Title = "Is Ignored by Monsters",
                     Description = "Determines whether the item is ignored by monsters.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsContainer")
                 {
                     Title = "Is Container",
                     Description = "Determines whether the item is a container.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsRangedWeapon")
                 {
                     Title = "Is Ranged Weapon",
                     Description = "Determines whether the item is a ranged weapon.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "DisableStomp")
                 {
                     Title = "Disable Stomp",
                     Description = "Determines whether stomping is disabled for the item.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "EnhancementFixedArtifactFactoriesBindingKeys")
                 {
                     Title = "Enhancement Fixed Artifact Factories Binding Keys",
                     Description = "The binding keys of fixed artifact factories used to provide enhancements for this item factory.",
@@ -258,17 +258,17 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MissileDamageMultiplier")
                 {
                     Title = "Missile Damage Multiplier",
                     Description = "The damage multiplier applied when the missile weapon is used.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MaxPhlogiston")
                 {
                     Title = "Maximum Phlogiston",
                     Description = "The maximum amount of fuel that can be used for phlogiston, or null when the light source cannot create phlogiston.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "MassProduceBindingTuples")
                 {
                     Title = "Mass Produce Binding Tuples",
                     Description = "The count and roll expression used to determine additional items produced for items sold in a store based on their cost.",
@@ -292,12 +292,12 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "BreaksDuringEnchantmentProbabilityExpression")
                 {
                     Title = "Breaks During Enchantment Probability Expression",
                     Description = "The probability expression that determines the chance the item breaks during enchantment.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "EnchantmentBindingTuples")
                 {
                     Title = "Enchantment Binding Tuples",
                     Description = "The power levels, store-stock condition, and script names used to determine which enchantment scripts apply.",
@@ -338,102 +338,102 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "EatMagicScriptBindingKey")
                 {
                     Title = "Eat Magic Script Binding Key",
                     Description = "The binding key of the script run when the energy of a rechargeable item is consumed, or null when the item has no consumable charges.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "GridProcessWorldScriptBindingKey")
                 {
                     Title = "Grid Process World Script Binding Key",
                     Description = "The binding key of the script used to process the item on the grid during world processing.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "MonsterProcessWorldScriptBindingKey")
                 {
                     Title = "Monster Process World Script Binding Key",
                     Description = "The binding key of the script used to process the item during monster world processing.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "EquipmentProcessWorldScriptBindingKey")
                 {
                     Title = "Equipment Process World Script Binding Key",
                     Description = "The binding key of the script used to process the item during equipment world processing.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "PackProcessWorldScriptBindingKey")
                 {
                     Title = "Pack Process World Script Binding Key",
                     Description = "The binding key of the script used to process the item during pack world processing.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "BreakageChanceProbabilityExpression")
                 {
                     Title = "Breakage Chance Probability Expression",
                     Description = "The probability expression representing the chance that an item thrown or fired will break.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "MakeObjectCountExpression")
                 {
                     Title = "Make Object Count Expression",
                     Description = "The expression used to determine the number of items created by MakeObject.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "GetsDamageMultiplier")
                 {
                     Title = "Gets Damage Multiplier",
                     Description = "Determines whether the item multiplies damage against a specific monster race.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IdentityCanBeSensed")
                 {
                     Title = "Identity Can Be Sensed",
                     Description = "Determines whether the item can be sensed.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsArmor")
                 {
                     Title = "Is Armor",
                     Description = "Determines whether the item is armor.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsWeapon")
                 {
                     Title = "Is Weapon",
                     Description = "Determines whether the item is a weapon.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "NumberOfItemsContained")
                 {
                     Title = "Number of Items Contained",
                     Description = "The number of items contained in the chest, or zero when the item is not a container.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "Name")
                 {
                     Title = "Name",
                     Description = "The name of the item within its factory class, uniquely identifying it from other items in the same factory class.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "DescriptionSyntax")
                 {
                     Title = "Description Syntax",
                     Description = "The syntax used to construct the item's description, including article and pluralization markers.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "AlternateDescriptionSyntax")
                 {
                     Title = "Alternate Description Syntax",
                     Description = "The alternate description syntax used for items with character-class-specific names, or null to use the standard description syntax.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "FlavorSuppressedDescriptionSyntax")
                 {
                     Title = "Flavor Suppressed Description Syntax",
                     Description = "The description syntax used when the item's flavor is suppressed.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "AlternateFlavorSuppressedDescriptionSyntax")
                 {
                     Title = "Alternate Flavor Suppressed Description Syntax",
                     Description = "The alternate description syntax used when the item's flavor is suppressed.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "FlavorUnknownDescriptionSyntax")
                 {
                     Title = "Flavor Unknown Description Syntax",
                     Description = "The description syntax used when the item's flavor is unknown.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "AlternateFlavorUnknownDescriptionSyntax")
                 {
                     Title = "Alternate Flavor Unknown Description Syntax",
                     Description = "The alternate description syntax used when the item's flavor is unknown.",
                 },
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "ZapBindingTuple")
                 {
                     Title = "Zap Binding Tuple",
                     Description = "The script name, recharge time, aiming requirement, and mana equivalent for an item that can be zapped.",
@@ -461,17 +461,17 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "ItemClassBindingKey")
                 {
                     Title = "Item Class Binding Key",
                     Description = "The binding key of the item class for this item factory.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "PackSort")
                 {
                     Title = "Pack Sort",
                     Description = "The sort order index used to arrange items in a pack. Lower values appear first.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "WieldSlotBindingKeys")
                 {
                     Title = "Wield Slot Binding Keys",
                     Description = "The binding keys of the inventory slots where the item can be wielded, in preference order.",
@@ -482,22 +482,22 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "AskDestroyAll")
                 {
                     Title = "Ask Destroy All",
                     Description = "Determines whether the destroy script asks the player whether known items from this factory should be destroyed.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HasQualityRatings")
                 {
                     Title = "Has Quality Ratings",
                     Description = "Determines whether items from this factory have different quality ratings.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "ArmorClass")
                 {
                     Title = "Armor Class",
                     Description = "The base armor class rating for items created by the factory.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "DepthsFoundAndChances")
                 {
                     Title = "Depths Found and Chances",
                     Description = "The dungeon levels and corresponding one-in chances at which the item can be found naturally, or null when it is not found naturally.",
@@ -521,67 +521,67 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "DiceSides")
                 {
                     Title = "Dice Sides",
                     Description = "The number of sides on the item's damage die.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "LevelNormallyFound")
                 {
                     Title = "Level Normally Found",
                     Description = "The dungeon level at which the item is normally found.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "InitialBonusAttacks")
                 {
                     Title = "Initial Bonus Attacks",
                     Description = "The initial number of bonus attacks assigned to the item.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "InitialBonusInfravision")
                 {
                     Title = "Initial Bonus Infravision",
                     Description = "The initial amount of bonus infravision assigned to the item.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "InitialBonusSpeed")
                 {
                     Title = "Initial Bonus Speed",
                     Description = "The initial amount of bonus speed assigned to the item.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "InitialBonusSearchExpression")
                 {
                     Title = "Initial Bonus Search Expression",
                     Description = "The expression used to determine the initial bonus search value assigned to the item.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "InitialBonusStealthExpression")
                 {
                     Title = "Initial Bonus Stealth Expression",
                     Description = "The expression used to determine the initial bonus stealth value assigned to the item.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "InitialBonusTunnel")
                 {
                     Title = "Initial Bonus Tunnel",
                     Description = "The initial amount of bonus tunneling assigned to the item.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "InitialTurnsOfLight")
                 {
                     Title = "Initial Turns of Light",
                     Description = "The initial number of turns of light assigned to the item.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "InitialNutritionalValue")
                 {
                     Title = "Initial Nutritional Value",
                     Description = "The initial nutritional value assigned to items created by this factory.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "InitialGoldPiecesRollExpression")
                 {
                     Title = "Initial Gold Pieces Roll Expression",
                     Description = "The roll expression used to determine the initial number of gold pieces given to the player when the item is picked up.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "ExperienceGainDivisorForDestroying")
                 {
                     Title = "Experience Gain Divisor for Destroying",
                     Description = "The divisor used to calculate experience gained when an applicable character class destroys the book.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "SpellBindingKeys")
                 {
                     Title = "Spell Binding Keys",
                     Description = "The binding keys of the spells belonging to this book, in order, or null when the item is not a book.",
@@ -592,87 +592,87 @@ public static class ItemFactoriesMetadata
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsGood")
                 {
                     Title = "Is Good",
                     Description = "Determines whether this factory generates good items.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsSmall")
                 {
                     Title = "Is Small",
                     Description = "Determines whether the chest is small.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "BaseValue")
                 {
                     Title = "Base Value",
                     Description = "The base value of a non-flavor-aware item.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HatesElectricity")
                 {
                     Title = "Hates Electricity",
                     Description = "Determines whether the item is susceptible to electricity.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HatesFire")
                 {
                     Title = "Hates Fire",
                     Description = "Determines whether the item is susceptible to fire.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HatesAcid")
                 {
                     Title = "Hates Acid",
                     Description = "Determines whether the item is susceptible to acid.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "HatesCold")
                 {
                     Title = "Hates Cold",
                     Description = "Determines whether the item is susceptible to cold.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanProvideSheathOfElectricity")
                 {
                     Title = "Can Provide Sheath of Electricity",
                     Description = "Determines whether the item can provide a sheath of electricity.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanProvideSheathOfFire")
                 {
                     Title = "Can Provide Sheath of Fire",
                     Description = "Determines whether the item can provide a sheath of fire.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "RandartActivationChance")
                 {
                     Title = "Random Artifact Activation Chance",
                     Description = "The one-in chance that a random artifact receives an activation.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "ProvidesSunlight")
                 {
                     Title = "Provides Sunlight",
                     Description = "Determines whether the item provides sunlight that burns certain races.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanApplyArtifactBiasResistance")
                 {
                     Title = "Can Apply Artifact Bias Resistance",
                     Description = "Determines whether items from this factory can receive random resistance bonuses from biased artifacts.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "CanBeEatenByMonsters")
                 {
                     Title = "Can Be Eaten by Monsters",
                     Description = "Determines whether an item from this factory can be eaten by a monster with the eat food attack effect.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "EatScriptBindingKey")
                 {
                     Title = "Eat Script Binding Key",
                     Description = "The binding key of the script run when an item from this factory is eaten, or null when items cannot be eaten.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "VanishesWhenEatenBySkeletons")
                 {
                     Title = "Vanishes When Eaten by Skeletons",
                     Description = "Determines whether the item vanishes when eaten by skeletons.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "IsConsumedWhenEaten")
                 {
                     Title = "Is Consumed When Eaten",
                     Description = "Determines whether the food item is completely consumed and removed when eaten.",
                 },
-                new PropertyMetadata("tuple", "")
+                new PropertyMetadata("tuple", "ReadBindingTuple")
                 {
                     Title = "Read Binding Tuple",
                     Description = "The script name and mana value used when the item is read.",

@@ -11,27 +11,27 @@ public static class MappedSpellScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "RealmBindingKey")
                 {
                     Title = "Realm Binding Key",
                     Description = "Returns the binding key of the realm associated with this mapped spell script.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "CharacterClassBindingKey")
                 {
                     Title = "Character Class Binding Key",
                     Description = "Returns the binding key of the character class associated with this mapped spell script.",
                 },
-                new PropertyMetadata("string", "")
+                new PropertyMetadata("string", "SpellBindingKey")
                 {
                     Title = "Spell Binding Key",
                     Description = "Returns the binding key of the spell associated with this mapped spell script.",
                 },
-                new PropertyMetadata("boolean", "")
+                new PropertyMetadata("boolean", "Success")
                 {
                     Title = "Success",
                     Description = "Indicates whether the mapped spell script represents a successful spell cast.",
                 },
-                new PropertyMetadata("array", "")
+                new PropertyMetadata("array", "CastSpellScriptBindingKeys")
                 {
                     Title = "Cast Spell Script Binding Keys",
                     Description = "Returns the binding keys of the cast spell scripts to run when the spell is cast, or null if the spell does nothing when cast.",
@@ -42,12 +42,12 @@ public static class MappedSpellScriptsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MinimumExperienceLevel")
                 {
                     Title = "Minimum Experience Level",
                     Description = "Returns the minimum experience level required for this mapped spell script, or null if there is no minimum.",
                 },
-                new PropertyMetadata("integer", "")
+                new PropertyMetadata("integer", "MaximumExperienceLevel")
                 {
                     Title = "Maximum Experience Level",
                     Description = "Returns the maximum experience level allowed for this mapped spell script, or null if there is no maximum.",
