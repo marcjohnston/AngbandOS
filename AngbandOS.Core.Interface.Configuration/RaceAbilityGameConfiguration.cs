@@ -8,17 +8,17 @@ public class RaceAbilityGameConfiguration : CompositeSingletonGameConfiguration
 
     [ConfigurationProperty("int",
         Title = "Bonus",
-        Summary = "Specifies the bonus applied to the race ability.")]
+        Description = "Specifies the bonus applied to the race ability.")]
     public virtual int Bonus { get; set; } = 0;
 
     [ConfigurationProperty("string",
         Title = "Race Binding Key",
-        Summary = "Specifies the binding key of the associated race.")]
+        Description = "Specifies the binding key of the associated race.")]
     public virtual string RaceBindingKey { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Ability Binding Key",
-        Summary = "Specifies the binding key of the associated ability.")]
+        Description = "Specifies the binding key of the associated ability.")]
     public virtual string AbilityBindingKey { get; set; }
 }
 

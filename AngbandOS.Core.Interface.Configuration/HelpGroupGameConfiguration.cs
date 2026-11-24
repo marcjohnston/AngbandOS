@@ -12,11 +12,11 @@ public class HelpGroupGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty("int",
         Title = "Sort Index",
-        Summary = "The order in which the help group is displayed.")]
+        Description = "The order in which the help group is displayed.")]
     public virtual int SortIndex { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Title",
-        Summary = "The title of the help group.")]
+        Description = "The title of the help group.")]
     public virtual string Title { get; set; }
 }

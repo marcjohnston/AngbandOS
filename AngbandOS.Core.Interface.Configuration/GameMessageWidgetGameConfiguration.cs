@@ -12,7 +12,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
 {
     [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "The color used to draw the widget's text.")]
+        Description = "The color used to draw the widget's text.")]
     /// <remarks>
     /// Defaults to <see cref="ColorEnum.White"/>. Change this to any value from <see cref="ColorEnum"/>
     /// to alter the message text color. The exact rendering behavior (e.g., palettes, intensity)
@@ -22,7 +22,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
 
     [ConfigurationProperty("int",
         Title = "X",
-        Summary = "X-coordinate (horizontal) of the widget's top-left corner on the Form.")]
+        Description = "X-coordinate (horizontal) of the widget's top-left corner on the Form.")]
     /// <remarks>
     /// Coordinate system is the <see cref="Form"/>'s client area with (0,0) at the top-left.
     /// This value is in character/cell units or pixels depending on the UI layer that consumes it —
@@ -32,7 +32,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
 
     [ConfigurationProperty("int",
         Title = "Y",
-        Summary = "Y-coordinate (vertical) of the widget's top-left corner on the Form.")]
+        Description = "Y-coordinate (vertical) of the widget's top-left corner on the Form.")]
     /// <remarks>
     /// Coordinate system is the <see cref="Form"/>'s client area with (0,0) at the top-left.
     /// This value is in character/cell units or pixels depending on the UI layer that consumes it —
@@ -42,7 +42,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
 
     [ConfigurationProperty("int?",
         Title = "Width",
-        Summary = "Width of the widget; when null, the widget should extend to the remaining width of the screen.")]
+        Description = "Width of the widget; when null, the widget should extend to the remaining width of the screen.")]
     /// <remarks>
     /// If specified, this value constrains the visible width of the message area. If <c>null</c>,
     /// the UI should calculate the remaining available width on the line starting at <see cref="X"/>.
@@ -52,7 +52,7 @@ public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfi
 
     [ConfigurationProperty("string",
         Title = "More Prompt",
-        Summary = "Text used for the \"more\" prompt when message output is paused.")]
+        Description = "Text used for the \"more\" prompt when message output is paused.")]
     /// <remarks>
     /// Defaults to <c>"-more-"</c>. The UI will display this prompt (or an equivalent indicator)
     /// when the message widget requires user interaction to continue (for example when there are

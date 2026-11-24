@@ -12,7 +12,7 @@ public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfigu
 {
     [ConfigurationProperty("(string AttributeKey, bool DesiredValue)[]?",
         Title = "Bitwise Or Attribute Filter Bindings",
-        Summary = "The attribute bindings used to filter for attributes where any specified bitwise value matches.")]
+        Description = "The attribute bindings used to filter for attributes where any specified bitwise value matches.")]
     [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
@@ -23,7 +23,7 @@ public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfigu
 
     [ConfigurationProperty("(string AttributeKey, bool?[] DesiredValue)[]?",
         Title = "Boolean Attribute Filter Bindings",
-        Summary = "The attribute bindings used to filter boolean attributes by their desired values.")]
+        Description = "The attribute bindings used to filter boolean attributes by their desired values.")]
     [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
@@ -34,7 +34,7 @@ public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfigu
 
     [ConfigurationProperty("(string AttributeKey, int? StartingValue, int? EndingValue)[]?",
         Title = "Summation Attribute Filter Bindings",
-        Summary = "The attribute bindings used to filter summed numeric attributes within a specified range.")]
+        Description = "The attribute bindings used to filter summed numeric attributes within a specified range.")]
     [ConfigurationTupleItem(
         "AttributeKey",
         Title = "Attribute Key")]
@@ -48,11 +48,11 @@ public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfigu
 
     [ConfigurationProperty("bool?",
         Title = "Activation Attribute Non-Null",
-        Summary = "Determines whether the activation attribute must be non-null.")]
+        Description = "Determines whether the activation attribute must be non-null.")]
     public virtual bool? ActivationAttributeNonNull { get; set; } = null;
 
     [ConfigurationProperty("bool?",
         Title = "Artifact Bias Attribute Non-Null",
-        Summary = "Determines whether the artifact bias attribute must be non-null.")]
+        Description = "Determines whether the artifact bias attribute must be non-null.")]
     public virtual bool? ArtifactBiasAttributeNonNull { get; set; } = null;
 }

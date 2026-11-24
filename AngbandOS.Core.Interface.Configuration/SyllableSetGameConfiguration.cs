@@ -6,16 +6,16 @@ public class SyllableSetGameConfiguration : NonCompositeSingletonGameConfigurati
 {
     [ConfigurationProperty("string[]",
         Title = "Beginning Syllables",
-        Summary = "Specifies the syllables that can begin generated names.")]
+        Description = "Specifies the syllables that can begin generated names.")]
     public virtual string[] BeginningSyllables { get; set; }
 
     [ConfigurationProperty("string[]",
         Title = "Middle Syllables",
-        Summary = "Specifies the syllables that can appear in the middle of generated names.")]
+        Description = "Specifies the syllables that can appear in the middle of generated names.")]
     public virtual string[] MiddleSyllables { get; set; }
 
     [ConfigurationProperty("string[]",
         Title = "Ending Syllables",
-        Summary = "Specifies the syllables that can end generated names.")]
+        Description = "Specifies the syllables that can end generated names.")]
     public virtual string[] EndingSyllables { get; set; }
 }

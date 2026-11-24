@@ -9,16 +9,16 @@ public class CharacterClassAbilityGameConfiguration : CompositeSingletonGameConf
 
     [ConfigurationProperty("int",
         Title = "Bonus",
-        Summary = "The bonus applied to the ability for this character class.")]
+        Description = "The bonus applied to the ability for this character class.")]
     public virtual int Bonus { get; set; } = 0;
 
     [ConfigurationProperty("string",
         Title = "Character Class Binding Key",
-        Summary = "The binding key identifying the character class.")]
+        Description = "The binding key identifying the character class.")]
     public virtual string CharacterClassBindingKey { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Ability Binding Key",
-        Summary = "The binding key identifying the ability.")]
+        Description = "The binding key identifying the ability.")]
     public virtual string AbilityBindingKey { get; set; }
 }

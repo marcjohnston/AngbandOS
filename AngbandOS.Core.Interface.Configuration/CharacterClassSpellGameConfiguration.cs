@@ -14,31 +14,31 @@ public class CharacterClassSpellGameConfiguration : CompositeSingletonGameConfig
 
     [ConfigurationProperty("string",
         Title = "Spell Name",
-        Summary = "The name of the spell associated with the character class.")]
+        Description = "The name of the spell associated with the character class.")]
     public virtual string SpellName { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Character Class Name",
-        Summary = "The name of the character class associated with the spell.")]
+        Description = "The name of the character class associated with the spell.")]
     public virtual string CharacterClassName { get; set; }
 
     [ConfigurationProperty("int",
         Title = "Level",
-        Summary = "The character class level at which the spell becomes available.")]
+        Description = "The character class level at which the spell becomes available.")]
     public virtual int Level { get; set; }
 
     [ConfigurationProperty("int",
         Title = "Mana Cost",
-        Summary = "The amount of mana required to cast the spell.")]
+        Description = "The amount of mana required to cast the spell.")]
     public virtual int ManaCost { get; set; }
 
     [ConfigurationProperty("int",
         Title = "Base Failure",
-        Summary = "The base chance that casting the spell will fail.")]
+        Description = "The base chance that casting the spell will fail.")]
     public virtual int BaseFailure { get; set; }
 
     [ConfigurationProperty("int",
         Title = "First Cast Experience",
-        Summary = "The experience gained the first time the spell is cast.")]
+        Description = "The experience gained the first time the spell is cast.")]
     public virtual int FirstCastExperience { get; set; }
 }

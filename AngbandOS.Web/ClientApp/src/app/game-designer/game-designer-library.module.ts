@@ -11,7 +11,7 @@ export function getEntityName(propertyMetadata: PropertyMetadata, entity: any): 
 
     // Check to see if the entity name is properly suffixed with the entity title.
     var entityName = keyValue; // Default the entity name to the key value.
-    const collectionEntityName: string | null = propertyMetadata.entityNoun;
+    const collectionEntityName: string | null = propertyMetadata.entityNounTitle;
     if (collectionEntityName !== null &&
         keyValue.endsWith(collectionEntityName)) {
       // Override the entity name by removing the suffix.

@@ -15,7 +15,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Monster Action",
-        Summary = "The action message displayed when the attack targets another monster.")]
+        Description = "The action message displayed when the attack targets another monster.")]
     public virtual string MonsterAction { get; set; }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// <returns></returns>
     [ConfigurationProperty("string[]?",
         Title = "Player Action Messages",
-        Summary = "The action messages displayed when the attack targets the player.")]
+        Description = "The action messages displayed when the attack targets the player.")]
     public virtual string[]? PlayerActionMessages { get; set; }
 
     /// <summary>
@@ -34,7 +34,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Knowledge Action",
-        Summary = "The action message displayed when a description of the attack is rendered in the player's knowledge.")]
+        Description = "The action message displayed when a description of the attack is rendered in the player's knowledge.")]
     public virtual string KnowledgeAction { get; set; }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Attack Touches Target",
-        Summary = "Determines whether the attack requires touching the target.")]
+        Description = "Determines whether the attack requires touching the target.")]
     public virtual bool AttackTouchesTarget { get; set; } = true;
 
     /// <summary>
@@ -52,7 +52,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Attack Awakens Target",
-        Summary = "Determines whether the attack awakens the target.")]
+        Description = "Determines whether the attack awakens the target.")]
     public virtual bool AttackAwakensTarget { get; set; } = false;
 
     /// <summary>
@@ -60,7 +60,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Attack Stuns Target",
-        Summary = "Determines whether the attack stuns the target.")]
+        Description = "Determines whether the attack stuns the target.")]
     public virtual bool AttackStunsTarget { get; set; } = false;
 
     /// <summary>
@@ -68,7 +68,7 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Attack Cuts Target",
-        Summary = "Determines whether the attack cuts the target.")]
+        Description = "Determines whether the attack cuts the target.")]
     public virtual bool AttackCutsTarget { get; set; } = false;
 
     /// <summary>
@@ -77,6 +77,6 @@ public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Renders Miss Message",
-        Summary = "Determines whether a message is rendered when the attack touches the target but misses.")]
+        Description = "Determines whether a message is rendered when the attack touches the target but misses.")]
     public virtual bool RendersMissMessage { get; set; } = true;
 }

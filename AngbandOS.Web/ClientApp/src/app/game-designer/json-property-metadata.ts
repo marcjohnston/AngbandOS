@@ -8,11 +8,10 @@ export class JsonPropertyMetadata {
   public categoryTitle: string | undefined = undefined;
   public description: string | null | undefined = undefined;
   public defaultValue: string[] | null | undefined = undefined;
-  public propertyMetadatas: JsonPropertyMetadata[] | null | undefined = undefined;
+  public associatedProperties: JsonPropertyMetadata[] | null | undefined = undefined;
   public entityKeyPropertyName: string | null | undefined = undefined;
   public entityNamePropertyName: string | null | undefined = undefined;
   public entityNounTitle: string | null | undefined = undefined;
-  public entityNoun: string | null | undefined = undefined;
   public foreignCollectionName: string | null | undefined = undefined;
   public labelIfNullable: string | null | undefined = undefined;
 }

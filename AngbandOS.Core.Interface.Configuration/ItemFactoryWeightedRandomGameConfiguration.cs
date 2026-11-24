@@ -7,7 +7,7 @@ public class ItemFactoryWeightedRandomGameConfiguration : NonCompositeSingletonG
 {
     [ConfigurationProperty("(string Name, int Weight)[]",
         Title = "Name and Weight Bindings",
-        Summary = "The item factory binding keys and their corresponding weights used for weighted random selection.")]
+        Description = "The item factory binding keys and their corresponding weights used for weighted random selection.")]
     [ConfigurationTupleItem("Name", Title = "Name")]
     [ConfigurationTupleItem("Weight", Title = "Weight")]
     public virtual (string Name, int Weight)[] NameAndWeightBindings { get; set; }

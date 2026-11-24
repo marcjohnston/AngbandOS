@@ -6,6 +6,6 @@ public class PluralGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty("string",
         Title = "Plural Form",
-        Summary = "Specifies the pluralized form of the key.")]
+        Description = "Specifies the pluralized form of the key.")]
     public virtual string PluralForm { get; set; }
 }

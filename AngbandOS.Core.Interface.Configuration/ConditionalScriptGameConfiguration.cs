@@ -12,16 +12,16 @@ public class ConditionalScriptGameConfiguration : NonCompositeSingletonGameConfi
 {
     [ConfigurationProperty("string",
         Title = "Conditional Key",
-        Summary = "The key identifying the conditional evaluated by the script.")]
+        Description = "The key identifying the conditional evaluated by the script.")]
     public virtual string ConditionalKey { get; set; }
 
     [ConfigurationProperty("string[]?",
         Title = "True Script Binding Keys",
-        Summary = "The binding keys of the scripts executed when the conditional evaluates to true.")]
+        Description = "The binding keys of the scripts executed when the conditional evaluates to true.")]
     public virtual string[]? TrueScriptBindingKeys { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "False Script Binding Keys",
-        Summary = "The binding keys of the scripts executed when the conditional evaluates to false.")]
+        Description = "The binding keys of the scripts executed when the conditional evaluates to false.")]
     public virtual string[]? FalseScriptBindingKeys { get; set; } = null;
 }

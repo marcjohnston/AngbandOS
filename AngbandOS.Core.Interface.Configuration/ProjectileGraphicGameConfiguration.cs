@@ -6,11 +6,11 @@ public class ProjectileGraphicGameConfiguration : NonCompositeSingletonGameConfi
 {
     [ConfigurationProperty("char",
         Title = "Character",
-        Summary = "Specifies the character used to render the projectile.")]
+        Description = "Specifies the character used to render the projectile.")]
     public virtual char Character { get; set; }
 
     [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "Specifies the color used to render the projectile.")]
+        Description = "Specifies the color used to render the projectile.")]
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 }

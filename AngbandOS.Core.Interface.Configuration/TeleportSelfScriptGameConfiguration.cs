@@ -12,6 +12,6 @@ public class TeleportSelfScriptGameConfiguration : NonCompositeSingletonGameConf
 {
     [ConfigurationProperty("string",
         Title = "Distance Expression",
-        Summary = "Specifies the expression used to determine the teleportation distance.")]
+        Description = "Specifies the expression used to determine the teleportation distance.")]
     public virtual string DistanceExpression { get; set; } = "10";
 }

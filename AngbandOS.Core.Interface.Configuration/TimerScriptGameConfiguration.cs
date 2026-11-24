@@ -6,7 +6,7 @@ public class TimerScriptGameConfiguration : NonCompositeSingletonGameConfigurati
 {
     [ConfigurationProperty("bool",
         Title = "Used",
-        Summary = "Determines whether items are considered used by the timer.")]
+        Description = "Determines whether items are considered used by the timer.")]
     /// <summary>
     /// Returns whether or not items are considered used.  Returns true, by default for timers.
     /// </summary>
@@ -14,7 +14,7 @@ public class TimerScriptGameConfiguration : NonCompositeSingletonGameConfigurati
 
     [ConfigurationProperty("string?",
         Title = "Value Expression",
-        Summary = "Specifies the expression used to modify the timer. Positive values add time, negative values subtract time, and null resets the timer to zero.")]
+        Description = "Specifies the expression used to modify the timer. Positive values add time, negative values subtract time, and null resets the timer to zero.")]
     /// <summary>
     /// Returns an expression that determine how much timer to add (positive values), subtract (negative values) to the timer; or null, to reset the timer to zero.
     /// </summary>
@@ -22,7 +22,7 @@ public class TimerScriptGameConfiguration : NonCompositeSingletonGameConfigurati
 
     [ConfigurationProperty("string",
         Title = "Timer Binding Key",
-        Summary = "Specifies the binding key of the timer modified by the script.")]
+        Description = "Specifies the binding key of the timer modified by the script.")]
     /// <summary>
     /// Returns the binding key for the timer that the script will modify.
     /// </summary>
@@ -30,21 +30,21 @@ public class TimerScriptGameConfiguration : NonCompositeSingletonGameConfigurati
 
     [ConfigurationProperty("string?",
         Title = "Custom Learned Details",
-        Summary = "Specifies custom details revealed when the timer script is learned.")]
+        Description = "Specifies custom details revealed when the timer script is learned.")]
     public virtual string? CustomLearnedDetails { get; set; } = null;
 
     [ConfigurationProperty("bool",
         Title = "Quiet",
-        Summary = "Determines whether the timer script executes without displaying messages.")]
+        Description = "Determines whether the timer script executes without displaying messages.")]
     public virtual bool Quiet { get; set; } = false;
 
     [ConfigurationProperty("string?",
         Title = "Pre-Message",
-        Summary = "Specifies the message displayed before the timer script executes.")]
+        Description = "Specifies the message displayed before the timer script executes.")]
     public virtual string? PreMessage { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Enabled Boolean Positive Function Binding Key",
-        Summary = "Specifies the optional binding key for the function that determines whether the timer script is enabled.")]
+        Description = "Specifies the optional binding key for the function that determines whether the timer script is enabled.")]
     public virtual string? EnabledBoolPosFunctionBindingKey { get; set; } = null;
 }

@@ -36,8 +36,8 @@ export class GameDesignerPropertyComponent {
 
   public addEntity() {
     const newCollectionEntity: any[] = [];
-    for (let index = 0; index < this.propertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas!.length; index++) {
-      const tuplePropertyMetadata: PropertyMetadata = this.propertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
+    for (let index = 0; index < this.propertyMetadataAndConfiguration.propertyMetadata.associatedProperties!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.propertyMetadataAndConfiguration!.propertyMetadata.associatedProperties![index];
       newCollectionEntity.push(tuplePropertyMetadata.defaultValue);
     }
     this.propertyMetadataAndConfiguration?.configuration.push(newCollectionEntity);

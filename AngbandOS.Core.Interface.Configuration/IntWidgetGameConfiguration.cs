@@ -20,7 +20,7 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     [ConfigurationProperty("string",
         Title = "Integer Value Name",
-        Summary = "The name of the integer value property to bind to.")]
+        Description = "The name of the integer value property to bind to.")]
     public virtual string IntValueName { get; set; }
 
     /// <summary>
@@ -32,7 +32,7 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "The color used to draw the widget's text.")]
+        Description = "The color used to draw the widget's text.")]
     public virtual ColorEnum Color { get; set; }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     [ConfigurationProperty("int",
         Title = "X",
-        Summary = "The horizontal coordinate of the widget's top-left corner.")]
+        Description = "The horizontal coordinate of the widget's top-left corner.")]
     public virtual int X { get; set; }
 
     /// <summary>
@@ -56,7 +56,7 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     [ConfigurationProperty("int",
         Title = "Y",
-        Summary = "The vertical coordinate of the widget's top-left corner.")]
+        Description = "The vertical coordinate of the widget's top-left corner.")]
     public virtual int Y { get; set; }
 
     /// <summary>
@@ -69,7 +69,7 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     [ConfigurationProperty("int?",
         Title = "Width",
-        Summary = "The width of the widget, or null to size it to the natural length of the rendered text.")]
+        Description = "The width of the widget, or null to size it to the natural length of the rendered text.")]
     public virtual int? Width { get; set; } = null;
 
     /// <summary>
@@ -81,7 +81,7 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     [ConfigurationProperty("JustificationsEnum",
         Title = "Justification",
-        Summary = "The name of the justification strategy used to lay out the text within the widget width.")]
+        Description = "The name of the justification strategy used to lay out the text within the widget width.")]
     public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     /// <summary>
@@ -94,7 +94,7 @@ public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </remarks>
     [ConfigurationProperty("string[]?",
         Title = "Change Tracker Names",
-        Summary = "The names of properties that participate in change tracking for this widget.")]
+        Description = "The names of properties that participate in change tracking for this widget.")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }
 

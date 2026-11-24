@@ -7,11 +7,11 @@ public class ChestTrapGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty("string",
         Title = "Activation Grid Tile Script Binding Key",
-        Summary = "The binding key identifying the grid tile script activated by the chest trap.")]
+        Description = "The binding key identifying the grid tile script activated by the chest trap.")]
     public virtual string ActivationGridTileScriptBindingKey { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Description",
-        Summary = "The description of the chest trap.")]
+        Description = "The description of the chest trap.")]
     public virtual string Description { get; set; }
 }

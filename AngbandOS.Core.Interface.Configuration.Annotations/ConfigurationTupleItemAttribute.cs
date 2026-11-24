@@ -42,4 +42,10 @@ public sealed class ConfigurationTupleItemAttribute : Attribute
     /// Defaults to true for tuples.
     /// </summary>
     public bool Inline { get; set; } = true;
+
+    /// <summary>
+    /// Label to display if the property is nullable.  Returns null (non-nullable), by default.  
+    /// When null, nullable boolean properties will scaffold to the default value of "Default".
+    /// </summary>
+    public string? LabelIfNullable { get; set; } = null;
 }

@@ -6,6 +6,6 @@ public class ChestTrapCombinationGameConfiguration : NonCompositeSingletonGameCo
 {
     [ConfigurationProperty("string[]",
         Title = "Chest Trap Binding Keys",
-        Summary = "The binding keys identifying the chest traps included in this combination.")]
+        Description = "The binding keys identifying the chest traps included in this combination.")]
     public virtual string[] ChestTrapBindingKeys { get; set; }
 }

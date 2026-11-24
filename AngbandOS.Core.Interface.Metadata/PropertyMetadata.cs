@@ -1,15 +1,13 @@
 ﻿namespace AngbandOS.Core.Interface.Metadata;
 
 /// <summary>
-/// Represents a class that contains metadata description for class.  The properties of this class use public modifiers on the properties to enable standard Json serialization and a protected 
-/// set modifier to prevent the property values from being set by anything but the derived classes.  This arrangement allows the Games controller to return an array of PropertyMetadata without
-/// needing polymorphic serialization.
+/// Represents a class that contains metadata description for class.
 /// </summary>
 /// <remarks>
 /// This class is an abstract class and the set accessors are all protected with the expectation that each derived class uses the "new" modifier on the
 /// properties to expose the set accessors as public.  This arrangement allows the Games controller to return an array of PropertyMetadata without needing polymorphic serialization.
 /// </remarks>
-public abstract class PropertyMetadata
+public class PropertyMetadata
 {
     public PropertyMetadata(string type, string propertyName)
     {
@@ -21,20 +19,20 @@ public abstract class PropertyMetadata
     /// Returns the type of the property.  This type is used by the game-designer to render an applicable component.
     /// </summary>
     /// <remarks>
+    /// This property applies to all non-collection types.
+    /// 
     /// The recognized values are:
     ///    Name             Matches                                         Notes
     /// 1. boolean          bool, bool?
     /// 2. character        char, char?
     /// 3. collection       *GameConfiguration[], *GameConfiguration[]?     
-    /// 5. enum             *Enum, *Enum?                                   The enum type must be decorated with the EnumMetadataAttribute
-    /// 6. foreign-key      a string that points to a collection entity by key (which is always a string)
-    /// 7. foreign-keys     TBD ... this should be represented by an isArray = true
-    /// 8. integer
-    /// 9. string
-    /// 10. strings         TBD ... this should be represented by an isArray = true 
-    /// 11. tuple           automatically assumes array
-    /// 12. array           AssociatedProperties contains 1 item representing the underlying type.
-    /// 13. 2d-array        AssociatedProperties contains 1 item representing the underlying type.
+    /// 4. enum             *Enum, *Enum?                                   The enum type must be decorated with the EnumMetadataAttribute
+    /// 5. foreign-key      a string that points to a collection entity by key (which is always a string)
+    /// 6. integer
+    /// 7. string
+    /// 8. tuple            AssociatedProperties contains at least 1 item representing the tuple items.
+    /// 9. array            AssociatedProperties contains exactly 1 item representing the underlying type.
+    /// 10. 2d-array        AssociatedProperties contains exactly 1 item representing the underlying type.
     /// </remarks>
     public string Type { get; }
 
@@ -96,32 +94,70 @@ public abstract class PropertyMetadata
     /// </summary>
     /// <remarks>
     /// This property applies to the following types:
-    /// boolean
+    /// boolean     
     /// character
+    /// enum
+    /// foreign-key
     /// integer
     /// string
+    /// array       
+    /// 2d-array
     /// </remarks>
-    public string[]? DefaultValue { get; protected set; } = null;
+    public string?[]? DefaultValue { get; set; } = null;
 
     /// <summary>
     /// Returns the name of the property that represents the primary key for a collection.  Returns null, if the property is not a collection.
     /// </summary>
-    public string? EntityKeyPropertyName { get; protected set; } = null;
+    /// <remarks>
+    /// This property applies to the following types:
+    /// collection - describes the pronerties associated to the collection
+    /// </remarks>
+    /// <example>
+    /// GetKey
+    /// </example>
+    public string? EntityKeyPropertyName { get; set; } = null;
 
     /// <summary>
     /// Returns the name of the property that represents the primary key for a collection.  Returns null, if the property is not a collection.
     /// </summary>
-    public string? EntityNamePropertyName { get; protected set; } = null;
+    /// <remarks>
+    /// This property applies to the following types:
+    /// collection - describes the pronerties associated to the collection
+    /// </remarks>
+    /// <example>
+    /// Name
+    /// </example>
+    public string? EntityNamePropertyName { get; set; } = null;
 
     /// <summary>
     /// Returns the singular entity name for each of the objects in a collection.  Returns null, if the property is not a collection.
     /// </summary>
-    public string? EntityNoun { get; protected set; } = null;
+    /// <remarks>
+    /// This property applies to the following types:
+    /// collection - describes the pronerties associated to the collection
+    /// </remarks>
+    /// <example>
+    /// Monster Name
+    /// </example>
+    public string? EntityNounTitle { get; set; } = null;
+
+   /// <summary>
+    /// Returns the name of the collection for foreign-key properties.  Returns null, for non-applicable data types.
+    /// </summary>
+    /// <remarks>
+    /// This property applies to the following types:
+    /// foreign-key
+    /// </remarks>
+    public string? ForeignCollectionName { get; set; } = null;
 
     /// <summary>
-    /// Returns the title to render for the entity name.
+    /// Returns true, if the foreign-key property should be rendered inline rather than requiring selection of an existing foreign object.  Returns null, for non-foreign-key properties.
     /// </summary>
-    public string? EntityNounTitle { get; protected set; } = null;
+    /// <remarks>
+    /// This property applies to the following types:
+    /// foreign-key
+    /// </remarks>
+    public bool? Inline { get; set; } = null;
 
     /// <summary>
     /// Returns the additional associated property metadata descriptions relevant to the property.  Returns null, for non-applicable and data types.
@@ -132,23 +168,5 @@ public abstract class PropertyMetadata
     /// tuple - describe the data type items of the tuple
     /// array - describe the inner data type
     /// </remarks>
-    public PropertyMetadata[]? AssociatedProperties { get; protected set; } = null;
-
-    /// <summary>
-    /// Returns the name of the collection for foreign-key properties.  Returns null, for non-applicable data types.
-    /// </summary>
-    /// <remarks>
-    /// This property applies to the following types:
-    /// foreign-key
-    /// </remarks>
-    public string? ForeignCollectionName { get; protected set; } = null;
-
-    /// <summary>
-    /// Returns true, if the foreign-key property should be rendered inline rather than requiring selection of an existing foreign object.  Returns null, for non-foreign-key properties.
-    /// </summary>
-    /// <remarks>
-    /// This property applies to the following types:
-    /// foreign-key
-    /// </remarks>
-    public bool? Inline { get; protected set; } = null;
+    public PropertyMetadata[]? AssociatedProperties { get; set; } = null;
 }

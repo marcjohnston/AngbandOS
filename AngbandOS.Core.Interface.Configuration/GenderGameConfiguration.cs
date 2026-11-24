@@ -12,12 +12,12 @@ public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty("string",
         Title = "Title",
-        Summary = "Display title for the gender (e.g., \"Male\", \"Female\").")]
+        Description = "Display title for the gender (e.g., \"Male\", \"Female\").")]
     public virtual string Title { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Winner",
-        Summary = "Short title used when this gender is presented as the winner type.")]
+        Description = "Short title used when this gender is presented as the winner type.")]
     /// <remarks>
     /// The comment indicates this may not currently be rendered; keep this value for potential UI usage.
     /// </remarks>
@@ -25,12 +25,12 @@ public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
 
     [ConfigurationProperty("bool",
         Title = "Can Be Randomly Selected",
-        Summary = "Whether this gender may be chosen by the random-selection logic.")]
+        Description = "Whether this gender may be chosen by the random-selection logic.")]
     public virtual bool CanBeRandomlySelected { get; set; } = true;
 
     [ConfigurationProperty("string",
         Title = "Pronoun",
-        Summary = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").")]
+        Description = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").")]
     /// <remarks>
     /// Localize or change to "he", "she", etc., as appropriate for the gender entry.
     /// </remarks>
@@ -38,7 +38,7 @@ public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
 
     [ConfigurationProperty("string",
         Title = "Possessive Adjective",
-        Summary = "Possessive adjective to use when rendering messages (default: \"its\").")]
+        Description = "Possessive adjective to use when rendering messages (default: \"its\").")]
     /// <remarks>
     /// Examples: "his", "her", "its". Used for natural-language assembly of messages.
     /// </remarks>

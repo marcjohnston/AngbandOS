@@ -9,7 +9,7 @@ public class ItemEnhancementWeightedRandomGameConfiguration : NonCompositeSingle
 {
     [ConfigurationProperty("(string? ItemEnhancementName, int Weight)[]",
         Title = "Name and Weight Bindings",
-        Summary = "The names of item enhancements and their corresponding weights used for weighted random selection.")]
+        Description = "The names of item enhancements and their corresponding weights used for weighted random selection.")]
     [ConfigurationTupleItem("ItemEnhancementName", Title = "Item Enhancement Name")]
     [ConfigurationTupleItem("Weight", Title = "Weight")]
     public virtual (string? ItemEnhancementName, int Weight)[] NameAndWeightBindings { get; set; }

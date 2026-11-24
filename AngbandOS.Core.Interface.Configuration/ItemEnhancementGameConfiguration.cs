@@ -16,21 +16,21 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
 {
     [ConfigurationProperty("(string AttributeName, string Expression)[]?",
         Title = "Summation Attribute and Expression Bindings",
-        Summary = "The attribute names and expressions used to calculate summation-based item enhancements.")]
+        Description = "The attribute names and expressions used to calculate summation-based item enhancements.")]
     [ConfigurationTupleItem("AttributeName", Title = "Attribute Name")]
     [ConfigurationTupleItem("Expression", Title = "Expression")]
     public virtual (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; set; } = null;
 
     [ConfigurationProperty("(string AttributeName, string BooleanExpression)[]?",
         Title = "Bitwise OR Attribute and Expression Bindings",
-        Summary = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.")]
+        Description = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.")]
     [ConfigurationTupleItem("AttributeName", Title = "Attribute Name")]
     [ConfigurationTupleItem("BooleanExpression", Title = "Boolean Expression")]
     public virtual (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; set; } = null;
 
     [ConfigurationProperty("(string AttributeName, string[] ScriptNames)[]?",
         Title = "Scripts Attribute and Script Bindings",
-        Summary = "The attribute names and script names used to apply scripts as item enhancements.")]
+        Description = "The attribute names and script names used to apply scripts as item enhancements.")]
     [ConfigurationTupleItem("AttributeName", Title = "Attribute Name")]
     [ConfigurationTupleItem("ScriptNames", Title = "Script Names")]
     public virtual (string AttributeName, string[] ScriptNames)[]? ScriptsAttributeAndScriptBindings { get; set; } = null;
@@ -41,12 +41,12 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// </summary>
     [ConfigurationProperty("string[]?",
         Title = "Applicable Item Factory Binding Keys",
-        Summary = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.")]
+        Description = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.")]
     public virtual string[]? ApplicableItemFactoryBindingKeys { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Additional Item Enhancement Weighted Random Binding Key",
-        Summary = "The binding key of the weighted random configuration used to select an additional item enhancement.")]
+        Description = "The binding key of the weighted random configuration used to select an additional item enhancement.")]
     public virtual string? AdditionalItemEnhancementWeightedRandomBindingKey { get; set; } = null;
 
     /// <summary>
@@ -54,7 +54,7 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Friendly Name",
-        Summary = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.")]
+        Description = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.")]
     public virtual string? FriendlyName { get; set; } = null;
 
     /// <summary>
@@ -64,11 +64,11 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
     /// <inheritdoc />
     [ConfigurationProperty("string?",
         Title = "Activation Name",
-        Summary = "The name of the activation applied to the item, or null when the item cannot be activated.")]
+        Description = "The name of the activation applied to the item, or null when the item cannot be activated.")]
     public virtual ActivationsEnum? ActivationEnumValue { get; set; }
 
     [ConfigurationProperty("string?",
         Title = "Artifact Bias Weighted Random Binding Key",
-        Summary = "The binding key of the weighted random configuration used to select an artifact bias.")]
+        Description = "The binding key of the weighted random configuration used to select an artifact bias.")]
     public virtual string? ArtifactBiasWeightedRandomBindingKey { get; set; } = null;
 }

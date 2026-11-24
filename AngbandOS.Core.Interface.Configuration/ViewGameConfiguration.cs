@@ -6,7 +6,7 @@ public class ViewGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty("string[]",
         Title = "Widget Names",
-        Summary = "Specifies the names of the widgets displayed in the view.")]
+        Description = "Specifies the names of the widgets displayed in the view.")]
     [ConfigurationForeignKey(
         "Widgets", 
         Inline = false)]

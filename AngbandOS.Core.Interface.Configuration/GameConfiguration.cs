@@ -212,817 +212,728 @@ public class GameConfiguration
         gameConfiguration.StringAttributes = LoadFromAssembly<StringNullableReferenceAttributeGameConfiguration>(assembly);
     }
 
+    [ConfigurationCollection(
+        "Towns",
+        Title = "Towns",
+        Summary = "Null to load towns from the assembly; otherwise a collection of towns to load into the SingletonRepository.",
+        EntityNounTitle = "Town")]
+    public virtual TownGameConfiguration[]? Towns { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Shopkeepers",
+        Title = "Shopkeepers",
+        Summary = "Collection of shopkeeper configurations.",
+        EntityNounTitle = "Shopkeeper")]
+    public virtual ShopkeeperGameConfiguration[]? Shopkeepers { get; set; } = null;
+
+    [ConfigurationCollection(
+        "GameCommands",
+        Title = "Game Commands",
+        Summary = "Collection of game command configurations.",
+        EntityNounTitle = "Game Command")]
+    public virtual GameCommandGameConfiguration[]? GameCommands { get; set; } = null;
+
+    [ConfigurationCollection(
+        "StoreCommands",
+        Title = "Store Commands",
+        Summary = "Collection of store command configurations.",
+        EntityNounTitle = "Store Command")]
+    public virtual StoreCommandGameConfiguration[]? StoreCommands { get; set; } = null;
+
+    [ConfigurationCollection(
+        "HelpGroups",
+        Title = "Help Groups",
+        Summary = "Collection of help group configurations.",
+        EntityNounTitle = "Help Group")]
+    public virtual HelpGroupGameConfiguration[]? HelpGroups { get; set; } = null;
+
+    [ConfigurationCollection(
+        "MonsterRaces",
+        Title = "Monster Races",
+        Summary = "Collection of monster race configurations.",
+        EntityNounTitle = "Monster Race")]
+    public virtual MonsterRaceGameConfiguration[]? MonsterRaces { get; set; } = null;
+
+    [ConfigurationCollection(
+        "OutfitManifests",
+        Title = "Outfit Manifests",
+        Summary = "Collection of outfit manifest configurations.",
+        EntityNounTitle = "Outfit Manifest")]
+    public virtual OutfitManifestGameConfiguration[]? OutfitManifests { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Symbols",
+        Title = "Symbols",
+        Summary = "Collection of symbol configurations.",
+        EntityNounTitle = "Symbol")]
+    public virtual SymbolGameConfiguration[]? Symbols { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Vaults",
+        Title = "Vaults",
+        Summary = "Collection of vault configurations.",
+        EntityNounTitle = "Vault")]
+    public virtual VaultGameConfiguration[]? Vaults { get; set; } = null;
+
+    [ConfigurationCollection(
+        "DungeonGuardians",
+        Title = "Dungeon Guardians",
+        Summary = "Collection of dungeon guardian configurations.",
+        EntityNounTitle = "Dungeon Guardian")]
+    public virtual DungeonGuardianGameConfiguration[]? DungeonGuardians { get; set; } = null;
+
+    [ConfigurationCollection(
+        "DamageLearnedKnowledges",
+        Title = "Damage Learned Knowledges",
+        Summary = "Collection of damage learned-knowledge configurations.",
+        EntityNounTitle = "Damage Learned Knowledge")]
+    public virtual DamageLearnedKnowledgeGameConfiguration[]? DamageLearnedKnowledges { get; set; } = null;
+
+    [ConfigurationCollection(
+        "DurationLearnedKnowledges",
+        Title = "Duration Learned Knowledges",
+        Summary = "Collection of duration learned-knowledge configurations.",
+        EntityNounTitle = "Duration Learned Knowledge")]
+    public virtual DurationLearnedKnowledgeGameConfiguration[]? DurationLearnedKnowledges { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RangeLearnedKnowledges",
+        Title = "Range Learned Knowledges",
+        Summary = "Collection of range learned-knowledge configurations.",
+        EntityNounTitle = "Range Learned Knowledge")]
+    public virtual RangeLearnedKnowledgeGameConfiguration[]? RangeLearnedKnowledges { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ExperienceLearnedKnowledges",
+        Title = "Experience Learned Knowledges",
+        Summary = "Collection of experience learned-knowledge configurations.",
+        EntityNounTitle = "Experience Learned Knowledge")]
+    public virtual ExperienceLearnedKnowledgeGameConfiguration[]? ExperienceLearnedKnowledges { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Dungeons",
+        Title = "Dungeons",
+        Summary = "Collection of dungeon configurations.",
+        EntityNounTitle = "Dungeon")]
+    public virtual DungeonGameConfiguration[]? Dungeons { get; set; } = null;
+
+    [ConfigurationCollection(
+        "StoreFactories",
+        Title = "Store Factories",
+        Summary = "Factories used to create stores within towns.",
+        EntityNounTitle = "Store Factory")]
+    public virtual StoreFactoryGameConfiguration[]? StoreFactories { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ProjectileGraphics",
+        Title = "Projectile Graphics",
+        Summary = "Collection of projectile graphic configurations.",
+        EntityNounTitle = "Projectile Graphic")]
+    public virtual ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemFlavors",
+        Title = "Item Flavors",
+        Summary = "Collection of item flavor configurations.",
+        EntityNounTitle = "Item Flavor")]
+    public virtual ItemFlavorGameConfiguration[]? ItemFlavors { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ClassSpells",
+        Title = "Class Spells",
+        Summary = "Collection of character class spell configurations.",
+        EntityNounTitle = "Character Class Spell")]
+    public virtual CharacterClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
+
+    [ConfigurationCollection(
+        "WizardCommands",
+        Title = "Wizard Commands",
+        Summary = "Collection of wizard command configurations.",
+        EntityNounTitle = "Wizard Command")]
+    public virtual WizardCommandGameConfiguration[]? WizardCommands { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Tiles",
+        Title = "Tiles",
+        Summary = "Collection of tile configurations.",
+        EntityNounTitle = "Tile")]
+    public virtual TileGameConfiguration[]? Tiles { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Animations",
+        Title = "Animations",
+        Summary = "Collection of animation configurations.",
+        EntityNounTitle = "Animation")]
+    public virtual AnimationGameConfiguration[]? Animations { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Spells",
+        Title = "Spells",
+        Summary = "Collection of spell configurations.",
+        EntityNounTitle = "Spell")]
+    public virtual SpellGameConfiguration[]? Spells { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Plurals",
+        Title = "Plurals",
+        Summary = "Collection of pluralization configurations.",
+        EntityNounTitle = "Plural")]
+    public virtual PluralGameConfiguration[]? Plurals { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Attacks",
+        Title = "Attacks",
+        Summary = "Collection of attack configurations.",
+        EntityNounTitle = "Attack")]
+    public virtual AttackGameConfiguration[]? Attacks { get; set; } = null;
+
+    [ConfigurationCollection(
+        "AttributeFilters",
+        Title = "Attribute Filters",
+        Summary = "Collection of attribute filter configurations.",
+        EntityNounTitle = "Attribute Filter")]
+    public virtual AttributeFilterGameConfiguration[]? AttributeFilters { get; set; } = null;
+
+    [ConfigurationCollection(
+        "OrAttributes",
+        Title = "Or Attributes",
+        Summary = "Collection of bitwise-or attribute configurations.",
+        EntityNounTitle = "Bitwise-Or Attribute")]
+    public virtual BitwiseOrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
+
+    [ConfigurationCollection(
+        "SumAttributes",
+        Title = "Sum Attributes",
+        Summary = "Collection of summation attribute configurations.",
+        EntityNounTitle = "Summation Attribute")]
+    public virtual SummationAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ScriptsAttributes",
+        Title = "Scripts Attributes",
+        Summary = "Collection of scripts attribute configurations.",
+        EntityNounTitle = "Scripts Attribute")]
+    public virtual ScriptsAttributeGameConfiguration[]? ScriptsAttributes { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ColorEnumAttributes",
+        Title = "Color Enum Attributes",
+        Summary = "Collection of color-enum attribute configurations.",
+        EntityNounTitle = "Color Enum Attribute")]
+    public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ArtifactBiasAttributes",
+        Title = "Artifact Bias Attributes",
+        Summary = "Collection of artifact-bias attribute configurations.",
+        EntityNounTitle = "Artifact Bias Attribute")]
+    public virtual ArtifactBiasNullableReferenceAttributeGameConfiguration[]? ArtifactBiasAttributes { get; set; } = null;
+
+    [ConfigurationCollection(
+        "StringAttributes",
+        Title = "String Attributes",
+        Summary = "Collection of string attribute configurations.",
+        EntityNounTitle = "String Attribute")]
+    public virtual StringNullableReferenceAttributeGameConfiguration[]? StringAttributes { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Gods",
+        Title = "Gods",
+        Summary = "Collection of god configurations.",
+        EntityNounTitle = "God")]
+    public virtual GodGameConfiguration[]? Gods { get; set; } = null;
+
+    [ConfigurationCollection(
+        "SyllableSets",
+        Title = "Syllable Sets",
+        Summary = "Collection of syllable set configurations.",
+        EntityNounTitle = "Syllable Set")]
+    public virtual SyllableSetGameConfiguration[]? SyllableSets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Projectiles",
+        Title = "Projectiles",
+        Summary = "Collection of projectile configurations.",
+        EntityNounTitle = "Projectile")]
+    public virtual ProjectileGameConfiguration[]? Projectiles { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ProjectileScripts",
+        Title = "Projectile Scripts",
+        Summary = "Collection of projectile script configurations.",
+        EntityNounTitle = "Projectile Script")]
+    public virtual ProjectileScriptGameConfiguration[]? ProjectileScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "MonsterSpells",
+        Title = "Projectile Monster Spells",
+        Summary = "Collection of projectile monster spell configurations.",
+        EntityNounTitle = "Projectile Monster Spell")]
+    public virtual ProjectileMonsterSpellGameConfiguration[]? ProjectileMonsterSpells { get; set; } = null;
+
+    [ConfigurationCollection(
+        "MonsterSpells",
+        Title = "Cause Wounds Monster Spells",
+        Summary = "Collection of cause-wounds monster spell configurations.",
+        EntityNounTitle = "Cause Wounds Monster Spell")]
+    public virtual CauseWoundsMonsterSpellGameConfiguration[]? CauseWoundsMonsterSpells { get; set; } = null;
+
+    [ConfigurationCollection(
+        "MonsterSpells",
+        Title = "Script Monster Spells",
+        Summary = "Collection of script monster spell configurations.",
+        EntityNounTitle = "Script Monster Spell")]
+    public virtual ScriptMonsterSpellGameConfiguration[]? ScriptMonsterSpells { get; set; } = null;
+
+    [ConfigurationCollection(
+        "MonsterSpells",
+        Title = "Summon Monster Spells",
+        Summary = "Collection of summon monster spell configurations.",
+        EntityNounTitle = "Summon Monster Spell")]
+    public virtual SummonMonsterSpellGameConfiguration[]? SummonMonsterSpells { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ArtifactBiasWeightedRandoms",
+        Title = "Artifact Bias Weighted Randoms",
+        Summary = "Collection of artifact-bias weighted-random configurations.",
+        EntityNounTitle = "Artifact Bias Weighted Random")]
+    public virtual ArtifactBiasWeightedRandomGameConfiguration[]? ArtifactBiasWeightedRandoms { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemClasses",
+        Title = "Item Classes",
+        Summary = "Collection of item class configurations.",
+        EntityNounTitle = "Item Class")]
+    public virtual ItemClassGameConfiguration[]? ItemClasses { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemEnhancements",
+        Title = "Item Enhancements",
+        Summary = "Collection of item enhancement configurations.",
+        EntityNounTitle = "Item Enhancement")]
+    public virtual ItemEnhancementGameConfiguration[]? ItemEnhancements { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemEnhancementWeightedRandoms",
+        Title = "Item Enhancement Weighted Randoms",
+        Summary = "Collection of item-enhancement weighted-random configurations.",
+        EntityNounTitle = "Item Enhancement Weighted Random")]
+    public virtual ItemEnhancementWeightedRandomGameConfiguration[]? ItemEnhancementWeightedRandoms { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemIdentifications",
+        Title = "Item Identifications",
+        Summary = "Collection of item identification configurations.",
+        EntityNounTitle = "Item Identification")]
+    public virtual ItemIdentificationGameConfiguration[]? ItemIdentifications { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemFactories",
+        Title = "Item Factories",
+        Summary = "Collection of item factory configurations.",
+        EntityNounTitle = "Item Factory")]
+    public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ProjectileWeightedRandomScripts",
+        Title = "Projectile Weighted Random Scripts",
+        Summary = "Collection of projectile-weighted-random script configurations.",
+        EntityNounTitle = "Projectile Script Weighted Random")]
+    public virtual ProjectileScriptWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Conditional Widgets",
+        Summary = "Collection of conditional widget configurations.",
+        EntityNounTitle = "Conditional Widget")]
+    public virtual ConditionalWidgetGameConfiguration[]? ConditionalWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Date Widgets",
+        Summary = "Collection of date widget configurations.",
+        EntityNounTitle = "Date Widget")]
+    public virtual DateWidgetGameConfiguration[]? DateWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Int Widgets",
+        Summary = "Collection of int widget configurations.",
+        EntityNounTitle = "Int Widget")]
+    public virtual IntWidgetGameConfiguration[]? IntWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Map Widgets",
+        Summary = "Collection of map widget configurations.",
+        EntityNounTitle = "Map Widget")]
+    public virtual MapWidgetGameConfiguration[]? MapWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Max Ranged Widgets",
+        Summary = "Collection of max-ranged widget configurations.",
+        EntityNounTitle = "Max Ranged Widget")]
+    public virtual MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Ranged Widgets",
+        Summary = "Collection of ranged widget configurations.",
+        EntityNounTitle = "Ranged Widget")]
+    public virtual RangedWidgetGameConfiguration[]? RangedWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RangedWeaponBonuses",
+        Title = "Ranged Weapon Bonuses",
+        Summary = "Collection of ranged weapon bonus configurations.",
+        EntityNounTitle = "Ranged Weapon Bonus")]
+    public virtual RangedWeaponBonusGameConfiguration[]? RangedWeaponBonuses { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "String Widgets",
+        Summary = "Collection of string widget configurations.",
+        EntityNounTitle = "String Widget")]
+    public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Game Message Widgets",
+        Summary = "Collection of game-message widget configurations.",
+        EntityNounTitle = "Game Message Widget")]
+    public virtual GameMessageWidgetGameConfiguration[]? GameMessageWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Label Widgets",
+        Summary = "Collection of label widget configurations.",
+        EntityNounTitle = "Label Widget")]
+    public virtual LabelWidgetGameConfiguration[]? LabelWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Time Widgets",
+        Summary = "Collection of time widget configurations.",
+        EntityNounTitle = "Time Widget")]
+    public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Widgets",
+        Title = "Nullable Strings Text Area Widgets",
+        Summary = "Collection of text widget configurations used for nullable string text areas.",
+        EntityNounTitle = "Text Widget")]
+    public virtual TextWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RaceGenders",
+        Title = "Race Genders",
+        Summary = "Collection of race-gender configurations.",
+        EntityNounTitle = "Race Gender")]
+    public virtual RaceGenderGameConfiguration[]? RaceGenders { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Genders",
+        Title = "Genders",
+        Summary = "Collection of gender configurations.",
+        EntityNounTitle = "Gender")]
+    public virtual GenderGameConfiguration[]? Genders { get; set; } = null;
+
+    [ConfigurationCollection(
+        "PhysicalAttributeSets",
+        Title = "Physical Attribute Sets",
+        Summary = "Collection of physical attribute set configurations.",
+        EntityNounTitle = "Physical Attribute Set")]
+    public virtual PhysicalAttributeSetGameConfiguration[]? PhysicalAttributeSets { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Realms",
+        Title = "Realms",
+        Summary = "Collection of realm configurations.",
+        EntityNounTitle = "Realm")]
+    public virtual RealmGameConfiguration[]? Realms { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RealmCharacterClasses",
+        Title = "Realm Character Classes",
+        Summary = "Collection of realm character class configurations.",
+        EntityNounTitle = "Realm Character Class")]
+    public virtual RealmCharacterClassGameConfiguration[]? RealmCharacterClasses { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Views",
+        Title = "Views",
+        Summary = "Collection of view configurations.",
+        EntityNounTitle = "View")]
+    public virtual ViewGameConfiguration[]? Views { get; set; } = null;
+
+    [ConfigurationCollection(
+        "SummonScripts",
+        Title = "Summon Scripts",
+        Summary = "Collection of summon script configurations.",
+        EntityNounTitle = "Summon Script")]
+    public virtual SummonScriptGameConfiguration[]? SummonScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "MappedSpellScripts",
+        Title = "Mapped Spell Scripts",
+        Summary = "Collection of mapped-spell script configurations.",
+        EntityNounTitle = "Mapped Spell Script")]
+    public virtual MappedSpellScriptGameConfiguration[]? MappedSpellScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "SummonWeightedRandoms",
+        Title = "Summon Weighted Randoms",
+        Summary = "Collection of summon-weighted-random configurations.",
+        EntityNounTitle = "Summon Weighted Random")]
+    public virtual SummonWeightedRandomGameConfiguration[]? SummonWeightedRandoms { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemFactoryWeightedRandoms",
+        Title = "Item Factory Weighted Randoms",
+        Summary = "Collection of item-factory weighted-random configurations.",
+        EntityNounTitle = "Item Factory Weighted Random")]
+    public virtual ItemFactoryWeightedRandomGameConfiguration[]? ItemFactoryWeightedRandoms { get; set; } = null;
+
+    [ConfigurationCollection(
+        "TimerScripts",
+        Title = "Timer Scripts",
+        Summary = "Collection of timer script configurations.",
+        EntityNounTitle = "Timer Script")]
+    public virtual TimerScriptGameConfiguration[]? TimerScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RenderMessageScripts",
+        Title = "Render Message Scripts",
+        Summary = "Collection of render-message script configurations.",
+        EntityNounTitle = "Render Message Script")]
+    public virtual RenderMessageScriptGameConfiguration[]? RenderMessageScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+       "MartialArtsAttacks",
+        Title = "Martial Arts Attacks",
+        Summary = "Collection of martial-arts attack configurations.",
+        EntityNounTitle = "Martial Arts Attack")]
+    public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
+
+    [ConfigurationCollection(
+        "AbilityScoreScripts",
+        Title = "Ability Score Scripts",
+        Summary = "Collection of ability-score script configurations.",
+        EntityNounTitle = "Ability Score Script")]
+    public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ChestTrapCombinations",
+        Title = "Chest Trap Combinations",
+        Summary = "Collection of chest-trap combination configurations.",
+        EntityNounTitle = "Chest Trap Combination")]
+    public virtual ChestTrapCombinationGameConfiguration[]? ChestTrapCombinations { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Patrons",
+        Title = "Patrons",
+        Summary = "Collection of patron configurations.",
+        EntityNounTitle = "Patron",
+        EntityNamePropertyName = "LongName")]
+    public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RacialPowerTests",
+        Title = "Racial Power Tests",
+        Summary = "Collection of racial-power test configurations.",
+        EntityNounTitle = "Racial Power Test")]
+    public virtual RacialPowerTestGameConfiguration[]? RacialPowerTests { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RaceAbilities",
+        Title = "Race Abilities",
+        Summary = "Collection of race-ability configurations.",
+        EntityNounTitle = "Race Ability")]
+    public virtual RaceAbilityGameConfiguration[]? RaceAbilities { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RacialPowers",
+        Title = "Racial Powers",
+        Summary = "Collection of racial-power configurations.",
+        EntityNounTitle = "Racial Power")]
+    public virtual RacePowerGameConfiguration[]? RacialPowers { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ConditionalScripts",
+        Title = "Conditional Scripts",
+        Summary = "Collection of conditional script configurations.",
+        EntityNounTitle = "Conditional Script")]
+    public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "CharacterClassAbilities",
+        Title = "Character Class Abilities",
+        Summary = "Collection of character-class ability configurations.",
+        EntityNounTitle = "Character Class Ability")]
+    public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
+
+    [ConfigurationCollection(
+        "CharacterClassAndRaceInnateTotals",
+        Title = "Character Class And Race Innate Totals",
+        Summary = "Collection of innate-total configurations for character classes and races.",
+        EntityNounTitle = "Character Class And Race Innate Total")]
+    public virtual InnateTotalsGameConfiguration[]? CharacterClassAndRaceInnateTotals { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Activations",
+        Title = "Activations",
+        Summary = "Collection of activation configurations.",
+        EntityNounTitle = "Activation")]
+    public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ItemFilters",
+        Title = "Item Filters",
+        Summary = "Collection of item filter configurations.",
+        EntityNounTitle = "Item Filter")]
+    public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ProductOfSumsBoolFunctions",
+        Title = "Product Of Sums Bool Functions",
+        Summary = "Collection of conditional (product-of-sums) boolean function configurations.",
+        EntityNounTitle = "Conditional")]
+    public virtual ConditionalGameConfiguration[]? ProductOfSumsBoolFunctions { get; set; } = null;
+
+    [ConfigurationCollection(
+        "RechargeItemScripts",
+        Title = "Recharge Item Scripts",
+        Summary = "Collection of recharge-item script configurations.",
+        EntityNounTitle = "Recharge Item Script")]
+    public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "Talents",
+        Title = "Talents",
+        Summary = "Collection of talent configurations.",
+        EntityNounTitle = "Talent")]
+    public virtual TalentGameConfiguration[]? Talents { get; set; } = null;
+
+    [ConfigurationCollection(
+        "TeleportSelfScripts",
+        Title = "Teleport Self Scripts",
+        Summary = "Collection of teleport-self script configurations.",
+        EntityNounTitle = "Teleport Self Script")]
+    public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
+
+    [ConfigurationCollection(
+        "MappedItemEnhancements",
+        Title = "Mapped Item Enhancements",
+        Summary = "Collection of mapped-item enhancement configurations.",
+        EntityNounTitle = "Mapped Item Enhancement")]
+    public virtual MappedItemEnhancementGameConfiguration[]? MappedItemEnhancements { get; set; } = null;
+
+    [ConfigurationCollection(
+        "ChestTraps",
+        Title = "Chest Traps",
+        Summary = "Collection of chest-trap configurations.",
+        EntityNounTitle = "Chest Trap")]
+    public virtual ChestTrapGameConfiguration[]? ChestTraps { get; set; } = null;
+
     [ConfigurationProperty("string[]?",
         Title = "Game Tick Event Binding Keys",
-        Summary = "Binding keys for events that occur on each game tick.")]
+        Description = "Binding keys for events that occur on each game tick.")]
     public virtual string[]? GameTickEventBindingKeys { get; set; } = null;
 
     [ConfigurationProperty("int",
         Title = "Max Monster Count",
-        Summary = "Maximum number of monsters allowed.")]
+        Description = "Maximum number of monsters allowed.")]
     public virtual int MaxMonsterCount { get; set; } = 512;
 
     [ConfigurationProperty("int",
         Title = "Compact Monster Cut In",
-        Summary = "Number of monsters at which compacting begins.")]
+        Description = "Number of monsters at which compacting begins.")]
     public virtual int CompactMonsterCutIn { get; set; } = 32;
 
     [ConfigurationProperty("int",
         Title = "Compact Monster Cut Out Target",
-        Summary = "Target number of monsters to reduce to when compacting.")]
+        Description = "Target number of monsters to reduce to when compacting.")]
     public virtual int CompactMonsterCutOutTarget { get; set; } = 64;
 
     [ConfigurationProperty("int?",
         Title = "Max Message Log Length",
-        Summary = "Number of log items that the message history may store. Null indicates no limit.")]
+        Description = "Number of log items that the message history may store. Null indicates no limit.")]
     public virtual int? MaxMessageLogLength { get; set; } = 2048;
 
     [ConfigurationProperty("int",
         Title = "Follow Distance",
-        Summary = "Distance at which followers remain from the player.")]
+        Description = "Distance at which followers remain from the player.")]
     public virtual int FollowDistance { get; set; } = 4;
 
     [ConfigurationProperty("int",
         Title = "Decay Rate",
-        Summary = "Rate at which certain game elements decay.")]
+        Description = "Rate at which certain game elements decay.")]
     public virtual int DecayRate { get; set; } = 10;
 
     [ConfigurationProperty("int",
         Title = "Patron Resting Favour",
-        Summary = "Favour amount awarded when resting with a patron.")]
+        Description = "Favour amount awarded when resting with a patron.")]
     public virtual int PatronRestingFavour { get; set; } = 30;
 
     [ConfigurationProperty("string?",
         Title = "Dungeon View Binding Key",
-        Summary = "Binding key for the dungeon view.")]
+        Description = "Binding key for the dungeon view.")]
     public virtual string? DungeonViewBindingKey { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Startup Town Name",
-        Summary = "Name of the town where the player will start, or null to choose a random startup town from available towns.")]
+        Description = "Name of the town where the player will start, or null to choose a random startup town from available towns.")]
     public virtual string? StartupTownName { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Gold Factories Binding Keys",
-        Summary = "Binding keys for gold factories.")]
+        Description = "Binding keys for gold factories.")]
     public virtual string[]? GoldFactoriesBindingKeys { get; set; } = null;
 
     [ConfigurationProperty("string",
         Title = "Gold Item Is Great Probability Expression",
-        Summary = "Probability expression that determines whether a gold-containing item is considered 'great'.")]
+        Description = "Probability expression that determines whether a gold-containing item is considered 'great'.")]
     public virtual string? GoldItemIsGreatProbabilityExpression { get; set; } = "0.05"; // 1 in 20 or 5%
-
-    [ConfigurationProperty("TownGameConfiguration[]?",
-        Title = "Towns",
-        Summary = "Null to load towns from the assembly; otherwise a collection of towns to load into the SingletonRepository.")]
-    [ConfigurationCollection(
-        "Towns",
-        EntityNoun = "Town")]
-    public virtual TownGameConfiguration[]? Towns { get; set; } = null;
-
-    [ConfigurationProperty("ShopkeeperGameConfiguration[]?",
-        Title = "Shopkeepers",
-        Summary = "Collection of shopkeeper configurations.")]
-    [ConfigurationCollection(
-        "Shopkeepers",
-        EntityNoun = "Shopkeeper")]
-    public virtual ShopkeeperGameConfiguration[]? Shopkeepers { get; set; } = null;
-
-    [ConfigurationProperty("GameCommandGameConfiguration[]?",
-        Title = "Game Commands",
-        Summary = "Collection of game command configurations.")]
-    [ConfigurationCollection(
-        "GameCommands",
-        EntityNoun = "Game Command")]
-    public virtual GameCommandGameConfiguration[]? GameCommands { get; set; } = null;
-
-    [ConfigurationProperty("StoreCommandGameConfiguration[]?",
-        Title = "Store Commands",
-        Summary = "Collection of store command configurations.")]
-    [ConfigurationCollection(
-        "StoreCommands",
-        EntityNoun = "Store Command")]
-    public virtual StoreCommandGameConfiguration[]? StoreCommands { get; set; } = null;
-
-    [ConfigurationProperty("HelpGroupGameConfiguration[]?",
-        Title = "Help Groups",
-        Summary = "Collection of help group configurations.")]
-    [ConfigurationCollection(
-        "HelpGroups",
-        EntityNoun = "Help Group")]
-    public virtual HelpGroupGameConfiguration[]? HelpGroups { get; set; } = null;
-
-    [ConfigurationProperty("MonsterRaceGameConfiguration[]?",
-        Title = "Monster Races",
-        Summary = "Collection of monster race configurations.")]
-    [ConfigurationCollection(
-        "MonsterRaces",
-        EntityNoun = "Monster Race")]
-    public virtual MonsterRaceGameConfiguration[]? MonsterRaces { get; set; } = null;
-
-    [ConfigurationProperty("OutfitManifestGameConfiguration[]?",
-        Title = "Outfit Manifests",
-        Summary = "Collection of outfit manifest configurations.")]
-    [ConfigurationCollection(
-        "OutfitManifests",
-        EntityNoun = "Outfit Manifest")]
-    public virtual OutfitManifestGameConfiguration[]? OutfitManifests { get; set; } = null;
-
-    [ConfigurationProperty("SymbolGameConfiguration[]?",
-        Title = "Symbols",
-        Summary = "Collection of symbol configurations.")]
-    [ConfigurationCollection(
-        "Symbols",
-        EntityNoun = "Symbol")]
-    public virtual SymbolGameConfiguration[]? Symbols { get; set; } = null;
-
-    [ConfigurationProperty("VaultGameConfiguration[]?",
-        Title = "Vaults",
-        Summary = "Collection of vault configurations.")]
-    [ConfigurationCollection(
-        "Vaults",
-        EntityNoun = "Vault")]
-    public virtual VaultGameConfiguration[]? Vaults { get; set; } = null;
-
-    [ConfigurationProperty("DungeonGuardianGameConfiguration[]?",
-        Title = "Dungeon Guardians",
-        Summary = "Collection of dungeon guardian configurations.")]
-    [ConfigurationCollection(
-        "DungeonGuardians",
-        EntityNoun = "Dungeon Guardian")]
-    public virtual DungeonGuardianGameConfiguration[]? DungeonGuardians { get; set; } = null;
-
-    [ConfigurationProperty("DamageLearnedKnowledgeGameConfiguration[]?",
-        Title = "Damage Learned Knowledges",
-        Summary = "Collection of damage learned-knowledge configurations.")]
-    [ConfigurationCollection(
-        "DamageLearnedKnowledges",
-        EntityNoun = "Damage Learned Knowledge")]
-    public virtual DamageLearnedKnowledgeGameConfiguration[]? DamageLearnedKnowledges { get; set; } = null;
-
-    [ConfigurationProperty("DurationLearnedKnowledgeGameConfiguration[]?",
-        Title = "Duration Learned Knowledges",
-        Summary = "Collection of duration learned-knowledge configurations.")]
-    [ConfigurationCollection(
-        "DurationLearnedKnowledges",
-        EntityNoun = "Duration Learned Knowledge")]
-    public virtual DurationLearnedKnowledgeGameConfiguration[]? DurationLearnedKnowledges { get; set; } = null;
-
-    [ConfigurationProperty("RangeLearnedKnowledgeGameConfiguration[]?",
-        Title = "Range Learned Knowledges",
-        Summary = "Collection of range learned-knowledge configurations.")]
-    [ConfigurationCollection(
-        "RangeLearnedKnowledges",
-        EntityNoun = "Range Learned Knowledge")]
-    public virtual RangeLearnedKnowledgeGameConfiguration[]? RangeLearnedKnowledges { get; set; } = null;
-
-    [ConfigurationProperty("ExperienceLearnedKnowledgeGameConfiguration[]?",
-        Title = "Experience Learned Knowledges",
-        Summary = "Collection of experience learned-knowledge configurations.")]
-    [ConfigurationCollection(
-        "ExperienceLearnedKnowledges",
-        EntityNoun = "Experience Learned Knowledge")]
-    public virtual ExperienceLearnedKnowledgeGameConfiguration[]? ExperienceLearnedKnowledges { get; set; } = null;
-
-    [ConfigurationProperty("DungeonGameConfiguration[]?",
-        Title = "Dungeons",
-        Summary = "Collection of dungeon configurations.")]
-    [ConfigurationCollection(
-        "Dungeons",
-        EntityNoun = "Dungeon")]
-    public virtual DungeonGameConfiguration[]? Dungeons { get; set; } = null;
-
-    [ConfigurationProperty("StoreFactoryGameConfiguration[]?",
-        Title = "Store Factories",
-        Summary = "Factories used to create stores within towns.")]
-    [ConfigurationCollection(
-        "StoreFactories",
-        EntityNoun = "Store Factory")]
-    public virtual StoreFactoryGameConfiguration[]? StoreFactories { get; set; } = null;
-
-    [ConfigurationProperty("ProjectileGraphicGameConfiguration[]?",
-        Title = "Projectile Graphics",
-        Summary = "Collection of projectile graphic configurations.")]
-    [ConfigurationCollection(
-        "ProjectileGraphics",
-        EntityNoun = "Projectile Graphic")]
-    public virtual ProjectileGraphicGameConfiguration[]? ProjectileGraphics { get; set; } = null;
-
-    [ConfigurationProperty("ItemFlavorGameConfiguration[]?",
-        Title = "Item Flavors",
-        Summary = "Collection of item flavor configurations.")]
-    [ConfigurationCollection(
-        "ItemFlavors",
-        EntityNoun = "Item Flavor")]
-    public virtual ItemFlavorGameConfiguration[]? ItemFlavors { get; set; } = null;
-
-    [ConfigurationProperty("CharacterClassSpellGameConfiguration[]?",
-        Title = "Class Spells",
-        Summary = "Collection of character class spell configurations.")]
-    [ConfigurationCollection(
-        "ClassSpells",
-        EntityNoun = "Character Class Spell")]
-    public virtual CharacterClassSpellGameConfiguration[]? ClassSpells { get; set; } = null;
-
-    [ConfigurationProperty("WizardCommandGameConfiguration[]?",
-        Title = "Wizard Commands",
-        Summary = "Collection of wizard command configurations.")]
-    [ConfigurationCollection(
-        "WizardCommands",
-        EntityNoun = "Wizard Command")]
-    public virtual WizardCommandGameConfiguration[]? WizardCommands { get; set; } = null;
-
-    [ConfigurationProperty("TileGameConfiguration[]?",
-        Title = "Tiles",
-        Summary = "Collection of tile configurations.")]
-    [ConfigurationCollection(
-        "Tiles",
-        EntityNoun = "Tile")]
-    public virtual TileGameConfiguration[]? Tiles { get; set; } = null;
-
-    [ConfigurationProperty("AnimationGameConfiguration[]?",
-        Title = "Animations",
-        Summary = "Collection of animation configurations.")]
-    [ConfigurationCollection(
-        "Animations",
-        EntityNoun = "Animation")]
-    public virtual AnimationGameConfiguration[]? Animations { get; set; } = null;
-
-    [ConfigurationProperty("SpellGameConfiguration[]?",
-        Title = "Spells",
-        Summary = "Collection of spell configurations.")]
-    [ConfigurationCollection(
-        "Spells",
-        EntityNoun = "Spell")]
-    public virtual SpellGameConfiguration[]? Spells { get; set; } = null;
-
-    [ConfigurationProperty("PluralGameConfiguration[]?",
-        Title = "Plurals",
-        Summary = "Collection of pluralization configurations.")]
-    [ConfigurationCollection(
-        "Plurals",
-        EntityNoun = "Plural")]
-    public virtual PluralGameConfiguration[]? Plurals { get; set; } = null;
-
-    [ConfigurationProperty("AttackGameConfiguration[]?",
-        Title = "Attacks",
-        Summary = "Collection of attack configurations.")]
-    [ConfigurationCollection(
-        "Attacks",
-        EntityNoun = "Attack")]
-    public virtual AttackGameConfiguration[]? Attacks { get; set; } = null;
-
-    [ConfigurationProperty("AttributeFilterGameConfiguration[]?",
-        Title = "Attribute Filters",
-        Summary = "Collection of attribute filter configurations.")]
-    [ConfigurationCollection(
-        "AttributeFilters",
-        EntityNoun = "Attribute Filter")]
-    public virtual AttributeFilterGameConfiguration[]? AttributeFilters { get; set; } = null;
-
-    [ConfigurationProperty("BitwiseOrAttributeGameConfiguration[]?",
-        Title = "Or Attributes",
-        Summary = "Collection of bitwise-or attribute configurations.")]
-    [ConfigurationCollection(
-        "OrAttributes",
-        EntityNoun = "Bitwise-Or Attribute")]
-    public virtual BitwiseOrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
-
-    [ConfigurationProperty("SummationAttributeGameConfiguration[]?",
-        Title = "Sum Attributes",
-        Summary = "Collection of summation attribute configurations.")]
-    [ConfigurationCollection(
-        "SumAttributes",
-        EntityNoun = "Summation Attribute")]
-    public virtual SummationAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
-
-    [ConfigurationProperty("ScriptsAttributeGameConfiguration[]?",
-        Title = "Scripts Attributes",
-        Summary = "Collection of scripts attribute configurations.")]
-    [ConfigurationCollection(
-        "ScriptsAttributes",
-        EntityNoun = "Scripts Attribute")]
-    public virtual ScriptsAttributeGameConfiguration[]? ScriptsAttributes { get; set; } = null;
-
-    [ConfigurationProperty("ColorEnumAttributeGameConfiguration[]?",
-        Title = "Color Enum Attributes",
-        Summary = "Collection of color-enum attribute configurations.")]
-    [ConfigurationCollection(
-        "ColorEnumAttributes",
-        EntityNoun = "Color Enum Attribute")]
-    public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
-
-    [ConfigurationProperty("ArtifactBiasNullableReferenceAttributeGameConfiguration[]?",
-        Title = "Artifact Bias Attributes",
-        Summary = "Collection of artifact-bias attribute configurations.")]
-    [ConfigurationCollection(
-        "ArtifactBiasAttributes",
-        EntityNoun = "Artifact Bias Attribute")]
-    public virtual ArtifactBiasNullableReferenceAttributeGameConfiguration[]? ArtifactBiasAttributes { get; set; } = null;
-
-    [ConfigurationProperty("StringNullableReferenceAttributeGameConfiguration[]?",
-        Title = "String Attributes",
-        Summary = "Collection of string attribute configurations.")]
-    [ConfigurationCollection(
-        "StringAttributes",
-        EntityNoun = "String Attribute")]
-    public virtual StringNullableReferenceAttributeGameConfiguration[]? StringAttributes { get; set; } = null;
-
-    [ConfigurationProperty("GodGameConfiguration[]?",
-        Title = "Gods",
-        Summary = "Collection of god configurations.")]
-    [ConfigurationCollection(
-        "Gods",
-        EntityNoun = "God")]
-    public virtual GodGameConfiguration[]? Gods { get; set; } = null;
-
-    [ConfigurationProperty("SyllableSetGameConfiguration[]?",
-        Title = "Syllable Sets",
-        Summary = "Collection of syllable set configurations.")]
-    [ConfigurationCollection(
-        "SyllableSets",
-        EntityNoun = "Syllable Set")]
-    public virtual SyllableSetGameConfiguration[]? SyllableSets { get; set; } = null;
-
-    [ConfigurationProperty("ProjectileGameConfiguration[]?",
-        Title = "Projectiles",
-        Summary = "Collection of projectile configurations.")]
-    [ConfigurationCollection(
-        "Projectiles",
-        EntityNoun = "Projectile")]
-    public virtual ProjectileGameConfiguration[]? Projectiles { get; set; } = null;
-
-    [ConfigurationProperty("ProjectileScriptGameConfiguration[]?",
-        Title = "Projectile Scripts",
-        Summary = "Collection of projectile script configurations.")]
-    [ConfigurationCollection(
-        "ProjectileScripts",
-        EntityNoun = "Projectile Script")]
-    public virtual ProjectileScriptGameConfiguration[]? ProjectileScripts { get; set; } = null;
-
-    [ConfigurationProperty("ProjectileMonsterSpellGameConfiguration[]?",
-        Title = "Projectile Monster Spells",
-        Summary = "Collection of projectile monster spell configurations.")]
-    [ConfigurationCollection(
-        "MonsterSpells",
-        EntityNoun = "Projectile Monster Spell")]
-    public virtual ProjectileMonsterSpellGameConfiguration[]? ProjectileMonsterSpells { get; set; } = null;
-
-    [ConfigurationProperty("CauseWoundsMonsterSpellGameConfiguration[]?",
-        Title = "Cause Wounds Monster Spells",
-        Summary = "Collection of cause-wounds monster spell configurations.")]
-    [ConfigurationCollection(
-        "MonsterSpells",
-        EntityNoun = "Cause Wounds Monster Spell")]
-    public virtual CauseWoundsMonsterSpellGameConfiguration[]? CauseWoundsMonsterSpells { get; set; } = null;
-
-    [ConfigurationProperty("ScriptMonsterSpellGameConfiguration[]?",
-        Title = "Script Monster Spells",
-        Summary = "Collection of script monster spell configurations.")]
-    [ConfigurationCollection(
-        "MonsterSpells",
-        EntityNoun = "Script Monster Spell")]
-    public virtual ScriptMonsterSpellGameConfiguration[]? ScriptMonsterSpells { get; set; } = null;
-
-    [ConfigurationProperty("SummonMonsterSpellGameConfiguration[]?",
-        Title = "Summon Monster Spells",
-        Summary = "Collection of summon monster spell configurations.")]
-    [ConfigurationCollection(
-        "MonsterSpells",
-        EntityNoun = "Summon Monster Spell")]
-    public virtual SummonMonsterSpellGameConfiguration[]? SummonMonsterSpells { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Shopkeeper Accepted Comments",
-        Summary = "Accepted shopkeeper comment strings.")]
+        Description = "Accepted shopkeeper comment strings.")]
     public virtual string[]? ShopkeeperAcceptedComments { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Illegible Flavor Syllables",
-        Summary = "Syllables used to represent illegible flavors.")]
+        Description = "Syllables used to represent illegible flavors.")]
     public virtual string[]? IllegibleFlavorSyllables { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Find Quests",
-        Summary = "Find-quest strings.")]
+        Description = "Find-quest strings.")]
     public virtual string[]? FindQuests { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Elvish Texts",
-        Summary = "Elvish text strings.")]
+        Description = "Elvish text strings.")]
     public virtual string[]? ElvishTexts { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Funny Descriptions",
-        Summary = "Funny description strings.")]
+        Description = "Funny description strings.")]
     public virtual string[]? FunnyDescriptions { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Funny Comments",
-        Summary = "Funny comment strings.")]
+        Description = "Funny comment strings.")]
     public virtual string[]? FunnyComments { get; set; } = null;
 
     [ConfigurationProperty("string[]?",
         Title = "Horrific Descriptions",
-        Summary = "Horrific description strings.")]
+        Description = "Horrific description strings.")]
     public virtual string[]? HorrificDescriptions { get; set; } = null;
-
-    [ConfigurationProperty("ArtifactBiasWeightedRandomGameConfiguration[]?",
-        Title = "Artifact Bias Weighted Randoms",
-        Summary = "Collection of artifact-bias weighted-random configurations.")]
-    [ConfigurationCollection(
-        "ArtifactBiasWeightedRandoms",
-        EntityNoun = "Artifact Bias Weighted Random")]
-    public virtual ArtifactBiasWeightedRandomGameConfiguration[]? ArtifactBiasWeightedRandoms { get; set; } = null;
-
-    [ConfigurationProperty("ItemClassGameConfiguration[]?",
-        Title = "Item Classes",
-        Summary = "Collection of item class configurations.")]
-    [ConfigurationCollection(
-        "ItemClasses",
-        EntityNoun = "Item Class")]
-    public virtual ItemClassGameConfiguration[]? ItemClasses { get; set; } = null;
-
-    [ConfigurationProperty("ItemEnhancementGameConfiguration[]?",
-        Title = "Item Enhancements",
-        Summary = "Collection of item enhancement configurations.")]
-    [ConfigurationCollection(
-        "ItemEnhancements",
-        EntityNoun = "Item Enhancement")]
-    public virtual ItemEnhancementGameConfiguration[]? ItemEnhancements { get; set; } = null;
-
-    [ConfigurationProperty("ItemEnhancementWeightedRandomGameConfiguration[]?",
-        Title = "Item Enhancement Weighted Randoms",
-        Summary = "Collection of item-enhancement weighted-random configurations.")]
-    [ConfigurationCollection(
-        "ItemEnhancementWeightedRandoms",
-        EntityNoun = "Item Enhancement Weighted Random")]
-    public virtual ItemEnhancementWeightedRandomGameConfiguration[]? ItemEnhancementWeightedRandoms { get; set; } = null;
-
-    [ConfigurationProperty("ItemIdentificationGameConfiguration[]?",
-        Title = "Item Identifications",
-        Summary = "Collection of item identification configurations.")]
-    [ConfigurationCollection(
-        "ItemIdentifications",
-        EntityNoun = "Item Identification")]
-    public virtual ItemIdentificationGameConfiguration[]? ItemIdentifications { get; set; } = null;
-
-    [ConfigurationProperty("ItemFactoryGameConfiguration[]?",
-        Title = "Item Factories",
-        Summary = "Collection of item factory configurations.")]
-    [ConfigurationCollection(
-        "ItemFactories",
-        EntityNoun = "Item Factory")]
-    public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
-
-    [ConfigurationProperty("ProjectileScriptWeightedRandomGameConfiguration[]?",
-        Title = "Projectile Weighted Random Scripts",
-        Summary = "Collection of projectile-weighted-random script configurations.")]
-    [ConfigurationCollection(
-        "ProjectileWeightedRandomScripts",
-        EntityNoun = "Projectile Script Weighted Random")]
-    public virtual ProjectileScriptWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
-
-    [ConfigurationProperty("ConditionalWidgetGameConfiguration[]?",
-        Title = "Conditional Widgets",
-        Summary = "Collection of conditional widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Conditional Widget")]
-    public virtual ConditionalWidgetGameConfiguration[]? ConditionalWidgets { get; set; } = null;
-
-    [ConfigurationProperty("DateWidgetGameConfiguration[]?",
-        Title = "Date Widgets",
-        Summary = "Collection of date widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Date Widget")]
-    public virtual DateWidgetGameConfiguration[]? DateWidgets { get; set; } = null;
-
-    [ConfigurationProperty("IntWidgetGameConfiguration[]?",
-        Title = "Int Widgets",
-        Summary = "Collection of int widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Int Widget")]
-    public virtual IntWidgetGameConfiguration[]? IntWidgets { get; set; } = null;
-
-    [ConfigurationProperty("MapWidgetGameConfiguration[]?",
-        Title = "Map Widgets",
-        Summary = "Collection of map widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Map Widget")]
-    public virtual MapWidgetGameConfiguration[]? MapWidgets { get; set; } = null;
-
-    [ConfigurationProperty("MaxRangedWidgetGameConfiguration[]?",
-        Title = "Max Ranged Widgets",
-        Summary = "Collection of max-ranged widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Max Ranged Widget")]
-    public virtual MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets { get; set; } = null;
-
-    [ConfigurationProperty("RangedWidgetGameConfiguration[]?",
-        Title = "Ranged Widgets",
-        Summary = "Collection of ranged widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Ranged Widget")]
-    public virtual RangedWidgetGameConfiguration[]? RangedWidgets { get; set; } = null;
-
-    [ConfigurationProperty("RangedWeaponBonusGameConfiguration[]?",
-        Title = "Ranged Weapon Bonuses",
-        Summary = "Collection of ranged weapon bonus configurations.")]
-    [ConfigurationCollection(
-        "RangedWeaponBonuses",
-        EntityNoun = "Ranged Weapon Bonus")]
-    public virtual RangedWeaponBonusGameConfiguration[]? RangedWeaponBonuses { get; set; } = null;
-
-    [ConfigurationProperty("StringWidgetGameConfiguration[]?",
-        Title = "String Widgets",
-        Summary = "Collection of string widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "String Widget")]
-    public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
-
-    [ConfigurationProperty("GameMessageWidgetGameConfiguration[]?",
-        Title = "Game Message Widgets",
-        Summary = "Collection of game-message widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Game Message Widget")]
-    public virtual GameMessageWidgetGameConfiguration[]? GameMessageWidgets { get; set; } = null;
-
-    [ConfigurationProperty("LabelWidgetGameConfiguration[]?",
-        Title = "Label Widgets",
-        Summary = "Collection of label widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Label Widget")]
-    public virtual LabelWidgetGameConfiguration[]? LabelWidgets { get; set; } = null;
-
-    [ConfigurationProperty("TimeWidgetGameConfiguration[]?",
-        Title = "Time Widgets",
-        Summary = "Collection of time widget configurations.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Time Widget")]
-    public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
-
-    [ConfigurationProperty("TextWidgetGameConfiguration[]?",
-        Title = "Nullable Strings Text Area Widgets",
-        Summary = "Collection of text widget configurations used for nullable string text areas.")]
-    [ConfigurationCollection(
-        "Widgets",
-        EntityNoun = "Text Widget")]
-    public virtual TextWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
-
-    [ConfigurationProperty("RaceGenderGameConfiguration[]?",
-        Title = "Race Genders",
-        Summary = "Collection of race-gender configurations.")]
-    [ConfigurationCollection(
-        "RaceGenders",
-        EntityNoun = "Race Gender")]
-    public virtual RaceGenderGameConfiguration[]? RaceGenders { get; set; } = null;
-
-    [ConfigurationProperty("GenderGameConfiguration[]?",
-        Title = "Genders",
-        Summary = "Collection of gender configurations.")]
-    [ConfigurationCollection(
-        "Genders",
-        EntityNoun = "Gender")]
-    public virtual GenderGameConfiguration[]? Genders { get; set; } = null;
-
-    [ConfigurationProperty("PhysicalAttributeSetGameConfiguration[]?",
-        Title = "Physical Attribute Sets",
-        Summary = "Collection of physical attribute set configurations.")]
-    [ConfigurationCollection(
-        "PhysicalAttributeSets",
-        EntityNoun = "Physical Attribute Set")]
-    public virtual PhysicalAttributeSetGameConfiguration[]? PhysicalAttributeSets { get; set; } = null;
-
-    [ConfigurationProperty("RealmGameConfiguration[]?",
-        Title = "Realms",
-        Summary = "Collection of realm configurations.")]
-    [ConfigurationCollection(
-        "Realms",
-        EntityNoun = "Realm")]
-    public virtual RealmGameConfiguration[]? Realms { get; set; } = null;
-
-    [ConfigurationProperty("RealmCharacterClassGameConfiguration[]?",
-        Title = "Realm Character Classes",
-        Summary = "Collection of realm character class configurations.")]
-    [ConfigurationCollection(
-        "RealmCharacterClasses",
-        EntityNoun = "Realm Character Class")]
-    public virtual RealmCharacterClassGameConfiguration[]? RealmCharacterClasses { get; set; } = null;
-
-    [ConfigurationProperty("ViewGameConfiguration[]?",
-        Title = "Views",
-        Summary = "Collection of view configurations.")]
-    [ConfigurationCollection(
-        "Views",
-        EntityNoun = "View")]
-    public virtual ViewGameConfiguration[]? Views { get; set; } = null;
-
-    [ConfigurationProperty("SummonScriptGameConfiguration[]?",
-        Title = "Summon Scripts",
-        Summary = "Collection of summon script configurations.")]
-    [ConfigurationCollection(
-        "SummonScripts",
-        EntityNoun = "Summon Script")]
-    public virtual SummonScriptGameConfiguration[]? SummonScripts { get; set; } = null;
-
-    [ConfigurationProperty("MappedSpellScriptGameConfiguration[]?",
-        Title = "Mapped Spell Scripts",
-        Summary = "Collection of mapped-spell script configurations.")]
-    [ConfigurationCollection(
-        "MappedSpellScripts",
-        EntityNoun = "Mapped Spell Script")]
-    public virtual MappedSpellScriptGameConfiguration[]? MappedSpellScripts { get; set; } = null;
-
-    [ConfigurationProperty("SummonWeightedRandomGameConfiguration[]?",
-        Title = "Summon Weighted Randoms",
-        Summary = "Collection of summon-weighted-random configurations.")]
-    [ConfigurationCollection(
-        "SummonWeightedRandoms",
-        EntityNoun = "Summon Weighted Random")]
-    public virtual SummonWeightedRandomGameConfiguration[]? SummonWeightedRandoms { get; set; } = null;
-
-    [ConfigurationProperty("ItemFactoryWeightedRandomGameConfiguration[]?",
-        Title = "Item Factory Weighted Randoms",
-        Summary = "Collection of item-factory weighted-random configurations.")]
-    [ConfigurationCollection(
-        "ItemFactoryWeightedRandoms",
-        EntityNoun = "Item Factory Weighted Random")]
-    public virtual ItemFactoryWeightedRandomGameConfiguration[]? ItemFactoryWeightedRandoms { get; set; } = null;
-
-    [ConfigurationProperty("TimerScriptGameConfiguration[]?",
-        Title = "Timer Scripts",
-        Summary = "Collection of timer script configurations.")]
-    [ConfigurationCollection(
-        "TimerScripts",
-        EntityNoun = "Timer Script")]
-    public virtual TimerScriptGameConfiguration[]? TimerScripts { get; set; } = null;
-
-    [ConfigurationProperty("RenderMessageScriptGameConfiguration[]?",
-        Title = "Render Message Scripts",
-        Summary = "Collection of render-message script configurations.")]
-    [ConfigurationCollection(
-        "RenderMessageScripts",
-        EntityNoun = "Render Message Script")]
-    public virtual RenderMessageScriptGameConfiguration[]? RenderMessageScripts { get; set; } = null;
-
-    [ConfigurationProperty("MartialArtsAttackGameConfiguration[]?",
-        Title = "Martial Arts Attacks",
-        Summary = "Collection of martial-arts attack configurations.")]
-    [ConfigurationCollection(
-        "MartialArtsAttacks",
-        EntityNoun = "Martial Arts Attack")]
-    public virtual MartialArtsAttackGameConfiguration[]? MartialArtsAttacks { get; set; } = null;
-
-    [ConfigurationProperty("AbilityScoreScriptGameConfiguration[]?",
-        Title = "Ability Score Scripts",
-        Summary = "Collection of ability-score script configurations.")]
-    [ConfigurationCollection(
-        "AbilityScoreScripts",
-        EntityNoun = "Ability Score Script")]
-    public virtual AbilityScoreScriptGameConfiguration[]? AbilityScoreScripts { get; set; } = null;
-
-    [ConfigurationProperty("ChestTrapCombinationGameConfiguration[]?",
-        Title = "Chest Trap Combinations",
-        Summary = "Collection of chest-trap combination configurations.")]
-    [ConfigurationCollection(
-        "ChestTrapCombinations",
-        EntityNoun = "Chest Trap Combination")]
-    public virtual ChestTrapCombinationGameConfiguration[]? ChestTrapCombinations { get; set; } = null;
-
-    [ConfigurationProperty("PatronGameConfiguration[]?",
-        Title = "Patrons",
-        Summary = "Collection of patron configurations.")]
-    [ConfigurationCollection(
-        "Patrons",
-        EntityNoun = "Patron",
-        EntityNamePropertyName = "LongName")]
-    public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
-
-    [ConfigurationProperty("RacialPowerTestGameConfiguration[]?",
-        Title = "Racial Power Tests",
-        Summary = "Collection of racial-power test configurations.")]
-    [ConfigurationCollection(
-        "RacialPowerTests",
-        EntityNoun = "Racial Power Test")]
-    public virtual RacialPowerTestGameConfiguration[]? RacialPowerTests { get; set; } = null;
-
-    [ConfigurationProperty("RaceAbilityGameConfiguration[]?",
-        Title = "Race Abilities",
-        Summary = "Collection of race-ability configurations.")]
-    [ConfigurationCollection(
-        "RaceAbilities",
-        EntityNoun = "Race Ability")]
-    public virtual RaceAbilityGameConfiguration[]? RaceAbilities { get; set; } = null;
-
-    [ConfigurationProperty("RacePowerGameConfiguration[]?",
-        Title = "Racial Powers",
-        Summary = "Collection of racial-power configurations.")]
-    [ConfigurationCollection(
-        "RacialPowers",
-        EntityNoun = "Racial Power")]
-    public virtual RacePowerGameConfiguration[]? RacialPowers { get; set; } = null;
-
-    [ConfigurationProperty("ConditionalScriptGameConfiguration[]?",
-        Title = "Conditional Scripts",
-        Summary = "Collection of conditional script configurations.")]
-    [ConfigurationCollection(
-        "ConditionalScripts",
-        EntityNoun = "Conditional Script")]
-    public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
-
-    [ConfigurationProperty("CharacterClassAbilityGameConfiguration[]?",
-        Title = "Character Class Abilities",
-        Summary = "Collection of character-class ability configurations.")]
-    [ConfigurationCollection(
-        "CharacterClassAbilities",
-        EntityNoun = "Character Class Ability")]
-    public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
-
-    [ConfigurationProperty("InnateTotalsGameConfiguration[]?",
-        Title = "Character Class And Race Innate Totals",
-        Summary = "Collection of innate-total configurations for character classes and races.")]
-    [ConfigurationCollection(
-        "CharacterClassAndRaceInnateTotals",
-        EntityNoun = "Character Class And Race Innate Total")]
-    public virtual InnateTotalsGameConfiguration[]? CharacterClassAndRaceInnateTotals { get; set; } = null;
-
-    [ConfigurationProperty("ActivationGameConfiguration[]?",
-        Title = "Activations",
-        Summary = "Collection of activation configurations.")]
-    [ConfigurationCollection(
-        "Activations",
-        EntityNoun = "Activation")]
-    public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
-
-    [ConfigurationProperty("ItemFilterGameConfiguration[]?",
-        Title = "Item Filters",
-        Summary = "Collection of item filter configurations.")]
-    [ConfigurationCollection(
-        "ItemFilters",
-        EntityNoun = "Item Filter")]
-    public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
-
-    [ConfigurationProperty("ConditionalGameConfiguration[]?",
-        Title = "Product Of Sums Bool Functions",
-        Summary = "Collection of conditional (product-of-sums) boolean function configurations.")]
-    [ConfigurationCollection(
-        "ProductOfSumsBoolFunctions",
-        EntityNoun = "Conditional")]
-    public virtual ConditionalGameConfiguration[]? ProductOfSumsBoolFunctions { get; set; } = null;
-
-    [ConfigurationProperty("RechargeItemScriptGameConfiguration[]?",
-        Title = "Recharge Item Scripts",
-        Summary = "Collection of recharge-item script configurations.")]
-    [ConfigurationCollection(
-        "RechargeItemScripts",
-        EntityNoun = "Recharge Item Script")]
-    public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
-
-    [ConfigurationProperty("TalentGameConfiguration[]?",
-        Title = "Talents",
-        Summary = "Collection of talent configurations.")]
-    [ConfigurationCollection(
-        "Talents",
-        EntityNoun = "Talent")]
-    public virtual TalentGameConfiguration[]? Talents { get; set; } = null;
-
-    [ConfigurationProperty("TeleportSelfScriptGameConfiguration[]?",
-        Title = "Teleport Self Scripts",
-        Summary = "Collection of teleport-self script configurations.")]
-    [ConfigurationCollection(
-        "TeleportSelfScripts",
-        EntityNoun = "Teleport Self Script")]
-    public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
-
-    [ConfigurationProperty("MappedItemEnhancementGameConfiguration[]?",
-        Title = "Mapped Item Enhancements",
-        Summary = "Collection of mapped-item enhancement configurations.")]
-    [ConfigurationCollection(
-        "MappedItemEnhancements",
-        EntityNoun = "Mapped Item Enhancement")]
-    public virtual MappedItemEnhancementGameConfiguration[]? MappedItemEnhancements { get; set; } = null;
-
-    [ConfigurationProperty("ChestTrapGameConfiguration[]?",
-        Title = "Chest Traps",
-        Summary = "Collection of chest-trap configurations.")]
-    [ConfigurationCollection(
-        "ChestTraps",
-        EntityNoun = "Chest Trap")]
-    public virtual ChestTrapGameConfiguration[]? ChestTraps { get; set; } = null;
 
     [ConfigurationProperty("int[]",
         Title = "Required Experience Per Level",
-        Summary = "Array of required experience values for each level.")]
+        Description = "Array of required experience values for each level.")]
     public virtual int[] RequiredExperiencePerLevel { get; set; } = new int[] // TODO: Need defaults removed.
     {
         10, 25, 45, 70, 100, 140, 200, 280, 380, 500, 650, 850, 1100, 1400, 1800, 2300, 2900, 3600, 4400, 5400,
@@ -1033,7 +944,7 @@ public class GameConfiguration
 
     [ConfigurationProperty("int[]",
         Title = "Extract Energy",
-        Summary = "Energy extracted per speed class.")]
+        Description = "Energy extracted per speed class.")]
     public virtual int[] ExtractEnergy { get; set; } = new int[] // TODO: Need defaults removed.
     {
 	/* Slow 0-9 */       1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
@@ -1060,7 +971,7 @@ public class GameConfiguration
 
     [ConfigurationProperty("int[][]",
         Title = "Blows Table",
-        Summary = "Table describing number of blows by attack/speed group.")]
+        Description = "Table describing number of blows by attack/speed group.")]
     public virtual int[][] BlowsTable { get; set; } = new int[][]
     {
         new[] {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3},

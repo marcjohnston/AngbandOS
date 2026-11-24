@@ -9,17 +9,17 @@ public class ItemClassGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "The capitalized singular name of the item represented by this item class.")]
+        Description = "The capitalized singular name of the item represented by this item class.")]
     public virtual string Name { get; set; }
 
     [ConfigurationProperty("bool",
         Title = "Allow Stomp",
-        Summary = "Determines whether items of this class allow the player to stomp them.")]
+        Description = "Determines whether items of this class allow the player to stomp them.")]
     public virtual bool AllowStomp { get; set; } = true;
 
     [ConfigurationProperty("int",
         Title = "Number of Flavors to Generate",
-        Summary = "The number of flavors to generate for items of this item class.")]
+        Description = "The number of flavors to generate for items of this item class.")]
     public virtual int NumberOfFlavorsToGenerate { get; set; } = 0;
 
     /// <summary>
@@ -28,6 +28,6 @@ public class ItemClassGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string[]?",
         Title = "Item Flavor Binding Keys",
-        Summary = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.")]
+        Description = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.")]
     public virtual string[]? ItemFlavorBindingKeys { get; set; } = null;
 }

@@ -6,6 +6,6 @@ public class DamageLearnedKnowledgeGameConfiguration : NonCompositeSingletonGame
 {
     [ConfigurationProperty("string",
         Title = "Damage Expression Text",
-        Summary = "The expression that defines the damage value learned from this knowledge.")]
+        Description = "The expression that defines the damage value learned from this knowledge.")]
     public virtual string DamageExpressionText { get; set; }
 }

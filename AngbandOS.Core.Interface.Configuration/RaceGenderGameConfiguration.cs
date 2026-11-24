@@ -8,12 +8,12 @@ public class RaceGenderGameConfiguration : CompositeSingletonGameConfiguration
 
     [ConfigurationProperty("string",
         Title = "Race Binding Key",
-        Summary = "Specifies the binding key for the race.")]
+        Description = "Specifies the binding key for the race.")]
     public virtual string RaceBindingKey { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Gender Binding Key",
-        Summary = "Specifies the binding key for the gender.")]
+        Description = "Specifies the binding key for the gender.")]
     [ConfigurationForeignKey("Genders", Inline = false)]
     public virtual string GenderBindingKey { get; set; }
 
@@ -27,6 +27,6 @@ public class RaceGenderGameConfiguration : CompositeSingletonGameConfiguration
         Title = "Weight")]
     [ConfigurationProperty("(string PhysicalAttributesBindingKey, int Weight)[]",
         Title = "Physical Attributes Weighted Random Bindings",
-        Summary = "Specifies the weighted random bindings for the race gender's physical attribute sets.")]
+        Description = "Specifies the weighted random bindings for the race gender's physical attribute sets.")]
     public virtual (string PhysicalAttributesBindingKey, int Weight)[] PhysicalAttributesWeightedRandomBindings { get; set; }
 }

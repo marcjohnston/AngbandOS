@@ -15,7 +15,7 @@ public class DungeonGuardianGameConfiguration : NonCompositeSingletonGameConfigu
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Monster Race Name",
-        Summary = "The name of the monster race for the quest monster.")]
+        Description = "The name of the monster race for the quest monster.")]
     public virtual string MonsterRaceName { get; set; }
 
     /// <summary>
@@ -23,6 +23,6 @@ public class DungeonGuardianGameConfiguration : NonCompositeSingletonGameConfigu
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Level Found",
-        Summary = "The dungeon level where the fixed quest is encountered.")]
+        Description = "The dungeon level where the fixed quest is encountered.")]
     public virtual int LevelFound { get; set; }
 }

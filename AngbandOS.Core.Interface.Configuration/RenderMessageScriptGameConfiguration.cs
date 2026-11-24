@@ -6,16 +6,16 @@ public class RenderMessageScriptGameConfiguration : NonCompositeSingletonGameCon
 {
     [ConfigurationProperty("string",
         Title = "Message",
-        Summary = "Specifies the message rendered by the script.")]
+        Description = "Specifies the message rendered by the script.")]
     public virtual string Message { get; set; }
 
     [ConfigurationProperty("bool",
         Title = "Uses Item",
-        Summary = "Determines whether the script uses an item.")]
+        Description = "Determines whether the script uses an item.")]
     public virtual bool UsesItem { get; set; } = false;
 
     [ConfigurationProperty("bool",
         Title = "Identifies Item",
-        Summary = "Determines whether the script identifies an item.")]
+        Description = "Determines whether the script identifies an item.")]
     public virtual bool IdentifiesItem { get; set; } = false;
 }

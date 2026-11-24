@@ -11,53 +11,74 @@ public static class GameConfigurationMetadata
         {
             return new EnumMetadata[]
             {
+                new EnumMetadata("AbilitiesEnum", new EnumOptionMetadata[]
+                {
+                    new("CharismaAbility", 0),
+                    new("ConstitutionAbility", 1),
+                    new("DexterityAbility", 2),
+                    new("IntelligenceAbility", 3),
+                    new("StrengthAbility", 4),
+                    new("WisdomAbility", 5),
+                }),
+                new EnumMetadata("AlignmentsEnum", new EnumOptionMetadata[]
+                {
+                    new("TopAlignment", 0),
+                    new("MiddleAlignment", 1),
+                    new("BottomAlignment", 2),
+                }),
                 new EnumMetadata("ColorEnum", new EnumOptionMetadata[]
                 {
-                    new EnumOptionMetadata("Background", 0),
-                    new EnumOptionMetadata("Black", 1),
-                    new EnumOptionMetadata("Grey", 2),
-                    new EnumOptionMetadata("BrightGrey", 3),
-                    new EnumOptionMetadata("Silver", 4),
-                    new EnumOptionMetadata("Beige", 5),
-                    new EnumOptionMetadata("BrightBeige", 6),
-                    new EnumOptionMetadata("White", 7),
-                    new EnumOptionMetadata("BrightWhite", 8),
-                    new EnumOptionMetadata("Red", 9),
-                    new EnumOptionMetadata("BrightRed", 10),
-                    new EnumOptionMetadata("Copper", 11),
-                    new EnumOptionMetadata("Orange", 12),
-                    new EnumOptionMetadata("BrightOrange", 13),
-                    new EnumOptionMetadata("Brown", 14),
-                    new EnumOptionMetadata("BrightBrown", 15),
-                    new EnumOptionMetadata("Gold", 16),
-                    new EnumOptionMetadata("Yellow", 17),
-                    new EnumOptionMetadata("BrightYellow", 18),
-                    new EnumOptionMetadata("Chartreuse", 19),
-                    new EnumOptionMetadata("BrightChartreuse", 20),
-                    new EnumOptionMetadata("Green", 21),
-                    new EnumOptionMetadata("BrightGreen", 22),
-                    new EnumOptionMetadata("Turquoise", 23),
-                    new EnumOptionMetadata("BrightTurquoise", 24),
-                    new EnumOptionMetadata("Blue", 25),
-                    new EnumOptionMetadata("BrightBlue", 26),
-                    new EnumOptionMetadata("Diamond", 27),
-                    new EnumOptionMetadata("Purple", 28),
-                    new EnumOptionMetadata("BrightPurple", 29),
-                    new EnumOptionMetadata("Pink", 30),
-                    new EnumOptionMetadata("BrightPink", 31),
+                    new("Background", 0),
+                    new("Black", 1),
+                    new("Grey", 2),
+                    new("BrightGrey", 3),
+                    new("Silver", 4),
+                    new("Beige", 5),
+                    new("BrightBeige", 6),
+                    new("White", 7),
+                    new("BrightWhite", 8),
+                    new("Red", 9),
+                    new("BrightRed", 10),
+                    new("Copper", 11),
+                    new("Orange", 12),
+                    new("BrightOrange", 13),
+                    new("Brown", 14),
+                    new("BrightBrown", 15),
+                    new("Gold", 16),
+                    new("Yellow", 17),
+                    new("BrightYellow", 18),
+                    new("Chartreuse", 19),
+                    new("BrightChartreuse", 20),
+                    new("Green", 21),
+                    new("BrightGreen", 22),
+                    new("Turquoise", 23),
+                    new("BrightTurquoise", 24),
+                    new("Blue", 25),
+                    new("BrightBlue", 26),
+                    new("Diamond", 27),
+                    new("Purple", 28),
+                    new("BrightPurple", 29),
+                    new("Pink", 30),
+                    new("BrightPink", 31),
+                }),
+                new EnumMetadata("JustificationsEnum", new EnumOptionMetadata[]
+                {
+                    new("LeftJustification", 0),
+                    new("CenterJustification", 1),
+                    new("RightJustification", 2),
                 }),
                 new EnumMetadata("LearnedDetailsWeightedRandomEnum", new EnumOptionMetadata[]
                 {
-                    new EnumOptionMetadata("Default", 0),
-                    new EnumOptionMetadata("InheritFromFirstDefined", 1),
+                    new("Default", 0),
+                    new("InheritFromFirstDefined", 1),
                 }),
                 new EnumMetadata("NonDirectionalProjectileModeEnum", new EnumOptionMetadata[]
                 {
-                    new EnumOptionMetadata("Default", 0),
-                    new EnumOptionMetadata("PlayerSpecified", 0),
-                    new EnumOptionMetadata("AllDirections", 1),
-                    new EnumOptionMetadata("AllMonstersInLos", 2),
-                    new EnumOptionMetadata("AtPlayerLocation", 3),
+                    new("Default", 0),
+                    new("Default", 0),
+                    new("AllDirections", 1),
+                    new("AllMonstersInLos", 2),
+                    new("AtPlayerLocation", 3),
                 }),
             };
         }
@@ -69,1206 +90,1077 @@ public static class GameConfigurationMetadata
         {
             return new PropertyMetadata[]
             {
-                new StringsPropertyMetadata("GameTickEventBindingKeys")
+                new PropertyMetadata("collection", "Towns")
                 {
-                    Description = "Binding keys for events that occur on each game tick.",
-                    LabelIfNullable = "Default",
-                    Title = "Game Tick Event Binding Keys",
-                    CategoryTitle = "",
-                },
-                new IntegerPropertyMetadata("MaxMonsterCount")
-                {
-                    Description = "Maximum number of monsters allowed.",
-                    LabelIfNullable = null,
-                    Title = "Max Monster Count",
-                    CategoryTitle = "",
-                },
-                new IntegerPropertyMetadata("CompactMonsterCutIn")
-                {
-                    Description = "Number of monsters at which compacting begins.",
-                    LabelIfNullable = null,
-                    Title = "Compact Monster Cut In",
-                    CategoryTitle = "",
-                },
-                new IntegerPropertyMetadata("CompactMonsterCutOutTarget")
-                {
-                    Description = "Target number of monsters to reduce to when compacting.",
-                    LabelIfNullable = null,
-                    Title = "Compact Monster Cut Out Target",
-                    CategoryTitle = "",
-                },
-                new IntegerPropertyMetadata("MaxMessageLogLength")
-                {
-                    Description = "Number of log items that the message history may store. Null indicates no limit.",
-                    LabelIfNullable = "Default",
-                    Title = "Max Message Log Length",
-                    CategoryTitle = "",
-                },
-                new IntegerPropertyMetadata("FollowDistance")
-                {
-                    Description = "Distance at which followers remain from the player.",
-                    LabelIfNullable = null,
-                    Title = "Follow Distance",
-                    CategoryTitle = "",
-                },
-                new IntegerPropertyMetadata("DecayRate")
-                {
-                    Description = "Rate at which certain game elements decay.",
-                    LabelIfNullable = null,
-                    Title = "Decay Rate",
-                    CategoryTitle = "",
-                },
-                new IntegerPropertyMetadata("PatronRestingFavour")
-                {
-                    Description = "Favour amount awarded when resting with a patron.",
-                    LabelIfNullable = null,
-                    Title = "Patron Resting Favour",
-                    CategoryTitle = "",
-                },
-                new StringPropertyMetadata("DungeonViewBindingKey")
-                {
-                    Description = "Binding key for the dungeon view.",
-                    LabelIfNullable = "Default",
-                    Title = "Dungeon View Binding Key",
-                    CategoryTitle = "",
-                },
-                new StringPropertyMetadata("StartupTownName")
-                {
-                    Description = "Name of the town where the player will start, or null to choose a random startup town from available towns.",
-                    LabelIfNullable = "Default",
-                    Title = "Startup Town Name",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("GoldFactoriesBindingKeys")
-                {
-                    Description = "Binding keys for gold factories.",
-                    LabelIfNullable = "Default",
-                    Title = "Gold Factories Binding Keys",
-                    CategoryTitle = "",
-                },
-                new StringPropertyMetadata("GoldItemIsGreatProbabilityExpression")
-                {
-                    Description = "Probability expression that determines whether a gold-containing item is considered 'great'.",
-                    LabelIfNullable = null,
-                    Title = "Gold Item Is Great Probability Expression",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Towns")
-                {
-                    AssociatedProperties = TownMetadata.Metadata,
-                    ForeignCollectionName = "Towns",
-                    EntityNoun = "Town",
-                    EntityKeyPropertyName = "GetKey",
-                    EntityNamePropertyName = "GetKey",
-                    Description = "Null to load towns from the assembly; otherwise a collection of towns to load into the SingletonRepository.",
-                    LabelIfNullable = "Default",
                     Title = "Towns",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Shopkeepers")
-                {
-                    AssociatedProperties = ShopkeeperMetadata.Metadata,
-                    ForeignCollectionName = "Shopkeepers",
-                    EntityNoun = "Shopkeeper",
+                    Description = "Null to load towns from the assembly; otherwise a collection of towns to load into the SingletonRepository.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of shopkeeper configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Town",
+                    ForeignCollectionName = "Towns",
+                    AssociatedProperties = TownsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Shopkeepers")
+                {
                     Title = "Shopkeepers",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("GameCommands")
-                {
-                    AssociatedProperties = GameCommandMetadata.Metadata,
-                    ForeignCollectionName = "GameCommands",
-                    EntityNoun = "Game Command",
+                    Description = "Collection of shopkeeper configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of game command configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Shopkeeper",
+                    ForeignCollectionName = "Shopkeepers",
+                    AssociatedProperties = ShopkeepersMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "GameCommands")
+                {
                     Title = "Game Commands",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("StoreCommands")
-                {
-                    AssociatedProperties = StoreCommandMetadata.Metadata,
-                    ForeignCollectionName = "StoreCommands",
-                    EntityNoun = "Store Command",
+                    Description = "Collection of game command configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of store command configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Game Command",
+                    ForeignCollectionName = "GameCommands",
+                    AssociatedProperties = GameCommandsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "StoreCommands")
+                {
                     Title = "Store Commands",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("HelpGroups")
-                {
-                    AssociatedProperties = HelpGroupMetadata.Metadata,
-                    ForeignCollectionName = "HelpGroups",
-                    EntityNoun = "Help Group",
+                    Description = "Collection of store command configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of help group configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Store Command",
+                    ForeignCollectionName = "StoreCommands",
+                    AssociatedProperties = StoreCommandsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "HelpGroups")
+                {
                     Title = "Help Groups",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("MonsterRaces")
-                {
-                    AssociatedProperties = MonsterRaceMetadata.Metadata,
-                    ForeignCollectionName = "MonsterRaces",
-                    EntityNoun = "Monster Race",
+                    Description = "Collection of help group configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of monster race configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Help Group",
+                    ForeignCollectionName = "HelpGroups",
+                    AssociatedProperties = HelpGroupsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "MonsterRaces")
+                {
                     Title = "Monster Races",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("OutfitManifests")
-                {
-                    AssociatedProperties = OutfitManifestMetadata.Metadata,
-                    ForeignCollectionName = "OutfitManifests",
-                    EntityNoun = "Outfit Manifest",
+                    Description = "Collection of monster race configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of outfit manifest configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Monster Race",
+                    ForeignCollectionName = "MonsterRaces",
+                    AssociatedProperties = MonsterRacesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "OutfitManifests")
+                {
                     Title = "Outfit Manifests",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Symbols")
-                {
-                    AssociatedProperties = SymbolMetadata.Metadata,
-                    ForeignCollectionName = "Symbols",
-                    EntityNoun = "Symbol",
+                    Description = "Collection of outfit manifest configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of symbol configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Outfit Manifest",
+                    ForeignCollectionName = "OutfitManifests",
+                    AssociatedProperties = OutfitManifestsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Symbols")
+                {
                     Title = "Symbols",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Vaults")
-                {
-                    AssociatedProperties = VaultMetadata.Metadata,
-                    ForeignCollectionName = "Vaults",
-                    EntityNoun = "Vault",
+                    Description = "Collection of symbol configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of vault configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Symbol",
+                    ForeignCollectionName = "Symbols",
+                    AssociatedProperties = SymbolsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Vaults")
+                {
                     Title = "Vaults",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("DungeonGuardians")
-                {
-                    AssociatedProperties = DungeonGuardianMetadata.Metadata,
-                    ForeignCollectionName = "DungeonGuardians",
-                    EntityNoun = "Dungeon Guardian",
+                    Description = "Collection of vault configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of dungeon guardian configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Vault",
+                    ForeignCollectionName = "Vaults",
+                    AssociatedProperties = VaultsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "DungeonGuardians")
+                {
                     Title = "Dungeon Guardians",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("DamageLearnedKnowledges")
-                {
-                    AssociatedProperties = DamageLearnedKnowledgeMetadata.Metadata,
-                    ForeignCollectionName = "DamageLearnedKnowledges",
-                    EntityNoun = "Damage Learned Knowledge",
+                    Description = "Collection of dungeon guardian configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of damage learned-knowledge configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Dungeon Guardian",
+                    ForeignCollectionName = "DungeonGuardians",
+                    AssociatedProperties = DungeonGuardiansMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "DamageLearnedKnowledges")
+                {
                     Title = "Damage Learned Knowledges",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("DurationLearnedKnowledges")
-                {
-                    AssociatedProperties = DurationLearnedKnowledgeMetadata.Metadata,
-                    ForeignCollectionName = "DurationLearnedKnowledges",
-                    EntityNoun = "Duration Learned Knowledge",
+                    Description = "Collection of damage learned-knowledge configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of duration learned-knowledge configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Damage Learned Knowledge",
+                    ForeignCollectionName = "DamageLearnedKnowledges",
+                    AssociatedProperties = DamageLearnedKnowledgesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "DurationLearnedKnowledges")
+                {
                     Title = "Duration Learned Knowledges",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RangeLearnedKnowledges")
-                {
-                    AssociatedProperties = RangeLearnedKnowledgeMetadata.Metadata,
-                    ForeignCollectionName = "RangeLearnedKnowledges",
-                    EntityNoun = "Range Learned Knowledge",
+                    Description = "Collection of duration learned-knowledge configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of range learned-knowledge configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Duration Learned Knowledge",
+                    ForeignCollectionName = "DurationLearnedKnowledges",
+                    AssociatedProperties = DurationLearnedKnowledgesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RangeLearnedKnowledges")
+                {
                     Title = "Range Learned Knowledges",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ExperienceLearnedKnowledges")
-                {
-                    AssociatedProperties = ExperienceLearnedKnowledgeMetadata.Metadata,
-                    ForeignCollectionName = "ExperienceLearnedKnowledges",
-                    EntityNoun = "Experience Learned Knowledge",
+                    Description = "Collection of range learned-knowledge configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of experience learned-knowledge configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Range Learned Knowledge",
+                    ForeignCollectionName = "RangeLearnedKnowledges",
+                    AssociatedProperties = RangeLearnedKnowledgesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ExperienceLearnedKnowledges")
+                {
                     Title = "Experience Learned Knowledges",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Dungeons")
-                {
-                    AssociatedProperties = DungeonMetadata.Metadata,
-                    ForeignCollectionName = "Dungeons",
-                    EntityNoun = "Dungeon",
+                    Description = "Collection of experience learned-knowledge configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of dungeon configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Experience Learned Knowledge",
+                    ForeignCollectionName = "ExperienceLearnedKnowledges",
+                    AssociatedProperties = ExperienceLearnedKnowledgesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Dungeons")
+                {
                     Title = "Dungeons",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("StoreFactories")
-                {
-                    AssociatedProperties = StoreFactoryMetadata.Metadata,
-                    ForeignCollectionName = "StoreFactories",
-                    EntityNoun = "Store Factory",
+                    Description = "Collection of dungeon configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Factories used to create stores within towns.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Dungeon",
+                    ForeignCollectionName = "Dungeons",
+                    AssociatedProperties = DungeonsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "StoreFactories")
+                {
                     Title = "Store Factories",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ProjectileGraphics")
-                {
-                    AssociatedProperties = ProjectileGraphicMetadata.Metadata,
-                    ForeignCollectionName = "ProjectileGraphics",
-                    EntityNoun = "Projectile Graphic",
+                    Description = "Factories used to create stores within towns.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of projectile graphic configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Store Factory",
+                    ForeignCollectionName = "StoreFactories",
+                    AssociatedProperties = StoreFactoriesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ProjectileGraphics")
+                {
                     Title = "Projectile Graphics",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemFlavors")
-                {
-                    AssociatedProperties = ItemFlavorMetadata.Metadata,
-                    ForeignCollectionName = "ItemFlavors",
-                    EntityNoun = "Item Flavor",
+                    Description = "Collection of projectile graphic configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item flavor configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Projectile Graphic",
+                    ForeignCollectionName = "ProjectileGraphics",
+                    AssociatedProperties = ProjectileGraphicsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemFlavors")
+                {
                     Title = "Item Flavors",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ClassSpells")
-                {
-                    AssociatedProperties = CharacterClassSpellMetadata.Metadata,
-                    ForeignCollectionName = "ClassSpells",
-                    EntityNoun = "Character Class Spell",
+                    Description = "Collection of item flavor configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of character class spell configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Flavor",
+                    ForeignCollectionName = "ItemFlavors",
+                    AssociatedProperties = ItemFlavorsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ClassSpells")
+                {
                     Title = "Class Spells",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("WizardCommands")
-                {
-                    AssociatedProperties = WizardCommandMetadata.Metadata,
-                    ForeignCollectionName = "WizardCommands",
-                    EntityNoun = "Wizard Command",
+                    Description = "Collection of character class spell configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of wizard command configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Character Class Spell",
+                    ForeignCollectionName = "ClassSpells",
+                    AssociatedProperties = ClassSpellsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "WizardCommands")
+                {
                     Title = "Wizard Commands",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Tiles")
-                {
-                    AssociatedProperties = TileMetadata.Metadata,
-                    ForeignCollectionName = "Tiles",
-                    EntityNoun = "Tile",
+                    Description = "Collection of wizard command configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of tile configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Wizard Command",
+                    ForeignCollectionName = "WizardCommands",
+                    AssociatedProperties = WizardCommandsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Tiles")
+                {
                     Title = "Tiles",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Animations")
-                {
-                    AssociatedProperties = AnimationMetadata.Metadata,
-                    ForeignCollectionName = "Animations",
-                    EntityNoun = "Animation",
+                    Description = "Collection of tile configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of animation configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Tile",
+                    ForeignCollectionName = "Tiles",
+                    AssociatedProperties = TilesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Animations")
+                {
                     Title = "Animations",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Spells")
-                {
-                    AssociatedProperties = SpellMetadata.Metadata,
-                    ForeignCollectionName = "Spells",
-                    EntityNoun = "Spell",
+                    Description = "Collection of animation configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of spell configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Animation",
+                    ForeignCollectionName = "Animations",
+                    AssociatedProperties = AnimationsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Spells")
+                {
                     Title = "Spells",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Plurals")
-                {
-                    AssociatedProperties = PluralMetadata.Metadata,
-                    ForeignCollectionName = "Plurals",
-                    EntityNoun = "Plural",
+                    Description = "Collection of spell configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of pluralization configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Spell",
+                    ForeignCollectionName = "Spells",
+                    AssociatedProperties = SpellsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Plurals")
+                {
                     Title = "Plurals",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Attacks")
-                {
-                    AssociatedProperties = AttackMetadata.Metadata,
-                    ForeignCollectionName = "Attacks",
-                    EntityNoun = "Attack",
+                    Description = "Collection of pluralization configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of attack configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Plural",
+                    ForeignCollectionName = "Plurals",
+                    AssociatedProperties = PluralsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Attacks")
+                {
                     Title = "Attacks",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("AttributeFilters")
-                {
-                    AssociatedProperties = AttributeFilterMetadata.Metadata,
-                    ForeignCollectionName = "AttributeFilters",
-                    EntityNoun = "Attribute Filter",
+                    Description = "Collection of attack configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of attribute filter configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Attack",
+                    ForeignCollectionName = "Attacks",
+                    AssociatedProperties = AttacksMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "AttributeFilters")
+                {
                     Title = "Attribute Filters",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("OrAttributes")
-                {
-                    AssociatedProperties = BitwiseOrAttributeMetadata.Metadata,
-                    ForeignCollectionName = "OrAttributes",
-                    EntityNoun = "Bitwise-Or Attribute",
+                    Description = "Collection of attribute filter configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of bitwise-or attribute configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Attribute Filter",
+                    ForeignCollectionName = "AttributeFilters",
+                    AssociatedProperties = AttributeFiltersMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "OrAttributes")
+                {
                     Title = "Or Attributes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("SumAttributes")
-                {
-                    AssociatedProperties = SummationAttributeMetadata.Metadata,
-                    ForeignCollectionName = "SumAttributes",
-                    EntityNoun = "Summation Attribute",
+                    Description = "Collection of bitwise-or attribute configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of summation attribute configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Bitwise-Or Attribute",
+                    ForeignCollectionName = "OrAttributes",
+                    AssociatedProperties = OrAttributesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "SumAttributes")
+                {
                     Title = "Sum Attributes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ScriptsAttributes")
-                {
-                    AssociatedProperties = ScriptsAttributeMetadata.Metadata,
-                    ForeignCollectionName = "ScriptsAttributes",
-                    EntityNoun = "Scripts Attribute",
+                    Description = "Collection of summation attribute configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of scripts attribute configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Summation Attribute",
+                    ForeignCollectionName = "SumAttributes",
+                    AssociatedProperties = SumAttributesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ScriptsAttributes")
+                {
                     Title = "Scripts Attributes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ColorEnumAttributes")
-                {
-                    AssociatedProperties = ColorEnumAttributeMetadata.Metadata,
-                    ForeignCollectionName = "ColorEnumAttributes",
-                    EntityNoun = "Color Enum Attribute",
+                    Description = "Collection of scripts attribute configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of color-enum attribute configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Scripts Attribute",
+                    ForeignCollectionName = "ScriptsAttributes",
+                    AssociatedProperties = ScriptsAttributesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ColorEnumAttributes")
+                {
                     Title = "Color Enum Attributes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ArtifactBiasAttributes")
-                {
-                    AssociatedProperties = ArtifactBiasNullableReferenceAttributeMetadata.Metadata,
-                    ForeignCollectionName = "ArtifactBiasAttributes",
-                    EntityNoun = "Artifact Bias Attribute",
+                    Description = "Collection of color-enum attribute configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of artifact-bias attribute configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Color Enum Attribute",
+                    ForeignCollectionName = "ColorEnumAttributes",
+                    AssociatedProperties = ColorEnumAttributesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ArtifactBiasAttributes")
+                {
                     Title = "Artifact Bias Attributes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("StringAttributes")
-                {
-                    AssociatedProperties = StringNullableReferenceAttributeMetadata.Metadata,
-                    ForeignCollectionName = "StringAttributes",
-                    EntityNoun = "String Attribute",
+                    Description = "Collection of artifact-bias attribute configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of string attribute configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Artifact Bias Attribute",
+                    ForeignCollectionName = "ArtifactBiasAttributes",
+                    AssociatedProperties = ArtifactBiasAttributesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "StringAttributes")
+                {
                     Title = "String Attributes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Gods")
-                {
-                    AssociatedProperties = GodMetadata.Metadata,
-                    ForeignCollectionName = "Gods",
-                    EntityNoun = "God",
+                    Description = "Collection of string attribute configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of god configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "String Attribute",
+                    ForeignCollectionName = "StringAttributes",
+                    AssociatedProperties = StringAttributesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Gods")
+                {
                     Title = "Gods",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("SyllableSets")
-                {
-                    AssociatedProperties = SyllableSetMetadata.Metadata,
-                    ForeignCollectionName = "SyllableSets",
-                    EntityNoun = "Syllable Set",
+                    Description = "Collection of god configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of syllable set configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "God",
+                    ForeignCollectionName = "Gods",
+                    AssociatedProperties = GodsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "SyllableSets")
+                {
                     Title = "Syllable Sets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Projectiles")
-                {
-                    AssociatedProperties = ProjectileMetadata.Metadata,
-                    ForeignCollectionName = "Projectiles",
-                    EntityNoun = "Projectile",
+                    Description = "Collection of syllable set configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of projectile configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Syllable Set",
+                    ForeignCollectionName = "SyllableSets",
+                    AssociatedProperties = SyllableSetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Projectiles")
+                {
                     Title = "Projectiles",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ProjectileScripts")
-                {
-                    AssociatedProperties = ProjectileScriptMetadata.Metadata,
-                    ForeignCollectionName = "ProjectileScripts",
-                    EntityNoun = "Projectile Script",
+                    Description = "Collection of projectile configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of projectile script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Projectile",
+                    ForeignCollectionName = "Projectiles",
+                    AssociatedProperties = ProjectilesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ProjectileScripts")
+                {
                     Title = "Projectile Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ProjectileMonsterSpells")
-                {
-                    AssociatedProperties = ProjectileMonsterSpellMetadata.Metadata,
-                    ForeignCollectionName = "MonsterSpells",
-                    EntityNoun = "Projectile Monster Spell",
+                    Description = "Collection of projectile script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of projectile monster spell configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Projectile Script",
+                    ForeignCollectionName = "ProjectileScripts",
+                    AssociatedProperties = ProjectileScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ProjectileMonsterSpells")
+                {
                     Title = "Projectile Monster Spells",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("CauseWoundsMonsterSpells")
-                {
-                    AssociatedProperties = CauseWoundsMonsterSpellMetadata.Metadata,
-                    ForeignCollectionName = "MonsterSpells",
-                    EntityNoun = "Cause Wounds Monster Spell",
+                    Description = "Collection of projectile monster spell configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of cause-wounds monster spell configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Projectile Monster Spell",
+                    ForeignCollectionName = "MonsterSpells",
+                    AssociatedProperties = ProjectileMonsterSpellsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "CauseWoundsMonsterSpells")
+                {
                     Title = "Cause Wounds Monster Spells",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ScriptMonsterSpells")
-                {
-                    AssociatedProperties = ScriptMonsterSpellMetadata.Metadata,
-                    ForeignCollectionName = "MonsterSpells",
-                    EntityNoun = "Script Monster Spell",
+                    Description = "Collection of cause-wounds monster spell configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of script monster spell configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Cause Wounds Monster Spell",
+                    ForeignCollectionName = "MonsterSpells",
+                    AssociatedProperties = CauseWoundsMonsterSpellsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ScriptMonsterSpells")
+                {
                     Title = "Script Monster Spells",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("SummonMonsterSpells")
-                {
-                    AssociatedProperties = SummonMonsterSpellMetadata.Metadata,
+                    Description = "Collection of script monster spell configurations.",
+                    EntityKeyPropertyName = "GetKey",
+                    EntityNamePropertyName = "GetKey",
+                    EntityNounTitle = "Script Monster Spell",
                     ForeignCollectionName = "MonsterSpells",
-                    EntityNoun = "Summon Monster Spell",
-                    EntityKeyPropertyName = "GetKey",
-                    EntityNamePropertyName = "GetKey",
-                    Description = "Collection of summon monster spell configurations.",
-                    LabelIfNullable = "Default",
+                    AssociatedProperties = ScriptMonsterSpellsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "SummonMonsterSpells")
+                {
                     Title = "Summon Monster Spells",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("ShopkeeperAcceptedComments")
-                {
-                    Description = "Accepted shopkeeper comment strings.",
-                    LabelIfNullable = "Default",
-                    Title = "Shopkeeper Accepted Comments",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("IllegibleFlavorSyllables")
-                {
-                    Description = "Syllables used to represent illegible flavors.",
-                    LabelIfNullable = "Default",
-                    Title = "Illegible Flavor Syllables",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("FindQuests")
-                {
-                    Description = "Find-quest strings.",
-                    LabelIfNullable = "Default",
-                    Title = "Find Quests",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("ElvishTexts")
-                {
-                    Description = "Elvish text strings.",
-                    LabelIfNullable = "Default",
-                    Title = "Elvish Texts",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("FunnyDescriptions")
-                {
-                    Description = "Funny description strings.",
-                    LabelIfNullable = "Default",
-                    Title = "Funny Descriptions",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("FunnyComments")
-                {
-                    Description = "Funny comment strings.",
-                    LabelIfNullable = "Default",
-                    Title = "Funny Comments",
-                    CategoryTitle = "",
-                },
-                new StringsPropertyMetadata("HorrificDescriptions")
-                {
-                    Description = "Horrific description strings.",
-                    LabelIfNullable = "Default",
-                    Title = "Horrific Descriptions",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ArtifactBiasWeightedRandoms")
-                {
-                    AssociatedProperties = ArtifactBiasWeightedRandomMetadata.Metadata,
-                    ForeignCollectionName = "ArtifactBiasWeightedRandoms",
-                    EntityNoun = "Artifact Bias Weighted Random",
+                    Description = "Collection of summon monster spell configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of artifact-bias weighted-random configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Summon Monster Spell",
+                    ForeignCollectionName = "MonsterSpells",
+                    AssociatedProperties = SummonMonsterSpellsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ArtifactBiasWeightedRandoms")
+                {
                     Title = "Artifact Bias Weighted Randoms",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemClasses")
-                {
-                    AssociatedProperties = ItemClassMetadata.Metadata,
-                    ForeignCollectionName = "ItemClasses",
-                    EntityNoun = "Item Class",
+                    Description = "Collection of artifact-bias weighted-random configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item class configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Artifact Bias Weighted Random",
+                    ForeignCollectionName = "ArtifactBiasWeightedRandoms",
+                    AssociatedProperties = ArtifactBiasWeightedRandomsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemClasses")
+                {
                     Title = "Item Classes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemEnhancements")
-                {
-                    AssociatedProperties = ItemEnhancementMetadata.Metadata,
-                    ForeignCollectionName = "ItemEnhancements",
-                    EntityNoun = "Item Enhancement",
+                    Description = "Collection of item class configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item enhancement configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Class",
+                    ForeignCollectionName = "ItemClasses",
+                    AssociatedProperties = ItemClassesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemEnhancements")
+                {
                     Title = "Item Enhancements",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemEnhancementWeightedRandoms")
-                {
-                    AssociatedProperties = ItemEnhancementWeightedRandomMetadata.Metadata,
-                    ForeignCollectionName = "ItemEnhancementWeightedRandoms",
-                    EntityNoun = "Item Enhancement Weighted Random",
+                    Description = "Collection of item enhancement configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item-enhancement weighted-random configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Enhancement",
+                    ForeignCollectionName = "ItemEnhancements",
+                    AssociatedProperties = ItemEnhancementsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemEnhancementWeightedRandoms")
+                {
                     Title = "Item Enhancement Weighted Randoms",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemIdentifications")
-                {
-                    AssociatedProperties = ItemIdentificationMetadata.Metadata,
-                    ForeignCollectionName = "ItemIdentifications",
-                    EntityNoun = "Item Identification",
+                    Description = "Collection of item-enhancement weighted-random configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item identification configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Enhancement Weighted Random",
+                    ForeignCollectionName = "ItemEnhancementWeightedRandoms",
+                    AssociatedProperties = ItemEnhancementWeightedRandomsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemIdentifications")
+                {
                     Title = "Item Identifications",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemFactories")
-                {
-                    AssociatedProperties = ItemFactoryMetadata.Metadata,
-                    ForeignCollectionName = "ItemFactories",
-                    EntityNoun = "Item Factory",
+                    Description = "Collection of item identification configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item factory configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Identification",
+                    ForeignCollectionName = "ItemIdentifications",
+                    AssociatedProperties = ItemIdentificationsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemFactories")
+                {
                     Title = "Item Factories",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ProjectileWeightedRandomScripts")
-                {
-                    AssociatedProperties = ProjectileScriptWeightedRandomMetadata.Metadata,
-                    ForeignCollectionName = "ProjectileWeightedRandomScripts",
-                    EntityNoun = "Projectile Script Weighted Random",
+                    Description = "Collection of item factory configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of projectile-weighted-random script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Factory",
+                    ForeignCollectionName = "ItemFactories",
+                    AssociatedProperties = ItemFactoriesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ProjectileWeightedRandomScripts")
+                {
                     Title = "Projectile Weighted Random Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ConditionalWidgets")
-                {
-                    AssociatedProperties = ConditionalWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Conditional Widget",
+                    Description = "Collection of projectile-weighted-random script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of conditional widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Projectile Script Weighted Random",
+                    ForeignCollectionName = "ProjectileWeightedRandomScripts",
+                    AssociatedProperties = ProjectileWeightedRandomScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ConditionalWidgets")
+                {
                     Title = "Conditional Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("DateWidgets")
-                {
-                    AssociatedProperties = DateWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Date Widget",
+                    Description = "Collection of conditional widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of date widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Conditional Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = ConditionalWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "DateWidgets")
+                {
                     Title = "Date Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("IntWidgets")
-                {
-                    AssociatedProperties = IntWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Int Widget",
+                    Description = "Collection of date widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of int widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Date Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = DateWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "IntWidgets")
+                {
                     Title = "Int Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("MapWidgets")
-                {
-                    AssociatedProperties = MapWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Map Widget",
+                    Description = "Collection of int widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of map widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Int Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = IntWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "MapWidgets")
+                {
                     Title = "Map Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("MaxRangedWidgets")
-                {
-                    AssociatedProperties = MaxRangedWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Max Ranged Widget",
+                    Description = "Collection of map widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of max-ranged widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Map Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = MapWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "MaxRangedWidgets")
+                {
                     Title = "Max Ranged Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RangedWidgets")
-                {
-                    AssociatedProperties = RangedWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Ranged Widget",
+                    Description = "Collection of max-ranged widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of ranged widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Max Ranged Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = MaxRangedWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RangedWidgets")
+                {
                     Title = "Ranged Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RangedWeaponBonuses")
-                {
-                    AssociatedProperties = RangedWeaponBonusMetadata.Metadata,
-                    ForeignCollectionName = "RangedWeaponBonuses",
-                    EntityNoun = "Ranged Weapon Bonus",
+                    Description = "Collection of ranged widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of ranged weapon bonus configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Ranged Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = RangedWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RangedWeaponBonuses")
+                {
                     Title = "Ranged Weapon Bonuses",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("StringWidgets")
-                {
-                    AssociatedProperties = StringWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "String Widget",
+                    Description = "Collection of ranged weapon bonus configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of string widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Ranged Weapon Bonus",
+                    ForeignCollectionName = "RangedWeaponBonuses",
+                    AssociatedProperties = RangedWeaponBonusesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "StringWidgets")
+                {
                     Title = "String Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("GameMessageWidgets")
-                {
-                    AssociatedProperties = GameMessageWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Game Message Widget",
+                    Description = "Collection of string widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of game-message widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "String Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = StringWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "GameMessageWidgets")
+                {
                     Title = "Game Message Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("LabelWidgets")
-                {
-                    AssociatedProperties = LabelWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Label Widget",
+                    Description = "Collection of game-message widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of label widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Game Message Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = GameMessageWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "LabelWidgets")
+                {
                     Title = "Label Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("TimeWidgets")
-                {
-                    AssociatedProperties = TimeWidgetMetadata.Metadata,
-                    ForeignCollectionName = "Widgets",
-                    EntityNoun = "Time Widget",
+                    Description = "Collection of label widget configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of time widget configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Label Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = LabelWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "TimeWidgets")
+                {
                     Title = "Time Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("NullableStringsTextAreaWidgets")
-                {
-                    AssociatedProperties = TextWidgetMetadata.Metadata,
+                    Description = "Collection of time widget configurations.",
+                    EntityKeyPropertyName = "GetKey",
+                    EntityNamePropertyName = "GetKey",
+                    EntityNounTitle = "Time Widget",
                     ForeignCollectionName = "Widgets",
-                    EntityNoun = "Text Widget",
-                    EntityKeyPropertyName = "GetKey",
-                    EntityNamePropertyName = "GetKey",
-                    Description = "Collection of text widget configurations used for nullable string text areas.",
-                    LabelIfNullable = "Default",
+                    AssociatedProperties = TimeWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "NullableStringsTextAreaWidgets")
+                {
                     Title = "Nullable Strings Text Area Widgets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RaceGenders")
-                {
-                    AssociatedProperties = RaceGenderMetadata.Metadata,
-                    ForeignCollectionName = "RaceGenders",
-                    EntityNoun = "Race Gender",
+                    Description = "Collection of text widget configurations used for nullable string text areas.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of race-gender configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Text Widget",
+                    ForeignCollectionName = "Widgets",
+                    AssociatedProperties = NullableStringsTextAreaWidgetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RaceGenders")
+                {
                     Title = "Race Genders",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Genders")
-                {
-                    AssociatedProperties = GenderMetadata.Metadata,
-                    ForeignCollectionName = "Genders",
-                    EntityNoun = "Gender",
+                    Description = "Collection of race-gender configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of gender configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Race Gender",
+                    ForeignCollectionName = "RaceGenders",
+                    AssociatedProperties = RaceGendersMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Genders")
+                {
                     Title = "Genders",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("PhysicalAttributeSets")
-                {
-                    AssociatedProperties = PhysicalAttributeSetMetadata.Metadata,
-                    ForeignCollectionName = "PhysicalAttributeSets",
-                    EntityNoun = "Physical Attribute Set",
+                    Description = "Collection of gender configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of physical attribute set configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Gender",
+                    ForeignCollectionName = "Genders",
+                    AssociatedProperties = GendersMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "PhysicalAttributeSets")
+                {
                     Title = "Physical Attribute Sets",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Realms")
-                {
-                    AssociatedProperties = RealmMetadata.Metadata,
-                    ForeignCollectionName = "Realms",
-                    EntityNoun = "Realm",
+                    Description = "Collection of physical attribute set configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of realm configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Physical Attribute Set",
+                    ForeignCollectionName = "PhysicalAttributeSets",
+                    AssociatedProperties = PhysicalAttributeSetsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Realms")
+                {
                     Title = "Realms",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RealmCharacterClasses")
-                {
-                    AssociatedProperties = RealmCharacterClassMetadata.Metadata,
-                    ForeignCollectionName = "RealmCharacterClasses",
-                    EntityNoun = "Realm Character Class",
+                    Description = "Collection of realm configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of realm character class configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Realm",
+                    ForeignCollectionName = "Realms",
+                    AssociatedProperties = RealmsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RealmCharacterClasses")
+                {
                     Title = "Realm Character Classes",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Views")
-                {
-                    AssociatedProperties = ViewMetadata.Metadata,
-                    ForeignCollectionName = "Views",
-                    EntityNoun = "View",
+                    Description = "Collection of realm character class configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of view configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Realm Character Class",
+                    ForeignCollectionName = "RealmCharacterClasses",
+                    AssociatedProperties = RealmCharacterClassesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Views")
+                {
                     Title = "Views",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("SummonScripts")
-                {
-                    AssociatedProperties = SummonScriptMetadata.Metadata,
-                    ForeignCollectionName = "SummonScripts",
-                    EntityNoun = "Summon Script",
+                    Description = "Collection of view configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of summon script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "View",
+                    ForeignCollectionName = "Views",
+                    AssociatedProperties = ViewsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "SummonScripts")
+                {
                     Title = "Summon Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("MappedSpellScripts")
-                {
-                    AssociatedProperties = MappedSpellScriptMetadata.Metadata,
-                    ForeignCollectionName = "MappedSpellScripts",
-                    EntityNoun = "Mapped Spell Script",
+                    Description = "Collection of summon script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of mapped-spell script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Summon Script",
+                    ForeignCollectionName = "SummonScripts",
+                    AssociatedProperties = SummonScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "MappedSpellScripts")
+                {
                     Title = "Mapped Spell Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("SummonWeightedRandoms")
-                {
-                    AssociatedProperties = SummonWeightedRandomMetadata.Metadata,
-                    ForeignCollectionName = "SummonWeightedRandoms",
-                    EntityNoun = "Summon Weighted Random",
+                    Description = "Collection of mapped-spell script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of summon-weighted-random configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Mapped Spell Script",
+                    ForeignCollectionName = "MappedSpellScripts",
+                    AssociatedProperties = MappedSpellScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "SummonWeightedRandoms")
+                {
                     Title = "Summon Weighted Randoms",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemFactoryWeightedRandoms")
-                {
-                    AssociatedProperties = ItemFactoryWeightedRandomMetadata.Metadata,
-                    ForeignCollectionName = "ItemFactoryWeightedRandoms",
-                    EntityNoun = "Item Factory Weighted Random",
+                    Description = "Collection of summon-weighted-random configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item-factory weighted-random configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Summon Weighted Random",
+                    ForeignCollectionName = "SummonWeightedRandoms",
+                    AssociatedProperties = SummonWeightedRandomsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemFactoryWeightedRandoms")
+                {
                     Title = "Item Factory Weighted Randoms",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("TimerScripts")
-                {
-                    AssociatedProperties = TimerScriptMetadata.Metadata,
-                    ForeignCollectionName = "TimerScripts",
-                    EntityNoun = "Timer Script",
+                    Description = "Collection of item-factory weighted-random configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of timer script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Factory Weighted Random",
+                    ForeignCollectionName = "ItemFactoryWeightedRandoms",
+                    AssociatedProperties = ItemFactoryWeightedRandomsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "TimerScripts")
+                {
                     Title = "Timer Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RenderMessageScripts")
-                {
-                    AssociatedProperties = RenderMessageScriptMetadata.Metadata,
-                    ForeignCollectionName = "RenderMessageScripts",
-                    EntityNoun = "Render Message Script",
+                    Description = "Collection of timer script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of render-message script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Timer Script",
+                    ForeignCollectionName = "TimerScripts",
+                    AssociatedProperties = TimerScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RenderMessageScripts")
+                {
                     Title = "Render Message Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("MartialArtsAttacks")
-                {
-                    AssociatedProperties = MartialArtsAttackMetadata.Metadata,
-                    ForeignCollectionName = "MartialArtsAttacks",
-                    EntityNoun = "Martial Arts Attack",
+                    Description = "Collection of render-message script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of martial-arts attack configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Render Message Script",
+                    ForeignCollectionName = "RenderMessageScripts",
+                    AssociatedProperties = RenderMessageScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "MartialArtsAttacks")
+                {
                     Title = "Martial Arts Attacks",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("AbilityScoreScripts")
-                {
-                    AssociatedProperties = AbilityScoreScriptMetadata.Metadata,
-                    ForeignCollectionName = "AbilityScoreScripts",
-                    EntityNoun = "Ability Score Script",
+                    Description = "Collection of martial-arts attack configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of ability-score script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Martial Arts Attack",
+                    ForeignCollectionName = "MartialArtsAttacks",
+                    AssociatedProperties = MartialArtsAttacksMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "AbilityScoreScripts")
+                {
                     Title = "Ability Score Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ChestTrapCombinations")
-                {
-                    AssociatedProperties = ChestTrapCombinationMetadata.Metadata,
-                    ForeignCollectionName = "ChestTrapCombinations",
-                    EntityNoun = "Chest Trap Combination",
+                    Description = "Collection of ability-score script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of chest-trap combination configurations.",
-                    LabelIfNullable = "Default",
-                    Title = "Chest Trap Combinations",
-                    CategoryTitle = "",
+                    EntityNounTitle = "Ability Score Script",
+                    ForeignCollectionName = "AbilityScoreScripts",
+                    AssociatedProperties = AbilityScoreScriptsMetadata.Metadata,
                 },
-                new CollectionPropertyMetadata("Patrons")
+                new PropertyMetadata("collection", "ChestTrapCombinations")
                 {
-                    AssociatedProperties = PatronMetadata.Metadata,
-                    ForeignCollectionName = "Patrons",
-                    EntityNoun = "Patron",
+                    Title = "Chest Trap Combinations",
+                    Description = "Collection of chest-trap combination configurations.",
+                    EntityKeyPropertyName = "GetKey",
+                    EntityNamePropertyName = "GetKey",
+                    EntityNounTitle = "Chest Trap Combination",
+                    ForeignCollectionName = "ChestTrapCombinations",
+                    AssociatedProperties = ChestTrapCombinationsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Patrons")
+                {
+                    Title = "Patrons",
+                    Description = "Collection of patron configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "LongName",
-                    Description = "Collection of patron configurations.",
-                    LabelIfNullable = "Default",
-                    Title = "Patrons",
-                    CategoryTitle = "",
+                    EntityNounTitle = "Patron",
+                    ForeignCollectionName = "Patrons",
+                    AssociatedProperties = PatronsMetadata.Metadata,
                 },
-                new CollectionPropertyMetadata("RacialPowerTests")
+                new PropertyMetadata("collection", "RacialPowerTests")
                 {
-                    AssociatedProperties = RacialPowerTestMetadata.Metadata,
-                    ForeignCollectionName = "RacialPowerTests",
-                    EntityNoun = "Racial Power Test",
-                    EntityKeyPropertyName = "GetKey",
-                    EntityNamePropertyName = "GetKey",
-                    Description = "Collection of racial-power test configurations.",
-                    LabelIfNullable = "Default",
                     Title = "Racial Power Tests",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RaceAbilities")
-                {
-                    AssociatedProperties = RaceAbilityMetadata.Metadata,
-                    ForeignCollectionName = "RaceAbilities",
-                    EntityNoun = "Race Ability",
+                    Description = "Collection of racial-power test configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of race-ability configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Racial Power Test",
+                    ForeignCollectionName = "RacialPowerTests",
+                    AssociatedProperties = RacialPowerTestsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RaceAbilities")
+                {
                     Title = "Race Abilities",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RacialPowers")
-                {
-                    AssociatedProperties = RacePowerMetadata.Metadata,
-                    ForeignCollectionName = "RacialPowers",
-                    EntityNoun = "Racial Power",
+                    Description = "Collection of race-ability configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of racial-power configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Race Ability",
+                    ForeignCollectionName = "RaceAbilities",
+                    AssociatedProperties = RaceAbilitiesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RacialPowers")
+                {
                     Title = "Racial Powers",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ConditionalScripts")
-                {
-                    AssociatedProperties = ConditionalScriptMetadata.Metadata,
-                    ForeignCollectionName = "ConditionalScripts",
-                    EntityNoun = "Conditional Script",
+                    Description = "Collection of racial-power configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of conditional script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Racial Power",
+                    ForeignCollectionName = "RacialPowers",
+                    AssociatedProperties = RacialPowersMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ConditionalScripts")
+                {
                     Title = "Conditional Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("CharacterClassAbilities")
-                {
-                    AssociatedProperties = CharacterClassAbilityMetadata.Metadata,
-                    ForeignCollectionName = "CharacterClassAbilities",
-                    EntityNoun = "Character Class Ability",
+                    Description = "Collection of conditional script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of character-class ability configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Conditional Script",
+                    ForeignCollectionName = "ConditionalScripts",
+                    AssociatedProperties = ConditionalScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "CharacterClassAbilities")
+                {
                     Title = "Character Class Abilities",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("CharacterClassAndRaceInnateTotals")
-                {
-                    AssociatedProperties = InnateTotalsMetadata.Metadata,
-                    ForeignCollectionName = "CharacterClassAndRaceInnateTotals",
-                    EntityNoun = "Character Class And Race Innate Total",
+                    Description = "Collection of character-class ability configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of innate-total configurations for character classes and races.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Character Class Ability",
+                    ForeignCollectionName = "CharacterClassAbilities",
+                    AssociatedProperties = CharacterClassAbilitiesMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "CharacterClassAndRaceInnateTotals")
+                {
                     Title = "Character Class And Race Innate Totals",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Activations")
-                {
-                    AssociatedProperties = ActivationMetadata.Metadata,
-                    ForeignCollectionName = "Activations",
-                    EntityNoun = "Activation",
+                    Description = "Collection of innate-total configurations for character classes and races.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of activation configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Character Class And Race Innate Total",
+                    ForeignCollectionName = "CharacterClassAndRaceInnateTotals",
+                    AssociatedProperties = CharacterClassAndRaceInnateTotalsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Activations")
+                {
                     Title = "Activations",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ItemFilters")
-                {
-                    AssociatedProperties = ItemFilterMetadata.Metadata,
-                    ForeignCollectionName = "ItemFilters",
-                    EntityNoun = "Item Filter",
+                    Description = "Collection of activation configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of item filter configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Activation",
+                    ForeignCollectionName = "Activations",
+                    AssociatedProperties = ActivationsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ItemFilters")
+                {
                     Title = "Item Filters",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ProductOfSumsBoolFunctions")
-                {
-                    AssociatedProperties = ConditionalMetadata.Metadata,
-                    ForeignCollectionName = "ProductOfSumsBoolFunctions",
-                    EntityNoun = "Conditional",
+                    Description = "Collection of item filter configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of conditional (product-of-sums) boolean function configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Item Filter",
+                    ForeignCollectionName = "ItemFilters",
+                    AssociatedProperties = ItemFiltersMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ProductOfSumsBoolFunctions")
+                {
                     Title = "Product Of Sums Bool Functions",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("RechargeItemScripts")
-                {
-                    AssociatedProperties = RechargeItemScriptMetadata.Metadata,
-                    ForeignCollectionName = "RechargeItemScripts",
-                    EntityNoun = "Recharge Item Script",
+                    Description = "Collection of conditional (product-of-sums) boolean function configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of recharge-item script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Conditional",
+                    ForeignCollectionName = "ProductOfSumsBoolFunctions",
+                    AssociatedProperties = ProductOfSumsBoolFunctionsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "RechargeItemScripts")
+                {
                     Title = "Recharge Item Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("Talents")
-                {
-                    AssociatedProperties = TalentMetadata.Metadata,
-                    ForeignCollectionName = "Talents",
-                    EntityNoun = "Talent",
+                    Description = "Collection of recharge-item script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of talent configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Recharge Item Script",
+                    ForeignCollectionName = "RechargeItemScripts",
+                    AssociatedProperties = RechargeItemScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "Talents")
+                {
                     Title = "Talents",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("TeleportSelfScripts")
-                {
-                    AssociatedProperties = TeleportSelfScriptMetadata.Metadata,
-                    ForeignCollectionName = "TeleportSelfScripts",
-                    EntityNoun = "Teleport Self Script",
+                    Description = "Collection of talent configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of teleport-self script configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Talent",
+                    ForeignCollectionName = "Talents",
+                    AssociatedProperties = TalentsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "TeleportSelfScripts")
+                {
                     Title = "Teleport Self Scripts",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("MappedItemEnhancements")
-                {
-                    AssociatedProperties = MappedItemEnhancementMetadata.Metadata,
-                    ForeignCollectionName = "MappedItemEnhancements",
-                    EntityNoun = "Mapped Item Enhancement",
+                    Description = "Collection of teleport-self script configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of mapped-item enhancement configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Teleport Self Script",
+                    ForeignCollectionName = "TeleportSelfScripts",
+                    AssociatedProperties = TeleportSelfScriptsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "MappedItemEnhancements")
+                {
                     Title = "Mapped Item Enhancements",
-                    CategoryTitle = "",
-                },
-                new CollectionPropertyMetadata("ChestTraps")
-                {
-                    AssociatedProperties = ChestTrapMetadata.Metadata,
-                    ForeignCollectionName = "ChestTraps",
-                    EntityNoun = "Chest Trap",
+                    Description = "Collection of mapped-item enhancement configurations.",
                     EntityKeyPropertyName = "GetKey",
                     EntityNamePropertyName = "GetKey",
-                    Description = "Collection of chest-trap configurations.",
-                    LabelIfNullable = "Default",
+                    EntityNounTitle = "Mapped Item Enhancement",
+                    ForeignCollectionName = "MappedItemEnhancements",
+                    AssociatedProperties = MappedItemEnhancementsMetadata.Metadata,
+                },
+                new PropertyMetadata("collection", "ChestTraps")
+                {
                     Title = "Chest Traps",
-                    CategoryTitle = "",
+                    Description = "Collection of chest-trap configurations.",
+                    EntityKeyPropertyName = "GetKey",
+                    EntityNamePropertyName = "GetKey",
+                    EntityNounTitle = "Chest Trap",
+                    ForeignCollectionName = "ChestTraps",
+                    AssociatedProperties = ChestTrapsMetadata.Metadata,
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Game Tick Event Binding Keys",
+                    Description = "Binding keys for events that occur on each game tick.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("integer", "")
+                {
+                    Title = "Max Monster Count",
+                    Description = "Maximum number of monsters allowed.",
+                },
+                new PropertyMetadata("integer", "")
+                {
+                    Title = "Compact Monster Cut In",
+                    Description = "Number of monsters at which compacting begins.",
+                },
+                new PropertyMetadata("integer", "")
+                {
+                    Title = "Compact Monster Cut Out Target",
+                    Description = "Target number of monsters to reduce to when compacting.",
+                },
+                new PropertyMetadata("integer", "")
+                {
+                    Title = "Max Message Log Length",
+                    Description = "Number of log items that the message history may store. Null indicates no limit.",
+                },
+                new PropertyMetadata("integer", "")
+                {
+                    Title = "Follow Distance",
+                    Description = "Distance at which followers remain from the player.",
+                },
+                new PropertyMetadata("integer", "")
+                {
+                    Title = "Decay Rate",
+                    Description = "Rate at which certain game elements decay.",
+                },
+                new PropertyMetadata("integer", "")
+                {
+                    Title = "Patron Resting Favour",
+                    Description = "Favour amount awarded when resting with a patron.",
+                },
+                new PropertyMetadata("string", "")
+                {
+                    Title = "Dungeon View Binding Key",
+                    Description = "Binding key for the dungeon view.",
+                },
+                new PropertyMetadata("string", "")
+                {
+                    Title = "Startup Town Name",
+                    Description = "Name of the town where the player will start, or null to choose a random startup town from available towns.",
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Gold Factories Binding Keys",
+                    Description = "Binding keys for gold factories.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("string", "")
+                {
+                    Title = "Gold Item Is Great Probability Expression",
+                    Description = "Probability expression that determines whether a gold-containing item is considered 'great'.",
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Shopkeeper Accepted Comments",
+                    Description = "Accepted shopkeeper comment strings.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Illegible Flavor Syllables",
+                    Description = "Syllables used to represent illegible flavors.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Find Quests",
+                    Description = "Find-quest strings.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Elvish Texts",
+                    Description = "Elvish text strings.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Funny Descriptions",
+                    Description = "Funny description strings.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Funny Comments",
+                    Description = "Funny comment strings.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Horrific Descriptions",
+                    Description = "Horrific description strings.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("string", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Required Experience Per Level",
+                    Description = "Array of required experience values for each level.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("integer", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("array", "")
+                {
+                    Title = "Extract Energy",
+                    Description = "Energy extracted per speed class.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("integer", "")
+                        {
+                        },
+                    },
+                },
+                new PropertyMetadata("2d-array", "")
+                {
+                    Title = "Blows Table",
+                    Description = "Table describing number of blows by attack/speed group.",
+                    AssociatedProperties = new PropertyMetadata[]
+                    {
+                        new PropertyMetadata("integer", "")
+                        {
+                        },
+                    },
                 },
             };
         }

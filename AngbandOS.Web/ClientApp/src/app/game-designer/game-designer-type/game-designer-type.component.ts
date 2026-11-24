@@ -61,13 +61,11 @@ export class GameDesignerTypeComponent {
       validatedPropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable,
       validatedPropertyMetadataAndConfiguration.propertyMetadata.description,
       validatedPropertyMetadataAndConfiguration.propertyMetadata.defaultValue,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas,
+      validatedPropertyMetadataAndConfiguration.propertyMetadata.associatedProperties,
       validatedPropertyMetadataAndConfiguration.propertyMetadata.entityKeyPropertyName,
       validatedPropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName,
       validatedPropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.entityNoun,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.enumOptions);
+      validatedPropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
     const activePropertyMetadataAndConfiguration = validatedPropertyMetadataAndConfiguration.configuration[validatedPropertyMetadataAndConfiguration.propertyMetadata.propertyName];
     return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration);
   }

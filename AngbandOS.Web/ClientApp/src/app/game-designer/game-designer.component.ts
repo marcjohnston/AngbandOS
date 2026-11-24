@@ -116,14 +116,8 @@ export class GameDesignerComponent implements OnInit {
       });
       return undefined;
     }
-    if (jsonPropertyMetadata.isArray === undefined) {
-      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid isArray value after json deserialization.`, "", {
-        duration: 5000
-      });
-      return undefined;
-    }
-    if (jsonPropertyMetadata.propertyMetadatas === undefined) {
-      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid propertyMetadatas value after json deserialization.`, "", {
+    if (jsonPropertyMetadata.associatedProperties === undefined) {
+      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid associatedProperties value after json deserialization.`, "", {
         duration: 5000
       });
       return undefined;
@@ -141,13 +135,7 @@ export class GameDesignerComponent implements OnInit {
       return undefined;
     }
     if (jsonPropertyMetadata.entityNounTitle === undefined) {
-      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid entityTitle value after json deserialization.`, "", {
-        duration: 5000
-      });
-      return undefined;
-    }
-    if (jsonPropertyMetadata.entityNoun === undefined) {
-      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid entityName value after json deserialization.`, "", {
+      this._snackBar.open(`Metadata property ${parentName}.${jsonPropertyMetadata.propertyName} has an invalid entityNounTitle value after json deserialization.`, "", {
         duration: 5000
       });
       return undefined;
@@ -191,9 +179,9 @@ export class GameDesignerComponent implements OnInit {
       case "collection":
       case "tuple":
       case "tuples":
-        if (jsonPropertyMetadata.propertyMetadatas !== null) {
+        if (jsonPropertyMetadata.associatedProperties !== null) {
           collectionPropertyMetadataList = [];
-          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.propertyMetadatas) {
+          for (let jsonCollectionPropertyMetadata of jsonPropertyMetadata.associatedProperties) {
             const childParentName: string = `${parentName}.${jsonCollectionPropertyMetadata.propertyName}`;
             const collectionPropertyMetadata: PropertyMetadata | undefined = this.validateJsonPropertyMetadata(childParentName, jsonCollectionPropertyMetadata);
             if (collectionPropertyMetadata === undefined) {
@@ -216,12 +204,10 @@ export class GameDesignerComponent implements OnInit {
       jsonPropertyMetadata.labelIfNullable,
       jsonPropertyMetadata.description,
       jsonPropertyMetadata.defaultValue,
-      jsonPropertyMetadata.isArray,
       collectionPropertyMetadataList,
       jsonPropertyMetadata.entityKeyPropertyName,
       jsonPropertyMetadata.entityNamePropertyName,
       jsonPropertyMetadata.entityNounTitle,
-      jsonPropertyMetadata.entityNoun,
       jsonPropertyMetadata.foreignCollectionName);
   }
 
@@ -272,7 +258,7 @@ export class GameDesignerComponent implements OnInit {
         const selectOptions: SelectOption[] = [];
         for (const jsonEnumOption of jsonEnumMetadata.options) {
           if (jsonEnumOption.name === undefined || jsonEnumOption.value === undefined) {
-            this._snackBar.open(`Metadata enum ${jsonEnumMetadata.name} contains an invalid option after json deserialization.`, "", {
+            this._snackBar.open(`Metadata enum ${jsonEnumMetadata.name} contains an invalid enum option after json deserialization.`, "", {
               duration: 5000
             });
             return;

@@ -9,7 +9,7 @@ public class ArtifactBiasWeightedRandomGameConfiguration : NonCompositeSingleton
 {
     [ConfigurationProperty("(string? ArtifactBiasBindingKey, int Weight)[]",
         Title = "Artifact Bias",
-        Summary = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.")]
+        Description = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.")]
     [ConfigurationTupleItem("ArtifactBiasBindingKey",
         Title = "Artifact Bias Binding Key")]
     [ConfigurationTupleItem("Weight",

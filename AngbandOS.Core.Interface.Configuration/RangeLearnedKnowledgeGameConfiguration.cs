@@ -6,6 +6,6 @@ public class RangeLearnedKnowledgeGameConfiguration : NonCompositeSingletonGameC
 {
     [ConfigurationProperty("string",
         Title = "Range Expression Text",
-        Summary = "The expression that defines the range value learned from this knowledge.")]
+        Description = "The expression that defines the range value learned from this knowledge.")]
     public virtual string RangeExpressionText { get; set; }
 }

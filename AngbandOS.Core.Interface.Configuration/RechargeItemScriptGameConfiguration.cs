@@ -6,21 +6,21 @@ public class RechargeItemScriptGameConfiguration : NonCompositeSingletonGameConf
 {
     [ConfigurationProperty("string",
         Title = "Turns Expression",
-        Summary = "Specifies the expression used to determine the number of turns required to recharge an item.")]
+        Description = "Specifies the expression used to determine the number of turns required to recharge an item.")]
     public virtual string TurnsExpression { get; set; } = "60";
 
     [ConfigurationProperty("string",
         Title = "Select Item Message",
-        Summary = "Specifies the message displayed when selecting an item to recharge.")]
+        Description = "Specifies the message displayed when selecting an item to recharge.")]
     public virtual string SelectItemMessage { get; set; } = "Recharge which item? ";
 
     [ConfigurationProperty("string",
         Title = "Non-Rechargeable Item Message",
-        Summary = "Specifies the message displayed when the selected item cannot be recharged.")]
+        Description = "Specifies the message displayed when the selected item cannot be recharged.")]
     public virtual string NonRechargeableItemMessage { get; set; } = "That is not rechargeable!";
 
     [ConfigurationProperty("string",
         Title = "Nothing Rechargeable Message",
-        Summary = "Specifies the message displayed when no rechargeable items are available.")]
+        Description = "Specifies the message displayed when no rechargeable items are available.")]
     public virtual string NothingRechargeableMessage { get; set; } = "You have nothing to recharge.";
 }

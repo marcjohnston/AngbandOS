@@ -6,37 +6,37 @@ public class DateWidgetGameConfiguration : NonCompositeSingletonGameConfiguratio
 {
     [ConfigurationProperty("string",
         Title = "Date Value Name",
-        Summary = "The name of the date value displayed by the widget.")]
+        Description = "The name of the date value displayed by the widget.")]
     public virtual string DateValueName { get; set; }
 
     [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "The color used to draw the widget text.")]
+        Description = "The color used to draw the widget text.")]
     public virtual ColorEnum Color { get; set; }
 
     [ConfigurationProperty("int",
         Title = "X",
-        Summary = "The x-coordinate on the form where the widget is drawn.")]
+        Description = "The x-coordinate on the form where the widget is drawn.")]
     public virtual int X { get; set; }
 
     [ConfigurationProperty("int",
         Title = "Y",
-        Summary = "The y-coordinate on the form where the widget is drawn.")]
+        Description = "The y-coordinate on the form where the widget is drawn.")]
     public virtual int Y { get; set; }
 
     [ConfigurationProperty("int?",
         Title = "Width",
-        Summary = "The width of the widget, or null to use the default width.")]
+        Description = "The width of the widget, or null to use the default width.")]
     public virtual int? Width { get; set; } = null;
 
     [ConfigurationProperty("JustificationsEnum",
         Title = "Justification",
-        Summary = "The name of the justification used to position the widget text within its width.")]
+        Description = "The name of the justification used to position the widget text within its width.")]
     public virtual JustificationsEnum JustificationEnumValue { get; set; } = JustificationsEnum.LeftJustification;
 
     [ConfigurationProperty("string[]?",
         Title = "Change Tracker Names",
-        Summary = "The names of the properties that participate in change tracking.")]
+        Description = "The names of the properties that participate in change tracking.")]
     public virtual string[]? ChangeTrackerNames { get; set; }
 }
 

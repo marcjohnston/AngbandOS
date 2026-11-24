@@ -3,8 +3,8 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
-import { EnumOption } from "../../EnumOption";
 import { PropertyMetadata } from '../../property-metadata';
+import { SelectOption } from '../../select-option';
 
 @Component({
   selector: 'app-game-designer-type-enum',
@@ -29,8 +29,8 @@ export class GameDesignerTypeEnumComponent implements OnInit {
     this.unmodifiedValue = this.getValue();
   }
 
-  public get enumOptions(): EnumOption[] {
-    return this.propertyMetadataAndConfiguration?.propertyMetadata.enumOptions ?? [];
+  public get enumOptions(): SelectOption[] {
+    return []; // this.propertyMetadataAndConfiguration?.propertyMetadata.enumOptions ?? [];
   }
 
   public getValue(): number | null {

@@ -12,22 +12,22 @@ public class ShopkeeperGameConfiguration : NonCompositeSingletonGameConfiguratio
 {
     [ConfigurationProperty("int",
         Title = "Maximum Cost",
-        Summary = "Specifies the maximum cost of items handled by the shopkeeper.")]
+        Description = "Specifies the maximum cost of items handled by the shopkeeper.")]
     public virtual int MaxCost { get; set; }
 
     [ConfigurationProperty("int",
         Title = "Minimum Inflate",
-        Summary = "Specifies the minimum inflation applied by the shopkeeper.")]
+        Description = "Specifies the minimum inflation applied by the shopkeeper.")]
     public virtual int MinInflate { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "Specifies the name of the shopkeeper.")]
+        Description = "Specifies the name of the shopkeeper.")]
     public virtual string Name { get; set; }
 
     [ConfigurationProperty("string?",
         Title = "Race Name",
-        Summary = "Specifies the race name of the shopkeeper. When null, no race is specified.")]
+        Description = "Specifies the race name of the shopkeeper. When null, no race is specified.")]
     public virtual string? RaceName { get; set; }
 }
 

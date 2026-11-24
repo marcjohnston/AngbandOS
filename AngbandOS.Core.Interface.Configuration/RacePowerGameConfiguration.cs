@@ -8,17 +8,17 @@ public class RacePowerGameConfiguration : CompositeSingletonGameConfiguration
 
     [ConfigurationProperty("string",
         Title = "Script Binding Key",
-        Summary = "Specifies the binding key of the script executed by the racial power.")]
+        Description = "Specifies the binding key of the script executed by the racial power.")]
     public virtual string ScriptBindingKey { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Race Binding Key",
-        Summary = "Specifies the binding key of the associated race.")]
+        Description = "Specifies the binding key of the associated race.")]
     public virtual string RaceBindingKey { get; set; }
 
     [ConfigurationProperty("string?",
         Title = "Character Class Binding Key",
-        Summary = "Specifies the optional binding key of the associated character class.")]
+        Description = "Specifies the optional binding key of the associated character class.")]
     public virtual string? CharacterClassBindingKey { get; set; } = null;
 }
 

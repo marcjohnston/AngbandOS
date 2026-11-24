@@ -12,26 +12,26 @@ public class RealmGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty("string[]",
         Title = "Spell Book Names",
-        Summary = "Specifies the spell book names associated with the realm.")]
+        Description = "Specifies the spell book names associated with the realm.")]
     public virtual string[] SpellBookNames { get; set; }
 
     [ConfigurationProperty("string[]",
         Title = "Info",
-        Summary = "Specifies the informational text associated with the realm.")]
+        Description = "Specifies the informational text associated with the realm.")]
     public virtual string[] Info { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "Specifies the name of the realm.")]
+        Description = "Specifies the name of the realm.")]
     public virtual string Name { get; set; }
 
     [ConfigurationProperty("bool",
         Title = "Resistant To Holy And Hell Projectiles",
-        Summary = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.")]
+        Description = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.")]
     public virtual bool ResistantToHolyAndHellProjectiles { get; set; } = false;
 
     [ConfigurationProperty("bool",
         Title = "Susceptible To Holy And Hell Projectiles",
-        Summary = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.")]
+        Description = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.")]
     public virtual bool SusceptibleToHolyAndHellProjectiles { get; set; } = false;
 }

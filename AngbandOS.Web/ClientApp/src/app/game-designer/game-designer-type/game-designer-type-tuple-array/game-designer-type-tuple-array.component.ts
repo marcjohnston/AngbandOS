@@ -24,8 +24,8 @@ export class GameDesignerTypeTupleArrayComponent {
 
   public addTuple() {
     const newTupleValue: any[] = [];
-    for (let index = 0; index < this.propertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas!.length; index++) {
-      const tuplePropertyMetadata: PropertyMetadata = this.propertyMetadataAndConfiguration!.propertyMetadata.propertyMetadatas![index];
+    for (let index = 0; index < this.propertyMetadataAndConfiguration!.propertyMetadata.associatedProperties!.length; index++) {
+      const tuplePropertyMetadata: PropertyMetadata = this.propertyMetadataAndConfiguration!.propertyMetadata.associatedProperties![index];
       newTupleValue.push(tuplePropertyMetadata.defaultValue);
     }
     this.propertyMetadataAndConfiguration?.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName].push(newTupleValue);
@@ -50,11 +50,10 @@ export class GameDesignerTypeTupleArrayComponent {
       tupleTypePropertyMetadata.labelIfNullable,
       tupleTypePropertyMetadata.description,
       tupleTypePropertyMetadata.defaultValue,
-      tupleTypePropertyMetadata.propertyMetadatas,
+      tupleTypePropertyMetadata.associatedProperties,
       null, // EntityKeyPropertyName - Tuples do not support collections/entities
       null, // EntityNamePropertyName - Tuples do not support collections/entities
-      null, // EntityTitle - Tuples do not support collections/entities
-      null, // EntityName - Tuples do not support collections/entities
+      null, // EntityNounTitle - Tuples do not support collections/entities
       tupleTypePropertyMetadata.foreignCollectionName);
     return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
   }

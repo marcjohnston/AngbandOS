@@ -1,5 +1,3 @@
-import { EnumOption } from "./EnumOption";
-
 /**
  * Represents a validated PropertyMetadata object.
  */
@@ -14,9 +12,7 @@ export class PropertyMetadata {
   public entityKeyPropertyName: string | null;
   public entityNamePropertyName: string | null;
   public entityNounTitle: string | null;
-  public entityNoun: string | null;
   public foreignCollectionName: string | null;
-  public enumOptions: EnumOption[] | null;
   public labelIfNullable: string | null;
 
   /**
@@ -27,19 +23,17 @@ export class PropertyMetadata {
   }
 
   constructor(type: string,
-              propertyName: string,
-              title: string | null,
-              categoryTitle: string,
-              labelIfNullable: string | null,
-              description: string | null,
-              defaultValue: string[] | null,
-              propertyMetadatas: PropertyMetadata[] | null,
-              entityKeyPropertyName: string | null,
-              entityNamePropertyName: string | null,
-              entityNounTitle: string | null,
-              entityNoun: string | null,
-              foreignCollectionName: string | null,
-              enumOptions: EnumOption[] | null = null) {
+      propertyName: string,
+      title: string | null,
+      categoryTitle: string,
+      labelIfNullable: string | null,
+      description: string | null,
+      defaultValue: string[] | null,
+      associatedProperties: PropertyMetadata[] | null,
+      entityKeyPropertyName: string | null,
+      entityNamePropertyName: string | null,
+      entityNounTitle: string | null,
+      foreignCollectionName: string | null) {
     this.type = type;
     this.title = title;
     this.propertyName = propertyName;
@@ -47,13 +41,11 @@ export class PropertyMetadata {
     this.labelIfNullable = labelIfNullable;
     this.description = description;
     this.defaultValue = defaultValue;
-    this.associatedProperties = propertyMetadatas;
+    this.associatedProperties = associatedProperties;
     this.entityKeyPropertyName = entityKeyPropertyName;
     this.entityNamePropertyName = entityNamePropertyName;
     this.entityNounTitle = entityNounTitle;
-    this.entityNoun = entityNoun;
     this.foreignCollectionName = foreignCollectionName;
-    this.enumOptions = enumOptions;
   }
 }
 

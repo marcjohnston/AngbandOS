@@ -15,7 +15,7 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Base Offset",
-        Summary = "The base offset, or difficulty, of the dungeon.")]
+        Description = "The base offset, or difficulty, of the dungeon.")]
     public virtual int BaseOffset { get; set; }
 
     /// <summary>
@@ -24,7 +24,7 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Bias Monster Filter Name",
-        Summary = "The name of the monster filter used to bias monster generation, or null if the dungeon has no monster bias.")]
+        Description = "The name of the monster filter used to bias monster generation, or null if the dungeon has no monster bias.")]
     public virtual string? BiasMonsterFilterName { get; set; } = null;
 
     /// <summary>
@@ -32,7 +32,7 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string[]?",
         Title = "Dungeon Guardian Names",
-        Summary = "The names of the dungeon guardians associated with the dungeon.")]
+        Description = "The names of the dungeon guardians associated with the dungeon.")]
     public virtual string[]? DungeonGuardianNames { get; set; } = null;
 
     /// <summary>
@@ -40,7 +40,7 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Map Symbol",
-        Summary = "The symbol used to represent the dungeon on the wilderness map.")]
+        Description = "The symbol used to represent the dungeon on the wilderness map.")]
     public virtual string MapSymbol { get; set; }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Max Level",
-        Summary = "The maximum number of levels in the dungeon.")]
+        Description = "The maximum number of levels in the dungeon.")]
     public virtual int MaxLevel { get; set; }
 
     /// <summary>
@@ -56,7 +56,7 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "The full name of the dungeon.")]
+        Description = "The full name of the dungeon.")]
     public virtual string Name { get; set; }
 
     /// <summary>
@@ -64,7 +64,7 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Shortname",
-        Summary = "The shortened name of the dungeon used for display purposes.")]
+        Description = "The shortened name of the dungeon used for display purposes.")]
     public virtual string Shortname { get; set; }
 
     /// <summary>
@@ -72,6 +72,6 @@ public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Tower",
-        Summary = "Determines whether the dungeon is a tower.")]
+        Description = "Determines whether the dungeon is a tower.")]
     public virtual bool Tower { get; set; } = false;
 }

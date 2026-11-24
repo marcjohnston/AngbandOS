@@ -22,10 +22,26 @@ public sealed class ConfigurationCollectionAttribute : Attribute
     }
 
     /// <summary>
+    /// Human-readable title rendered by the UI.
+    /// </summary>
+    public string? Title { get; set; }
+
+    /// <summary>
+    /// Human-readable summary describing the purpose of the property.
+    /// </summary>
+    public string? Summary { get; set; }
+
+    /// <summary>
+    /// Label to display if the property is nullable.  Returns null (non-nullable), by default.  
+    /// When null, nullable boolean properties will scaffold to the default value of "Default".
+    /// </summary>
+    public string? LabelIfNullable { get; set; } = null;
+
+    /// <summary>
     /// Singular noun used when referring to an individual entity in the collection or null, to simply use the collection name.  This noun completes a statement of "This is a(n) 'what'."
     /// Returns null, by default.
     /// </summary>
-    public string? EntityNoun { get; set; } = null;
+    public string? EntityNounTitle { get; set; } = null;
 
     /// <summary>
     /// Returns the name of the collection for the items.  Multiple properties may contribute to the same collection (e.g. CauseWoundsMonsterSpells, ProjectileMonsterSpells, ScriptMonsterSpells and SummonMonsterSpells

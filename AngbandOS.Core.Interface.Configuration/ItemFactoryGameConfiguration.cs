@@ -12,7 +12,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
 {
     [ConfigurationProperty("string?",
         Title = "Item Enhancement Binding Key",
-        Summary = "The binding key of the item enhancement applied to items created by this factory.")]
+        Description = "The binding key of the item enhancement applied to items created by this factory.")]
     public virtual string? ItemEnhancementBindingKey { get; set; } = null;
 
     /// <summary>
@@ -22,22 +22,22 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Preassigned Item Flavor Binding Key",
-        Summary = "The binding key of the item flavor assigned to items created by this factory, or null to allow the item class to assign a random flavor.")]
+        Description = "The binding key of the item flavor assigned to items created by this factory, or null to allow the item class to assign a random flavor.")]
     public virtual string? PreassignedItemFlavorBindingKey { get; set; } = null;
 
     [ConfigurationProperty("bool",
         Title = "Negative Bonus Damage Represents Broken",
-        Summary = "Determines whether a negative bonus damage value represents a broken item.")]
+        Description = "Determines whether a negative bonus damage value represents a broken item.")]
     public virtual bool NegativeBonusDamageRepresentsBroken { get; set; } = false;
 
     [ConfigurationProperty("bool",
         Title = "Negative Bonus Armor Class Represents Broken",
-        Summary = "Determines whether a negative bonus armor class value represents a broken item.")]
+        Description = "Determines whether a negative bonus armor class value represents a broken item.")]
     public virtual bool NegativeBonusArmorClassRepresentsBroken { get; set; } = false;
 
     [ConfigurationProperty("bool",
         Title = "Negative Bonus Hit Represents Broken",
-        Summary = "Determines whether a negative bonus hit value represents a broken item.")]
+        Description = "Determines whether a negative bonus hit value represents a broken item.")]
     public virtual bool NegativeBonusHitRepresentsBroken { get; set; } = false;
 
     /// <summary>
@@ -46,12 +46,12 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("ColorEnum",
         Title = "Color",
-        Summary = "The color used to render items of this type.")]
+        Description = "The color used to render items of this type.")]
     public virtual ColorEnum Color { get; set; }
 
     [ConfigurationProperty("string?",
         Title = "Slaying Random Artifact Item Enhancement Weighted Random Binding Key",
-        Summary = "The binding key of the weighted random configuration used to select slaying item enhancements for random artifacts.")]
+        Description = "The binding key of the weighted random configuration used to select slaying item enhancements for random artifacts.")]
     public virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; set; } = nameof(ItemEnhancementWeightedRandomsEnum.SlayingItemEnhancementWeightedRandom);
 
     /// <summary>
@@ -61,7 +61,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int?",
         Title = "Random Artifact Bonus Armor Ceiling",
-        Summary = "The maximum bonus armor value allowed when creating a random artifact, or null when no bonus should be added.")]
+        Description = "The maximum bonus armor value allowed when creating a random artifact, or null when no bonus should be added.")]
     public virtual int? RandomArtifactBonusArmorCeiling { get; set; } = null;
 
     /// <summary>
@@ -71,7 +71,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int?",
         Title = "Random Artifact Bonus Hit Ceiling",
-        Summary = "The maximum bonus hit value allowed when creating a random artifact, or null when no bonus should be added.")]
+        Description = "The maximum bonus hit value allowed when creating a random artifact, or null when no bonus should be added.")]
     public virtual int? RandomArtifactBonusHitCeiling { get; set; } = null;
 
     /// <summary>
@@ -81,7 +81,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int?",
         Title = "Random Artifact Bonus Damage Ceiling",
-        Summary = "The maximum bonus damage value allowed when creating a random artifact, or null when no bonus should be added.")]
+        Description = "The maximum bonus damage value allowed when creating a random artifact, or null when no bonus should be added.")]
     public virtual int? RandomArtifactBonusDamageCeiling { get; set; } = null;
 
     /// <summary>
@@ -90,7 +90,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Refill Script Binding Key",
-        Summary = "The binding key of the script used to refill the item, or null when the item cannot be refilled.")]
+        Description = "The binding key of the script used to refill the item, or null when the item cannot be refilled.")]
     public virtual string? RefillScriptBindingKey { get; set; } = null;
 
     /// <summary>
@@ -99,22 +99,22 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Symbol Binding Key",
-        Summary = "The binding key of the symbol used to render the item.")]
+        Description = "The binding key of the symbol used to render the item.")]
     public virtual string SymbolBindingKey { get; set; }
 
     [ConfigurationProperty("bool",
         Title = "Can Be Weapon of Law",
-        Summary = "Determines whether the item can be a weapon of law.")]
+        Description = "Determines whether the item can be a weapon of law.")]
     public virtual bool CanBeWeaponOfLaw { get; set; } = false;
 
     [ConfigurationProperty("bool",
         Title = "Can Be Weapon of Sharpness",
-        Summary = "Determines whether the item can be a weapon of sharpness.")]
+        Description = "Determines whether the item can be a weapon of sharpness.")]
     public virtual bool CanBeWeaponOfSharpness { get; set; } = false;
 
     [ConfigurationProperty("bool",
         Title = "Capable of Vorpal Slaying",
-        Summary = "Determines whether the item is capable of vorpal slaying.")]
+        Description = "Determines whether the item is capable of vorpal slaying.")]
     public virtual bool CapableOfVorpalSlaying { get; set; } = false;
 
     /// <summary>
@@ -130,7 +130,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("(string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)?",
         Title = "Use Binding Tuple",
-        Summary = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.")]
+        Description = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.")]
     [ConfigurationTupleItem("UseScriptBindingKey", Title = "Use Script Binding Key")]
     [ConfigurationTupleItem("InitialChargesRollExpression", Title = "Initial Charges Roll Expression")]
     [ConfigurationTupleItem("PerChargeValue", Title = "Per Charge Value")]
@@ -148,7 +148,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("(string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)?",
         Title = "Quaff Binding Tuple",
-        Summary = "The quaff script name, optional smash script name, and mana equivalent used when the item is quaffed.")]
+        Description = "The quaff script name, optional smash script name, and mana equivalent used when the item is quaffed.")]
     [ConfigurationTupleItem("QuaffScriptName", Title = "Quaff Script Name")]
     [ConfigurationTupleItem("SmashScriptName", Title = "Smash Script Name")]
     [ConfigurationTupleItem("ManaEquivalent", Title = "Mana Equivalent")]
@@ -160,7 +160,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string[]?",
         Title = "Ammunition Item Factory Binding Keys",
-        Summary = "The binding keys of the item factories used as ammunition for this item, or null when the item is not a ranged weapon.")]
+        Description = "The binding keys of the item factories used as ammunition for this item, or null when the item is not a ranged weapon.")]
     public virtual string[]? AmmunitionItemFactoryBindingKeys { get; set; } = null;
 
     /// <summary>
@@ -168,7 +168,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Can Spike Door Closed",
-        Summary = "Determines whether the item can be used to spike a door closed.")]
+        Description = "Determines whether the item can be used to spike a door closed.")]
     public virtual bool CanSpikeDoorClosed { get; set; } = false;
 
     /// <summary>
@@ -176,7 +176,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Can Project Arrows",
-        Summary = "Determines whether the item is a bow that can project arrows.")]
+        Description = "Determines whether the item is a bow that can project arrows.")]
     public virtual bool CanProjectArrows { get; set; } = false;
 
     /// <summary>
@@ -185,7 +185,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Enchantment Maximum Count",
-        Summary = "The maximum number of items that can be enchanted at one time.")]
+        Description = "The maximum number of items that can be enchanted at one time.")]
     public virtual int EnchantmentMaximumCount { get; set; } = 1;
 
     /// <summary>
@@ -193,7 +193,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Magical",
-        Summary = "Determines whether the item is magical and is noticed by the detect magical scroll.")]
+        Description = "Determines whether the item is magical and is noticed by the detect magical scroll.")]
     public virtual bool IsMagical { get; set; } = false;
 
     /// <summary>
@@ -201,7 +201,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Value Per Turn of Light",
-        Summary = "The value of each turn of light for light sources.")]
+        Description = "The value of each turn of light for light sources.")]
     public virtual int ValuePerTurnOfLight { get; set; } = 0;
 
     /// <summary>
@@ -210,7 +210,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("(string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)?",
         Title = "Aiming Binding Tuple",
-        Summary = "The activation script name, initial charges roll expression, per-charge value, and mana value for an item that can be aimed.")]
+        Description = "The activation script name, initial charges roll expression, per-charge value, and mana value for an item that can be aimed.")]
     [ConfigurationTupleItem("ActivationScriptName", Title = "Activation Script Name")]
     [ConfigurationTupleItem("InitialChargesCountRollExpression", Title = "Initial Charges Count Roll Expression")]
     [ConfigurationTupleItem("PerChargeValue", Title = "Per Charge Value")]
@@ -223,7 +223,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Initial Broken Stomp",
-        Summary = "Determines whether broken items of this factory initially default to being stomped.")]
+        Description = "Determines whether broken items of this factory initially default to being stomped.")]
     public virtual bool InitialBrokenStomp { get; set; } = false;
 
     /// <summary>
@@ -232,7 +232,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Initial Average Stomp",
-        Summary = "Determines whether average-quality items of this factory initially default to being stomped.")]
+        Description = "Determines whether average-quality items of this factory initially default to being stomped.")]
     public virtual bool InitialAverageStomp { get; set; } = false;
 
     /// <summary>
@@ -241,7 +241,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Initial Good Stomp",
-        Summary = "Determines whether good-quality items of this factory initially default to being stomped.")]
+        Description = "Determines whether good-quality items of this factory initially default to being stomped.")]
     public virtual bool InitialGoodStomp { get; set; } = false;
 
     /// <summary>
@@ -250,12 +250,12 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Initial Excellent Stomp",
-        Summary = "Determines whether excellent-quality items of this factory initially default to being stomped.")]
+        Description = "Determines whether excellent-quality items of this factory initially default to being stomped.")]
     public virtual bool InitialExcellentStomp { get; set; } = false;
 
     [ConfigurationProperty("string?",
         Title = "Recharge Script Binding Key",
-        Summary = "The binding key of the script used to recharge the item.")]
+        Description = "The binding key of the script used to recharge the item.")]
     public virtual string? RechargeScriptBindingKey { get; set; } = null;
 
     /// <summary>
@@ -263,7 +263,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Ignored by Monsters",
-        Summary = "Determines whether the item is ignored by monsters.")]
+        Description = "Determines whether the item is ignored by monsters.")]
     public virtual bool IsIgnoredByMonsters { get; set; } = false;
 
     /// <summary>
@@ -271,7 +271,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Container",
-        Summary = "Determines whether the item is a container.")]
+        Description = "Determines whether the item is a container.")]
     public virtual bool IsContainer { get; set; } = false;
 
     /// <summary>
@@ -279,17 +279,17 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Ranged Weapon",
-        Summary = "Determines whether the item is a ranged weapon.")]
+        Description = "Determines whether the item is a ranged weapon.")]
     public virtual bool IsRangedWeapon { get; set; } = false;
 
     [ConfigurationProperty("bool",
         Title = "Disable Stomp",
-        Summary = "Determines whether stomping is disabled for the item.")]
+        Description = "Determines whether stomping is disabled for the item.")]
     public virtual bool DisableStomp { get; set; } = false;
 
     [ConfigurationProperty("string[]?",
         Title = "Enhancement Fixed Artifact Factories Binding Keys",
-        Summary = "The binding keys of fixed artifact factories used to provide enhancements for this item factory.")]
+        Description = "The binding keys of fixed artifact factories used to provide enhancements for this item factory.")]
     public virtual string[]? EnhancementFixedArtifactFactoriesBindingKeys { get; set; } = null;
 
     /// <summary>
@@ -297,7 +297,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Missile Damage Multiplier",
-        Summary = "The damage multiplier applied when the missile weapon is used.")]
+        Description = "The damage multiplier applied when the missile weapon is used.")]
     public virtual int MissileDamageMultiplier { get; set; } = 1;
 
     /// <summary>
@@ -305,7 +305,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int?",
         Title = "Maximum Phlogiston",
-        Summary = "The maximum amount of fuel that can be used for phlogiston, or null when the light source cannot create phlogiston.")]
+        Description = "The maximum amount of fuel that can be used for phlogiston, or null when the light source cannot create phlogiston.")]
     public virtual int? MaxPhlogiston { get; set; } = null;
 
     /// <summary>
@@ -315,14 +315,14 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("(int count, string rollExpression)[]?",
         Title = "Mass Produce Binding Tuples",
-        Summary = "The count and roll expression used to determine additional items produced for items sold in a store based on their cost.")]
+        Description = "The count and roll expression used to determine additional items produced for items sold in a store based on their cost.")]
     [ConfigurationTupleItem("count", Title = "Count")]
     [ConfigurationTupleItem("rollExpression", Title = "Roll Expression")]
     public virtual (int count, string rollExpression)[]? MassProduceBindingTuples { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Breaks During Enchantment Probability Expression",
-        Summary = "The probability expression that determines the chance the item breaks during enchantment.")]
+        Description = "The probability expression that determines the chance the item breaks during enchantment.")]
     public virtual string? BreaksDuringEnchantmentProbabilityExpression { get; set; } = null;
 
     /// <summary>
@@ -335,7 +335,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </returns>
     [ConfigurationProperty("(int[]? Powers, bool? StoreStock, string[] ScriptNames)[]?",
         Title = "Enchantment Binding Tuples",
-        Summary = "The power levels, store-stock condition, and script names used to determine which enchantment scripts apply.")]
+        Description = "The power levels, store-stock condition, and script names used to determine which enchantment scripts apply.")]
     [ConfigurationTupleItem("Powers", Title = "Powers")]
     [ConfigurationTupleItem("StoreStock", Title = "Store Stock")]
     [ConfigurationTupleItem("ScriptNames", Title = "Script Names")]
@@ -347,27 +347,27 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Eat Magic Script Binding Key",
-        Summary = "The binding key of the script run when the energy of a rechargeable item is consumed, or null when the item has no consumable charges.")]
+        Description = "The binding key of the script run when the energy of a rechargeable item is consumed, or null when the item has no consumable charges.")]
     public virtual string? EatMagicScriptBindingKey { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Grid Process World Script Binding Key",
-        Summary = "The binding key of the script used to process the item on the grid during world processing.")]
+        Description = "The binding key of the script used to process the item on the grid during world processing.")]
     public virtual string? GridProcessWorldScriptBindingKey { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Monster Process World Script Binding Key",
-        Summary = "The binding key of the script used to process the item during monster world processing.")]
+        Description = "The binding key of the script used to process the item during monster world processing.")]
     public virtual string? MonsterProcessWorldScriptBindingKey { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Equipment Process World Script Binding Key",
-        Summary = "The binding key of the script used to process the item during equipment world processing.")]
+        Description = "The binding key of the script used to process the item during equipment world processing.")]
     public virtual string? EquipmentProcessWorldScriptBindingKey { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Pack Process World Script Binding Key",
-        Summary = "The binding key of the script used to process the item during pack world processing.")]
+        Description = "The binding key of the script used to process the item during pack world processing.")]
     public virtual string? PackProcessWorldScriptBindingKey { get; set; } = null;
 
     /// <summary>
@@ -376,7 +376,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Breakage Chance Probability Expression",
-        Summary = "The probability expression representing the chance that an item thrown or fired will break.")]
+        Description = "The probability expression representing the chance that an item thrown or fired will break.")]
     public virtual string BreakageChanceProbabilityExpression { get; set; } = "10/100";
 
     /// <summary>
@@ -384,7 +384,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Make Object Count Expression",
-        Summary = "The expression used to determine the number of items created by MakeObject.")]
+        Description = "The expression used to determine the number of items created by MakeObject.")]
     public virtual string MakeObjectCountExpression { get; set; } = "1";
 
     /// <summary>
@@ -392,7 +392,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Gets Damage Multiplier",
-        Summary = "Determines whether the item multiplies damage against a specific monster race.")]
+        Description = "Determines whether the item multiplies damage against a specific monster race.")]
     public virtual bool GetsDamageMultiplier { get; set; } = false;
 
     /// <summary>
@@ -400,7 +400,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Identity Can Be Sensed",
-        Summary = "Determines whether the item can be sensed.")]
+        Description = "Determines whether the item can be sensed.")]
     public virtual bool IdentityCanBeSensed { get; set; } = false;
 
     /// <summary>
@@ -408,7 +408,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Armor",
-        Summary = "Determines whether the item is armor.")]
+        Description = "Determines whether the item is armor.")]
     public virtual bool IsArmor { get; set; } = false;
 
     /// <summary>
@@ -416,7 +416,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Weapon",
-        Summary = "Determines whether the item is a weapon.")]
+        Description = "Determines whether the item is a weapon.")]
     public virtual bool IsWeapon { get; set; } = false;
 
     /// <summary>
@@ -424,7 +424,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Number of Items Contained",
-        Summary = "The number of items contained in the chest, or zero when the item is not a container.")]
+        Description = "The number of items contained in the chest, or zero when the item is not a container.")]
     public virtual int NumberOfItemsContained { get; set; } = 0;
 
     /// <summary>
@@ -433,7 +433,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "The name of the item within its factory class, uniquely identifying it from other items in the same factory class.")]
+        Description = "The name of the item within its factory class, uniquely identifying it from other items in the same factory class.")]
     public virtual string Name { get; set; }
 
     /// <summary>
@@ -442,7 +442,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Description Syntax",
-        Summary = "The syntax used to construct the item's description, including article and pluralization markers.")]
+        Description = "The syntax used to construct the item's description, including article and pluralization markers.")]
     public virtual string? DescriptionSyntax { get; set; } = null; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
 
     /// <summary>
@@ -452,27 +452,27 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Alternate Description Syntax",
-        Summary = "The alternate description syntax used for items with character-class-specific names, or null to use the standard description syntax.")]
+        Description = "The alternate description syntax used for items with character-class-specific names, or null to use the standard description syntax.")]
     public virtual string? AlternateDescriptionSyntax { get; set; } = null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
 
     [ConfigurationProperty("string?",
         Title = "Flavor Suppressed Description Syntax",
-        Summary = "The description syntax used when the item's flavor is suppressed.")]
+        Description = "The description syntax used when the item's flavor is suppressed.")]
     public virtual string? FlavorSuppressedDescriptionSyntax { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Alternate Flavor Suppressed Description Syntax",
-        Summary = "The alternate description syntax used when the item's flavor is suppressed.")]
+        Description = "The alternate description syntax used when the item's flavor is suppressed.")]
     public virtual string? AlternateFlavorSuppressedDescriptionSyntax { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Flavor Unknown Description Syntax",
-        Summary = "The description syntax used when the item's flavor is unknown.")]
+        Description = "The description syntax used when the item's flavor is unknown.")]
     public virtual string? FlavorUnknownDescriptionSyntax { get; set; } = null;
 
     [ConfigurationProperty("string?",
         Title = "Alternate Flavor Unknown Description Syntax",
-        Summary = "The alternate description syntax used when the item's flavor is unknown.")]
+        Description = "The alternate description syntax used when the item's flavor is unknown.")]
     public virtual string? AlternateFlavorUnknownDescriptionSyntax { get; set; } = null;
 
     /// <summary>
@@ -481,7 +481,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("(string ScriptName, string TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)?",
         Title = "Zap Binding Tuple",
-        Summary = "The script name, recharge time, aiming requirement, and mana equivalent for an item that can be zapped.")]
+        Description = "The script name, recharge time, aiming requirement, and mana equivalent for an item that can be zapped.")]
     [ConfigurationTupleItem("ScriptName", Title = "Script Name")]
     [ConfigurationTupleItem("TurnsToRecharge", Title = "Turns to Recharge")]
     [ConfigurationTupleItem("RequiresAiming", Title = "Requires Aiming")]
@@ -490,7 +490,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
 
     [ConfigurationProperty("string",
         Title = "Item Class Binding Key",
-        Summary = "The binding key of the item class for this item factory.")]
+        Description = "The binding key of the item class for this item factory.")]
     public virtual string ItemClassBindingKey { get; set; }
 
     /// <summary>
@@ -498,7 +498,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Pack Sort",
-        Summary = "The sort order index used to arrange items in a pack. Lower values appear first.")]
+        Description = "The sort order index used to arrange items in a pack. Lower values appear first.")]
     public virtual int PackSort { get; set; }
 
     /// <summary>
@@ -507,7 +507,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string[]",
         Title = "Wield Slot Binding Keys",
-        Summary = "The binding keys of the inventory slots where the item can be wielded, in preference order.")]
+        Description = "The binding keys of the inventory slots where the item can be wielded, in preference order.")]
     public virtual string[] WieldSlotBindingKeys { get; set; } = new string[] { nameof(WieldSlotsEnum.PackWieldSlot) };
 
     /// <summary>
@@ -516,7 +516,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Ask Destroy All",
-        Summary = "Determines whether the destroy script asks the player whether known items from this factory should be destroyed.")]
+        Description = "Determines whether the destroy script asks the player whether known items from this factory should be destroyed.")]
     public virtual bool AskDestroyAll { get; set; } = true;
 
     /// <summary>
@@ -526,7 +526,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Has Quality Ratings",
-        Summary = "Determines whether items from this factory have different quality ratings.")]
+        Description = "Determines whether items from this factory have different quality ratings.")]
     public virtual bool HasQualityRatings { get; set; } = false;
 
     /// <summary>
@@ -534,7 +534,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Armor Class",
-        Summary = "The base armor class rating for items created by the factory.")]
+        Description = "The base armor class rating for items created by the factory.")]
     public virtual int ArmorClass { get; set; } = 0;
 
     /// <summary>
@@ -542,19 +542,19 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("(int level, int chance)[]?",
         Title = "Depths Found and Chances",
-        Summary = "The dungeon levels and corresponding one-in chances at which the item can be found naturally, or null when it is not found naturally.")]
+        Description = "The dungeon levels and corresponding one-in chances at which the item can be found naturally, or null when it is not found naturally.")]
     [ConfigurationTupleItem("level", Title = "Level")]
     [ConfigurationTupleItem("chance", Title = "Chance")]
     public virtual (int level, int chance)[]? DepthsFoundAndChances { get; set; } = null; // TODO: Convert the chance into a Roll object
 
     [ConfigurationProperty("int",
         Title = "Dice Sides",
-        Summary = "The number of sides on the item's damage die.")]
+        Description = "The number of sides on the item's damage die.")]
     public virtual int DiceSides { get; set; } = 0;
 
     [ConfigurationProperty("int",
         Title = "Level Normally Found",
-        Summary = "The dungeon level at which the item is normally found.")]
+        Description = "The dungeon level at which the item is normally found.")]
     public virtual int LevelNormallyFound { get; set; } = 0;
 
     /// <summary>
@@ -562,7 +562,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Initial Bonus Attacks",
-        Summary = "The initial number of bonus attacks assigned to the item.")]
+        Description = "The initial number of bonus attacks assigned to the item.")]
     public virtual int InitialBonusAttacks { get; set; } = 0;
 
     /// <summary>
@@ -570,7 +570,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Initial Bonus Infravision",
-        Summary = "The initial amount of bonus infravision assigned to the item.")]
+        Description = "The initial amount of bonus infravision assigned to the item.")]
     public virtual int InitialBonusInfravision { get; set; } = 0;
 
     /// <summary>
@@ -578,7 +578,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Initial Bonus Speed",
-        Summary = "The initial amount of bonus speed assigned to the item.")]
+        Description = "The initial amount of bonus speed assigned to the item.")]
     public virtual int InitialBonusSpeed { get; set; } = 0;
 
     /// <summary>
@@ -586,7 +586,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Initial Bonus Search Expression",
-        Summary = "The expression used to determine the initial bonus search value assigned to the item.")]
+        Description = "The expression used to determine the initial bonus search value assigned to the item.")]
     public virtual string InitialBonusSearchExpression { get; set; } = "0";
 
     /// <summary>
@@ -594,7 +594,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Initial Bonus Stealth Expression",
-        Summary = "The expression used to determine the initial bonus stealth value assigned to the item.")]
+        Description = "The expression used to determine the initial bonus stealth value assigned to the item.")]
     public virtual string InitialBonusStealthExpression { get; set; } = "0";
 
     /// <summary>
@@ -602,7 +602,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Initial Bonus Tunnel",
-        Summary = "The initial amount of bonus tunneling assigned to the item.")]
+        Description = "The initial amount of bonus tunneling assigned to the item.")]
     public virtual int InitialBonusTunnel { get; set; } = 0;
 
     /// <summary>
@@ -610,7 +610,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Initial Turns of Light",
-        Summary = "The initial number of turns of light assigned to the item.")]
+        Description = "The initial number of turns of light assigned to the item.")]
     public virtual int InitialTurnsOfLight { get; set; } = 0;
 
     /// <summary>
@@ -618,7 +618,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Initial Nutritional Value",
-        Summary = "The initial nutritional value assigned to items created by this factory.")]
+        Description = "The initial nutritional value assigned to items created by this factory.")]
     public virtual int InitialNutritionalValue { get; set; } = 0;
 
     /// <summary>
@@ -627,7 +627,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string",
         Title = "Initial Gold Pieces Roll Expression",
-        Summary = "The roll expression used to determine the initial number of gold pieces given to the player when the item is picked up.")]
+        Description = "The roll expression used to determine the initial number of gold pieces given to the player when the item is picked up.")]
     public virtual string InitialGoldPiecesRollExpression { get; set; } = "0";
 
     /// <summary>
@@ -635,7 +635,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Experience Gain Divisor for Destroying",
-        Summary = "The divisor used to calculate experience gained when an applicable character class destroys the book.")]
+        Description = "The divisor used to calculate experience gained when an applicable character class destroys the book.")]
     public virtual int ExperienceGainDivisorForDestroying { get; set; } = 0;
 
     /// <summary>
@@ -643,7 +643,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string[]?",
         Title = "Spell Binding Keys",
-        Summary = "The binding keys of the spells belonging to this book, in order, or null when the item is not a book.")]
+        Description = "The binding keys of the spells belonging to this book, in order, or null when the item is not a book.")]
     public virtual string[]? SpellBindingKeys { get; set; } = null;
 
     /// <summary>
@@ -651,7 +651,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Good",
-        Summary = "Determines whether this factory generates good items.")]
+        Description = "Determines whether this factory generates good items.")]
     public virtual bool IsGood { get; set; } = false;
 
     /// <summary>
@@ -659,7 +659,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Small",
-        Summary = "Determines whether the chest is small.")]
+        Description = "Determines whether the chest is small.")]
     public virtual bool IsSmall { get; set; } = false; // TODO: This property is only valid when IsContainer.  The data type is horrible.
 
     /// <summary>
@@ -667,7 +667,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Base Value",
-        Summary = "The base value of a non-flavor-aware item.")]
+        Description = "The base value of a non-flavor-aware item.")]
     public virtual int BaseValue { get; set; } = 0;
 
     /// <summary>
@@ -675,7 +675,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Hates Electricity",
-        Summary = "Determines whether the item is susceptible to electricity.")]
+        Description = "Determines whether the item is susceptible to electricity.")]
     public virtual bool HatesElectricity { get; set; } = false;
 
     /// <summary>
@@ -683,7 +683,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Hates Fire",
-        Summary = "Determines whether the item is susceptible to fire.")]
+        Description = "Determines whether the item is susceptible to fire.")]
     public virtual bool HatesFire { get; set; } = false;
 
     /// <summary>
@@ -691,7 +691,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Hates Acid",
-        Summary = "Determines whether the item is susceptible to acid.")]
+        Description = "Determines whether the item is susceptible to acid.")]
     public virtual bool HatesAcid { get; set; } = false;
 
     /// <summary>
@@ -699,7 +699,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Hates Cold",
-        Summary = "Determines whether the item is susceptible to cold.")]
+        Description = "Determines whether the item is susceptible to cold.")]
     public virtual bool HatesCold { get; set; } = false;
 
     /// <summary>
@@ -707,7 +707,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Can Provide Sheath of Electricity",
-        Summary = "Determines whether the item can provide a sheath of electricity.")]
+        Description = "Determines whether the item can provide a sheath of electricity.")]
     public virtual bool CanProvideSheathOfElectricity { get; set; } = false;
 
     /// <summary>
@@ -715,7 +715,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Can Provide Sheath of Fire",
-        Summary = "Determines whether the item can provide a sheath of fire.")]
+        Description = "Determines whether the item can provide a sheath of fire.")]
     public virtual bool CanProvideSheathOfFire { get; set; } = false;
 
     /// <summary>
@@ -723,7 +723,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("int",
         Title = "Random Artifact Activation Chance",
-        Summary = "The one-in chance that a random artifact receives an activation.")]
+        Description = "The one-in chance that a random artifact receives an activation.")]
     public virtual int RandartActivationChance { get; set; } = 3;
 
     /// <summary>
@@ -731,7 +731,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Provides Sunlight",
-        Summary = "Determines whether the item provides sunlight that burns certain races.")]
+        Description = "Determines whether the item provides sunlight that burns certain races.")]
     public virtual bool ProvidesSunlight { get; set; } = false;
 
     /// <summary>
@@ -739,7 +739,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Can Apply Artifact Bias Resistance",
-        Summary = "Determines whether items from this factory can receive random resistance bonuses from biased artifacts.")]
+        Description = "Determines whether items from this factory can receive random resistance bonuses from biased artifacts.")]
     public virtual bool CanApplyArtifactBiasResistance { get; set; } = true;
 
     /// <summary>
@@ -747,7 +747,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Can Be Eaten by Monsters",
-        Summary = "Determines whether an item from this factory can be eaten by a monster with the eat food attack effect.")]
+        Description = "Determines whether an item from this factory can be eaten by a monster with the eat food attack effect.")]
     public virtual bool CanBeEatenByMonsters { get; set; } = false;
 
     /// <summary>
@@ -756,12 +756,12 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("string?",
         Title = "Eat Script Binding Key",
-        Summary = "The binding key of the script run when an item from this factory is eaten, or null when items cannot be eaten.")]
+        Description = "The binding key of the script run when an item from this factory is eaten, or null when items cannot be eaten.")]
     public virtual string? EatScriptBindingKey { get; set; } = null;
 
     [ConfigurationProperty("bool",
         Title = "Vanishes When Eaten by Skeletons",
-        Summary = "Determines whether the item vanishes when eaten by skeletons.")]
+        Description = "Determines whether the item vanishes when eaten by skeletons.")]
     public virtual bool VanishesWhenEatenBySkeletons { get; set; } = false;
 
     /// <summary>
@@ -770,7 +770,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("bool",
         Title = "Is Consumed When Eaten",
-        Summary = "Determines whether the food item is completely consumed and removed when eaten.")]
+        Description = "Determines whether the food item is completely consumed and removed when eaten.")]
     public virtual bool IsConsumedWhenEaten { get; set; } = true;
 
     /// <summary>
@@ -781,7 +781,7 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </returns>
     [ConfigurationProperty("(string ScriptName, int ManaValue)?",
         Title = "Read Binding Tuple",
-        Summary = "The script name and mana value used when the item is read.")]
+        Description = "The script name and mana value used when the item is read.")]
     [ConfigurationTupleItem("ScriptName", Title = "Script Name")]
     [ConfigurationTupleItem("ManaValue", Title = "Mana Value")]
     public virtual (string ScriptName, int ManaValue)? ReadBindingTuple { get; set; } = null;

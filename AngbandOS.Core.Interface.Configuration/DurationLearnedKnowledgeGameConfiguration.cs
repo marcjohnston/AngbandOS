@@ -6,6 +6,6 @@ public class DurationLearnedKnowledgeGameConfiguration : NonCompositeSingletonGa
 {
     [ConfigurationProperty("string",
         Title = "Duration Expression Text",
-        Summary = "The expression that defines the duration value learned from this knowledge.")]
+        Description = "The expression that defines the duration value learned from this knowledge.")]
     public virtual string DurationExpressionText { get; set; }
 }

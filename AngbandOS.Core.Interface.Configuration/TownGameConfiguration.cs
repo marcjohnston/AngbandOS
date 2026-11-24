@@ -12,43 +12,43 @@ public class TownGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     [ConfigurationProperty("char",
         Title = "Character",
-        Summary = "Specifies the ASCII character used to represent the town.")]
+        Description = "Specifies the ASCII character used to represent the town.")]
     public virtual char Char { get; set; }
 
     [ConfigurationProperty("int",
         Title = "House Price",
-        Summary = "Specifies the price of a house in the town.")]
+        Description = "Specifies the price of a house in the town.")]
     public virtual int HousePrice { get; set; }
 
     [ConfigurationProperty("string",
         Title = "Name",
-        Summary = "Specifies the name of the town.")]
+        Description = "Specifies the name of the town.")]
     public virtual string Name { get; set; }
 
     [ConfigurationProperty("string[]",
         Title = "Store Factory Names",
-        Summary = "Specifies the store factory names available in the town.")]
+        Description = "Specifies the store factory names available in the town.")]
     [ConfigurationForeignKey("StoreFactories")]
     public virtual string[] StoreFactoryNames { get; set; }
 
     [ConfigurationProperty("bool",
         Title = "Can Be Escorted Here",
-        Summary = "Determines whether the player can be escorted to the town.")]
+        Description = "Determines whether the player can be escorted to the town.")]
     public virtual bool CanBeEscortedHere { get; set; } = true;
 
     [ConfigurationProperty("bool",
         Title = "Allow Startup Town",
-        Summary = "Determines whether the town can be used as the startup town.")]
+        Description = "Determines whether the town can be used as the startup town.")]
     public virtual bool AllowStartupTown { get; set; } = true;
 
     [ConfigurationProperty("string",
         Title = "Dungeon",
-        Summary = "Specifies the name of the dungeon associated with the town.")]
+        Description = "Specifies the name of the dungeon associated with the town.")]
     [ConfigurationForeignKey("Dungeons")]
     public virtual string DungeonName { get; set; }
 
     [ConfigurationProperty("bool",
         Title = "Unused Store Lots Are Graveyards",
-        Summary = "Determines whether unused store lots are treated as graveyards.")]
+        Description = "Determines whether unused store lots are treated as graveyards.")]
     public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
 }
