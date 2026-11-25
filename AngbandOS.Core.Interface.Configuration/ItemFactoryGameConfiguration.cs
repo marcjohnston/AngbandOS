@@ -131,7 +131,8 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
     /// </summary>
     [ConfigurationProperty("(string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)?",
         Title = "Use Binding Tuple",
-        Description = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.")]
+        Description = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.",
+        LabelIfNullable = "Item Can be Used?")]
     [ConfigurationTupleItem("UseScriptBindingKey", Title = "Use Script Binding Key")]
     [ConfigurationTupleItem("InitialChargesRollExpression", Title = "Initial Charges Roll Expression")]
     [ConfigurationTupleItem("PerChargeValue", Title = "Per Charge Value")]

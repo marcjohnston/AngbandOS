@@ -129,7 +129,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "UseBindingTuple",
                     Type = "tuple",
                     Title = "Use Binding Tuple",
-                    LabelIfNullable = "",
+                    LabelIfNullable = "Item Can be Used?",
                     Description = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

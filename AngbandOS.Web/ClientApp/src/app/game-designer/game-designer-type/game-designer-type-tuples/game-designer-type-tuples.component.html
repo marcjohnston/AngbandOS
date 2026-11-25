@@ -32,7 +32,7 @@
       } @else {
       <tr>
         @if (propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null) {
-        <td><input type="checkbox" /></td>
+        <td>{{propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}<input type="checkbox" /></td>
         }
         <ng-container *ngFor="let tupleTypePropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
           <td>
