@@ -11,7 +11,7 @@ import { GameDesignerTypeTupleArrayComponent } from './game-designer-type-tuple-
 import { GameDesignerTypeStringArrayComponent } from './game-designer-type-string-array/game-designer-type-string-array.component';
 import { GameDesignerTypeStringComponent } from './game-designer-type-string/game-designer-type-string.component';
 import { MatIconModule } from '@angular/material/icon';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { GameDesignerTypeEnumComponent } from './game-designer-type-enum/game-designer-type-enum.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,7 +23,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: true,
   imports: [
     NgIf,
-    NgFor,
     MatIconModule,
     MatSelectModule,
     GameDesignerTypeCharacterComponent,
@@ -41,6 +40,20 @@ export class GameDesignerTypeComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
   @Input({ required: true }) public configuration!: Record<string, unknown>;
   @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
+
+  private foreignKeyValues?: (string | null)[];
+  private foreignKeyRowIds: symbol[] = [];
+
+  public get foreignKeyRows(): symbol[] {
+    const { configuration, propertyMetadata } = this.propertyMetadataAndConfiguration;
+    const values: (string | null)[] | undefined = configuration[propertyMetadata.propertyName];
+    if (values !== this.foreignKeyValues) {
+      this.foreignKeyValues = values;
+      // Values can repeat or change. Keep each editor's Undo state tied to its row.
+      this.foreignKeyRowIds = values?.map(() => Symbol()) ?? [];
+    }
+    return this.foreignKeyRowIds;
+  }
 
   /**
    * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.
@@ -71,10 +84,14 @@ export class GameDesignerTypeComponent {
   }
 
   public deleteArrayIndex(index: number) {
+    const rows = this.foreignKeyRows;
     this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName].splice(index, 1);
+    rows.splice(index, 1);
   }
 
   public appendArrayItem() {
+    const rows = this.foreignKeyRows;
     this.propertyMetadataAndConfiguration!.configuration[this.propertyMetadataAndConfiguration!.propertyMetadata.propertyName].push("");
+    rows.push(Symbol());
   }
 }

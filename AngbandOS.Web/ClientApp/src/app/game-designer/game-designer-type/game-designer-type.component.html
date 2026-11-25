@@ -1,10 +1,12 @@
 <ng-container *ngIf="propertyMetadataAndConfiguration !== undefined">
   <!-- Foreign Key Array -->
   <div class="array-div" *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-keys'">
-    <div class="array-item-div" *ngFor="let value of propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName]; let valueIndex = index">
-      <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="createArrayChild(valueIndex)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-foreign-key>
-      <mat-icon class="game-designer-delete-icon" (click)="deleteArrayIndex(valueIndex)">delete</mat-icon>
-    </div>
+    @for (rowId of foreignKeyRows; track rowId; let valueIndex = $index) {
+      <div class="array-item-div">
+        <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="createArrayChild(valueIndex)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-foreign-key>
+        <mat-icon class="game-designer-delete-icon" (click)="deleteArrayIndex(valueIndex)">delete</mat-icon>
+      </div>
+    }
     <mat-icon class="game-designer-add-icon" (click)="appendArrayItem()">add</mat-icon>
   </div>
   <!-- Foreign Key -->

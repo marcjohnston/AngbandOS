@@ -17,10 +17,10 @@
     <button (click)="onLoginClick()">Login</button>
     <button (click)="onForgotPasswordClick()">Forgot Password</button>
   </ng-container>
-  <ng-template ngFor [ngForOf]="errors" let-error>
+  @for (error of errors; track $index) {
     <div>{{error}}</div>
-  </ng-template>
-  <ng-template ngFor [ngForOf]="messages" let-message>
+  }
+  @for (message of messages; track $index) {
     <div>{{message}}</div>
-  </ng-template>
+  }
 </app-master-layout>

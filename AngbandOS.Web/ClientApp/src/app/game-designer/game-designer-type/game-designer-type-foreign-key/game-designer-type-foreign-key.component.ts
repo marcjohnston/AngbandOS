@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { SelectOption } from '../../select-option';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +15,6 @@ import { JsonPipe } from '@angular/common';
   styleUrls: ['./game-designer-type-foreign-key.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
     NgIf,
     JsonPipe,
     FormsModule,

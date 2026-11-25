@@ -8,7 +8,7 @@ import { PropertyMetadataAndConfiguration } from './property-metadata-and-config
 import { JsonPropertyMetadata } from './json-property-metadata';
 import { getEntityName as importedGetEntityName} from './game-designer-library.module';
 import { SelectOption } from './select-option';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { GameDesignerPropertyComponent } from './game-designer-property/game-designer-property.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
@@ -21,7 +21,6 @@ import { JsonGameMetadata } from './JsonGameMetadata';
   standalone: true,
   imports: [
     NgIf,
-    NgFor,
     GameDesignerPropertyComponent,
     FooterComponent,
     NavMenuComponent

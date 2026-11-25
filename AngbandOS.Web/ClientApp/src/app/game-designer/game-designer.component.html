@@ -8,7 +8,7 @@
     <ng-container *ngIf="rootTreeNodes !== undefined && configuration !== undefined && propertyMetadataMap !== undefined">
       <div id="tree-panel">
         <table>
-          <ng-container *ngFor="let treeNode of rootTreeNodes">
+          @for (treeNode of rootTreeNodes; track treeNode) {
             <tr (click)="treeNodeClicked(treeNode)">
               <td (click)="treeNode.isOpen=!treeNode.isOpen">
                 <ng-container *ngIf="treeNode.children != null">
@@ -23,23 +23,23 @@
               <td colspan="2">{{treeNode.title}}</td>
             </tr>
             <ng-container *ngIf="treeNode.children != null && treeNode.isOpen">
-              <ng-container *ngFor="let childTreeNode of treeNode.children">
+              @for (childTreeNode of treeNode.children; track childTreeNode) {
                 <tr (click)="treeNodeClicked(childTreeNode)">
                   <td></td>
                   <td>-</td>
                   <td>{{childTreeNode.title}}</td>
                 </tr>
-              </ng-container>
+              }
             </ng-container>
-          </ng-container>
+          }
         </table>
       </div>
       <div id="entity-panel">
         <ng-container *ngIf="selectedPropertyMetadataAndConfigurations !== null">
           <!-- Render all of metadatas and configurations for the selection.  The game settings will have multiple metadatas and configuraitons; everything else will have a single element -->
-          <ng-container *ngFor="let propertyMetadataAndConfiguration of selectedPropertyMetadataAndConfigurations">
+          @for (propertyMetadataAndConfiguration of selectedPropertyMetadataAndConfigurations; track propertyMetadataAndConfiguration) {
             <app-game-designer-property [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-property>
-          </ng-container>
+          }
         </ng-container>
       </div>
     </ng-container>

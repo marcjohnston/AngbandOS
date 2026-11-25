@@ -5,7 +5,7 @@ import { AuthenticationService } from '../accounts/authentication-service/authen
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { ActiveUserDetails } from './active-user-details';
 import { HubConnections } from './HubConnections';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { ChangeDetectorRef } from '@angular/core';

@@ -3,7 +3,7 @@ import { PropertyMetadataAndConfiguration } from '../property-metadata-and-confi
 import { PropertyMetadata } from '../property-metadata';
 import { getEntityName as importedGetEntityName } from '../game-designer-library.module';
 import { SelectOption } from '../select-option';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
 import { JsonPipe } from '@angular/common';
@@ -18,7 +18,6 @@ import { JsonPipe } from '@angular/common';
   standalone: true,
   imports: [
     NgIf,
-    NgFor,
     JsonPipe,
     MatIconModule,
     GameDesignerTypeComponent

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { ChatMessage } from './chat-message';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ChangeDetectorRef } from '@angular/core';
@@ -18,7 +18,6 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [
     CommonModule,
-    NgFor,
     NgIf,
     MatIconModule,
     MatCardModule,
