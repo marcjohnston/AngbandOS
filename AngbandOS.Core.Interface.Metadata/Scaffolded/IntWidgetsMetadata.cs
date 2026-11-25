@@ -45,6 +45,7 @@ public static class IntWidgetsMetadata
                     PropertyName = "Width",
                     Type = "integer",
                     Title = "Width",
+                    LabelIfNullable = "",
                     Description = "The width of the widget, or null to size it to the natural length of the rendered text.",
                 },
                 new PropertyMetadata()
@@ -60,6 +61,7 @@ public static class IntWidgetsMetadata
                     PropertyName = "ChangeTrackerNames",
                     Type = "array",
                     Title = "Change Tracker Names",
+                    LabelIfNullable = "",
                     Description = "The names of properties that participate in change tracking for this widget.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

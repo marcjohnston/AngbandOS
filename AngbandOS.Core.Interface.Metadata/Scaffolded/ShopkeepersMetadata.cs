@@ -37,6 +37,7 @@ public static class ShopkeepersMetadata
                     PropertyName = "RaceName",
                     Type = "string",
                     Title = "Race Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the race name of the shopkeeper. When null, no race is specified.",
                 },
             };

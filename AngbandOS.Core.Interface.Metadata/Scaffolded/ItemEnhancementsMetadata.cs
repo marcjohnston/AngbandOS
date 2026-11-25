@@ -16,6 +16,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "SummationAttributeAndExpressionBindings",
                     Type = "tuples",
                     Title = "Summation Attribute and Expression Bindings",
+                    LabelIfNullable = "",
                     Description = "The attribute names and expressions used to calculate summation-based item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -40,6 +41,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "BitwiseOrAttributeAndExpressionBindings",
                     Type = "tuples",
                     Title = "Bitwise OR Attribute and Expression Bindings",
+                    LabelIfNullable = "",
                     Description = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -64,6 +66,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "ScriptsAttributeAndScriptBindings",
                     Type = "tuples",
                     Title = "Scripts Attribute and Script Bindings",
+                    LabelIfNullable = "",
                     Description = "The attribute names and script names used to apply scripts as item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -96,6 +99,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "ApplicableItemFactoryBindingKeys",
                     Type = "array",
                     Title = "Applicable Item Factory Binding Keys",
+                    LabelIfNullable = "",
                     Description = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -111,6 +115,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "AdditionalItemEnhancementWeightedRandomBindingKey",
                     Type = "string",
                     Title = "Additional Item Enhancement Weighted Random Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the weighted random configuration used to select an additional item enhancement.",
                 },
                 new PropertyMetadata()
@@ -118,6 +123,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "FriendlyName",
                     Type = "string",
                     Title = "Friendly Name",
+                    LabelIfNullable = "",
                     Description = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.",
                 },
                 new PropertyMetadata()
@@ -125,6 +131,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "ActivationEnumValue",
                     Type = "string",
                     Title = "Activation Name",
+                    LabelIfNullable = "",
                     Description = "The name of the activation applied to the item, or null when the item cannot be activated.",
                 },
                 new PropertyMetadata()
@@ -132,6 +139,7 @@ public static class ItemEnhancementsMetadata
                     PropertyName = "ArtifactBiasWeightedRandomBindingKey",
                     Type = "string",
                     Title = "Artifact Bias Weighted Random Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the weighted random configuration used to select an artifact bias.",
                 },
             };

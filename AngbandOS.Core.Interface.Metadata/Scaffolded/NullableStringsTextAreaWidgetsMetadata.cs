@@ -75,6 +75,7 @@ public static class NullableStringsTextAreaWidgetsMetadata
                     PropertyName = "ChangeTrackerNames",
                     Type = "array",
                     Title = "Change Tracker Names",
+                    LabelIfNullable = "",
                     Description = "Specifies the property names that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

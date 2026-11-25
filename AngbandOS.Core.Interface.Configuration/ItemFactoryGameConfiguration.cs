@@ -12,7 +12,8 @@ public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfigurati
 {
     [ConfigurationProperty("string?",
         Title = "Item Enhancement Binding Key",
-        Description = "The binding key of the item enhancement applied to items created by this factory.")]
+        Description = "The binding key of the item enhancement applied to items created by this factory.",
+        LabelIfNullable = "Apply item enhancements")]
     public virtual string? ItemEnhancementBindingKey { get; set; } = null;
 
     /// <summary>

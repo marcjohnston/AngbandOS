@@ -44,6 +44,7 @@ public static class SummonScriptsMetadata
                     PropertyName = "PreMessages",
                     Type = "array",
                     Title = "Pre-Messages",
+                    LabelIfNullable = "",
                     Description = "The messages displayed before summoning is attempted.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -59,6 +60,7 @@ public static class SummonScriptsMetadata
                     PropertyName = "SuccessMessages",
                     Type = "array",
                     Title = "Success Messages",
+                    LabelIfNullable = "",
                     Description = "The messages displayed when summoning succeeds.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -74,6 +76,7 @@ public static class SummonScriptsMetadata
                     PropertyName = "FailureMessages",
                     Type = "array",
                     Title = "Failure Messages",
+                    LabelIfNullable = "",
                     Description = "The messages displayed when summoning fails.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

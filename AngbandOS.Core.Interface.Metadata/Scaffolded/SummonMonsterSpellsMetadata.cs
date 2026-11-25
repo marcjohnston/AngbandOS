@@ -250,6 +250,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "VsPlayerBlindMessage",
                     Type = "string",
                     Title = "Versus Player Blind Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell is used against a blind player.",
                 },
                 new PropertyMetadata()
@@ -257,6 +258,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessage",
                     Type = "string",
                     Title = "Versus Player Action Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell targets a visible player who is not blind.",
                 },
                 new PropertyMetadata()
@@ -264,6 +266,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessageOnInvisibleMonster",
                     Type = "string",
                     Title = "Versus Player Action Message On Invisible Monster",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell targets a player while the monster is not visible.",
                 },
                 new PropertyMetadata()
@@ -271,6 +274,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "VsMonsterUnseenMessage",
                     Type = "string",
                     Title = "Versus Monster Unseen Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell is used against another monster while the player is blind.",
                 },
                 new PropertyMetadata()
@@ -278,6 +282,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "VsMonsterSeenMessage",
                     Type = "string",
                     Title = "Versus Monster Seen Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when a monster attacks another monster and the player sees either monster.",
                 },
                 new PropertyMetadata()
@@ -285,6 +290,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "SmartLearnSpellResistantDetectionKeys",
                     Type = "array",
                     Title = "Smart Learn Spell Resistant Detection Keys",
+                    LabelIfNullable = "",
                     Description = "Specifies the spell-resistant detection characteristics learned when the player experiences or sees the spell.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -314,6 +320,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "MonsterSelectorBindingKey",
                     Type = "string",
                     Title = "Monster Selector Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the monster selector binding key used to determine which type of monster is summoned. When null, any monster may be summoned.",
                 },
                 new PropertyMetadata()
@@ -321,6 +328,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "FriendlyMonsterSelectorBindingKey",
                     Type = "string",
                     Title = "Friendly Monster Selector Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the monster selector binding key used when a friendly monster attacks another monster. When null, any monster may be summoned.",
                 },
                 new PropertyMetadata()
@@ -328,6 +336,7 @@ public static class SummonMonsterSpellsMetadata
                     PropertyName = "SummonLevel",
                     Type = "integer",
                     Title = "Summon Level",
+                    LabelIfNullable = "",
                     Description = "Specifies the level of the summoned monster. When null, the summoned monster uses the level of the summoning monster.",
                 },
                 new PropertyMetadata()

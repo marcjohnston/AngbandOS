@@ -84,6 +84,7 @@ public static class RangedWidgetsMetadata
                     PropertyName = "Width",
                     Type = "integer",
                     Title = "Width",
+                    LabelIfNullable = "",
                     Description = "Specifies the width of the widget. When null, the width is based on the text length.",
                 },
                 new PropertyMetadata()
@@ -99,6 +100,7 @@ public static class RangedWidgetsMetadata
                     PropertyName = "ChangeTrackerNames",
                     Type = "array",
                     Title = "Change Tracker Names",
+                    LabelIfNullable = "",
                     Description = "Specifies the property names that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

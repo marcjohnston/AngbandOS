@@ -16,6 +16,7 @@ public static class CharacterClassAndRaceInnateTotalsMetadata
                     PropertyName = "CharacterClassBindingKey",
                     Type = "string",
                     Title = "Character Class Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the character class associated with these innate totals.",
                 },
                 new PropertyMetadata()
@@ -23,6 +24,7 @@ public static class CharacterClassAndRaceInnateTotalsMetadata
                     PropertyName = "RaceBindingKey",
                     Type = "string",
                     Title = "Race Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the race associated with these innate totals.",
                 },
                 new PropertyMetadata()

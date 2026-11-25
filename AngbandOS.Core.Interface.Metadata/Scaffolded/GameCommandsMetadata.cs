@@ -23,6 +23,7 @@ public static class GameCommandsMetadata
                     PropertyName = "Repeat",
                     Type = "integer",
                     Title = "Repeat",
+                    LabelIfNullable = "",
                     Description = "The number of times the command is repeated, or null when no repeat count is specified.",
                 },
                 new PropertyMetadata()
@@ -37,6 +38,7 @@ public static class GameCommandsMetadata
                     PropertyName = "ExecuteScriptName",
                     Type = "string",
                     Title = "Execute Script Name",
+                    LabelIfNullable = "",
                     Description = "The name of the script executed by the game command.",
                 },
             };

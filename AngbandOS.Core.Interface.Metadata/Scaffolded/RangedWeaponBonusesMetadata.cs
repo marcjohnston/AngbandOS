@@ -16,6 +16,7 @@ public static class RangedWeaponBonusesMetadata
                     PropertyName = "ItemClassBindingKey",
                     Type = "string",
                     Title = "Item Class Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key of the item class affected by the ranged weapon bonus.",
                 },
                 new PropertyMetadata()
@@ -23,6 +24,7 @@ public static class RangedWeaponBonusesMetadata
                     PropertyName = "CharacterClassBindingKey",
                     Type = "string",
                     Title = "Character Class Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key of the character class affected by the ranged weapon bonus.",
                 },
                 new PropertyMetadata()
@@ -30,6 +32,7 @@ public static class RangedWeaponBonusesMetadata
                     PropertyName = "ExperienceLevel",
                     Type = "integer",
                     Title = "Experience Level",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional experience level at which the ranged weapon bonus applies.",
                 },
                 new PropertyMetadata()

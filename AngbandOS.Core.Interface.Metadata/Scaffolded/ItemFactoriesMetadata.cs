@@ -16,6 +16,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "ItemEnhancementBindingKey",
                     Type = "string",
                     Title = "Item Enhancement Binding Key",
+                    LabelIfNullable = "Apply item enhancements",
                     Description = "The binding key of the item enhancement applied to items created by this factory.",
                 },
                 new PropertyMetadata()
@@ -23,6 +24,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "PreassignedItemFlavorBindingKey",
                     Type = "string",
                     Title = "Preassigned Item Flavor Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the item flavor assigned to items created by this factory, or null to allow the item class to assign a random flavor.",
                 },
                 new PropertyMetadata()
@@ -59,6 +61,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey",
                     Type = "string",
                     Title = "Slaying Random Artifact Item Enhancement Weighted Random Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the weighted random configuration used to select slaying item enhancements for random artifacts.",
                 },
                 new PropertyMetadata()
@@ -66,6 +69,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "RandomArtifactBonusArmorCeiling",
                     Type = "integer",
                     Title = "Random Artifact Bonus Armor Ceiling",
+                    LabelIfNullable = "",
                     Description = "The maximum bonus armor value allowed when creating a random artifact, or null when no bonus should be added.",
                 },
                 new PropertyMetadata()
@@ -73,6 +77,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "RandomArtifactBonusHitCeiling",
                     Type = "integer",
                     Title = "Random Artifact Bonus Hit Ceiling",
+                    LabelIfNullable = "",
                     Description = "The maximum bonus hit value allowed when creating a random artifact, or null when no bonus should be added.",
                 },
                 new PropertyMetadata()
@@ -80,6 +85,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "RandomArtifactBonusDamageCeiling",
                     Type = "integer",
                     Title = "Random Artifact Bonus Damage Ceiling",
+                    LabelIfNullable = "",
                     Description = "The maximum bonus damage value allowed when creating a random artifact, or null when no bonus should be added.",
                 },
                 new PropertyMetadata()
@@ -87,6 +93,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "RefillScriptBindingKey",
                     Type = "string",
                     Title = "Refill Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script used to refill the item, or null when the item cannot be refilled.",
                 },
                 new PropertyMetadata()
@@ -122,6 +129,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "UseBindingTuple",
                     Type = "tuple",
                     Title = "Use Binding Tuple",
+                    LabelIfNullable = "",
                     Description = "The script binding key, initial charges roll expression, per-charge value, and mana equivalent used when the item is used.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -160,6 +168,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "QuaffBindingTuple",
                     Type = "tuple",
                     Title = "Quaff Binding Tuple",
+                    LabelIfNullable = "",
                     Description = "The quaff script name, optional smash script name, and mana equivalent used when the item is quaffed.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -191,6 +200,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "AmmunitionItemFactoryBindingKeys",
                     Type = "array",
                     Title = "Ammunition Item Factory Binding Keys",
+                    LabelIfNullable = "",
                     Description = "The binding keys of the item factories used as ammunition for this item, or null when the item is not a ranged weapon.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -241,6 +251,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "AimingBindingTuple",
                     Type = "tuple",
                     Title = "Aiming Binding Tuple",
+                    LabelIfNullable = "",
                     Description = "The activation script name, initial charges roll expression, per-charge value, and mana value for an item that can be aimed.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -307,6 +318,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "RechargeScriptBindingKey",
                     Type = "string",
                     Title = "Recharge Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script used to recharge the item.",
                 },
                 new PropertyMetadata()
@@ -342,6 +354,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "EnhancementFixedArtifactFactoriesBindingKeys",
                     Type = "array",
                     Title = "Enhancement Fixed Artifact Factories Binding Keys",
+                    LabelIfNullable = "",
                     Description = "The binding keys of fixed artifact factories used to provide enhancements for this item factory.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -364,6 +377,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "MaxPhlogiston",
                     Type = "integer",
                     Title = "Maximum Phlogiston",
+                    LabelIfNullable = "",
                     Description = "The maximum amount of fuel that can be used for phlogiston, or null when the light source cannot create phlogiston.",
                 },
                 new PropertyMetadata()
@@ -371,6 +385,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "MassProduceBindingTuples",
                     Type = "tuples",
                     Title = "Mass Produce Binding Tuples",
+                    LabelIfNullable = "",
                     Description = "The count and roll expression used to determine additional items produced for items sold in a store based on their cost.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -395,6 +410,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "BreaksDuringEnchantmentProbabilityExpression",
                     Type = "string",
                     Title = "Breaks During Enchantment Probability Expression",
+                    LabelIfNullable = "",
                     Description = "The probability expression that determines the chance the item breaks during enchantment.",
                 },
                 new PropertyMetadata()
@@ -402,6 +418,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "EnchantmentBindingTuples",
                     Type = "tuples",
                     Title = "Enchantment Binding Tuples",
+                    LabelIfNullable = "",
                     Description = "The power levels, store-stock condition, and script names used to determine which enchantment scripts apply.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -449,6 +466,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "EatMagicScriptBindingKey",
                     Type = "string",
                     Title = "Eat Magic Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script run when the energy of a rechargeable item is consumed, or null when the item has no consumable charges.",
                 },
                 new PropertyMetadata()
@@ -456,6 +474,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "GridProcessWorldScriptBindingKey",
                     Type = "string",
                     Title = "Grid Process World Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script used to process the item on the grid during world processing.",
                 },
                 new PropertyMetadata()
@@ -463,6 +482,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "MonsterProcessWorldScriptBindingKey",
                     Type = "string",
                     Title = "Monster Process World Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script used to process the item during monster world processing.",
                 },
                 new PropertyMetadata()
@@ -470,6 +490,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "EquipmentProcessWorldScriptBindingKey",
                     Type = "string",
                     Title = "Equipment Process World Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script used to process the item during equipment world processing.",
                 },
                 new PropertyMetadata()
@@ -477,6 +498,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "PackProcessWorldScriptBindingKey",
                     Type = "string",
                     Title = "Pack Process World Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script used to process the item during pack world processing.",
                 },
                 new PropertyMetadata()
@@ -540,6 +562,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "DescriptionSyntax",
                     Type = "string",
                     Title = "Description Syntax",
+                    LabelIfNullable = "",
                     Description = "The syntax used to construct the item's description, including article and pluralization markers.",
                 },
                 new PropertyMetadata()
@@ -547,6 +570,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "AlternateDescriptionSyntax",
                     Type = "string",
                     Title = "Alternate Description Syntax",
+                    LabelIfNullable = "",
                     Description = "The alternate description syntax used for items with character-class-specific names, or null to use the standard description syntax.",
                 },
                 new PropertyMetadata()
@@ -554,6 +578,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "FlavorSuppressedDescriptionSyntax",
                     Type = "string",
                     Title = "Flavor Suppressed Description Syntax",
+                    LabelIfNullable = "",
                     Description = "The description syntax used when the item's flavor is suppressed.",
                 },
                 new PropertyMetadata()
@@ -561,6 +586,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "AlternateFlavorSuppressedDescriptionSyntax",
                     Type = "string",
                     Title = "Alternate Flavor Suppressed Description Syntax",
+                    LabelIfNullable = "",
                     Description = "The alternate description syntax used when the item's flavor is suppressed.",
                 },
                 new PropertyMetadata()
@@ -568,6 +594,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "FlavorUnknownDescriptionSyntax",
                     Type = "string",
                     Title = "Flavor Unknown Description Syntax",
+                    LabelIfNullable = "",
                     Description = "The description syntax used when the item's flavor is unknown.",
                 },
                 new PropertyMetadata()
@@ -575,6 +602,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "AlternateFlavorUnknownDescriptionSyntax",
                     Type = "string",
                     Title = "Alternate Flavor Unknown Description Syntax",
+                    LabelIfNullable = "",
                     Description = "The alternate description syntax used when the item's flavor is unknown.",
                 },
                 new PropertyMetadata()
@@ -582,6 +610,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "ZapBindingTuple",
                     Type = "tuple",
                     Title = "Zap Binding Tuple",
+                    LabelIfNullable = "",
                     Description = "The script name, recharge time, aiming requirement, and mana equivalent for an item that can be zapped.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -670,6 +699,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "DepthsFoundAndChances",
                     Type = "tuples",
                     Title = "Depths Found and Chances",
+                    LabelIfNullable = "",
                     Description = "The dungeon levels and corresponding one-in chances at which the item can be found naturally, or null when it is not found naturally.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -778,6 +808,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "SpellBindingKeys",
                     Type = "array",
                     Title = "Spell Binding Keys",
+                    LabelIfNullable = "",
                     Description = "The binding keys of the spells belonging to this book, in order, or null when the item is not a book.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -884,6 +915,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "EatScriptBindingKey",
                     Type = "string",
                     Title = "Eat Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "The binding key of the script run when an item from this factory is eaten, or null when items cannot be eaten.",
                 },
                 new PropertyMetadata()
@@ -905,6 +937,7 @@ public static class ItemFactoriesMetadata
                     PropertyName = "ReadBindingTuple",
                     Type = "tuple",
                     Title = "Read Binding Tuple",
+                    LabelIfNullable = "",
                     Description = "The script name and mana value used when the item is read.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

@@ -250,6 +250,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "VsPlayerBlindMessage",
                     Type = "string",
                     Title = "Versus Player Blind Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell is used against a blind player.",
                 },
                 new PropertyMetadata()
@@ -257,6 +258,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessage",
                     Type = "string",
                     Title = "Versus Player Action Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell targets a visible player who is not blind.",
                 },
                 new PropertyMetadata()
@@ -264,6 +266,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessageOnInvisibleMonster",
                     Type = "string",
                     Title = "Versus Player Action Message On Invisible Monster",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell targets a player while the monster is not visible.",
                 },
                 new PropertyMetadata()
@@ -271,6 +274,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "VsMonsterUnseenMessage",
                     Type = "string",
                     Title = "Versus Monster Unseen Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell is used against another monster while the player is blind.",
                 },
                 new PropertyMetadata()
@@ -278,6 +282,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "VsMonsterSeenMessage",
                     Type = "string",
                     Title = "Versus Monster Seen Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when a monster attacks another monster and the player sees either monster.",
                 },
                 new PropertyMetadata()
@@ -285,6 +290,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "SmartLearnSpellResistantDetectionKeys",
                     Type = "array",
                     Title = "Smart Learn Spell Resistant Detection Keys",
+                    LabelIfNullable = "",
                     Description = "Specifies the spell-resistant detection characteristics learned when the player experiences or sees the spell.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -342,6 +348,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "MaxDamage",
                     Type = "integer",
                     Title = "Max Damage",
+                    LabelIfNullable = "",
                     Description = "Specifies the maximum damage inflicted by the spell.",
                 },
                 new PropertyMetadata()
@@ -370,6 +377,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "PreExecuteOnPlayerScriptBindingKey",
                     Type = "string",
                     Title = "Pre-Execute On Player Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the script binding key executed before the spell affects a player.",
                 },
                 new PropertyMetadata()
@@ -377,6 +385,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "PostExecuteOnPlayerScriptBindingKey",
                     Type = "string",
                     Title = "Post-Execute On Player Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the script binding key executed after the spell affects a player.",
                 },
                 new PropertyMetadata()
@@ -384,6 +393,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "PreExecuteOnMonsterScriptBindingKey",
                     Type = "string",
                     Title = "Pre-Execute On Monster Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the script binding key executed before the spell affects a monster.",
                 },
                 new PropertyMetadata()
@@ -391,6 +401,7 @@ public static class ProjectileMonsterSpellsMetadata
                     PropertyName = "PostExecuteOnMonsterScriptBindingKey",
                     Type = "string",
                     Title = "Post-Execute On Monster Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the script binding key executed after the spell affects a monster.",
                 },
             };

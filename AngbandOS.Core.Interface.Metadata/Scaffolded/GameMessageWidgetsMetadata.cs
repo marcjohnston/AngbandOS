@@ -38,6 +38,7 @@ public static class GameMessageWidgetsMetadata
                     PropertyName = "Width",
                     Type = "integer",
                     Title = "Width",
+                    LabelIfNullable = "",
                     Description = "Width of the widget; when null, the widget should extend to the remaining width of the screen.",
                 },
                 new PropertyMetadata()

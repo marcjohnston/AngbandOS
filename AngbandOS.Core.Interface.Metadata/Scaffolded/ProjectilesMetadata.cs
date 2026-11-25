@@ -44,6 +44,7 @@ public static class ProjectilesMetadata
                     PropertyName = "BoltProjectileGraphicBindingKey",
                     Type = "string",
                     Title = "Bolt Projectile Graphic Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key for the projectile graphic used by a bolt.",
                 },
                 new PropertyMetadata()
@@ -51,6 +52,7 @@ public static class ProjectilesMetadata
                     PropertyName = "EffectAnimationBindingKey",
                     Type = "string",
                     Title = "Effect Animation Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key for the animation used by the projectile effect.",
                 },
                 new PropertyMetadata()
@@ -58,6 +60,7 @@ public static class ProjectilesMetadata
                     PropertyName = "ImpactProjectileGraphicBindingKey",
                     Type = "string",
                     Title = "Impact Projectile Graphic Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key for the projectile graphic used on impact.",
                 },
             };

@@ -1163,6 +1163,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "GameTickEventBindingKeys",
                     Type = "array",
                     Title = "Game Tick Event Binding Keys",
+                    LabelIfNullable = "",
                     Description = "Binding keys for events that occur on each game tick.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1199,6 +1200,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "MaxMessageLogLength",
                     Type = "integer",
                     Title = "Max Message Log Length",
+                    LabelIfNullable = "",
                     Description = "Number of log items that the message history may store. Null indicates no limit.",
                 },
                 new PropertyMetadata()
@@ -1227,6 +1229,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "DungeonViewBindingKey",
                     Type = "string",
                     Title = "Dungeon View Binding Key",
+                    LabelIfNullable = "",
                     Description = "Binding key for the dungeon view.",
                 },
                 new PropertyMetadata()
@@ -1234,6 +1237,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "StartupTownName",
                     Type = "string",
                     Title = "Startup Town Name",
+                    LabelIfNullable = "",
                     Description = "Name of the town where the player will start, or null to choose a random startup town from available towns.",
                 },
                 new PropertyMetadata()
@@ -1241,6 +1245,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "GoldFactoriesBindingKeys",
                     Type = "array",
                     Title = "Gold Factories Binding Keys",
+                    LabelIfNullable = "",
                     Description = "Binding keys for gold factories.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1263,6 +1268,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "ShopkeeperAcceptedComments",
                     Type = "array",
                     Title = "Shopkeeper Accepted Comments",
+                    LabelIfNullable = "",
                     Description = "Accepted shopkeeper comment strings.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1278,6 +1284,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "IllegibleFlavorSyllables",
                     Type = "array",
                     Title = "Illegible Flavor Syllables",
+                    LabelIfNullable = "",
                     Description = "Syllables used to represent illegible flavors.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1293,6 +1300,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "FindQuests",
                     Type = "array",
                     Title = "Find Quests",
+                    LabelIfNullable = "",
                     Description = "Find-quest strings.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1308,6 +1316,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "ElvishTexts",
                     Type = "array",
                     Title = "Elvish Texts",
+                    LabelIfNullable = "",
                     Description = "Elvish text strings.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1323,6 +1332,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "FunnyDescriptions",
                     Type = "array",
                     Title = "Funny Descriptions",
+                    LabelIfNullable = "",
                     Description = "Funny description strings.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1338,6 +1348,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "FunnyComments",
                     Type = "array",
                     Title = "Funny Comments",
+                    LabelIfNullable = "",
                     Description = "Funny comment strings.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -1353,6 +1364,7 @@ public static class GameConfigurationMetadata
                     PropertyName = "HorrificDescriptions",
                     Type = "array",
                     Title = "Horrific Descriptions",
+                    LabelIfNullable = "",
                     Description = "Horrific description strings.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

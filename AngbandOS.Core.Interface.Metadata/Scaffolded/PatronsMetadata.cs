@@ -23,6 +23,7 @@ public static class PatronsMetadata
                     PropertyName = "PreferredAbilityBindingKey",
                     Type = "string",
                     Title = "Preferred Ability Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key of the patron's preferred ability.",
                 },
                 new PropertyMetadata()

@@ -16,6 +16,7 @@ public static class OutfitManifestsMetadata
                     PropertyName = "CharacterClassBindingKey",
                     Type = "tuple",
                     Title = "Character Class Binding Key",
+                    LabelIfNullable = "",
                     Description = "Returns null to match all character classes, or specifies the character class values and equality operator used for matching.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -48,6 +49,7 @@ public static class OutfitManifestsMetadata
                     PropertyName = "RaceBindingKey",
                     Type = "tuple",
                     Title = "Race Binding Key",
+                    LabelIfNullable = "",
                     Description = "Returns null to match all races, or specifies the race values and equality operator used for matching.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -80,6 +82,7 @@ public static class OutfitManifestsMetadata
                     PropertyName = "RealmBindingKey",
                     Type = "tuple",
                     Title = "Realm Binding Key",
+                    LabelIfNullable = "",
                     Description = "Returns null to match all realms, or specifies the realm values and equality operator used for matching.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

@@ -250,6 +250,7 @@ public static class CauseWoundsMonsterSpellsMetadata
                     PropertyName = "VsPlayerBlindMessage",
                     Type = "string",
                     Title = "Vs Player Blind Message",
+                    LabelIfNullable = "",
                     Description = "The message rendered when the spell targets the player while the player is blind.",
                 },
                 new PropertyMetadata()
@@ -257,6 +258,7 @@ public static class CauseWoundsMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessage",
                     Type = "string",
                     Title = "Vs Player Action Message",
+                    LabelIfNullable = "",
                     Description = "The message rendered when the spell targets a visible player who is not blind.",
                 },
                 new PropertyMetadata()
@@ -264,6 +266,7 @@ public static class CauseWoundsMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessageOnInvisibleMonster",
                     Type = "string",
                     Title = "Vs Player Action Message On Invisible Monster",
+                    LabelIfNullable = "",
                     Description = "The message rendered when the spell targets the player while the monster is not visible.",
                 },
                 new PropertyMetadata()
@@ -271,6 +274,7 @@ public static class CauseWoundsMonsterSpellsMetadata
                     PropertyName = "VsMonsterUnseenMessage",
                     Type = "string",
                     Title = "Vs Monster Unseen Message",
+                    LabelIfNullable = "",
                     Description = "The message rendered when the spell targets another monster while the player is blind.",
                 },
                 new PropertyMetadata()
@@ -278,6 +282,7 @@ public static class CauseWoundsMonsterSpellsMetadata
                     PropertyName = "VsMonsterSeenMessage",
                     Type = "string",
                     Title = "Vs Monster Seen Message",
+                    LabelIfNullable = "",
                     Description = "The message rendered when a monster attacks another monster and the player can see the interaction.",
                 },
                 new PropertyMetadata()
@@ -285,6 +290,7 @@ public static class CauseWoundsMonsterSpellsMetadata
                     PropertyName = "SmartLearnSpellResistantDetectionKeys",
                     Type = "array",
                     Title = "Smart Learn Spell Resistant Detection Keys",
+                    LabelIfNullable = "",
                     Description = "The spell resistant detection keys learned when the player experiences or sees the spell.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

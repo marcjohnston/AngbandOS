@@ -250,6 +250,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "VsPlayerBlindMessage",
                     Type = "string",
                     Title = "Versus Player Blind Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell is used against a blind player.",
                 },
                 new PropertyMetadata()
@@ -257,6 +258,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessage",
                     Type = "string",
                     Title = "Versus Player Action Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell targets a visible player who is not blind.",
                 },
                 new PropertyMetadata()
@@ -264,6 +266,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "VsPlayerActionMessageOnInvisibleMonster",
                     Type = "string",
                     Title = "Versus Player Action Message On Invisible Monster",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell targets a player while the monster is not visible.",
                 },
                 new PropertyMetadata()
@@ -271,6 +274,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "VsMonsterUnseenMessage",
                     Type = "string",
                     Title = "Versus Monster Unseen Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when the spell is used against another monster while the player is blind.",
                 },
                 new PropertyMetadata()
@@ -278,6 +282,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "VsMonsterSeenMessage",
                     Type = "string",
                     Title = "Versus Monster Seen Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered when a monster attacks another monster and the player sees either monster.",
                 },
                 new PropertyMetadata()
@@ -285,6 +290,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "SmartLearnSpellResistantDetectionKeys",
                     Type = "array",
                     Title = "Smart Learn Spell Resistant Detection Keys",
+                    LabelIfNullable = "",
                     Description = "Specifies the spell-resistant detection characteristics learned when the player experiences or sees the spell.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -307,6 +313,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "ExecuteOnPlayerScriptBindingKey",
                     Type = "string",
                     Title = "Execute On Player Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the binding key for the script executed when the spell affects a player. If null, no script is executed.",
                 },
                 new PropertyMetadata()
@@ -314,6 +321,7 @@ public static class ScriptMonsterSpellsMetadata
                     PropertyName = "ExecuteOnMonsterScriptBindingKey",
                     Type = "string",
                     Title = "Execute On Monster Script Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the binding key for the script executed when the spell affects a monster. If null, no script is executed.",
                 },
             };

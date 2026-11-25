@@ -12,12 +12,13 @@
       </tr>
     </thead>
     <tbody>
+      @if(arrayOf === true) {
       <!-- Tuple table rows of configuration values -->
       <ng-container *ngFor="let tupleValues of propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName]; let index=index">
         <tr>
-          <ng-container *ngFor="let tupleTypePropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties; let tupleIndex=index">
+          <ng-container *ngFor="let tupleTypePropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
             <td>
-              <app-game-designer-type [propertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type>
+              <app-game-designer-type [propertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleValues)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type>
             </td>
           </ng-container>
           <td>
@@ -25,7 +26,21 @@
           </td>
         </tr>
       </ng-container>
+      } @else {
+      <tr>
+        @if (propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null) {
+        <td><input type="checkbox" /></td>
+        } @else {
+        <ng-container *ngFor="let tupleTypePropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
+          <td>
+            <app-game-designer-type [propertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName])" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type>
+          </td>
+        </ng-container>
+        }
+      </tr>
+      }
     </tbody>
+    @if(arrayOf === true) {
     <ng-container *ngIf="propertyMetadataAndConfiguration.propertyMetadata.associatedProperties !== null">
       <tfoot>
         <tr>
@@ -35,5 +50,6 @@
         </tr>
       </tfoot>
     </ng-container>
+    }
   </table>
 </ng-container>

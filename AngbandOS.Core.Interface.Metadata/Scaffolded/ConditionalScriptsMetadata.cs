@@ -23,6 +23,7 @@ public static class ConditionalScriptsMetadata
                     PropertyName = "TrueScriptBindingKeys",
                     Type = "array",
                     Title = "True Script Binding Keys",
+                    LabelIfNullable = "",
                     Description = "The binding keys of the scripts executed when the conditional evaluates to true.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -38,6 +39,7 @@ public static class ConditionalScriptsMetadata
                     PropertyName = "FalseScriptBindingKeys",
                     Type = "array",
                     Title = "False Script Binding Keys",
+                    LabelIfNullable = "",
                     Description = "The binding keys of the scripts executed when the conditional evaluates to false.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

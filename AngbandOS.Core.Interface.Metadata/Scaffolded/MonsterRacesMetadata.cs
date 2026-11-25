@@ -23,6 +23,7 @@ public static class MonsterRacesMetadata
                     PropertyName = "MonsterSpellBindingKeys",
                     Type = "array",
                     Title = "Spells",
+                    LabelIfNullable = "",
                     Description = "Specifies the spells that are available to monsters of this race.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -40,6 +41,7 @@ public static class MonsterRacesMetadata
                     PropertyName = "MultilineName",
                     Type = "string",
                     Title = "Multiline Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the multiline name displayed to the player. When null, the friendly name is used.",
                 },
                 new PropertyMetadata()
@@ -78,6 +80,7 @@ public static class MonsterRacesMetadata
                     PropertyName = "AttackDefinitions",
                     Type = "tuples",
                     Title = "Attack Definitions",
+                    LabelIfNullable = "",
                     Description = "Specifies the attack definitions for the monster. When null, the monster cannot attack.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

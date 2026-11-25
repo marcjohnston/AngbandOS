@@ -16,6 +16,7 @@ public static class ProjectileScriptsMetadata
                     PropertyName = "CustomLearnedDetails",
                     Type = "string",
                     Title = "Custom Learned Details",
+                    LabelIfNullable = "",
                     Description = "Returns the details revealed to the player when the projectile is learned. When null, the default details are used.",
                 },
                 new PropertyMetadata()
@@ -100,6 +101,7 @@ public static class ProjectileScriptsMetadata
                     PropertyName = "Identified",
                     Type = "boolean",
                     Title = "Identified",
+                    LabelIfNullable = "",
                     Description = "Determines whether the projectile is automatically identified. Null indicates conditional identification when the projectile affects a target.",
                 },
                 new PropertyMetadata()
@@ -107,6 +109,7 @@ public static class ProjectileScriptsMetadata
                     PropertyName = "PreMessage",
                     Type = "string",
                     Title = "Pre-Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered before the projectile is projected. When null, no message is rendered.",
                 },
                 new PropertyMetadata()
@@ -114,6 +117,7 @@ public static class ProjectileScriptsMetadata
                     PropertyName = "PostMessage",
                     Type = "string",
                     Title = "Post-Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message rendered after the projectile is projected. When null, no message is rendered.",
                 },
                 new PropertyMetadata()

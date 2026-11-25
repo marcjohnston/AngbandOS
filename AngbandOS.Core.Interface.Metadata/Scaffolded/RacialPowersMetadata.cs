@@ -30,6 +30,7 @@ public static class RacialPowersMetadata
                     PropertyName = "CharacterClassBindingKey",
                     Type = "string",
                     Title = "Character Class Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key of the associated character class.",
                 },
             };

@@ -51,6 +51,7 @@ public static class TalentsMetadata
                     PropertyName = "LearnedKnowledgeBindingKey",
                     Type = "string",
                     Title = "Learned Knowledge Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key of the knowledge learned from the talent.",
                 },
             };

@@ -30,6 +30,7 @@ public static class RealmCharacterClassesMetadata
                     PropertyName = "CharacterClassTitle",
                     Type = "string",
                     Title = "Character Class Title",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional title displayed for the character class.",
                 },
                 new PropertyMetadata()
@@ -37,6 +38,7 @@ public static class RealmCharacterClassesMetadata
                     PropertyName = "DeityBindingKey",
                     Type = "string",
                     Title = "Deity Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key for the deity.",
                 },
             };

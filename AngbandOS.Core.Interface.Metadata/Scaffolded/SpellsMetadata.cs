@@ -23,6 +23,7 @@ public static class SpellsMetadata
                     PropertyName = "LearnedDetails",
                     Type = "string",
                     Title = "Learned Details",
+                    LabelIfNullable = "",
                     Description = "Returns details about the spell, blank if there are no details, or null if the details should be retrieved from the associated scripts configured when the spell succeeds.",
                 },
             };

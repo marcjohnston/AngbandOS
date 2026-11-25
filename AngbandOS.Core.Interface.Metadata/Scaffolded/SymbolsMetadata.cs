@@ -23,6 +23,7 @@ public static class SymbolsMetadata
                     PropertyName = "QueryCharacter",
                     Type = "character",
                     Title = "Query Character",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional character used when querying the symbol.",
                 },
                 new PropertyMetadata()

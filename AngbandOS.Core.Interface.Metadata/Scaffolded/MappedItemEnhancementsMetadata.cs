@@ -16,6 +16,7 @@ public static class MappedItemEnhancementsMetadata
                     PropertyName = "FixedArtifactBindingKeys",
                     Type = "array",
                     Title = "Fixed Artifact Binding Keys",
+                    LabelIfNullable = "",
                     Description = "Specifies the fixed artifacts for the map entry. When null, applies to all fixed artifacts.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -31,6 +32,7 @@ public static class MappedItemEnhancementsMetadata
                     PropertyName = "CharacterClassBindingKeys",
                     Type = "array",
                     Title = "Character Class Binding Keys",
+                    LabelIfNullable = "",
                     Description = "Specifies the character classes for the map entry. When null, applies to all character classes.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -46,6 +48,7 @@ public static class MappedItemEnhancementsMetadata
                     PropertyName = "ItemEnhancementBindingKeys",
                     Type = "array",
                     Title = "Item Enhancement Binding Keys",
+                    LabelIfNullable = "",
                     Description = "Specifies the item enhancements to be used for the fixed artifact. When null, no item enhancements are applied.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

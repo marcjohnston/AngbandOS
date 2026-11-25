@@ -23,6 +23,7 @@ public static class AttacksMetadata
                     PropertyName = "PlayerActionMessages",
                     Type = "array",
                     Title = "Player Action Messages",
+                    LabelIfNullable = "",
                     Description = "The action messages displayed when the attack targets the player.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

@@ -30,6 +30,7 @@ public static class StoreCommandsMetadata
                     PropertyName = "ValidStoreFactoryNames",
                     Type = "array",
                     Title = "Valid Store Factory Names",
+                    LabelIfNullable = "",
                     Description = "Specifies the store factory names for which the command is valid.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -45,6 +46,7 @@ public static class StoreCommandsMetadata
                     PropertyName = "ExecuteScriptName",
                     Type = "string",
                     Title = "Execute Script Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the name of the script executed by the store command.",
                 },
             };

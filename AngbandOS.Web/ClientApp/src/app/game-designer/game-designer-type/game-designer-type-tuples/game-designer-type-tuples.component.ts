@@ -45,7 +45,7 @@ export class GameDesignerTypeTuplesComponent {
    * @param tupleIndex
    * @returns
    */
-  public createTupleChild(tupleTypePropertyMetadata: PropertyMetadata, tupleIndex: number, tupleValues: any): PropertyMetadataAndConfiguration {
+  public createTupleChild(tupleTypePropertyMetadata: PropertyMetadata, tupleValues: any): PropertyMetadataAndConfiguration {
     const derivedTuplePropertyMetadata = new PropertyMetadata(
       tupleTypePropertyMetadata.type,
       tupleTypePropertyMetadata.propertyName,

@@ -23,6 +23,7 @@ public static class DungeonsMetadata
                     PropertyName = "BiasMonsterFilterName",
                     Type = "string",
                     Title = "Bias Monster Filter Name",
+                    LabelIfNullable = "",
                     Description = "The name of the monster filter used to bias monster generation, or null if the dungeon has no monster bias.",
                 },
                 new PropertyMetadata()
@@ -30,6 +31,7 @@ public static class DungeonsMetadata
                     PropertyName = "DungeonGuardianNames",
                     Type = "array",
                     Title = "Dungeon Guardian Names",
+                    LabelIfNullable = "",
                     Description = "The names of the dungeon guardians associated with the dungeon.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

@@ -37,6 +37,7 @@ public static class ItemClassesMetadata
                     PropertyName = "ItemFlavorBindingKeys",
                     Type = "array",
                     Title = "Item Flavor Binding Keys",
+                    LabelIfNullable = "",
                     Description = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

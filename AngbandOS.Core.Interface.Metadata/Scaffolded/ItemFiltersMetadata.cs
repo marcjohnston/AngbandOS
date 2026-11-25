@@ -16,6 +16,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "AttributeFilterBindingKey",
                     Type = "string",
                     Title = "Attribute Filter Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the binding key for the attribute filter to apply.",
                 },
                 new PropertyMetadata()
@@ -23,6 +24,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "AnyMatchingItemClassNames",
                     Type = "array",
                     Title = "Any Matching Item Class Names",
+                    LabelIfNullable = "",
                     Description = "Specifies item class names where an item matches if it belongs to any of the specified classes.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -38,6 +40,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "AllNonMatchingItemClassNames",
                     Type = "array",
                     Title = "All Non-Matching Item Class Names",
+                    LabelIfNullable = "",
                     Description = "Specifies item class names that an item must not belong to for the filter to match.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -53,6 +56,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "AnyMatchingItemFactoryNames",
                     Type = "array",
                     Title = "Any Matching Item Factory Names",
+                    LabelIfNullable = "",
                     Description = "Specifies item factory names where an item matches if it was created by any of the specified factories.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -68,6 +72,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "AllNonMatchingItemFactoryNames",
                     Type = "array",
                     Title = "All Non-Matching Item Factory Names",
+                    LabelIfNullable = "",
                     Description = "Specifies item factory names that an item must not have been created by for the filter to match.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -83,6 +88,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeActivated",
                     Type = "boolean",
                     Title = "Can Be Activated",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being activated.",
                 },
                 new PropertyMetadata()
@@ -90,6 +96,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeAimed",
                     Type = "boolean",
                     Title = "Can Be Aimed",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being aimed.",
                 },
                 new PropertyMetadata()
@@ -97,6 +104,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeFired",
                     Type = "boolean",
                     Title = "Can Be Fired",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being fired.",
                 },
                 new PropertyMetadata()
@@ -104,6 +112,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeQuaffed",
                     Type = "boolean",
                     Title = "Can Be Quaffed",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being quaffed.",
                 },
                 new PropertyMetadata()
@@ -111,6 +120,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeRead",
                     Type = "boolean",
                     Title = "Can Be Read",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being read.",
                 },
                 new PropertyMetadata()
@@ -118,6 +128,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeRecharged",
                     Type = "boolean",
                     Title = "Can Be Recharged",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being recharged.",
                 },
                 new PropertyMetadata()
@@ -125,6 +136,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeUsed",
                     Type = "boolean",
                     Title = "Can Be Used",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being used.",
                 },
                 new PropertyMetadata()
@@ -132,6 +144,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanBeZapped",
                     Type = "boolean",
                     Title = "Can Be Zapped",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of being zapped.",
                 },
                 new PropertyMetadata()
@@ -139,6 +152,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "CanProjectArrows",
                     Type = "boolean",
                     Title = "Can Project Arrows",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be capable of projecting arrows.",
                 },
                 new PropertyMetadata()
@@ -146,6 +160,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "IsKnown",
                     Type = "boolean",
                     Title = "Is Known",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be known.",
                 },
                 new PropertyMetadata()
@@ -153,6 +168,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "IsOfValue",
                     Type = "boolean",
                     Title = "Is Of Value",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be considered valuable.",
                 },
                 new PropertyMetadata()
@@ -160,6 +176,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "IsTooHeavyToWield",
                     Type = "boolean",
                     Title = "Is Too Heavy To Wield",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be too heavy for the player to wield.",
                 },
                 new PropertyMetadata()
@@ -167,6 +184,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "IsUsableSpellBook",
                     Type = "boolean",
                     Title = "Is Usable Spell Book",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be a usable spell book.",
                 },
                 new PropertyMetadata()
@@ -174,6 +192,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "ArtifactBiasCanSlay",
                     Type = "boolean",
                     Title = "Artifact Bias Can Slay",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item's artifact bias must be capable of slaying a target.",
                 },
                 new PropertyMetadata()
@@ -181,6 +200,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "ArtifactBias",
                     Type = "boolean",
                     Title = "Artifact Bias",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must have an artifact bias.",
                 },
                 new PropertyMetadata()
@@ -188,6 +208,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "IsCursed",
                     Type = "boolean",
                     Title = "Is Cursed",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must be cursed.",
                 },
                 new PropertyMetadata()
@@ -195,6 +216,7 @@ public static class ItemFiltersMetadata
                     PropertyName = "HeavyCurse",
                     Type = "boolean",
                     Title = "Heavy Curse",
+                    LabelIfNullable = "",
                     Description = "Specifies whether the item must have a heavy curse.",
                 },
             };

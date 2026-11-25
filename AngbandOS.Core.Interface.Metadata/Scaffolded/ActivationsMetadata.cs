@@ -23,6 +23,7 @@ public static class ActivationsMetadata
                     PropertyName = "PreActivationMessage",
                     Type = "string",
                     Title = "Pre-Activation Message",
+                    LabelIfNullable = "",
                     Description = "The message displayed before the activation occurs.",
                 },
                 new PropertyMetadata()

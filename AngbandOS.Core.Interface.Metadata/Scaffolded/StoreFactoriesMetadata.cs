@@ -101,6 +101,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "StoreStockManifestDefinitions",
                     Type = "tuples",
                     Title = "Store Stock Manifest Definitions",
+                    LabelIfNullable = "",
                     Description = "Specifies the item factories and distribution weights used to stock the store.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -147,6 +148,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "AdvertisedStoreCommand1Name",
                     Type = "string",
                     Title = "Advertised Store Command 1 Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the first advertised store command name.",
                 },
                 new PropertyMetadata()
@@ -154,6 +156,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "AdvertisedStoreCommand2Name",
                     Type = "string",
                     Title = "Advertised Store Command 2 Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the second advertised store command name.",
                 },
                 new PropertyMetadata()
@@ -161,6 +164,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "AdvertisedStoreCommand3Name",
                     Type = "string",
                     Title = "Advertised Store Command 3 Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the third advertised store command name.",
                 },
                 new PropertyMetadata()
@@ -168,6 +172,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "AdvertisedStoreCommand4Name",
                     Type = "string",
                     Title = "Advertised Store Command 4 Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the fourth advertised store command name.",
                 },
                 new PropertyMetadata()
@@ -175,6 +180,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "AdvertisedStoreCommand5Name",
                     Type = "string",
                     Title = "Advertised Store Command 5 Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the fifth advertised store command name.",
                 },
                 new PropertyMetadata()
@@ -210,6 +216,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "OwnerName",
                     Type = "string",
                     Title = "Owner Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the name of the store owner. When null, the owner is determined automatically.",
                 },
                 new PropertyMetadata()
@@ -217,6 +224,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "Title",
                     Type = "string",
                     Title = "Title",
+                    LabelIfNullable = "",
                     Description = "Specifies the title of the store. When null, the title is determined automatically.",
                 },
                 new PropertyMetadata()
@@ -259,6 +267,7 @@ public static class StoreFactoriesMetadata
                     PropertyName = "LevelForRandomItemCreation",
                     Type = "integer",
                     Title = "Level For Random Item Creation",
+                    LabelIfNullable = "",
                     Description = "Specifies the base level for random item creation. When null, the store stock manifests are used.",
                 },
                 new PropertyMetadata()

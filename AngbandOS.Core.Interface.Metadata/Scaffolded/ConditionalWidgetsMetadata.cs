@@ -23,6 +23,7 @@ public static class ConditionalWidgetsMetadata
                     PropertyName = "TrueWidgetNames",
                     Type = "array",
                     Title = "True Widget Names",
+                    LabelIfNullable = "",
                     Description = "The names of the widgets to invalidate when the conditional evaluates to true.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -38,6 +39,7 @@ public static class ConditionalWidgetsMetadata
                     PropertyName = "FalseWidgetNames",
                     Type = "array",
                     Title = "False Widget Names",
+                    LabelIfNullable = "",
                     Description = "The names of the widgets to invalidate when the conditional evaluates to false.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -90,6 +92,7 @@ public static class ConditionalWidgetsMetadata
                     PropertyName = "ChangeTrackerNames",
                     Type = "array",
                     Title = "Change Tracker Names",
+                    LabelIfNullable = "",
                     Description = "The names of the properties that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

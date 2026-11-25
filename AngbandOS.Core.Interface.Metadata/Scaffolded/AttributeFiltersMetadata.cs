@@ -16,6 +16,7 @@ public static class AttributeFiltersMetadata
                     PropertyName = "BitwiseOrAttributeFilterBindings",
                     Type = "tuples",
                     Title = "Bitwise Or Attribute Filter Bindings",
+                    LabelIfNullable = "",
                     Description = "The attribute bindings used to filter for attributes where any specified bitwise value matches.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -40,6 +41,7 @@ public static class AttributeFiltersMetadata
                     PropertyName = "BoolAttributeFilterBindings",
                     Type = "tuples",
                     Title = "Boolean Attribute Filter Bindings",
+                    LabelIfNullable = "",
                     Description = "The attribute bindings used to filter boolean attributes by their desired values.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -73,6 +75,7 @@ public static class AttributeFiltersMetadata
                     PropertyName = "SummationAttributeFilterBindings",
                     Type = "tuples",
                     Title = "Summation Attribute Filter Bindings",
+                    LabelIfNullable = "",
                     Description = "The attribute bindings used to filter summed numeric attributes within a specified range.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -104,6 +107,7 @@ public static class AttributeFiltersMetadata
                     PropertyName = "ActivationAttributeNonNull",
                     Type = "boolean",
                     Title = "Activation Attribute Non-Null",
+                    LabelIfNullable = "",
                     Description = "Determines whether the activation attribute must be non-null.",
                 },
                 new PropertyMetadata()
@@ -111,6 +115,7 @@ public static class AttributeFiltersMetadata
                     PropertyName = "ArtifactBiasAttributeNonNull",
                     Type = "boolean",
                     Title = "Artifact Bias Attribute Non-Null",
+                    LabelIfNullable = "",
                     Description = "Determines whether the artifact bias attribute must be non-null.",
                 },
             };

@@ -23,6 +23,7 @@ public static class TimerScriptsMetadata
                     PropertyName = "ValueExpression",
                     Type = "string",
                     Title = "Value Expression",
+                    LabelIfNullable = "",
                     Description = "Specifies the expression used to modify the timer. Positive values add time, negative values subtract time, and null resets the timer to zero.",
                 },
                 new PropertyMetadata()
@@ -37,6 +38,7 @@ public static class TimerScriptsMetadata
                     PropertyName = "CustomLearnedDetails",
                     Type = "string",
                     Title = "Custom Learned Details",
+                    LabelIfNullable = "",
                     Description = "Specifies custom details revealed when the timer script is learned.",
                 },
                 new PropertyMetadata()
@@ -51,6 +53,7 @@ public static class TimerScriptsMetadata
                     PropertyName = "PreMessage",
                     Type = "string",
                     Title = "Pre-Message",
+                    LabelIfNullable = "",
                     Description = "Specifies the message displayed before the timer script executes.",
                 },
                 new PropertyMetadata()
@@ -58,6 +61,7 @@ public static class TimerScriptsMetadata
                     PropertyName = "EnabledBoolPosFunctionBindingKey",
                     Type = "string",
                     Title = "Enabled Boolean Positive Function Binding Key",
+                    LabelIfNullable = "",
                     Description = "Specifies the optional binding key for the function that determines whether the timer script is enabled.",
                 },
             };

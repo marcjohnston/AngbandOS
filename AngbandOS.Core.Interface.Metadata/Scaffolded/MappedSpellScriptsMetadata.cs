@@ -16,6 +16,7 @@ public static class MappedSpellScriptsMetadata
                     PropertyName = "RealmBindingKey",
                     Type = "string",
                     Title = "Realm Binding Key",
+                    LabelIfNullable = "",
                     Description = "Returns the binding key of the realm associated with this mapped spell script.",
                 },
                 new PropertyMetadata()
@@ -23,6 +24,7 @@ public static class MappedSpellScriptsMetadata
                     PropertyName = "CharacterClassBindingKey",
                     Type = "string",
                     Title = "Character Class Binding Key",
+                    LabelIfNullable = "",
                     Description = "Returns the binding key of the character class associated with this mapped spell script.",
                 },
                 new PropertyMetadata()
@@ -30,6 +32,7 @@ public static class MappedSpellScriptsMetadata
                     PropertyName = "SpellBindingKey",
                     Type = "string",
                     Title = "Spell Binding Key",
+                    LabelIfNullable = "",
                     Description = "Returns the binding key of the spell associated with this mapped spell script.",
                 },
                 new PropertyMetadata()
@@ -44,6 +47,7 @@ public static class MappedSpellScriptsMetadata
                     PropertyName = "CastSpellScriptBindingKeys",
                     Type = "array",
                     Title = "Cast Spell Script Binding Keys",
+                    LabelIfNullable = "",
                     Description = "Returns the binding keys of the cast spell scripts to run when the spell is cast, or null if the spell does nothing when cast.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
@@ -59,6 +63,7 @@ public static class MappedSpellScriptsMetadata
                     PropertyName = "MinimumExperienceLevel",
                     Type = "integer",
                     Title = "Minimum Experience Level",
+                    LabelIfNullable = "",
                     Description = "Returns the minimum experience level required for this mapped spell script, or null if there is no minimum.",
                 },
                 new PropertyMetadata()
@@ -66,6 +71,7 @@ public static class MappedSpellScriptsMetadata
                     PropertyName = "MaximumExperienceLevel",
                     Type = "integer",
                     Title = "Maximum Experience Level",
+                    LabelIfNullable = "",
                     Description = "Returns the maximum experience level allowed for this mapped spell script, or null if there is no maximum.",
                 },
             };

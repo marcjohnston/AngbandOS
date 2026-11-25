@@ -30,6 +30,7 @@ public static class WizardCommandsMetadata
                     PropertyName = "HelpGroupName",
                     Type = "string",
                     Title = "Help Group Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the name of the help group containing the wizard command. When null, the command is not associated with a help group.",
                 },
                 new PropertyMetadata()
@@ -44,6 +45,7 @@ public static class WizardCommandsMetadata
                     PropertyName = "ExecuteScriptName",
                     Type = "string",
                     Title = "Execute Script Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the name of the script executed by the wizard command. When null, no script is executed.",
                 },
             };

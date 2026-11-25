@@ -429,10 +429,24 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
             // Generate the property metadata for the collection property.
             PropertyMetadata propertyMetadata = annotatedDataType.ToPropertyMetadata();
 
+            // Establish the nullability and verify annotation.
+            if (propertyMetadata.LabelIfNullable is null)
+            {
+                // The property is not nullable.  Ensure a label was not provided in the annotation.
+                if (configurationPropertyAttribute.LabelIfNullable is not null)
+                {
+                    throw new Exception($"Cannot provide a label for null when property is not nullable for the '{type.Name}.{propertyName}' property.");
+                }
+            }
+            else
+            {
+                // The property is nullable.  Check to see if a custom label was provided.
+                propertyMetadata.LabelIfNullable = configurationPropertyAttribute.LabelIfNullable ?? propertyMetadata.LabelIfNullable;
+            }
+
             // Copy the ConfigurationPropertyAttribute properties.
             propertyMetadata.PropertyName = propertyName;
             propertyMetadata.Title = configurationPropertyAttribute.Title;
-            propertyMetadata.LabelIfNullable = configurationPropertyAttribute.LabelIfNullable;
             propertyMetadata.Description = configurationPropertyAttribute.Description ?? "";
 
             // If there is a category attribute, then we will use it to override the category title.

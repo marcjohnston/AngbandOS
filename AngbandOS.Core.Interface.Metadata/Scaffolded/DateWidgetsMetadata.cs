@@ -45,6 +45,7 @@ public static class DateWidgetsMetadata
                     PropertyName = "Width",
                     Type = "integer",
                     Title = "Width",
+                    LabelIfNullable = "",
                     Description = "The width of the widget, or null to use the default width.",
                 },
                 new PropertyMetadata()
@@ -60,6 +61,7 @@ public static class DateWidgetsMetadata
                     PropertyName = "ChangeTrackerNames",
                     Type = "array",
                     Title = "Change Tracker Names",
+                    LabelIfNullable = "",
                     Description = "The names of the properties that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

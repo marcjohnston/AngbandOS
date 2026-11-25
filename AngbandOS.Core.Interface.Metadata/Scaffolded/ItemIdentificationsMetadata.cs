@@ -23,6 +23,7 @@ public static class ItemIdentificationsMetadata
                     PropertyName = "InterpolationExpressionAttributeNames",
                     Type = "array",
                     Title = "Interpolation Expression Attribute Names",
+                    LabelIfNullable = "",
                     Description = "Specifies the attribute names whose values are available for interpolation in the effect description.",
                     AssociatedProperties = new PropertyMetadata[]
                     {

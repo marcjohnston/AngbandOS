@@ -44,6 +44,7 @@ public static class TilesMetadata
                     PropertyName = "OnJammedTileName",
                     Type = "string",
                     Title = "On Jammed Tile Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the tile name used when this tile is jammed.",
                 },
                 new PropertyMetadata()
@@ -51,6 +52,7 @@ public static class TilesMetadata
                     PropertyName = "VisibleTreasureForTileName",
                     Type = "string",
                     Title = "Visible Treasure For Tile Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the visible treasure tile name associated with this tile.",
                 },
                 new PropertyMetadata()
@@ -65,6 +67,7 @@ public static class TilesMetadata
                     PropertyName = "StepOnScriptName",
                     Type = "string",
                     Title = "Step On Script Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the name of the script executed when the tile is stepped on.",
                 },
                 new PropertyMetadata()
@@ -108,6 +111,7 @@ public static class TilesMetadata
                     PropertyName = "BlocksScent",
                     Type = "boolean",
                     Title = "Blocks Scent",
+                    LabelIfNullable = "",
                     Description = "Determines whether the tile blocks the scent trail. When null, the value is derived from whether the tile blocks line of sight.",
                 },
                 new PropertyMetadata()
@@ -115,6 +119,7 @@ public static class TilesMetadata
                     PropertyName = "HiddenTreasureForTileName",
                     Type = "string",
                     Title = "Hidden Treasure For Tile Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the visible tile name associated with this hidden treasure tile. When null, the tile is not hidden treasure.",
                 },
                 new PropertyMetadata()
@@ -171,6 +176,7 @@ public static class TilesMetadata
                     PropertyName = "AlterActionName",
                     Type = "string",
                     Title = "Alter Action Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the name of the action performed on the tile.",
                 },
                 new PropertyMetadata()
@@ -178,6 +184,7 @@ public static class TilesMetadata
                     PropertyName = "MimicTileName",
                     Type = "string",
                     Title = "Mimic Tile Name",
+                    LabelIfNullable = "",
                     Description = "Specifies the name of the tile this tile appears to be when viewed.",
                 },
                 new PropertyMetadata()
