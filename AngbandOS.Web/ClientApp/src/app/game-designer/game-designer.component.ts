@@ -178,6 +178,8 @@ export class GameDesignerComponent implements OnInit {
     switch (jsonPropertyMetadata.type) {
       case "collection":
       case "tuple":
+      case "tuples":
+      case "tuples?":
       case "array":
         if (jsonPropertyMetadata.associatedProperties !== null) {
           collectionPropertyMetadataList = [];
