@@ -2,7 +2,7 @@ import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { PropertyMetadata } from '../../property-metadata';
 import { MatIconModule } from '@angular/material/icon';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { GameDesignerTypeComponent } from '../game-designer-type.component';
 
 @Component({
@@ -11,7 +11,6 @@ import { GameDesignerTypeComponent } from '../game-designer-type.component';
   styleUrls: ['./game-designer-type-tuple-array.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     NgFor,
     MatIconModule,
     forwardRef(() => GameDesignerTypeComponent) /** This is needed to break the circular reference */

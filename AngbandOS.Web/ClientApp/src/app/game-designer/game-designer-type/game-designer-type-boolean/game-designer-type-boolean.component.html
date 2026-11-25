@@ -1,10 +1,12 @@
-<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
-  <select #select [ngModel]="getValue()" (change)="setValue()">
-    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null">
-      <option value="">activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable</option>
-    </ng-container>
-    <option value="true">True</option>
-    <option value="false">False</option>
-  </select>
-  <span id="modified-span" *ngIf="unmodifiedValue !== getValue()"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
-</ng-container>
+@if (activePropertyMetadataAndConfiguration !== undefined){
+<select #select [ngModel]="getValue()" (change)="setValue()">
+  @if (activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null){
+    <option value="">activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable</option>
+  }
+  <option value="true">True</option>
+  <option value="false">False</option>
+</select>
+  @if(unmodifiedValue !== getValue()) {
+    <span id="modified-span"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
+  }  
+}

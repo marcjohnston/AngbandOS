@@ -1,12 +1,13 @@
-<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
-  <!-- Collection -->
-  <div *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.type === 'collection'; else nonCollectionProperty">
+@if (activePropertyMetadataAndConfiguration !== undefined) {
+<!-- Collection -->
+  @if(activePropertyMetadataAndConfiguration.propertyMetadata.type === 'collection'){
+    <div>
     <!-- Collection entity list, add and delete -->
-    <ng-container *ngIf="activePropertyMetadataAndConfiguration.configurationIsArray; else showCollectionEntity">
+    @if (activePropertyMetadataAndConfiguration.configurationIsArray) {
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-      <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== ''">
+      @if (activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== '') {
         <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
-      </ng-container>
+      }
       <table>
         <tbody>
           <ng-container *ngFor="let entity of activePropertyMetadataAndConfiguration.configuration; let index=index">
@@ -28,23 +29,22 @@
           </tr>
         </tfoot>
       </table>
-    </ng-container>
-    <!-- Single collection entity -->
-    <ng-template #showCollectionEntity>
+     } @else {
+      <!-- Single collection entity -->
       <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(activePropertyMetadataAndConfiguration.configuration)}}</span><br />
       <div class="property-container-div" *ngFor="let childPropertyMetadata of activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas">
-        <app-game-designer-property [activePropertyMetadataAndConfiguration]="createChild(activePropertyMetadataAndConfiguration, childPropertyMetadata)" [collectionMap]="collectionMap"></app-game-designer-property> <!-- Recursion -->
+      <app-game-designer-property [activePropertyMetadataAndConfiguration]="createChild(activePropertyMetadataAndConfiguration, childPropertyMetadata)" [collectionMap]="collectionMap"></app-game-designer-property> <!-- Recursion -->
       </div>
-    </ng-template>
+    }
   </div>
-  <!-- An array of metadatas and configurations -->
-  <ng-template #nonCollectionProperty>
-    <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
-    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== ''">
-      <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
-    </ng-container>
-    <div class="type-container-div">
-      <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collectionMap]="collectionMap"></app-game-designer-type>
-    </div>
-  </ng-template>
-</ng-container>
+} @else {
+<!-- An array of metadatas and configurations -->
+  <span class="collection-property-metadata-title">{{activePropertyMetadataAndConfiguration.propertyMetadata.renderTitle}}</span><br />
+  @if (activePropertyMetadataAndConfiguration.propertyMetadata.description !== null && activePropertyMetadataAndConfiguration.propertyMetadata.description !== '') {
+  <span class="property-metadata-description">{{activePropertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
+  }
+  <div class="type-container-div">
+    <app-game-designer-type [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collectionMap]="collectionMap"></app-game-designer-type>
+  </div>
+  }
+}

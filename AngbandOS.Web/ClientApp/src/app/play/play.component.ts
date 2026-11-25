@@ -16,7 +16,6 @@ import { PreferencesDialogData } from '../preferences-dialog/preferences-dialog-
 import { Preferences } from './preferences';
 import { GameConfiguration } from "./game-configuration";
 import { PutUserPreferences } from './put-user-preferences';
-import { NgIf } from '@angular/common';
 import { ConsoleConfiguration } from '../modules/html-console/console-configuration';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
 
@@ -28,7 +27,6 @@ const snackBarDefaultDelayTime = 3000;
   styleUrls: ['./play.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     MasterLayoutComponent
   ]
 })

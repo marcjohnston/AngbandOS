@@ -1,5 +1,5 @@
 <app-master-layout>
-  <ng-container *ngIf="!isAuthenticated && errors.length === 0">
+  @if (!isAuthenticated && errors.length === 0) {
     <form [formGroup]="formGroup">
       <div>Login to complete confirmation of your email account.</div>
       <mat-form-field id="email-address">
@@ -16,7 +16,7 @@
     </form>
     <button (click)="onLoginClick()">Login</button>
     <button (click)="onForgotPasswordClick()">Forgot Password</button>
-  </ng-container>
+  }
   <ng-template ngFor [ngForOf]="errors" let-error>
     <div>{{error}}</div>
   </ng-template>

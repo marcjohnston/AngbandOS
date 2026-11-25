@@ -1,62 +1,65 @@
 <div id="container">
   <app-nav-menu></app-nav-menu>
   <h6 class="window-left-right-margins">Game Configuration Designer</h6>
-  <div class="window-left-right-margins" *ngIf="configuration !== undefined">
-    {{isModified ? '--MODIFIED--' : "--unchanged--"}}
-  </div>
+  @if (configuration !== undefined) {
+    <div class="window-left-right-margins">
+      {{isModified ? '--MODIFIED--' : "--unchanged--"}}
+    </div>
+  }
   <div id="component-window" class="window-left-right-margins">
-    <ng-container *ngIf="rootTreeNodes !== undefined">
-      <div id="tree-panel">
-        <table>
-          <ng-container *ngFor="let treeNode of rootTreeNodes">
-            <tr (click)="treeNodeClicked(treeNode)">
-              <td (click)="treeNode.isOpen=!treeNode.isOpen">
-                <ng-container *ngIf="treeNode.children != null">
-                  <ng-container *ngIf="!treeNode.isOpen">
+    @if (rootTreeNodes !== undefined) {
+    <div id="tree-panel">
+      <table>
+        <ng-container *ngFor="let treeNode of rootTreeNodes">
+          <tr (click)="treeNodeClicked(treeNode)">
+            <td (click)="treeNode.isOpen=!treeNode.isOpen">
+              @if (treeNode.children != null) {
+                @if (!treeNode.isOpen) {
                     <mat-icon class="game-designer-add-icon">add</mat-icon>
-                  </ng-container>
-                  <ng-container *ngIf="treeNode.isOpen">
+                 }
+                 @else {
                     <mat-icon class="game-designer-add-icon">remove</mat-icon>
-                  </ng-container>
-                </ng-container>
-              </td>
-              <td colspan="2">{{treeNode.title}}</td>
-            </tr>
-            <ng-container *ngIf="treeNode.children != null && treeNode.isOpen">
-              <ng-container *ngFor="let childTreeNode of treeNode.children">
-                <tr (click)="treeNodeClicked(childTreeNode)">
-                  <td></td>
-                  <td>-</td>
-                  <td>{{childTreeNode.title}}</td>
-                </tr>
-              </ng-container>
+                 }
+              }
+            </td>
+            <td colspan="2">{{treeNode.title}}</td>
+          </tr>
+          @if (treeNode.children != null && treeNode.isOpen) {
+            <ng-container *ngFor="let childTreeNode of treeNode.children">
+              <tr (click)="treeNodeClicked(childTreeNode)">
+                <td></td>
+                <td>-</td>
+                <td>{{childTreeNode.title}}</td>
+              </tr>
             </ng-container>
-          </ng-container>
-        </table>
-      </div>
-      <div id="entity-panel">
-        <ng-container *ngIf="activePropertyMetadataAndConfigurations !== null">
-          <!-- Render all of metadatas and configurations for the selection.  The game settings will have multiple metadatas and configuraitons; everything else will have a single element -->
-          <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations">
-            <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collectionMap]="collectionMap"></app-game-designer-property>
-          </ng-container>
-          <!-- Debug -->
-          <ng-container *ngIf="false && activePropertyMetadataAndConfigurations !== null"> <!-- Change the first true/false to enable and disable the debug mode -->
-            <hr />
-            <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations; let index = index">
-              <h6>Property Metadata Debug #{{index}}</h6>
-              <pre style="white-space: pre-wrap;">{{activePropertyMetadataAndConfiguration.propertyMetadata | json}}</pre>
-            </ng-container>
-            <hr />
-            <h6>Configuration Debug</h6>
-            <pre style="white-space: pre-wrap;">{{activePropertyMetadataAndConfigurations[0].configuration | json}}</pre> <!-- We only want to show the configuration once.  It is the same for all properties. -->
-          </ng-container>
+          }
         </ng-container>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="rootTreeNodes === undefined">
-      loading ...
-    </ng-container>
+      </table>
+    </div>
+    <div id="entity-panel">
+     @if (activePropertyMetadataAndConfigurations !== null) {
+        <!-- Render all of metadatas and configurations for the selection.  The game settings will have multiple metadatas and configuraitons; everything else will have a single element -->
+        <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations">
+          <app-game-designer-property [activePropertyMetadataAndConfiguration]="activePropertyMetadataAndConfiguration" [collectionMap]="collectionMap"></app-game-designer-property>
+        </ng-container>
+        <!-- Debug -->
+        @if (false && activePropertyMetadataAndConfigurations !== null) {
+          <!-- Change the first true/false to enable and disable the debug mode -->
+          <hr />
+          <ng-container *ngFor="let activePropertyMetadataAndConfiguration of activePropertyMetadataAndConfigurations; let index = index">
+            <h6>Property Metadata Debug #{{index}}</h6>
+            <pre style="white-space: pre-wrap;">{{activePropertyMetadataAndConfiguration.propertyMetadata | json}}</pre>
+          </ng-container>
+          <hr />
+          <h6>Configuration Debug</h6>
+          <pre style="white-space: pre-wrap;">{{activePropertyMetadataAndConfigurations[0].configuration | json}}</pre> <!-- We only want to show the configuration once.  It is the same for all properties. -->
+        }
+      }
+    </div>
+    }
+    @else {
+    loading ...
+    }
   </div>
   <app-footer></app-footer>
 </div>

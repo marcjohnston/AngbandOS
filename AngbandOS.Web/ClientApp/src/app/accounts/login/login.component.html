@@ -1,5 +1,5 @@
 <app-master-layout>
-  <ng-container *ngIf="!isAuthenticated">
+  @if (!isAuthenticated){
     <form [formGroup]="formGroup" (submit)="onLoginClick()">
       <div class="header-title">Login</div>
       <mat-form-field id="email-address">
@@ -14,9 +14,9 @@
       <button mat-button mat-flat-button>Login</button>
       <a href="#" [routerLink]='["/accounts/forgot-password"]'>Forgot password!</a>
     </form>
-  </ng-container>
-  <ng-container *ngIf="isAuthenticated">
+  }
+  @else {
     <p>Login successful.</p>
     <p>Click <a [routerLink]="['/']">here</a> to return to the home screen.</p>
-  </ng-container>
+  }
 </app-master-layout>

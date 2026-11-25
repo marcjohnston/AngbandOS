@@ -1,24 +1,23 @@
 <div class="login-menu">
-  <ng-container *ngIf="isAuthenticated">
+  @if (isAuthenticated) {
     <button mat-button [routerLink]="['/accounts/profile']">Hello {{username}}</button>
-  </ng-container>
+  }
 
   <button mat-button (click)="onWikiClick()">Wiki</button>
   <button mat-button (click)="onDeveloperClick()">Developer</button>
   <button mat-button [routerLink]="['/ui']">UI Designer</button>
 
-  <ng-container *ngIf="isAdministrator">
+  @if (isAdministrator){
     <button mat-button [routerLink]="['/game-designer']">Game Designer</button>
     <button mat-button [routerLink]="['/dashboard']">Dashboard</button>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="isAuthenticated">
+  @if (isAuthenticated){
     <button mat-button [routerLink]="['/accounts/logout']" [state]="{ local: true }">Logout</button>
-  </ng-container>
-
-  <ng-container *ngIf="!isAuthenticated">
-    <button mat-button [routerLink]="['/accounts/register']">Register</button>
-    <button mat-button [routerLink]="['/accounts/login']">Login</button>
-  </ng-container>
+  }
+  @else {
+  <button mat-button [routerLink]="['/accounts/register']">Register</button>
+  <button mat-button [routerLink]="['/accounts/login']">Login</button>
+  }
 </div>
 

@@ -8,7 +8,6 @@ import { PutUser } from './put-user';
 import { UserDetails } from '../authentication-service/user-details';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
-import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
@@ -19,7 +18,6 @@ import { MasterLayoutComponent } from '../../master-layout/master-layout.compone
   styleUrls: ['./account-confirmation.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     ReactiveFormsModule,
     MatFormField,
     MasterLayoutComponent

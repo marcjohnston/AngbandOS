@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login-menu',
@@ -12,7 +11,6 @@ import { NgIf } from '@angular/common';
   imports: [
     RouterLink,
     MatButtonModule,
-    NgIf
   ]
 })
 export class LoginMenuComponent implements OnInit, OnDestroy {

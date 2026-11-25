@@ -1,18 +1,25 @@
-<div id="container" *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+@if (activePropertyMetadataAndConfiguration !== undefined) {
+<div id="container">
   <div id="select-div">
     <select #select [ngModel]="getValue()" (change)="setValue()">
-      <ng-container *ngIf="colorOptions !== undefined">
-        <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null">
-          <option value="">{{activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}</option>
-        </ng-container>
-        <ng-container *ngFor="let selectOption of colorOptions">
-          <option value="{{selectOption.value
-            }}">{{selectOption.text}}
-          </option>
-        </ng-container>
+      @if (colorOptions !== undefined) {
+        @if (activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null) {
+        <option value="">{{activePropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}</option>
+        }
+      <ng-container *ngFor="let selectOption of colorOptions">
+        <option value="{{selectOption.value
+            }}">
+          {{selectOption.text}}
+        </option>
       </ng-container>
+      }
     </select>
-    <span id="modified-span" *ngIf="unmodifiedValue !== getValue()"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
+    @if (unmodifiedValue !== getValue()) {
+      <span id="modified-span"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
+    }
   </div>
-  <span class="game-designer-error-message-span" *ngIf="errorMessage !== ''">{{errorMessage}}</span>
+  @if(errorMessage !== '') {
+   <span class="game-designer-error-message-span">{{errorMessage}}</span>
+  }
 </div>
+}

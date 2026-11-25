@@ -1,3 +1,4 @@
-<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+@if (activePropertyMetadataAndConfiguration !== undefined) {              
   <input type="text" [(ngModel)]="activePropertyMetadataAndConfiguration.configuration[activePropertyMetadataAndConfiguration.propertyMetadata.propertyName]" />
-</ng-container>
+}
+

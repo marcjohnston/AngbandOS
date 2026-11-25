@@ -1,15 +1,13 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.scss'],
   standalone: true,
-  imports: [
-    NgIf
+  imports: [ 
   ]
 })
 export class LogoutComponent implements OnInit {

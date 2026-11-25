@@ -1,4 +1,4 @@
-<ng-container *ngIf="activePropertyMetadataAndConfiguration !== undefined">
+@if (activePropertyMetadataAndConfiguration !== undefined) {
   <table id="tuple-table">
     <thead>
       <tr>
@@ -26,7 +26,7 @@
         </tr>
       </ng-container>
     </tbody>
-    <ng-container *ngIf="activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas !== null">
+    @if (activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas !== null) {
       <tfoot>
         <tr>
           <td [attr.colspan]="activePropertyMetadataAndConfiguration.propertyMetadata.propertyMetadatas.length + 1">
@@ -34,6 +34,6 @@
           </td>
         </tr>
       </tfoot>
-    </ng-container>
+    }
   </table>
-</ng-container>
+}

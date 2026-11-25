@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
@@ -12,7 +12,6 @@ import { EnumOption } from "../../EnumOption";
   standalone: true,
   imports: [
     NgFor,
-    NgIf,
     FormsModule,
     MatIconModule
   ]

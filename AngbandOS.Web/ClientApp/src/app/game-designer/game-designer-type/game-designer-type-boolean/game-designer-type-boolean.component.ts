@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
-import { NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +10,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./game-designer-type-boolean.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     MatSelectModule,
     MatIconModule,
     FormsModule

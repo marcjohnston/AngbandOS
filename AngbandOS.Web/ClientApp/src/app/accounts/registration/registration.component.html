@@ -1,67 +1,67 @@
 <app-master-layout>
-  <ng-container *ngIf="!isAuthenticated">
-    <form [formGroup]="formGroup" (submit)="onRegisterClick()">
-      <div class="header-title">Create an Account</div>
-      <mat-form-field id="username">
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username" />
-        <mat-error *ngIf="formGroup.username.hasError('duplicate')">
-          This username is already taken.
-        </mat-error>
-        <mat-error *ngIf="formGroup.username.hasError('required')">
-          Username is required.
-        </mat-error>
-        <mat-error *ngIf="formGroup.username.hasError('minlength')">
-          Username must be at least 5 characters.
-        </mat-error>
-        <mat-error *ngIf="formGroup.username.hasError('maxlength')">
-          Username must be no more than 15 characters.
-        </mat-error>
-        <mat-error *ngIf="formGroup.username.hasError('pattern')">
-          Username must start with a letter and contain only letters and numbers.
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field id="email-address">
-        <mat-label>Email Address</mat-label>
-        <input matInput formControlName="emailAddress" />
-        <mat-error *ngIf="formGroup.emailAddress.hasError('required')">
-          Email address is required.
-        </mat-error>
-        <mat-error *ngIf="formGroup.emailAddress.hasError('email')">
-          Please enter a valid email address.
-        </mat-error>
-        <mat-error *ngIf="formGroup.username.hasError('duplicate')">
-          This email address is already registered.  Please login.
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field id="password">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" />
-        <mat-error *ngIf="formGroup.password.hasError('minlength')">
-          Password must be at least 8 characters.
-        </mat-error>
-        <mat-error *ngIf="formGroup.password.hasError('required')">
-          Password is required.
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field id="confirm-password">
-        <mat-label>Confirm</mat-label>
-        <input matInput type="password" formControlName="confirmPassword" />
-        <mat-error *ngIf="formGroup.confirmPassword.hasError('required')">
-          Password confirmartion is required.
-        </mat-error>
-      </mat-form-field>
-      <mat-error *ngIf="formGroup.hasError('passwordMismatch') && formGroup.confirmPassword.touched">
-        Passwords do not match.
-      </mat-error>
-      <ng-template ngFor [ngForOf]="messages" let-message>
-        <div>{{message}}</div>
-      </ng-template>
-      <button mat-button mat-flat-button>Register</button>
-    </form>
-  </ng-container>
-  <ng-container *ngIf="isAuthenticated">
+  @if (!isAuthenticated) {
+  <form [formGroup]="formGroup" (submit)="onRegisterClick()">
+    <div class="header-title">Create an Account</div>
+    <mat-form-field id="username">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+      @if (formGroup.username.hasError('duplicate')) {
+      <mat-error>This username is already taken.</mat-error>
+      }
+      @if (formGroup.username.hasError('required')) {
+      <mat-error>Username is required.</mat-error>
+      }
+      @if (formGroup.username.hasError('minlength')) {
+      <mat-error>Username must be at least 5 characters.</mat-error>
+      }
+      @if (formGroup.username.hasError('maxlength')) {
+      <mat-error>Username must be no more than 15 characters.</mat-error>
+      }
+      @if (formGroup.username.hasError('pattern')) {
+      <mat-error>Username must start with a letter and contain only letters and numbers.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field id="email-address">
+      <mat-label>Email Address</mat-label>
+      <input matInput formControlName="emailAddress" />
+      @if (formGroup.emailAddress.hasError('required')) {
+      <mat-error>Email address is required.</mat-error>
+      }
+      @if (formGroup.emailAddress.hasError('email')) {
+      <mat-error>Please enter a valid email address.</mat-error>
+      }
+      @if (formGroup.username.hasError('duplicate')) {
+      <mat-error>This email address is already registered.  Please login.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field id="password">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      @if (formGroup.password.hasError('minlength')) {
+      <mat-error>Password must be at least 8 characters.</mat-error>
+      }
+      @if (formGroup.password.hasError('required')) {
+      <mat-error>Password is required.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field id="confirm-password">
+      <mat-label>Confirm</mat-label>
+      <input matInput type="password" formControlName="confirmPassword" />
+      @if (formGroup.confirmPassword.hasError('required')) {
+        <mat-error>Password confirmartion is required.</mat-error>
+      }
+    </mat-form-field>
+    @if (formGroup.hasError('passwordMismatch') && formGroup.confirmPassword.touched) {
+      <mat-error>Passwords do not match.</mat-error>
+    }
+    <ng-template ngFor [ngForOf]="messages" let-message>
+      <div>{{message}}</div>
+    </ng-template>
+    <button mat-button mat-flat-button>Register</button>
+  </form>
+  }
+  @else {
     <p>You are registered.</p>
     <p>Click <a [routerLink]="['/']">here</a> to return to the home screen.</p>
-  </ng-container>
+  }
 </app-master-layout>

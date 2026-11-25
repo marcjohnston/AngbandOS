@@ -11,7 +11,7 @@ import { GameDesignerTypeTupleArrayComponent } from './game-designer-type-tuple-
 import { GameDesignerTypeStringArrayComponent } from './game-designer-type-string-array/game-designer-type-string-array.component';
 import { GameDesignerTypeStringComponent } from './game-designer-type-string/game-designer-type-string.component';
 import { MatIconModule } from '@angular/material/icon';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { GameDesignerTypeEnumComponent } from './game-designer-type-enum/game-designer-type-enum.component';
 
@@ -21,7 +21,6 @@ import { GameDesignerTypeEnumComponent } from './game-designer-type-enum/game-de
   styleUrls: ['./game-designer-type.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     NgFor,
     MatIconModule,
     MatSelectModule,

@@ -6,7 +6,6 @@ import { ResetPasswordFormGroup } from './reset-password-form-group';
 import { ResetPasswordRequest } from './reset-password-request';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
-import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 
@@ -16,7 +15,6 @@ import { MatFormField } from '@angular/material/form-field';
   styleUrls: ['./reset-password.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     ReactiveFormsModule,
     MatFormField
   ]

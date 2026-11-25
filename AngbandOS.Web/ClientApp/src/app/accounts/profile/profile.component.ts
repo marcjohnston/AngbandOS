@@ -7,7 +7,6 @@ import { ProfileFormGroup } from './profile-form-group';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
 import { UpdateAccountRequest } from '../change-password/update-account-request';
-import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
@@ -20,7 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./profile.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     RouterLink,
     ReactiveFormsModule,
     MatFormField,

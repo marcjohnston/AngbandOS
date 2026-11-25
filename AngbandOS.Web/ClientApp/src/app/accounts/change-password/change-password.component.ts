@@ -5,7 +5,6 @@ import { ErrorMessages } from '../../modules/error-messages/error-messages.modul
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { ChangePasswordFormGroup } from './change-password-form-group';
 import { ChangePasswordRequest } from './change-password-request';
-import { NgIf } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +18,6 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./change-password.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     MatFormField,
     RouterLink,
     ReactiveFormsModule,

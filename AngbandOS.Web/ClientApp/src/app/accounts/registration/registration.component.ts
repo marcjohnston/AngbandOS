@@ -4,7 +4,6 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { PostAccount } from './post-account';
 import { RegistrationFormGroup } from './registration-form-group';
-import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
@@ -17,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./registration.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     MatButtonModule,
     ReactiveFormsModule,
     MatFormField,

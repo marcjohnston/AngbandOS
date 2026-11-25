@@ -4,7 +4,6 @@ import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { LoginFormGroup } from './login-form-group';
-import { NgIf } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -20,7 +19,6 @@ import { MatInputModule } from '@angular/material/input';
   standalone: true,
   imports: [
     RouterLink,
-    NgIf,
     MatFormField,
     MatInputModule,
     ReactiveFormsModule,

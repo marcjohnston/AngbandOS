@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +8,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./game-designer-type-string-array.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     FormsModule
   ]
 })

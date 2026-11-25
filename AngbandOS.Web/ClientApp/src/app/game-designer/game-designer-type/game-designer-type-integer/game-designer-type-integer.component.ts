@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -10,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./game-designer-type-integer.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     FormsModule,
     MatIconModule
   ]
