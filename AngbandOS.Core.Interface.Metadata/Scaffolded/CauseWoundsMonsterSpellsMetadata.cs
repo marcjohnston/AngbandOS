@@ -21,14 +21,14 @@ public static class CauseWoundsMonsterSpellsMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "CollapsableActionVerb",
+                            PropertyName = "Item1",
                             Type = "string",
                             Title = "Collapsable Action Verb",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "UniqueDescription",
+                            PropertyName = "Item2",
                             Type = "string",
                             Title = "Unique Description",
                             Inline = true,

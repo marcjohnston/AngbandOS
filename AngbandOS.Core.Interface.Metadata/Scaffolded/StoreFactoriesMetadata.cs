@@ -99,32 +99,24 @@ public static class StoreFactoriesMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "StoreStockManifestDefinitions",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Store Stock Manifest Definitions",
                     Description = "Specifies the item factories and distribution weights used to stock the store.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "ItemFactoryName",
-                                    Type = "string",
-                                    Title = "Item Factory Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Weight",
-                                    Type = "integer",
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Item Factory Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },

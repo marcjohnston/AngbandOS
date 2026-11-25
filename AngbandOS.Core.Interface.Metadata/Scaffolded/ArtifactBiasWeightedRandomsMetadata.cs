@@ -14,32 +14,24 @@ public static class ArtifactBiasWeightedRandomsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "ArtifactBiasBindingKeyAndWeightTuples",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Artifact Bias",
                     Description = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "ArtifactBiasBindingKey",
-                                    Type = "string",
-                                    Title = "Artifact Bias Binding Key",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Weight",
-                                    Type = "integer",
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Artifact Bias Binding Key",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },

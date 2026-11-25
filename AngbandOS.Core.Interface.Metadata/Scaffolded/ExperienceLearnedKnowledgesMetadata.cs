@@ -14,32 +14,24 @@ public static class ExperienceLearnedKnowledgesMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "ExperienceLearnedKnowledgeBindingTuples",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Experience Learned Knowledge Binding Tuples",
                     Description = "The experience levels and learned knowledge binding keys used to determine which knowledge is learned.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "MaxExperienceLevel",
-                                    Type = "integer",
-                                    Title = "Max Experience Level",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "LearnedKnowledgeBindingKey",
-                                    Type = "string",
-                                    Title = "Learned Knowledge Binding Key",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "integer",
+                            Title = "Max Experience Level",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Learned Knowledge Binding Key",
+                            Inline = true,
                         },
                     },
                 },

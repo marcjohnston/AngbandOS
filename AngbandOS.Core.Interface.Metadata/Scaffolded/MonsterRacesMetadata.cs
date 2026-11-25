@@ -76,47 +76,39 @@ public static class MonsterRacesMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "AttackDefinitions",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Attack Definitions",
                     Description = "Specifies the attack definitions for the monster. When null, the monster cannot attack.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "MethodName",
-                                    Type = "string",
-                                    Title = "Method Name",
-                                    ForeignCollectionName = "Attacks",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "EffectName",
-                                    Type = "string",
-                                    Title = "Effect Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Dice",
-                                    Type = "integer",
-                                    Title = "Dice",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Sides",
-                                    Type = "integer",
-                                    Title = "Sides",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Method Name",
+                            ForeignCollectionName = "Attacks",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Effect Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "integer",
+                            Title = "Dice",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item4",
+                            Type = "integer",
+                            Title = "Sides",
+                            Inline = true,
                         },
                     },
                 },

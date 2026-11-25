@@ -14,40 +14,32 @@ public static class RangedWidgetsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "Ranges",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Ranges",
                     Description = "Specifies the value ranges, display text, and colors used to render the widget.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "startValue",
-                                    Type = "integer",
-                                    Title = "Start Value",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "textToRender",
-                                    Type = "string",
-                                    Title = "Text To Render",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "color",
-                                    Type = "enum",
-                                    Title = "Color",
-                                    ForeignCollectionName = "ColorEnum",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "integer",
+                            Title = "Start Value",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Text To Render",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "enum",
+                            Title = "Color",
+                            ForeignCollectionName = "ColorEnum",
+                            Inline = true,
                         },
                     },
                 },

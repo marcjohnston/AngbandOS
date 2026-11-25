@@ -21,7 +21,7 @@ public static class OutfitManifestsMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "MatchValues",
+                            PropertyName = "Item1",
                             Type = "array",
                             Title = "Match Values",
                             Inline = true,
@@ -36,7 +36,7 @@ public static class OutfitManifestsMetadata
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "IsEqual",
+                            PropertyName = "Item2",
                             Type = "boolean",
                             Title = "Is Equal",
                             Inline = true,
@@ -53,7 +53,7 @@ public static class OutfitManifestsMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "MatchValues",
+                            PropertyName = "Item1",
                             Type = "array",
                             Title = "Match Values",
                             Inline = true,
@@ -68,7 +68,7 @@ public static class OutfitManifestsMetadata
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "IsEqual",
+                            PropertyName = "Item2",
                             Type = "boolean",
                             Title = "Is Equal",
                             Inline = true,
@@ -85,7 +85,7 @@ public static class OutfitManifestsMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "MatchValues",
+                            PropertyName = "Item1",
                             Type = "array",
                             Title = "Match Values",
                             Inline = true,
@@ -100,7 +100,7 @@ public static class OutfitManifestsMetadata
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "IsEqual",
+                            PropertyName = "Item2",
                             Type = "boolean",
                             Title = "Is Equal",
                             Inline = true,
@@ -110,61 +110,53 @@ public static class OutfitManifestsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "ItemFactoryAndEnhancementsBindings",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Item Factory and Enhancements Bindings",
                     Description = "Specifies the item factories, item enhancements, stack counts, identification state, and wield-one behavior for the outfit manifest.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Item Factory Binding Key",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "array",
+                            Title = "Item Enhancement Binding Key",
+                            Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
                                 new PropertyMetadata()
                                 {
-                                    PropertyName = "ItemFactoryBindingKey",
+                                    PropertyName = "",
                                     Type = "string",
-                                    Title = "Item Factory Binding Key",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "ItemEnhancementBindingKey",
-                                    Type = "array",
-                                    Title = "Item Enhancement Binding Key",
-                                    Inline = true,
-                                    AssociatedProperties = new PropertyMetadata[]
-                                    {
-                                        new PropertyMetadata()
-                                        {
-                                            PropertyName = "",
-                                            Type = "string",
-                                        },
-                                    },
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "StackCountExpression",
-                                    Type = "string",
-                                    Title = "Stack Count Expression",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "MakeKnown",
-                                    Type = "boolean",
-                                    Title = "Make Known",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "WieldOne",
-                                    Type = "boolean",
-                                    Title = "Wield One",
-                                    Inline = true,
                                 },
                             },
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "string",
+                            Title = "Stack Count Expression",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item4",
+                            Type = "boolean",
+                            Title = "Make Known",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item5",
+                            Type = "boolean",
+                            Title = "Wield One",
+                            Inline = true,
                         },
                     },
                 },

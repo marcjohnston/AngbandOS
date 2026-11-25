@@ -14,40 +14,32 @@ public static class MaxRangedWidgetsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "Ranges",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Ranges",
                     Description = "Specifies the percentage ranges, display text, and colors used to render the widget.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "percentage",
-                                    Type = "integer",
-                                    Title = "Percentage",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "text",
-                                    Type = "string",
-                                    Title = "Text",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "color",
-                                    Type = "enum",
-                                    Title = "Color",
-                                    ForeignCollectionName = "ColorEnum",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "integer",
+                            Title = "Percentage",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Text",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "enum",
+                            Title = "Color",
+                            ForeignCollectionName = "ColorEnum",
+                            Inline = true,
                         },
                     },
                 },

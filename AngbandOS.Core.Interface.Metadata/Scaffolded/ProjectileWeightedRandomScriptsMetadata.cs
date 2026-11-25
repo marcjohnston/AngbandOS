@@ -14,32 +14,24 @@ public static class ProjectileWeightedRandomScriptsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "NameAndWeightBindings",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Name and Weight Bindings",
                     Description = "Specifies the projectile script names and their associated weights used for weighted random selection.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Name",
-                                    Type = "string",
-                                    Title = "Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Weight",
-                                    Type = "integer",
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },

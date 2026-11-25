@@ -7,7 +7,7 @@ import { GameDesignerTypeIntegerComponent } from './game-designer-type-integer/g
 import { GameDesignerTypeBooleanComponent } from './game-designer-type-boolean/game-designer-type-boolean.component';
 import { GameDesignerTypeColorComponent } from './game-designer-type-color/game-designer-type-color.component';
 import { GameDesignerTypeForeignKeyComponent } from './game-designer-type-foreign-key/game-designer-type-foreign-key.component';
-import { GameDesignerTypeTupleArrayComponent } from './game-designer-type-tuple-array/game-designer-type-tuple-array.component';
+import { GameDesignerTypeTuplesComponent } from './game-designer-type-tuples/game-designer-type-tuples.component';
 import { GameDesignerTypeStringArrayComponent } from './game-designer-type-string-array/game-designer-type-string-array.component';
 import { GameDesignerTypeStringComponent } from './game-designer-type-string/game-designer-type-string.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,7 +31,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     GameDesignerTypeBooleanComponent,
     GameDesignerTypeColorComponent,
     GameDesignerTypeForeignKeyComponent,
-    GameDesignerTypeTupleArrayComponent,
+    GameDesignerTypeTuplesComponent,
     GameDesignerTypeStringArrayComponent,
     GameDesignerTypeStringComponent,
     GameDesignerTypeEnumComponent

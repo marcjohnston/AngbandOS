@@ -468,22 +468,7 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
                 stringPropertyMetadata.Inline = configurationForeignKeyAttribute.Inline;
             }
 
-            // If there are tuples, then we will use them to override the associated properties.
-            ConfigurationTupleItemAttribute[]? configurationTupleItemAttributes = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
-            if (configurationTupleItemAttributes is not null)
-            {
-                // Generate a dictionary for easy lookup.
-                Dictionary<string, ConfigurationTupleItemAttribute> configurationTupleItemAttributeDictionary = configurationTupleItemAttributes.ToDictionary(x => x.Name, x => x);
-
-                // Recursively populate the PropertyMetadata with the associated tuple items.
-                CopyConfigurationTupleItemAttributes(propertyMetadata, "", configurationTupleItemAttributeDictionary);
-
-                // Ensure all of the dictionary items were matched.
-                if (configurationTupleItemAttributeDictionary.Count > 0)
-                {
-                    throw new Exception($"The property '{type.Name}.{propertyName}' has tuple items that did not match any tuple item.");
-                }
-            }
+            RecursivelyCollapseAndConfigureArrayOfTuples(property, propertyMetadata, $"{type.Name}.{propertyName}");
 
             associatedProperties.Add(propertyMetadata);
         }
@@ -491,63 +476,94 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
     return associatedProperties.ToArray();
 }
 
-static void CopyConfigurationTupleItemAttributes(PropertyMetadata propertyMetadata, string propertyNamePrefix, Dictionary<string, ConfigurationTupleItemAttribute> configurationTupleItemAttributeDictionary)
+static void RecursivelyCollapseAndConfigureArrayOfTuples(PropertyInfo property, PropertyMetadata propertyMetadata, string typeName, string targetPropertyName = "")
 {
-    // If the property metadata type is an array or 2d-array, then copy the properties to the inner type.
+    // Perform a collapse, if this is an array of tuples.
     if (propertyMetadata.Type == "array" || propertyMetadata.Type == "2d-array")
     {
-        // The associated properties for an array must be populated with exactly 1 element.
+        // Ensure the associated properties has exactly one item.
         if (propertyMetadata.AssociatedProperties is null || propertyMetadata.AssociatedProperties.Length != 1)
         {
-            throw new Exception($"Exactly one associated property is expected for the array property '{propertyMetadata.PropertyName}'.");
+            throw new Exception($"The {typeName} array does not have exactly one associated property.");
         }
 
-        CopyConfigurationTupleItemAttributes(propertyMetadata.AssociatedProperties[0], propertyNamePrefix, configurationTupleItemAttributeDictionary);
-        return;
-    }
-
-    // If the property metadata isn't a tuple, then no processing occurs.  This allows us to recurse the property metadata to determine eligibility.
-    if (propertyMetadata.Type != "tuple")
-    {
-        return;
-    }
-
-    // The associated properties for a tuple must be populated with at least 1 element.
-    if (propertyMetadata.AssociatedProperties is null || propertyMetadata.AssociatedProperties.Length == 0)
-    {
-        throw new Exception($"At least one associated property is expected for the tuple property '{propertyMetadata.PropertyName}'.");
-    }
-
-    // Enumerate the tuple items.
-    foreach (PropertyMetadata associatedPropertyMetadata in propertyMetadata.AssociatedProperties)
-    {
-        // Concatenate the parent/prefix name with the current property name for the lookup.
-        string targetPropertyName = $"{propertyNamePrefix}{associatedPropertyMetadata.PropertyName}";
-
-        // Retrieve the tuple item attribute for the associated property metadata.
-        ConfigurationTupleItemAttribute? configurationTupleItemAttribute = configurationTupleItemAttributeDictionary.GetValueOrDefault(targetPropertyName);
-
-        // Ensure the tuple item attribute exists for the associated property metadata.
-        if (configurationTupleItemAttribute is null)
+        // Now check if this array is a tuple.
+        if (propertyMetadata.AssociatedProperties[0].Type == "tuple")
         {
-            throw new Exception($"The tuple item attribute for the property '{targetPropertyName}' was not found.");
+            if (propertyMetadata.AssociatedProperties[0].LabelIfNullable is null)
+            {
+                propertyMetadata.Type = "tuples";
+            }
+            else
+            {
+                propertyMetadata.Type =  "tuples?"; // TODO: This is lossy, the label if nullable is lost.
+            }
+
+            // Arrays of tuples need to render as a single html table and have their own special type .. "tuples".  We 
+            // need to modify the structure and collapse the array of tuple into tuples.
+            propertyMetadata.AssociatedProperties = propertyMetadata.AssociatedProperties[0].AssociatedProperties;
+        }
+    }
+
+    // Now check if this is a tuple or tuples.
+    if (propertyMetadata.Type == "tuple" || propertyMetadata.Type == "tuples" || propertyMetadata.Type == "tuples?")
+    {
+        // Retrieve the tuple annotations that were specified.
+        ConfigurationTupleItemAttribute[]? configurationTupleItemAttributes = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
+
+        // Check the annotation count with the tuple count.
+        if (configurationTupleItemAttributes is null || propertyMetadata.AssociatedProperties is null || configurationTupleItemAttributes.Length != propertyMetadata.AssociatedProperties.Length)
+        {
+            throw new Exception($"The {typeName} tuple does not have a matching number of {nameof(ConfigurationTupleItemAttribute)} annotations.");
         }
 
-        // Remove the tuple item from the dictionary, now that we used it.
-        configurationTupleItemAttributeDictionary.Remove(targetPropertyName);
+        // Generate a dictionary for easy lookup.  We will use them to override the associated properties.  This also allows the 
+        // tuple item annotations to be specified out of order.
+        Dictionary<string, ConfigurationTupleItemAttribute> configurationTupleItemAttributeDictionary = configurationTupleItemAttributes.ToDictionary(x => x.Name, x => x);
 
-        // Copy the properties.
-        associatedPropertyMetadata.Title = configurationTupleItemAttribute.Title;
-        associatedPropertyMetadata.Description = configurationTupleItemAttribute.Description ?? "";
-        associatedPropertyMetadata.Inline = configurationTupleItemAttribute.Inline;
-        associatedPropertyMetadata.LabelIfNullable = configurationTupleItemAttribute.LabelIfNullable;
+        // Enumerate the tuple items.
+        int index = 0;
+        foreach (PropertyMetadata associatedPropertyMetadata in propertyMetadata.AssociatedProperties)
+        {
+            index++;
 
-        // The foreign collection name is being shared with enum name.  Enums can't be strings and foreign-keys can only be strings.
-        // We need to preserve the ForeignCollectionName, when the tuple item attribute is null.
-        associatedPropertyMetadata.ForeignCollectionName = configurationTupleItemAttribute.ForeignCollectionName ?? associatedPropertyMetadata.ForeignCollectionName;
+            // Concatenate the parent/prefix name with the current property name for the lookup.
+            string tuplePropertyName = targetPropertyName == "" ? associatedPropertyMetadata.PropertyName : $"{targetPropertyName}.{associatedPropertyMetadata.PropertyName}";
 
-        // Recurively check for nested tuples.  Since the call can do the check and return when not applicable, we can simple make the recursive vall.
-        CopyConfigurationTupleItemAttributes(associatedPropertyMetadata, targetPropertyName, configurationTupleItemAttributeDictionary);
+            // Retrieve the tuple item attribute for the associated property metadata.
+            ConfigurationTupleItemAttribute? configurationTupleItemAttribute = configurationTupleItemAttributeDictionary.GetValueOrDefault(tuplePropertyName);
+
+            // Ensure the tuple item attribute exists for the associated property metadata.
+            if (configurationTupleItemAttribute is null)
+            {
+                throw new Exception($"The tuple item attribute for the property '{targetPropertyName}' was not found.");
+            }
+
+            // Remove the tuple item from the dictionary, now that we used it.
+            configurationTupleItemAttributeDictionary.Remove(tuplePropertyName);
+
+            // Modify the property name for tuple Item# lookup.
+            associatedPropertyMetadata.PropertyName = $"Item{index}";
+
+            // Copy the properties.
+            associatedPropertyMetadata.Title = configurationTupleItemAttribute.Title;
+            associatedPropertyMetadata.Description = configurationTupleItemAttribute.Description ?? "";
+            associatedPropertyMetadata.Inline = configurationTupleItemAttribute.Inline;
+            associatedPropertyMetadata.LabelIfNullable = configurationTupleItemAttribute.LabelIfNullable;
+
+            // The foreign collection name is being shared with enum name.  Enums can't be strings and foreign-keys can only be strings.
+            // We need to preserve the ForeignCollectionName, when the tuple item attribute is null.
+            associatedPropertyMetadata.ForeignCollectionName = configurationTupleItemAttribute.ForeignCollectionName ?? associatedPropertyMetadata.ForeignCollectionName;
+
+            // Recurively check for nested tuples.  Since the call can do the check and return when not applicable, we can simple make the recursive vall.
+            RecursivelyCollapseAndConfigureArrayOfTuples(property, associatedPropertyMetadata, typeName, tuplePropertyName);
+        }
+
+        // Ensure all of the dictionary items were matched.
+        if (configurationTupleItemAttributeDictionary.Count > 0)
+        {
+            throw new Exception($"The property '{typeName}' has tuple items that did not match any tuple item.");
+        }
     }
 }
 

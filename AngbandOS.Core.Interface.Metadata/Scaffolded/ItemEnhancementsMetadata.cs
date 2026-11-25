@@ -14,102 +14,78 @@ public static class ItemEnhancementsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "SummationAttributeAndExpressionBindings",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Summation Attribute and Expression Bindings",
                     Description = "The attribute names and expressions used to calculate summation-based item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "AttributeName",
-                                    Type = "string",
-                                    Title = "Attribute Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Expression",
-                                    Type = "string",
-                                    Title = "Expression",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Expression",
+                            Inline = true,
                         },
                     },
                 },
                 new PropertyMetadata()
                 {
                     PropertyName = "BitwiseOrAttributeAndExpressionBindings",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Bitwise OR Attribute and Expression Bindings",
                     Description = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "AttributeName",
-                                    Type = "string",
-                                    Title = "Attribute Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "BooleanExpression",
-                                    Type = "string",
-                                    Title = "Boolean Expression",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Boolean Expression",
+                            Inline = true,
                         },
                     },
                 },
                 new PropertyMetadata()
                 {
                     PropertyName = "ScriptsAttributeAndScriptBindings",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Scripts Attribute and Script Bindings",
                     Description = "The attribute names and script names used to apply scripts as item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "array",
+                            Title = "Script Names",
+                            Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
                                 new PropertyMetadata()
                                 {
-                                    PropertyName = "AttributeName",
+                                    PropertyName = "",
                                     Type = "string",
-                                    Title = "Attribute Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "ScriptNames",
-                                    Type = "array",
-                                    Title = "Script Names",
-                                    Inline = true,
-                                    AssociatedProperties = new PropertyMetadata[]
-                                    {
-                                        new PropertyMetadata()
-                                        {
-                                            PropertyName = "",
-                                            Type = "string",
-                                        },
-                                    },
                                 },
                             },
                         },

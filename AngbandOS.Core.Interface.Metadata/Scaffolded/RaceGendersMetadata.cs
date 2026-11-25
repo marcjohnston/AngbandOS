@@ -30,33 +30,25 @@ public static class RaceGendersMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "PhysicalAttributesWeightedRandomBindings",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Physical Attributes Weighted Random Bindings",
                     Description = "Specifies the weighted random bindings for the race gender's physical attribute sets.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "PhysicalAttributesBindingKey",
-                                    Type = "string",
-                                    Title = "Physical Attributes Binding Key",
-                                    ForeignCollectionName = "PhysicalAttributeSets",
-                                    Inline = false,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Weight",
-                                    Type = "integer",
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Physical Attributes Binding Key",
+                            ForeignCollectionName = "PhysicalAttributeSets",
+                            Inline = false,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },

@@ -14,32 +14,24 @@ public static class ItemEnhancementWeightedRandomsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "NameAndWeightBindings",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Name and Weight Bindings",
                     Description = "The names of item enhancements and their corresponding weights used for weighted random selection.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "ItemEnhancementName",
-                                    Type = "string",
-                                    Title = "Item Enhancement Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "Weight",
-                                    Type = "integer",
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Item Enhancement Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },

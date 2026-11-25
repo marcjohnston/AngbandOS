@@ -27,6 +27,8 @@ public class PropertyMetadata
     /// 8. tuple            AssociatedProperties contains at least 1 item representing the tuple items.
     /// 9. array            AssociatedProperties contains exactly 1 item representing the underlying type.
     /// 10. 2d-array        AssociatedProperties contains exactly 1 item representing the underlying type.
+    /// 11. tuples          Array of tuples ... collapsed so that html can render single table with table headers
+    /// 12. tuples?         Array of nullable tuples ... the label if null for the inner nullability is lost
     /// </remarks>
     public string Type { get; set; } // Set is needed because we modify the type for foreign-keys.
 

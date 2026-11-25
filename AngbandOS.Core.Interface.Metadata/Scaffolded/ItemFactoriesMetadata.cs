@@ -127,28 +127,28 @@ public static class ItemFactoriesMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "UseScriptBindingKey",
+                            PropertyName = "Item1",
                             Type = "string",
                             Title = "Use Script Binding Key",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "InitialChargesRollExpression",
+                            PropertyName = "Item2",
                             Type = "string",
                             Title = "Initial Charges Roll Expression",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "PerChargeValue",
+                            PropertyName = "Item3",
                             Type = "integer",
                             Title = "Per Charge Value",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "ManaEquivalent",
+                            PropertyName = "Item4",
                             Type = "integer",
                             Title = "Mana Equivalent",
                             Inline = true,
@@ -165,21 +165,21 @@ public static class ItemFactoriesMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "QuaffScriptName",
+                            PropertyName = "Item1",
                             Type = "string",
                             Title = "Quaff Script Name",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "SmashScriptName",
+                            PropertyName = "Item2",
                             Type = "string",
                             Title = "Smash Script Name",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "ManaEquivalent",
+                            PropertyName = "Item3",
                             Type = "integer",
                             Title = "Mana Equivalent",
                             Inline = true,
@@ -246,28 +246,28 @@ public static class ItemFactoriesMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "ActivationScriptName",
+                            PropertyName = "Item1",
                             Type = "string",
                             Title = "Activation Script Name",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "InitialChargesCountRollExpression",
+                            PropertyName = "Item2",
                             Type = "string",
                             Title = "Initial Charges Count Roll Expression",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "PerChargeValue",
+                            PropertyName = "Item3",
                             Type = "integer",
                             Title = "Per Charge Value",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "ManaValue",
+                            PropertyName = "Item4",
                             Type = "integer",
                             Title = "Mana Value",
                             Inline = true,
@@ -369,32 +369,24 @@ public static class ItemFactoriesMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "MassProduceBindingTuples",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Mass Produce Binding Tuples",
                     Description = "The count and roll expression used to determine additional items produced for items sold in a store based on their cost.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "count",
-                                    Type = "integer",
-                                    Title = "Count",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "rollExpression",
-                                    Type = "string",
-                                    Title = "Roll Expression",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "integer",
+                            Title = "Count",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Roll Expression",
+                            Inline = true,
                         },
                     },
                 },
@@ -408,53 +400,45 @@ public static class ItemFactoriesMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "EnchantmentBindingTuples",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Enchantment Binding Tuples",
                     Description = "The power levels, store-stock condition, and script names used to determine which enchantment scripts apply.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
+                            PropertyName = "Item1",
+                            Type = "array",
+                            Title = "Powers",
+                            Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
                                 new PropertyMetadata()
                                 {
-                                    PropertyName = "Powers",
-                                    Type = "array",
-                                    Title = "Powers",
-                                    Inline = true,
-                                    AssociatedProperties = new PropertyMetadata[]
-                                    {
-                                        new PropertyMetadata()
-                                        {
-                                            PropertyName = "",
-                                            Type = "integer",
-                                        },
-                                    },
+                                    PropertyName = "",
+                                    Type = "integer",
                                 },
+                            },
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "boolean",
+                            Title = "Store Stock",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "array",
+                            Title = "Script Names",
+                            Inline = true,
+                            AssociatedProperties = new PropertyMetadata[]
+                            {
                                 new PropertyMetadata()
                                 {
-                                    PropertyName = "StoreStock",
-                                    Type = "boolean",
-                                    Title = "Store Stock",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "ScriptNames",
-                                    Type = "array",
-                                    Title = "Script Names",
-                                    Inline = true,
-                                    AssociatedProperties = new PropertyMetadata[]
-                                    {
-                                        new PropertyMetadata()
-                                        {
-                                            PropertyName = "",
-                                            Type = "string",
-                                        },
-                                    },
+                                    PropertyName = "",
+                                    Type = "string",
                                 },
                             },
                         },
@@ -603,28 +587,28 @@ public static class ItemFactoriesMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "ScriptName",
+                            PropertyName = "Item1",
                             Type = "string",
                             Title = "Script Name",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "TurnsToRecharge",
+                            PropertyName = "Item2",
                             Type = "string",
                             Title = "Turns to Recharge",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "RequiresAiming",
+                            PropertyName = "Item3",
                             Type = "boolean",
                             Title = "Requires Aiming",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "ManaEquivalent",
+                            PropertyName = "Item4",
                             Type = "integer",
                             Title = "Mana Equivalent",
                             Inline = true,
@@ -684,32 +668,24 @@ public static class ItemFactoriesMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "DepthsFoundAndChances",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Depths Found and Chances",
                     Description = "The dungeon levels and corresponding one-in chances at which the item can be found naturally, or null when it is not found naturally.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "level",
-                                    Type = "integer",
-                                    Title = "Level",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "chance",
-                                    Type = "integer",
-                                    Title = "Chance",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "integer",
+                            Title = "Level",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Chance",
+                            Inline = true,
                         },
                     },
                 },
@@ -934,14 +910,14 @@ public static class ItemFactoriesMetadata
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "ScriptName",
+                            PropertyName = "Item1",
                             Type = "string",
                             Title = "Script Name",
                             Inline = true,
                         },
                         new PropertyMetadata()
                         {
-                            PropertyName = "ManaValue",
+                            PropertyName = "Item2",
                             Type = "integer",
                             Title = "Mana Value",
                             Inline = true,

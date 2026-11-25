@@ -14,39 +14,31 @@ public static class ProductOfSumsBoolFunctionsMetadata
                 new PropertyMetadata()
                 {
                     PropertyName = "EnabledNames",
-                    Type = "array",
+                    Type = "tuples",
                     Title = "Enabled Names",
                     Description = "The conditional names and required values used to determine whether configuration conditions are enabled.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
                         new PropertyMetadata()
                         {
-                            PropertyName = "",
-                            Type = "tuple",
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "conditionalName",
-                                    Type = "string",
-                                    Title = "Conditional Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "valueConditionalMustBe",
-                                    Type = "boolean",
-                                    Title = "Value Conditional Must Be",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata()
-                                {
-                                    PropertyName = "productOfSumsTerm",
-                                    Type = "integer",
-                                    Title = "Product Of Sums Term",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Conditional Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "boolean",
+                            Title = "Value Conditional Must Be",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "integer",
+                            Title = "Product Of Sums Term",
+                            Inline = true,
                         },
                     },
                 },
