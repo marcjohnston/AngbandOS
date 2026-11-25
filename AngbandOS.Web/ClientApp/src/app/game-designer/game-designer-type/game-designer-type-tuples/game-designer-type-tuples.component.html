@@ -3,6 +3,9 @@
     <thead>
       <tr>
         <!-- Tuple table header -->
+        @if (propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null) {
+        <td></td>
+        }
         <ng-container *ngFor="let tupleType of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
           <td>
             <span class="tuple-table-header">{{tupleType.renderTitle}}</span>
@@ -30,13 +33,13 @@
       <tr>
         @if (propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null) {
         <td><input type="checkbox" /></td>
-        } @else {
+        }
         <ng-container *ngFor="let tupleTypePropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
           <td>
             <app-game-designer-type [propertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName])" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type>
           </td>
         </ng-container>
-        }
+        
       </tr>
       }
     </tbody>

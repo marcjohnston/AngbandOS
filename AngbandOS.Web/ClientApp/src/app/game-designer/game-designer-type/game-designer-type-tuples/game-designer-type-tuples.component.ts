@@ -59,6 +59,12 @@ export class GameDesignerTypeTuplesComponent {
       null, // EntityNamePropertyName - Tuples do not support collections/entities
       null, // EntityNounTitle - Tuples do not support collections/entities
       tupleTypePropertyMetadata.foreignCollectionName);
+
+    // There is a special case for a nullable tuple.  There is no configuration so the tuple type cannot retrieve the tuple value. For this we need
+    // to construct a configuration value to send.
+    if (!this.arrayOf && this.propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null && tupleValues === null) {
+      tupleValues = { [tupleTypePropertyMetadata.propertyName]: null };
+    }
     return new PropertyMetadataAndConfiguration(derivedTuplePropertyMetadata, tupleValues);
   }
 }
