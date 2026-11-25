@@ -20,8 +20,8 @@ import { SelectOption } from '../../select-option';
 })
 export class GameDesignerTypeEnumComponent implements OnInit {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: Record<string, unknown>;
-  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
+  @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
+  @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
 
   public unmodifiedValue: number | null = null;
 

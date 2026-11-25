@@ -1,17 +1,17 @@
 <ng-container *ngIf="propertyMetadataAndConfiguration !== undefined">
-  <!-- Foreign Key Array -->
-  <div class="array-div" *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-keys'">
+  <!-- Array -->
+  <div class="array-div" *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'array'">
     <div class="array-item-div" *ngFor="let value of propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName]; let valueIndex = index">
-      <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="createArrayChild(valueIndex)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-foreign-key>
+      <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="createArrayChild(valueIndex)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type-foreign-key>
       <mat-icon class="game-designer-delete-icon" (click)="deleteArrayIndex(valueIndex)">delete</mat-icon>
     </div>
     <mat-icon class="game-designer-add-icon" (click)="appendArrayItem()">add</mat-icon>
   </div>
   <!-- Foreign Key -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'foreign-key'">
-    <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-foreign-key>
+    <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type-foreign-key>
   </div>
-  <!-- String Array -->
+  <!-- TextArea -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'strings'">
     <app-game-designer-type-string-array [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-string-array>
   </div>
@@ -27,9 +27,9 @@
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'color'">
     <app-game-designer-type-color [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"></app-game-designer-type-color>
   </div>
-  <!-- Tuple Array -->
+  <!-- Tuple  -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
-    <app-game-designer-type-tuple-array [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-tuple-array>
+    <app-game-designer-type-tuple-array [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type-tuple-array>
   </div>
   <!-- Integer -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'integer'">
@@ -41,6 +41,6 @@
   </div>
   <!-- Enum -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'enum'">
-    <app-game-designer-type-enum [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type-enum>
+    <app-game-designer-type-enum [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type-enum>
   </div>
 </ng-container>

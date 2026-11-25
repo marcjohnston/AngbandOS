@@ -24,8 +24,8 @@ import { JsonPipe } from '@angular/common';
 })
 export class GameDesignerTypeForeignKeyComponent implements OnInit {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: Record<string, unknown>;
-  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
+  @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
+  @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
   @ViewChild('select') select!: ElementRef;
   public showDebug: boolean = false;
 
@@ -46,14 +46,14 @@ export class GameDesignerTypeForeignKeyComponent implements OnInit {
     let collectionFound = false;
 
     // A foreign collection can be represented by multiple metadata entries.
-    for (const foreignCollectionPropertyMetadata of this.propertyMetadataMap.values()) {
+    for (const foreignCollectionPropertyMetadata of this.gamePropertyMetadata.values()) {
       // Check to see if the foreign collection name matches.
       if (foreignCollectionPropertyMetadata.foreignCollectionName !== foreignCollectionName) {
         continue;
       }
 
       // It does.  Validate the collection.
-      const foreignCollection: unknown = this.configuration[foreignCollectionPropertyMetadata.propertyName];
+      const foreignCollection: unknown = this.gameConfiguration[foreignCollectionPropertyMetadata.propertyName];
       if (!Array.isArray(foreignCollection)) {
         continue;
       }

@@ -19,8 +19,8 @@ import { GameDesignerTypeComponent } from '../game-designer-type.component';
 })
 export class GameDesignerTypeTupleArrayComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: Record<string, unknown>;
-  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
+  @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
+  @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
 
   public addTuple() {
     const newTupleValue: any[] = [];
