@@ -11,23 +11,31 @@ public static class RechargeItemScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "TurnsExpression")
+                new PropertyMetadata()
                 {
+                    PropertyName = "TurnsExpression",
+                    Type = "string",
                     Title = "Turns Expression",
                     Description = "Specifies the expression used to determine the number of turns required to recharge an item.",
                 },
-                new PropertyMetadata("string", "SelectItemMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SelectItemMessage",
+                    Type = "string",
                     Title = "Select Item Message",
                     Description = "Specifies the message displayed when selecting an item to recharge.",
                 },
-                new PropertyMetadata("string", "NonRechargeableItemMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NonRechargeableItemMessage",
+                    Type = "string",
                     Title = "Non-Rechargeable Item Message",
                     Description = "Specifies the message displayed when the selected item cannot be recharged.",
                 },
-                new PropertyMetadata("string", "NothingRechargeableMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NothingRechargeableMessage",
+                    Type = "string",
                     Title = "Nothing Rechargeable Message",
                     Description = "Specifies the message displayed when no rechargeable items are available.",
                 },

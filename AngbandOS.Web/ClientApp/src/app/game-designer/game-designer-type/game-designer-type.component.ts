@@ -7,7 +7,7 @@ import { GameDesignerTypeIntegerComponent } from './game-designer-type-integer/g
 import { GameDesignerTypeBooleanComponent } from './game-designer-type-boolean/game-designer-type-boolean.component';
 import { GameDesignerTypeColorComponent } from './game-designer-type-color/game-designer-type-color.component';
 import { GameDesignerTypeForeignKeyComponent } from './game-designer-type-foreign-key/game-designer-type-foreign-key.component';
-import { GameDesignerTypeTupleArrayComponent } from './game-designer-type-tuple-array/game-designer-type-tuple-array.component';
+import { GameDesignerTypeTuplesComponent } from './game-designer-type-tuples/game-designer-type-tuples.component';
 import { GameDesignerTypeStringArrayComponent } from './game-designer-type-string-array/game-designer-type-string-array.component';
 import { GameDesignerTypeStringComponent } from './game-designer-type-string/game-designer-type-string.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,7 +31,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     GameDesignerTypeBooleanComponent,
     GameDesignerTypeColorComponent,
     GameDesignerTypeForeignKeyComponent,
-    GameDesignerTypeTupleArrayComponent,
+    GameDesignerTypeTuplesComponent,
     GameDesignerTypeStringArrayComponent,
     GameDesignerTypeStringComponent,
     GameDesignerTypeEnumComponent
@@ -39,8 +39,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class GameDesignerTypeComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: Record<string, unknown>;
-  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
+  @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
+  @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
+  @Input({ required: true }) public enumMap!: Map<string, SelectOption[]>;
 
   /**
    * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.
@@ -51,22 +52,27 @@ export class GameDesignerTypeComponent {
     if (this.propertyMetadataAndConfiguration === undefined) {
       throw new Error("propertyMetadataAndConfiguration is undefined");
     }
+    if (this.propertyMetadataAndConfiguration.propertyMetadata.associatedProperties === null || this.propertyMetadataAndConfiguration.propertyMetadata.associatedProperties.length !== 1) {
+      throw new Error("PropertyMetadata array type does not have exactly 1 associated property.");
+    }
 
-    const validatedPropertyMetadataAndConfiguration = this.propertyMetadataAndConfiguration;
+    const arrayTypePropertyMetadataAndConfiguration = this.propertyMetadataAndConfiguration.propertyMetadata.associatedProperties[0];
     const derivedArrayPropertyMetadata = new PropertyMetadata(
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.type,
+      arrayTypePropertyMetadataAndConfiguration.type,
       valueIndex, // This is how the serialization is naming the tuple fields
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.title,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.categoryTitle,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.description,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.defaultValue,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.associatedProperties,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.entityKeyPropertyName,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
-    const activePropertyMetadataAndConfiguration = validatedPropertyMetadataAndConfiguration.configuration[validatedPropertyMetadataAndConfiguration.propertyMetadata.propertyName];
+      arrayTypePropertyMetadataAndConfiguration.title,
+      arrayTypePropertyMetadataAndConfiguration.categoryTitle,
+      arrayTypePropertyMetadataAndConfiguration.labelIfNullable,
+      arrayTypePropertyMetadataAndConfiguration.description,
+      arrayTypePropertyMetadataAndConfiguration.defaultValue,
+      arrayTypePropertyMetadataAndConfiguration.associatedProperties,
+      arrayTypePropertyMetadataAndConfiguration.entityKeyPropertyName,
+      arrayTypePropertyMetadataAndConfiguration.entityNamePropertyName,
+      arrayTypePropertyMetadataAndConfiguration.entityNounTitle,
+      arrayTypePropertyMetadataAndConfiguration.foreignCollectionName);
+
+    // Now we need the active configuration.  Remember the property name is at the array level, not the associated property.
+    const activePropertyMetadataAndConfiguration = this.propertyMetadataAndConfiguration.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName];
     return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration);
   }
 

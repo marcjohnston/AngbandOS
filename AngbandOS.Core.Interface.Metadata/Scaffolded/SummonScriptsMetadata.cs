@@ -11,66 +11,90 @@ public static class SummonScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("boolean", "Pet")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Pet",
+                    Type = "boolean",
                     Title = "Pet",
                     Description = "Returns true, to summon a friendly monster (a.k.a pet); false, otherwise. Returns false, by default.",
                 },
-                new PropertyMetadata("string", "GroupBooleanExpression")
+                new PropertyMetadata()
                 {
+                    PropertyName = "GroupBooleanExpression",
+                    Type = "string",
                     Title = "Group Boolean Expression",
                     Description = "Returns a boolean expression that is computed to determine whether the summoning of the monster will produce a group of like-monsters. Returns true, by default.",
                 },
-                new PropertyMetadata("string", "MonsterFilterBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MonsterFilterBindingKey",
+                    Type = "string",
                     Title = "Monster Filter Binding Key",
                     Description = "The binding key of the monster filter used to select monsters for summoning.",
                 },
-                new PropertyMetadata("string", "LevelRollExpression")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LevelRollExpression",
+                    Type = "string",
                     Title = "Level Roll Expression",
                     Description = "The expression used to determine the level of summoned monsters.",
                 },
-                new PropertyMetadata("array", "PreMessages")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PreMessages",
+                    Type = "array",
                     Title = "Pre-Messages",
                     Description = "The messages displayed before summoning is attempted.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "SuccessMessages")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SuccessMessages",
+                    Type = "array",
                     Title = "Success Messages",
                     Description = "The messages displayed when summoning succeeds.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "FailureMessages")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FailureMessages",
+                    Type = "array",
                     Title = "Failure Messages",
                     Description = "The messages displayed when summoning fails.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "LearnedDetails")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LearnedDetails",
+                    Type = "string",
                     Title = "Learned Details",
                     Description = "The details displayed for the learned summoning script.",
                 },
-                new PropertyMetadata("boolean", "Used")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Used",
+                    Type = "boolean",
                     Title = "Used",
                     Description = "Determines whether the summoning script is used.",
                 },

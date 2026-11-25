@@ -11,81 +11,101 @@ public static class MaxRangedWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "Ranges")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Ranges",
+                    Type = "tuples",
                     Title = "Ranges",
                     Description = "Specifies the percentage ranges, display text, and colors used to render the widget.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("integer", "percentage")
-                                {
-                                    Title = "Percentage",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("string", "text")
-                                {
-                                    Title = "Text",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("enum", "color")
-                                {
-                                    Title = "Color",
-                                    ForeignCollectionName = "ColorEnum",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "integer",
+                            Title = "Percentage",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Text",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "enum",
+                            Title = "Color",
+                            ForeignCollectionName = "ColorEnum",
+                            Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("enum", "DefaultColor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DefaultColor",
+                    Type = "enum",
                     Title = "Default Color",
                     Description = "Specifies the color used when none of the ranges apply.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "MaxIntValueName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MaxIntValueName",
+                    Type = "string",
                     Title = "Maximum Integer Value Name",
                     Description = "Specifies the name of the maximum integer value displayed by the widget.",
                 },
-                new PropertyMetadata("string", "IntValueName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IntValueName",
+                    Type = "string",
                     Title = "Integer Value Name",
                     Description = "Specifies the name of the integer value displayed by the widget.",
                 },
-                new PropertyMetadata("integer", "X")
+                new PropertyMetadata()
                 {
+                    PropertyName = "X",
+                    Type = "integer",
                     Title = "X",
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Y")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Y",
+                    Type = "integer",
                     Title = "Y",
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Width")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Width",
+                    Type = "integer",
                     Title = "Width",
                     Description = "Specifies the width of the widget. When null, the width is based on the text length.",
                 },
-                new PropertyMetadata("enum", "JustificationEnumValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "JustificationEnumValue",
+                    Type = "enum",
                     Title = "Justification",
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "ChangeTrackerNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ChangeTrackerNames",
+                    Type = "array",
                     Title = "Change Tracker Names",
                     Description = "Specifies the property names that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

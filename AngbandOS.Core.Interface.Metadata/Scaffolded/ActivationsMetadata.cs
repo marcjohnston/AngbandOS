@@ -11,28 +11,38 @@ public static class ActivationsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "The name of the activation.",
                 },
-                new PropertyMetadata("string", "PreActivationMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PreActivationMessage",
+                    Type = "string",
                     Title = "Pre-Activation Message",
                     Description = "The message displayed before the activation occurs.",
                 },
-                new PropertyMetadata("integer", "Value")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Value",
+                    Type = "integer",
                     Title = "Value",
                     Description = "The value associated with the activation.",
                 },
-                new PropertyMetadata("string", "RechargeTimeRollExpression")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RechargeTimeRollExpression",
+                    Type = "string",
                     Title = "Recharge Time Roll Expression",
                     Description = "The roll expression used to determine how long it takes for the activation to recharge.",
                 },
-                new PropertyMetadata("string", "ActivationCancellableScriptItemBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ActivationCancellableScriptItemBindingKey",
+                    Type = "string",
                     Title = "Activation Cancellable Script Item Binding Key",
                     Description = "The binding key of the script item that can cancel the activation.",
                 },

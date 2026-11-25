@@ -11,38 +11,52 @@ public static class MartialArtsAttacksMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "Chance")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Chance",
+                    Type = "integer",
                     Title = "Chance",
                     Description = "Specifies the chance of performing the martial arts attack.",
                 },
-                new PropertyMetadata("integer", "Dd")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Dd",
+                    Type = "integer",
                     Title = "Damage Dice",
                     Description = "Specifies the number of damage dice used by the attack.",
                 },
-                new PropertyMetadata("string", "Desc")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Desc",
+                    Type = "string",
                     Title = "Description",
                     Description = "Specifies the description of the martial arts attack.",
                 },
-                new PropertyMetadata("integer", "Ds")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Ds",
+                    Type = "integer",
                     Title = "Damage Sides",
                     Description = "Specifies the number of sides on each damage die.",
                 },
-                new PropertyMetadata("string", "MartialArtsEffectBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MartialArtsEffectBindingKey",
+                    Type = "string",
                     Title = "Martial Arts Effect Binding Key",
                     Description = "Specifies the binding key of the effect applied by the martial arts attack.",
                 },
-                new PropertyMetadata("integer", "MinLevel")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MinLevel",
+                    Type = "integer",
                     Title = "Minimum Level",
                     Description = "Specifies the minimum level at which the martial arts attack is available.",
                 },
-                new PropertyMetadata("boolean", "IsDefault")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsDefault",
+                    Type = "boolean",
                     Title = "Is Default",
                     Description = "Determines whether the martial arts attack is the default attack.",
                 },

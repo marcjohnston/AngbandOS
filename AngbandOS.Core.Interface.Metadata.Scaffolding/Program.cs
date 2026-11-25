@@ -2,42 +2,49 @@
 using AngbandOS.Core.Interface.Metadata;
 using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.Core.Interface.Configuration.Annotations;
-using System.Runtime.CompilerServices;
 using AngbandOS.Core.Interface;
 
-string outputFolder = GetOutputFolderFromCommandLine(args);
-
-// Enumerate the game configuration object and generate the property metadatas.
-List<Type> reachableTypes = new();
-PropertyMetadata[] propertyMetadatas = ScaffoldType(typeof(GameConfiguration), ref reachableTypes);
-if (propertyMetadatas.Length == 0)
+try
 {
-    Console.Error.WriteLine($"No properties were found in the {nameof(GameConfiguration)} type.");
+    string outputFolder = GetOutputFolderFromCommandLine(args);
+
+    // Enumerate the game configuration object and generate the property metadatas.
+    List<Type> reachableTypes = new();
+
+    PropertyMetadata[] propertyMetadatas = ScaffoldType(typeof(GameConfiguration), ref reachableTypes);
+    if (propertyMetadatas.Length == 0)
+    {
+        throw new Exception($"No properties were found in the {nameof(GameConfiguration)} type.");
+    }
+
+    ValidateForeignKeyCollectionsExist(propertyMetadatas);
+
+    // Now build the enum metadata.
+    Dictionary<string, (string Name, int Value)[]> enumerationsDictionary = GenerateEnumMetadata(propertyMetadatas);
+
+    // Now we have the property metadata for the GameConfiguration.  We need to write the files to disk.  First step is to purge the old
+    // folder and create a new one.
+    PurgeFolderAndCreateNew(outputFolder);
+
+    // Write the top-level game-configuration type.  The separate collection files are also written.
+    WriteMetadataFile(outputFolder, nameof(GameConfiguration), (StreamWriter _writer) =>
+    {
+        // Write the enumerations into the top-level game configuration type.
+        WriteEnumMetadata(_writer, enumerationsDictionary);
+
+        // Now write all of the metadata properties.
+        WriteMetadataProperty(_writer, propertyMetadatas, outputFolder);
+    });
+
+    Console.WriteLine($"Generated {reachableTypes.Count} metadata classes in '{outputFolder}'.");
+    return 0;
+}
+catch (Exception ex)
+{
+    // Unsuccessful run.  Errors generated.
+    Console.Error.WriteLine(ex.Message);
     return 1;
 }
-
-ValidateForeignKeyCollectionsExist(propertyMetadatas);
-
-// Now build the enum metadata.
-Dictionary<string, (string Name, int Value)[]> enumerationsDictionary = GenerateEnumMetadata(propertyMetadatas);
-
-// Now we have the property metadata for the GameConfiguration.  We need to write the files to disk.  First step is to purge the old
-// folder and create a new one.
-PurgeFolderAndCreateNew(outputFolder);
-
-// Write the top-level game-configuration type.  The separate collection files are also written.
-WriteMetadataFile(outputFolder, nameof(GameConfiguration), (StreamWriter _writer) =>
-{
-    // Write the enumerations into the top-level game configuration type.
-    WriteEnumMetadata(_writer, enumerationsDictionary);
-
-    // Now write all of the metadata properties.
-    WriteMetadataProperty(_writer, propertyMetadatas, outputFolder);
-});
-
-Console.WriteLine($"Generated {reachableTypes.Count} metadata classes in '{outputFolder}'.");
-return 0;
-
 static void WriteMetadataFile(string outputFolder, string classNamePrefix, Action<StreamWriter> callBack)
 {
     // Add the path to it.
@@ -97,8 +104,10 @@ static void WritePropertyMetadata(StreamWriter writer, PropertyMetadata property
 {
     string indentation = new(' ', 4 * indent);
 
-    writer.WriteLine($"{indentation}new {nameof(PropertyMetadata)}(\"{Escape(propertyMetadata.Type)}\", \"{Escape(propertyMetadata.PropertyName)}\")");
+    writer.WriteLine($"{indentation}new {nameof(PropertyMetadata)}()");
     writer.WriteLine($"{indentation}{{");
+    writer.WriteLine($"{indentation}    PropertyName = \"{Escape(propertyMetadata.PropertyName)}\",");
+    writer.WriteLine($"{indentation}    Type = \"{Escape(propertyMetadata.Type)}\",");
     if (propertyMetadata.Title is not null)
     {
         writer.WriteLine($"{indentation}    Title = \"{Escape(propertyMetadata.Title)}\",");
@@ -252,8 +261,7 @@ static void ValidateForeignKeyCollectionsExist(PropertyMetadata[] propertyMetada
     string[] missingForeignCollectionNames = foreignKeyCollectionNames.Where(foreignCollectionName => !propertyMetadatas.Any(propertyMetadata => propertyMetadata.ForeignCollectionName == foreignCollectionName)).ToArray();
     if (missingForeignCollectionNames.Length > 0)
     {
-        Console.Error.WriteLine($"The {String.Join(", ", missingForeignCollectionNames)} foreign collections do not exist.");
-        Environment.Exit(1);
+        throw new Exception($"The {String.Join(", ", missingForeignCollectionNames)} foreign collections do not exist.");
     }
 }
 
@@ -263,8 +271,7 @@ static string GetOutputFolderFromCommandLine(string[] args)
     if (args.Length != 1)
     {
         string currentExecutableName = Path.GetFileNameWithoutExtension(Environment.ProcessPath) ?? "scaffold-metadata";
-        Console.Error.WriteLine($"syntax: {currentExecutableName} {{output_folder}}");
-        Environment.Exit(1);
+        throw new Exception($"syntax: {currentExecutableName} {{output_folder}}");
     }
 
     string outputFolder = Path.GetFullPath(args[0]);
@@ -272,9 +279,8 @@ static string GetOutputFolderFromCommandLine(string[] args)
     // Ensure the output folder isn't a file that we do not want to accidentally overwrite or delete.
     if (File.Exists(outputFolder))
     {
-        Console.Error.WriteLine($"The output path '{outputFolder}' is a file. The output path must be either nonexistent or an existing directory.");
-        Environment.Exit(1);
-    }
+        throw new Exception($"The output path '{outputFolder}' is a file. The output path must be either nonexistent or an existing directory.");
+   }
     return outputFolder;
 }
 
@@ -288,8 +294,7 @@ static void PurgeFolderAndCreateNew(string outputFolder)
         }
         catch (Exception exception)
         {
-            Console.Error.WriteLine($"Unable to delete existing output directory '{outputFolder}': {exception.Message}");
-            Environment.Exit(1);
+            throw new Exception($"Unable to delete existing output directory '{outputFolder}': {exception.Message}");
         }
     }
     Directory.CreateDirectory(outputFolder);
@@ -303,17 +308,17 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
     // Ensure we are not traversing a type that has already been traversed.
     if (reachableTypes.Contains(type))
     {
-        Console.WriteLine($"Configuration type '{type.FullName}' contains a recursive property relationship.");
-        Environment.Exit(1);
+        throw new Exception($"Configuration type '{type.FullName}' contains a recursive property relationship.");
     }
     reachableTypes.Add(type);
 
-    // Retrieve all of the properties for the type we are traversing.
+    // Retrieve all of the properties for the type we are traversing and that they are get/set properties.
     PropertyInfo[] properties = type
         .GetProperties(
             BindingFlags.Instance |
             BindingFlags.Public |
             BindingFlags.DeclaredOnly)
+        .Where(x => x.CanRead && x.CanWrite)
         .OrderBy(x => x.MetadataToken)
         .ToArray();
 
@@ -333,29 +338,25 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
             // Collections are only supported on the GameConfiguration object.
             if (!collectionsSupported)
             {
-                Console.Error.WriteLine($"The property '{type.Name}.{propertyName}' is a collection but collections are only supported on the GameConfiguration object.");
-                Environment.Exit(1);
+                throw new Exception($"The property '{type.Name}.{propertyName}' is a collection but collections are only supported on the GameConfiguration object.");
             }
 
             ConfigurationForeignKeyAttribute? configurationForeignKeyAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
             if (configurationForeignKeyAttribute is not null)
             {
-                Console.Error.WriteLine($"The property '{type.Name}.{propertyName}' is a collection but collections cannot have foreign keys.");
-                Environment.Exit(1);
+                throw new Exception($"The property '{type.Name}.{propertyName}' is a collection but collections cannot have foreign keys.");
             }
 
             ConfigurationTupleItemAttribute[]? configurationTupleItemAttributes = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
             if (configurationTupleItemAttributes.Length > 0)
             {
-                Console.Error.WriteLine($"The property '{type.Name}.{propertyName}' is a collection but collections cannot have tuple item attributes.");
-                Environment.Exit(1);
+                throw new Exception($"The property '{type.Name}.{propertyName}' is a collection but collections cannot have tuple item attributes.");
             }
 
             // Use Reflection to retrieve the collection type, ensure it is an array and determine if it is nullable.
             if (!property.PropertyType.IsArray)
             {
-                Console.Error.WriteLine($"The property '{type.Name}.{propertyName}' is a collection but collections must be of type List<T>.");
-                Environment.Exit(1);
+                throw new Exception($"The property '{type.Name}.{propertyName}' is a collection but collections must be of type List<T>.");
             }
             Type arrayType = property.PropertyType;
             Type collectionType = arrayType.GetElementType()!;
@@ -363,15 +364,13 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
             bool isNullable = nullability.ReadState == NullabilityState.Nullable;
 
             // Generate the property metadata for the collection.
-            PropertyMetadata[]? collectionPropertyMetadata = ScaffoldType(collectionType, ref reachableTypes);
-            if (collectionPropertyMetadata is null)
-            {
-                Environment.Exit(1);
-            }
+            PropertyMetadata[] collectionPropertyMetadata = ScaffoldType(collectionType, ref reachableTypes);
 
             // Generate the parent property metadata for the collection property.
-            PropertyMetadata propertyMetadata = new("collection", property.Name)
+            PropertyMetadata propertyMetadata = new()
             {
+                Type = "collection",
+                PropertyName = propertyName,
                 Title = configurationCollectionAttribute.Title,
                 LabelIfNullable = configurationCollectionAttribute.LabelIfNullable,
                 Description = configurationCollectionAttribute.Summary ?? "",
@@ -393,28 +392,20 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
         }
         else
         {
-            // This is not a collection.  Ensure it is a get/set property.  We skip non-get/set properties.
-            if (!property.CanRead || !property.CanWrite)
-            {
-                continue;
-            }
-            
-            // Retrieve the ConfigurationPropertyAttribute metadata for the property.
+            // This is not a collection.  Retrieve the ConfigurationPropertyAttribute metadata for the property.
             ConfigurationPropertyAttribute? configurationPropertyAttribute = property.GetCustomAttribute<ConfigurationPropertyAttribute>();
 
             // Every property must have a ConfigurationPropertyAttribute. If it does not, then it is not a valid configuration property and we will skip it.
             if (configurationPropertyAttribute is null)
             {
-                Console.Error.WriteLine($"Property '{type.FullName}.{propertyName}' is not annotated with either the {nameof(ConfigurationCollectionAttribute)} or the {nameof(ConfigurationPropertyAttribute)}.");
-                Environment.Exit(1);
+                throw new Exception($"Property '{type.FullName}.{propertyName}' is not annotated with either the {nameof(ConfigurationCollectionAttribute)} or the {nameof(ConfigurationPropertyAttribute)}.");
             }
 
             // Parse the annotated data type.  This applies to both the collection and non-collection properties.
             string? annotatedDataTypeAsString = configurationPropertyAttribute.DataType;
             if (annotatedDataTypeAsString is null)
             {
-                Console.Error.WriteLine($"The property '{type.Name}.{propertyName}' has no DataType.");
-                Environment.Exit(1);
+                throw new Exception($"The property '{type.Name}.{propertyName}' has no DataType.");
             }
 
             // We need to parse the data type.  This parsing will throw (needed for unit testing), so we need to convert those exceptions to error messages
@@ -426,22 +417,20 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Error occured parsing the data type for property {type.Name}.{property.Name}. {ex.Message}");
-                Environment.Exit(1);
-                throw; // Unreachable code.  Needed to prevent warnings.
+                throw new Exception($"Error occured parsing the data type for property {type.Name}.{property.Name}. {ex.Message}");
             }
 
             // Assert that the annotated data type is valid for the property type.
             if (annotatedDataType.ToString() != annotatedDataTypeAsString)
             {
-                Console.Error.WriteLine($"Unable to parse the DataType '{annotatedDataTypeAsString}' for the '{type.Name}.{propertyName}' property.");
-                Environment.Exit(1);
+                throw new Exception($"Unable to parse the DataType '{annotatedDataTypeAsString}' for the '{type.Name}.{propertyName}' property.");
             }
 
             // Generate the property metadata for the collection property.
-            PropertyMetadata propertyMetadata = annotatedDataType.ToPropertyMetadata(propertyName);
+            PropertyMetadata propertyMetadata = annotatedDataType.ToPropertyMetadata();
 
             // Copy the ConfigurationPropertyAttribute properties.
+            propertyMetadata.PropertyName = propertyName;
             propertyMetadata.Title = configurationPropertyAttribute.Title;
             propertyMetadata.LabelIfNullable = configurationPropertyAttribute.LabelIfNullable;
             propertyMetadata.Description = configurationPropertyAttribute.Description ?? "";
@@ -457,35 +446,29 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
             ConfigurationForeignKeyAttribute? configurationForeignKeyAttribute = property.GetCustomAttribute<ConfigurationForeignKeyAttribute>();
             if (configurationForeignKeyAttribute is not null)
             {
-                // The property metadata must be a string or an array of string to be a foreign key.
-                bool isString = (propertyMetadata.Type == "string");
-                bool isArrayOfString = (propertyMetadata.Type == "array" || propertyMetadata.Type == "2d-array") && propertyMetadata.AssociatedProperties is not null && propertyMetadata.AssociatedProperties.Length == 1 && propertyMetadata.AssociatedProperties[0].Type == "string";
-                if (!isString && !isArrayOfString)
+                // Check to see if this is an array, where the subtype is the foreign key.
+                PropertyMetadata stringPropertyMetadata;
+                // Check to see if the property metadata is a string.
+                if (propertyMetadata.Type == "string")
                 {
-                    Console.Error.WriteLine($"The property '{type.Name}.{propertyName}' is a foreign key but foreign keys must be of type string.");
-                    Environment.Exit(1);
+                    stringPropertyMetadata = propertyMetadata;
                 }
-                propertyMetadata.ForeignCollectionName = configurationForeignKeyAttribute.CollectionName;
-                propertyMetadata.Inline = configurationForeignKeyAttribute.Inline;
+                else if ((propertyMetadata.Type == "array" || propertyMetadata.Type == "2d-array") && propertyMetadata.AssociatedProperties is not null && propertyMetadata.AssociatedProperties.Length == 1 && propertyMetadata.AssociatedProperties[0].Type == "string")
+                {
+                    // Convert the associated property type to a foreign-key.
+                    stringPropertyMetadata = propertyMetadata.AssociatedProperties[0];
+                }
+                else
+                {
+                    throw new Exception($"The property '{type.Name}.{propertyName}' is a foreign key but foreign keys must be of type string.");
+                }
+                // Convert the type to a foreign-key.
+                stringPropertyMetadata.Type = "foreign-key";
+                stringPropertyMetadata.ForeignCollectionName = configurationForeignKeyAttribute.CollectionName;
+                stringPropertyMetadata.Inline = configurationForeignKeyAttribute.Inline;
             }
 
-            // If there are tuples, then we will use them to override the associated properties.
-            ConfigurationTupleItemAttribute[]? configurationTupleItemAttributes = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
-            if (configurationTupleItemAttributes is not null)
-            {
-                // Generate a dictionary for easy lookup.
-                Dictionary<string, ConfigurationTupleItemAttribute> configurationTupleItemAttributeDictionary = configurationTupleItemAttributes.ToDictionary(x => x.Name, x => x);
-
-                // Recursively populate the PropertyMetadata with the associated tuple items.
-                CopyConfigurationTupleItemAttributes(propertyMetadata, "", configurationTupleItemAttributeDictionary);
-
-                // Ensure all of the dictionary items were matched.
-                if (configurationTupleItemAttributeDictionary.Count > 0)
-                {
-                    Console.Error.WriteLine($"The property '{type.Name}.{propertyName}' has tuple items that did not match any tuple item.");
-                    Environment.Exit(1);
-                }
-            }
+            RecursivelyCollapseAndConfigureArrayOfTuples(property, propertyMetadata, $"{type.Name}.{propertyName}");
 
             associatedProperties.Add(propertyMetadata);
         }
@@ -493,66 +476,94 @@ static PropertyMetadata[] ScaffoldType(Type type, ref List<Type> reachableTypes)
     return associatedProperties.ToArray();
 }
 
-static void CopyConfigurationTupleItemAttributes(PropertyMetadata propertyMetadata, string propertyNamePrefix, Dictionary<string, ConfigurationTupleItemAttribute> configurationTupleItemAttributeDictionary)
+static void RecursivelyCollapseAndConfigureArrayOfTuples(PropertyInfo property, PropertyMetadata propertyMetadata, string typeName, string targetPropertyName = "")
 {
-    // If the property metadata type is an array or 2d-array, then copy the properties to the inner type.
+    // Perform a collapse, if this is an array of tuples.
     if (propertyMetadata.Type == "array" || propertyMetadata.Type == "2d-array")
     {
-        // The associated properties for an array must be populated with exactly 1 element.
+        // Ensure the associated properties has exactly one item.
         if (propertyMetadata.AssociatedProperties is null || propertyMetadata.AssociatedProperties.Length != 1)
         {
-            Console.Error.WriteLine($"Exactly one associated property is expected for the array property '{propertyMetadata.PropertyName}'.");
-            Environment.Exit(1);
+            throw new Exception($"The {typeName} array does not have exactly one associated property.");
         }
 
-        CopyConfigurationTupleItemAttributes(propertyMetadata.AssociatedProperties[0], propertyNamePrefix, configurationTupleItemAttributeDictionary);
-        return;
-    }
-
-    // If the property metadata isn't a tuple, then no processing occurs.  This allows us to recurse the property metadata to determine eligibility.
-    if (propertyMetadata.Type != "tuple")
-    {
-        return;
-    }
-
-    // The associated properties for a tuple must be populated with at least 1 element.
-    if (propertyMetadata.AssociatedProperties is null || propertyMetadata.AssociatedProperties.Length == 0)
-    {
-        Console.Error.WriteLine($"At least one associated property is expected for the tuple property '{propertyMetadata.PropertyName}'.");
-        Environment.Exit(1);
-    }
-
-    // Enumerate the tuple items.
-    foreach (PropertyMetadata associatedPropertyMetadata in propertyMetadata.AssociatedProperties)
-    {
-        // Concatenate the parent/prefix name with the current property name for the lookup.
-        string targetPropertyName = $"{propertyNamePrefix}{associatedPropertyMetadata.PropertyName}";
-
-        // Retrieve the tuple item attribute for the associated property metadata.
-        ConfigurationTupleItemAttribute? configurationTupleItemAttribute = configurationTupleItemAttributeDictionary.GetValueOrDefault(targetPropertyName);
-
-        // Ensure the tuple item attribute exists for the associated property metadata.
-        if (configurationTupleItemAttribute is null)
+        // Now check if this array is a tuple.
+        if (propertyMetadata.AssociatedProperties[0].Type == "tuple")
         {
-            Console.Error.WriteLine($"The tuple item attribute for the property '{targetPropertyName}' was not found.");
-            Environment.Exit(1);
+            if (propertyMetadata.AssociatedProperties[0].LabelIfNullable is null)
+            {
+                propertyMetadata.Type = "tuples";
+            }
+            else
+            {
+                propertyMetadata.Type =  "tuples?"; // TODO: This is lossy, the label if nullable is lost.
+            }
+
+            // Arrays of tuples need to render as a single html table and have their own special type .. "tuples".  We 
+            // need to modify the structure and collapse the array of tuple into tuples.
+            propertyMetadata.AssociatedProperties = propertyMetadata.AssociatedProperties[0].AssociatedProperties;
+        }
+    }
+
+    // Now check if this is a tuple or tuples.
+    if (propertyMetadata.Type == "tuple" || propertyMetadata.Type == "tuples" || propertyMetadata.Type == "tuples?")
+    {
+        // Retrieve the tuple annotations that were specified.
+        ConfigurationTupleItemAttribute[]? configurationTupleItemAttributes = property.GetCustomAttributes<ConfigurationTupleItemAttribute>().ToArray();
+
+        // Check the annotation count with the tuple count.
+        if (configurationTupleItemAttributes is null || propertyMetadata.AssociatedProperties is null || configurationTupleItemAttributes.Length != propertyMetadata.AssociatedProperties.Length)
+        {
+            throw new Exception($"The {typeName} tuple does not have a matching number of {nameof(ConfigurationTupleItemAttribute)} annotations.");
         }
 
-        // Remove the tuple item from the dictionary, now that we used it.
-        configurationTupleItemAttributeDictionary.Remove(targetPropertyName);
+        // Generate a dictionary for easy lookup.  We will use them to override the associated properties.  This also allows the 
+        // tuple item annotations to be specified out of order.
+        Dictionary<string, ConfigurationTupleItemAttribute> configurationTupleItemAttributeDictionary = configurationTupleItemAttributes.ToDictionary(x => x.Name, x => x);
 
-        // Copy the properties.
-        associatedPropertyMetadata.Title = configurationTupleItemAttribute.Title;
-        associatedPropertyMetadata.Description = configurationTupleItemAttribute.Description ?? "";
-        associatedPropertyMetadata.Inline = configurationTupleItemAttribute.Inline;
-        associatedPropertyMetadata.LabelIfNullable = configurationTupleItemAttribute.LabelIfNullable;
+        // Enumerate the tuple items.
+        int index = 0;
+        foreach (PropertyMetadata associatedPropertyMetadata in propertyMetadata.AssociatedProperties)
+        {
+            index++;
 
-        // The foreign collection name is being shared with enum name.  Enums can't be strings and foreign-keys can only be strings.
-        // We need to preserve the ForeignCollectionName, when the tuple item attribute is null.
-        associatedPropertyMetadata.ForeignCollectionName = configurationTupleItemAttribute.ForeignCollectionName ?? associatedPropertyMetadata.ForeignCollectionName;
+            // Concatenate the parent/prefix name with the current property name for the lookup.
+            string tuplePropertyName = targetPropertyName == "" ? associatedPropertyMetadata.PropertyName : $"{targetPropertyName}.{associatedPropertyMetadata.PropertyName}";
 
-        // Recurively check for nested tuples.  Since the call can do the check and return when not applicable, we can simple make the recursive vall.
-        CopyConfigurationTupleItemAttributes(associatedPropertyMetadata, targetPropertyName, configurationTupleItemAttributeDictionary);
+            // Retrieve the tuple item attribute for the associated property metadata.
+            ConfigurationTupleItemAttribute? configurationTupleItemAttribute = configurationTupleItemAttributeDictionary.GetValueOrDefault(tuplePropertyName);
+
+            // Ensure the tuple item attribute exists for the associated property metadata.
+            if (configurationTupleItemAttribute is null)
+            {
+                throw new Exception($"The tuple item attribute for the property '{targetPropertyName}' was not found.");
+            }
+
+            // Remove the tuple item from the dictionary, now that we used it.
+            configurationTupleItemAttributeDictionary.Remove(tuplePropertyName);
+
+            // Modify the property name for tuple Item# lookup.
+            associatedPropertyMetadata.PropertyName = $"Item{index}";
+
+            // Copy the properties.
+            associatedPropertyMetadata.Title = configurationTupleItemAttribute.Title;
+            associatedPropertyMetadata.Description = configurationTupleItemAttribute.Description ?? "";
+            associatedPropertyMetadata.Inline = configurationTupleItemAttribute.Inline;
+            associatedPropertyMetadata.LabelIfNullable = configurationTupleItemAttribute.LabelIfNullable;
+
+            // The foreign collection name is being shared with enum name.  Enums can't be strings and foreign-keys can only be strings.
+            // We need to preserve the ForeignCollectionName, when the tuple item attribute is null.
+            associatedPropertyMetadata.ForeignCollectionName = configurationTupleItemAttribute.ForeignCollectionName ?? associatedPropertyMetadata.ForeignCollectionName;
+
+            // Recurively check for nested tuples.  Since the call can do the check and return when not applicable, we can simple make the recursive vall.
+            RecursivelyCollapseAndConfigureArrayOfTuples(property, associatedPropertyMetadata, typeName, tuplePropertyName);
+        }
+
+        // Ensure all of the dictionary items were matched.
+        if (configurationTupleItemAttributeDictionary.Count > 0)
+        {
+            throw new Exception($"The property '{typeName}' has tuple items that did not match any tuple item.");
+        }
     }
 }
 

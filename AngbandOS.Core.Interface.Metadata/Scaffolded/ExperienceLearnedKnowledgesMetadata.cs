@@ -11,27 +11,27 @@ public static class ExperienceLearnedKnowledgesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "ExperienceLearnedKnowledgeBindingTuples")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ExperienceLearnedKnowledgeBindingTuples",
+                    Type = "tuples",
                     Title = "Experience Learned Knowledge Binding Tuples",
                     Description = "The experience levels and learned knowledge binding keys used to determine which knowledge is learned.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("integer", "MaxExperienceLevel")
-                                {
-                                    Title = "Max Experience Level",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("string", "LearnedKnowledgeBindingKey")
-                                {
-                                    Title = "Learned Knowledge Binding Key",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "integer",
+                            Title = "Max Experience Level",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Learned Knowledge Binding Key",
+                            Inline = true,
                         },
                     },
                 },

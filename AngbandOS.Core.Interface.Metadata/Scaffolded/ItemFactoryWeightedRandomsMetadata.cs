@@ -11,27 +11,27 @@ public static class ItemFactoryWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "NameAndWeightBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NameAndWeightBindings",
+                    Type = "tuples",
                     Title = "Name and Weight Bindings",
                     Description = "The item factory binding keys and their corresponding weights used for weighted random selection.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "Name")
-                                {
-                                    Title = "Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("integer", "Weight")
-                                {
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },

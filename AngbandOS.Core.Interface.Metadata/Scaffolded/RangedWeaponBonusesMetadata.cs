@@ -11,23 +11,31 @@ public static class RangedWeaponBonusesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "ItemClassBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ItemClassBindingKey",
+                    Type = "string",
                     Title = "Item Class Binding Key",
                     Description = "Specifies the optional binding key of the item class affected by the ranged weapon bonus.",
                 },
-                new PropertyMetadata("string", "CharacterClassBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CharacterClassBindingKey",
+                    Type = "string",
                     Title = "Character Class Binding Key",
                     Description = "Specifies the optional binding key of the character class affected by the ranged weapon bonus.",
                 },
-                new PropertyMetadata("integer", "ExperienceLevel")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ExperienceLevel",
+                    Type = "integer",
                     Title = "Experience Level",
                     Description = "Specifies the optional experience level at which the ranged weapon bonus applies.",
                 },
-                new PropertyMetadata("integer", "BonusMissileAttacksPerRound")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BonusMissileAttacksPerRound",
+                    Type = "integer",
                     Title = "Bonus Missile Attacks Per Round",
                     Description = "Specifies the bonus number of missile attacks performed per round.",
                 },

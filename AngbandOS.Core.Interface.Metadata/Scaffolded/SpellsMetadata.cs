@@ -11,13 +11,17 @@ public static class SpellsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "Returns the name of the spell, as rendered to the save game.",
                 },
-                new PropertyMetadata("string", "LearnedDetails")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LearnedDetails",
+                    Type = "string",
                     Title = "Learned Details",
                     Description = "Returns details about the spell, blank if there are no details, or null if the details should be retrieved from the associated scripts configured when the spell succeeds.",
                 },

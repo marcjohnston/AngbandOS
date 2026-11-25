@@ -11,14 +11,18 @@ public static class ChestTrapCombinationsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "ChestTrapBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ChestTrapBindingKeys",
+                    Type = "array",
                     Title = "Chest Trap Binding Keys",
                     Description = "The binding keys identifying the chest traps included in this combination.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

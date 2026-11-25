@@ -11,112 +11,126 @@ public static class ItemEnhancementsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "SummationAttributeAndExpressionBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SummationAttributeAndExpressionBindings",
+                    Type = "tuples",
                     Title = "Summation Attribute and Expression Bindings",
                     Description = "The attribute names and expressions used to calculate summation-based item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "AttributeName")
-                                {
-                                    Title = "Attribute Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("string", "Expression")
-                                {
-                                    Title = "Expression",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Expression",
+                            Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("array", "BitwiseOrAttributeAndExpressionBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BitwiseOrAttributeAndExpressionBindings",
+                    Type = "tuples",
                     Title = "Bitwise OR Attribute and Expression Bindings",
                     Description = "The attribute names and Boolean expressions used to calculate bitwise-OR item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "AttributeName")
-                                {
-                                    Title = "Attribute Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("string", "BooleanExpression")
-                                {
-                                    Title = "Boolean Expression",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "string",
+                            Title = "Boolean Expression",
+                            Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("array", "ScriptsAttributeAndScriptBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ScriptsAttributeAndScriptBindings",
+                    Type = "tuples",
                     Title = "Scripts Attribute and Script Bindings",
                     Description = "The attribute names and script names used to apply scripts as item enhancements.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "array",
+                            Title = "Script Names",
+                            Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "AttributeName")
+                                new PropertyMetadata()
                                 {
-                                    Title = "Attribute Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("array", "ScriptNames")
-                                {
-                                    Title = "Script Names",
-                                    Inline = true,
-                                    AssociatedProperties = new PropertyMetadata[]
-                                    {
-                                        new PropertyMetadata("string", "")
-                                        {
-                                        },
-                                    },
+                                    PropertyName = "",
+                                    Type = "string",
                                 },
                             },
                         },
                     },
                 },
-                new PropertyMetadata("array", "ApplicableItemFactoryBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ApplicableItemFactoryBindingKeys",
+                    Type = "array",
                     Title = "Applicable Item Factory Binding Keys",
                     Description = "The binding keys of the item factories to which this item enhancement applies, or null when it can be applied to all item factories.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "AdditionalItemEnhancementWeightedRandomBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AdditionalItemEnhancementWeightedRandomBindingKey",
+                    Type = "string",
                     Title = "Additional Item Enhancement Weighted Random Binding Key",
                     Description = "The binding key of the weighted random configuration used to select an additional item enhancement.",
                 },
-                new PropertyMetadata("string", "FriendlyName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FriendlyName",
+                    Type = "string",
                     Title = "Friendly Name",
                     Description = "The name of the rare item characteristics to append to the description of the original item, or null to leave the original name unchanged.",
                 },
-                new PropertyMetadata("string", "ActivationEnumValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ActivationEnumValue",
+                    Type = "string",
                     Title = "Activation Name",
                     Description = "The name of the activation applied to the item, or null when the item cannot be activated.",
                 },
-                new PropertyMetadata("string", "ArtifactBiasWeightedRandomBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ArtifactBiasWeightedRandomBindingKey",
+                    Type = "string",
                     Title = "Artifact Bias Weighted Random Binding Key",
                     Description = "The binding key of the weighted random configuration used to select an artifact bias.",
                 },

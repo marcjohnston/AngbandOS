@@ -1,11 +1,11 @@
 <div id="container">
   <app-nav-menu></app-nav-menu>
   <h6 class="window-left-right-margins">Game Configuration Designer</h6>
-  <div class="window-left-right-margins" *ngIf="configuration !== undefined">
+  <div class="window-left-right-margins" *ngIf="gameConfiguration !== undefined">
     {{isModified ? '--MODIFIED--' : "--unchanged--"}}
   </div>
   <div id="component-window" class="window-left-right-margins">
-    <ng-container *ngIf="rootTreeNodes !== undefined && configuration !== undefined && propertyMetadataMap !== undefined">
+    <ng-container *ngIf="rootTreeNodes !== undefined && gameConfiguration !== undefined && gamePropertyMetadata !== undefined">
       <div id="tree-panel">
         <table>
           <ng-container *ngFor="let treeNode of rootTreeNodes">
@@ -38,7 +38,7 @@
         <ng-container *ngIf="selectedPropertyMetadataAndConfigurations !== null">
           <!-- Render all of metadatas and configurations for the selection.  The game settings will have multiple metadatas and configuraitons; everything else will have a single element -->
           <ng-container *ngFor="let propertyMetadataAndConfiguration of selectedPropertyMetadataAndConfigurations">
-            <app-game-designer-property [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-property>
+            <app-game-designer-property [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-property>
           </ng-container>
         </ng-container>
       </div>

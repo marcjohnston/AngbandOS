@@ -11,24 +11,32 @@ public static class AbilityScoreScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "LearnedDetails")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LearnedDetails",
+                    Type = "string",
                     Title = "Learned Details",
                     Description = "Details describing what is learned when this ability score script is used.",
                 },
-                new PropertyMetadata("boolean", "UsesItem")
+                new PropertyMetadata()
                 {
+                    PropertyName = "UsesItem",
+                    Type = "boolean",
                     Title = "Uses Item",
                     Description = "Determines whether using this ability score script requires an item.",
                 },
-                new PropertyMetadata("enum", "AbilityEnumValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AbilityEnumValue",
+                    Type = "enum",
                     Title = "Ability",
                     Description = "The binding key that identifies the ability associated with this script.",
                     ForeignCollectionName = "AbilitiesEnum",
                 },
-                new PropertyMetadata("boolean", "TrueToIncreaseFalseToDecrease")
+                new PropertyMetadata()
                 {
+                    PropertyName = "TrueToIncreaseFalseToDecrease",
+                    Type = "boolean",
                     Title = "True To Increase False To Decrease",
                     Description = "Determines whether the script increases the ability score when true or decreases it when false.",
                 },

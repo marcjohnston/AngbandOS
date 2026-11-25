@@ -11,38 +11,52 @@ public static class TimerScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("boolean", "Used")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Used",
+                    Type = "boolean",
                     Title = "Used",
                     Description = "Determines whether items are considered used by the timer.",
                 },
-                new PropertyMetadata("string", "ValueExpression")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ValueExpression",
+                    Type = "string",
                     Title = "Value Expression",
                     Description = "Specifies the expression used to modify the timer. Positive values add time, negative values subtract time, and null resets the timer to zero.",
                 },
-                new PropertyMetadata("string", "TimerBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "TimerBindingKey",
+                    Type = "string",
                     Title = "Timer Binding Key",
                     Description = "Specifies the binding key of the timer modified by the script.",
                 },
-                new PropertyMetadata("string", "CustomLearnedDetails")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CustomLearnedDetails",
+                    Type = "string",
                     Title = "Custom Learned Details",
                     Description = "Specifies custom details revealed when the timer script is learned.",
                 },
-                new PropertyMetadata("boolean", "Quiet")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Quiet",
+                    Type = "boolean",
                     Title = "Quiet",
                     Description = "Determines whether the timer script executes without displaying messages.",
                 },
-                new PropertyMetadata("string", "PreMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PreMessage",
+                    Type = "string",
                     Title = "Pre-Message",
                     Description = "Specifies the message displayed before the timer script executes.",
                 },
-                new PropertyMetadata("string", "EnabledBoolPosFunctionBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "EnabledBoolPosFunctionBindingKey",
+                    Type = "string",
                     Title = "Enabled Boolean Positive Function Binding Key",
                     Description = "Specifies the optional binding key for the function that determines whether the timer script is enabled.",
                 },

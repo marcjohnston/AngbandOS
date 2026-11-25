@@ -11,38 +11,52 @@ public static class ProjectilesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "FloorEffectBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FloorEffectBindingKey",
+                    Type = "string",
                     Title = "Floor Effect Binding Key",
                     Description = "Specifies the binding key for the floor effect script used by the projectile.",
                 },
-                new PropertyMetadata("string", "ItemEffectBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ItemEffectBindingKey",
+                    Type = "string",
                     Title = "Item Effect Binding Key",
                     Description = "Specifies the binding key for the item effect script used by the projectile.",
                 },
-                new PropertyMetadata("string", "PlayerEffectBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PlayerEffectBindingKey",
+                    Type = "string",
                     Title = "Player Effect Binding Key",
                     Description = "Specifies the binding key for the player effect script used by the projectile.",
                 },
-                new PropertyMetadata("string", "MonsterEffectBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MonsterEffectBindingKey",
+                    Type = "string",
                     Title = "Monster Effect Binding Key",
                     Description = "Specifies the binding key for the monster effect script used by the projectile.",
                 },
-                new PropertyMetadata("string", "BoltProjectileGraphicBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BoltProjectileGraphicBindingKey",
+                    Type = "string",
                     Title = "Bolt Projectile Graphic Binding Key",
                     Description = "Specifies the optional binding key for the projectile graphic used by a bolt.",
                 },
-                new PropertyMetadata("string", "EffectAnimationBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "EffectAnimationBindingKey",
+                    Type = "string",
                     Title = "Effect Animation Binding Key",
                     Description = "Specifies the optional binding key for the animation used by the projectile effect.",
                 },
-                new PropertyMetadata("string", "ImpactProjectileGraphicBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ImpactProjectileGraphicBindingKey",
+                    Type = "string",
                     Title = "Impact Projectile Graphic Binding Key",
                     Description = "Specifies the optional binding key for the projectile graphic used on impact.",
                 },

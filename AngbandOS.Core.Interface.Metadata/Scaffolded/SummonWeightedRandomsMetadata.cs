@@ -11,32 +11,34 @@ public static class SummonWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "NameAndWeightBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NameAndWeightBindings",
+                    Type = "tuples",
                     Title = "Name and Weight Bindings",
                     Description = "Specifies the summon names and their associated weights used for weighted random selection.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "Name")
-                                {
-                                    Title = "Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("integer", "Weight")
-                                {
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("string", "LearnedDetails")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LearnedDetails",
+                    Type = "string",
                     Title = "Learned Details",
                     Description = "Specifies the information revealed when the summon is learned.",
                 },

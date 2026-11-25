@@ -11,137 +11,189 @@ public static class ItemFiltersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "AttributeFilterBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AttributeFilterBindingKey",
+                    Type = "string",
                     Title = "Attribute Filter Binding Key",
                     Description = "Specifies the binding key for the attribute filter to apply.",
                 },
-                new PropertyMetadata("array", "AnyMatchingItemClassNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AnyMatchingItemClassNames",
+                    Type = "array",
                     Title = "Any Matching Item Class Names",
                     Description = "Specifies item class names where an item matches if it belongs to any of the specified classes.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "AllNonMatchingItemClassNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AllNonMatchingItemClassNames",
+                    Type = "array",
                     Title = "All Non-Matching Item Class Names",
                     Description = "Specifies item class names that an item must not belong to for the filter to match.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "AnyMatchingItemFactoryNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AnyMatchingItemFactoryNames",
+                    Type = "array",
                     Title = "Any Matching Item Factory Names",
                     Description = "Specifies item factory names where an item matches if it was created by any of the specified factories.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "AllNonMatchingItemFactoryNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AllNonMatchingItemFactoryNames",
+                    Type = "array",
                     Title = "All Non-Matching Item Factory Names",
                     Description = "Specifies item factory names that an item must not have been created by for the filter to match.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "CanBeActivated")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeActivated",
+                    Type = "boolean",
                     Title = "Can Be Activated",
                     Description = "Specifies whether the item must be capable of being activated.",
                 },
-                new PropertyMetadata("boolean", "CanBeAimed")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeAimed",
+                    Type = "boolean",
                     Title = "Can Be Aimed",
                     Description = "Specifies whether the item must be capable of being aimed.",
                 },
-                new PropertyMetadata("boolean", "CanBeFired")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeFired",
+                    Type = "boolean",
                     Title = "Can Be Fired",
                     Description = "Specifies whether the item must be capable of being fired.",
                 },
-                new PropertyMetadata("boolean", "CanBeQuaffed")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeQuaffed",
+                    Type = "boolean",
                     Title = "Can Be Quaffed",
                     Description = "Specifies whether the item must be capable of being quaffed.",
                 },
-                new PropertyMetadata("boolean", "CanBeRead")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeRead",
+                    Type = "boolean",
                     Title = "Can Be Read",
                     Description = "Specifies whether the item must be capable of being read.",
                 },
-                new PropertyMetadata("boolean", "CanBeRecharged")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeRecharged",
+                    Type = "boolean",
                     Title = "Can Be Recharged",
                     Description = "Specifies whether the item must be capable of being recharged.",
                 },
-                new PropertyMetadata("boolean", "CanBeUsed")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeUsed",
+                    Type = "boolean",
                     Title = "Can Be Used",
                     Description = "Specifies whether the item must be capable of being used.",
                 },
-                new PropertyMetadata("boolean", "CanBeZapped")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeZapped",
+                    Type = "boolean",
                     Title = "Can Be Zapped",
                     Description = "Specifies whether the item must be capable of being zapped.",
                 },
-                new PropertyMetadata("boolean", "CanProjectArrows")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanProjectArrows",
+                    Type = "boolean",
                     Title = "Can Project Arrows",
                     Description = "Specifies whether the item must be capable of projecting arrows.",
                 },
-                new PropertyMetadata("boolean", "IsKnown")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsKnown",
+                    Type = "boolean",
                     Title = "Is Known",
                     Description = "Specifies whether the item must be known.",
                 },
-                new PropertyMetadata("boolean", "IsOfValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsOfValue",
+                    Type = "boolean",
                     Title = "Is Of Value",
                     Description = "Specifies whether the item must be considered valuable.",
                 },
-                new PropertyMetadata("boolean", "IsTooHeavyToWield")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsTooHeavyToWield",
+                    Type = "boolean",
                     Title = "Is Too Heavy To Wield",
                     Description = "Specifies whether the item must be too heavy for the player to wield.",
                 },
-                new PropertyMetadata("boolean", "IsUsableSpellBook")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsUsableSpellBook",
+                    Type = "boolean",
                     Title = "Is Usable Spell Book",
                     Description = "Specifies whether the item must be a usable spell book.",
                 },
-                new PropertyMetadata("boolean", "ArtifactBiasCanSlay")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ArtifactBiasCanSlay",
+                    Type = "boolean",
                     Title = "Artifact Bias Can Slay",
                     Description = "Specifies whether the item's artifact bias must be capable of slaying a target.",
                 },
-                new PropertyMetadata("boolean", "ArtifactBias")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ArtifactBias",
+                    Type = "boolean",
                     Title = "Artifact Bias",
                     Description = "Specifies whether the item must have an artifact bias.",
                 },
-                new PropertyMetadata("boolean", "IsCursed")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsCursed",
+                    Type = "boolean",
                     Title = "Is Cursed",
                     Description = "Specifies whether the item must be cursed.",
                 },
-                new PropertyMetadata("boolean", "HeavyCurse")
+                new PropertyMetadata()
                 {
+                    PropertyName = "HeavyCurse",
+                    Type = "boolean",
                     Title = "Heavy Curse",
                     Description = "Specifies whether the item must have a heavy curse.",
                 },

@@ -11,18 +11,24 @@ public static class GodsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "LongName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LongName",
+                    Type = "string",
                     Title = "Long Name",
                     Description = "The full name of the god.",
                 },
-                new PropertyMetadata("string", "ShortName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ShortName",
+                    Type = "string",
                     Title = "Short Name",
                     Description = "The abbreviated name of the god.",
                 },
-                new PropertyMetadata("string", "FavorDescription")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FavorDescription",
+                    Type = "string",
                     Title = "Favor Description",
                     Description = "A description of the favor granted by the god.",
                 },

@@ -11,28 +11,38 @@ public static class WizardCommandsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "KeyChar")
+                new PropertyMetadata()
                 {
+                    PropertyName = "KeyChar",
+                    Type = "character",
                     Title = "Key Character",
                     Description = "Specifies the character used to invoke the wizard command.",
                 },
-                new PropertyMetadata("boolean", "IsEnabled")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsEnabled",
+                    Type = "boolean",
                     Title = "Is Enabled",
                     Description = "Determines whether the wizard command is enabled.",
                 },
-                new PropertyMetadata("string", "HelpGroupName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "HelpGroupName",
+                    Type = "string",
                     Title = "Help Group Name",
                     Description = "Specifies the name of the help group containing the wizard command. When null, the command is not associated with a help group.",
                 },
-                new PropertyMetadata("string", "HelpDescription")
+                new PropertyMetadata()
                 {
+                    PropertyName = "HelpDescription",
+                    Type = "string",
                     Title = "Help Description",
                     Description = "Specifies the description displayed for the wizard command.",
                 },
-                new PropertyMetadata("string", "ExecuteScriptName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ExecuteScriptName",
+                    Type = "string",
                     Title = "Execute Script Name",
                     Description = "Specifies the name of the script executed by the wizard command. When null, no script is executed.",
                 },

@@ -20,13 +20,18 @@ import { SelectOption } from '../../select-option';
 })
 export class GameDesignerTypeEnumComponent implements OnInit {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: Record<string, unknown>;
-  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
-
+  @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
+  @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
+  @Input({ required: true }) public enumMap!: Map<string, SelectOption[]>;
+  public enumSelectOptions: SelectOption[] | undefined;
   public unmodifiedValue: number | null = null;
 
   public ngOnInit(): void {
     this.unmodifiedValue = this.getValue();
+    if (this.propertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName === null) {
+      throw new Error("Enum cannot have a null foreign collection name.");
+    }
+    this.enumSelectOptions = this.enumMap.get(this.propertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
   }
 
   public get enumOptions(): SelectOption[] {

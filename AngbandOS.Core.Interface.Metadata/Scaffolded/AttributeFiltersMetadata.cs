@@ -11,97 +11,105 @@ public static class AttributeFiltersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "BitwiseOrAttributeFilterBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BitwiseOrAttributeFilterBindings",
+                    Type = "tuples",
                     Title = "Bitwise Or Attribute Filter Bindings",
                     Description = "The attribute bindings used to filter for attributes where any specified bitwise value matches.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "AttributeKey")
-                                {
-                                    Title = "Attribute Key",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("boolean", "DesiredValue")
-                                {
-                                    Title = "Desired Value",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Key",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "boolean",
+                            Title = "Desired Value",
+                            Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("array", "BoolAttributeFilterBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BoolAttributeFilterBindings",
+                    Type = "tuples",
                     Title = "Boolean Attribute Filter Bindings",
                     Description = "The attribute bindings used to filter boolean attributes by their desired values.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Key",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "array",
+                            Title = "Desired Value",
+                            Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "AttributeKey")
+                                new PropertyMetadata()
                                 {
-                                    Title = "Attribute Key",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("array", "DesiredValue")
-                                {
-                                    Title = "Desired Value",
-                                    Inline = true,
-                                    AssociatedProperties = new PropertyMetadata[]
-                                    {
-                                        new PropertyMetadata("boolean", "")
-                                        {
-                                            LabelIfNullable = "",
-                                        },
-                                    },
+                                    PropertyName = "",
+                                    Type = "boolean",
+                                    LabelIfNullable = "",
                                 },
                             },
                         },
                     },
                 },
-                new PropertyMetadata("array", "SummationAttributeFilterBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SummationAttributeFilterBindings",
+                    Type = "tuples",
                     Title = "Summation Attribute Filter Bindings",
                     Description = "The attribute bindings used to filter summed numeric attributes within a specified range.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "AttributeKey")
-                                {
-                                    Title = "Attribute Key",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("integer", "StartingValue")
-                                {
-                                    Title = "Starting Value",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("integer", "EndingValue")
-                                {
-                                    Title = "Ending Value",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Attribute Key",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Starting Value",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item3",
+                            Type = "integer",
+                            Title = "Ending Value",
+                            Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "ActivationAttributeNonNull")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ActivationAttributeNonNull",
+                    Type = "boolean",
                     Title = "Activation Attribute Non-Null",
                     Description = "Determines whether the activation attribute must be non-null.",
                 },
-                new PropertyMetadata("boolean", "ArtifactBiasAttributeNonNull")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ArtifactBiasAttributeNonNull",
+                    Type = "boolean",
                     Title = "Artifact Bias Attribute Non-Null",
                     Description = "Determines whether the artifact bias attribute must be non-null.",
                 },

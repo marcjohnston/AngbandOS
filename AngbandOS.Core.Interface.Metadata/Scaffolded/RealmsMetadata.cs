@@ -11,40 +11,54 @@ public static class RealmsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "SpellBookNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SpellBookNames",
+                    Type = "array",
                     Title = "Spell Book Names",
                     Description = "Specifies the spell book names associated with the realm.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "Info")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Info",
+                    Type = "array",
                     Title = "Info",
                     Description = "Specifies the informational text associated with the realm.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "Specifies the name of the realm.",
                 },
-                new PropertyMetadata("boolean", "ResistantToHolyAndHellProjectiles")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ResistantToHolyAndHellProjectiles",
+                    Type = "boolean",
                     Title = "Resistant To Holy And Hell Projectiles",
                     Description = "Determines whether subscribing to the realm grants resistance to holy and hell projectiles.",
                 },
-                new PropertyMetadata("boolean", "SusceptibleToHolyAndHellProjectiles")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SusceptibleToHolyAndHellProjectiles",
+                    Type = "boolean",
                     Title = "Susceptible To Holy And Hell Projectiles",
                     Description = "Determines whether subscribing to the realm increases susceptibility to holy and hell projectiles.",
                 },

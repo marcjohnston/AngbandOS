@@ -11,30 +11,40 @@ public static class ConditionalScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "ConditionalKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ConditionalKey",
+                    Type = "string",
                     Title = "Conditional Key",
                     Description = "The key identifying the conditional evaluated by the script.",
                 },
-                new PropertyMetadata("array", "TrueScriptBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "TrueScriptBindingKeys",
+                    Type = "array",
                     Title = "True Script Binding Keys",
                     Description = "The binding keys of the scripts executed when the conditional evaluates to true.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "FalseScriptBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FalseScriptBindingKeys",
+                    Type = "array",
                     Title = "False Script Binding Keys",
                     Description = "The binding keys of the scripts executed when the conditional evaluates to false.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

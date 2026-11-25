@@ -11,68 +11,92 @@ public static class ConditionalWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "ConditionalKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ConditionalKey",
+                    Type = "string",
                     Title = "Conditional Key",
                     Description = "The key identifying the conditional that determines which widgets are enabled.",
                 },
-                new PropertyMetadata("array", "TrueWidgetNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "TrueWidgetNames",
+                    Type = "array",
                     Title = "True Widget Names",
                     Description = "The names of the widgets to invalidate when the conditional evaluates to true.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "FalseWidgetNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FalseWidgetNames",
+                    Type = "array",
                     Title = "False Widget Names",
                     Description = "The names of the widgets to invalidate when the conditional evaluates to false.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("enum", "Color")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Color",
+                    Type = "enum",
                     Title = "Color",
                     Description = "The color used to draw the widget text.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "X")
+                new PropertyMetadata()
                 {
+                    PropertyName = "X",
+                    Type = "integer",
                     Title = "X",
                     Description = "The x-coordinate on the form where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Y")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Y",
+                    Type = "integer",
                     Title = "Y",
                     Description = "The y-coordinate on the form where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Width")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Width",
+                    Type = "integer",
                     Title = "Width",
                     Description = "The width of the widget.",
                 },
-                new PropertyMetadata("enum", "JustificationEnumValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "JustificationEnumValue",
+                    Type = "enum",
                     Title = "Justification",
                     Description = "The name of the justification used to position the widget text within its width.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "ChangeTrackerNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ChangeTrackerNames",
+                    Type = "array",
                     Title = "Change Tracker Names",
                     Description = "The names of the properties that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

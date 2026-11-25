@@ -11,13 +11,17 @@ public static class DungeonGuardiansMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "MonsterRaceName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MonsterRaceName",
+                    Type = "string",
                     Title = "Monster Race Name",
                     Description = "The name of the monster race for the quest monster.",
                 },
-                new PropertyMetadata("integer", "LevelFound")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LevelFound",
+                    Type = "integer",
                     Title = "Level Found",
                     Description = "The dungeon level where the fixed quest is encountered.",
                 },

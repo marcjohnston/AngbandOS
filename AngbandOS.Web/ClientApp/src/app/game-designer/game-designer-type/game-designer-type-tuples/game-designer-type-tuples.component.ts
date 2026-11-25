@@ -4,11 +4,12 @@ import { PropertyMetadata } from '../../property-metadata';
 import { MatIconModule } from '@angular/material/icon';
 import { NgFor, NgIf } from '@angular/common';
 import { GameDesignerTypeComponent } from '../game-designer-type.component';
+import { SelectOption } from '../../select-option';
 
 @Component({
-  selector: 'app-game-designer-type-tuple-array',
-  templateUrl: './game-designer-type-tuple-array.component.html',
-  styleUrls: ['./game-designer-type-tuple-array.component.scss'],
+  selector: 'app-game-designer-type-tuples',
+  templateUrl: './game-designer-type-tuples.component.html',
+  styleUrls: ['./game-designer-type-tuples.component.scss'],
   standalone: true,
   imports: [
     NgIf,
@@ -17,10 +18,13 @@ import { GameDesignerTypeComponent } from '../game-designer-type.component';
     forwardRef(() => GameDesignerTypeComponent) /** This is needed to break the circular reference */
   ]
 })
-export class GameDesignerTypeTupleArrayComponent {
+export class GameDesignerTypeTuplesComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
-  @Input({ required: true }) public configuration!: Record<string, unknown>;
-  @Input({ required: true }) public propertyMetadataMap!: Map<string, PropertyMetadata>;
+  @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
+  @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
+  @Input({ required: true }) public enumMap!: Map<string, SelectOption[]>;
+  @Input({ required: true }) public arrayOf!: boolean;
+  @Input({ required: true }) public nullableItems!: boolean;
 
   public addTuple() {
     const newTupleValue: any[] = [];

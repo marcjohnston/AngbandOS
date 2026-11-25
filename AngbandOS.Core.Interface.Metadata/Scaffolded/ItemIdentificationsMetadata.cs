@@ -11,24 +11,32 @@ public static class ItemIdentificationsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "AttributeFilterBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AttributeFilterBindingKey",
+                    Type = "string",
                     Title = "Attribute Filter Binding Key",
                     Description = "Specifies the binding key for the attribute filter used to identify the item.",
                 },
-                new PropertyMetadata("array", "InterpolationExpressionAttributeNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "InterpolationExpressionAttributeNames",
+                    Type = "array",
                     Title = "Interpolation Expression Attribute Names",
                     Description = "Specifies the attribute names whose values are available for interpolation in the effect description.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "EffectDescription")
+                new PropertyMetadata()
                 {
+                    PropertyName = "EffectDescription",
+                    Type = "string",
                     Title = "Effect Description",
                     Description = "Specifies the description of the effect produced when the item is identified.",
                 },

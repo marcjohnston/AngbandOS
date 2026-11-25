@@ -11,88 +11,122 @@ public static class ProjectileScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "CustomLearnedDetails")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CustomLearnedDetails",
+                    Type = "string",
                     Title = "Custom Learned Details",
                     Description = "Returns the details revealed to the player when the projectile is learned. When null, the default details are used.",
                 },
-                new PropertyMetadata("string", "ProjectileBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ProjectileBindingKey",
+                    Type = "string",
                     Title = "Projectile Binding Key",
                     Description = "Specifies the binding key for the projectile.",
                 },
-                new PropertyMetadata("string", "DamageRollExpression")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DamageRollExpression",
+                    Type = "string",
                     Title = "Damage Roll Expression",
                     Description = "Specifies the roll expression for the amount of damage produced by the projectile.",
                 },
-                new PropertyMetadata("string", "RadiusRollExpression")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RadiusRollExpression",
+                    Type = "string",
                     Title = "Radius Roll Expression",
                     Description = "Specifies the roll expression for the projectile's damage radius. A radius of zero represents a bolt, a positive radius represents a ball, and a negative radius represents a breath attack.",
                 },
-                new PropertyMetadata("boolean", "Stop")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Stop",
+                    Type = "boolean",
                     Title = "Stop",
                     Description = "Determines whether the projectile stops when it hits an obstacle.",
                 },
-                new PropertyMetadata("boolean", "Kill")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Kill",
+                    Type = "boolean",
                     Title = "Kill",
                     Description = "Determines whether the projectile can affect monsters or other entities in its path.",
                 },
-                new PropertyMetadata("boolean", "Jump")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Jump",
+                    Type = "boolean",
                     Title = "Jump",
                     Description = "Determines whether the projectile moves directly to its target while ignoring intermediate grids or obstacles.",
                 },
-                new PropertyMetadata("boolean", "Beam")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Beam",
+                    Type = "boolean",
                     Title = "Beam",
                     Description = "Determines whether the projectile travels in a line and can affect multiple targets along its path.",
                 },
-                new PropertyMetadata("boolean", "Grid")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Grid",
+                    Type = "boolean",
                     Title = "Grid",
                     Description = "Determines whether the projectile interacts with each grid through which it travels.",
                 },
-                new PropertyMetadata("boolean", "Item")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Item",
+                    Type = "boolean",
                     Title = "Item",
                     Description = "Determines whether the projectile interacts with items it encounters.",
                 },
-                new PropertyMetadata("boolean", "Thru")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Thru",
+                    Type = "boolean",
                     Title = "Thru",
                     Description = "Determines whether the projectile passes through targets or objects without stopping.",
                 },
-                new PropertyMetadata("boolean", "Hide")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Hide",
+                    Type = "boolean",
                     Title = "Hide",
                     Description = "Determines whether the projectile is hidden from the player's view.",
                 },
-                new PropertyMetadata("boolean", "Identified")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Identified",
+                    Type = "boolean",
                     Title = "Identified",
                     Description = "Determines whether the projectile is automatically identified. Null indicates conditional identification when the projectile affects a target.",
                 },
-                new PropertyMetadata("string", "PreMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PreMessage",
+                    Type = "string",
                     Title = "Pre-Message",
                     Description = "Specifies the message rendered before the projectile is projected. When null, no message is rendered.",
                 },
-                new PropertyMetadata("string", "PostMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PostMessage",
+                    Type = "string",
                     Title = "Post-Message",
                     Description = "Specifies the message rendered after the projectile is projected. When null, no message is rendered.",
                 },
-                new PropertyMetadata("boolean", "SmashingOnPetsTurnsUnfriendly")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SmashingOnPetsTurnsUnfriendly",
+                    Type = "boolean",
                     Title = "Smashing On Pets Turns Unfriendly",
                     Description = "Determines whether smashing a pet with the projectile turns the pet into an unfriendly monster.",
                 },
-                new PropertyMetadata("enum", "NonDirectionalProjectileMode")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NonDirectionalProjectileMode",
+                    Type = "enum",
                     Title = "Non-Directional Projectile Mode",
                     Description = "Specifies the mode used when the projectile is launched without a directional parameter.",
                     ForeignCollectionName = "NonDirectionalProjectileModeEnum",

@@ -11,18 +11,24 @@ public static class SymbolsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "Character")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Character",
+                    Type = "character",
                     Title = "Character",
                     Description = "Specifies the character used to render the symbol.",
                 },
-                new PropertyMetadata("character", "QueryCharacter")
+                new PropertyMetadata()
                 {
+                    PropertyName = "QueryCharacter",
+                    Type = "character",
                     Title = "Query Character",
                     Description = "Specifies the optional character used when querying the symbol.",
                 },
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "Specifies the name of the symbol.",
                 },

@@ -11,249 +11,337 @@ public static class StoreFactoriesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("boolean", "IsEmptyLot")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsEmptyLot",
+                    Type = "boolean",
                     Title = "Is Empty Lot",
                     Description = "Determines whether the store is an empty lot.",
                 },
-                new PropertyMetadata("boolean", "BuildingsMadeFromPermanentRock")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BuildingsMadeFromPermanentRock",
+                    Type = "boolean",
                     Title = "Buildings Made From Permanent Rock",
                     Description = "Determines whether store buildings are made from permanent rock.",
                 },
-                new PropertyMetadata("boolean", "StoreEntranceDoorsAreBlownOff")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreEntranceDoorsAreBlownOff",
+                    Type = "boolean",
                     Title = "Store Entrance Doors Are Blown Off",
                     Description = "Determines whether store entrance doors are randomly placed.",
                 },
-                new PropertyMetadata("integer", "PageSize")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PageSize",
+                    Type = "integer",
                     Title = "Page Size",
                     Description = "Specifies the number of items displayed on one store page.",
                 },
-                new PropertyMetadata("boolean", "UseHomeCarry")
+                new PropertyMetadata()
                 {
+                    PropertyName = "UseHomeCarry",
+                    Type = "boolean",
                     Title = "Use Home Carry",
                     Description = "Determines whether the store uses home carry behavior.",
                 },
-                new PropertyMetadata("array", "ItemFilterNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ItemFilterNames",
+                    Type = "array",
                     Title = "Item Filter Names",
                     Description = "Specifies the item filters used to determine which items the store buys.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "IsHomeThatCanBeBought")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsHomeThatCanBeBought",
+                    Type = "boolean",
                     Title = "Is Home That Can Be Bought",
                     Description = "Determines whether the store is a home that can be bought.",
                 },
-                new PropertyMetadata("boolean", "MaintainsStockLevels")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MaintainsStockLevels",
+                    Type = "boolean",
                     Title = "Maintains Stock Levels",
                     Description = "Determines whether the store automatically maintains its stock levels.",
                 },
-                new PropertyMetadata("integer", "MaxInventory")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MaxInventory",
+                    Type = "integer",
                     Title = "Maximum Inventory",
                     Description = "Specifies the maximum number of items maintained by the store.",
                 },
-                new PropertyMetadata("integer", "MinInventory")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MinInventory",
+                    Type = "integer",
                     Title = "Minimum Inventory",
                     Description = "Specifies the minimum number of items maintained by the store.",
                 },
-                new PropertyMetadata("integer", "StoreTurnover")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreTurnover",
+                    Type = "integer",
                     Title = "Store Turnover",
                     Description = "Specifies the number of items removed during store maintenance.",
                 },
-                new PropertyMetadata("array", "StoreStockManifestDefinitions")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreStockManifestDefinitions",
+                    Type = "tuples",
                     Title = "Store Stock Manifest Definitions",
                     Description = "Specifies the item factories and distribution weights used to stock the store.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "ItemFactoryName")
-                                {
-                                    Title = "Item Factory Name",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("integer", "Weight")
-                                {
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Item Factory Name",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "ShufflesOwnersAndPricing")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ShufflesOwnersAndPricing",
+                    Type = "boolean",
                     Title = "Shuffles Owners And Pricing",
                     Description = "Determines whether the store periodically changes its owner and pricing.",
                 },
-                new PropertyMetadata("array", "ShopkeeperNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ShopkeeperNames",
+                    Type = "array",
                     Title = "Shopkeeper Names",
                     Description = "Specifies the shopkeepers that can own the store.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "AdvertisedStoreCommand1Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AdvertisedStoreCommand1Name",
+                    Type = "string",
                     Title = "Advertised Store Command 1 Name",
                     Description = "Specifies the first advertised store command name.",
                 },
-                new PropertyMetadata("string", "AdvertisedStoreCommand2Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AdvertisedStoreCommand2Name",
+                    Type = "string",
                     Title = "Advertised Store Command 2 Name",
                     Description = "Specifies the second advertised store command name.",
                 },
-                new PropertyMetadata("string", "AdvertisedStoreCommand3Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AdvertisedStoreCommand3Name",
+                    Type = "string",
                     Title = "Advertised Store Command 3 Name",
                     Description = "Specifies the third advertised store command name.",
                 },
-                new PropertyMetadata("string", "AdvertisedStoreCommand4Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AdvertisedStoreCommand4Name",
+                    Type = "string",
                     Title = "Advertised Store Command 4 Name",
                     Description = "Specifies the fourth advertised store command name.",
                 },
-                new PropertyMetadata("string", "AdvertisedStoreCommand5Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AdvertisedStoreCommand5Name",
+                    Type = "string",
                     Title = "Advertised Store Command 5 Name",
                     Description = "Specifies the fifth advertised store command name.",
                 },
-                new PropertyMetadata("integer", "WidthOfDescriptionColumn")
+                new PropertyMetadata()
                 {
+                    PropertyName = "WidthOfDescriptionColumn",
+                    Type = "integer",
                     Title = "Width Of Description Column",
                     Description = "Specifies the width of the item description column.",
                 },
-                new PropertyMetadata("boolean", "RenderWeightUnitOfMeasurement")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RenderWeightUnitOfMeasurement",
+                    Type = "boolean",
                     Title = "Render Weight Unit Of Measurement",
                     Description = "Determines whether weight units are rendered for items.",
                 },
-                new PropertyMetadata("string", "TileName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "TileName",
+                    Type = "string",
                     Title = "Tile Name",
                     Description = "Specifies the tile name used for the store.",
                 },
-                new PropertyMetadata("boolean", "ItemsRenderFlavorAware")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ItemsRenderFlavorAware",
+                    Type = "boolean",
                     Title = "Items Render Flavor Aware",
                     Description = "Determines whether items are rendered with flavor awareness.",
                 },
-                new PropertyMetadata("string", "OwnerName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "OwnerName",
+                    Type = "string",
                     Title = "Owner Name",
                     Description = "Specifies the name of the store owner. When null, the owner is determined automatically.",
                 },
-                new PropertyMetadata("string", "Title")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Title",
+                    Type = "string",
                     Title = "Title",
                     Description = "Specifies the title of the store. When null, the title is determined automatically.",
                 },
-                new PropertyMetadata("boolean", "StoreMaintainsInventory")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreMaintainsInventory",
+                    Type = "boolean",
                     Title = "Store Maintains Inventory",
                     Description = "Determines whether the store maintains an inventory.",
                 },
-                new PropertyMetadata("boolean", "ShowItemPricing")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ShowItemPricing",
+                    Type = "boolean",
                     Title = "Show Item Pricing",
                     Description = "Determines whether item prices are displayed in the inventory.",
                 },
-                new PropertyMetadata("integer", "MarkupRate")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MarkupRate",
+                    Type = "integer",
                     Title = "Markup Rate",
                     Description = "Specifies the rate at which the store marks up items.",
                 },
-                new PropertyMetadata("integer", "MarkdownRate")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MarkdownRate",
+                    Type = "integer",
                     Title = "Markdown Rate",
                     Description = "Specifies the rate at which the store marks down items.",
                 },
-                new PropertyMetadata("boolean", "PerformsMaintenanceWhenResting")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PerformsMaintenanceWhenResting",
+                    Type = "boolean",
                     Title = "Performs Maintenance When Resting",
                     Description = "Determines whether the store performs maintenance while the player rests.",
                 },
-                new PropertyMetadata("integer", "LevelForRandomItemCreation")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LevelForRandomItemCreation",
+                    Type = "integer",
                     Title = "Level For Random Item Creation",
                     Description = "Specifies the base level for random item creation. When null, the store stock manifests are used.",
                 },
-                new PropertyMetadata("integer", "MinimumItemValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MinimumItemValue",
+                    Type = "integer",
                     Title = "Minimum Item Value",
                     Description = "Specifies the minimum value of items handled by the store.",
                 },
-                new PropertyMetadata("string", "NoStockMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NoStockMessage",
+                    Type = "string",
                     Title = "No Stock Message",
                     Description = "Specifies the message displayed when the store is out of stock.",
                 },
-                new PropertyMetadata("string", "PurchaseMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PurchaseMessage",
+                    Type = "string",
                     Title = "Purchase Message",
                     Description = "Specifies the prompt displayed when purchasing items.",
                 },
-                new PropertyMetadata("boolean", "StoreSellsItems")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreSellsItems",
+                    Type = "boolean",
                     Title = "Store Sells Items",
                     Description = "Determines whether the store sells items to the player.",
                 },
-                new PropertyMetadata("boolean", "BoughtMessageAsBoughtBack")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BoughtMessageAsBoughtBack",
+                    Type = "boolean",
                     Title = "Bought Message As Bought Back",
                     Description = "Determines whether the store indicates that an item was bought back.",
                 },
-                new PropertyMetadata("string", "SellPrompt")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SellPrompt",
+                    Type = "string",
                     Title = "Sell Prompt",
                     Description = "Specifies the prompt displayed when selling an item.",
                 },
-                new PropertyMetadata("string", "StoreFullMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreFullMessage",
+                    Type = "string",
                     Title = "Store Full Message",
                     Description = "Specifies the message displayed when the store has no room for an item.",
                 },
-                new PropertyMetadata("boolean", "StoreMaintainsInscription")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreMaintainsInscription",
+                    Type = "boolean",
                     Title = "Store Maintains Inscription",
                     Description = "Determines whether the store preserves item inscriptions.",
                 },
-                new PropertyMetadata("boolean", "StoreBuysItems")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreBuysItems",
+                    Type = "boolean",
                     Title = "Store Buys Items",
                     Description = "Determines whether the store buys items from the player.",
                 },
-                new PropertyMetadata("string", "BoughtVerb")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BoughtVerb",
+                    Type = "string",
                     Title = "Bought Verb",
                     Description = "Specifies the verb used when the player sells or drops an item.",
                 },
-                new PropertyMetadata("boolean", "StoreIdentifiesItems")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreIdentifiesItems",
+                    Type = "boolean",
                     Title = "Store Identifies Items",
                     Description = "Determines whether the store identifies items sold by the player.",
                 },
-                new PropertyMetadata("boolean", "StoreAnalyzesPurchases")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreAnalyzesPurchases",
+                    Type = "boolean",
                     Title = "Store Analyzes Purchases",
                     Description = "Determines whether the store analyzes purchases.",
                 },

@@ -11,8 +11,10 @@ public static class RangeLearnedKnowledgesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "RangeExpressionText")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RangeExpressionText",
+                    Type = "string",
                     Title = "Range Expression Text",
                     Description = "The expression that defines the range value learned from this knowledge.",
                 },

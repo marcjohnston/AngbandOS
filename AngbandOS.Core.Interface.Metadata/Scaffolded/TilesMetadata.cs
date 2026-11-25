@@ -11,309 +11,431 @@ public static class TilesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("boolean", "IsEarthquakeResistant")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsEarthquakeResistant",
+                    Type = "boolean",
                     Title = "Is Earthquake Resistant",
                     Description = "Determines whether the tile is resistant to earthquakes.",
                 },
-                new PropertyMetadata("boolean", "IsPathBase")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsPathBase",
+                    Type = "boolean",
                     Title = "Is Path Base",
                     Description = "Determines whether the tile is a path base tile.",
                 },
-                new PropertyMetadata("boolean", "CanBeClosed")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeClosed",
+                    Type = "boolean",
                     Title = "Can Be Closed",
                     Description = "Determines whether the tile can be closed.",
                 },
-                new PropertyMetadata("boolean", "IsInvisibleTrap")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsInvisibleTrap",
+                    Type = "boolean",
                     Title = "Is Invisible Trap",
                     Description = "Determines whether the tile is an invisible trap.",
                 },
-                new PropertyMetadata("string", "OnJammedTileName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "OnJammedTileName",
+                    Type = "string",
                     Title = "On Jammed Tile Name",
                     Description = "Specifies the tile name used when this tile is jammed.",
                 },
-                new PropertyMetadata("string", "VisibleTreasureForTileName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "VisibleTreasureForTileName",
+                    Type = "string",
                     Title = "Visible Treasure For Tile Name",
                     Description = "Specifies the visible treasure tile name associated with this tile.",
                 },
-                new PropertyMetadata("boolean", "IsYellowSignSigil")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsYellowSignSigil",
+                    Type = "boolean",
                     Title = "Is Yellow Sign Sigil",
                     Description = "Determines whether the tile is a Yellow Sign sigil.",
                 },
-                new PropertyMetadata("string", "StepOnScriptName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StepOnScriptName",
+                    Type = "string",
                     Title = "Step On Script Name",
                     Description = "Specifies the name of the script executed when the tile is stepped on.",
                 },
-                new PropertyMetadata("string", "SymbolName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SymbolName",
+                    Type = "string",
                     Title = "Symbol Name",
                     Description = "Specifies the name of the symbol used to render the tile.",
                 },
-                new PropertyMetadata("enum", "Color")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Color",
+                    Type = "enum",
                     Title = "Color",
                     Description = "Specifies the color used to render the tile.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("boolean", "IsWildPath")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsWildPath",
+                    Type = "boolean",
                     Title = "Is Wild Path",
                     Description = "Determines whether the tile is a wild path.",
                 },
-                new PropertyMetadata("boolean", "IsPath")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsPath",
+                    Type = "boolean",
                     Title = "Is Path",
                     Description = "Determines whether the tile is a path tile.",
                 },
-                new PropertyMetadata("boolean", "IsTreasure")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsTreasure",
+                    Type = "boolean",
                     Title = "Is Treasure",
                     Description = "Determines whether the tile is a treasure tile.",
                 },
-                new PropertyMetadata("boolean", "BlocksScent")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BlocksScent",
+                    Type = "boolean",
                     Title = "Blocks Scent",
                     Description = "Determines whether the tile blocks the scent trail. When null, the value is derived from whether the tile blocks line of sight.",
                 },
-                new PropertyMetadata("string", "HiddenTreasureForTileName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "HiddenTreasureForTileName",
+                    Type = "string",
                     Title = "Hidden Treasure For Tile Name",
                     Description = "Specifies the visible tile name associated with this hidden treasure tile. When null, the tile is not hidden treasure.",
                 },
-                new PropertyMetadata("boolean", "IsVisibleTreasure")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsVisibleTreasure",
+                    Type = "boolean",
                     Title = "Is Visible Treasure",
                     Description = "Determines whether the tile is a visible treasure tile.",
                 },
-                new PropertyMetadata("boolean", "IsBorder")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsBorder",
+                    Type = "boolean",
                     Title = "Is Border",
                     Description = "Determines whether the tile is a border tile.",
                 },
-                new PropertyMetadata("boolean", "IsMagma")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsMagma",
+                    Type = "boolean",
                     Title = "Is Magma",
                     Description = "Determines whether the tile is magma.",
                 },
-                new PropertyMetadata("boolean", "IsWallOuter")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsWallOuter",
+                    Type = "boolean",
                     Title = "Is Wall Outer",
                     Description = "Determines whether the tile is an outer wall.",
                 },
-                new PropertyMetadata("boolean", "IsWallPermanentOuter")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsWallPermanentOuter",
+                    Type = "boolean",
                     Title = "Is Wall Permanent Outer",
                     Description = "Determines whether the tile is a permanent outer wall.",
                 },
-                new PropertyMetadata("boolean", "IsWallPermanentSolid")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsWallPermanentSolid",
+                    Type = "boolean",
                     Title = "Is Wall Permanent Solid",
                     Description = "Determines whether the tile is a permanent solid wall.",
                 },
-                new PropertyMetadata("boolean", "IsWallSolid")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsWallSolid",
+                    Type = "boolean",
                     Title = "Is Wall Solid",
                     Description = "Determines whether the tile is a solid wall.",
                 },
-                new PropertyMetadata("string", "AlterActionName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AlterActionName",
+                    Type = "string",
                     Title = "Alter Action Name",
                     Description = "Specifies the name of the action performed on the tile.",
                 },
-                new PropertyMetadata("string", "MimicTileName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MimicTileName",
+                    Type = "string",
                     Title = "Mimic Tile Name",
                     Description = "Specifies the name of the tile this tile appears to be when viewed.",
                 },
-                new PropertyMetadata("boolean", "BlocksLos")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BlocksLos",
+                    Type = "boolean",
                     Title = "Blocks Line Of Sight",
                     Description = "Determines whether the tile blocks line of sight.",
                 },
-                new PropertyMetadata("string", "Description")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Description",
+                    Type = "string",
                     Title = "Description",
                     Description = "Specifies the text description of the tile.",
                 },
-                new PropertyMetadata("boolean", "DimsOutsideLOS")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DimsOutsideLOS",
+                    Type = "boolean",
                     Title = "Dims Outside Line Of Sight",
                     Description = "Determines whether the tile dims outside line of sight.",
                 },
-                new PropertyMetadata("boolean", "IsBasicWall")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsBasicWall",
+                    Type = "boolean",
                     Title = "Is Basic Wall",
                     Description = "Determines whether the tile is a basic, non-permanent dungeon wall.",
                 },
-                new PropertyMetadata("boolean", "IsVisibleDoor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsVisibleDoor",
+                    Type = "boolean",
                     Title = "Is Visible Door",
                     Description = "Determines whether the tile is a visible door.",
                 },
-                new PropertyMetadata("integer", "LockLevel")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LockLevel",
+                    Type = "integer",
                     Title = "Lock Level",
                     Description = "Specifies the lock level of the tile.",
                 },
-                new PropertyMetadata("boolean", "IsInteresting")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsInteresting",
+                    Type = "boolean",
                     Title = "Is Interesting",
                     Description = "Determines whether the tile is interesting and should be noticed when the player looks around.",
                 },
-                new PropertyMetadata("boolean", "IsOpenFloor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsOpenFloor",
+                    Type = "boolean",
                     Title = "Is Open Floor",
                     Description = "Determines whether the tile is open floor that is safe to drop items on.",
                 },
-                new PropertyMetadata("boolean", "IsPassable")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsPassable",
+                    Type = "boolean",
                     Title = "Is Passable",
                     Description = "Determines whether the tile is passable.",
                 },
-                new PropertyMetadata("boolean", "IsPermanent")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsPermanent",
+                    Type = "boolean",
                     Title = "Is Permanent",
                     Description = "Determines whether the tile is permanent.",
                 },
-                new PropertyMetadata("boolean", "IsShop")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsShop",
+                    Type = "boolean",
                     Title = "Is Shop",
                     Description = "Determines whether the tile is a shop entrance.",
                 },
-                new PropertyMetadata("boolean", "IsTrap")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsTrap",
+                    Type = "boolean",
                     Title = "Is Trap",
                     Description = "Determines whether the tile is a known trap.",
                 },
-                new PropertyMetadata("boolean", "IsWall")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsWall",
+                    Type = "boolean",
                     Title = "Is Wall",
                     Description = "Determines whether the tile is a wall, excluding secret doors.",
                 },
-                new PropertyMetadata("boolean", "IsWater")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsWater",
+                    Type = "boolean",
                     Title = "Is Water",
                     Description = "Determines whether the tile is water.",
                 },
-                new PropertyMetadata("boolean", "IsRock")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsRock",
+                    Type = "boolean",
                     Title = "Is Rock",
                     Description = "Determines whether the tile is rock.",
                 },
-                new PropertyMetadata("boolean", "IsDownStaircase")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsDownStaircase",
+                    Type = "boolean",
                     Title = "Is Down Staircase",
                     Description = "Determines whether the tile is a down staircase.",
                 },
-                new PropertyMetadata("boolean", "IsUpStaircase")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsUpStaircase",
+                    Type = "boolean",
                     Title = "Is Up Staircase",
                     Description = "Determines whether the tile is an up staircase.",
                 },
-                new PropertyMetadata("boolean", "IsGrass")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsGrass",
+                    Type = "boolean",
                     Title = "Is Grass",
                     Description = "Determines whether the tile is grass.",
                 },
-                new PropertyMetadata("boolean", "HasWater")
+                new PropertyMetadata()
                 {
+                    PropertyName = "HasWater",
+                    Type = "boolean",
                     Title = "Has Water",
                     Description = "Determines whether the tile has water.",
                 },
-                new PropertyMetadata("integer", "MapPriority")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MapPriority",
+                    Type = "integer",
                     Title = "Map Priority",
                     Description = "Specifies the priority of the tile on the map.",
                 },
-                new PropertyMetadata("boolean", "RunPast")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RunPast",
+                    Type = "boolean",
                     Title = "Run Past",
                     Description = "Determines whether the player runs past the tile rather than stopping at it.",
                 },
-                new PropertyMetadata("boolean", "YellowInTorchlight")
+                new PropertyMetadata()
                 {
+                    PropertyName = "YellowInTorchlight",
+                    Type = "boolean",
                     Title = "Yellow In Torchlight",
                     Description = "Determines whether the tile appears yellow in torchlight.",
                 },
-                new PropertyMetadata("boolean", "IsRevealedWithDetectStairsScript")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsRevealedWithDetectStairsScript",
+                    Type = "boolean",
                     Title = "Is Revealed With Detect Stairs Script",
                     Description = "Determines whether the tile is revealed by the detect stairs script.",
                 },
-                new PropertyMetadata("boolean", "AllowMonsterToOccupy")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AllowMonsterToOccupy",
+                    Type = "boolean",
                     Title = "Allow Monster To Occupy",
                     Description = "Determines whether a monster can occupy the tile.",
                 },
-                new PropertyMetadata("boolean", "IsSecretDoor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsSecretDoor",
+                    Type = "boolean",
                     Title = "Is Secret Door",
                     Description = "Determines whether the tile is a secret door.",
                 },
-                new PropertyMetadata("boolean", "IsClosedDoor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsClosedDoor",
+                    Type = "boolean",
                     Title = "Is Closed Door",
                     Description = "Determines whether the tile is a closed door.",
                 },
-                new PropertyMetadata("boolean", "IsJammedClosedDoor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsJammedClosedDoor",
+                    Type = "boolean",
                     Title = "Is Jammed Closed Door",
                     Description = "Determines whether the tile is a door that is jammed closed.",
                 },
-                new PropertyMetadata("boolean", "IsTrapDoor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsTrapDoor",
+                    Type = "boolean",
                     Title = "Is Trap Door",
                     Description = "Determines whether the tile is a trap door.",
                 },
-                new PropertyMetadata("boolean", "IsRubble")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsRubble",
+                    Type = "boolean",
                     Title = "Is Rubble",
                     Description = "Determines whether the tile is rubble.",
                 },
-                new PropertyMetadata("boolean", "IsBrokenDoor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsBrokenDoor",
+                    Type = "boolean",
                     Title = "Is Broken Door",
                     Description = "Determines whether the tile is a broken door.",
                 },
-                new PropertyMetadata("boolean", "IsBush")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsBush",
+                    Type = "boolean",
                     Title = "Is Bush",
                     Description = "Determines whether the tile is a bush.",
                 },
-                new PropertyMetadata("boolean", "IsPillar")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsPillar",
+                    Type = "boolean",
                     Title = "Is Pillar",
                     Description = "Determines whether the tile is a pillar.",
                 },
-                new PropertyMetadata("boolean", "IsElderSignSigil")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsElderSignSigil",
+                    Type = "boolean",
                     Title = "Is Elder Sign Sigil",
                     Description = "Determines whether the tile is an Elder Sign sigil.",
                 },
-                new PropertyMetadata("boolean", "IsOpenDoor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsOpenDoor",
+                    Type = "boolean",
                     Title = "Is Open Door",
                     Description = "Determines whether the tile is an open door.",
                 },
-                new PropertyMetadata("boolean", "IsVein")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsVein",
+                    Type = "boolean",
                     Title = "Is Vein",
                     Description = "Determines whether the tile is a vein.",
                 },
-                new PropertyMetadata("boolean", "IsUnidentifiedTrap")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsUnidentifiedTrap",
+                    Type = "boolean",
                     Title = "Is Unidentified Trap",
                     Description = "Determines whether the tile is an unidentified trap.",
                 },
-                new PropertyMetadata("boolean", "IsTree")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsTree",
+                    Type = "boolean",
                     Title = "Is Tree",
                     Description = "Determines whether the tile is a tree.",
                 },

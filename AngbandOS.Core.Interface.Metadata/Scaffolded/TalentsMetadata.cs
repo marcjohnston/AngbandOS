@@ -11,33 +11,45 @@ public static class TalentsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "Specifies the name of the talent.",
                 },
-                new PropertyMetadata("integer", "Level")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Level",
+                    Type = "integer",
                     Title = "Level",
                     Description = "Specifies the level required to use the talent.",
                 },
-                new PropertyMetadata("integer", "ManaCost")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ManaCost",
+                    Type = "integer",
                     Title = "Mana Cost",
                     Description = "Specifies the mana cost of using the talent.",
                 },
-                new PropertyMetadata("integer", "BaseFailure")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BaseFailure",
+                    Type = "integer",
                     Title = "Base Failure",
                     Description = "Specifies the base failure chance of using the talent.",
                 },
-                new PropertyMetadata("string", "UseScriptBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "UseScriptBindingKey",
+                    Type = "string",
                     Title = "Use Script Binding Key",
                     Description = "Specifies the binding key of the script used by the talent.",
                 },
-                new PropertyMetadata("string", "LearnedKnowledgeBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LearnedKnowledgeBindingKey",
+                    Type = "string",
                     Title = "Learned Knowledge Binding Key",
                     Description = "Specifies the optional binding key of the knowledge learned from the talent.",
                 },

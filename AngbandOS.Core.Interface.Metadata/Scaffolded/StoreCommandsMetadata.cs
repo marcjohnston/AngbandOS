@@ -11,29 +11,39 @@ public static class StoreCommandsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "KeyChar")
+                new PropertyMetadata()
                 {
+                    PropertyName = "KeyChar",
+                    Type = "character",
                     Title = "Key Character",
                     Description = "Specifies the character used to invoke the store command.",
                 },
-                new PropertyMetadata("string", "Description")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Description",
+                    Type = "string",
                     Title = "Description",
                     Description = "Specifies the description of the store command.",
                 },
-                new PropertyMetadata("array", "ValidStoreFactoryNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ValidStoreFactoryNames",
+                    Type = "array",
                     Title = "Valid Store Factory Names",
                     Description = "Specifies the store factory names for which the command is valid.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "ExecuteScriptName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ExecuteScriptName",
+                    Type = "string",
                     Title = "Execute Script Name",
                     Description = "Specifies the name of the script executed by the store command.",
                 },

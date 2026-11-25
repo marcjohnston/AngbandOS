@@ -17,7 +17,7 @@
         <tr>
           <ng-container *ngFor="let tupleTypePropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties; let tupleIndex=index">
             <td>
-              <app-game-designer-type [propertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-type>
+              <app-game-designer-type [propertyMetadataAndConfiguration]="createTupleChild(tupleTypePropertyMetadata, tupleIndex, tupleValues)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type>
             </td>
           </ng-container>
           <td>

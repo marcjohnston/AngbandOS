@@ -11,39 +11,53 @@ public static class VaultsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("enum", "Color")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Color",
+                    Type = "enum",
                     Title = "Color",
                     Description = "Specifies the display color of the vault.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "Specifies the name of the vault.",
                 },
-                new PropertyMetadata("integer", "Category")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Category",
+                    Type = "integer",
                     Title = "Category",
                     Description = "Specifies the category of the vault.",
                 },
-                new PropertyMetadata("integer", "Height")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Height",
+                    Type = "integer",
                     Title = "Height",
                     Description = "Specifies the height of the vault.",
                 },
-                new PropertyMetadata("integer", "Rating")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Rating",
+                    Type = "integer",
                     Title = "Rating",
                     Description = "Specifies the difficulty rating of the vault.",
                 },
-                new PropertyMetadata("string", "Text")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Text",
+                    Type = "string",
                     Title = "Text",
                     Description = "Specifies the layout text of the vault.",
                 },
-                new PropertyMetadata("integer", "Width")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Width",
+                    Type = "integer",
                     Title = "Width",
                     Description = "Specifies the width of the vault.",
                 },

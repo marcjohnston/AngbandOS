@@ -11,16 +11,20 @@ public static class ViewsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "WidgetNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "WidgetNames",
+                    Type = "array",
                     Title = "Widget Names",
                     Description = "Specifies the names of the widgets displayed in the view.",
-                    ForeignCollectionName = "Widgets",
-                    Inline = false,
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "foreign-key",
+                            ForeignCollectionName = "Widgets",
+                            Inline = false,
                         },
                     },
                 },

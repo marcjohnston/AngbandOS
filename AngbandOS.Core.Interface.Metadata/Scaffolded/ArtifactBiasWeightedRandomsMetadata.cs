@@ -11,27 +11,27 @@ public static class ArtifactBiasWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "ArtifactBiasBindingKeyAndWeightTuples")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ArtifactBiasBindingKeyAndWeightTuples",
+                    Type = "tuples",
                     Title = "Artifact Bias",
                     Description = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
-                            AssociatedProperties = new PropertyMetadata[]
-                            {
-                                new PropertyMetadata("string", "ArtifactBiasBindingKey")
-                                {
-                                    Title = "Artifact Bias Binding Key",
-                                    Inline = true,
-                                },
-                                new PropertyMetadata("integer", "Weight")
-                                {
-                                    Title = "Weight",
-                                    Inline = true,
-                                },
-                            },
+                            PropertyName = "Item1",
+                            Type = "string",
+                            Title = "Artifact Bias Binding Key",
+                            Inline = true,
+                        },
+                        new PropertyMetadata()
+                        {
+                            PropertyName = "Item2",
+                            Type = "integer",
+                            Title = "Weight",
+                            Inline = true,
                         },
                     },
                 },

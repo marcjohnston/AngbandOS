@@ -11,49 +11,67 @@ public static class DungeonsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "BaseOffset")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BaseOffset",
+                    Type = "integer",
                     Title = "Base Offset",
                     Description = "The base offset, or difficulty, of the dungeon.",
                 },
-                new PropertyMetadata("string", "BiasMonsterFilterName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BiasMonsterFilterName",
+                    Type = "string",
                     Title = "Bias Monster Filter Name",
                     Description = "The name of the monster filter used to bias monster generation, or null if the dungeon has no monster bias.",
                 },
-                new PropertyMetadata("array", "DungeonGuardianNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DungeonGuardianNames",
+                    Type = "array",
                     Title = "Dungeon Guardian Names",
                     Description = "The names of the dungeon guardians associated with the dungeon.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "MapSymbol")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MapSymbol",
+                    Type = "string",
                     Title = "Map Symbol",
                     Description = "The symbol used to represent the dungeon on the wilderness map.",
                 },
-                new PropertyMetadata("integer", "MaxLevel")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MaxLevel",
+                    Type = "integer",
                     Title = "Max Level",
                     Description = "The maximum number of levels in the dungeon.",
                 },
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "The full name of the dungeon.",
                 },
-                new PropertyMetadata("string", "Shortname")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Shortname",
+                    Type = "string",
                     Title = "Shortname",
                     Description = "The shortened name of the dungeon used for display purposes.",
                 },
-                new PropertyMetadata("boolean", "Tower")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Tower",
+                    Type = "boolean",
                     Title = "Tower",
                     Description = "Determines whether the dungeon is a tower.",
                 },

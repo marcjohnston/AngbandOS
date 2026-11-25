@@ -11,23 +11,31 @@ public static class PhysicalAttributeSetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "BaseHeight")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BaseHeight",
+                    Type = "integer",
                     Title = "Base Height",
                     Description = "Specifies the base height for the physical attribute set.",
                 },
-                new PropertyMetadata("integer", "HeightRange")
+                new PropertyMetadata()
                 {
+                    PropertyName = "HeightRange",
+                    Type = "integer",
                     Title = "Height Range",
                     Description = "Specifies the height variation range for the physical attribute set.",
                 },
-                new PropertyMetadata("integer", "BaseWeight")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BaseWeight",
+                    Type = "integer",
                     Title = "Base Weight",
                     Description = "Specifies the base weight for the physical attribute set.",
                 },
-                new PropertyMetadata("integer", "WeightRange")
+                new PropertyMetadata()
                 {
+                    PropertyName = "WeightRange",
+                    Type = "integer",
                     Title = "Weight Range",
                     Description = "Specifies the weight variation range for the physical attribute set.",
                 },

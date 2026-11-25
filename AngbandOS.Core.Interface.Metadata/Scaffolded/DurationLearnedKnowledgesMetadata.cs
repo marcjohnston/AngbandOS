@@ -11,8 +11,10 @@ public static class DurationLearnedKnowledgesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "DurationExpressionText")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DurationExpressionText",
+                    Type = "string",
                     Title = "Duration Expression Text",
                     Description = "The expression that defines the duration value learned from this knowledge.",
                 },
