@@ -4,8 +4,8 @@
       <option *ngIf="propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null"
               value="{{propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}">
       </option>
-      <option *ngFor="let enumOption of enumOptions" [value]="enumOption.value">
-        {{enumOption.text}}
+      <option *ngFor="let enumSelectOption of enumSelectOptions" [value]="enumSelectOption.value">
+        {{enumSelectOption.text}}
       </option>
     </select>
     <span id="modified-span" *ngIf="unmodifiedValue !== getValue()">

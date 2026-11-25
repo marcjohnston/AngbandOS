@@ -47,7 +47,7 @@
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{propertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(propertyMetadataAndConfiguration.configuration)}}</span><br />
       <div class="property-container-div" *ngFor="let childPropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
-        <app-game-designer-property [propertyMetadataAndConfiguration]="createChild(childPropertyMetadata)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-property> <!-- Recursion -->
+        <app-game-designer-property [propertyMetadataAndConfiguration]="createChild(childPropertyMetadata)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-property> <!-- Recursion -->
       </div>
     </ng-template>
   </div>
@@ -58,7 +58,7 @@
       <span class="property-metadata-description">{{propertyMetadataAndConfiguration.propertyMetadata.description}}</span><br />
     </ng-container>
     <div class="type-container-div">
-      <app-game-designer-type [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type>
+      <app-game-designer-type [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type>
     </div>
   </ng-template>
 </ng-container>

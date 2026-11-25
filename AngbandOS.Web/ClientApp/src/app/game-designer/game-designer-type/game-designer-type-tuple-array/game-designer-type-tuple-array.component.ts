@@ -4,6 +4,7 @@ import { PropertyMetadata } from '../../property-metadata';
 import { MatIconModule } from '@angular/material/icon';
 import { NgFor, NgIf } from '@angular/common';
 import { GameDesignerTypeComponent } from '../game-designer-type.component';
+import { SelectOption } from '../../select-option';
 
 @Component({
   selector: 'app-game-designer-type-tuple-array',
@@ -21,6 +22,7 @@ export class GameDesignerTypeTupleArrayComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
   @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
   @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
+  @Input({ required: true }) public enumMap!: Map<string, SelectOption[]>;
 
   public addTuple() {
     const newTupleValue: any[] = [];

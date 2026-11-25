@@ -41,6 +41,7 @@ export class GameDesignerTypeComponent {
   @Input({ required: true }) public propertyMetadataAndConfiguration!: PropertyMetadataAndConfiguration;
   @Input({ required: true }) public gameConfiguration!: Record<string, unknown>;
   @Input({ required: true }) public gamePropertyMetadata!: PropertyMetadata[];
+  @Input({ required: true }) public enumMap!: Map<string, SelectOption[]>;
 
   /**
    * Creates a new PropertyMetadataAndConfiguration object from a child property metadata.  This is used by the game-designer-type component for recursion.

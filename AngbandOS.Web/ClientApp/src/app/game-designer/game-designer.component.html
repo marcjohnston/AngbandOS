@@ -38,7 +38,7 @@
         <ng-container *ngIf="selectedPropertyMetadataAndConfigurations !== null">
           <!-- Render all of metadatas and configurations for the selection.  The game settings will have multiple metadatas and configuraitons; everything else will have a single element -->
           <ng-container *ngFor="let propertyMetadataAndConfiguration of selectedPropertyMetadataAndConfigurations">
-            <app-game-designer-property [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-property>
+            <app-game-designer-property [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-property>
           </ng-container>
         </ng-container>
       </div>

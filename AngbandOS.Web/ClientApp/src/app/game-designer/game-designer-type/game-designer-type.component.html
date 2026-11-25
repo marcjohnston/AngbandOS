@@ -29,7 +29,7 @@
   </div>
   <!-- Tuple  -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'tuple'">
-    <app-game-designer-type-tuple-array [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type-tuple-array>
+    <app-game-designer-type-tuple-array [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type-tuple-array>
   </div>
   <!-- Integer -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'integer'">
@@ -41,6 +41,6 @@
   </div>
   <!-- Enum -->
   <div *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'enum'">
-    <app-game-designer-type-enum [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type-enum>
+    <app-game-designer-type-enum [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type-enum>
   </div>
 </ng-container>
