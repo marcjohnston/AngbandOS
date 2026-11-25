@@ -12,20 +12,20 @@
           {{ isLoadingMoreMessages ? 'Loading…' : 'Get More Messages' }}
         </mat-card-content>
       </mat-card>
-      <ng-container *ngFor="let chatMessage of history">
-        <mat-card title="{{isAdministrator ? 'ID: ' + chatMessage.id : ''}}">
-          <mat-card-subtitle>
-            <span class="from-username">{{chatMessage.fromUsername}}</span>
-            <span title="{{chatMessage.sentDateTime | date:'long'}}">{{formatDate(chatMessage.sentDateTime)}}</span>
-            <ng-container *ngIf="isAdministrator">
-              <mat-icon aria-hidden="false" title="Delete This Message" aria-label="Delete Message" fontIcon="clear" (click)="deleteMessage(chatMessage)"></mat-icon>
-            </ng-container>
-          </mat-card-subtitle>
-          <mat-card-content title="{{isAdministrator ? 'ID: ' + chatMessage.id : ''}}">
-            {{chatMessage.message}}
-          </mat-card-content>
-        </mat-card>
-      </ng-container>
+      @for (chatMessage of history; track chatMessage.id) {
+      <mat-card title="{{isAdministrator ? 'ID: ' + chatMessage.id : ''}}">
+        <mat-card-subtitle>
+          <span class="from-username">{{chatMessage.fromUsername}}</span>
+          <span title="{{chatMessage.sentDateTime | date:'long'}}">{{formatDate(chatMessage.sentDateTime)}}</span>
+          <ng-container *ngIf="isAdministrator">
+            <mat-icon aria-hidden="false" title="Delete This Message" aria-label="Delete Message" fontIcon="clear" (click)="deleteMessage(chatMessage)"></mat-icon>
+          </ng-container>
+        </mat-card-subtitle>
+        <mat-card-content title="{{isAdministrator ? 'ID: ' + chatMessage.id : ''}}">
+          {{chatMessage.message}}
+        </mat-card-content>
+      </mat-card>
+      }
     </div>
   </div>
   <textarea id="chat-box" [placeholder]="isAuthenticated ? 'Type a new message' : 'Login to chat'" (input)="input($event)" [disabled]="!isAuthenticated"></textarea>

@@ -4,9 +4,11 @@
       <option *ngIf="propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null"
               value="{{propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}">
       </option>
-      <option *ngFor="let enumOption of enumOptions" [value]="enumOption.value">
-        {{enumOption.text}}
-      </option>
+      @for (enumOption of enumOptions; track enumOption) {
+        <option [value]="enumOption.value">
+          {{enumOption.text}}
+        </option>
+      }
     </select>
     <span id="modified-span" *ngIf="unmodifiedValue !== getValue()">
       <mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon>

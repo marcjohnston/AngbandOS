@@ -54,9 +54,9 @@
       <mat-error *ngIf="formGroup.hasError('passwordMismatch') && formGroup.confirmPassword.touched">
         Passwords do not match.
       </mat-error>
-      <ng-template ngFor [ngForOf]="messages" let-message>
+      @for (message of messages; track $index) {
         <div>{{message}}</div>
-      </ng-template>
+      }
       <button mat-button mat-flat-button>Register</button>
     </form>
   </ng-container>

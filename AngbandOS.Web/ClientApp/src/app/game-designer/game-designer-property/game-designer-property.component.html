@@ -22,7 +22,7 @@
       </ng-container>
       <table>
         <tbody>
-          <ng-container *ngFor="let entity of propertyMetadataAndConfiguration.configuration; let index=index">
+          @for (entity of propertyMetadataAndConfiguration.configuration; track entity; let index = $index) {
             <tr>
               <td>
                 {{getEntityName(entity)}}
@@ -31,7 +31,7 @@
                 <mat-icon class="game-designer-delete-icon" (click)="deleteEntity(index)">delete</mat-icon>
               </td>
             </tr>
-          </ng-container>
+          }
         </tbody>
         <tfoot>
           <tr>
@@ -45,9 +45,11 @@
     <!-- Render a the properties of a single entity that belongs to a collection -->
     <ng-template #showCollectionEntity>
       <span class="collection-property-metadata-title">{{propertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(propertyMetadataAndConfiguration.configuration)}}</span><br />
-      <div class="property-container-div" *ngFor="let childPropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
-        <app-game-designer-property [propertyMetadataAndConfiguration]="createChild(childPropertyMetadata)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-property> <!-- Recursion -->
-      </div>
+      @for (childPropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties; track childPropertyMetadata) {
+        <div class="property-container-div">
+          <app-game-designer-property [propertyMetadataAndConfiguration]="createChild(childPropertyMetadata)" [configuration]="configuration" [propertyMetadataMap]="propertyMetadataMap"></app-game-designer-property> <!-- Recursion -->
+        </div>
+      }
     </ng-template>
   </div>
   <!-- Render a single Game Setting.  The parent component is rendering this in a loop for multiple game settings -->

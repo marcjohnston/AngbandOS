@@ -11,9 +11,9 @@
         <input matInput formControlName="emailAddress" placeholder="Email Address" />
       </mat-form-field>
     </form>
-    <ng-template ngFor [ngForOf]="messages" let-message>
+    @for (message of messages; track $index) {
       <div class="mat-error">{{message}}</div>
-    </ng-template>
+    }
     <button mat-button mat-flat-button [routerLink]="['/accounts/change-password']" *ngIf="formGroup.disabled">Change Password</button>
     <button mat-button mat-flat-button (click)="onEditClick()" *ngIf="formGroup.disabled">Edit</button>
     <button mat-button mat-flat-button (click)="onSaveClick()" *ngIf="formGroup.enabled">Save</button>

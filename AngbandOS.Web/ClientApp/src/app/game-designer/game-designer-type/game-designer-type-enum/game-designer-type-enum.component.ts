@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
@@ -12,7 +12,6 @@ import { SelectOption } from '../../select-option';
   styleUrls: ['./game-designer-type-enum.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
     NgIf,
     FormsModule,
     MatIconModule

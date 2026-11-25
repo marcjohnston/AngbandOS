@@ -3,7 +3,7 @@ import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-co
 import { SelectOption } from '../../select-option';
 import { ColorEnum } from '../../../modules/color-enum/color-enum.module';
 import { convertToTitleCase } from '../../../modules/strings-library/strings-library.module';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { PropertyMetadata } from '../../property-metadata';
@@ -15,7 +15,6 @@ import { PropertyMetadata } from '../../property-metadata';
   standalone: true,
   imports: [
     NgIf,
-    NgFor,
     MatIconModule,
     FormsModule
   ]

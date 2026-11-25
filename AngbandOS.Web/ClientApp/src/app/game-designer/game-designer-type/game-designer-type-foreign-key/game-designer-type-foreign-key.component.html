@@ -17,9 +17,9 @@
       <ng-container *ngIf="propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable !== null">
         <option value="">{{propertyMetadataAndConfiguration.propertyMetadata.labelIfNullable}}</option>
       </ng-container>
-      <ng-container *ngFor="let selectOption of selectOptions">
+      @for (selectOption of selectOptions; track selectOption) {
         <option value="{{selectOption.value}}">{{selectOption.text}}</option>
-      </ng-container>
+      }
     </select>
     <span id="modified-span" *ngIf="unmodifiedValue !== getValue()"><mat-icon class="game-designer-undo-icon" (click)="undo()">undo</mat-icon></span>
   </div>
