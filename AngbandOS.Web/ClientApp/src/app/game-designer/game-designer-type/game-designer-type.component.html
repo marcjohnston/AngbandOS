@@ -1,8 +1,9 @@
 <ng-container *ngIf="propertyMetadataAndConfiguration !== undefined">
   <!-- Array -->
   <div class="array-div" *ngIf="propertyMetadataAndConfiguration.propertyMetadata.type === 'array'">
+    <!-- Enumerate the configured children of the array -->
     <div class="array-item-div" *ngFor="let value of propertyMetadataAndConfiguration.configuration[propertyMetadataAndConfiguration.propertyMetadata.propertyName]; let valueIndex = index">
-      <app-game-designer-type-foreign-key [propertyMetadataAndConfiguration]="createArrayChild(valueIndex)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata"></app-game-designer-type-foreign-key>
+      <app-game-designer-type [propertyMetadataAndConfiguration]="createArrayChild(valueIndex)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-type>
       <mat-icon class="game-designer-delete-icon" (click)="deleteArrayIndex(valueIndex)">delete</mat-icon>
     </div>
     <mat-icon class="game-designer-add-icon" (click)="appendArrayItem()">add</mat-icon>

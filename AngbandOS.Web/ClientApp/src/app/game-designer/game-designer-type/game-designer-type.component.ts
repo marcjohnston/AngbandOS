@@ -52,22 +52,27 @@ export class GameDesignerTypeComponent {
     if (this.propertyMetadataAndConfiguration === undefined) {
       throw new Error("propertyMetadataAndConfiguration is undefined");
     }
+    if (this.propertyMetadataAndConfiguration.propertyMetadata.associatedProperties === null || this.propertyMetadataAndConfiguration.propertyMetadata.associatedProperties.length !== 1) {
+      throw new Error("PropertyMetadata array type does not have exactly 1 associated property.");
+    }
 
-    const validatedPropertyMetadataAndConfiguration = this.propertyMetadataAndConfiguration;
+    const arrayTypePropertyMetadataAndConfiguration = this.propertyMetadataAndConfiguration.propertyMetadata.associatedProperties[0];
     const derivedArrayPropertyMetadata = new PropertyMetadata(
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.type,
+      arrayTypePropertyMetadataAndConfiguration.type,
       valueIndex, // This is how the serialization is naming the tuple fields
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.title,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.categoryTitle,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.labelIfNullable,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.description,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.defaultValue,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.associatedProperties,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.entityKeyPropertyName,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.entityNamePropertyName,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.entityNounTitle,
-      validatedPropertyMetadataAndConfiguration.propertyMetadata.foreignCollectionName);
-    const activePropertyMetadataAndConfiguration = validatedPropertyMetadataAndConfiguration.configuration[validatedPropertyMetadataAndConfiguration.propertyMetadata.propertyName];
+      arrayTypePropertyMetadataAndConfiguration.title,
+      arrayTypePropertyMetadataAndConfiguration.categoryTitle,
+      arrayTypePropertyMetadataAndConfiguration.labelIfNullable,
+      arrayTypePropertyMetadataAndConfiguration.description,
+      arrayTypePropertyMetadataAndConfiguration.defaultValue,
+      arrayTypePropertyMetadataAndConfiguration.associatedProperties,
+      arrayTypePropertyMetadataAndConfiguration.entityKeyPropertyName,
+      arrayTypePropertyMetadataAndConfiguration.entityNamePropertyName,
+      arrayTypePropertyMetadataAndConfiguration.entityNounTitle,
+      arrayTypePropertyMetadataAndConfiguration.foreignCollectionName);
+
+    // Now we need the active configuration.  Remember the property name is at the array level, not the associated property.
+    const activePropertyMetadataAndConfiguration = this.propertyMetadataAndConfiguration.configuration[this.propertyMetadataAndConfiguration.propertyMetadata.propertyName];
     return new PropertyMetadataAndConfiguration(derivedArrayPropertyMetadata, activePropertyMetadataAndConfiguration);
   }
 
