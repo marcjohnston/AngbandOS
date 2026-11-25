@@ -11,23 +11,31 @@ public static class GameCommandsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "KeyChar")
+                new PropertyMetadata()
                 {
+                    PropertyName = "KeyChar",
+                    Type = "character",
                     Title = "Key Character",
                     Description = "The character used to invoke the game command.",
                 },
-                new PropertyMetadata("integer", "Repeat")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Repeat",
+                    Type = "integer",
                     Title = "Repeat",
                     Description = "The number of times the command is repeated, or null when no repeat count is specified.",
                 },
-                new PropertyMetadata("boolean", "IsEnabled")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IsEnabled",
+                    Type = "boolean",
                     Title = "Is Enabled",
                     Description = "Determines whether the game command is enabled.",
                 },
-                new PropertyMetadata("string", "ExecuteScriptName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ExecuteScriptName",
+                    Type = "string",
                     Title = "Execute Script Name",
                     Description = "The name of the script executed by the game command.",
                 },

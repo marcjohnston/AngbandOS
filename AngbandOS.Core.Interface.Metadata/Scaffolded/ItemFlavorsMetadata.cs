@@ -11,24 +11,32 @@ public static class ItemFlavorsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "SymbolName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SymbolName",
+                    Type = "string",
                     Title = "Symbol Name",
                     Description = "The name of the symbol used to represent the item flavor.",
                 },
-                new PropertyMetadata("enum", "Color")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Color",
+                    Type = "enum",
                     Title = "Color",
                     Description = "The color used to display the item flavor.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "The name of the item flavor.",
                 },
-                new PropertyMetadata("boolean", "CanBeAssigned")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeAssigned",
+                    Type = "boolean",
                     Title = "Can Be Assigned",
                     Description = "Determines whether this item flavor can be assigned to an item.",
                 },

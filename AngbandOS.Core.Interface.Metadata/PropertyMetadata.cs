@@ -9,12 +9,6 @@
 /// </remarks>
 public class PropertyMetadata
 {
-    public PropertyMetadata(string type, string propertyName)
-    {
-        Type = type;
-        PropertyName = propertyName;
-    }
-
     /// <summary>
     /// Returns the type of the property.  This type is used by the game-designer to render an applicable component.
     /// </summary>
@@ -34,7 +28,7 @@ public class PropertyMetadata
     /// 9. array            AssociatedProperties contains exactly 1 item representing the underlying type.
     /// 10. 2d-array        AssociatedProperties contains exactly 1 item representing the underlying type.
     /// </remarks>
-    public string Type { get; }
+    public string Type { get; set; } // Set is needed because we modify the type for foreign-keys.
 
     /// <summary>
     /// Returns the name of the property.
@@ -42,7 +36,7 @@ public class PropertyMetadata
     /// <remarks>
     /// This property applies to all types.
     /// </remarks>
-    public string PropertyName { get; }
+    public string PropertyName { get; set; } // Set is needed because we inject the top-level property name.
 
     /// <summary>
     /// Returns the title (or short description) of the property that can be presented to the user or null; in which the <see cref="PropertyName"/> should be rendered.

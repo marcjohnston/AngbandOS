@@ -11,29 +11,39 @@ public static class GameMessageWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("enum", "Color")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Color",
+                    Type = "enum",
                     Title = "Color",
                     Description = "The color used to draw the widget's text.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "X")
+                new PropertyMetadata()
                 {
+                    PropertyName = "X",
+                    Type = "integer",
                     Title = "X",
                     Description = "X-coordinate (horizontal) of the widget's top-left corner on the Form.",
                 },
-                new PropertyMetadata("integer", "Y")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Y",
+                    Type = "integer",
                     Title = "Y",
                     Description = "Y-coordinate (vertical) of the widget's top-left corner on the Form.",
                 },
-                new PropertyMetadata("integer", "Width")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Width",
+                    Type = "integer",
                     Title = "Width",
                     Description = "Width of the widget; when null, the widget should extend to the remaining width of the screen.",
                 },
-                new PropertyMetadata("string", "MorePrompt")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MorePrompt",
+                    Type = "string",
                     Title = "More Prompt",
                     Description = "Text used for the \"more\" prompt when message output is paused.",
                 },

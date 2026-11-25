@@ -11,13 +11,17 @@ public static class HelpGroupsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "SortIndex")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SortIndex",
+                    Type = "integer",
                     Title = "Sort Index",
                     Description = "The order in which the help group is displayed.",
                 },
-                new PropertyMetadata("string", "Title")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Title",
+                    Type = "string",
                     Title = "Title",
                     Description = "The title of the help group.",
                 },

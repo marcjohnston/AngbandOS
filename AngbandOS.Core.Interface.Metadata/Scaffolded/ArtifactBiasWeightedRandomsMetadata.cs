@@ -11,23 +11,31 @@ public static class ArtifactBiasWeightedRandomsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "ArtifactBiasBindingKeyAndWeightTuples")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ArtifactBiasBindingKeyAndWeightTuples",
+                    Type = "array",
                     Title = "Artifact Bias",
                     Description = "The artifact bias binding keys and their associated weights used to select a weighted random artifact bias.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "tuple",
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "ArtifactBiasBindingKey")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "ArtifactBiasBindingKey",
+                                    Type = "string",
                                     Title = "Artifact Bias Binding Key",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("integer", "Weight")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "Weight",
+                                    Type = "integer",
                                     Title = "Weight",
                                     Inline = true,
                                 },

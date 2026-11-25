@@ -11,28 +11,38 @@ public static class GendersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "Title")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Title",
+                    Type = "string",
                     Title = "Title",
                     Description = "Display title for the gender (e.g., \"Male\", \"Female\").",
                 },
-                new PropertyMetadata("string", "Winner")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Winner",
+                    Type = "string",
                     Title = "Winner",
                     Description = "Short title used when this gender is presented as the winner type.",
                 },
-                new PropertyMetadata("boolean", "CanBeRandomlySelected")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeRandomlySelected",
+                    Type = "boolean",
                     Title = "Can Be Randomly Selected",
                     Description = "Whether this gender may be chosen by the random-selection logic.",
                 },
-                new PropertyMetadata("string", "Pronoun")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Pronoun",
+                    Type = "string",
                     Title = "Pronoun",
                     Description = "Pronoun to use when rendering messages referring to entities of this gender (default: \"it\").",
                 },
-                new PropertyMetadata("string", "PossessiveAdjective")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PossessiveAdjective",
+                    Type = "string",
                     Title = "Possessive Adjective",
                     Description = "Possessive adjective to use when rendering messages (default: \"its\").",
                 },

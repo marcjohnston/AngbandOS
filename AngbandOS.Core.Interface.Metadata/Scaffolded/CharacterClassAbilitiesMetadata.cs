@@ -11,18 +11,24 @@ public static class CharacterClassAbilitiesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("integer", "Bonus")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Bonus",
+                    Type = "integer",
                     Title = "Bonus",
                     Description = "The bonus applied to the ability for this character class.",
                 },
-                new PropertyMetadata("string", "CharacterClassBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CharacterClassBindingKey",
+                    Type = "string",
                     Title = "Character Class Binding Key",
                     Description = "The binding key identifying the character class.",
                 },
-                new PropertyMetadata("string", "AbilityBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AbilityBindingKey",
+                    Type = "string",
                     Title = "Ability Binding Key",
                     Description = "The binding key identifying the ability.",
                 },

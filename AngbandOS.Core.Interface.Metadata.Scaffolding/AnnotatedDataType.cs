@@ -24,15 +24,17 @@ public class AnnotatedDataType
     public string PropertyName { get; set; }
     public AnnotatedDataType[]? AssociatedProperties { get; set; } = null;
 
-    public PropertyMetadata ToPropertyMetadata(string? propertyName)
+    public PropertyMetadata ToPropertyMetadata()
     {
         // We force inject the property name when it comes from the parent call ... otherwise we keep the property name because it belongs
         // to the tuple names.
-        return new PropertyMetadata(Type, propertyName ?? PropertyName ?? "") // Force inject, keep tuple, or "" for neither
+        return new PropertyMetadata()
         {
+            PropertyName = PropertyName ?? "", // Some property names will be blank for subtypes of arrays.
+            Type = Type,
             LabelIfNullable = IsNullable ? "" : null,
             ForeignCollectionName = EnumName,
-            AssociatedProperties = AssociatedProperties?.Select(x => x.ToPropertyMetadata(null)).ToArray() // Keep the tuple property name
+            AssociatedProperties = AssociatedProperties?.Select(x => x.ToPropertyMetadata()).ToArray() // Keep the tuple property name
         };
     }
 

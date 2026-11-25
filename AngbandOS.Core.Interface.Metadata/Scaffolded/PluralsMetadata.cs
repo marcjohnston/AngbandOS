@@ -11,8 +11,10 @@ public static class PluralsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "PluralForm")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PluralForm",
+                    Type = "string",
                     Title = "Plural Form",
                     Description = "Specifies the pluralized form of the key.",
                 },

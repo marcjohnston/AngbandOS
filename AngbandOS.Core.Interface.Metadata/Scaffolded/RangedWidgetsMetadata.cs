@@ -11,28 +11,38 @@ public static class RangedWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "Ranges")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Ranges",
+                    Type = "array",
                     Title = "Ranges",
                     Description = "Specifies the value ranges, display text, and colors used to render the widget.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "tuple",
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("integer", "startValue")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "startValue",
+                                    Type = "integer",
                                     Title = "Start Value",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("string", "textToRender")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "textToRender",
+                                    Type = "string",
                                     Title = "Text To Render",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("enum", "color")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "color",
+                                    Type = "enum",
                                     Title = "Color",
                                     ForeignCollectionName = "ColorEnum",
                                     Inline = true,
@@ -41,51 +51,69 @@ public static class RangedWidgetsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "IntValueName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "IntValueName",
+                    Type = "string",
                     Title = "Integer Value Name",
                     Description = "Specifies the name of the integer value displayed by the widget.",
                 },
-                new PropertyMetadata("string", "DefaultText")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DefaultText",
+                    Type = "string",
                     Title = "Default Text",
                     Description = "Specifies the text rendered when none of the ranges apply.",
                 },
-                new PropertyMetadata("enum", "DefaultColor")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DefaultColor",
+                    Type = "enum",
                     Title = "Default Color",
                     Description = "Specifies the color used when none of the ranges apply.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "X")
+                new PropertyMetadata()
                 {
+                    PropertyName = "X",
+                    Type = "integer",
                     Title = "X",
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Y")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Y",
+                    Type = "integer",
                     Title = "Y",
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Width")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Width",
+                    Type = "integer",
                     Title = "Width",
                     Description = "Specifies the width of the widget. When null, the width is based on the text length.",
                 },
-                new PropertyMetadata("enum", "JustificationEnumValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "JustificationEnumValue",
+                    Type = "enum",
                     Title = "Justification",
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "ChangeTrackerNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ChangeTrackerNames",
+                    Type = "array",
                     Title = "Change Tracker Names",
                     Description = "Specifies the property names that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

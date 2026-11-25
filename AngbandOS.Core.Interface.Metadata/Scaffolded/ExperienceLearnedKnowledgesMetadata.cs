@@ -11,23 +11,31 @@ public static class ExperienceLearnedKnowledgesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "ExperienceLearnedKnowledgeBindingTuples")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ExperienceLearnedKnowledgeBindingTuples",
+                    Type = "array",
                     Title = "Experience Learned Knowledge Binding Tuples",
                     Description = "The experience levels and learned knowledge binding keys used to determine which knowledge is learned.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "tuple",
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("integer", "MaxExperienceLevel")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "MaxExperienceLevel",
+                                    Type = "integer",
                                     Title = "Max Experience Level",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("string", "LearnedKnowledgeBindingKey")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "LearnedKnowledgeBindingKey",
+                                    Type = "string",
                                     Title = "Learned Knowledge Binding Key",
                                     Inline = true,
                                 },

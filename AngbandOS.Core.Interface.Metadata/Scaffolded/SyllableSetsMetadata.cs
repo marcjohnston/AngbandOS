@@ -11,36 +11,48 @@ public static class SyllableSetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "BeginningSyllables")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BeginningSyllables",
+                    Type = "array",
                     Title = "Beginning Syllables",
                     Description = "Specifies the syllables that can begin generated names.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "MiddleSyllables")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MiddleSyllables",
+                    Type = "array",
                     Title = "Middle Syllables",
                     Description = "Specifies the syllables that can appear in the middle of generated names.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "EndingSyllables")
+                new PropertyMetadata()
                 {
+                    PropertyName = "EndingSyllables",
+                    Type = "array",
                     Title = "Ending Syllables",
                     Description = "Specifies the syllables that can end generated names.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

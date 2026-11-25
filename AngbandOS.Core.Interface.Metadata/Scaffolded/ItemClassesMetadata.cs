@@ -11,29 +11,39 @@ public static class ItemClassesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "The capitalized singular name of the item represented by this item class.",
                 },
-                new PropertyMetadata("boolean", "AllowStomp")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AllowStomp",
+                    Type = "boolean",
                     Title = "Allow Stomp",
                     Description = "Determines whether items of this class allow the player to stomp them.",
                 },
-                new PropertyMetadata("integer", "NumberOfFlavorsToGenerate")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NumberOfFlavorsToGenerate",
+                    Type = "integer",
                     Title = "Number of Flavors to Generate",
                     Description = "The number of flavors to generate for items of this item class.",
                 },
-                new PropertyMetadata("array", "ItemFlavorBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ItemFlavorBindingKeys",
+                    Type = "array",
                     Title = "Item Flavor Binding Keys",
                     Description = "The binding keys of the flavors assigned to items of this item class, or null when items should use the effective attribute set or have a predefined flavor.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

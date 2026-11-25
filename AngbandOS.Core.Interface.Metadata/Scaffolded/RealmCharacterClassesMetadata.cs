@@ -11,23 +11,31 @@ public static class RealmCharacterClassesMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "CharacterClassBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CharacterClassBindingKey",
+                    Type = "string",
                     Title = "Character Class Binding Key",
                     Description = "Specifies the binding key for the character class.",
                 },
-                new PropertyMetadata("string", "RealmBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RealmBindingKey",
+                    Type = "string",
                     Title = "Realm Binding Key",
                     Description = "Specifies the binding key for the realm.",
                 },
-                new PropertyMetadata("string", "CharacterClassTitle")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CharacterClassTitle",
+                    Type = "string",
                     Title = "Character Class Title",
                     Description = "Specifies the optional title displayed for the character class.",
                 },
-                new PropertyMetadata("string", "DeityBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DeityBindingKey",
+                    Type = "string",
                     Title = "Deity Binding Key",
                     Description = "Specifies the optional binding key for the deity.",
                 },

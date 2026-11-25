@@ -11,36 +11,48 @@ public static class RaceGendersMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "RaceBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RaceBindingKey",
+                    Type = "string",
                     Title = "Race Binding Key",
                     Description = "Specifies the binding key for the race.",
                 },
-                new PropertyMetadata("string", "GenderBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "GenderBindingKey",
+                    Type = "foreign-key",
                     Title = "Gender Binding Key",
                     Description = "Specifies the binding key for the gender.",
                     ForeignCollectionName = "Genders",
                     Inline = false,
                 },
-                new PropertyMetadata("array", "PhysicalAttributesWeightedRandomBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PhysicalAttributesWeightedRandomBindings",
+                    Type = "array",
                     Title = "Physical Attributes Weighted Random Bindings",
                     Description = "Specifies the weighted random bindings for the race gender's physical attribute sets.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "tuple",
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "PhysicalAttributesBindingKey")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "PhysicalAttributesBindingKey",
+                                    Type = "string",
                                     Title = "Physical Attributes Binding Key",
                                     ForeignCollectionName = "PhysicalAttributeSets",
                                     Inline = false,
                                 },
-                                new PropertyMetadata("integer", "Weight")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "Weight",
+                                    Type = "integer",
                                     Title = "Weight",
                                     Inline = true,
                                 },

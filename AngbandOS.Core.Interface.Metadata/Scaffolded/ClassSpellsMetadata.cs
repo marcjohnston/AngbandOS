@@ -11,33 +11,45 @@ public static class ClassSpellsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "SpellName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "SpellName",
+                    Type = "string",
                     Title = "Spell Name",
                     Description = "The name of the spell associated with the character class.",
                 },
-                new PropertyMetadata("string", "CharacterClassName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CharacterClassName",
+                    Type = "string",
                     Title = "Character Class Name",
                     Description = "The name of the character class associated with the spell.",
                 },
-                new PropertyMetadata("integer", "Level")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Level",
+                    Type = "integer",
                     Title = "Level",
                     Description = "The character class level at which the spell becomes available.",
                 },
-                new PropertyMetadata("integer", "ManaCost")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ManaCost",
+                    Type = "integer",
                     Title = "Mana Cost",
                     Description = "The amount of mana required to cast the spell.",
                 },
-                new PropertyMetadata("integer", "BaseFailure")
+                new PropertyMetadata()
                 {
+                    PropertyName = "BaseFailure",
+                    Type = "integer",
                     Title = "Base Failure",
                     Description = "The base chance that casting the spell will fail.",
                 },
-                new PropertyMetadata("integer", "FirstCastExperience")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FirstCastExperience",
+                    Type = "integer",
                     Title = "First Cast Experience",
                     Description = "The experience gained the first time the spell is cast.",
                 },

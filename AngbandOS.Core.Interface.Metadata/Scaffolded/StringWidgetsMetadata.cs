@@ -11,47 +11,63 @@ public static class StringWidgetsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "StringValueName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StringValueName",
+                    Type = "string",
                     Title = "String Value Name",
                     Description = "Specifies the name of the string value displayed by the widget.",
                 },
-                new PropertyMetadata("enum", "Color")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Color",
+                    Type = "enum",
                     Title = "Color",
                     Description = "Specifies the color used to draw the widget text.",
                     ForeignCollectionName = "ColorEnum",
                 },
-                new PropertyMetadata("integer", "X")
+                new PropertyMetadata()
                 {
+                    PropertyName = "X",
+                    Type = "integer",
                     Title = "X",
                     Description = "Specifies the horizontal coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Y")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Y",
+                    Type = "integer",
                     Title = "Y",
                     Description = "Specifies the vertical coordinate where the widget is drawn.",
                 },
-                new PropertyMetadata("integer", "Width")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Width",
+                    Type = "integer",
                     Title = "Width",
                     LabelIfNullable = "Auto-size",
                     Description = "Specifies the width of the widget. When null, the width is based on the text length.",
                 },
-                new PropertyMetadata("enum", "JustificationEnumValue")
+                new PropertyMetadata()
                 {
+                    PropertyName = "JustificationEnumValue",
+                    Type = "enum",
                     Title = "Justification",
                     Description = "Specifies the name of the justification used to lay out the widget text.",
                     ForeignCollectionName = "JustificationsEnum",
                 },
-                new PropertyMetadata("array", "ChangeTrackerNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ChangeTrackerNames",
+                    Type = "array",
                     Title = "Change Tracker Names",
                     Description = "Specifies the property names that participate in change tracking.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },

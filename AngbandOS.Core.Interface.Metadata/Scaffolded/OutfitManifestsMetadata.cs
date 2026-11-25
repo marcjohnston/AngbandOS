@@ -11,116 +11,156 @@ public static class OutfitManifestsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("tuple", "CharacterClassBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CharacterClassBindingKey",
+                    Type = "tuple",
                     Title = "Character Class Binding Key",
                     Description = "Returns null to match all character classes, or specifies the character class values and equality operator used for matching.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("array", "MatchValues")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "MatchValues",
+                            Type = "array",
                             Title = "Match Values",
                             Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "",
+                                    Type = "string",
                                 },
                             },
                         },
-                        new PropertyMetadata("boolean", "IsEqual")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "IsEqual",
+                            Type = "boolean",
                             Title = "Is Equal",
                             Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("tuple", "RaceBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RaceBindingKey",
+                    Type = "tuple",
                     Title = "Race Binding Key",
                     Description = "Returns null to match all races, or specifies the race values and equality operator used for matching.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("array", "MatchValues")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "MatchValues",
+                            Type = "array",
                             Title = "Match Values",
                             Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "",
+                                    Type = "string",
                                 },
                             },
                         },
-                        new PropertyMetadata("boolean", "IsEqual")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "IsEqual",
+                            Type = "boolean",
                             Title = "Is Equal",
                             Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("tuple", "RealmBindingKey")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RealmBindingKey",
+                    Type = "tuple",
                     Title = "Realm Binding Key",
                     Description = "Returns null to match all realms, or specifies the realm values and equality operator used for matching.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("array", "MatchValues")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "MatchValues",
+                            Type = "array",
                             Title = "Match Values",
                             Inline = true,
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "",
+                                    Type = "string",
                                 },
                             },
                         },
-                        new PropertyMetadata("boolean", "IsEqual")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "IsEqual",
+                            Type = "boolean",
                             Title = "Is Equal",
                             Inline = true,
                         },
                     },
                 },
-                new PropertyMetadata("array", "ItemFactoryAndEnhancementsBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ItemFactoryAndEnhancementsBindings",
+                    Type = "array",
                     Title = "Item Factory and Enhancements Bindings",
                     Description = "Specifies the item factories, item enhancements, stack counts, identification state, and wield-one behavior for the outfit manifest.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "tuple",
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "ItemFactoryBindingKey")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "ItemFactoryBindingKey",
+                                    Type = "string",
                                     Title = "Item Factory Binding Key",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("array", "ItemEnhancementBindingKey")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "ItemEnhancementBindingKey",
+                                    Type = "array",
                                     Title = "Item Enhancement Binding Key",
                                     Inline = true,
                                     AssociatedProperties = new PropertyMetadata[]
                                     {
-                                        new PropertyMetadata("string", "")
+                                        new PropertyMetadata()
                                         {
+                                            PropertyName = "",
+                                            Type = "string",
                                         },
                                     },
                                 },
-                                new PropertyMetadata("string", "StackCountExpression")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "StackCountExpression",
+                                    Type = "string",
                                     Title = "Stack Count Expression",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("boolean", "MakeKnown")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "MakeKnown",
+                                    Type = "boolean",
                                     Title = "Make Known",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("boolean", "WieldOne")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "WieldOne",
+                                    Type = "boolean",
                                     Title = "Wield One",
                                     Inline = true,
                                 },

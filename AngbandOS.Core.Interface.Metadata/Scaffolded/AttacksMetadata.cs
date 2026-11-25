@@ -11,49 +11,67 @@ public static class AttacksMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("string", "MonsterAction")
+                new PropertyMetadata()
                 {
+                    PropertyName = "MonsterAction",
+                    Type = "string",
                     Title = "Monster Action",
                     Description = "The action message displayed when the attack targets another monster.",
                 },
-                new PropertyMetadata("array", "PlayerActionMessages")
+                new PropertyMetadata()
                 {
+                    PropertyName = "PlayerActionMessages",
+                    Type = "array",
                     Title = "Player Action Messages",
                     Description = "The action messages displayed when the attack targets the player.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("string", "KnowledgeAction")
+                new PropertyMetadata()
                 {
+                    PropertyName = "KnowledgeAction",
+                    Type = "string",
                     Title = "Knowledge Action",
                     Description = "The action message displayed when a description of the attack is rendered in the player's knowledge.",
                 },
-                new PropertyMetadata("boolean", "AttackTouchesTarget")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AttackTouchesTarget",
+                    Type = "boolean",
                     Title = "Attack Touches Target",
                     Description = "Determines whether the attack requires touching the target.",
                 },
-                new PropertyMetadata("boolean", "AttackAwakensTarget")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AttackAwakensTarget",
+                    Type = "boolean",
                     Title = "Attack Awakens Target",
                     Description = "Determines whether the attack awakens the target.",
                 },
-                new PropertyMetadata("boolean", "AttackStunsTarget")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AttackStunsTarget",
+                    Type = "boolean",
                     Title = "Attack Stuns Target",
                     Description = "Determines whether the attack stuns the target.",
                 },
-                new PropertyMetadata("boolean", "AttackCutsTarget")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AttackCutsTarget",
+                    Type = "boolean",
                     Title = "Attack Cuts Target",
                     Description = "Determines whether the attack cuts the target.",
                 },
-                new PropertyMetadata("boolean", "RendersMissMessage")
+                new PropertyMetadata()
                 {
+                    PropertyName = "RendersMissMessage",
+                    Type = "boolean",
                     Title = "Renders Miss Message",
                     Description = "Determines whether a message is rendered when the attack touches the target but misses.",
                 },

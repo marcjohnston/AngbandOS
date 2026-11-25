@@ -11,53 +11,71 @@ public static class TownsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("character", "Char")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Char",
+                    Type = "character",
                     Title = "Character",
                     Description = "Specifies the ASCII character used to represent the town.",
                 },
-                new PropertyMetadata("integer", "HousePrice")
+                new PropertyMetadata()
                 {
+                    PropertyName = "HousePrice",
+                    Type = "integer",
                     Title = "House Price",
                     Description = "Specifies the price of a house in the town.",
                 },
-                new PropertyMetadata("string", "Name")
+                new PropertyMetadata()
                 {
+                    PropertyName = "Name",
+                    Type = "string",
                     Title = "Name",
                     Description = "Specifies the name of the town.",
                 },
-                new PropertyMetadata("array", "StoreFactoryNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "StoreFactoryNames",
+                    Type = "array",
                     Title = "Store Factory Names",
                     Description = "Specifies the store factory names available in the town.",
-                    ForeignCollectionName = "StoreFactories",
-                    Inline = false,
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "foreign-key",
+                            ForeignCollectionName = "StoreFactories",
+                            Inline = false,
                         },
                     },
                 },
-                new PropertyMetadata("boolean", "CanBeEscortedHere")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CanBeEscortedHere",
+                    Type = "boolean",
                     Title = "Can Be Escorted Here",
                     Description = "Determines whether the player can be escorted to the town.",
                 },
-                new PropertyMetadata("boolean", "AllowStartupTown")
+                new PropertyMetadata()
                 {
+                    PropertyName = "AllowStartupTown",
+                    Type = "boolean",
                     Title = "Allow Startup Town",
                     Description = "Determines whether the town can be used as the startup town.",
                 },
-                new PropertyMetadata("string", "DungeonName")
+                new PropertyMetadata()
                 {
+                    PropertyName = "DungeonName",
+                    Type = "foreign-key",
                     Title = "Dungeon",
                     Description = "Specifies the name of the dungeon associated with the town.",
                     ForeignCollectionName = "Dungeons",
                     Inline = false,
                 },
-                new PropertyMetadata("boolean", "UnusedStoreLotsAreGraveyards")
+                new PropertyMetadata()
                 {
+                    PropertyName = "UnusedStoreLotsAreGraveyards",
+                    Type = "boolean",
                     Title = "Unused Store Lots Are Graveyards",
                     Description = "Determines whether unused store lots are treated as graveyards.",
                 },

@@ -11,23 +11,31 @@ public static class ProjectileWeightedRandomScriptsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "NameAndWeightBindings")
+                new PropertyMetadata()
                 {
+                    PropertyName = "NameAndWeightBindings",
+                    Type = "array",
                     Title = "Name and Weight Bindings",
                     Description = "Specifies the projectile script names and their associated weights used for weighted random selection.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "tuple",
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "Name")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "Name",
+                                    Type = "string",
                                     Title = "Name",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("integer", "Weight")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "Weight",
+                                    Type = "integer",
                                     Title = "Weight",
                                     Inline = true,
                                 },
@@ -35,13 +43,17 @@ public static class ProjectileWeightedRandomScriptsMetadata
                         },
                     },
                 },
-                new PropertyMetadata("string", "LearnedDetails")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LearnedDetails",
+                    Type = "string",
                     Title = "Learned Details",
                     Description = "Specifies the details revealed when the projectile script is learned.",
                 },
-                new PropertyMetadata("enum", "LearnedDetailsMode")
+                new PropertyMetadata()
                 {
+                    PropertyName = "LearnedDetailsMode",
+                    Type = "enum",
                     Title = "Learned Details Mode",
                     Description = "Specifies how the learned details are determined.",
                     ForeignCollectionName = "LearnedDetailsWeightedRandomEnum",

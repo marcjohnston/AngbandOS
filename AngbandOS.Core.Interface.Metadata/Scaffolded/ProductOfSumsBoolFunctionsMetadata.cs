@@ -11,28 +11,38 @@ public static class ProductOfSumsBoolFunctionsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "EnabledNames")
+                new PropertyMetadata()
                 {
+                    PropertyName = "EnabledNames",
+                    Type = "array",
                     Title = "Enabled Names",
                     Description = "The conditional names and required values used to determine whether configuration conditions are enabled.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("tuple", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "tuple",
                             AssociatedProperties = new PropertyMetadata[]
                             {
-                                new PropertyMetadata("string", "conditionalName")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "conditionalName",
+                                    Type = "string",
                                     Title = "Conditional Name",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("boolean", "valueConditionalMustBe")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "valueConditionalMustBe",
+                                    Type = "boolean",
                                     Title = "Value Conditional Must Be",
                                     Inline = true,
                                 },
-                                new PropertyMetadata("integer", "productOfSumsTerm")
+                                new PropertyMetadata()
                                 {
+                                    PropertyName = "productOfSumsTerm",
+                                    Type = "integer",
                                     Title = "Product Of Sums Term",
                                     Inline = true,
                                 },

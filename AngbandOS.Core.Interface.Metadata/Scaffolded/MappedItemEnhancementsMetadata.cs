@@ -11,36 +11,48 @@ public static class MappedItemEnhancementsMetadata
         {
             return new PropertyMetadata[]
             {
-                new PropertyMetadata("array", "FixedArtifactBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "FixedArtifactBindingKeys",
+                    Type = "array",
                     Title = "Fixed Artifact Binding Keys",
                     Description = "Specifies the fixed artifacts for the map entry. When null, applies to all fixed artifacts.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "CharacterClassBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "CharacterClassBindingKeys",
+                    Type = "array",
                     Title = "Character Class Binding Keys",
                     Description = "Specifies the character classes for the map entry. When null, applies to all character classes.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
-                new PropertyMetadata("array", "ItemEnhancementBindingKeys")
+                new PropertyMetadata()
                 {
+                    PropertyName = "ItemEnhancementBindingKeys",
+                    Type = "array",
                     Title = "Item Enhancement Binding Keys",
                     Description = "Specifies the item enhancements to be used for the fixed artifact. When null, no item enhancements are applied.",
                     AssociatedProperties = new PropertyMetadata[]
                     {
-                        new PropertyMetadata("string", "")
+                        new PropertyMetadata()
                         {
+                            PropertyName = "",
+                            Type = "string",
                         },
                     },
                 },
