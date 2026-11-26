@@ -3,9 +3,9 @@ import { PropertyMetadataAndConfiguration } from '../property-metadata-and-confi
 import { PropertyMetadata } from '../property-metadata';
 import { getEntityName as importedGetEntityName } from '../game-designer-library.module';
 import { SelectOption } from '../select-option';
-import { NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
+import { GameDesignerPropertyCollectionComponent } from './game-designer-property-collection/game-designer-property-collection.component';
 
 @Component({
   selector: 'app-game-designer-property',
@@ -13,19 +13,15 @@ import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-t
   styleUrls: ['./game-designer-property.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
     MatIconModule,
-    GameDesignerTypeComponent
+    GameDesignerTypeComponent,
+    GameDesignerPropertyCollectionComponent
   ]
 })
-export class GameDesignerPropertyComponent implements OnInit {
+export class GameDesignerPropertyComponent {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.
   @Input() collectionMap: Map<string, SelectOption[]> | undefined = undefined; // Undefined until Angular loads the parameters.
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   /***
    * Returns an entity name.  If the entity doesn't have a defined property name, the property key value will be returned.
