@@ -45,10 +45,12 @@
     </ng-container>
     <!-- Render a the properties of a single entity that belongs to a collection -->
     <ng-template #showCollectionEntity>
-      <span class="collection-property-metadata-title">{{propertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{getEntityName(propertyMetadataAndConfiguration.configuration)}}</span><br />
-      <div class="property-container-div" *ngFor="let childPropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties">
-        <app-game-designer-property [propertyMetadataAndConfiguration]="createChild(childPropertyMetadata)" [gameConfiguration]="gameConfiguration" [gamePropertyMetadata]="gamePropertyMetadata" [enumMap]="enumMap"></app-game-designer-property> <!-- Recursion -->
-      </div>
+      <app-game-designer-property-entity
+        [propertyMetadataAndConfiguration]="propertyMetadataAndConfiguration"
+        [gameConfiguration]="gameConfiguration"
+        [gamePropertyMetadata]="gamePropertyMetadata"
+        [enumMap]="enumMap">
+      </app-game-designer-property-entity>
     </ng-template>
   </div>
   <!-- Render a single Game Setting.  The parent component is rendering this in a loop for multiple game settings -->
