@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../property-metadata-and-configuration';
 import { PropertyMetadata } from '../property-metadata';
 import { getEntityName as importedGetEntityName } from '../game-designer-library.module';
@@ -6,6 +6,7 @@ import { SelectOption } from '../select-option';
 import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
+import { GameDesignerPropertyEntityComponent } from './game-designer-property-entity/game-designer-property-entity.component';
 import { JsonPipe } from '@angular/common';
 
 /**
@@ -21,7 +22,8 @@ import { JsonPipe } from '@angular/common';
     NgFor,
     JsonPipe,
     MatIconModule,
-    GameDesignerTypeComponent
+    GameDesignerTypeComponent,
+    forwardRef(() => GameDesignerPropertyEntityComponent),
   ]
 })
 export class GameDesignerPropertyComponent {

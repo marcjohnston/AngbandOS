@@ -1,0 +1,15 @@
+<span class="collection-property-metadata-title">
+  {{propertyMetadataAndConfiguration.propertyMetadata.entityNounTitle}} - {{entityName}}
+</span>
+<br />
+
+@for (childPropertyMetadata of propertyMetadataAndConfiguration.propertyMetadata.associatedProperties; track childPropertyMetadata) {
+<div class="property-container-div">
+  <app-game-designer-property
+                              [propertyMetadataAndConfiguration]="createChild(childPropertyMetadata)"
+                              [gameConfiguration]="gameConfiguration"
+                              [gamePropertyMetadata]="gamePropertyMetadata"
+                              [enumMap]="enumMap">
+  </app-game-designer-property> <!-- Recursion -->
+</div>
+}
