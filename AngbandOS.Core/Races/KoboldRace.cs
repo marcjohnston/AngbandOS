@@ -21,7 +21,7 @@ internal class KoboldRace : Race
     public override int BaseAge => 11;
     public override int AgeRange => 3;
     public override int InfraVision => 3;
-    public override uint Choice => 0xC009;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(RogueCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Kobolds are small reptillian creatures whose claims to be\nrelated to dragons are generally not taken seriously. They\nare resistant to poison, and can learn to throw poison\ndarts (at lvl 9).";
 
     /// <summary>

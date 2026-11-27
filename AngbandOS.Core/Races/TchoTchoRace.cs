@@ -21,7 +21,7 @@ internal class TchoTchoRace : Race
     public override int BaseAge => 14;
     public override int AgeRange => 8;
     public override int InfraVision => 0;
-    public override uint Choice => 0xC89D;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(FanaticCharacterClass), nameof(DruidCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Tcho-Tchos are hairless cannibalistic near-humans who dwell\nin isolated parts of the world away from more civilised\nplaces where their dark rituals and sacrifices go unseen.\nTcho-Tchos are immune to fear, and can also learn to create\nThe Yellow Sign (at lvl 35).";
 
     /// <summary>

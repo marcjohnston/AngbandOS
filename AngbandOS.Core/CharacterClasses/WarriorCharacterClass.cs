@@ -15,7 +15,6 @@ internal class WarriorCharacterClass : CharacterClass
         (30, null, nameof(WarriorCharacterClassLevel30ItemEnhancement))
     };
     protected override string? MeleeAttacksPerRoundBonusExpression => "X/15";
-    public override int ID => 0;
     public override string Title => "Warrior";
     public override int? AttackAndDamageBonusPerExperienceLevelDivisor => 5;
     public override int BasePerception => 2;

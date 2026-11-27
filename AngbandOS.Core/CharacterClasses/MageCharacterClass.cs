@@ -12,7 +12,6 @@ internal class MageCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(MageCharacterClassItemEnhancement)) 
     };
-    public override int ID => 1;
     public override int FriendsUpkeepDivider => 15;
     public override string Title => "Mage";
     public override int? SpellMinFailChance => 5;

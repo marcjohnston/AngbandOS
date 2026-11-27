@@ -75,6 +75,7 @@ internal abstract class Race : IGetKey, ISaveGameState
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         ChanceOfSanityBlastImmunityExpression = Game.ParseNumericExpression(ChanceOfSanityBlastImmunityExpressionText);
         ExperienceLevelAndEnhancementTuples = ExperienceLevelAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+        RandomSelectionAvailableCharacterClasses = Game.SingletonRepository.Get<CharacterClass>(RandomSelectionAvailableCharacterClassesBindingKeys);
     }
     public void RestoreGame(RestoreGameState restoreGameState) 
     { 
@@ -106,7 +107,9 @@ internal abstract class Race : IGetKey, ISaveGameState
     public abstract int MeleeToHit { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int RangedToHit { get; }
     public abstract int BasePerception { get; }
-    public abstract uint Choice { get; }
+    public abstract string[] RandomSelectionAvailableCharacterClassesBindingKeys { get; } // Character classes permitted for this race.
+    public CharacterClass[] RandomSelectionAvailableCharacterClasses { get; private set; }
+    
     public abstract int ExperienceFactor { get; }
     public abstract int HitDieBonus { get; }
     public abstract int InfraVision { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT

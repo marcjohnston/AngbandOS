@@ -21,7 +21,7 @@ internal class VampireRace : Race
     public override int BaseAge => 100;
     public override int AgeRange => 30;
     public override int InfraVision => 5;
-    public override uint Choice => 0xFFFF;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(PaladinCharacterClass), nameof(WarriorMageCharacterClass), nameof(FanaticCharacterClass), nameof(MonkCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(CultistCharacterClass), nameof(ChannelerCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Vampires are powerful undead. They resist darkness, nether,\ncold, poison, and having their life force drained. Vampires\nproduce their own ethereal light in the dark, but are hurt\nby direct sunlight. They can learn to drain the life force\nfrom their foes (at lvl 2).";
 
     /// <summary>

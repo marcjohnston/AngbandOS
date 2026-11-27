@@ -14,7 +14,6 @@ internal class PaladinCharacterClass : CharacterClass
         (1, null, nameof(PaladinCharacterClassItemEnhancement)),
         (40, null, nameof(PaladinCharacterClassLevel40ItemEnhancement))
     };
-    public override int ID => 5;
     public override string Title => "Paladin";
     public override int BasePerception => 2;
     public override int MeleeToHit => 68;

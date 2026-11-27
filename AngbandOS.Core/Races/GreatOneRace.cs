@@ -21,7 +21,7 @@ internal class GreatOneRace : Race
     public override int BaseAge => 50;
     public override int AgeRange => 50;
     public override int InfraVision => 0;
-    public override uint Choice => 0xFFFF;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(PaladinCharacterClass), nameof(WarriorMageCharacterClass), nameof(FanaticCharacterClass), nameof(MonkCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(CultistCharacterClass), nameof(ChannelerCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Great-Ones are the offspring of the petty gods that rule\nDreamlands. As such they are somewhat more than human.\nTheir constitution cannot be reduced, and they heal\nquickly. They can also learn to travel through dreams\n(at lvl 30) and restore their health (at lvl 40).";
 
     /// <summary>

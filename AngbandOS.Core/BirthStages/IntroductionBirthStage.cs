@@ -106,7 +106,7 @@ internal class IntroductionBirthStage : BirthStage
                 Game.Race = Game.SingletonRepository.Get<Race>(raceIndex);
                 Game.GetFirstLevelMutation = Game.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
             }
-            while ((Game.Race.Choice & (1L << Game.CharacterClass.ID)) == 0);
+            while (!Game.Race.RandomSelectionAvailableCharacterClasses.Contains(Game.CharacterClass));
 
             // Use a weighted random to choose a the realms.
             Game.PrimaryRealm = new WeightedRandom<Realm>(Game, Game.CharacterClass.AvailablePrimaryRealms).ChooseOrDefault();

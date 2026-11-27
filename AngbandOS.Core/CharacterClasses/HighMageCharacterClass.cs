@@ -12,7 +12,6 @@ internal class HighMageCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(HighMageCharacterClassItemEnhancement)) 
     };
-    public override int ID => 10;
     public override int FriendsUpkeepDivider => 12;
     public override string Title => "High-Mage";
     public override string InvokeSpiritsBeamProbabilityRollExpression => "X+10";

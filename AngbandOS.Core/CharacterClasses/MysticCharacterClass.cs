@@ -18,7 +18,6 @@ internal class MysticCharacterClass : CharacterClass
         (40, null, nameof(MysticCharacterClassLevel40ItemEnhancement)),
     };
     public override bool IsMartialArtist => true;
-    public override int ID => 15;
     public override string Title => "Mystic";
     public override bool RenderSpellsPerLevel => false;
     public override int BasePerception => 24;

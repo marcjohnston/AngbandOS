@@ -21,7 +21,7 @@ internal class SpriteRace : Race
     public override int BaseAge => 50;
     public override int AgeRange => 25;
     public override int InfraVision => 4;
-    public override uint Choice => 0xBE5E;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(WarriorMageCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(CultistCharacterClass), nameof(ChannelerCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Sprites are tiny fairies, distantly related to elves. They\nshare their relatives' resistance to light based attacks,\nand their wings both protect them from falling damage and\nallow them to move progressively faster if unencumbered.\nSprites glow in the dark and can learn to throw fairy dust\nto send their enemies to sleep (at lvl 12).";
 
     /// <summary>

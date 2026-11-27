@@ -13,7 +13,6 @@ internal class RogueCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(RogueCharacterClassItemEnhancement)) 
     };
-    public override int ID => 3;
     public override bool CanBackstab => true;
     public override string Title => "Rogue";
     public override int BasePerception => 24;

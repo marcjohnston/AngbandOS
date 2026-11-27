@@ -12,7 +12,6 @@ internal class RangerCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(RangerCharacterClassItemEnhancement)) 
     };
-    public override int ID => 4;
     public override string Title => "Ranger";
     public override int BasePerception => 16;
     public override int MeleeToHit => 56;

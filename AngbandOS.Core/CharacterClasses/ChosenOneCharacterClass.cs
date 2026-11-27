@@ -38,7 +38,6 @@ internal class ChosenOneCharacterClass : CharacterClass
         (48, null, nameof(ChosenOneCharacterClassLevel48ItemEnhancement)),
         (50, null, nameof(ChosenOneCharacterClassLevel50ItemEnhancement)),
     };
-    public override int ID => 14;
     public override string Title => "Chosen One";
     public override int BasePerception => 4;
     public override int MeleeToHit => 50;

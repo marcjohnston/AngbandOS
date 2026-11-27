@@ -12,7 +12,6 @@ internal class PriestCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(PriestCharacterClassItemEnhancement)) 
     };
-    public override int ID => 2;
     public override string Title => "Priest";
     public override int BasePerception => 8;
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;

@@ -21,7 +21,7 @@ internal class HalfTitanRace : Race
     public override int BaseAge => 100;
     public override int AgeRange => 30;
     public override int InfraVision => 0;
-    public override uint Choice => 0x1F27;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(PaladinCharacterClass), nameof(MonkCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(CultistCharacterClass) };
     public override string Description => "Half-Titans are massively strong, being descended from the\npredecessors of the gods that grew from primal chaos. This\nlegacy lets them resist damage from chaos, and half-titans\ncan learn to magically probe their foes to find out their\nstrengths and weaknesses (at lvl 35).";
 
     /// <summary>

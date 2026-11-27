@@ -22,7 +22,7 @@ internal class DarkElfRace : Race
     public override int BaseAge => 75;
     public override int AgeRange => 75;
     public override int InfraVision => 5;
-    public override uint Choice => 0xBFDF;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(WarriorMageCharacterClass), nameof(FanaticCharacterClass), nameof(MonkCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(ChannelerCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Dark elves are underground elves who have a kinship with\nfungi the way that surface elves have a kinship with trees.\nThe innately magical nature of dark elves lets them learn\nto fire magical missiles at their opponents (at lvl 2).\nThey also resist dark-based attacks and can learn to see\ninvisible creatures (at lvl 20).";
 
     /// <summary>

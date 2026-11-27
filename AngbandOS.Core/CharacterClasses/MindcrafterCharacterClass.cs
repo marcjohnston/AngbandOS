@@ -18,7 +18,6 @@ internal class MindcrafterCharacterClass : CharacterClass
         (30, null, nameof(MindcrafterCharacterClassLevel30ItemEnhancement)),
         (40, null, nameof(MindcrafterCharacterClassLevel40ItemEnhancement)),
     };
-    public override int ID => 9;
     public override string Title => "Mindcrafter";
     public override bool RenderSpellsPerLevel => false;
     public override int BasePerception => 16;

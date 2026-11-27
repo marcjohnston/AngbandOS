@@ -12,7 +12,6 @@ internal class ChannelerCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(ChannelerCharacterClassItemEnhancement)) 
     };
-    public override int ID => 13;
     public override string Title => "Channeler";
     public override int BasePerception => 20;
     public override bool RenderMinFail => false;

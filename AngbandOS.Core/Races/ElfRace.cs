@@ -21,7 +21,7 @@ internal class ElfRace : Race
     public override int BaseAge => 75;
     public override int AgeRange => 75;
     public override int InfraVision => 3;
-    public override uint Choice => 0xFF5F;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(WarriorMageCharacterClass), nameof(MonkCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(CultistCharacterClass), nameof(ChannelerCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Elves are creatures of the woods, and cultivate a symbiotic\nrelationship with trees. While not the sturdiest of races,\nthey are dextrous and have excellent mental faculties.\nBecause they are partially photosynthetic, elves are able\nto resist light based attacks.";
 
     /// <summary>

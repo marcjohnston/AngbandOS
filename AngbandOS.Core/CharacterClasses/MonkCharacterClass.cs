@@ -15,7 +15,6 @@ internal class MonkCharacterClass : CharacterClass
         (10, false, nameof(MonkCharacterClassLevel10ItemEnhancement)),
         (25, false, nameof(MonkCharacterClassLevel25ItemEnhancement))
     };
-    public override int ID => 8;
     public override string Title => "Monk";
     public override int BasePerception => 24;
     public override int MeleeToHit => 64;

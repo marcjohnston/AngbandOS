@@ -12,7 +12,6 @@ internal class WarriorMageCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(WarriorMageCharacterClassItemEnhancement)) 
     };
-    public override int ID => 6;
     public override string Title => "Warrior-Mage";
     public override int BasePerception => 16;
     public override int MeleeToHit => 50;

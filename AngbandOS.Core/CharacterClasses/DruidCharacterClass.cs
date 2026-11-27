@@ -12,7 +12,6 @@ internal class DruidCharacterClass : CharacterClass
     protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(DruidCharacterClassItemEnhancement)) 
     };
-    public override int ID => 11;
     public override string Title => "Druid";
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;
     public override int? AttackAndDamageBonusForUnpriestlyWeapon => -2;

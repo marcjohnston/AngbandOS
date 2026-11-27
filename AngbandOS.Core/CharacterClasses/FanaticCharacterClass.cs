@@ -16,7 +16,6 @@ internal class FanaticCharacterClass : CharacterClass
         (40, null, nameof(FanaticCharacterClassLevel40ItemEnhancement)),
     };
 
-    public override int ID => 7;
     public override string Title => "Fanatic";
     public override bool HasPatron => true;
     public override int BasePerception => 12;

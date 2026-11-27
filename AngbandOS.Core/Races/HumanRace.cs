@@ -21,7 +21,7 @@ internal class HumanRace : Race
     public override int BaseAge => 14;
     public override int AgeRange => 6;
     public override int InfraVision => 0;
-    public override uint Choice => 0xFFFF;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(PaladinCharacterClass), nameof(WarriorMageCharacterClass), nameof(FanaticCharacterClass), nameof(MonkCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(CultistCharacterClass), nameof(ChannelerCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Hopefully you know all about humans already because you\nare one! In game terms, humans are the average around which\nthe other races are measured. As such, humans get no\nspecial abilities, but they increase in level quicker than\nany other race. Humans are recommended for new players.";
 
     /// <summary>

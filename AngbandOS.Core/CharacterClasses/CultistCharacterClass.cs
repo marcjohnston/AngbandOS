@@ -17,7 +17,6 @@ internal class CultistCharacterClass : CharacterClass
         (20, null, nameof(CultistCharacterClassLevel20ItemEnhancement))
     };
 
-    public override int ID => 12;
     public override string Title => "Cultist";
     public override bool RenderChaosMessageForWieldingUnpriestlyWeapon => true;
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;

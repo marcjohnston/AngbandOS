@@ -486,12 +486,6 @@ internal abstract class CharacterClass : IGetKey, ISaveGameState
     public virtual bool IsMartialArtist => false;
 
     /// <summary>
-    /// Returns the deprecated CharacterClass constant for backwards compatibility.
-    /// </summary>
-    /// <value>The identifier.</value>
-    public abstract int ID { get; } // TODO: Need to delete
-
-    /// <summary>
     /// Returns whether or not the character can backstab.  Returns false, by default.  Rogues return true.
     /// </summary>
     public virtual bool CanBackstab => false;

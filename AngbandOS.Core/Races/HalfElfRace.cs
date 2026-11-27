@@ -21,7 +21,7 @@ internal class HalfElfRace : Race
     public override int BaseAge => 24;
     public override int AgeRange => 16;
     public override int InfraVision => 2;
-    public override uint Choice => 0xFFFF;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass), nameof(MageCharacterClass), nameof(PriestCharacterClass), nameof(RogueCharacterClass), nameof(RangerCharacterClass), nameof(PaladinCharacterClass), nameof(WarriorMageCharacterClass), nameof(FanaticCharacterClass), nameof(MonkCharacterClass), nameof(MindcrafterCharacterClass), nameof(HighMageCharacterClass), nameof(DruidCharacterClass), nameof(CultistCharacterClass), nameof(ChannelerCharacterClass), nameof(ChosenOneCharacterClass), nameof(MysticCharacterClass) };
     public override string Description => "Half-Elves inherit better ability scores and skills from\ntheir elven parent, but none of that parent's special\nabilities. However, a half elf will advance in level more\nquickly than a full elf.";
 
     /// <summary>

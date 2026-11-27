@@ -22,7 +22,7 @@ internal class ZombieRace : Race
     public override int BaseAge => 100;
     public override int AgeRange => 30;
     public override int InfraVision => 2;
-    public override uint Choice => 0x0001;
+    public override string[] RandomSelectionAvailableCharacterClassesBindingKeys => new string[] { nameof(WarriorCharacterClass) };
     public override string Description => "Zombies are undead creatures. Their decayed flesh resists\nnether and poison, and having their life force drained.\nZombies digest food slowly, and can see invisible monsters.\nThey can learn to restore their life force (at lvl 30).";
 
     /// <summary>
