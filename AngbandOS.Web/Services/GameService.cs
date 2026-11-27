@@ -328,11 +328,8 @@ namespace AngbandOS.Web.Services
                         break;
 
                     // These events will not write a message to the database.
-                    case GameUpdateNotificationEnum.ExperienceLevelChanged:
-                    case GameUpdateNotificationEnum.CharacterRenamed:
-                    case GameUpdateNotificationEnum.GameTimeElapsed:
                     case GameUpdateNotificationEnum.InputReceived:
-                    case GameUpdateNotificationEnum.GoldUpdated:
+                    case GameUpdateNotificationEnum.TurnCompleted:
                         break;
                 }
             };

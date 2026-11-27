@@ -58,24 +58,6 @@ public interface IViewPort
     void PlayerDied(string name, string diedFrom, int level);
 
     /// <summary>
-    /// Called when the players' gold level changes.
-    /// </summary>
-    /// <param name="gold"></param>
-    void GoldUpdated(int gold);
-
-    /// <summary>
-    /// Called when the players' characters' name changes.
-    /// </summary>
-    /// <param name="name"></param>
-    void CharacterRenamed(string name);
-
-    /// <summary>
-    /// Called when the experience level for the player changes.
-    /// </summary>
-    /// <param name="level"></param>
-    void ExperienceLevelChanged(int level);
-
-    /// <summary>
     /// Called when the game starts.
     /// </summary>
     void GameStarted();
@@ -92,9 +74,9 @@ public interface IViewPort
     void GameExceptionThrown(string message);
 
     /// <summary>
-    /// Called when the game time changes.
+    /// Called when a player turn has completed.
     /// </summary>
-    void GameTimeElapsed();
+    void TurnCompleted();
 
     /// <summary>
     /// Called when input is received from the player.

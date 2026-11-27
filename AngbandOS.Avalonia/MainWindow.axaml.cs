@@ -166,9 +166,6 @@ public partial class MainWindow : Window, IConsoleAndViewPort
 
     public void MessagesUpdated() { }
     public void PlayerDied(string name, string diedFrom, int level) { }
-    public void GoldUpdated(int gold) { }
-    public void CharacterRenamed(string name) { }
-    public void ExperienceLevelChanged(int level) { }
     public void GameStarted() { }
     public void GameStopped() { }
     public void GameExceptionThrown(string message)
@@ -179,8 +176,8 @@ public partial class MainWindow : Window, IConsoleAndViewPort
             await dlg.ShowDialog(this);
         });
     }
-    public void GameTimeElapsed() { }
     public void InputReceived() { }
+    public void TurnCompleted() { }
     public void MessagesReceived(IGameMessage[] gameMessages) { }
 
     public void SetBackground(BackgroundImageEnum image)

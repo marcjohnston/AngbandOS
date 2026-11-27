@@ -5375,14 +5375,14 @@ internal class Game : ISaveGameState
                 break;
             }
             Tick();
-            if (!IsFeelTime)
-            {
-                continue;
-            }
-            if (CurrentDepth > 0)
+            if (IsFeelTime && CurrentDepth > 0)
             {
                 RunScript(nameof(SayFeelingScript));
             }
+
+            // This is technically a turn in the turn-based system, although there may be keystrokes in the ahead buffer or we are in replay mode.
+            // This allows the telemetry consumers to update during the replay and ahead keystrokes.
+            ConsoleViewPort.TurnCompleted();
         }
     }
 
@@ -10513,11 +10513,6 @@ internal class Game : ISaveGameState
             CurrentGameDateTime.DateAndTimeValue = CurrentGameDateTime.DateAndTimeValue.AddYears(1297 - year);
         }
 
-        // Send an update to the calling application, that the game time has changed.
-        if (CurrentGameDateTime.DateAndTimeValue > oldDateTime + new TimeSpan(0, 0, 5))
-        {
-            ConsoleViewPort.GameTimeElapsed();
-        }
     }
 
     public void ToNextDawn()

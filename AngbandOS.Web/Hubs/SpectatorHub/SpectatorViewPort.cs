@@ -50,18 +50,6 @@ public class SpectatorViewPort : IViewPort
     {
     }
 
-    public void GoldUpdated(int gold)
-    {
-    }
-
-    public void CharacterRenamed(string name)
-    {
-    }
-
-    public void ExperienceLevelChanged(int level)
-    {
-    }
-
     public void GameStarted()
     {
     }
@@ -74,11 +62,11 @@ public class SpectatorViewPort : IViewPort
     {
     }
 
-    public void GameTimeElapsed()
+    public void InputReceived()
     {
     }
 
-    public void InputReceived()
+    public void TurnCompleted()
     {
     }
 }

@@ -10,9 +10,4 @@ internal class PlayerNameStringProperty : StringProperty
 {
     private PlayerNameStringProperty(Game game) : base(game) { }
 
-    protected override void OnAfterSet()
-    {
-        // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-        Game.ConsoleViewPort.CharacterRenamed(StringValue);
-    }
 }

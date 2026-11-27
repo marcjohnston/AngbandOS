@@ -127,17 +127,9 @@ internal class ConsoleAndViewport : IConsoleAndViewPort
     {
     }
 
-    public void CharacterRenamed(string name)
-    {
-    }
-
     public void Clear()
     {
         Console.Clear();
-    }
-
-    public void ExperienceLevelChanged(int level)
-    {
     }
 
     public void GameExceptionThrown(string message)
@@ -152,10 +144,6 @@ internal class ConsoleAndViewport : IConsoleAndViewPort
     {
     }
 
-    public void GameTimeElapsed()
-    {
-    }
-
     public char? GetKey()
     {
         if (KeyQueue.TryDequeue(out var key))
@@ -165,11 +153,11 @@ internal class ConsoleAndViewport : IConsoleAndViewPort
         return null;
     }
 
-    public void GoldUpdated(int gold)
+    public void InputReceived()
     {
     }
 
-    public void InputReceived()
+    public void TurnCompleted()
     {
     }
 

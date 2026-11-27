@@ -250,15 +250,6 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        public void CharacterRenamed(string name)
-        {
-            if (NotificationAction is not null)
-            {
-                string message = $"{name} was just birthed.";
-                NotificationAction(this, GameUpdateNotificationEnum.CharacterRenamed, message);
-            }
-        }
-
         public void GameStarted()
         {
             if (NotificationAction is not null)
@@ -267,21 +258,6 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        public void GoldUpdated(int gold)
-        {
-            if (NotificationAction is not null)
-            {
-                NotificationAction(this, GameUpdateNotificationEnum.GoldUpdated, "Gold updated.");
-            }
-        }
-
-        public void ExperienceLevelChanged(int level)
-        {
-            if (NotificationAction is not null)
-            {
-                NotificationAction(this, GameUpdateNotificationEnum.ExperienceLevelChanged, "Experience level changed.");
-            }
-        }
         public void GameStopped()
         {
             if (NotificationAction is not null)
@@ -298,19 +274,19 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        public void GameTimeElapsed()
-        {
-            if (NotificationAction is not null)
-            {
-                NotificationAction(this, GameUpdateNotificationEnum.GameTimeElapsed, "Game time elapsed.");
-            }
-        }
-
         public void InputReceived()
         {
             if (NotificationAction is not null)
             {
                 NotificationAction(this, GameUpdateNotificationEnum.InputReceived, "Game input received.");
+            }
+        }
+
+        public void TurnCompleted()
+        {
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.TurnCompleted, "Turn completed.");
             }
         }
         #endregion

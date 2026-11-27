@@ -13,9 +13,4 @@ internal class ExperienceLevelIntProperty : IntProperty
 {
     private ExperienceLevelIntProperty(Game game) : base(game) { }
 
-    protected override void OnAfterSet()
-    {
-        base.OnAfterSet();
-        Game.ConsoleViewPort.ExperienceLevelChanged(IntValue);
-    }
 }

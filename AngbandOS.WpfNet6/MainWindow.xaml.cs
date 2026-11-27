@@ -484,18 +484,6 @@ public partial class MainWindow : Window, IConsoleAndViewPort
     {
     }
 
-    public void GoldUpdated(int gold)
-    {
-    }
-
-    public void CharacterRenamed(string name)
-    {
-    }
-
-    public void ExperienceLevelChanged(int level)
-    {
-    }
-
     public void GameStarted()
     {
     }
@@ -509,11 +497,11 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         MessageBox.Show(message);
     }
 
-    public void GameTimeElapsed()
+    public void InputReceived()
     {
     }
 
-    public void InputReceived()
+    public void TurnCompleted()
     {
     }
 

@@ -9,18 +9,6 @@
         /// <summary>
         /// Represents an event received from the game that the players' gold level has changed.
         /// </summary>
-        GoldUpdated = 0,
-
-        /// <summary>
-        /// Represents an event received from the game that the players' dungeon level has changed.
-        /// </summary>
-        ExperienceLevelChanged = 1,
-
-        /// <summary>
-        /// Represents an event received from the game that the players' characters' name has changed.
-        /// </summary>
-        CharacterRenamed = 2,
-
         /// <summary>
         /// Represents an event received from the game that the player has died.
         /// </summary>
@@ -44,11 +32,14 @@
         /// <summary>
         /// Represents an event received that the game time changed.
         /// </summary>
-        GameTimeElapsed = 7,
-
         /// <summary>
         /// Represents an event received that input from the player has been received and processed by the game.
         /// </summary>
-        InputReceived = 8
+        InputReceived = 8,
+
+        /// <summary>
+        /// Represents an event received after a player turn has completed.
+        /// </summary>
+        TurnCompleted = 9
     }
 }
