@@ -178,11 +178,11 @@ namespace AngbandOS.Web.Services
             // Add an event for when the game is over, that we can disconnect the client.
             gameHost.RunWorkerCompleted += Console_RunWorkerCompleted;
 
-            // Run the background thread and the game.
-            gameHost.RunWorkerAsync();
-
             // Run the update notifications.
             await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+
+            // Run the background thread and the game.
+            gameHost.RunWorkerAsync();
 
             return gameHost;
         }
@@ -235,11 +235,11 @@ namespace AngbandOS.Web.Services
             // Add an event for when the game is over, that we can disconnect the client.
             gameConsoleAndViewPort.RunWorkerCompleted += Console_RunWorkerCompleted;
 
-            // Run the background thread and the game.
-            gameConsoleAndViewPort.RunWorkerAsync();
-
             // Run the update notifications.
             await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+
+            // Run the background thread and the game.
+            gameConsoleAndViewPort.RunWorkerAsync();
 
             return gameConsoleAndViewPort;
         }
@@ -290,11 +290,11 @@ namespace AngbandOS.Web.Services
             // Add an event for when the game is over, that we can disconnect the client.
             gameConsoleAndViewPort.RunWorkerCompleted += Console_RunWorkerCompleted;
 
-            // Run the background thread and the game.
-            gameConsoleAndViewPort.RunWorkerAsync();
-
             // Run the update notifications.
             await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+
+            // Run the background thread and the game.
+            gameConsoleAndViewPort.RunWorkerAsync();
 
             return gameConsoleAndViewPort;
         }

@@ -991,12 +991,13 @@ internal class Game : ISaveGameState
         FullScreenOverlay = true;
         SetBackground(BackgroundImageEnum.Normal);
         Screen.CursorVisible = false;
+        ConsoleViewPort.GameStarted();
         if (IsDead)
         {
             GenerateNewGame();
         }
-        ConsoleViewPort.GameStarted();
         //MessageAppendNextMessage = false;
+        ConsoleViewPort.TurnCompleted();
         MsgPrint(string.Empty);
         UpdateScreen();
         FullScreenOverlay = false;
